@@ -110,6 +110,8 @@
 		4739B5E41D488E3E007842CC /* NoticeGameviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4739B5E31D488E3E007842CC /* NoticeGameviewCell.m */; };
 		4739B5E71D488E6E007842CC /* HistoryviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4739B5E61D488E6E007842CC /* HistoryviewCell.m */; };
 		4739B5EA1D488E84007842CC /* GameListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4739B5E91D488E84007842CC /* GameListViewCell.m */; };
+		47405DD01D521791000A980A /* GameListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47405DCF1D521791000A980A /* GameListView.m */; };
+		47405DD31D521ABB000A980A /* CostomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47405DD21D521ABB000A980A /* CostomView.m */; };
 		4746A63B1D489365009E0645 /* SchoolInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4746A63A1D489365009E0645 /* SchoolInfoView.m */; };
 		4746A6411D489A90009E0645 /* NewsDetailViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4746A6401D489A90009E0645 /* NewsDetailViewModel.m */; };
 		4746A6441D489B18009E0645 /* SEMNewsDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4746A6431D489B18009E0645 /* SEMNewsDetailController.m */; };
@@ -328,6 +330,10 @@
 		4739B5E61D488E6E007842CC /* HistoryviewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryviewCell.m; sourceTree = "<group>"; };
 		4739B5E81D488E84007842CC /* GameListViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameListViewCell.h; sourceTree = "<group>"; };
 		4739B5E91D488E84007842CC /* GameListViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameListViewCell.m; sourceTree = "<group>"; };
+		47405DCE1D521791000A980A /* GameListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameListView.h; sourceTree = "<group>"; };
+		47405DCF1D521791000A980A /* GameListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameListView.m; sourceTree = "<group>"; };
+		47405DD11D521ABB000A980A /* CostomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CostomView.h; sourceTree = "<group>"; };
+		47405DD21D521ABB000A980A /* CostomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CostomView.m; sourceTree = "<group>"; };
 		4746A6391D489365009E0645 /* SchoolInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SchoolInfoView.h; sourceTree = "<group>"; };
 		4746A63A1D489365009E0645 /* SchoolInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SchoolInfoView.m; sourceTree = "<group>"; };
 		4746A63F1D489A90009E0645 /* NewsDetailViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsDetailViewModel.h; sourceTree = "<group>"; };
@@ -657,6 +663,8 @@
 				4746A63A1D489365009E0645 /* SchoolInfoView.m */,
 				4708D2E41D4A67BD0094FAF9 /* NoticeCellView.h */,
 				4708D2E51D4A67BD0094FAF9 /* NoticeCellView.m */,
+				47405DCE1D521791000A980A /* GameListView.h */,
+				47405DCF1D521791000A980A /* GameListView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -751,6 +759,8 @@
 			children = (
 				4734CD971D41BE3E006536DF /* DataArchive.h */,
 				4734CD981D41BE3E006536DF /* DataArchive.m */,
+				47405DD11D521ABB000A980A /* CostomView.h */,
+				47405DD21D521ABB000A980A /* CostomView.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1219,6 +1229,7 @@
 			files = (
 				4734CDDC1D41C95D006536DF /* UIFont+IconFont.m in Sources */,
 				4739B5E41D488E3E007842CC /* NoticeGameviewCell.m in Sources */,
+				47405DD01D521791000A980A /* GameListView.m in Sources */,
 				470C5E751D44BFC800DDF90B /* BottomView.m in Sources */,
 				47BB49941D45E0D40052E4D0 /* News.m in Sources */,
 				472A923A1D4705A000F8620F /* SEMLoginViewController.m in Sources */,
@@ -1258,6 +1269,7 @@
 				4734CD831D41BA54006536DF /* SEMViewModel.m in Sources */,
 				4708D2E61D4A67BD0094FAF9 /* NoticeCellView.m in Sources */,
 				4734CD921D41BCB9006536DF /* SEMMeViewModel.m in Sources */,
+				47405DD31D521ABB000A980A /* CostomView.m in Sources */,
 				4734CDB61D41C4BF006536DF /* SEMNewsViewController.m in Sources */,
 				4746A64A1D48A2A3009E0645 /* NewsDetailResponseModel.m in Sources */,
 				4739B5D51D483B52007842CC /* MeLoginVIewModel.m in Sources */,

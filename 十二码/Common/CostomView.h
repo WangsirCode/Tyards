@@ -13,5 +13,5 @@
 @property (nonatomic,strong) NSString    * text;
 @property (nonatomic,strong) UIImage     * imgae;
 @property (nonatomic,strong) UIImageView * imageView;
-- (instancetype)initWithInfo:(NSString*)text image:(UIImage*)image;
+- (instancetype)initWithInfo:(NSString*)text image:(UIImage*)image FontSize:(NSInteger)size;
 @end
