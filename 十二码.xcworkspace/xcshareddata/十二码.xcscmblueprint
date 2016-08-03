@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "B042F318444C723720C042EFB0E8308F07E114B9",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "B042F318444C723720C042EFB0E8308F07E114B9" : 0,
+    "3FFAE264C0A53970BD35FCBE6D13654E89B458FA" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "0391D103-2B8F-4843-BA56-839F8DF4F0F6",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "B042F318444C723720C042EFB0E8308F07E114B9" : "Tyards\/",
+    "3FFAE264C0A53970BD35FCBE6D13654E89B458FA" : "..\/..\/Volumes\/Transcend\/work\/%E9%95%BF%E6%B1%9F%E4%BA%91\/MediaCloud-iOS"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "十二码",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "十二码.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "git.lehoolive.com:zhaoqian\/MediaCloud-iOS.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "3FFAE264C0A53970BD35FCBE6D13654E89B458FA"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Novel111\/Tyards.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "B042F318444C723720C042EFB0E8308F07E114B9"
+    }
+  ]
+}
