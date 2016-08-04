@@ -9,16 +9,50 @@
 #import "GameDetailModel.h"
 
 @implementation GameDetailResponseModel
+MJCodingImplementation
 
 + (NSDictionary *)objectClassInArray{
     return @{@"resp" : [GameDetailModel class]};
 }
-MJCodingImplementation
 @end
+
+
+
 
 
 @implementation GameDetailModel
 MJCodingImplementation
++ (NSDictionary *)objectClassInArray{
+    return @{@"games" : [Games class]};
+}
+-(NSString *)getDate1
+{
+    NSDate *date = [[NSDate alloc]initWithTimeIntervalSince1970:self.date/1000];
+    NSDateFormatter* formater = [[NSDateFormatter alloc] init];
+    formater.dateFormat = @"yyyy年MM月dd日";
+    NSString* ta = [formater stringFromDate:date];
+    return ta;
+}
+@end
+
+
+@implementation Games
+MJCodingImplementation
+-(NSInteger)getStatus1
+{
+    if([self.status isEqualToString:@"PLANNING"])
+    {
+        return 2;
+    }
+    else if ([self.status isEqualToString:@"PLAYING"])
+    {
+        return 1;
+    }
+    else
+    {
+        return 3;
+    }
+}
 @end
 
 
@@ -30,6 +64,7 @@ MJCodingImplementation
 @implementation Home
 MJCodingImplementation
 @end
+
 
 
 @implementation Stadium
@@ -48,11 +83,9 @@ MJCodingImplementation
 
 
 @implementation Tournament
-+ (NSDictionary *)objectClassInArray{
-    return @{@"logo" : [Logo class]};
-}
 MJCodingImplementation
 @end
+
 
 
 

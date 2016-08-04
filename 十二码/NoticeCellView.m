@@ -32,8 +32,6 @@
     [self addSubview:self.awaySocreLabel];
     [self addSubview:self.centerLabel];
     [self addSubview:self.statusLabel];
-    [self addSubview:self.timeLabel];
-    [self addSubview:self.timaImageView];
     [self addSubview:self.locationImageView];
     [self addSubview:self.homeLabel];
 }
@@ -84,18 +82,8 @@
         make.centerX.equalTo(self.mas_centerX);
         make.top.equalTo(self.homeTitleLabel.mas_top);
     }];
-    [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.mas_centerX);
-        make.bottom.equalTo(self.mas_bottom).offset(-5*scale);
-    }];
-    [self.timaImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.timeLabel.mas_top);
-        make.height.equalTo(@(12*scale));
-        make.width.equalTo(@(12*scale));
-        make.right.equalTo(self.timeLabel.mas_left).offset(-8*scale);
-    }];
     [self.homeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.timeLabel.mas_top);
+        make.top.equalTo(self.homeTitleLabel.mas_bottom).offset(10);
     }];
     [self.locationImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.and.height.equalTo(@(12*scale));
@@ -244,25 +232,6 @@
         _statusLabel.layer.borderWidth = 1;
     }
     return _statusLabel;
-}
-- (UILabel *)timeLabel
-{
-    if (!_timeLabel) {
-        _timeLabel = [[UILabel alloc] init];
-        _timeLabel.font = [UIFont systemFontOfSize:11];
-        _timeLabel.textAlignment = NSTextAlignmentCenter;
-        _timeLabel.textColor = [UIColor colorWithHexString:@"#999999"];
-    }
-    return _timeLabel;
-}
--(UIImageView *)timaImageView
-{
-    if (!_timaImageView) {
-        _timaImageView = [[UIImageView alloc] init];
-        UIImage* image = [UIImage imageNamed:@"clock"];
-        _timaImageView.image = image;
-    }
-    return _timaImageView;
 }
 - (UIImageView *)locationImageView
 {

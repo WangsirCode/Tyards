@@ -14,5 +14,4 @@
  *  @brief 历史战报的cell
  */
 @interface HistoryviewCell : NoticeGameviewCell
-@property (nonatomic,strong) NoticeCellView* myview;
 @end

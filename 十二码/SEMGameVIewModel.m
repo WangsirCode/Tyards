@@ -29,7 +29,7 @@ NSString* const GameListCache = @"GameListCache";
 }
 - (void)fecthData
 {
-    NSArray *noticeGames = (NSArray*) [DataArchive unarchiveDataWithFileName:NoticeGameCache];
+    NSArray<GameDetailModel*> *noticeGames = (NSArray<GameDetailModel*>*) [DataArchive unarchiveDataWithFileName:NoticeGameCache];
     if (noticeGames.count > 0) {
         self.noticeGameDatasource = noticeGames;
     }
@@ -46,7 +46,7 @@ NSString* const GameListCache = @"GameListCache";
         self.historyGameDatasource = [[NSArray alloc] init];
     }
     NSArray* gamelists = (NSArray*)[DataArchive unarchiveDataWithFileName:GameListCache];
-    if (historyGames.count > 0) {
+    if (gamelists.count > 0) {
         self.gameListDatasource = gamelists;
     }
     else
@@ -66,6 +66,9 @@ NSString* const GameListCache = @"GameListCache";
                 [manager fetchNoticeGame:self.code offset:0 success:^(id data) {
                     self.noticeGameDatasource = data;
                     [DataArchive archiveData:self.noticeGameDatasource withFileName:NoticeGameCache];
+                    NSArray<GameDetailModel*> *noticeGames = (NSArray<GameDetailModel*>*) [DataArchive unarchiveDataWithFileName:NoticeGameCache];
+                    
+                    NSLog(@"%lu",(unsigned long)noticeGames.count);
                     [subscriber sendNext:@1];
                     [subscriber sendCompleted];
                     

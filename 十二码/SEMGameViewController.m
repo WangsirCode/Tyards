@@ -91,31 +91,59 @@
 #pragma mark- tableviewdatasource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    if (tableView.tag == 101) {
+        return 1;
+    }
+    else if (tableView.tag == 100)
+    {
+        return self.viewModel.noticeGameDatasource.count;
+    }
+    else{
+        return self.viewModel.historyGameDatasource.count;
+    }
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (tableView.tag == 100) {
-        return self.viewModel.noticeGameDatasource.count;
+        return self.viewModel.noticeGameDatasource[section].games.count;
     }
-    return 0;
+    else if (tableView.tag == 101)
+    {
+        return self.viewModel.gameListDatasource.count;
+    }
+    else
+    {
+        return self.viewModel.historyGameDatasource[section].games.count;
+
+    }
 }
+    
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if(tableView.tag == 100)
     {
         NoticeGameviewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"NoticeGameviewCell" forIndexPath:indexPath];
-        GameDetailModel* model = self.viewModel.noticeGameDatasource[indexPath.row];
+        GameDetailModel* model1 = self.viewModel.noticeGameDatasource[indexPath.section];
+        Games* model = model1.games[indexPath.row];
         cell.view.titleLabel.text = model.tournament.name;
         cell.view.roundLabel.text = model.round.name;
-        cell.view.homeScoreLabel.text = [NSString stringWithFormat: @"%ld", (long)model.homeScore];
-        cell.view.awaySocreLabel.text = [NSString stringWithFormat: @"%ld", (long)model.awayScore];
+        cell.view.status = [model getStatus1];
+        if (cell.view.status == 2) {
+            cell.view.homeScoreLabel.text = @"-";
+            cell.view.awaySocreLabel.text = @"-";
+        }
+        else
+        {
+            cell.view.homeScoreLabel.text = [NSString stringWithFormat: @"%ld", (long)model.homeScore];
+            cell.view.awaySocreLabel.text = [NSString stringWithFormat: @"%ld", (long)model.awayScore];
+        }
         cell.view.homeTitleLabel.text = model.home.name;
         cell.view.awayTitleLabel.text = model.away.name;
+        cell.view.homeLabel.text = model.home.name;
         UIImage *image = [UIImage imageNamed:@"zhanwei.jpg"];
         NSURL *homeurl;
-        if (model.home.logo) {
-            homeurl = [[NSURL alloc] initWithString:model.home.logo];
+        if (model.home.logo.url) {
+            homeurl = [[NSURL alloc] initWithString:model.home.logo.url];
             [cell.view.homeImageview sd_setImageWithURL:homeurl placeholderImage:image options:SDWebImageRefreshCached];
         }
         else
@@ -131,16 +159,132 @@
         {
             cell.view.awayImgaeview.image = image;
         }
-        cell.view.status = 1;
         cell.view.location = 1;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
+
+    }
+    else if (tableView.tag == 101)
+    {
+        GameListModel* model = self.viewModel.gameListDatasource[indexPath.row];
+        GameListViewCell* cell = (GameListViewCell*)[tableView dequeueReusableCellWithIdentifier:@"GameListViewCell"];
+        if (model.logo.url) {
+            NSURL *url = [[NSURL alloc] initWithString:model.logo.url];
+            [cell.logoImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"zhanwei"]];
+            
+        }
+        else
+        {
+            cell.logoImageView.image = [UIImage imageNamed:@"zhanwei"];
+        }
+        cell.status = [model getStatus];
+        cell.titleLabel.text = model.name;
+        cell.timeLabel.text = [model getDate];
+        cell.location = [model getLocation];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+
+        return cell;
+    }
+    else
+    {
+        HistoryviewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"HistoryviewCell" forIndexPath:indexPath];
+        GameDetailModel* model1 = self.viewModel.historyGameDatasource[indexPath.section];
+        Games* model = model1.games[indexPath.row];
+        cell.view.titleLabel.text = model.tournament.name;
+        cell.view.roundLabel.text = model.round.name;
+        cell.view.status = [model getStatus1];
+        if (cell.view.status == 2) {
+            cell.view.homeScoreLabel.text = @"-";
+            cell.view.awaySocreLabel.text = @"-";
+        }
+        else
+        {
+            cell.view.homeScoreLabel.text = [NSString stringWithFormat: @"%ld", (long)model.homeScore];
+            cell.view.awaySocreLabel.text = [NSString stringWithFormat: @"%ld", (long)model.awayScore];
+        }
+        cell.view.homeTitleLabel.text = model.home.name;
+        cell.view.awayTitleLabel.text = model.away.name;
+        cell.view.homeLabel.text = model.home.name;
+        UIImage *image = [UIImage imageNamed:@"zhanwei.jpg"];
+        NSURL *homeurl;
+        if (model.home.logo.url) {
+            homeurl = [[NSURL alloc] initWithString:model.home.logo.url];
+            [cell.view.homeImageview sd_setImageWithURL:homeurl placeholderImage:image options:SDWebImageRefreshCached];
+        }
+        else
+        {
+            cell.view.homeImageview.image = image;
+        }
+        NSURL *awayurl;
+        if (model.away.logo) {
+            awayurl = [[NSURL alloc] initWithString:model.away.logo];
+            [cell.view.awayImgaeview sd_setImageWithURL:awayurl placeholderImage:image options:SDWebImageRefreshCached];
+        }
+        else
+        {
+            cell.view.awayImgaeview.image = image;
+        }
+        cell.view.location = 1;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
+        
     }
     return nil;
     
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 156;
+    if (tableView.tag == 101) {
+        return 100 * self.view.scale;
+    }
+    else
+    {
+        return 156 * self.view.scale;
+    }
+}
+//- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+//{
+//    if (tableView.tag == 100) {
+//        return [self.viewModel.noticeGameDatasource[section] getDate];
+//    }
+//    return nil;
+//}
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    if (tableView.tag == 101) {
+        return nil;
+    }
+    UIView* view = [[UIView alloc] init];
+    view.backgroundColor = [UIColor whiteColor];
+    UILabel* label = [[UILabel alloc] init];
+    view.frame = CGRectMake(0, 0, self.view.width, 16*self.view.scale);
+    [view addSubview:label];
+    NSString* string;
+    if (tableView.tag == 100) {
+        string = [self.viewModel.noticeGameDatasource[section] getDate1];
+    }
+    else if(tableView.tag == 102)
+    {
+        string = [self.viewModel.historyGameDatasource[section] getDate1];
+    }
+    NSMutableAttributedString *AttributedStr = [[NSMutableAttributedString alloc]initWithString:string];
+    NSRange range = NSMakeRange(0, string.length);
+    [AttributedStr addAttribute:NSForegroundColorAttributeName
+     
+                          value:[UIColor colorWithHexString:@"#1EA11F"]
+     
+                          range:range];
+    label.attributedText = AttributedStr;
+    label.textAlignment = NSTextAlignmentCenter;
+    [label mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(view);
+    }];
+    return view;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 16*self.view.scale;
 }
 #pragma mark- Getter
 - (UITableView*)noticegameTableview
@@ -179,7 +323,7 @@
         _historygameTableview = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _historygameTableview.delegate = self;
         _historygameTableview.dataSource = self;
-        _historygameTableview.tag = 101;
+        _historygameTableview.tag = 102;
         [_historygameTableview registerClass:[HistoryviewCell class] forCellReuseIdentifier:@"HistoryviewCell"];
         _historygameTableview.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
             
@@ -212,7 +356,7 @@
         _gamelistTableview = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _gamelistTableview.delegate = self;
         _gamelistTableview.dataSource = self;
-        _gamelistTableview.tag = 102;
+        _gamelistTableview.tag = 101;
         [_gamelistTableview registerClass:[GameListViewCell class] forCellReuseIdentifier:@"GameListViewCell"];
         _gamelistTableview.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
             
@@ -229,12 +373,11 @@
             [[self.viewModel.loadMoreGameListCommand execute: nil] subscribeNext:^(id x) {
                 NSLog(@"已经加载了更多了");
                 NSLog(@"%@",x);
-                [_historygameTableview reloadData];
+                [_gamelistTableview reloadData];
                 [self endRefresh];
             }];
         }];
     }
-    
     return _gamelistTableview;
 }
 - (LazyPageScrollView*)pageView
@@ -248,10 +391,10 @@
         [_pageView addTab:@"比赛预告" View:self.noticegameTableview Info:nil];
         view=[[UIView alloc] init];
         view.backgroundColor=[UIColor greenColor];
-        [_pageView addTab:@"历史战报" View:self.gamelistTableview Info:nil];
+        [_pageView addTab:@"赛事一览" View:self.gamelistTableview Info:nil];
         view=[[UIView alloc] init];
         view.backgroundColor=[UIColor lightGrayColor];
-        [_pageView addTab:@"赛事一览" View:self.historygameTableview Info:nil];
+        [_pageView addTab:@"历史战报" View:self.historygameTableview Info:nil];
         [_pageView setTitleStyle:[UIFont systemFontOfSize:15] SelFont:[UIFont systemFontOfSize:20] Color:[UIColor blackColor] SelColor:[UIColor colorWithHexString:@"#1EA11F"]];
         [_pageView enableBreakLine:YES Width:1 TopMargin:0 BottomMargin:0 Color:[UIColor groupTableViewBackgroundColor]];
         [_pageView generate:^(UIButton *firstTitleControl, UIView *viewTitleEffect) {
@@ -289,13 +432,13 @@
 {
     if (index == 1) {
         if (self.viewModel.fisrtGotoGameListtable == YES) {
-            [self.historygameTableview.mj_header beginRefreshing];
+            [self.gamelistTableview.mj_header beginRefreshing];
         }
     }
     else if (index == 2)
     {
         if (self.viewModel.fisrtGotoHistoryTable == YES) {
-            [self.gamelistTableview.mj_header beginRefreshing];
+            [self.historygameTableview.mj_header beginRefreshing];
         }
     }
     

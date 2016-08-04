@@ -5,25 +5,39 @@
 //  Created by 汪宇豪 on 16/7/27.
 //  Copyright © 2016年 汪宇豪. All rights reserved.
 //
-
+//GameDetailModel
 #import <Foundation/Foundation.h>
 #import "MDABizManager.h"
 #import "SearchModel.h"
-@class GameDetailModel,Group,Home,Stadium,Round,Away,Tournament,Logo;
-@interface GameDetailResponseModel : NSObject<NSCoding>
 
+
+
+@class GameDetailModel,Games,Group,Home,Logo,Stadium,Round,Away,Tournament,Logo;
+@interface GameDetailResponseModel : NSObject<NSCoding>
 @property (nonatomic, strong) NSArray<GameDetailModel *> *resp;
 
 @property (nonatomic, assign) NSInteger code;
 
 @end
+
+
+
+
 @interface GameDetailModel : NSObject<NSCoding>
+
+@property (nonatomic, assign) long long date;
+
+@property (nonatomic, strong) NSArray<Games *> *games;
+- (NSString*)getDate1;
+@end
+
+@interface Games : NSObject<NSCoding>
 
 @property (nonatomic, assign) NSInteger id;
 
 @property (nonatomic, assign) NSInteger penaltyHome;
 
-@property (nonatomic, copy) NSString *Description;
+@property (nonatomic, copy) NSString *description1;
 
 @property (nonatomic, assign) NSInteger homeScore;
 
@@ -50,8 +64,9 @@
 @property (nonatomic, assign) NSInteger awayScore;
 
 @property (nonatomic, copy) NSString *status;
-- (NSInteger)getStatus;
-- (NSString*)getDate;
+
+- (NSInteger)getStatus1;
+
 @end
 
 @interface Group : NSObject<NSCoding>
@@ -70,9 +85,11 @@
 
 @property (nonatomic, copy) NSString *name;
 
-@property (nonatomic, copy) NSString *logo;
+@property (nonatomic, strong) Logo *logo;
 
 @end
+
+
 
 @interface Stadium : NSObject<NSCoding>
 
@@ -111,5 +128,6 @@
 @property (nonatomic, strong) Logo *logo;
 
 @end
+
 
 

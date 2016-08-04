@@ -136,6 +136,7 @@
 		476B99601D4F757B00D52B31 /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 476B995F1D4F757B00D52B31 /* CommentCell.m */; };
 		476B99631D4F75B100D52B31 /* CommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 476B99621D4F75B100D52B31 /* CommentView.m */; };
 		476CBDAF1D4352070075FA7E /* HomeHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 476CBDAE1D4352070075FA7E /* HomeHeadView.m */; };
+		4783923B1D53242F00C31D37 /* UITableViewCell+Scale.m in Sources */ = {isa = PBXBuildFile; fileRef = 4783923A1D53242F00C31D37 /* UITableViewCell+Scale.m */; };
 		478B5E531D420728007AABC4 /* SEMNetworkingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 478B5E521D420728007AABC4 /* SEMNetworkingManager.m */; };
 		478B5E561D420AC5007AABC4 /* hotTopicsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 478B5E551D420AC5007AABC4 /* hotTopicsModel.m */; };
 		47B45C191D431C50009C8DA0 /* zhanwei.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 47B45C181D431C50009C8DA0 /* zhanwei.jpg */; };
@@ -377,6 +378,8 @@
 		476B99621D4F75B100D52B31 /* CommentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentView.m; sourceTree = "<group>"; };
 		476CBDAD1D4352070075FA7E /* HomeHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeHeadView.h; sourceTree = "<group>"; };
 		476CBDAE1D4352070075FA7E /* HomeHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeHeadView.m; sourceTree = "<group>"; };
+		478392391D53242F00C31D37 /* UITableViewCell+Scale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+Scale.h"; sourceTree = "<group>"; };
+		4783923A1D53242F00C31D37 /* UITableViewCell+Scale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+Scale.m"; sourceTree = "<group>"; };
 		478B5E511D420728007AABC4 /* SEMNetworkingManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEMNetworkingManager.h; sourceTree = "<group>"; };
 		478B5E521D420728007AABC4 /* SEMNetworkingManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SEMNetworkingManager.m; sourceTree = "<group>"; };
 		478B5E541D420AC5007AABC4 /* hotTopicsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hotTopicsModel.h; sourceTree = "<group>"; };
@@ -811,6 +814,8 @@
 				4734CDAC1D41BFF2006536DF /* NSArray+Safe.m */,
 				4762521B1D5196A0003788C0 /* UIView+Scale.h */,
 				4762521C1D5196A0003788C0 /* UIView+Scale.m */,
+				478392391D53242F00C31D37 /* UITableViewCell+Scale.h */,
+				4783923A1D53242F00C31D37 /* UITableViewCell+Scale.m */,
 			);
 			name = Catagory;
 			sourceTree = "<group>";
@@ -1244,6 +1249,7 @@
 				472930F91D430AD1008587A6 /* HomeCell.m in Sources */,
 				4734CD3E1D41B512006536DF /* AppDelegate.m in Sources */,
 				4746A66A1D49AB17009E0645 /* UserModel.m in Sources */,
+				4783923B1D53242F00C31D37 /* UITableViewCell+Scale.m in Sources */,
 				4734CD8F1D41BC75006536DF /* SEMGameVIewModel.m in Sources */,
 				476B99601D4F757B00D52B31 /* CommentCell.m in Sources */,
 				4734CD3B1D41B512006536DF /* main.m in Sources */,
@@ -1415,7 +1421,8 @@
 			baseConfigurationReference = DBF612850A2096C988540F2E /* Pods-十二码.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: 462775767@qq.com (P36WG5MF94)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1473,9 +1480,9 @@
 					"\"UIKit\"",
 					"-fobjc-arc",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = wangfffffo;
+				PRODUCT_BUNDLE_IDENTIFIER = Tyards12;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "55fa3f7d-f20b-4a18-b209-6e5023265379";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -1484,7 +1491,8 @@
 			baseConfigurationReference = EBAD3E5CA26ABE9BF6BF078F /* Pods-十二码.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: 462775767@qq.com (P36WG5MF94)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1542,9 +1550,9 @@
 					"\"UIKit\"",
 					"-fobjc-arc",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = wangfffffo;
+				PRODUCT_BUNDLE_IDENTIFIER = Tyards12;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "55fa3f7d-f20b-4a18-b209-6e5023265379";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

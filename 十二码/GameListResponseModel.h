@@ -10,14 +10,14 @@
 #import "SEMNetworkingManager.h"
 #import "SearchModel.h"
 @class GameListModel,University,Shortcut,Logo,Logo,Area,Universities,Shortcut,Logo;
-@interface GameListResponseModel : NSObject
+@interface GameListResponseModel : NSObject<NSCoding>
 
 @property (nonatomic, strong) NSArray<GameListModel *> *resp;
 
 @property (nonatomic, assign) NSInteger code;
 
 @end
-@interface GameListModel : NSObject
+@interface GameListModel : NSObject<NSCoding>
 
 @property (nonatomic, strong) University *university;
 
@@ -36,10 +36,12 @@
 @property (nonatomic, copy) NSString *name;
 
 @property (nonatomic, strong) Logo *logo;
-
+- (NSInteger)getStatus;
+- (NSString*)getDate;
+- (NSString*)getLocation;
 @end
 
-@interface University : NSObject
+@interface University : NSObject<NSCoding>
 
 @property (nonatomic, strong) Shortcut *shortcut;
 

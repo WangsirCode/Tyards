@@ -20,8 +20,6 @@
 @property (nonatomic,strong) UILabel* centerLabel;
 @property (nonatomic,strong) UILabel* homeTitleLabel;
 @property (nonatomic,strong) UILabel* awayTitleLabel;
-@property (nonatomic,strong) UILabel* timeLabel;
-@property (nonatomic,strong) UIImageView* timaImageView;
 @property (nonatomic,strong) UIImageView* locationImageView;
 @property (nonatomic,assign)NSInteger status;
 @property (nonatomic,assign)NSInteger location;
