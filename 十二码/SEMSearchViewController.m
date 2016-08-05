@@ -64,6 +64,7 @@
     }];
 }
 #pragma mark -tableviewDelegate
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     if (self.viewModel.isSearching == YES) {

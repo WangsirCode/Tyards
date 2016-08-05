@@ -9,6 +9,9 @@
 #import "SEMNetworkingManager.h"
 #import "GameDetailModel.h"
 #import "GameListResponseModel.h"
+#import "TeamLisstResponseModel.h"
+#import "TeamHomeModelResponse.h"
+#import "TeamPlayerResponseModel.h"
 NSString* const hotTopics = @"/university/hotTopics";
 NSString* const hotTopicsCache = @"hotTopicsCache";
 NSString* const ReconmendNewsURL = @"/university/editorViews";
@@ -22,6 +25,10 @@ NSString* const GameListURL = @"/university/tournaments";
 NSString* const NewDetailURL = @"/news/detail";
 NSString* const WexinURL = @"/user/wxToken";
 NSString* const qqURL = @" /user/qqToken";
+NSString* const teamList = @"/university/teams";
+NSString* const TeamInfo = @"/team/detail/";
+NSString* const TeamPlayer = @"/team/players/";
+NSString* const TeamComments = @"/team/newses/";
 @implementation SEMNetworkingManager
 + (instancetype)sharedInstance
 {
@@ -228,6 +235,75 @@ NSString* const qqURL = @" /user/qqToken";
         failureBlock(error);
     }];
     
+}
+
+//球队列表
+-(NSURLSessionTask *)fetchTeamList:(NSString *)schoolcode searchName:(NSString *)name success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
+{
+    [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
+    NSMutableString* URL = [NSMutableString stringWithString:@"/"];
+    
+    NSDictionary *para = @{@"q":name};
+    [URL appendString:schoolcode];
+    [URL appendString:teamList];
+    return [self GET:URL parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        TeamLisstResponseModel* model = [TeamLisstResponseModel mj_objectWithKeyValues:responseObject];
+        successBlock(model.resp);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }];
+}
+
+//球队主页信息
+-(NSURLSessionTask *)fetchTeamInfo:(NSString *)ide success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
+{
+    [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
+    NSMutableString* URL = [[NSMutableString alloc] init];
+    [URL appendString:TeamInfo];
+    [URL appendString:ide];
+    return [self GET:URL parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        TeamHomeModelResponse* model = [TeamHomeModelResponse mj_objectWithKeyValues:responseObject];
+        successBlock(model.resp);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }];
+}
+
+//球队队员信息
+- (NSURLSessionTask *)fetchTeamPlayers:(NSString *)ide success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
+{
+    [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
+    NSMutableString* URL = [[NSMutableString alloc] init];
+    [URL appendString:TeamPlayer];
+    [URL appendString:ide];
+    return [self GET:URL parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        TeamPlayerResponseModel* model = [TeamPlayerResponseModel mj_objectWithKeyValues:responseObject];
+        successBlock(model.resp);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }];
+}
+- (NSURLSessionTask *)fetchTeamComments:(NSString *)ide success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
+{
+    [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
+    NSMutableString* URL = [[NSMutableString alloc] init];
+    [URL appendString:TeamComments];
+    [URL appendString:ide];
+    NSDictionary* para = @{@"unflattern":@YES};
+    return [self GET:URL parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSArray<NewsDetailModel*>* model = [NSArray mj_objectWithKeyValues:responseObject];
+        successBlock(model);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }];
 }
 
 @end

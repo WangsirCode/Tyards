@@ -7,7 +7,13 @@
 //
 
 #import "SEMViewModel.h"
-
+#import "MDABizManager.h"
+#import "TeamLisstResponseModel.h"
 @interface SEMTeamViewModel : SEMViewModel
 @property (nonatomic,strong) NSString* title;
+@property (nonatomic, strong) TeamModel *model;
+@property (nonatomic,strong)RACCommand* searchCommand;
+@property (nonatomic, strong) TeamModel *teams;
+@property (nonatomic,assign)BOOL isSearching;
+@property (nonatomic,assign) BOOL needReloadTableview;
 @end

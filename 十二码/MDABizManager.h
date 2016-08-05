@@ -26,6 +26,7 @@
 #import "WXApi.h"
 #import "WXApiObject.h"
 #import "UITableViewCell+Scale.h"
+#import "UIImage+placeholder.h"
 @interface MDABizManager : NSObject
 @property (nonatomic,assign)BOOL userLogined;
 /**

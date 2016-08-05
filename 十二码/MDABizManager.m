@@ -23,7 +23,8 @@
                                @"tab":@"SEMTabViewController",
                                @"search":@"SEMSearchViewController",
                                @"login":@"SEMLoginViewController",
-                               @"News detail":@"SEMNewsDetailController"};
+                               @"News detail":@"SEMNewsDetailController",
+                               @"TeamHome":@"SEMTeamHomeViewController"};
     [[HRTRouter sharedInstance].routeMap addEntriesFromDictionary: routeMap];
 }
 

@@ -136,6 +136,14 @@
 		476B99601D4F757B00D52B31 /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 476B995F1D4F757B00D52B31 /* CommentCell.m */; };
 		476B99631D4F75B100D52B31 /* CommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 476B99621D4F75B100D52B31 /* CommentView.m */; };
 		476CBDAF1D4352070075FA7E /* HomeHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 476CBDAE1D4352070075FA7E /* HomeHeadView.m */; };
+		477642521D541F8300548C9F /* TeamLisstResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 477642511D541F8300548C9F /* TeamLisstResponseModel.m */; };
+		4776425C1D5434F100548C9F /* SEMTeamHomeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4776425B1D5434F100548C9F /* SEMTeamHomeModel.m */; };
+		4776425F1D54357700548C9F /* SEMTeamHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4776425E1D54357700548C9F /* SEMTeamHomeViewController.m */; };
+		477642621D5440AA00548C9F /* TeamHomeModelResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 477642611D5440AA00548C9F /* TeamHomeModelResponse.m */; };
+		477642651D546ADE00548C9F /* MessageTableviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 477642641D546ADE00548C9F /* MessageTableviewCell.m */; };
+		477642681D546F0800548C9F /* UIImage+placeholder.m in Sources */ = {isa = PBXBuildFile; fileRef = 477642671D546F0800548C9F /* UIImage+placeholder.m */; };
+		4776426B1D5485F300548C9F /* TeamNewsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4776426A1D5485F300548C9F /* TeamNewsCell.m */; };
+		4776426E1D548CAD00548C9F /* TeamPlayerResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4776426D1D548CAD00548C9F /* TeamPlayerResponseModel.m */; };
 		4783923B1D53242F00C31D37 /* UITableViewCell+Scale.m in Sources */ = {isa = PBXBuildFile; fileRef = 4783923A1D53242F00C31D37 /* UITableViewCell+Scale.m */; };
 		478B5E531D420728007AABC4 /* SEMNetworkingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 478B5E521D420728007AABC4 /* SEMNetworkingManager.m */; };
 		478B5E561D420AC5007AABC4 /* hotTopicsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 478B5E551D420AC5007AABC4 /* hotTopicsModel.m */; };
@@ -378,6 +386,22 @@
 		476B99621D4F75B100D52B31 /* CommentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentView.m; sourceTree = "<group>"; };
 		476CBDAD1D4352070075FA7E /* HomeHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeHeadView.h; sourceTree = "<group>"; };
 		476CBDAE1D4352070075FA7E /* HomeHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeHeadView.m; sourceTree = "<group>"; };
+		477642501D541F8300548C9F /* TeamLisstResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamLisstResponseModel.h; sourceTree = "<group>"; };
+		477642511D541F8300548C9F /* TeamLisstResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamLisstResponseModel.m; sourceTree = "<group>"; };
+		4776425A1D5434F100548C9F /* SEMTeamHomeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEMTeamHomeModel.h; sourceTree = "<group>"; };
+		4776425B1D5434F100548C9F /* SEMTeamHomeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SEMTeamHomeModel.m; sourceTree = "<group>"; };
+		4776425D1D54357700548C9F /* SEMTeamHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEMTeamHomeViewController.h; sourceTree = "<group>"; };
+		4776425E1D54357700548C9F /* SEMTeamHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SEMTeamHomeViewController.m; sourceTree = "<group>"; };
+		477642601D5440AA00548C9F /* TeamHomeModelResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamHomeModelResponse.h; sourceTree = "<group>"; };
+		477642611D5440AA00548C9F /* TeamHomeModelResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamHomeModelResponse.m; sourceTree = "<group>"; };
+		477642631D546ADE00548C9F /* MessageTableviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageTableviewCell.h; sourceTree = "<group>"; };
+		477642641D546ADE00548C9F /* MessageTableviewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTableviewCell.m; sourceTree = "<group>"; };
+		477642661D546F0800548C9F /* UIImage+placeholder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+placeholder.h"; sourceTree = "<group>"; };
+		477642671D546F0800548C9F /* UIImage+placeholder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+placeholder.m"; sourceTree = "<group>"; };
+		477642691D5485F300548C9F /* TeamNewsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamNewsCell.h; sourceTree = "<group>"; };
+		4776426A1D5485F300548C9F /* TeamNewsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamNewsCell.m; sourceTree = "<group>"; };
+		4776426C1D548CAD00548C9F /* TeamPlayerResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamPlayerResponseModel.h; sourceTree = "<group>"; };
+		4776426D1D548CAD00548C9F /* TeamPlayerResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamPlayerResponseModel.m; sourceTree = "<group>"; };
 		478392391D53242F00C31D37 /* UITableViewCell+Scale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+Scale.h"; sourceTree = "<group>"; };
 		4783923A1D53242F00C31D37 /* UITableViewCell+Scale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+Scale.m"; sourceTree = "<group>"; };
 		478B5E511D420728007AABC4 /* SEMNetworkingManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEMNetworkingManager.h; sourceTree = "<group>"; };
@@ -532,6 +556,7 @@
 		4734CD6D1D41B7A3006536DF /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				477642561D5420B800548C9F /* Team */,
 				4739B5D31D483B52007842CC /* MeLoginVIewModel.h */,
 				4739B5D41D483B52007842CC /* MeLoginVIewModel.m */,
 				4734CD811D41BA54006536DF /* SEMViewModel.h */,
@@ -542,8 +567,6 @@
 				4734CD8E1D41BC75006536DF /* SEMGameVIewModel.m */,
 				4734CD901D41BCB9006536DF /* SEMMeViewModel.h */,
 				4734CD911D41BCB9006536DF /* SEMMeViewModel.m */,
-				4734CD931D41BCE3006536DF /* SEMTeamViewModel.h */,
-				4734CD941D41BCE3006536DF /* SEMTeamViewModel.m */,
 				4734CDBD1D41C585006536DF /* SEMNewsVIewModel.h */,
 				4734CDBE1D41C585006536DF /* SEMNewsVIewModel.m */,
 				476823701D44E43E00B224E6 /* SEMSearchViewModel.h */,
@@ -559,6 +582,7 @@
 		4734CD6E1D41B7B7006536DF /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4776424F1D541F5F00548C9F /* Team */,
 				4734CDC61D41C95D006536DF /* IconFont */,
 				4734CDA71D41BE7D006536DF /* MDABizManager.m */,
 				4734CDA61D41BE7D006536DF /* MDABizManager.h */,
@@ -640,6 +664,10 @@
 		4734CD741D41B955006536DF /* View */ = {
 			isa = PBXGroup;
 			children = (
+				477642631D546ADE00548C9F /* MessageTableviewCell.h */,
+				477642641D546ADE00548C9F /* MessageTableviewCell.m */,
+				477642691D5485F300548C9F /* TeamNewsCell.h */,
+				4776426A1D5485F300548C9F /* TeamNewsCell.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -649,6 +677,8 @@
 			children = (
 				4734CDBA1D41C4D9006536DF /* SEMTeamViewController.h */,
 				4734CDBB1D41C4D9006536DF /* SEMTeamViewController.m */,
+				4776425D1D54357700548C9F /* SEMTeamHomeViewController.h */,
+				4776425E1D54357700548C9F /* SEMTeamHomeViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -816,6 +846,8 @@
 				4762521C1D5196A0003788C0 /* UIView+Scale.m */,
 				478392391D53242F00C31D37 /* UITableViewCell+Scale.h */,
 				4783923A1D53242F00C31D37 /* UITableViewCell+Scale.m */,
+				477642661D546F0800548C9F /* UIImage+placeholder.h */,
+				477642671D546F0800548C9F /* UIImage+placeholder.m */,
 			);
 			name = Catagory;
 			sourceTree = "<group>";
@@ -948,6 +980,30 @@
 				4746A6721D49B92B009E0645 /* XHToast.h */,
 			);
 			name = XHToast;
+			sourceTree = "<group>";
+		};
+		4776424F1D541F5F00548C9F /* Team */ = {
+			isa = PBXGroup;
+			children = (
+				477642501D541F8300548C9F /* TeamLisstResponseModel.h */,
+				477642511D541F8300548C9F /* TeamLisstResponseModel.m */,
+				477642601D5440AA00548C9F /* TeamHomeModelResponse.h */,
+				477642611D5440AA00548C9F /* TeamHomeModelResponse.m */,
+				4776426C1D548CAD00548C9F /* TeamPlayerResponseModel.h */,
+				4776426D1D548CAD00548C9F /* TeamPlayerResponseModel.m */,
+			);
+			name = Team;
+			sourceTree = "<group>";
+		};
+		477642561D5420B800548C9F /* Team */ = {
+			isa = PBXGroup;
+			children = (
+				4734CD931D41BCE3006536DF /* SEMTeamViewModel.h */,
+				4734CD941D41BCE3006536DF /* SEMTeamViewModel.m */,
+				4776425A1D5434F100548C9F /* SEMTeamHomeModel.h */,
+				4776425B1D5434F100548C9F /* SEMTeamHomeModel.m */,
+			);
+			name = Team;
 			sourceTree = "<group>";
 		};
 		47BB49A01D45F45B0052E4D0 /* weixin */ = {
@@ -1232,6 +1288,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				477642621D5440AA00548C9F /* TeamHomeModelResponse.m in Sources */,
 				4734CDDC1D41C95D006536DF /* UIFont+IconFont.m in Sources */,
 				4739B5E41D488E3E007842CC /* NoticeGameviewCell.m in Sources */,
 				47405DD01D521791000A980A /* GameListView.m in Sources */,
@@ -1248,6 +1305,7 @@
 				472930F41D430168008587A6 /* ReCommendNews.m in Sources */,
 				472930F91D430AD1008587A6 /* HomeCell.m in Sources */,
 				4734CD3E1D41B512006536DF /* AppDelegate.m in Sources */,
+				4776425F1D54357700548C9F /* SEMTeamHomeViewController.m in Sources */,
 				4746A66A1D49AB17009E0645 /* UserModel.m in Sources */,
 				4783923B1D53242F00C31D37 /* UITableViewCell+Scale.m in Sources */,
 				4734CD8F1D41BC75006536DF /* SEMGameVIewModel.m in Sources */,
@@ -1261,6 +1319,8 @@
 				4734CDA51D41BE54006536DF /* HRTTabBarButton.m in Sources */,
 				470C5EF61D44D7E700DDF90B /* SEMSearchViewController.m in Sources */,
 				475307501D46F964003ECEBF /* MeinfoVIew.m in Sources */,
+				4776425C1D5434F100548C9F /* SEMTeamHomeModel.m in Sources */,
+				477642521D541F8300548C9F /* TeamLisstResponseModel.m in Sources */,
 				4734CDE11D41CBEA006536DF /* SEMTabViewController.m in Sources */,
 				4734CDC51D41C84C006536DF /* SEMNavigationController.m in Sources */,
 				4734CD891D41BB49006536DF /* SEMHomeVIewModel.m in Sources */,
@@ -1293,12 +1353,16 @@
 				4746A6771D49DFC4009E0645 /* TagView.m in Sources */,
 				472A92411D473F8B00F8620F /* MeLoginView.m in Sources */,
 				4739B5EA1D488E84007842CC /* GameListViewCell.m in Sources */,
+				477642651D546ADE00548C9F /* MessageTableviewCell.m in Sources */,
 				4734CDAD1D41BFF2006536DF /* NSArray+Safe.m in Sources */,
 				4734CDB91D41C4CD006536DF /* SEMGameViewController.m in Sources */,
 				4734CDBC1D41C4D9006536DF /* SEMTeamViewController.m in Sources */,
+				4776426E1D548CAD00548C9F /* TeamPlayerResponseModel.m in Sources */,
 				4734CDA31D41BE54006536DF /* HRTRouter.m in Sources */,
 				4746A63B1D489365009E0645 /* SchoolInfoView.m in Sources */,
+				4776426B1D5485F300548C9F /* TeamNewsCell.m in Sources */,
 				4734CDA41D41BE54006536DF /* UIViewController+HRTRouter.m in Sources */,
+				477642681D546F0800548C9F /* UIImage+placeholder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

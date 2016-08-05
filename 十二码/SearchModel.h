@@ -70,9 +70,3 @@
 @property (nonatomic, copy  ) NSString  *type;
 
 @end
-//@interface SearchResultsModel : NSObject
-//
-//@property (nonatomic, strong) NSArray<Universities *> *resp;
-//
-//@property (nonatomic, assign) NSInteger code;
-//@end

@@ -29,5 +29,9 @@
 {
     
 }
-
+-(NSString *)getSchoolCode
+{
+    NSUserDefaults *database = [NSUserDefaults standardUserDefaults];
+    return [database objectForKey:@"name"];
+}
 @end

@@ -209,5 +209,71 @@
                               openid:(NSString*)openid
                              success:(void (^)(id data))successBlock
                           failure:(void (^)(NSError *aError))failureBlock;
+
+
+/*!
+ *  @author 汪宇豪, 16-08-05 09:08:50
+ *
+ *  @brief 获取球队列表
+ *
+ *  @param name         球队名称
+ *  @param successBlock 成功
+ *  @param failureBlock 失败
+ *
+ *  @return NSURLSessionTask
+ */
+- (NSURLSessionTask*)fetchTeamList:(NSString*)schoolcode
+                        searchName:(NSString*)name
+                          success:(void (^)(id data))successBlock
+                          failure:(void (^)(NSError *aError))failureBlock;
+
+
+
+/*!
+ *  @author 汪宇豪, 16-08-05 11:08:55
+ *
+ *  @brief 获取球队信息
+ *
+ *  @param ide          id
+ *  @param successBlock 成功
+ *  @param failureBlock 失败
+ *
+ *  @return NSURLSessionTask
+ */
+- (NSURLSessionTask*)fetchTeamInfo:(NSString*)ide
+                           success:(void (^)(id data))successBlock
+                           failure:(void (^)(NSError *aError))failureBlock;
+
+
+/*!
+ *  @author 汪宇豪, 16-08-05 16:08:56
+ *
+ *  @brief 获取队员信息
+ *
+ *  @param ide          id
+ *  @param successBlock 成功
+ *  @param failureBlock 失败
+ *
+ *  @return NSURLSessionTask
+ */
+- (NSURLSessionTask*)fetchTeamPlayers:(NSString*)ide
+                           success:(void (^)(id data))successBlock
+                           failure:(void (^)(NSError *aError))failureBlock;
+
+
+/*!
+ *  @author 汪宇豪, 16-08-05 18:08:43
+ *
+ *  @brief 获取球队评论
+ *
+ *  @param ide          id
+ *  @param successBlock 成功
+ *  @param failureBlock 失败
+ *
+ *  @return NSURLSessionTask
+ */
+- (NSURLSessionTask*)fetchTeamComments:(NSString*)ide
+                              success:(void (^)(id data))successBlock
+                              failure:(void (^)(NSError *aError))failureBlock;
 @end
 

@@ -15,5 +15,5 @@
 - (instancetype)initWithDictionary:(NSDictionary*)dictionary;
 
 - (void)setup;
-
+- (NSString*)getSchoolCode;
 @end
