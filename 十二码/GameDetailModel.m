@@ -82,9 +82,6 @@ MJCodingImplementation
 @end
 
 
-@implementation Tournament
-MJCodingImplementation
-@end
 
 
 

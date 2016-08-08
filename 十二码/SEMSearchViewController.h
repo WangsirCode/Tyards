@@ -7,13 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SearchModel.h"
 /*!
  *  @author 汪宇豪, 16-07-24 19:07:09
  *
  *  @brief 搜索界面
  */
 @protocol SEMSearchViewControllerDelegate <NSObject>
-- (void)didSelectedItem:(NSString*)name diplayname:(NSString*)dispalyname;
+- (void)didSelectedItem:(NSString*)name diplayname:(NSString*)dispalyname uni:(Universities*)uni;
 @end
 
 @interface SEMSearchViewController : UIViewController

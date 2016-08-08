@@ -17,8 +17,14 @@
 {
     NSArray *documentArray = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentPath = [documentArray safeObjectAtIndex:0];
-    NSString *filePath = [documentPath stringByAppendingPathComponent:aFileName];
-    
+
+    NSString *filePath1 = [documentPath stringByAppendingPathComponent:@"cache"];
+    NSFileManager* fileManager=[NSFileManager defaultManager];
+    if (![fileManager fileExistsAtPath:filePath1]) {
+        [fileManager createDirectoryAtPath:filePath1 withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+    NSLog(@"%@",filePath1);
+    NSString *filePath = [filePath1 stringByAppendingPathComponent:aFileName];
     NSData *archiveData = [NSKeyedArchiver archivedDataWithRootObject:aData];
     [archiveData writeToFile:filePath atomically:NO];
 }
@@ -30,8 +36,12 @@
 {
     NSArray *documentArray = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentPath = [documentArray safeObjectAtIndex:0];
-    NSString *filePath = [documentPath stringByAppendingPathComponent:aFileName];
-    
+    NSString *filePath1 = [documentPath stringByAppendingPathComponent:@"cache"];
+    NSFileManager* fileManager=[NSFileManager defaultManager];
+    if (![fileManager fileExistsAtPath:filePath1]) {
+        [fileManager createDirectoryAtPath:filePath1 withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+    NSString *filePath = [filePath1 stringByAppendingPathComponent:aFileName];
     id unarchiveData = [NSKeyedUnarchiver unarchiveObjectWithFile:filePath];
     return unarchiveData;
 }
@@ -46,12 +56,25 @@
     id unarchiveData = [NSKeyedUnarchiver unarchiveObjectWithFile:filePath];
     return unarchiveData;
 }
+
+/*!
+ *  @author 汪宇豪, 16-08-08 11:08:14
+ *
+ *  @brief 删除文件
+ *
+ *  @param filename 文件名
+ */
 + (void)removefile:(NSString *)filename
 {
     NSArray *documentArray = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentPath = [documentArray safeObjectAtIndex:0];
-    NSString *filePath = [documentPath stringByAppendingPathComponent:filename];
+    NSString *filePath1 = [documentPath stringByAppendingPathComponent:@"cache"];
     NSFileManager* fileManager=[NSFileManager defaultManager];
+    if (![fileManager fileExistsAtPath:filePath1]) {
+        [fileManager createFileAtPath:filePath1 contents:nil attributes:nil];
+    }
+    NSLog(@"%@",filePath1);
+    NSString* filePath = [documentPath stringByAppendingPathComponent:filename];
     BOOL blHave=[[NSFileManager defaultManager] fileExistsAtPath:filePath];
     if (!blHave) {
         NSLog(@"no  have");
@@ -69,5 +92,38 @@
 }
 
 
+/*!
+ *  @author 汪宇豪, 16-08-08 11:08:31
+ *
+ *  @brief 计算文件大校
+ *
+ *  @param fileName 文件名
+ *
+ *  @return 大小(单位是M)
+ */
++ (unsigned long long)fileSize:(NSString *)fileName
+{
+    NSArray *documentArray = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentPath = [documentArray safeObjectAtIndex:0];
+    NSString *filePath = [documentPath stringByAppendingPathComponent:fileName];
+    NSFileManager* fileManager=[NSFileManager defaultManager];
+    unsigned long long size = 0;
+    BOOL isDir = NO;
+    BOOL exist = [fileManager fileExistsAtPath:filePath isDirectory:&isDir];
     
+    // 判断路径是否存在
+    if (!exist) return size;
+    if (isDir) { // 是文件夹
+        NSDirectoryEnumerator *enumerator = [fileManager enumeratorAtPath:filePath];
+        for (NSString *subPath in enumerator) {
+            NSString *fullPath = [filePath stringByAppendingPathComponent:subPath];
+            size += [fileManager attributesOfItemAtPath:fullPath error:nil].fileSize;
+            
+        }
+    }else{ // 是文件
+        size += [fileManager attributesOfItemAtPath:filePath error:nil].fileSize;
+    }
+    return size / 1000000;
+}
+
 @end

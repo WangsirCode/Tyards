@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		4708D2E61D4A67BD0094FAF9 /* NoticeCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4708D2E51D4A67BD0094FAF9 /* NoticeCellView.m */; };
+		470BEE111D582909003167ED /* SetUpController.m in Sources */ = {isa = PBXBuildFile; fileRef = 470BEE101D582909003167ED /* SetUpController.m */; };
+		470BEE141D58295C003167ED /* SetUpViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 470BEE131D58295C003167ED /* SetUpViewModel.m */; };
 		470C5E751D44BFC800DDF90B /* BottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 470C5E741D44BFC800DDF90B /* BottomView.m */; };
 		470C5EF61D44D7E700DDF90B /* SEMSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 470C5EF51D44D7E700DDF90B /* SEMSearchViewController.m */; };
 		472930F41D430168008587A6 /* ReCommendNews.m in Sources */ = {isa = PBXBuildFile; fileRef = 472930F31D430168008587A6 /* ReCommendNews.m */; };
@@ -103,6 +105,13 @@
 		4734CE4B1D41CD5E006536DF /* 消息icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4734CE441D41CD5E006536DF /* 消息icon.png */; };
 		4734CE4C1D41CD5E006536DF /* 信息发送icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4734CE451D41CD5E006536DF /* 信息发送icon.png */; };
 		4734CE4E1D41CD6D006536DF /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 4734CE4D1D41CD6D006536DF /* 2.png */; };
+		4735F9F71D55FA8F00FDF2ED /* PersonalInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4735F9F61D55FA8F00FDF2ED /* PersonalInfoController.m */; };
+		4735F9FD1D55FAF600FDF2ED /* ColleageSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4735F9FC1D55FAF600FDF2ED /* ColleageSearchController.m */; };
+		4735FA001D55FB3700FDF2ED /* PersonalInfoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4735F9FF1D55FB3700FDF2ED /* PersonalInfoViewModel.m */; };
+		4735FA0C1D55FCDA00FDF2ED /* MeColleageSearchViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4735FA0B1D55FCDA00FDF2ED /* MeColleageSearchViewModel.m */; };
+		4735FA0F1D560EBE00FDF2ED /* MeUserInfoResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4735FA0E1D560EBE00FDF2ED /* MeUserInfoResponseModel.m */; };
+		4735FA121D5616F000FDF2ED /* Group 19.png in Resources */ = {isa = PBXBuildFile; fileRef = 4735FA101D5616F000FDF2ED /* Group 19.png */; };
+		4735FA151D561E2100FDF2ED /* 头像背景.png in Resources */ = {isa = PBXBuildFile; fileRef = 4735FA141D561E2100FDF2ED /* 头像背景.png */; };
 		4739B5D51D483B52007842CC /* MeLoginVIewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4739B5D41D483B52007842CC /* MeLoginVIewModel.m */; };
 		4739B5DB1D483FE4007842CC /* TopicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4739B5DA1D483FE4007842CC /* TopicCell.m */; };
 		4739B5DE1D4862F1007842CC /* GameDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4739B5DD1D4862F1007842CC /* GameDetailModel.m */; };
@@ -124,10 +133,18 @@
 		4746A66A1D49AB17009E0645 /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4746A6691D49AB17009E0645 /* UserModel.m */; };
 		4746A66D1D49B0A6009E0645 /* LoginCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 4746A66C1D49B0A6009E0645 /* LoginCommand.m */; };
 		4746A6701D49B3D8009E0645 /* MeinfoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4746A66F1D49B3D8009E0645 /* MeinfoViewModel.m */; };
-		4746A6731D49B92B009E0645 /* XHToast.m in Sources */ = {isa = PBXBuildFile; fileRef = 4746A6711D49B92B009E0645 /* XHToast.m */; };
 		4746A6771D49DFC4009E0645 /* TagView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4746A6761D49DFC4009E0645 /* TagView.m */; };
 		4753074D1D46F74A003ECEBF /* MeTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4753074C1D46F74A003ECEBF /* MeTopView.m */; };
 		475307501D46F964003ECEBF /* MeinfoVIew.m in Sources */ = {isa = PBXBuildFile; fileRef = 4753074F1D46F964003ECEBF /* MeinfoVIew.m */; };
+		476088041D55818600F36597 /* TeamInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 476088031D55818600F36597 /* TeamInfoView.m */; };
+		4760880B1D55874400F36597 /* camera_L.png in Resources */ = {isa = PBXBuildFile; fileRef = 476088051D55874400F36597 /* camera_L.png */; };
+		4760880C1D55874400F36597 /* calender_L.png in Resources */ = {isa = PBXBuildFile; fileRef = 476088061D55874400F36597 /* calender_L.png */; };
+		4760880D1D55874400F36597 /* 约战-助攻.png in Resources */ = {isa = PBXBuildFile; fileRef = 476088071D55874400F36597 /* 约战-助攻.png */; };
+		4760880E1D55874400F36597 /* 约战-乌龙.png in Resources */ = {isa = PBXBuildFile; fileRef = 476088081D55874400F36597 /* 约战-乌龙.png */; };
+		4760880F1D55874400F36597 /* 约战-时间.png in Resources */ = {isa = PBXBuildFile; fileRef = 476088091D55874400F36597 /* 约战-时间.png */; };
+		476088101D55874400F36597 /* 约战-进球.png in Resources */ = {isa = PBXBuildFile; fileRef = 4760880A1D55874400F36597 /* 约战-进球.png */; };
+		476088131D5588D900F36597 /* SEMTeamPhotoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 476088121D5588D900F36597 /* SEMTeamPhotoController.m */; };
+		4760881B1D55897200F36597 /* TeamPhotoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4760881A1D55897200F36597 /* TeamPhotoViewModel.m */; };
 		476252171D519027003788C0 /* ShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 476252161D519027003788C0 /* ShareView.m */; };
 		4762521D1D5196A0003788C0 /* UIView+Scale.m in Sources */ = {isa = PBXBuildFile; fileRef = 4762521C1D5196A0003788C0 /* UIView+Scale.m */; };
 		476823721D44E43E00B224E6 /* SEMSearchViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 476823711D44E43E00B224E6 /* SEMSearchViewModel.m */; };
@@ -136,6 +153,11 @@
 		476B99601D4F757B00D52B31 /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 476B995F1D4F757B00D52B31 /* CommentCell.m */; };
 		476B99631D4F75B100D52B31 /* CommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 476B99621D4F75B100D52B31 /* CommentView.m */; };
 		476CBDAF1D4352070075FA7E /* HomeHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 476CBDAE1D4352070075FA7E /* HomeHeadView.m */; };
+		4772FE611D56579B0008ED37 /* MyMessageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4772FE601D56579B0008ED37 /* MyMessageController.m */; };
+		4772FE641D5657B40008ED37 /* MyMessageViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4772FE631D5657B40008ED37 /* MyMessageViewModel.m */; };
+		4772FE671D5659E40008ED37 /* MyMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4772FE661D5659E40008ED37 /* MyMessageModel.m */; };
+		4772FE6A1D565C780008ED37 /* MyMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4772FE691D565C780008ED37 /* MyMessageCell.m */; };
+		4772FE6D1D565DEB0008ED37 /* UIColor+MyColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 4772FE6C1D565DEB0008ED37 /* UIColor+MyColor.m */; };
 		477642521D541F8300548C9F /* TeamLisstResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 477642511D541F8300548C9F /* TeamLisstResponseModel.m */; };
 		4776425C1D5434F100548C9F /* SEMTeamHomeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4776425B1D5434F100548C9F /* SEMTeamHomeModel.m */; };
 		4776425F1D54357700548C9F /* SEMTeamHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4776425E1D54357700548C9F /* SEMTeamHomeViewController.m */; };
@@ -144,9 +166,18 @@
 		477642681D546F0800548C9F /* UIImage+placeholder.m in Sources */ = {isa = PBXBuildFile; fileRef = 477642671D546F0800548C9F /* UIImage+placeholder.m */; };
 		4776426B1D5485F300548C9F /* TeamNewsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4776426A1D5485F300548C9F /* TeamNewsCell.m */; };
 		4776426E1D548CAD00548C9F /* TeamPlayerResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4776426D1D548CAD00548C9F /* TeamPlayerResponseModel.m */; };
+		477676631D58527100E10594 /* XHToast.m in Sources */ = {isa = PBXBuildFile; fileRef = 477676621D58527100E10594 /* XHToast.m */; };
+		477676661D5853CD00E10594 /* FeedBackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 477676651D5853CD00E10594 /* FeedBackController.m */; };
+		477676691D58544D00E10594 /* FeedBackViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 477676681D58544D00E10594 /* FeedBackViewModel.m */; };
+		4776766F1D58610600E10594 /* AboutVIewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4776766E1D58610600E10594 /* AboutVIewModel.m */; };
+		477676721D58614A00E10594 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 477676711D58614A00E10594 /* AboutViewController.m */; };
 		4783923B1D53242F00C31D37 /* UITableViewCell+Scale.m in Sources */ = {isa = PBXBuildFile; fileRef = 4783923A1D53242F00C31D37 /* UITableViewCell+Scale.m */; };
 		478B5E531D420728007AABC4 /* SEMNetworkingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 478B5E521D420728007AABC4 /* SEMNetworkingManager.m */; };
 		478B5E561D420AC5007AABC4 /* hotTopicsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 478B5E551D420AC5007AABC4 /* hotTopicsModel.m */; };
+		47AF5D2B1D56468F00728933 /* MyConcernController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47AF5D2A1D56468F00728933 /* MyConcernController.m */; };
+		47AF5D2E1D5646A700728933 /* MyConcernViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47AF5D2D1D5646A700728933 /* MyConcernViewModel.m */; };
+		47AF5D311D564AA200728933 /* MeReplyResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47AF5D301D564AA200728933 /* MeReplyResponseModel.m */; };
+		47AF5D341D564DDA00728933 /* MyConcernModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47AF5D331D564DDA00728933 /* MyConcernModel.m */; };
 		47B45C191D431C50009C8DA0 /* zhanwei.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 47B45C181D431C50009C8DA0 /* zhanwei.jpg */; };
 		47BB49941D45E0D40052E4D0 /* News.m in Sources */ = {isa = PBXBuildFile; fileRef = 47BB49931D45E0D40052E4D0 /* News.m */; };
 		47BB49971D45E3700052E4D0 /* TopicModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47BB49961D45E3700052E4D0 /* TopicModel.m */; };
@@ -193,6 +224,10 @@
 /* Begin PBXFileReference section */
 		4708D2E41D4A67BD0094FAF9 /* NoticeCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoticeCellView.h; sourceTree = "<group>"; };
 		4708D2E51D4A67BD0094FAF9 /* NoticeCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoticeCellView.m; sourceTree = "<group>"; };
+		470BEE0F1D582909003167ED /* SetUpController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetUpController.h; sourceTree = "<group>"; };
+		470BEE101D582909003167ED /* SetUpController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetUpController.m; sourceTree = "<group>"; };
+		470BEE121D58295C003167ED /* SetUpViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetUpViewModel.h; sourceTree = "<group>"; };
+		470BEE131D58295C003167ED /* SetUpViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetUpViewModel.m; sourceTree = "<group>"; };
 		470C5E731D44BFC800DDF90B /* BottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BottomView.h; sourceTree = "<group>"; };
 		470C5E741D44BFC800DDF90B /* BottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BottomView.m; sourceTree = "<group>"; };
 		470C5EF41D44D7E700DDF90B /* SEMSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEMSearchViewController.h; sourceTree = "<group>"; };
@@ -325,6 +360,18 @@
 		4734CE441D41CD5E006536DF /* 消息icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "消息icon.png"; sourceTree = "<group>"; };
 		4734CE451D41CD5E006536DF /* 信息发送icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "信息发送icon.png"; sourceTree = "<group>"; };
 		4734CE4D1D41CD6D006536DF /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
+		4735F9F51D55FA8F00FDF2ED /* PersonalInfoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalInfoController.h; sourceTree = "<group>"; };
+		4735F9F61D55FA8F00FDF2ED /* PersonalInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalInfoController.m; sourceTree = "<group>"; };
+		4735F9FB1D55FAF600FDF2ED /* ColleageSearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColleageSearchController.h; sourceTree = "<group>"; };
+		4735F9FC1D55FAF600FDF2ED /* ColleageSearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColleageSearchController.m; sourceTree = "<group>"; };
+		4735F9FE1D55FB3700FDF2ED /* PersonalInfoViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalInfoViewModel.h; sourceTree = "<group>"; };
+		4735F9FF1D55FB3700FDF2ED /* PersonalInfoViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalInfoViewModel.m; sourceTree = "<group>"; };
+		4735FA0A1D55FCDA00FDF2ED /* MeColleageSearchViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeColleageSearchViewModel.h; sourceTree = "<group>"; };
+		4735FA0B1D55FCDA00FDF2ED /* MeColleageSearchViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeColleageSearchViewModel.m; sourceTree = "<group>"; };
+		4735FA0D1D560EBE00FDF2ED /* MeUserInfoResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeUserInfoResponseModel.h; sourceTree = "<group>"; };
+		4735FA0E1D560EBE00FDF2ED /* MeUserInfoResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeUserInfoResponseModel.m; sourceTree = "<group>"; };
+		4735FA101D5616F000FDF2ED /* Group 19.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Group 19.png"; sourceTree = "<group>"; };
+		4735FA141D561E2100FDF2ED /* 头像背景.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "头像背景.png"; sourceTree = "<group>"; };
 		4739B5D31D483B52007842CC /* MeLoginVIewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeLoginVIewModel.h; sourceTree = "<group>"; };
 		4739B5D41D483B52007842CC /* MeLoginVIewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeLoginVIewModel.m; sourceTree = "<group>"; };
 		4739B5D91D483FE4007842CC /* TopicCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopicCell.h; sourceTree = "<group>"; };
@@ -362,14 +409,24 @@
 		4746A66C1D49B0A6009E0645 /* LoginCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginCommand.m; sourceTree = "<group>"; };
 		4746A66E1D49B3D8009E0645 /* MeinfoViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeinfoViewModel.h; sourceTree = "<group>"; };
 		4746A66F1D49B3D8009E0645 /* MeinfoViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeinfoViewModel.m; sourceTree = "<group>"; };
-		4746A6711D49B92B009E0645 /* XHToast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XHToast.m; path = "/Volumes/Transcend/work/长江云/MediaCloud-iOS/Expand/XHToast/XHToast.m"; sourceTree = "<absolute>"; };
-		4746A6721D49B92B009E0645 /* XHToast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XHToast.h; path = "/Volumes/Transcend/work/长江云/MediaCloud-iOS/Expand/XHToast/XHToast.h"; sourceTree = "<absolute>"; };
 		4746A6751D49DFC4009E0645 /* TagView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagView.h; sourceTree = "<group>"; };
 		4746A6761D49DFC4009E0645 /* TagView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagView.m; sourceTree = "<group>"; };
 		4753074B1D46F74A003ECEBF /* MeTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeTopView.h; sourceTree = "<group>"; };
 		4753074C1D46F74A003ECEBF /* MeTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeTopView.m; sourceTree = "<group>"; };
 		4753074E1D46F964003ECEBF /* MeinfoVIew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeinfoVIew.h; sourceTree = "<group>"; };
 		4753074F1D46F964003ECEBF /* MeinfoVIew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeinfoVIew.m; sourceTree = "<group>"; };
+		476088021D55818600F36597 /* TeamInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamInfoView.h; sourceTree = "<group>"; };
+		476088031D55818600F36597 /* TeamInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamInfoView.m; sourceTree = "<group>"; };
+		476088051D55874400F36597 /* camera_L.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera_L.png; sourceTree = "<group>"; };
+		476088061D55874400F36597 /* calender_L.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = calender_L.png; sourceTree = "<group>"; };
+		476088071D55874400F36597 /* 约战-助攻.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "约战-助攻.png"; sourceTree = "<group>"; };
+		476088081D55874400F36597 /* 约战-乌龙.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "约战-乌龙.png"; sourceTree = "<group>"; };
+		476088091D55874400F36597 /* 约战-时间.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "约战-时间.png"; sourceTree = "<group>"; };
+		4760880A1D55874400F36597 /* 约战-进球.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "约战-进球.png"; sourceTree = "<group>"; };
+		476088111D5588D900F36597 /* SEMTeamPhotoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEMTeamPhotoController.h; sourceTree = "<group>"; };
+		476088121D5588D900F36597 /* SEMTeamPhotoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SEMTeamPhotoController.m; sourceTree = "<group>"; };
+		476088191D55897200F36597 /* TeamPhotoViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamPhotoViewModel.h; sourceTree = "<group>"; };
+		4760881A1D55897200F36597 /* TeamPhotoViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamPhotoViewModel.m; sourceTree = "<group>"; };
 		476252151D519027003788C0 /* ShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareView.h; sourceTree = "<group>"; };
 		476252161D519027003788C0 /* ShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareView.m; sourceTree = "<group>"; };
 		4762521B1D5196A0003788C0 /* UIView+Scale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Scale.h"; sourceTree = "<group>"; };
@@ -386,6 +443,16 @@
 		476B99621D4F75B100D52B31 /* CommentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentView.m; sourceTree = "<group>"; };
 		476CBDAD1D4352070075FA7E /* HomeHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeHeadView.h; sourceTree = "<group>"; };
 		476CBDAE1D4352070075FA7E /* HomeHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeHeadView.m; sourceTree = "<group>"; };
+		4772FE5F1D56579B0008ED37 /* MyMessageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMessageController.h; sourceTree = "<group>"; };
+		4772FE601D56579B0008ED37 /* MyMessageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMessageController.m; sourceTree = "<group>"; };
+		4772FE621D5657B40008ED37 /* MyMessageViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMessageViewModel.h; sourceTree = "<group>"; };
+		4772FE631D5657B40008ED37 /* MyMessageViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMessageViewModel.m; sourceTree = "<group>"; };
+		4772FE651D5659E40008ED37 /* MyMessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMessageModel.h; sourceTree = "<group>"; };
+		4772FE661D5659E40008ED37 /* MyMessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMessageModel.m; sourceTree = "<group>"; };
+		4772FE681D565C780008ED37 /* MyMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMessageCell.h; sourceTree = "<group>"; };
+		4772FE691D565C780008ED37 /* MyMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMessageCell.m; sourceTree = "<group>"; };
+		4772FE6B1D565DEB0008ED37 /* UIColor+MyColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+MyColor.h"; sourceTree = "<group>"; };
+		4772FE6C1D565DEB0008ED37 /* UIColor+MyColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+MyColor.m"; sourceTree = "<group>"; };
 		477642501D541F8300548C9F /* TeamLisstResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamLisstResponseModel.h; sourceTree = "<group>"; };
 		477642511D541F8300548C9F /* TeamLisstResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamLisstResponseModel.m; sourceTree = "<group>"; };
 		4776425A1D5434F100548C9F /* SEMTeamHomeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEMTeamHomeModel.h; sourceTree = "<group>"; };
@@ -402,12 +469,30 @@
 		4776426A1D5485F300548C9F /* TeamNewsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamNewsCell.m; sourceTree = "<group>"; };
 		4776426C1D548CAD00548C9F /* TeamPlayerResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamPlayerResponseModel.h; sourceTree = "<group>"; };
 		4776426D1D548CAD00548C9F /* TeamPlayerResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamPlayerResponseModel.m; sourceTree = "<group>"; };
+		477676611D58527100E10594 /* XHToast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHToast.h; sourceTree = "<group>"; };
+		477676621D58527100E10594 /* XHToast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHToast.m; sourceTree = "<group>"; };
+		477676641D5853CD00E10594 /* FeedBackController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedBackController.h; sourceTree = "<group>"; };
+		477676651D5853CD00E10594 /* FeedBackController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedBackController.m; sourceTree = "<group>"; };
+		477676671D58544D00E10594 /* FeedBackViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedBackViewModel.h; sourceTree = "<group>"; };
+		477676681D58544D00E10594 /* FeedBackViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedBackViewModel.m; sourceTree = "<group>"; };
+		4776766D1D58610600E10594 /* AboutVIewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutVIewModel.h; sourceTree = "<group>"; };
+		4776766E1D58610600E10594 /* AboutVIewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutVIewModel.m; sourceTree = "<group>"; };
+		477676701D58614A00E10594 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
+		477676711D58614A00E10594 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		478392391D53242F00C31D37 /* UITableViewCell+Scale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+Scale.h"; sourceTree = "<group>"; };
 		4783923A1D53242F00C31D37 /* UITableViewCell+Scale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+Scale.m"; sourceTree = "<group>"; };
 		478B5E511D420728007AABC4 /* SEMNetworkingManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEMNetworkingManager.h; sourceTree = "<group>"; };
 		478B5E521D420728007AABC4 /* SEMNetworkingManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SEMNetworkingManager.m; sourceTree = "<group>"; };
 		478B5E541D420AC5007AABC4 /* hotTopicsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hotTopicsModel.h; sourceTree = "<group>"; };
 		478B5E551D420AC5007AABC4 /* hotTopicsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = hotTopicsModel.m; sourceTree = "<group>"; };
+		47AF5D291D56468F00728933 /* MyConcernController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyConcernController.h; sourceTree = "<group>"; };
+		47AF5D2A1D56468F00728933 /* MyConcernController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyConcernController.m; sourceTree = "<group>"; };
+		47AF5D2C1D5646A700728933 /* MyConcernViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyConcernViewModel.h; sourceTree = "<group>"; };
+		47AF5D2D1D5646A700728933 /* MyConcernViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyConcernViewModel.m; sourceTree = "<group>"; };
+		47AF5D2F1D564AA200728933 /* MeReplyResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeReplyResponseModel.h; sourceTree = "<group>"; };
+		47AF5D301D564AA200728933 /* MeReplyResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeReplyResponseModel.m; sourceTree = "<group>"; };
+		47AF5D321D564DDA00728933 /* MyConcernModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyConcernModel.h; sourceTree = "<group>"; };
+		47AF5D331D564DDA00728933 /* MyConcernModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyConcernModel.m; sourceTree = "<group>"; };
 		47B45C181D431C50009C8DA0 /* zhanwei.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = zhanwei.jpg; sourceTree = "<group>"; };
 		47BB49921D45E0D40052E4D0 /* News.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = News.h; sourceTree = "<group>"; };
 		47BB49931D45E0D40052E4D0 /* News.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = News.m; sourceTree = "<group>"; };
@@ -493,6 +578,12 @@
 			children = (
 				4734CD3C1D41B512006536DF /* AppDelegate.h */,
 				4734CD3D1D41B512006536DF /* AppDelegate.m */,
+				4734CDA71D41BE7D006536DF /* MDABizManager.m */,
+				4734CDA61D41BE7D006536DF /* MDABizManager.h */,
+				478B5E511D420728007AABC4 /* SEMNetworkingManager.h */,
+				478B5E521D420728007AABC4 /* SEMNetworkingManager.m */,
+				4735F9F01D55F9D700FDF2ED /* Me */,
+				476088141D55892B00F36597 /* Team */,
 				4734CD6E1D41B7B7006536DF /* Model */,
 				4734CD6D1D41B7A3006536DF /* ViewModel */,
 				4734CD6C1D41B79C006536DF /* VIew */,
@@ -544,10 +635,8 @@
 				4734CDC41D41C84C006536DF /* SEMNavigationController.m */,
 				470C5E731D44BFC800DDF90B /* BottomView.h */,
 				470C5E741D44BFC800DDF90B /* BottomView.m */,
-				4734CD731D41B902006536DF /* Team */,
 				4734CD721D41B8C0006536DF /* Game */,
 				4734CD711D41B87C006536DF /* News */,
-				4734CD701D41B86C006536DF /* Me */,
 				4734CD6F1D41B7F2006536DF /* Home */,
 			);
 			name = VIew;
@@ -556,7 +645,6 @@
 		4734CD6D1D41B7A3006536DF /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				477642561D5420B800548C9F /* Team */,
 				4739B5D31D483B52007842CC /* MeLoginVIewModel.h */,
 				4739B5D41D483B52007842CC /* MeLoginVIewModel.m */,
 				4734CD811D41BA54006536DF /* SEMViewModel.h */,
@@ -565,16 +653,12 @@
 				4734CD881D41BB49006536DF /* SEMHomeVIewModel.m */,
 				4734CD8D1D41BC75006536DF /* SEMGameVIewModel.h */,
 				4734CD8E1D41BC75006536DF /* SEMGameVIewModel.m */,
-				4734CD901D41BCB9006536DF /* SEMMeViewModel.h */,
-				4734CD911D41BCB9006536DF /* SEMMeViewModel.m */,
 				4734CDBD1D41C585006536DF /* SEMNewsVIewModel.h */,
 				4734CDBE1D41C585006536DF /* SEMNewsVIewModel.m */,
 				476823701D44E43E00B224E6 /* SEMSearchViewModel.h */,
 				476823711D44E43E00B224E6 /* SEMSearchViewModel.m */,
 				4746A63F1D489A90009E0645 /* NewsDetailViewModel.h */,
 				4746A6401D489A90009E0645 /* NewsDetailViewModel.m */,
-				4746A66E1D49B3D8009E0645 /* MeinfoViewModel.h */,
-				4746A66F1D49B3D8009E0645 /* MeinfoViewModel.m */,
 			);
 			name = ViewModel;
 			sourceTree = "<group>";
@@ -584,10 +668,6 @@
 			children = (
 				4776424F1D541F5F00548C9F /* Team */,
 				4734CDC61D41C95D006536DF /* IconFont */,
-				4734CDA71D41BE7D006536DF /* MDABizManager.m */,
-				4734CDA61D41BE7D006536DF /* MDABizManager.h */,
-				478B5E511D420728007AABC4 /* SEMNetworkingManager.h */,
-				478B5E521D420728007AABC4 /* SEMNetworkingManager.m */,
 				478B5E541D420AC5007AABC4 /* hotTopicsModel.h */,
 				478B5E551D420AC5007AABC4 /* hotTopicsModel.m */,
 				472930F21D430168008587A6 /* ReCommendNews.h */,
@@ -625,15 +705,6 @@
 			name = Home;
 			sourceTree = "<group>";
 		};
-		4734CD701D41B86C006536DF /* Me */ = {
-			isa = PBXGroup;
-			children = (
-				4734CD7B1D41B99A006536DF /* Controller */,
-				4734CD7A1D41B991006536DF /* VIew */,
-			);
-			name = Me;
-			sourceTree = "<group>";
-		};
 		4734CD711D41B87C006536DF /* News */ = {
 			isa = PBXGroup;
 			children = (
@@ -650,37 +721,6 @@
 				4734CD761D41B96A006536DF /* View */,
 			);
 			name = Game;
-			sourceTree = "<group>";
-		};
-		4734CD731D41B902006536DF /* Team */ = {
-			isa = PBXGroup;
-			children = (
-				4734CD751D41B95E006536DF /* Controller */,
-				4734CD741D41B955006536DF /* View */,
-			);
-			name = Team;
-			sourceTree = "<group>";
-		};
-		4734CD741D41B955006536DF /* View */ = {
-			isa = PBXGroup;
-			children = (
-				477642631D546ADE00548C9F /* MessageTableviewCell.h */,
-				477642641D546ADE00548C9F /* MessageTableviewCell.m */,
-				477642691D5485F300548C9F /* TeamNewsCell.h */,
-				4776426A1D5485F300548C9F /* TeamNewsCell.m */,
-			);
-			name = View;
-			sourceTree = "<group>";
-		};
-		4734CD751D41B95E006536DF /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				4734CDBA1D41C4D9006536DF /* SEMTeamViewController.h */,
-				4734CDBB1D41C4D9006536DF /* SEMTeamViewController.m */,
-				4776425D1D54357700548C9F /* SEMTeamHomeViewController.h */,
-				4776425E1D54357700548C9F /* SEMTeamHomeViewController.m */,
-			);
-			name = Controller;
 			sourceTree = "<group>";
 		};
 		4734CD761D41B96A006536DF /* View */ = {
@@ -737,30 +777,6 @@
 				4734CDB51D41C4BF006536DF /* SEMNewsViewController.m */,
 				4746A6421D489B18009E0645 /* SEMNewsDetailController.h */,
 				4746A6431D489B18009E0645 /* SEMNewsDetailController.m */,
-			);
-			name = Controller;
-			sourceTree = "<group>";
-		};
-		4734CD7A1D41B991006536DF /* VIew */ = {
-			isa = PBXGroup;
-			children = (
-				4753074B1D46F74A003ECEBF /* MeTopView.h */,
-				4753074C1D46F74A003ECEBF /* MeTopView.m */,
-				4753074E1D46F964003ECEBF /* MeinfoVIew.h */,
-				4753074F1D46F964003ECEBF /* MeinfoVIew.m */,
-				472A923F1D473F8B00F8620F /* MeLoginView.h */,
-				472A92401D473F8B00F8620F /* MeLoginView.m */,
-			);
-			name = VIew;
-			sourceTree = "<group>";
-		};
-		4734CD7B1D41B99A006536DF /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				4734CDAE1D41C46A006536DF /* SEMMeViewController.h */,
-				4734CDAF1D41C46A006536DF /* SEMMeViewController.m */,
-				472A92381D4705A000F8620F /* SEMLoginViewController.h */,
-				472A92391D4705A000F8620F /* SEMLoginViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -848,6 +864,8 @@
 				4783923A1D53242F00C31D37 /* UITableViewCell+Scale.m */,
 				477642661D546F0800548C9F /* UIImage+placeholder.h */,
 				477642671D546F0800548C9F /* UIImage+placeholder.m */,
+				4772FE6B1D565DEB0008ED37 /* UIColor+MyColor.h */,
+				4772FE6C1D565DEB0008ED37 /* UIColor+MyColor.m */,
 			);
 			name = Catagory;
 			sourceTree = "<group>";
@@ -883,6 +901,14 @@
 		4734CDE21D41CD27006536DF /* picture */ = {
 			isa = PBXGroup;
 			children = (
+				4735FA101D5616F000FDF2ED /* Group 19.png */,
+				476088051D55874400F36597 /* camera_L.png */,
+				4735FA141D561E2100FDF2ED /* 头像背景.png */,
+				476088061D55874400F36597 /* calender_L.png */,
+				476088071D55874400F36597 /* 约战-助攻.png */,
+				476088081D55874400F36597 /* 约战-乌龙.png */,
+				476088091D55874400F36597 /* 约战-时间.png */,
+				4760880A1D55874400F36597 /* 约战-进球.png */,
 				47B45C181D431C50009C8DA0 /* zhanwei.jpg */,
 				472A923D1D473C6900F8620F /* logo.png */,
 				4734CE4D1D41CD6D006536DF /* 2.png */,
@@ -973,16 +999,118 @@
 			path = "资讯球队赛事";
 			sourceTree = "<group>";
 		};
+		4735F9F01D55F9D700FDF2ED /* Me */ = {
+			isa = PBXGroup;
+			children = (
+				4735F9F41D55FA2400FDF2ED /* Model */,
+				4735F9F31D55F9ED00FDF2ED /* ViewModel */,
+				4735F9F21D55F9E800FDF2ED /* View */,
+				4735F9F11D55F9DF00FDF2ED /* Controller */,
+			);
+			name = Me;
+			sourceTree = "<group>";
+		};
+		4735F9F11D55F9DF00FDF2ED /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				4734CDAE1D41C46A006536DF /* SEMMeViewController.h */,
+				4734CDAF1D41C46A006536DF /* SEMMeViewController.m */,
+				472A92381D4705A000F8620F /* SEMLoginViewController.h */,
+				472A92391D4705A000F8620F /* SEMLoginViewController.m */,
+				4735F9F51D55FA8F00FDF2ED /* PersonalInfoController.h */,
+				4735F9F61D55FA8F00FDF2ED /* PersonalInfoController.m */,
+				4735F9FB1D55FAF600FDF2ED /* ColleageSearchController.h */,
+				4735F9FC1D55FAF600FDF2ED /* ColleageSearchController.m */,
+				47AF5D291D56468F00728933 /* MyConcernController.h */,
+				47AF5D2A1D56468F00728933 /* MyConcernController.m */,
+				4772FE5F1D56579B0008ED37 /* MyMessageController.h */,
+				4772FE601D56579B0008ED37 /* MyMessageController.m */,
+				470BEE0F1D582909003167ED /* SetUpController.h */,
+				470BEE101D582909003167ED /* SetUpController.m */,
+				477676641D5853CD00E10594 /* FeedBackController.h */,
+				477676651D5853CD00E10594 /* FeedBackController.m */,
+				477676701D58614A00E10594 /* AboutViewController.h */,
+				477676711D58614A00E10594 /* AboutViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		4735F9F21D55F9E800FDF2ED /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4753074B1D46F74A003ECEBF /* MeTopView.h */,
+				4753074C1D46F74A003ECEBF /* MeTopView.m */,
+				4753074E1D46F964003ECEBF /* MeinfoVIew.h */,
+				4753074F1D46F964003ECEBF /* MeinfoVIew.m */,
+				472A923F1D473F8B00F8620F /* MeLoginView.h */,
+				472A92401D473F8B00F8620F /* MeLoginView.m */,
+				4772FE681D565C780008ED37 /* MyMessageCell.h */,
+				4772FE691D565C780008ED37 /* MyMessageCell.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		4735F9F31D55F9ED00FDF2ED /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				4746A66E1D49B3D8009E0645 /* MeinfoViewModel.h */,
+				4746A66F1D49B3D8009E0645 /* MeinfoViewModel.m */,
+				4735F9FE1D55FB3700FDF2ED /* PersonalInfoViewModel.h */,
+				4735F9FF1D55FB3700FDF2ED /* PersonalInfoViewModel.m */,
+				4735FA0A1D55FCDA00FDF2ED /* MeColleageSearchViewModel.h */,
+				4735FA0B1D55FCDA00FDF2ED /* MeColleageSearchViewModel.m */,
+				4734CD901D41BCB9006536DF /* SEMMeViewModel.h */,
+				4734CD911D41BCB9006536DF /* SEMMeViewModel.m */,
+				47AF5D2C1D5646A700728933 /* MyConcernViewModel.h */,
+				47AF5D2D1D5646A700728933 /* MyConcernViewModel.m */,
+				4772FE621D5657B40008ED37 /* MyMessageViewModel.h */,
+				4772FE631D5657B40008ED37 /* MyMessageViewModel.m */,
+				470BEE121D58295C003167ED /* SetUpViewModel.h */,
+				470BEE131D58295C003167ED /* SetUpViewModel.m */,
+				477676671D58544D00E10594 /* FeedBackViewModel.h */,
+				477676681D58544D00E10594 /* FeedBackViewModel.m */,
+				4776766D1D58610600E10594 /* AboutVIewModel.h */,
+				4776766E1D58610600E10594 /* AboutVIewModel.m */,
+			);
+			name = ViewModel;
+			sourceTree = "<group>";
+		};
+		4735F9F41D55FA2400FDF2ED /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4735FA0D1D560EBE00FDF2ED /* MeUserInfoResponseModel.h */,
+				4735FA0E1D560EBE00FDF2ED /* MeUserInfoResponseModel.m */,
+				47AF5D2F1D564AA200728933 /* MeReplyResponseModel.h */,
+				47AF5D301D564AA200728933 /* MeReplyResponseModel.m */,
+				47AF5D321D564DDA00728933 /* MyConcernModel.h */,
+				47AF5D331D564DDA00728933 /* MyConcernModel.m */,
+				4772FE651D5659E40008ED37 /* MyMessageModel.h */,
+				4772FE661D5659E40008ED37 /* MyMessageModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		4746A6741D49B92F009E0645 /* XHToast */ = {
 			isa = PBXGroup;
 			children = (
-				4746A6711D49B92B009E0645 /* XHToast.m */,
-				4746A6721D49B92B009E0645 /* XHToast.h */,
+				477676611D58527100E10594 /* XHToast.h */,
+				477676621D58527100E10594 /* XHToast.m */,
 			);
 			name = XHToast;
 			sourceTree = "<group>";
 		};
-		4776424F1D541F5F00548C9F /* Team */ = {
+		476088141D55892B00F36597 /* Team */ = {
+			isa = PBXGroup;
+			children = (
+				476088181D55895400F36597 /* ViewModel */,
+				476088171D55894F00F36597 /* View */,
+				476088161D55894500F36597 /* Controller */,
+				476088151D55893300F36597 /* Model */,
+			);
+			name = Team;
+			sourceTree = "<group>";
+		};
+		476088151D55893300F36597 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				477642501D541F8300548C9F /* TeamLisstResponseModel.h */,
@@ -992,16 +1120,51 @@
 				4776426C1D548CAD00548C9F /* TeamPlayerResponseModel.h */,
 				4776426D1D548CAD00548C9F /* TeamPlayerResponseModel.m */,
 			);
-			name = Team;
+			name = Model;
 			sourceTree = "<group>";
 		};
-		477642561D5420B800548C9F /* Team */ = {
+		476088161D55894500F36597 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				4734CDBA1D41C4D9006536DF /* SEMTeamViewController.h */,
+				4734CDBB1D41C4D9006536DF /* SEMTeamViewController.m */,
+				4776425D1D54357700548C9F /* SEMTeamHomeViewController.h */,
+				4776425E1D54357700548C9F /* SEMTeamHomeViewController.m */,
+				476088111D5588D900F36597 /* SEMTeamPhotoController.h */,
+				476088121D5588D900F36597 /* SEMTeamPhotoController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		476088171D55894F00F36597 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				477642631D546ADE00548C9F /* MessageTableviewCell.h */,
+				477642641D546ADE00548C9F /* MessageTableviewCell.m */,
+				477642691D5485F300548C9F /* TeamNewsCell.h */,
+				4776426A1D5485F300548C9F /* TeamNewsCell.m */,
+				476088021D55818600F36597 /* TeamInfoView.h */,
+				476088031D55818600F36597 /* TeamInfoView.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		476088181D55895400F36597 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				476088191D55897200F36597 /* TeamPhotoViewModel.h */,
+				4760881A1D55897200F36597 /* TeamPhotoViewModel.m */,
 				4734CD931D41BCE3006536DF /* SEMTeamViewModel.h */,
 				4734CD941D41BCE3006536DF /* SEMTeamViewModel.m */,
 				4776425A1D5434F100548C9F /* SEMTeamHomeModel.h */,
 				4776425B1D5434F100548C9F /* SEMTeamHomeModel.m */,
+			);
+			name = ViewModel;
+			sourceTree = "<group>";
+		};
+		4776424F1D541F5F00548C9F /* Team */ = {
+			isa = PBXGroup;
+			children = (
 			);
 			name = Team;
 			sourceTree = "<group>";
@@ -1166,14 +1329,18 @@
 				4734CDD81D41C95D006536DF /* iconfont.eot in Resources */,
 				4734CDDA1D41C95D006536DF /* iconfont.ttf in Resources */,
 				4734CE381D41CD55006536DF /* up-arrow.png in Resources */,
+				4760880F1D55874400F36597 /* 约战-时间.png in Resources */,
 				4734CE3C1D41CD55006536DF /* wechat_s.png in Resources */,
 				4734CDF01D41CD39006536DF /* 赛事icon-绿.png in Resources */,
+				4735FA121D5616F000FDF2ED /* Group 19.png in Resources */,
 				4734CE3A1D41CD55006536DF /* upload_L副本.png in Resources */,
 				4734CDD61D41C95D006536DF /* demo.html in Resources */,
 				472A923E1D473C6900F8620F /* logo.png in Resources */,
 				4734CD461D41B512006536DF /* Assets.xcassets in Resources */,
+				4760880E1D55874400F36597 /* 约战-乌龙.png in Resources */,
 				4734CE1A1D41CD4B006536DF /* 设置icon.png in Resources */,
 				4734CE121D41CD4B006536DF /* 修个人信息-修改icon.png in Resources */,
+				4760880D1D55874400F36597 /* 约战-助攻.png in Resources */,
 				4734CDDB1D41C95D006536DF /* iconfont.woff in Resources */,
 				4734CE351D41CD55006536DF /* right-arrow.png in Resources */,
 				4734CDED1D41CD39006536DF /* 球队icon-绿.png in Resources */,
@@ -1191,10 +1358,13 @@
 				4734CE011D41CD42006536DF /* 足球logo.png in Resources */,
 				4734CE021D41CD42006536DF /* 返回icon.png in Resources */,
 				4734CE471D41CD5E006536DF /* 点-绿.png in Resources */,
+				4735FA151D561E2100FDF2ED /* 头像背景.png in Resources */,
 				4734CE171D41CD4B006536DF /* 深色背景.png in Resources */,
 				4734CE341D41CD55006536DF /* Rectangle 301.png in Resources */,
 				4734CE4A1D41CD5E006536DF /* 搜索icon.png in Resources */,
+				4760880B1D55874400F36597 /* camera_L.png in Resources */,
 				4734CDF21D41CD39006536DF /* 首页icon-灰.png in Resources */,
+				4760880C1D55874400F36597 /* calender_L.png in Resources */,
 				4734CE311D41CD55006536DF /* location_L.png in Resources */,
 				4734CDEF1D41CD39006536DF /* 资讯icon-绿.png in Resources */,
 				4734CE4E1D41CD6D006536DF /* 2.png in Resources */,
@@ -1202,6 +1372,7 @@
 				4734CE131D41CD4B006536DF /* 好友推荐icon.png in Resources */,
 				4734CDFF1D41CD42006536DF /* 微信QQ矩形框.png in Resources */,
 				4734CE321D41CD55006536DF /* qq_s.png in Resources */,
+				476088101D55874400F36597 /* 约战-进球.png in Resources */,
 				4734CE101D41CD4B006536DF /* 个人信息-向右箭头icon.png in Resources */,
 				4734CE391D41CD55006536DF /* upload_L.png in Resources */,
 				4734CDF11D41CD39006536DF /* 赛事icon=灰.png in Resources */,
@@ -1288,32 +1459,42 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4735FA001D55FB3700FDF2ED /* PersonalInfoViewModel.m in Sources */,
 				477642621D5440AA00548C9F /* TeamHomeModelResponse.m in Sources */,
 				4734CDDC1D41C95D006536DF /* UIFont+IconFont.m in Sources */,
 				4739B5E41D488E3E007842CC /* NoticeGameviewCell.m in Sources */,
 				47405DD01D521791000A980A /* GameListView.m in Sources */,
 				470C5E751D44BFC800DDF90B /* BottomView.m in Sources */,
 				47BB49941D45E0D40052E4D0 /* News.m in Sources */,
+				4772FE611D56579B0008ED37 /* MyMessageController.m in Sources */,
 				472A923A1D4705A000F8620F /* SEMLoginViewController.m in Sources */,
 				4734CDBF1D41C585006536DF /* SEMNewsVIewModel.m in Sources */,
+				4772FE6A1D565C780008ED37 /* MyMessageCell.m in Sources */,
+				4735FA0F1D560EBE00FDF2ED /* MeUserInfoResponseModel.m in Sources */,
 				476823751D44EA7E00B224E6 /* SearchModel.m in Sources */,
 				4734CD991D41BE3E006536DF /* DataArchive.m in Sources */,
 				4734CD951D41BCE3006536DF /* SEMTeamViewModel.m in Sources */,
 				476823721D44E43E00B224E6 /* SEMSearchViewModel.m in Sources */,
 				4746A6701D49B3D8009E0645 /* MeinfoViewModel.m in Sources */,
 				4734CDA81D41BE7D006536DF /* MDABizManager.m in Sources */,
+				47AF5D2E1D5646A700728933 /* MyConcernViewModel.m in Sources */,
 				472930F41D430168008587A6 /* ReCommendNews.m in Sources */,
 				472930F91D430AD1008587A6 /* HomeCell.m in Sources */,
 				4734CD3E1D41B512006536DF /* AppDelegate.m in Sources */,
 				4776425F1D54357700548C9F /* SEMTeamHomeViewController.m in Sources */,
 				4746A66A1D49AB17009E0645 /* UserModel.m in Sources */,
+				477676721D58614A00E10594 /* AboutViewController.m in Sources */,
 				4783923B1D53242F00C31D37 /* UITableViewCell+Scale.m in Sources */,
 				4734CD8F1D41BC75006536DF /* SEMGameVIewModel.m in Sources */,
+				470BEE111D582909003167ED /* SetUpController.m in Sources */,
+				4735F9F71D55FA8F00FDF2ED /* PersonalInfoController.m in Sources */,
 				476B99601D4F757B00D52B31 /* CommentCell.m in Sources */,
 				4734CD3B1D41B512006536DF /* main.m in Sources */,
 				4734CDB01D41C46A006536DF /* SEMMeViewController.m in Sources */,
+				477676691D58544D00E10594 /* FeedBackViewModel.m in Sources */,
 				4739B5E71D488E6E007842CC /* HistoryviewCell.m in Sources */,
 				4746A66D1D49B0A6009E0645 /* LoginCommand.m in Sources */,
+				4760881B1D55897200F36597 /* TeamPhotoViewModel.m in Sources */,
 				476B99631D4F75B100D52B31 /* CommentView.m in Sources */,
 				476CBDAF1D4352070075FA7E /* HomeHeadView.m in Sources */,
 				4734CDA51D41BE54006536DF /* HRTTabBarButton.m in Sources */,
@@ -1323,6 +1504,7 @@
 				477642521D541F8300548C9F /* TeamLisstResponseModel.m in Sources */,
 				4734CDE11D41CBEA006536DF /* SEMTabViewController.m in Sources */,
 				4734CDC51D41C84C006536DF /* SEMNavigationController.m in Sources */,
+				4735F9FD1D55FAF600FDF2ED /* ColleageSearchController.m in Sources */,
 				4734CD891D41BB49006536DF /* SEMHomeVIewModel.m in Sources */,
 				472A92471D47B1FA00F8620F /* WeChatUserModel.m in Sources */,
 				4746A6411D489A90009E0645 /* NewsDetailViewModel.m in Sources */,
@@ -1332,12 +1514,18 @@
 				4734CDDE1D41C95D006536DF /* UIView+Hirat.m in Sources */,
 				4753074D1D46F74A003ECEBF /* MeTopView.m in Sources */,
 				4734CDC21D41C835006536DF /* SEMInitialViewController.m in Sources */,
+				4735FA0C1D55FCDA00FDF2ED /* MeColleageSearchViewModel.m in Sources */,
+				4772FE6D1D565DEB0008ED37 /* UIColor+MyColor.m in Sources */,
 				4734CD831D41BA54006536DF /* SEMViewModel.m in Sources */,
 				4708D2E61D4A67BD0094FAF9 /* NoticeCellView.m in Sources */,
 				4734CD921D41BCB9006536DF /* SEMMeViewModel.m in Sources */,
+				477676661D5853CD00E10594 /* FeedBackController.m in Sources */,
+				470BEE141D58295C003167ED /* SetUpViewModel.m in Sources */,
+				4772FE641D5657B40008ED37 /* MyMessageViewModel.m in Sources */,
 				47405DD31D521ABB000A980A /* CostomView.m in Sources */,
 				4734CDB61D41C4BF006536DF /* SEMNewsViewController.m in Sources */,
 				4746A64A1D48A2A3009E0645 /* NewsDetailResponseModel.m in Sources */,
+				47AF5D311D564AA200728933 /* MeReplyResponseModel.m in Sources */,
 				4739B5D51D483B52007842CC /* MeLoginVIewModel.m in Sources */,
 				4739B5E11D4867DF007842CC /* GameListResponseModel.m in Sources */,
 				4768237E1D44F44F00B224E6 /* SearchResultsModel.m in Sources */,
@@ -1345,24 +1533,30 @@
 				4762521D1D5196A0003788C0 /* UIView+Scale.m in Sources */,
 				4739B5DB1D483FE4007842CC /* TopicCell.m in Sources */,
 				478B5E531D420728007AABC4 /* SEMNetworkingManager.m in Sources */,
-				4746A6731D49B92B009E0645 /* XHToast.m in Sources */,
 				4734CDDD1D41C95D006536DF /* UIImage+IconFont.m in Sources */,
 				476252171D519027003788C0 /* ShareView.m in Sources */,
 				47BB49B61D460AF00052E4D0 /* NewsViewCell.m in Sources */,
+				477676631D58527100E10594 /* XHToast.m in Sources */,
 				4739B5DE1D4862F1007842CC /* GameDetailModel.m in Sources */,
 				4746A6771D49DFC4009E0645 /* TagView.m in Sources */,
+				476088131D5588D900F36597 /* SEMTeamPhotoController.m in Sources */,
 				472A92411D473F8B00F8620F /* MeLoginView.m in Sources */,
 				4739B5EA1D488E84007842CC /* GameListViewCell.m in Sources */,
 				477642651D546ADE00548C9F /* MessageTableviewCell.m in Sources */,
 				4734CDAD1D41BFF2006536DF /* NSArray+Safe.m in Sources */,
 				4734CDB91D41C4CD006536DF /* SEMGameViewController.m in Sources */,
+				4776766F1D58610600E10594 /* AboutVIewModel.m in Sources */,
 				4734CDBC1D41C4D9006536DF /* SEMTeamViewController.m in Sources */,
 				4776426E1D548CAD00548C9F /* TeamPlayerResponseModel.m in Sources */,
 				4734CDA31D41BE54006536DF /* HRTRouter.m in Sources */,
+				47AF5D2B1D56468F00728933 /* MyConcernController.m in Sources */,
 				4746A63B1D489365009E0645 /* SchoolInfoView.m in Sources */,
 				4776426B1D5485F300548C9F /* TeamNewsCell.m in Sources */,
 				4734CDA41D41BE54006536DF /* UIViewController+HRTRouter.m in Sources */,
 				477642681D546F0800548C9F /* UIImage+placeholder.m in Sources */,
+				4772FE671D5659E40008ED37 /* MyMessageModel.m in Sources */,
+				476088041D55818600F36597 /* TeamInfoView.m in Sources */,
+				47AF5D341D564DDA00728933 /* MyConcernModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

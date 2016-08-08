@@ -171,7 +171,7 @@
 }
 
 #pragma mark -searchcontrollerDelegate
-- (void)didSelectedItem:(NSString *)name diplayname:(NSString *)dispalyname
+- (void)didSelectedItem:(NSString *)name diplayname:(NSString *)dispalyname uni:(Universities *)uni
 {
     self.viewModel.code = name;
     self.viewModel.title = dispalyname;

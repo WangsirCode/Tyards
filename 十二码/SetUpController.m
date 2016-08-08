@@ -1,0 +1,310 @@
+//
+//  SetUpController.m
+//  十二码
+//
+//  Created by 汪宇豪 on 16/8/8.
+//  Copyright © 2016年 汪宇豪. All rights reserved.
+//
+
+#import "SetUpController.h"
+#import "MDABizManager.h"
+#import "SetUpViewModel.h"
+#import "FeedBackController.h"
+#import "ShareView.h"
+#import "SEMLoginViewController.h"
+#import "AboutViewController.h"
+@interface SetUpController ()<UITableViewDelegate,UITableViewDataSource,ShareViewDelegate>
+@property (strong,nonatomic)SetUpViewModel* viewModel;
+@property (nonatomic,strong)UITableView* tableView;
+@property (nonatomic,strong)UIBarButtonItem* backItem;
+@property (nonatomic,strong)ShareView* shareView;
+@property (nonatomic,strong)UIView* maskView;
+@end
+
+@implementation SetUpController
+#pragma mark- lifeCycle
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self setUpView];
+    [self bindModel];
+    // Do any additional setup after loading the view.
+}
+#pragma mark- setupView
+
+- (void)setUpView
+{
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#F2F2F2"];
+    [self addSubViews];
+    [self makeConstraits];
+}
+- (void)addSubViews
+{
+    self.navigationItem.leftBarButtonItem = self.backItem;
+    [self.view addSubview:self.tableView];
+    [self.view addSubview:self.maskView];
+    [self.view addSubview:self.shareView];
+}
+- (void)makeConstraits
+{
+    CGFloat height;
+    if (self.viewModel.isLogined) {
+        height = self.view.scale * 48 * 6 + 24;
+    }
+    else
+    {
+        height = self.view.scale * 48 * 4 + 16;
+    }
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.and.left.and.right.equalTo(self.view);
+        make.height.equalTo(@(height));
+    }];
+}
+
+- (void)bindModel
+{
+    self.navigationItem.title = @"设置";
+}
+#pragma mark-ShareViewDelegate
+- (void)didSelectedShareView:(NSInteger)index
+{
+    NSLog(@"%ld",(long)index);
+    switch (index) {
+        case 0:
+            break;
+        case 1:
+            break;
+        case 2:
+            
+            break;
+        case 3:
+            
+            break;
+        case 4:
+            [self hideMaskView];
+            break;
+        default:
+            break;
+    }
+}
+#pragma mark -viewModelSet
+
+- (void)setRouterParameters:(NSDictionary *)routerParameters
+{
+    self.viewModel = [[SetUpViewModel alloc] initWithDictionary: routerParameters];
+}
+#pragma mark- tableviewDatasource
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    if (self.viewModel.isLogined) {
+        return 3;
+    }
+    else{
+        return 2;
+    }
+   
+    
+}
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    if (self.viewModel.isLogined) {
+        return 3 - section;
+    }
+    else
+    {
+        if (section ==  0) {
+            return 3;
+        }
+        else{
+            return 1;
+        }
+    }
+}
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString* text;
+    NSString* detailText;
+   // NSString* detailText;
+    if (self.viewModel.isLogined) {
+        text = self.viewModel.itemName1[indexPath.section][indexPath.row];
+    }
+    else
+    {
+        text = self.viewModel.itemName2[indexPath.section][indexPath.row];
+
+    }
+    UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"setcell"];
+    if ([text isEqualToString:@"切换账号"]) {
+        [cell.textLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.center.equalTo(cell.contentView);
+        }];
+    }
+    if ([text isEqualToString:@"检查更新"]) {
+        detailText = self.viewModel.version;
+        cell.detailTextLabel.text = detailText;
+        cell.detailTextLabel.textColor = [UIColor colorWithHexString:@"#CACACA"];
+    }
+    if ([text isEqualToString:@"意见反馈"]) {
+        detailText = @"尽情来吐槽吧";
+        cell.detailTextLabel.text = detailText;
+        cell.detailTextLabel.textColor = [UIColor colorWithHexString:@"#CACACA"];
+    }
+    if ([text isEqualToString:@"清除缓存"]) {
+        detailText = self.viewModel.fileSize;
+        cell.detailTextLabel.text = detailText;
+        cell.detailTextLabel.textColor = [UIColor colorWithHexString:@"#CACACA"];
+    }
+
+    cell.textLabel.text = text;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    if([text isEqualToString:@"推荐好友"])
+    {
+        UIImageView* image = [[UIImageView alloc] init];
+        image.image = [UIImage imageNamed:@"upload_L"];
+        [cell.contentView addSubview:image];
+        [image mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(cell.contentView.mas_centerY);
+            make.right.equalTo(cell.contentView.mas_right).offset(10);
+        }];
+        //        image.sd_layout
+        //        .centerYEqualToView(cell.contentView)
+        //        .rightSpaceToView(cell.contentView,10)
+        //        .heightIs(30)
+        //        .widthIs(30);
+    }
+ 
+    return cell;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 48 * self.view.scale;
+}
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIView* view = [UIView new];
+    view.backgroundColor = [UIColor colorWithHexString:@"#F2F2F2"];
+    return view;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 8;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+    NSString* text = cell.textLabel.text;
+    if ([text isEqualToString:@"清除缓存"]) {
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"清除缓存" message:@"确定要清除缓存吗？" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+        UIAlertAction* done = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self.viewModel clearCache];
+        }];
+        [alert addAction:cancel];
+        [alert addAction:done];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+    else if ([text isEqualToString:@"意见反馈"])
+    {
+        FeedBackController* controller = [HRTRouter objectForURL:@"feedBack" withUserInfo:@{}];
+        controller.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:controller animated:YES];
+    }
+    else if([text isEqualToString:@"推荐好友"])
+    {
+        CALayer* imageLayer = self.shareView.layer;
+        self.maskView.hidden = NO;
+        CGPoint fromPoint = imageLayer.position;
+        CGPoint toPoint = CGPointMake(0, self.view.height - 200*self.view.scale);
+        // 创建不断改变CALayer的position属性的属性动画
+        CABasicAnimation* anim = [CABasicAnimation
+                                  animationWithKeyPath:@"position"];
+        // 设置动画开始的属性值
+        anim.fromValue = [NSValue valueWithCGPoint:fromPoint];
+        // 设置动画结束的属性值
+        anim.toValue = [NSValue valueWithCGPoint:toPoint];
+        anim.duration = 0.3;
+        imageLayer.position = toPoint;
+        anim.removedOnCompletion = YES;
+        // 为imageLayer添加动画
+        [imageLayer addAnimation:anim forKey:nil];
+    }
+    if ([text isEqualToString:@"切换账号"]) {
+        SEMLoginViewController* login = [HRTRouter objectForURL:@"login" withUserInfo:@{}];
+        [self presentViewController:login animated:YES completion:nil];
+    }
+    if ([text isEqualToString:@"关于"]) {
+        AboutViewController* controller = [HRTRouter objectForURL:@"about" withUserInfo:@{}];
+        controller.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:controller animated:YES];
+    }
+}
+- (void)hideMaskView
+{
+    _maskView.hidden = YES;
+    CALayer* imageLayer = self.shareView.layer;
+    CGPoint fromPoint = imageLayer.position;
+    CGPoint toPoint = CGPointMake(0, self.view.height);
+    // 创建不断改变CALayer的position属性的属性动画
+    CABasicAnimation* anim = [CABasicAnimation
+                              animationWithKeyPath:@"position"];
+    // 设置动画开始的属性值
+    anim.fromValue = [NSValue valueWithCGPoint:fromPoint];
+    // 设置动画结束的属性值
+    anim.toValue = [NSValue valueWithCGPoint:toPoint];
+    anim.duration = 0.3;
+    imageLayer.position = toPoint;
+    anim.removedOnCompletion = YES;
+    // 为imageLayer添加动画
+    [imageLayer addAnimation:anim forKey:nil];
+}
+#pragma  mark -Getter
+-(UIBarButtonItem *)backItem
+{
+    if (!_backItem) {
+        UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
+        [button setImage:[UIImage imageNamed:@"返回icon"] forState:UIControlStateNormal];
+        button.frame = CGRectMake(0, 0, 25, 20);
+        _backItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+        [[button rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }];
+        
+    }
+    return _backItem;
+}
+-(UITableView *)tableView
+{
+    if (!_tableView) {
+        _tableView = [[UITableView alloc ] initWithFrame:CGRectZero style:UITableViewStylePlain];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+    }
+    return _tableView;
+}
+- (ShareView *)shareView
+{
+    if (!_shareView) {
+        _shareView = [[ShareView alloc] initWithFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height, self.view.width, 200*self.view.scale)];
+        _shareView.layer.anchorPoint = CGPointMake(0, 0);
+        _shareView.frame = CGRectMake(0, self.view.height, self.view.width, 200*self.view.scale);
+        _shareView.delegate = self;
+        _shareView.layer.anchorPoint = CGPointMake(0, 0);
+        NSLog(@"%@",_shareView.description);
+    }
+    return _shareView;
+}
+- (UIView *)maskView
+{
+    if (!_maskView) {
+        _maskView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height)];
+        _maskView.backgroundColor = [UIColor lightGrayColor];
+        _maskView.alpha = 0.5;
+        _maskView.hidden = YES;
+        
+        //添加点击之后的手势
+        UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideMaskView)];
+        [_maskView addGestureRecognizer:tap];
+    }
+    return _maskView;
+}
+@end

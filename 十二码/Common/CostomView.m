@@ -13,6 +13,7 @@
 {
     self = [super init];
     if (self) {
+        self.userInteractionEnabled = YES;
         self.label.text = text;
         self.imageView.image = image;
         self.label.font = [UIFont systemFontOfSize:size];
@@ -43,6 +44,7 @@
     if (!_label) {
         _label = [UILabel new];
         _label.textAlignment = NSTextAlignmentLeft;
+        _label.userInteractionEnabled = YES;
     }
     return _label;
 }

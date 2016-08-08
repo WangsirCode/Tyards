@@ -66,12 +66,13 @@
     _timeLabel.sd_layout
     .leftSpaceToView(_view1,13)
     .topSpaceToView(self.contentView,20)
+    .rightEqualToView(self.contentView)
     .autoHeightRatio(0);
     
     _view0.sd_cornerRadiusFromWidthRatio = @(0.5);
     
     [_view1 setSingleLineAutoResizeWithMaxWidth:200];
-
+    self.contentView.clipsToBounds = YES;
 }
 - (void)setModel:(Comments*)model
 {
@@ -87,7 +88,7 @@
     }
     _view1.text = self.model.comment.creator.nickname;
     _view2.text = self.model.comment.content;
-    _timeLabel.text = self.model.getDate;
+    _timeLabel.text = [self.model getDate];
     if (self.model.comment.replies.count > 0) {
         _commentView = [[CommentView alloc] initWithReplies:self.model.comment.replies];
         [self.contentView addSubview:self.commentView];

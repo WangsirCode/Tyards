@@ -14,6 +14,10 @@
 #import "TeamNewsCell.h"
 #import "TeamHomeModelResponse.h"
 #import "ShareView.h"
+#import "CommentCell.h"
+#import "NoticeGameviewCell.h"
+#import "CostomView.h"
+#import "SEMTeamPhotoController.h"
 @interface SEMTeamHomeViewController ()<UITableViewDelegate,UITableViewDataSource,LazyPageScrollViewDelegate,UIScrollViewDelegate,ShareViewDelegate>
 @property (nonatomic,strong)SEMTeamHomeModel* viewModel;
 @property (nonatomic,strong)UIImageView* logoImageView;
@@ -29,6 +33,7 @@
 @property (nonatomic,strong)UIBarButtonItem* blankItem;
 @property (nonatomic,strong)ShareView* shareView;
 @property (nonatomic,strong)UIView* maskView;
+@property (nonatomic,strong)CostomView* photoview;
 @end
 
 @implementation SEMTeamHomeViewController
@@ -36,7 +41,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
     self.navigationController.navigationBar.translucent = YES;
 }
 - (void)viewDidLoad {
@@ -48,6 +53,7 @@
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+    self.navigationController.navigationBar.translucent = NO;
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setShadowImage:nil];
 }
@@ -86,8 +92,8 @@
 - (void)bindModel
 {
     //当加载完毕之后隐藏hud
-    [RACObserve(self.viewModel, finishenLoading) subscribeNext:^(id x) {
-        if (self.viewModel.finishenLoading == YES) {
+    [RACObserve(self.viewModel, loadingStatus) subscribeNext:^(id x) {
+        if (self.viewModel.loadingStatus == 4) {
             [self.hud hide:YES];
             self.navigationItem.title = self.viewModel.model.info.name;
             NSString* urlstring = self.viewModel.model.info.cover.url;
@@ -99,6 +105,22 @@
             {
                 self.logoImageView.image = [UIImage placeholderImage];
             }
+            [self.messageTableview reloadData];
+            UIImage* image = [UIImage imageNamed:@"camera_L"];
+            self.photoview = [[CostomView alloc] initWithInfo:@"相册" image:image FontSize:14];
+            self.photoview.label.textColor = [UIColor whiteColor];
+            [self.view addSubview:self.photoview];
+            [self.photoview mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.right.equalTo(self.logoImageView.mas_right);
+                make.bottom.equalTo(self.logoImageView.mas_bottom);
+                make.height.equalTo(@14);
+                make.width.equalTo(@60);
+            }];
+            UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] initWithActionBlock:^(id  _Nonnull sender) {
+                SEMTeamPhotoController* controller = [HRTRouter objectForURL:@"photo" withUserInfo:@{@"id":@(self.viewModel.model.info.id)}];
+                [self.navigationController pushViewController:controller animated:YES];
+            }];
+            [self.photoview.label addGestureRecognizer:tap];
         }
     }];
     [[self.viewModel.shareCommand executionSignals] subscribeNext:^(id x) {
@@ -208,12 +230,20 @@
         }
         
     }
+    else if(tableView.tag == 103)
+    {
+        return self.viewModel.games.count;
+    }
+    else if(tableView.tag == 104)
+    {
+        return 0;
+    }
     return 0;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (tableView.tag == 100) {
-        return 0;
+        return self.viewModel.comments.count;
     }
     else if (tableView.tag == 101)
     {
@@ -238,12 +268,23 @@
             return self.viewModel.players.count;
         }
     }
+    else if(tableView.tag == 103)
+    {
+        return self.viewModel.games[section].games.count;
+    }
+    else if (tableView.tag == 104)
+    {
+        return 1;
+    }
     return 0;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (tableView.tag == 100) {
-        
+        CommentCell* cell = (CommentCell*)[tableView dequeueReusableCellWithIdentifier:@"CommentCell" forIndexPath:indexPath];
+        cell.model = self.viewModel.comments[indexPath.row];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
     }
     else if (tableView.tag == 101)
     {
@@ -273,14 +314,14 @@
         if (indexPath.section == 0 && self.viewModel.model.info.coach)
         {
             NSMutableAttributedString* attr = [[NSMutableAttributedString alloc] initWithString:self.viewModel.model.info.coach];
-            NSRange range = NSMakeRange(0, self.viewModel.model.info.coach.length);
+            NSRange range = NSMakeRange(0, self.viewModel.model.info.coach.name.length);
             [attr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#1EA11F"] range:range];
             cell.textLabel.attributedText = attr;
         }
         else if ((indexPath.section == 0) && (indexPath.row == 0) && cap)
         {
             NSMutableAttributedString* attr = [[NSMutableAttributedString alloc] initWithString:cap];
-            NSRange range = NSMakeRange(0, self.viewModel.model.info.coach.length);
+            NSRange range = NSMakeRange(0, self.viewModel.model.info.coach.name.length);
             [attr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#1EA11F"] range:range];
             cell.textLabel.attributedText = attr;
             cell.detailTextLabel.text = @"教练";
@@ -292,13 +333,57 @@
         }
         return cell;
     }
+    else if (tableView.tag == 103)
+    {
+        NoticeGameviewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"NoticeGameviewCell" forIndexPath:indexPath];
+        GameDetailModel* model1 = self.viewModel.games[indexPath.section];
+        Games* model = model1.games[indexPath.row];
+        cell.view.titleLabel.text = model.tournament.name;
+        cell.view.roundLabel.text = model.round.name;
+        cell.view.status = [model getStatus1];
+        if (cell.view.status == 2) {
+            cell.view.homeScoreLabel.text = @"-";
+            cell.view.awaySocreLabel.text = @"-";
+        }
+        else
+        {
+            cell.view.homeScoreLabel.text = [NSString stringWithFormat: @"%ld", (long)model.homeScore];
+            cell.view.awaySocreLabel.text = [NSString stringWithFormat: @"%ld", (long)model.awayScore];
+        }
+        cell.view.homeTitleLabel.text = model.home.name;
+        cell.view.awayTitleLabel.text = model.away.name;
+        cell.view.homeLabel.text = model.home.name;
+        UIImage *image = [UIImage imageNamed:@"zhanwei.jpg"];
+        NSURL *homeurl;
+        if (model.home.logo.url) {
+            homeurl = [[NSURL alloc] initWithString:model.home.logo.url];
+            [cell.view.homeImageview sd_setImageWithURL:homeurl placeholderImage:image options:SDWebImageRefreshCached];
+        }
+        else
+        {
+            cell.view.homeImageview.image = image;
+        }
+        NSURL *awayurl;
+        if (model.away.logo) {
+            awayurl = [[NSURL alloc] initWithString:model.away.logo];
+            [cell.view.awayImgaeview sd_setImageWithURL:awayurl placeholderImage:image options:SDWebImageRefreshCached];
+        }
+        else
+        {
+            cell.view.awayImgaeview.image = image;
+        }
+        cell.view.location = 1;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
+    }
     return nil;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (tableView.tag == 100) {
-        
+         CGFloat height = [tableView cellHeightForIndexPath:indexPath model:self.viewModel.comments[indexPath.row] keyPath:@"model" cellClass:[CommentCell class]  contentViewWidth:[UIScreen mainScreen].bounds.size.width];
+        return height;
     }
     else if(tableView.tag == 101)
     {
@@ -307,6 +392,9 @@
     else if (tableView.tag == 102)
     {
         return 48 * self.view.scale;
+    }
+    else if (tableView.tag == 103) {
+        return 156 * self.view.scale;
     }
     return 0;
 }
@@ -328,17 +416,62 @@
     if (tableView.tag == 102) {
         return 48 * self.view.scale;
     }
+    else if (tableView.tag == 103)
+    {
+        return 16*self.view.scale;
+    }
     return 0;
+}
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    if (tableView.tag == 103) {
+    UIView* view = [[UIView alloc] init];
+    view.backgroundColor = [UIColor whiteColor];
+    UILabel* label = [[UILabel alloc] init];
+    view.frame = CGRectMake(0, 0, self.view.width, 16*self.view.scale);
+    [view addSubview:label];
+    NSString* string;
+    string = [self.viewModel.games[section] getDate1];
+    NSMutableAttributedString *AttributedStr = [[NSMutableAttributedString alloc]initWithString:string];
+    NSRange range = NSMakeRange(0, string.length);
+    [AttributedStr addAttribute:NSForegroundColorAttributeName
+     
+                          value:[UIColor colorWithHexString:@"#1EA11F"]
+     
+                          range:range];
+    label.attributedText = AttributedStr;
+    label.textAlignment = NSTextAlignmentCenter;
+    [label mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(view);
+    }];
+    return view;
+    }
+    return nil;
 }
 #pragma  mark- scrollviewdelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     CGFloat offset = scrollView.contentOffset.y;
-    [self.logoImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view.mas_top).offset(-offset);
-        make.left.and.right.equalTo(self.view);
-        make.height.equalTo(@(227 *self.view.scale));
-    }];
+    if (offset < 175) {
+        [self.logoImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.view.mas_top).offset(-offset);
+            make.left.and.right.equalTo(self.view);
+            make.height.equalTo(@(227 *self.view.scale));
+        }];
+        [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    
+        [self.navigationController.navigationBar setShadowImage:[UIImage new]];
+    }
+    if(offset > 175)
+    {
+        [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+        [self.navigationController.navigationBar setShadowImage:nil];
+        [self.logoImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.equalTo(self.mas_topLayoutGuide);
+            make.left.and.right.equalTo(self.view);
+            make.height.equalTo(@(227 *self.view.scale));
+        }];
+    }
 }
 #pragma mark- getter
 - (LazyPageScrollView*)pageView
@@ -385,7 +518,7 @@
         _messageTableview.dataSource = self;
         _messageTableview.tag = 100;
         _messageTableview.contentSize = CGSizeMake(self.view.width, 2 * self.view.height);
-        [_messageTableview registerClass:[MessageTableviewCell class] forCellReuseIdentifier:@"messageTableviewCell"];
+        [_messageTableview registerClass:[CommentCell class] forCellReuseIdentifier:@"CommentCell"];
     }
     return _messageTableview;
 }
@@ -419,7 +552,7 @@
         _scheduleTableview.delegate = self;
         _scheduleTableview.dataSource = self;
         _scheduleTableview.tag = 103;
-        //        [_newsTableview registerClass:[MessageTableviewCell class] forCellReuseIdentifier:@"_messageTableviewCell"];
+        [_scheduleTableview registerClass:[NoticeGameviewCell class] forCellReuseIdentifier:@"NoticeGameviewCell"];
     }
     return _scheduleTableview;
 }
@@ -517,6 +650,14 @@
     else if (index == 2)
     {
         [self.listTableview reloadData];
+    }
+    else if (index == 0)
+    {
+        [self.messageTableview reloadData];
+    }
+    else if (index == 3)
+    {
+        [self.scheduleTableview reloadData];
     }
 }
 

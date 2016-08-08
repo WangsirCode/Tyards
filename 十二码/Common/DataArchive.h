@@ -33,4 +33,6 @@
  */
 + (void)removefile:(NSString*)filename;
 
++ (unsigned long long )fileSize:(NSString*)fileName;
+
 @end

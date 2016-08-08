@@ -243,13 +243,6 @@
         return 156 * self.view.scale;
     }
 }
-//- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-//{
-//    if (tableView.tag == 100) {
-//        return [self.viewModel.noticeGameDatasource[section] getDate];
-//    }
-//    return nil;
-//}
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     if (tableView.tag == 101) {

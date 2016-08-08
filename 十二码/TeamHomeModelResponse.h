@@ -9,7 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "ReCommendNews.h"
 #import "SearchModel.h"
-@class TeamHomeModel,Info,Cover,Articles,Thumbnail,Newses,Comments1;
+#import "MDABizManager.h"
+@class TeamHomeModel,Info,Cover,Articles,Thumbnail,Newses,Comments1,Coach;
+
 @interface TeamHomeModelResponse : NSObject
 
 @property (nonatomic, strong) TeamHomeModel *resp;
@@ -17,6 +19,7 @@
 @property (nonatomic, assign) NSInteger code;
 
 @end
+
 @interface TeamHomeModel : NSObject
 
 @property (nonatomic, strong) NSArray<Articles *> *articles;
@@ -39,7 +42,7 @@
 
 @property (nonatomic, strong) Cover *cover;
 
-@property (nonatomic, copy) NSString *coach;
+@property (nonatomic, strong) Coach *coach;
 
 @property (nonatomic, copy) NSString *name;
 
@@ -126,5 +129,8 @@
 @property (nonatomic, copy) NSString *replyUser;
 
 @end
+
+
+
 
 

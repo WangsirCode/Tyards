@@ -27,6 +27,20 @@
 #import "WXApiObject.h"
 #import "UITableViewCell+Scale.h"
 #import "UIImage+placeholder.h"
+#import "MMDrawerController.h"
+#import "UIViewController+MMDrawerController.h"
+#import "UINavigationController+FDFullscreenPopGesture.h"
+#import "SearchModel.h"
+#import "GameListResponseModel.h"
+#import "TeamLisstResponseModel.h"
+#import "TeamPlayerResponseModel.h"
+#import "GameDetailModel.h"
+#import "TeamHomeModelResponse.h"
+#import "MyConcernModel.h"
+#import "TeamHomeModelResponse.h"
+#import "NewsDetailResponseModel.h"
+#import "MyMessageModel.h"
+#import "UIColor+MyColor.h"
 @interface MDABizManager : NSObject
 @property (nonatomic,assign)BOOL userLogined;
 /**

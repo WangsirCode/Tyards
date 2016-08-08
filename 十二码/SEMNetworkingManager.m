@@ -12,6 +12,7 @@
 #import "TeamLisstResponseModel.h"
 #import "TeamHomeModelResponse.h"
 #import "TeamPlayerResponseModel.h"
+#import "MeUserInfoResponseModel.h"
 NSString* const hotTopics = @"/university/hotTopics";
 NSString* const hotTopicsCache = @"hotTopicsCache";
 NSString* const ReconmendNewsURL = @"/university/editorViews";
@@ -29,6 +30,13 @@ NSString* const teamList = @"/university/teams";
 NSString* const TeamInfo = @"/team/detail/";
 NSString* const TeamPlayer = @"/team/players/";
 NSString* const TeamComments = @"/team/newses/";
+NSString* const TeamGames = @"/team/games/";
+NSString* const UserInfo = @"/user/info";
+NSString* const Colleges = @"/university/collegesApi/";
+NSString* const UpdateInfo = @"/user/updateInfo";
+NSString* const UserReply = @"/user/replies";
+NSString* const MyConcern = @"/user/fans/";
+NSString* const FeedBack = @"/feedback/post";
 @implementation SEMNetworkingManager
 + (instancetype)sharedInstance
 {
@@ -289,6 +297,8 @@ NSString* const TeamComments = @"/team/newses/";
         failureBlock(error);
     }];
 }
+
+//获取评论
 - (NSURLSessionTask *)fetchTeamComments:(NSString *)ide success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
 {
     [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
@@ -299,12 +309,137 @@ NSString* const TeamComments = @"/team/newses/";
     return [self GET:URL parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSArray<NewsDetailModel*>* model = [NSArray mj_objectWithKeyValues:responseObject];
+        NSArray<NewsDetailModel*>* model = [NewsDetailModel mj_objectArrayWithKeyValuesArray:responseObject[@"resp"]];
+        NSMutableArray<Comments*>* array =[[NSMutableArray alloc] init];
+        [model enumerateObjectsUsingBlock:^(NewsDetailModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [array appendObjects:obj.comments];
+        }];
+        NSArray* result = [[NSArray alloc] initWithArray:array];
+        successBlock(result);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }];
+}
+- (NSURLSessionTask *)fetchTeamGames:(NSString *)ide success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
+{
+    [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
+    NSMutableString* URL = [[NSMutableString alloc] init];
+    [URL appendString:TeamGames];
+    //测试以这个未测试
+    [URL appendString:@"75"];
+    
+   // [URL appendString:ide];
+    NSDictionary* para = @{@"group":@YES};
+    return [self GET:URL parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        GameDetailResponseModel* model = [GameDetailResponseModel mj_objectWithKeyValues:responseObject];
+        successBlock(model.resp);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }];
+
+}
+-(NSURLSessionTask *)fetchUserInfo:(NSString *)token success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
+{
+    [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
+    NSMutableString* URL = [[NSMutableString alloc] init];
+    [URL appendString:UserInfo];
+
+    NSDictionary* para = @{@"token":token};
+    return [self GET:URL parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        MeUserInfoResponseModel* model = [MeUserInfoResponseModel mj_objectWithKeyValues:responseObject];
+        successBlock(model.resp);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }];
+}
+- (NSURLSessionTask *)fetchColleges:(NSString *)ide success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
+{
+    [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
+    NSMutableString* URL = [[NSMutableString alloc] init];
+    [URL appendString:Colleges];
+    [URL appendString:ide];
+    return [self GET:URL parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSArray<College*>* model = [College mj_objectArrayWithKeyValuesArray:responseObject[@"resp"]];
         successBlock(model);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failureBlock(error);
     }];
 }
 
+
+//提交信息
+-(NSURLSessionTask *)postUserInfo:(NSInteger)schoolId collegeId:(NSInteger)collegeId gender:(NSString *)gender birthday:(long long)birthday token:(NSString *)token success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
+{
+    [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
+    NSMutableString* URL = [[NSMutableString alloc] init];
+    [URL appendString:UpdateInfo];
+    
+    NSDictionary* para = @{@"university":@(schoolId),@"college":@(collegeId),@"gender":gender,@"birthday":@(birthday),@"token":token};
+    return [self POST:URL parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        successBlock(responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }];
+}
+
+//获取评论信息
+-(NSURLSessionTask *)fetchMyReplies:(NSString *)token success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
+{
+    [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
+    NSMutableString* URL = [[NSMutableString alloc] init];
+    [URL appendString:UserReply];
+    
+    NSDictionary* para = @{@"token":token};
+    return [self POST:URL parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        MyMessageModel* model = [MyMessageModel mj_objectWithKeyValues:responseObject];
+        successBlock(model.resp);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }];
+}
+
+//获取我的关注
+
+- (NSURLSessionTask *)fetchMyConcern:(NSString*)ids success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
+{
+    [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
+    NSMutableString* URL = [[NSMutableString alloc] init];
+    [URL appendString:MyConcern];
+    [URL appendString:ids];
+    return [self GET:URL parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        MyConcernModel* model = [MyConcernModel mj_objectWithKeyValues:responseObject];
+        successBlock(model.resp);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }];
+}
+
+//提交反馈
+-(NSURLSessionTask *)postFeebback:(NSString *)feedback success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
+{
+    [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
+    NSMutableString* URL = [[NSMutableString alloc] init];
+    [URL appendString:FeedBack];
+    NSDictionary *para = @{@"content":feedback};
+    return [self POST:URL parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        successBlock(responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }];
+}
 @end
 

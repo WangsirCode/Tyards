@@ -55,7 +55,14 @@
 
 @implementation Reply
 
-
+-(NSString *)getdate
+{
+    NSDate *date = [[NSDate alloc]initWithTimeIntervalSince1970:self.dateCreated/1000];
+    NSDateFormatter* formater = [[NSDateFormatter alloc] init];
+    formater.dateFormat = @"MM月dd日 HH : mm";
+    NSString* ta = [formater stringFromDate:date];
+    return ta;
+}
 @end
 
 

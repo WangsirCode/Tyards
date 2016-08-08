@@ -8,7 +8,10 @@
 
 #import "SEMViewModel.h"
 #import "UserModel.h"
+#import "MeUserInfoResponseModel.h"
 @interface SEMMeViewModel : SEMViewModel
+@property (nonatomic, strong) UserInfoModel *model;
+-(void)fetchUserInfo:(NSString*)token;
 @property (nonatomic,strong) NSString* title;
 @property (nonatomic,strong)NSArray* items;
 @property (nonatomic,strong)NSArray* images;

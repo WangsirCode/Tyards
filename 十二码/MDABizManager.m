@@ -23,7 +23,15 @@
                                @"tab":@"SEMTabViewController",
                                @"search":@"SEMSearchViewController",
                                @"login":@"SEMLoginViewController",
-                               @"News detail":@"SEMNewsDetailController",
+                               @"Newsdetail":@"SEMNewsDetailController",
+                               @"photo":@"SEMTeamPhotoController",
+                               @"myInfo":@"PersonalInfoController",
+                               @"MEInfoColleageSearch":@"ColleageSearchController",
+                               @"Myconcern":@"MyConcernController",
+                               @"MyMessage":@"MyMessageController",
+                               @"setup":@"SetUpController",
+                               @"feedBack":@"FeedBackController",
+                               @"about":@"AboutViewController",
                                @"TeamHome":@"SEMTeamHomeViewController"};
     [[HRTRouter sharedInstance].routeMap addEntriesFromDictionary: routeMap];
 }

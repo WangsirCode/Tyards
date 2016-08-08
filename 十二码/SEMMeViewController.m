@@ -14,6 +14,11 @@
 #import "SEMLoginViewController.h"
 #import  "LoginCommand.h"
 #import "UserModel.h"
+#import "PersonalInfoController.h"
+#import "UIViewController+MMDrawerController.h"
+#import "SEMTabViewController.h"
+#import "MyConcernController.h"
+#import "MyMessageController.h"
 @interface SEMMeViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong,nonatomic)SEMMeViewModel* viewModel;
 @property (nonatomic,strong)MeTopView* topView;
@@ -32,12 +37,16 @@
         self.topView.name = self.viewModel.info.nickname;
         NSURL* url = [[NSURL alloc] initWithString:self.viewModel.info.headimgurl];
         [self.topView.userHeadView sd_setImageWithURL:url];
+        NSString* token = (NSString*)[DataArchive unarchiveDataWithFileName:@"token"];
+        [self.viewModel fetchUserInfo:token];
+        self.viewModel.isLogined = YES;
     }
     else
     {
         self.topView.name = @"请登录";
         self.topView.headImage = [UIImage imageNamed:@"个人资料icon"];
         self.topView.infoView.hidden = YES;
+        self.viewModel.isLogined = NO;
     }
 }
 - (void)viewDidLoad {
@@ -124,7 +133,73 @@
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
+#pragma  mark-TableDelegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //进入个人资料页面
+    if (indexPath.row == 0) {
+        if (self.viewModel.isLogined) {
+            [self.mm_drawerController closeDrawerAnimated: YES completion:^(BOOL finished) {
+                
+            }];
+            
+            UINavigationController* nav = (UINavigationController*)(((SEMTabViewController*)self.mm_drawerController.centerViewController).selectedViewController);
+            
+            PersonalInfoController* controller = [HRTRouter objectForURL:@"myInfo" withUserInfo:@{@"model":self.viewModel.model}];
+            controller.hidesBottomBarWhenPushed = YES;
+            [nav pushViewController:controller animated:YES];
+        }
+        else
+        {
+            [XHToast showCenterWithText:@"请先登录"];
+        }
+        
+    }
+    else if (indexPath.row == 1)
+    {
+        if (self.viewModel.isLogined) {
+            [self.mm_drawerController closeDrawerAnimated: YES completion:^(BOOL finished) {
+            }];
+            UINavigationController* nav = (UINavigationController*)(((SEMTabViewController*)self.mm_drawerController.centerViewController).selectedViewController);
+            
+            MyConcernController* controller = [HRTRouter objectForURL:@"Myconcern" withUserInfo:@{@"id":@(self.viewModel.model.id)}];
+            controller.hidesBottomBarWhenPushed = YES;
+            [nav pushViewController:controller animated:YES];
+        }
+        else
+        {
+            [XHToast showCenterWithText:@"请先登录"];
+        }
+        
+    }
+    else if (indexPath.row == 2)
+    {
+        if (self.viewModel.isLogined) {
+            [self.mm_drawerController closeDrawerAnimated: YES completion:^(BOOL finished) {
+            }];
+            UINavigationController* nav = (UINavigationController*)(((SEMTabViewController*)self.mm_drawerController.centerViewController).selectedViewController);
+            
+            MyMessageController* controller = [HRTRouter objectForURL:@"MyMessage" withUserInfo:@{}];
+            controller.hidesBottomBarWhenPushed = YES;
+            [nav pushViewController:controller animated:YES];
+        }
+        else
+        {
+             [XHToast showCenterWithText:@"请先登录"];
+        }
 
+    }
+    else if (indexPath.row == 6)
+    {
+        [self.mm_drawerController closeDrawerAnimated: YES completion:^(BOOL finished) {
+        }];
+        UINavigationController* nav = (UINavigationController*)(((SEMTabViewController*)self.mm_drawerController.centerViewController).selectedViewController);
+        
+        MyMessageController* controller = [HRTRouter objectForURL:@"setup" withUserInfo:@{@"login":@(self.viewModel.isLogined)}];
+        controller.hidesBottomBarWhenPushed = YES;
+        [nav pushViewController:controller animated:YES];
+    }
+}
 #pragma mark -Getter
 - (MeTopView*)topView
 {
@@ -133,8 +208,10 @@
         _topView.name = @"爱足球的宝贝";
         _topView.headImage = [UIImage imageNamed:@"logo"];
         UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] initWithActionBlock:^(id  _Nonnull sender) {
-            SEMLoginViewController* login = [HRTRouter objectForURL:@"login" withUserInfo:@{}];
-            [self presentViewController:login animated:YES completion:nil];
+            if (self.viewModel.isLogined == NO) {
+                SEMLoginViewController* login = [HRTRouter objectForURL:@"login" withUserInfo:@{}];
+                [self presentViewController:login animated:YES completion:nil];
+            }
         }];
         [_topView.userHeadView addGestureRecognizer:tap];
     }

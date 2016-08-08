@@ -11,10 +11,13 @@
 #import "TeamHomeModelResponse.h"
 #import "TeamPlayerResponseModel.h"
 #import "NewsDetailViewModel.h"
+#import "GameDetailModel.h"
 @interface SEMTeamHomeModel : SEMViewModel
 @property (nonatomic, strong) TeamHomeModel *model;
 @property (nonatomic, strong) NSArray<TeamPlayerModel *> *players;
+@property (nonatomic, strong) NSArray<Comments *> *comments;
 @property (nonatomic,strong)RACCommand* shareCommand;
 @property (nonatomic,strong)RACCommand* likeCommand;
-@property (nonatomic,assign)BOOL finishenLoading;
+@property (nonatomic,assign)NSInteger loadingStatus;
+@property (nonatomic, strong) NSArray<GameDetailModel *> *games;;
 @end

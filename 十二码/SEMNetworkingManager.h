@@ -275,5 +275,124 @@
 - (NSURLSessionTask*)fetchTeamComments:(NSString*)ide
                               success:(void (^)(id data))successBlock
                               failure:(void (^)(NSError *aError))failureBlock;
+
+
+/*!
+ *  @author 汪宇豪, 16-08-06 09:08:06
+ *
+ *  @brief 获取球队赛程
+ *
+ *  @param ide          id
+ *  @param successBlock 成功
+ *  @param failureBlock 失败
+ *
+ *  @return NSURLSessionTask
+ */
+- (NSURLSessionTask*)fetchTeamGames:(NSString*)ide
+                               success:(void (^)(id data))successBlock
+                               failure:(void (^)(NSError *aError))failureBlock;
+
+
+/*!
+ *  @author 汪宇豪, 16-08-06 20:08:40
+ *
+ *  @brief 获取个人信息
+ *
+ *  @param ide          token
+ *  @param successBlock 成功
+ *  @param failureBlock 失败
+ *
+ *  @return NSURLSessionTask
+ */
+- (NSURLSessionTask*)fetchUserInfo:(NSString*)token
+                            success:(void (^)(id data))successBlock
+                            failure:(void (^)(NSError *aError))failureBlock;
+
+
+/*!
+ *  @author 汪宇豪, 16-08-06 23:08:08
+ *
+ *  @brief 获取学院列表
+ *
+ *  @param ide          id
+ *  @param successBlock 成功
+ *  @param failureBlock 失败
+ *
+ *  @return NSURLSessionTask
+ */
+- (NSURLSessionTask*)fetchColleges:(NSString*)ide
+                           success:(void (^)(id data))successBlock
+                           failure:(void (^)(NSError *aError))failureBlock;
+
+
+
+/*!
+ *  @author 汪宇豪, 16-08-07 00:08:55
+ *
+ *  @brief 更新用户信息
+ *
+ *  @param schoolId     学校id
+ *  @param collegeId    学院id
+ *  @param gender       性别
+ *  @param birthday     生日
+ *  @param successBlock 成功
+ *  @param failureBlock 失败
+ *
+ *  @return NSURLSessionTask
+ */
+- (NSURLSessionTask*)postUserInfo:(NSInteger)schoolId
+                        collegeId:(NSInteger)collegeId
+                           gender:(NSString*)gender
+                         birthday:(long long) birthday
+                            token:(NSString*)token
+                           success:(void (^)(id data))successBlock
+                           failure:(void (^)(NSError *aError))failureBlock;
+
+
+/*!
+ *  @author 汪宇豪, 16-08-07 00:08:57
+ *
+ *  @brief 获取我的评论信息
+ *
+ *  @param token        token
+ *  @param successBlock 成功
+ *  @param failureBlock 失败
+ *
+ *  @return NSURLSessionTask
+ */
+- (NSURLSessionTask*)fetchMyReplies:(NSString*)token
+                           success:(void (^)(id data))successBlock
+                           failure:(void (^)(NSError *aError))failureBlock;
+
+/*!
+ *  @author 汪宇豪, 16-08-07 01:08:00
+ *
+ *  @brief 获取我的关注
+ *
+ *  @param ids          id
+ *  @param successBlock 成功
+ *  @param failureBlock 失败
+ *
+ *  @return NSURLSessionTask
+ */
+- (NSURLSessionTask*)fetchMyConcern:(NSString*)ids
+                            success:(void (^)(id data))successBlock
+                            failure:(void (^)(NSError *aError))failureBlock;
+
+
+/*!
+ *  @author 汪宇豪, 16-08-08 14:08:03
+ *
+ *  @brief 提交反馈
+ *
+ *  @param feedback     成功
+ *  @param successBlock 失败
+ *  @param failureBlock
+ *
+ *  @return 
+ */
+- (NSURLSessionTask*)postFeebback:(NSString*)feedback
+                            success:(void (^)(id data))successBlock
+                            failure:(void (^)(NSError *aError))failureBlock;
 @end
 

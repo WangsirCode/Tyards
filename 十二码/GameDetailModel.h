@@ -119,15 +119,5 @@
 
 @end
 
-@interface Tournament : NSObject<NSCoding>
-
-@property (nonatomic, assign) NSInteger id;
-
-@property (nonatomic, copy) NSString *name;
-
-@property (nonatomic, strong) Logo *logo;
-
-@end
-
 
 

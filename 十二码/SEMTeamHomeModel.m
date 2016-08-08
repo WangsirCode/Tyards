@@ -14,7 +14,8 @@
     self = [super initWithDictionary:dictionary];
     if (self)
     {
-        [self fetchData:[(NSNumber*)dictionary[@"id"] stringValue]];
+        self.loadingStatus = 0;
+        [self fetchData:[(NSNumber*)dictionary[@"ide"] stringValue]];
     }
     return self;
 }
@@ -23,12 +24,25 @@
     SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
     [manager fetchTeamInfo:string success:^(id data) {
         self.model = data;
-        self.finishenLoading = YES;
+        self.loadingStatus += 1;
     } failure:^(NSError *aError) {
         
     }];
     [manager fetchTeamPlayers:string success:^(id data) {
         self.players = data;
+        self.loadingStatus += 1;
+    } failure:^(NSError *aError) {
+        
+    }];
+    [manager fetchTeamComments:string success:^(id data) {
+        self.comments = data;
+        self.loadingStatus += 1;
+    } failure:^(NSError *aError) {
+        
+    }];
+    [manager fetchTeamGames:string success:^(id data) {
+        self.games = data;
+        self.loadingStatus += 1;
     } failure:^(NSError *aError) {
         
     }];

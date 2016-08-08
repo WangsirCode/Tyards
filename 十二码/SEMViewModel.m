@@ -34,4 +34,9 @@
     NSUserDefaults *database = [NSUserDefaults standardUserDefaults];
     return [database objectForKey:@"name"];
 }
+- (NSString *)getToken
+{
+    NSUserDefaults *database = [NSUserDefaults standardUserDefaults];
+    return [database objectForKey:@"token"];
+}
 @end

@@ -157,18 +157,22 @@
 {
     NSString* name;
     NSString* dispalyname;
+    Universities* uni;
     [self.searchBar resignFirstResponder];
     if (self.viewModel.isSearching == YES) {
+        uni = self.viewModel.universities[indexPath.row];
         name = self.viewModel.universities[indexPath.row].code;
         dispalyname = self.viewModel.universities[indexPath.row].displayName;
     }
     else
     {
+        uni = self.viewModel.datasource[indexPath.section].universities[indexPath.row];
         name = self.viewModel.datasource[indexPath.section].universities[indexPath.row].code;
         dispalyname = self.viewModel.datasource[indexPath.section].universities[indexPath.row].displayName;
     }
     [self.navigationController popViewControllerAnimated:YES];
-    [self.delegate didSelectedItem:name diplayname:dispalyname];
+    
+    [self.delegate didSelectedItem:name diplayname:dispalyname uni:uni] ;
     
 }
 #pragma mark- UISearBardelagate
@@ -216,8 +220,6 @@
         _searchBar.translucent = YES;
         [_searchBar setTintColor:[UIColor whiteColor]];
 //        _searchBar.barTintColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:1];
-        _searchBar.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
-       [UISearchBar appearance].barTintColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
 //        [UISearchBar appearance].backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
     }
     return _searchBar;

@@ -8,6 +8,8 @@
 
 #import "SEMViewModel.h"
 #import "UserModel.h"
+#import "MeUserInfoResponseModel.h"
 @interface MeinfoViewModel : SEMViewModel
 @property (nonatomic,strong)UserModel* info;
+@property (nonatomic, strong) UserInfoModel *model;
 @end

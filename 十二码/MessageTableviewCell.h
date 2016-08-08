@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface MessageTableviewCell : UITableViewCell
+#import "CommentCell.h"
+@interface MessageTableviewCell :CommentCell
 
 @end

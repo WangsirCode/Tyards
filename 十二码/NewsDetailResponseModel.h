@@ -91,7 +91,7 @@
 @property (nonatomic, assign) BOOL read;
 
 @property (nonatomic, strong) Creator *creator;
-
+-(NSString*)getdate;
 @end
 
 

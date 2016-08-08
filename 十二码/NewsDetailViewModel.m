@@ -13,7 +13,7 @@
 {
     self = [super initWithDictionary:dictionary];
     if (self) {
-        self.identifier = [dictionary[@"id"] integerValue];
+        self.identifier = [dictionary[@"ides"] integerValue];
         [self fetchdata];
     }
     return self;

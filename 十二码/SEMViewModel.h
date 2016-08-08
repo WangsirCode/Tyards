@@ -16,4 +16,5 @@
 
 - (void)setup;
 - (NSString*)getSchoolCode;
+- (NSString*)getToken;
 @end

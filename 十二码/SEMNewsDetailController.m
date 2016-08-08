@@ -124,7 +124,6 @@
             .leftEqualToView(self.view)
             .rightEqualToView(self.view)
             .heightIs(self.tableviewHeight);
-            
         }
     }];
     [[self.viewModel.shareCommand executionSignals] subscribeNext:^(id x) {

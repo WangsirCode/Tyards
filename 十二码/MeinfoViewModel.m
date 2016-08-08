@@ -7,14 +7,16 @@
 //
 
 #import "MeinfoViewModel.h"
-
+#import "MDABizManager.h"
 @implementation MeinfoViewModel
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary
 {
     self = [super initWithDictionary:dictionary];
     if (self) {
-        
+       
     }
     return self;
 }
+
+
 @end

@@ -184,12 +184,12 @@
 #pragma mark- tableviewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (tableView.tag == 100) {
-        NSInteger ide = self.viewModel.newsDataSource[indexPath.row].id;
-        SEMNewsDetailController* controller = [HRTRouter objectForURL:@"News detail" withUserInfo:@{@"id":@(ide)}];
-        controller.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:controller animated:YES];
-    }
+//    if (tableView.tag == 100) {
+//        NSInteger ide = self.viewModel.newsDataSource[indexPath.row].id;
+//        SEMNewsDetailController* controller = [HRTRouter objectForURL:@"Newsdetail" withUserInfo:@{@"ides":@(ide)}];
+//        controller.hidesBottomBarWhenPushed = YES;
+//        [self.navigationController pushViewController:controller animated:YES];
+//    }
 }
 #pragma mark -Getter
 
