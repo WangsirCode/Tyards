@@ -25,8 +25,8 @@
 }
 - (void)fetchUserInfo:(NSString*)token
 {
-    if ([DataArchive unarchiveDataWithFileName:@"userInfo"]) {
-        self.model = (UserInfoModel*)[DataArchive unarchiveDataWithFileName:@"userInfo"];
+    if ([DataArchive unarchiveUserDataWithFileName:@"UserInfo"]) {
+        self.model = (UserInfoModel*)[DataArchive unarchiveUserDataWithFileName:@"UserInfo"];
     }
     else
     {
@@ -35,8 +35,9 @@
         [manager fetchUserInfo:@"d16c7f4be4a02398c4af50bdc8c1db06" success:^(id data) {
             self.model = data;
             self.shouldReloadData = YES;
-            [DataArchive archiveData:self.model withFileName:@"userInfo"];
-        } failure:^(NSError *aError) {
+            [DataArchive archiveUserData:self.model withFileName:@"UserInfo"];
+        } failure:^(NSError *aError)
+        {
             
         }];
     }

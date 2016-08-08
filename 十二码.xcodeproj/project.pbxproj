@@ -171,6 +171,8 @@
 		477676691D58544D00E10594 /* FeedBackViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 477676681D58544D00E10594 /* FeedBackViewModel.m */; };
 		4776766F1D58610600E10594 /* AboutVIewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4776766E1D58610600E10594 /* AboutVIewModel.m */; };
 		477676721D58614A00E10594 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 477676711D58614A00E10594 /* AboutViewController.m */; };
+		477676751D58CB2C00E10594 /* TeamCommentsResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 477676741D58CB2C00E10594 /* TeamCommentsResponseModel.m */; };
+		477676771D58D1BF00E10594 /* zhanwei.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 477676761D58D1BF00E10594 /* zhanwei.jpg */; };
 		4783923B1D53242F00C31D37 /* UITableViewCell+Scale.m in Sources */ = {isa = PBXBuildFile; fileRef = 4783923A1D53242F00C31D37 /* UITableViewCell+Scale.m */; };
 		478B5E531D420728007AABC4 /* SEMNetworkingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 478B5E521D420728007AABC4 /* SEMNetworkingManager.m */; };
 		478B5E561D420AC5007AABC4 /* hotTopicsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 478B5E551D420AC5007AABC4 /* hotTopicsModel.m */; };
@@ -178,7 +180,6 @@
 		47AF5D2E1D5646A700728933 /* MyConcernViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47AF5D2D1D5646A700728933 /* MyConcernViewModel.m */; };
 		47AF5D311D564AA200728933 /* MeReplyResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47AF5D301D564AA200728933 /* MeReplyResponseModel.m */; };
 		47AF5D341D564DDA00728933 /* MyConcernModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47AF5D331D564DDA00728933 /* MyConcernModel.m */; };
-		47B45C191D431C50009C8DA0 /* zhanwei.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 47B45C181D431C50009C8DA0 /* zhanwei.jpg */; };
 		47BB49941D45E0D40052E4D0 /* News.m in Sources */ = {isa = PBXBuildFile; fileRef = 47BB49931D45E0D40052E4D0 /* News.m */; };
 		47BB49971D45E3700052E4D0 /* TopicModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47BB49961D45E3700052E4D0 /* TopicModel.m */; };
 		47BB499D1D45F4450052E4D0 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 47BB499B1D45F4450052E4D0 /* libWeChatSDK.a */; };
@@ -479,6 +480,9 @@
 		4776766E1D58610600E10594 /* AboutVIewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutVIewModel.m; sourceTree = "<group>"; };
 		477676701D58614A00E10594 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		477676711D58614A00E10594 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
+		477676731D58CB2C00E10594 /* TeamCommentsResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamCommentsResponseModel.h; sourceTree = "<group>"; };
+		477676741D58CB2C00E10594 /* TeamCommentsResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamCommentsResponseModel.m; sourceTree = "<group>"; };
+		477676761D58D1BF00E10594 /* zhanwei.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = zhanwei.jpg; sourceTree = "<group>"; };
 		478392391D53242F00C31D37 /* UITableViewCell+Scale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+Scale.h"; sourceTree = "<group>"; };
 		4783923A1D53242F00C31D37 /* UITableViewCell+Scale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+Scale.m"; sourceTree = "<group>"; };
 		478B5E511D420728007AABC4 /* SEMNetworkingManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEMNetworkingManager.h; sourceTree = "<group>"; };
@@ -493,7 +497,6 @@
 		47AF5D301D564AA200728933 /* MeReplyResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeReplyResponseModel.m; sourceTree = "<group>"; };
 		47AF5D321D564DDA00728933 /* MyConcernModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyConcernModel.h; sourceTree = "<group>"; };
 		47AF5D331D564DDA00728933 /* MyConcernModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyConcernModel.m; sourceTree = "<group>"; };
-		47B45C181D431C50009C8DA0 /* zhanwei.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = zhanwei.jpg; sourceTree = "<group>"; };
 		47BB49921D45E0D40052E4D0 /* News.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = News.h; sourceTree = "<group>"; };
 		47BB49931D45E0D40052E4D0 /* News.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = News.m; sourceTree = "<group>"; };
 		47BB49951D45E3700052E4D0 /* TopicModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopicModel.h; sourceTree = "<group>"; };
@@ -907,9 +910,9 @@
 				476088061D55874400F36597 /* calender_L.png */,
 				476088071D55874400F36597 /* 约战-助攻.png */,
 				476088081D55874400F36597 /* 约战-乌龙.png */,
+				477676761D58D1BF00E10594 /* zhanwei.jpg */,
 				476088091D55874400F36597 /* 约战-时间.png */,
 				4760880A1D55874400F36597 /* 约战-进球.png */,
-				47B45C181D431C50009C8DA0 /* zhanwei.jpg */,
 				472A923D1D473C6900F8620F /* logo.png */,
 				4734CE4D1D41CD6D006536DF /* 2.png */,
 				4734CE1C1D41CD55006536DF /* 资讯球队赛事 */,
@@ -1119,6 +1122,8 @@
 				477642611D5440AA00548C9F /* TeamHomeModelResponse.m */,
 				4776426C1D548CAD00548C9F /* TeamPlayerResponseModel.h */,
 				4776426D1D548CAD00548C9F /* TeamPlayerResponseModel.m */,
+				477676731D58CB2C00E10594 /* TeamCommentsResponseModel.h */,
+				477676741D58CB2C00E10594 /* TeamCommentsResponseModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1345,6 +1350,7 @@
 				4734CE351D41CD55006536DF /* right-arrow.png in Resources */,
 				4734CDED1D41CD39006536DF /* 球队icon-绿.png in Resources */,
 				4734CE361D41CD55006536DF /* star_L.png in Resources */,
+				477676771D58D1BF00E10594 /* zhanwei.jpg in Resources */,
 				4734CE3B1D41CD55006536DF /* wechat moment-s.png in Resources */,
 				4734CDD91D41C95D006536DF /* iconfont.svg in Resources */,
 				4734CDD71D41C95D006536DF /* iconfont.css in Resources */,
@@ -1381,7 +1387,6 @@
 				4734CE331D41CD55006536DF /* qzone_s.png in Resources */,
 				4734CDF31D41CD39006536DF /* 首页icon-绿.png in Resources */,
 				4734CE4B1D41CD5E006536DF /* 消息icon.png in Resources */,
-				47B45C191D431C50009C8DA0 /* zhanwei.jpg in Resources */,
 				4734CE1B1D41CD4B006536DF /* 黑色透明度.png in Resources */,
 				4734CE3E1D41CD55006536DF /* 标题背景.png in Resources */,
 				4734CE4C1D41CD5E006536DF /* 信息发送icon.png in Resources */,
@@ -1515,6 +1520,7 @@
 				4753074D1D46F74A003ECEBF /* MeTopView.m in Sources */,
 				4734CDC21D41C835006536DF /* SEMInitialViewController.m in Sources */,
 				4735FA0C1D55FCDA00FDF2ED /* MeColleageSearchViewModel.m in Sources */,
+				477676751D58CB2C00E10594 /* TeamCommentsResponseModel.m in Sources */,
 				4772FE6D1D565DEB0008ED37 /* UIColor+MyColor.m in Sources */,
 				4734CD831D41BA54006536DF /* SEMViewModel.m in Sources */,
 				4708D2E61D4A67BD0094FAF9 /* NoticeCellView.m in Sources */,

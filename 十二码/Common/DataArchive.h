@@ -34,5 +34,6 @@
 + (void)removefile:(NSString*)filename;
 
 + (unsigned long long )fileSize:(NSString*)fileName;
-
++ (void)archiveUserData:(id<NSCoding>)aData withFileName:(NSString *)aFileName;
++ (id<NSCoding>)unarchiveUserDataWithFileName:(NSString *)aFileName;
 @end

@@ -29,6 +29,29 @@
     [archiveData writeToFile:filePath atomically:NO];
 }
 
+/*!
+ *  @author 汪宇豪, 16-08-08 21:08:59
+ *
+ *  @brief 存储用户的信息
+ *
+ *  @param aData     <#aData description#>
+ *  @param aFileName <#aFileName description#>
+ */
++ (void)archiveUserData:(id<NSCoding>)aData withFileName:(NSString *)aFileName
+{
+    NSArray *documentArray = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentPath = [documentArray safeObjectAtIndex:0];
+    
+    NSString *filePath1 = [documentPath stringByAppendingPathComponent:@"user"];
+    NSFileManager* fileManager=[NSFileManager defaultManager];
+    if (![fileManager fileExistsAtPath:filePath1]) {
+        [fileManager createDirectoryAtPath:filePath1 withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+    NSLog(@"%@",filePath1);
+    NSString *filePath = [filePath1 stringByAppendingPathComponent:aFileName];
+    NSData *archiveData = [NSKeyedArchiver archivedDataWithRootObject:aData];
+    [archiveData writeToFile:filePath atomically:NO];
+}
 /**
  *  功能:取档(获取用户数据，第一次使用或版本更新时会清空数据)
  */
@@ -45,7 +68,19 @@
     id unarchiveData = [NSKeyedUnarchiver unarchiveObjectWithFile:filePath];
     return unarchiveData;
 }
-
++ (id<NSCoding>)unarchiveUserDataWithFileName:(NSString *)aFileName
+{
+    NSArray *documentArray = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentPath = [documentArray safeObjectAtIndex:0];
+    NSString *filePath1 = [documentPath stringByAppendingPathComponent:@"user"];
+    NSFileManager* fileManager=[NSFileManager defaultManager];
+    if (![fileManager fileExistsAtPath:filePath1]) {
+        [fileManager createDirectoryAtPath:filePath1 withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+    NSString *filePath = [filePath1 stringByAppendingPathComponent:aFileName];
+    id unarchiveData = [NSKeyedUnarchiver unarchiveObjectWithFile:filePath];
+    return unarchiveData;
+}
 /**
  *  功能:取档(获取系统数据，直接取档)
  */

@@ -170,14 +170,6 @@
     return _firstPa;
 }
 
-//- (UILabel *)secPa
-//{
-//    if (!_secPa) {
-//        _secPa = [UILabel new];
-//        _secPa.textAlignment = NSTextAlignmentCenter;
-//        _secPa.text = @"A"
-//    }
-//}
 -(UILabel *)sevieceLabel
 {
     if (!_sevieceLabel) {

@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface SEMNewsDetailController : UIViewController
-
+- (instancetype)initWithDictionary:(NSDictionary*)dictionary;
 @end

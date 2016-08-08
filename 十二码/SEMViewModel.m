@@ -7,7 +7,7 @@
 //
 
 #import "SEMViewModel.h"
-
+#import "MDABizManager.h"
 @interface SEMViewModel ()
 @property (nonatomic, strong) NSDictionary* userInfo;
 @end
@@ -36,7 +36,7 @@
 }
 - (NSString *)getToken
 {
-    NSUserDefaults *database = [NSUserDefaults standardUserDefaults];
-    return [database objectForKey:@"token"];
+    NSString* token = (NSString*)[DataArchive unarchiveUserDataWithFileName:@"token"];
+    return token;
 }
 @end

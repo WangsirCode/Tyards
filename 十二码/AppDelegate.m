@@ -110,7 +110,7 @@ NSString* const USER_INFO = @"userinfo";
                 SEMNetworkingManager* magager = [SEMNetworkingManager sharedInstance];
                 [magager fetchWexinToken:accessToken openid:openID success:^(id data) {
                     NSString* token = data;
-                    [DataArchive archiveData:token withFileName:@"token"];
+                    [DataArchive archiveUserData:token withFileName:@"token"];
                 } failure:^(NSError *aError) {
                     NSLog(@"%@",aError);
                 }];
@@ -143,12 +143,12 @@ NSString* const USER_INFO = @"userinfo";
         UserModel* data = [[UserModel alloc] init];
         data.headimgurl = model.headimgurl;
         data.nickname = model.nickname;
-        data.token = (NSString*)[DataArchive unarchiveDataWithFileName:@"token"];
-        [DataArchive archiveData:data withFileName:@"userinfo"];
+        data.token = (NSString*)[DataArchive unarchiveUserDataWithFileName:@"token"];
+        [DataArchive archiveUserData:data withFileName:@"userinfo"];
         dispatch_async(dispatch_get_main_queue(), ^{
             NSData* data1 = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:model.headimgurl]];
             UIImage* imamge = [[UIImage alloc] initWithData:data1];
-            [DataArchive archiveData:imamge withFileName:@"headimage"];
+            [DataArchive archiveUserData:imamge withFileName:@"headimage"];
         });
         LoginCommand* command = [LoginCommand sharedInstance];
         [command.weixinLoginedCommand execute:data];

@@ -13,6 +13,7 @@
 #import "TeamHomeModelResponse.h"
 #import "TeamPlayerResponseModel.h"
 #import "MeUserInfoResponseModel.h"
+#import "TeamCommentsResponseModel.h"
 NSString* const hotTopics = @"/university/hotTopics";
 NSString* const hotTopicsCache = @"hotTopicsCache";
 NSString* const ReconmendNewsURL = @"/university/editorViews";
@@ -309,13 +310,15 @@ NSString* const FeedBack = @"/feedback/post";
     return [self GET:URL parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSArray<NewsDetailModel*>* model = [NewsDetailModel mj_objectArrayWithKeyValuesArray:responseObject[@"resp"]];
+        TeamCommentsResponseModel* result = [TeamCommentsResponseModel mj_objectWithKeyValues:responseObject];
+        NSArray<NewsDetailModel*>* model = result.resp;
         NSMutableArray<Comments*>* array =[[NSMutableArray alloc] init];
         [model enumerateObjectsUsingBlock:^(NewsDetailModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             [array appendObjects:obj.comments];
         }];
-        NSArray* result = [[NSArray alloc] initWithArray:array];
-        successBlock(result);
+        
+        NSArray* result1 = [[NSArray alloc] initWithArray:array];
+        successBlock(result1);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failureBlock(error);
     }];

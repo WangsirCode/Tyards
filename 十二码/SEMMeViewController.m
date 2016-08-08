@@ -32,12 +32,12 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.viewModel.info = (UserModel*)[DataArchive unarchiveDataWithFileName:@"userinfo"];
+    self.viewModel.info = (UserModel*)[DataArchive unarchiveUserDataWithFileName:@"userinfo"];
     if (self.viewModel.info) {
         self.topView.name = self.viewModel.info.nickname;
         NSURL* url = [[NSURL alloc] initWithString:self.viewModel.info.headimgurl];
         [self.topView.userHeadView sd_setImageWithURL:url];
-        NSString* token = (NSString*)[DataArchive unarchiveDataWithFileName:@"token"];
+        NSString* token = (NSString*)[DataArchive unarchiveUserDataWithFileName:@"token"];
         [self.viewModel fetchUserInfo:token];
         self.viewModel.isLogined = YES;
     }

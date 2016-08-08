@@ -20,6 +20,21 @@
 }
 - (void)fetchData:(NSString*)string
 {
-    
+    SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
+    [manager fetchTeamComments:@"60" success:^(id data) {
+        
+    } failure:^(NSError *aError) {
+        
+    }];
+
+    [manager fetchNewsDetail:783 success:^(id data) {
+        [manager fetchTeamComments:@"60" success:^(id data) {
+            
+        } failure:^(NSError *aError) {
+            
+        }];
+    } failure:^(NSError *aError) {
+        
+    }];
 }
 @end

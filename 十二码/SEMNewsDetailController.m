@@ -34,6 +34,14 @@
 @end
 @implementation SEMNewsDetailController
 #pragma mark- lifeCycle
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary
+{
+    self = [super init];
+    if (self) {
+        self.viewModel = [[NewsDetailViewModel alloc] initWithDictionary: dictionary];
+    }
+    return self;
+}
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -289,7 +297,7 @@
 {
     self.viewModel = [[NewsDetailViewModel alloc] initWithDictionary: routerParameters];
 }
-
+#pragma mark-getter
 - (UILabel*)titleLabel
 {
     if (!_titleLabel) {
@@ -452,7 +460,6 @@
         _shareView.frame = CGRectMake(0, self.view.height, self.view.width, 200*self.view.scale);
         _shareView.delegate = self;
         _shareView.layer.anchorPoint = CGPointMake(0, 0);
-        NSLog(@"%@",_shareView.description);
     }
     return _shareView;
 }

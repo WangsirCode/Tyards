@@ -8,7 +8,7 @@
 
 #import "SEMMeViewModel.h"
 #import "MDABizManager.h"
-NSString* const userInfo = @"userInfo";
+NSString* const userInfo = @"UserInfo";
 @implementation SEMMeViewModel
 #pragma mark- initialization
 - (instancetype) initWithDictionary:(NSDictionary *)dictionary

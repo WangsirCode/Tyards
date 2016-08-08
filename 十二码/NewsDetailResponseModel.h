@@ -117,5 +117,33 @@
 
 @end
 
+@interface NewsDetailModel1 : NSObject
 
+@property (nonatomic, assign) NSInteger id;
+
+@property (nonatomic, copy) NSString *detail;
+
+@property (nonatomic, strong) NSArray<Comments *> *comments;
+
+@property (nonatomic, assign) long long dateCreated;
+
+@property (nonatomic, assign) NSInteger viewed;
+
+@property (nonatomic, strong) NSArray<NSString *> *tags;
+
+@property (nonatomic, strong) NSArray *medias;
+
+@property (nonatomic, copy) NSString *type;
+
+@property (nonatomic, copy) NSString *title;
+
+@property (nonatomic, strong) Creator *creator;
+
+@property (nonatomic, copy) NSString *text;
+
+@property (nonatomic, strong) NSArray *loves;
+
+@property (nonatomic, strong) NSArray *viewers;
+- (NSString*)getInfo;
+@end
 

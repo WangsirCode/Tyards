@@ -26,6 +26,7 @@
 #import "UserModel.h"
 #import "UIViewController+MMDrawerController.h"
 #import "MDABizManager.h"
+#import "SEMNewsDetailController.h"
 @interface SEMHomeVIewController ()<UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,SEMSearchViewControllerDelegate>
 @property (nonatomic,strong) SEMHomeVIewModel * viewModel;
 @property (nonatomic,strong) HomeHeadView     * headView;
@@ -235,7 +236,22 @@
     return 100*scale;
     
 }
-
+#pragma mark -Scollviewdelegate
+- (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index
+{
+    NSInteger ide = self.viewModel.topics[index].id;
+    SEMNewsDetailController* controller = [[SEMNewsDetailController alloc] initWithDictionary:@{@"ides":@(ide)}];
+    controller.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:controller animated:YES];
+}
+#pragma mark- tableviewDelegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSInteger ide = self.viewModel.datasource[indexPath.row].id;
+    SEMNewsDetailController* controller = [[SEMNewsDetailController alloc] initWithDictionary:@{@"ides":@(ide)}];
+    controller.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:controller animated:YES];
+}
 #pragma mark -Getter
 - (HomeHeadView*)headView
 {
