@@ -14,7 +14,6 @@
 #import "SEMTeamHomeViewController.h"
 @interface SEMTeamViewController ()<UISearchBarDelegate,UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)SEMTeamViewModel* viewModel;
-@property (nonatomic,strong)UIBarButtonItem* backBarButtonItem;
 @property (nonatomic,strong)UISearchBar* searchBar;
 @property (nonatomic,strong)UITableView* tableView;
 @end
@@ -46,7 +45,7 @@
 
 - (void)addSubviews
 {
-    self.navigationItem.leftBarButtonItem = self.backBarButtonItem;
+    self.navigationItem.leftBarButtonItem = nil;
     self.navigationItem.titleView = self.searchBar;
     [self.view addSubview:self.tableView];
 }
@@ -339,19 +338,6 @@
     [self.navigationController pushViewController:controller animated:YES];
 }
 #pragma mark- Getter
-- (UIBarButtonItem*)backBarButtonItem
-{
-    UIImage* image = [UIImage imageNamed:@"返回icon"];
-    
-    UIButton* button= [UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame = CGRectMake(0, 0, 20, 20);
-    [button setImage: image forState: UIControlStateNormal];
-    [[button rac_signalForControlEvents: UIControlEventTouchUpInside] subscribeNext:^(id x) {
-        [self.navigationController popViewControllerAnimated:YES];
-    }];
-    UIBarButtonItem* someBarButtonItem= [[UIBarButtonItem alloc] initWithCustomView: button];
-    return someBarButtonItem;
-}
 - (UISearchBar*)searchBar
 {
     if (!_searchBar) {

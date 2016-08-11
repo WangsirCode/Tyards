@@ -7,7 +7,7 @@
 //
 
 #import "SEMViewModel.h"
-
+#import "MDABizManager.h"
 @interface TeamPhotoViewModel : SEMViewModel
-
+@property (nonatomic, strong) NSArray<TeamAlbumModel *> *model;
 @end

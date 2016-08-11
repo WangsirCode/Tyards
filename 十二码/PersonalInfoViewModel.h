@@ -16,6 +16,5 @@
 @property (nonatomic,strong)NSArray* genderArrat;
 @property (nonatomic,strong)NSDictionary* gender;
 @property (nonatomic,strong) RACCommand* postCommand;
-@property (nonatomic,assign)BOOL shouldReloadData;
 - (void)getDetail;
 @end

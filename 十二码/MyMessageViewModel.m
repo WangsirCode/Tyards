@@ -14,7 +14,7 @@
     self = [super initWithDictionary:dictionary];
     if (self)
     {
-        NSString* token = (NSString*)[DataArchive unarchiveUserDataWithFileName:@"token"];
+        //NSString* token = [self getToken];
         
         //暂时用这个测试
         [self fetchData:@"d16c7f4be4a02398c4af50bdc8c1db06"];

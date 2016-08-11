@@ -86,7 +86,6 @@
 }
 - (RACCommand *)postCommand
 {
-    NSUserDefaults *data = [NSUserDefaults standardUserDefaults];
 //    NSString* token = [data objectForKey:@"token"];
     NSString* token = @"d16c7f4be4a02398c4af50bdc8c1db06";
     if (!_postCommand) {

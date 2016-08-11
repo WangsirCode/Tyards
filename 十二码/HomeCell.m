@@ -53,23 +53,24 @@
         make.width.equalTo(self.contentView.mas_width).dividedBy(3.7);
     }];
     
-    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.contentView.mas_top).offset(10 * scale);
-        make.left.equalTo(self.newsImage.mas_right).offset(4*scale);
-        make.right.equalTo(self.contentView.mas_right).offset(-10*scale);
-        make.height.equalTo(@(60 * scale));
-    }];
-    
+//    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.contentView.mas_top).offset(10 * scale);
+//        make.left.equalTo(self.newsImage.mas_right).offset(4*scale);
+//        make.right.equalTo(self.contentView.mas_right).offset(-10*scale);
+//        make.height.equalTo(@(60 * scale));
+//    }];
+    self.titleLabel.sd_layout
+    .topSpaceToView(self.contentView,10*self.scale)
+    .leftSpaceToView(self.newsImage,4*self.scale)
+    .rightSpaceToView(self.contentView,10*self.scale)
+    .autoHeightRatio(0)
+    .maxHeightIs(60*self.scale);
     [self.bottomview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.titleLabel.mas_left);
         make.right.equalTo(self.contentView.mas_right);
         make.bottom.equalTo(self.contentView.mas_bottom).offset(-6*scale);
-        make.top.equalTo(self.titleLabel.mas_bottom).offset(5*scale);
+        make.height.equalTo(@(20*self.scale));
     }];
-//    NSLog(@"%f",self.frame.size.width);
-//    NSLog(@"%f",self.frame.size.height);
-    NSLog(@"%f",self.bottomview.frame.size.width);
-    NSLog(@"%f",self.bottomview.frame.size.height);
     
 }
 

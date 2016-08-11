@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "ReCommendNews.h"
-@class NewsDetailModel,Creator,Comments,Comment,Creator;
-@class Remind,Creator,Targetcomment,Reply;
+@class NewsDetailModel,Creator,Comments,Comment,Creator,Tag;
+@class Remind,Creator,Targetcomment,Reply,BackNews;
 @interface NewsDetailResponseModel : NSObject
 
 @property (nonatomic, strong) NewsDetailModel *resp;
@@ -29,7 +29,7 @@
 
 @property (nonatomic, assign) NSInteger viewed;
 
-@property (nonatomic, strong) NSArray<NSString *> *tags;
+@property (nonatomic, strong) NSArray<Tag *> *tags;
 
 @property (nonatomic, strong) NSArray *medias;
 
@@ -91,6 +91,10 @@
 @property (nonatomic, assign) BOOL read;
 
 @property (nonatomic, strong) Creator *creator;
+
+@property (nonatomic,strong) BackNews* news;
+
+@property (nonatomic,strong) BackNews* hotTopic;
 -(NSString*)getdate;
 @end
 
@@ -129,7 +133,7 @@
 
 @property (nonatomic, assign) NSInteger viewed;
 
-@property (nonatomic, strong) NSArray<NSString *> *tags;
+@property (nonatomic, strong) NSArray<Tag *> *tags;
 
 @property (nonatomic, strong) NSArray *medias;
 
@@ -146,4 +150,15 @@
 @property (nonatomic, strong) NSArray *viewers;
 - (NSString*)getInfo;
 @end
+@interface Tag : NSObject
 
+@property (nonatomic,assign) NSInteger id;
+@property (nonatomic,strong) NSString* text;
+@property (nonatomic,strong) NSString* type;
+@property (nonatomic,assign) NSInteger rid;
+@end
+@interface BackNews : NSObject
+
+@property (nonatomic,assign) NSInteger id;
+@property (nonatomic,assign) long long dateCreated;
+@end

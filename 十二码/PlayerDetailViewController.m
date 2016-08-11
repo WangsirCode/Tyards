@@ -1,0 +1,488 @@
+//
+//  PlayerDetailViewController.m
+//  十二码
+//
+//  Created by 汪宇豪 on 16/8/10.
+//  Copyright © 2016年 汪宇豪. All rights reserved.
+//
+
+#import "PlayerDetailViewController.h"
+#import "MDABizManager.h"
+#import "PlayerDetailViewModel.h"
+#import "SEMTeamViewController.h"
+#import "SEMTeamViewModel.h"
+#import "NoticeCellView.h"
+#import "GameListView.h"
+#import "TeamLisstResponseModel.h"
+#import "SEMTeamHomeViewController.h"
+#import "SEMTeamHomeViewController.h"
+#import "SEMTeamHomeModel.h"
+#import "MDABizManager.h"
+#import "LazyPageScrollView.h"
+#import "MessageTableviewCell.h"
+#import "TeamNewsCell.h"
+#import "TeamHomeModelResponse.h"
+#import "ShareView.h"
+#import "CommentCell.h"
+#import "NoticeGameviewCell.h"
+#import "CostomView.h"
+#import "SEMTeamPhotoController.h"
+#import "TeamDetailInfoView.h"
+#import "PlayerInfoView.h"
+@interface PlayerDetailViewController ()<UITableViewDelegate,UITableViewDataSource,LazyPageScrollViewDelegate,UIScrollViewDelegate,ShareViewDelegate>
+@property (nonatomic,strong) PlayerDetailViewModel *viewModel;
+@property (nonatomic,strong) UIImageView        * logoImageView;
+@property (nonatomic,strong) LazyPageScrollView * pageView;
+@property (nonatomic,strong) UITableView        * messageTableview;
+@property (nonatomic,strong) UITableView        * newsTableview;
+@property (nonatomic,strong) UITableView        * listTableview;
+@property (nonatomic,strong) UITableView        * scheduleTableview;
+@property (nonatomic,strong) PlayerInfoView * infoView;;
+@property (nonatomic,strong) MBProgressHUD      * hud;
+@property (nonatomic,strong) UIBarButtonItem    * shareItem;
+@property (nonatomic,strong) UIBarButtonItem    * favoriteItem;
+@property (nonatomic,strong) UIBarButtonItem    * blankItem;
+@property (nonatomic,strong) ShareView          * shareView;
+@property (nonatomic,strong) UIView             * maskView;
+@property (nonatomic,strong) UIScrollView       * scrollView;
+@property (nonatomic,strong) UIBarButtonItem      *backItem;
+@end
+
+@implementation PlayerDetailViewController
+#pragma mark- lifeCycle
+-(instancetype)initWithDictionary:(NSDictionary *)dictionary
+{
+    self = [super init];
+    if (self) {
+        self.viewModel = [[PlayerDetailViewModel alloc] initWithDictionary:dictionary];
+    }
+    return self;
+}
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
+    self.navigationController.navigationBar.translucent = YES;
+}
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self setupView];
+    [self bindModel];
+    
+    // Do any additional setup after loading the view.
+}
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    self.navigationController.navigationBar.translucent = NO;
+    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setShadowImage:nil];
+}
+#pragma mark- setview
+- (void)setupView
+{
+    self.view.backgroundColor = [UIColor whiteColor];
+    
+    [self addSubviews];
+    [self makeConstraits];
+}
+- (void)addSubviews
+{
+    [self.view addSubview:self.logoImageView];
+    [self.view addSubview:self.pageView];
+    self.navigationItem.leftBarButtonItem = self.backItem;
+    self.navigationItem.rightBarButtonItems = @[self.shareItem,self.blankItem,self.favoriteItem];
+    [self.view addSubview:self.maskView];
+    [self.view addSubview:self.shareView];
+    [self.scrollView addSubview:self.infoView];
+    self.hud.labelText = @"加载中";
+}
+
+- (void)makeConstraits
+{
+    [self.logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view.mas_top);
+        make.left.and.right.equalTo(self.view);
+        make.height.equalTo(@(227 *self.view.scale));
+    }];
+    [self.pageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.logoImageView.mas_bottom);
+        make.bottom.equalTo(self.view.mas_bottom);
+        make.left.equalTo(self.view.mas_left);
+        make.right.equalTo(self.view.mas_right);
+    }];
+    self.infoView.sd_layout
+    .widthIs(self.view.width)
+    .topEqualToView(self.scrollView)
+    .leftEqualToView(self.scrollView);
+    [self.scrollView setupAutoContentSizeWithBottomView:self.infoView bottomMargin:20];
+}
+- (void)bindModel
+{
+    //当加载完毕之后隐藏hud
+    [RACObserve(self.viewModel, shouldReloadData) subscribeNext:^(id x) {
+        if (self.viewModel.shouldReloadData == YES) {
+            [self.hud hide:YES];
+            self.navigationItem.title = self.viewModel.model.player.name;
+            NSString* urlstring = self.viewModel.model.player.cover.url;
+            if (urlstring) {
+                NSURL* url = [[NSURL alloc] initWithString:urlstring];
+                [self.logoImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"zhanwei.jpg"]];
+            }
+            else
+            {
+                self.logoImageView.image = [UIImage placeholderImage];
+            }
+            [self.messageTableview reloadData];
+            self.infoView.model = self.viewModel.model.player;
+        }
+    }];
+    [[self.viewModel.shareCommand executionSignals] subscribeNext:^(id x) {
+        NSLog(@"收到了分享信号");
+        CALayer* imageLayer = self.shareView.layer;
+        self.maskView.hidden = NO;
+        CGPoint fromPoint = imageLayer.position;
+        CGPoint toPoint = CGPointMake(0, self.view.height - 200*self.view.scale);
+        // 创建不断改变CALayer的position属性的属性动画
+        CABasicAnimation* anim = [CABasicAnimation
+                                  animationWithKeyPath:@"position"];
+        // 设置动画开始的属性值
+        anim.fromValue = [NSValue valueWithCGPoint:fromPoint];
+        // 设置动画结束的属性值
+        anim.toValue = [NSValue valueWithCGPoint:toPoint];
+        anim.duration = 0.3;
+        imageLayer.position = toPoint;
+        anim.removedOnCompletion = YES;
+        // 为imageLayer添加动画
+        [imageLayer addAnimation:anim forKey:nil];
+    }];
+    [RACObserve(self.logoImageView, frame) subscribeNext:^(id x) {
+        if (self.pageView.frame.origin.y < -44) {
+            [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+            [self.navigationController.navigationBar setShadowImage:nil];
+        }
+    }];
+}
+- (void)hideMaskView
+{
+    _maskView.hidden = YES;
+    CALayer* imageLayer = self.shareView.layer;
+    CGPoint fromPoint = imageLayer.position;
+    CGPoint toPoint = CGPointMake(0, self.view.height);
+    // 创建不断改变CALayer的position属性的属性动画
+    CABasicAnimation* anim = [CABasicAnimation
+                              animationWithKeyPath:@"position"];
+    // 设置动画开始的属性值
+    anim.fromValue = [NSValue valueWithCGPoint:fromPoint];
+    // 设置动画结束的属性值
+    anim.toValue = [NSValue valueWithCGPoint:toPoint];
+    anim.duration = 0.3;
+    imageLayer.position = toPoint;
+    anim.removedOnCompletion = YES;
+    // 为imageLayer添加动画
+    [imageLayer addAnimation:anim forKey:nil];
+}
+#pragma mark- shareviewdelegate
+- (void)didSelectedShareView:(NSInteger)index
+{
+    //    NSLog(@"%ld",(long)index);
+    //    WXMediaMessage* mes = [WXMediaMessage message];
+    //    [mes setThumbImage:[UIImage imageNamed:@"zhanwei.jpg"]];
+    //    mes.title = self.viewModel.newdetail.title;
+    //    mes.description = @"我在十二码发送了一片文章";
+    //    WXWebpageObject* web = [WXWebpageObject object];
+    //    web.webpageUrl = @"www.baidu.com";
+    //    mes.mediaObject = web;
+    //    SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
+    //    req.bText = NO;
+    //    req.scene = WXSceneTimeline;
+    switch (index) {
+        case 0:
+            break;
+        case 1:
+            //            [WXApi sendReq:req];
+            break;
+        case 2:
+            
+            break;
+        case 3:
+            
+            break;
+        case 4:
+            [self hideMaskView];
+            break;
+        default:
+            break;
+    }
+}
+#pragma mark- tableiviewDelegate
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    if (tableView.tag == 100) {
+        return self.viewModel.model.newses.count;
+    }
+    else
+    {
+        return self.viewModel.model.articles.count;
+    }
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (tableView.tag == 100) {
+        CommentCell* cell = (CommentCell*)[tableView dequeueReusableCellWithIdentifier:@"CommentCell" forIndexPath:indexPath];
+        cell.model = self.viewModel.comments[indexPath.row];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
+    }
+    else if (tableView.tag == 101)
+    {
+        Articles* news = self.viewModel.model.articles[indexPath.row];
+        TeamNewsCell* cell = (TeamNewsCell*)[tableView dequeueReusableCellWithIdentifier:@"TeamNewsCell"];
+        cell.titleLabel.text = news.title;
+        
+        cell.bottomview.commentLabel.text = [@(news.commentCount) stringValue];;
+        cell.bottomview.inifoLabel.text = [news getInfo];
+        if (news.thumbnail.url)
+        {
+            NSURL* url = [[NSURL alloc] initWithString:news.thumbnail.url];
+            [cell.newsImage sd_setImageWithURL:url
+                              placeholderImage:[UIImage imageNamed:@"zhanwei.jpg"]
+                                       options:SDWebImageRefreshCached];
+        }
+        else
+        {
+            cell.newsImage.image = [UIImage imageNamed:@"zhanwei.jpg"];
+        }
+        return cell;
+    }
+
+    return nil;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (tableView.tag == 100) {
+        CGFloat height = [tableView cellHeightForIndexPath:indexPath model:self.viewModel.comments[indexPath.row] keyPath:@"model" cellClass:[CommentCell class]  contentViewWidth:[UIScreen mainScreen].bounds.size.width];
+        return height;
+    }
+    else if(tableView.tag == 101)
+    {
+        return 100 * self.view.scale;
+    }
+    return 0;
+}
+#pragma  mark- scrollviewdelegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    CGFloat offset = scrollView.contentOffset.y;
+    if (offset < 175) {
+        [self.logoImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.view.mas_top).offset(-offset);
+            make.left.and.right.equalTo(self.view);
+            make.height.equalTo(@(227 *self.view.scale));
+        }];
+        [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+        
+        [self.navigationController.navigationBar setShadowImage:[UIImage new]];
+    }
+    if(offset > 175)
+    {
+        [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+        [self.navigationController.navigationBar setShadowImage:nil];
+        [self.logoImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.equalTo(self.mas_topLayoutGuide);
+            make.left.and.right.equalTo(self.view);
+            make.height.equalTo(@(227 *self.view.scale));
+        }];
+    }
+}
+#pragma mark- getter
+- (LazyPageScrollView*)pageView
+{
+    if (!_pageView) {
+        _pageView = [[LazyPageScrollView alloc] init];
+        _pageView.frame =self.view.frame;
+        _pageView.delegate = self;
+        [_pageView initTab:YES Gap:self.view.width / 3 TabHeight:40 VerticalDistance:10 BkColor:[UIColor whiteColor]];
+        
+        [_pageView addTab:@"留言" View:self.messageTableview Info:nil];
+        [_pageView addTab:@"新闻" View:self.newsTableview Info:nil];
+        [_pageView addTab:@"资料" View:self.scrollView Info:nil];
+        [_pageView setTitleStyle:[UIFont systemFontOfSize:15] SelFont:[UIFont systemFontOfSize:20] Color:[UIColor blackColor] SelColor:[UIColor colorWithHexString:@"#1EA11F"]];
+        [_pageView enableBreakLine:YES Width:1 TopMargin:0 BottomMargin:0 Color:[UIColor groupTableViewBackgroundColor]];
+        [_pageView generate:^(UIButton *firstTitleControl, UIView *viewTitleEffect) {
+            CGRect frame= firstTitleControl.frame;
+            frame.size.height-=5;
+            frame.size.width-=6;
+            viewTitleEffect.frame=frame;
+            viewTitleEffect.center=firstTitleControl.center;
+        }];
+        UIView *topView=[_pageView getTopContentView];
+        UILabel *lb=[[UILabel alloc] init];
+        lb.translatesAutoresizingMaskIntoConstraints=NO;
+        lb.backgroundColor=[UIColor colorWithHexString:@"#"];
+        [topView addSubview:lb];
+        [topView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[lb]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(lb)]];
+        [topView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[lb(==1)]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(lb)]];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            //_pageView.selectedIndex=4;
+            
+        });
+    }
+    return _pageView;
+}
+- (UITableView*)messageTableview
+{
+    if (!_messageTableview) {
+        _messageTableview = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+        _messageTableview.delegate = self;
+        _messageTableview.dataSource = self;
+        _messageTableview.tag = 100;
+        _messageTableview.contentSize = CGSizeMake(self.view.width, 2 * self.view.height);
+        [_messageTableview registerClass:[CommentCell class] forCellReuseIdentifier:@"CommentCell"];
+    }
+    return _messageTableview;
+}
+- (UITableView*)newsTableview
+{
+    if (!_newsTableview) {
+        _newsTableview = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+        _newsTableview.delegate = self;
+        _newsTableview.dataSource = self;
+        _newsTableview.tag = 101;
+        [_newsTableview registerClass:[TeamNewsCell class] forCellReuseIdentifier:@"TeamNewsCell"];
+    }
+    return _newsTableview;
+}
+
+- (UIImageView *)logoImageView
+{
+    if (!_logoImageView) {
+        _logoImageView = [[UIImageView alloc] init];
+        _logoImageView.contentMode =  UIViewContentModeScaleAspectFill;
+        _logoImageView.clipsToBounds = YES;
+        
+    }
+    return _logoImageView;
+}
+-(MBProgressHUD *)hud
+{
+    if (!_hud) {
+        _hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    }
+    return _hud;
+}
+- (ShareView *)shareView
+{
+    if (!_shareView) {
+        _shareView = [[ShareView alloc] initWithFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height, self.view.width, 200*self.view.scale)];
+        _shareView.layer.anchorPoint = CGPointMake(0, 0);
+        _shareView.frame = CGRectMake(0, self.view.height, self.view.width, 200*self.view.scale);
+        _shareView.delegate = self;
+        _shareView.layer.anchorPoint = CGPointMake(0, 0);
+        NSLog(@"%@",_shareView.description);
+    }
+    return _shareView;
+}
+- (UIView *)maskView
+{
+    if (!_maskView) {
+        _maskView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height)];
+        _maskView.backgroundColor = [UIColor lightGrayColor];
+        _maskView.alpha = 0.5;
+        _maskView.hidden = YES;
+        
+        //添加点击之后的手势
+        UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideMaskView)];
+        [_maskView addGestureRecognizer:tap];
+    }
+    return _maskView;
+}
+-(UIBarButtonItem *)shareItem
+{
+    if (!_shareItem) {
+        UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
+        button.frame = CGRectMake(0, 0, 20, 25);
+        
+        [button setImage:[UIImage imageNamed:@"upload_L"] forState:UIControlStateNormal];
+        _shareItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+        button.rac_command = self.viewModel.shareCommand;
+    }
+    return _shareItem;
+}
+- (UIBarButtonItem *)favoriteItem
+{
+    if (!_favoriteItem) {
+        UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
+        button.frame = CGRectMake(20, 0, 25, 25);
+        [button setImage:[UIImage imageNamed:@"star_L"] forState:UIControlStateNormal];
+        _favoriteItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+        button.rac_command = self.viewModel.likeCommand;
+    }
+    return _favoriteItem;
+}
+- (UIBarButtonItem *)blankItem
+{
+    if (!_blankItem) {
+        _blankItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+        _blankItem.width = 20;
+    }
+    return _blankItem;
+}
+- (PlayerInfoView *)infoView
+{
+    if (!_infoView) {
+        _infoView = [[PlayerInfoView alloc] initWithFrame:CGRectZero];
+        _infoView.userInteractionEnabled = YES;
+    }
+    return _infoView;
+}
+- (UIScrollView *)scrollView
+{
+    if (!_scrollView) {
+        _scrollView = [[UIScrollView alloc] init];
+        _scrollView.delegate = self;
+        _scrollView.contentSize = CGSizeMake(self.view.width, 1000);
+        _scrollView.tag = 1000;
+    }
+    return _scrollView;
+}
+-(UIBarButtonItem *)backItem
+{
+    if (!_backItem) {
+        UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
+        [button setImage:[UIImage imageNamed:@"返回icon"] forState:UIControlStateNormal];
+        button.frame     = CGRectMake(0, 0, 20, 15);
+        _backItem        = [[UIBarButtonItem alloc] initWithCustomView:button];
+        [[button rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }];
+    }
+    return _backItem;
+}
+#pragma mark -LazyPageScrollViewDelegate
+-(void)LazyPageScrollViewPageChange:(LazyPageScrollView *)pageScrollView Index:(NSInteger)index PreIndex:(NSInteger)preIndex TitleEffectView:(UIView *)viewTitleEffect SelControl:(UIButton *)selBtn
+{
+    if (index == 1) {
+        [self.newsTableview reloadData];
+    }
+    else if (index == 2)
+    {
+        [self.listTableview reloadData];
+    }
+    else if (index == 0)
+    {
+        [self.messageTableview reloadData];
+    }
+    else if (index == 3)
+    {
+        [self.scheduleTableview reloadData];
+    }
+}
+
+@end
+
+

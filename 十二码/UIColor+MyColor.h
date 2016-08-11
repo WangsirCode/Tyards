@@ -10,4 +10,5 @@
 
 @interface UIColor (MyColor)
 + (UIColor*)MyColor;
++ (UIColor*)BackGroundColor;
 @end

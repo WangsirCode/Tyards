@@ -46,15 +46,25 @@
     } failure:^(NSError *aError) {
         
     }];
+    [manager fetchTeamDetailInfo:string success:^(id data) {
+        self.InfoModel = data;
+        self.loadingStatus += 1;
+    } failure:^(NSError *aError) {
+        
+    }];
 }
 -(RACCommand *)likeCommand
 {
     if (!_likeCommand) {
         _likeCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
             return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
-                NSLog(@"点击了收藏按钮");
-                [subscriber sendNext:@1];
-                [subscriber sendCompleted];
+                SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
+                [manager postdisLikeTeam:[@(self.model.info.id) stringValue] token:[self getToken] success:^(id data) {
+                    [subscriber sendNext:@1];
+                    [subscriber sendCompleted];
+                } failure:^(NSError *aError) {
+                    
+                }];
                 return nil;
             }];
         }];

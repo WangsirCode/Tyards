@@ -12,7 +12,7 @@
 
 
 
-@class GameDetailModel,Games,Group,Home,Logo,Stadium,Round,Away,Tournament,Logo;
+@class GameDetailModel,Games,Group,Home,Logo,Stadium,Round,Away,Tournament,Logo,LatestNews;
 @interface GameDetailResponseModel : NSObject<NSCoding>
 @property (nonatomic, strong) NSArray<GameDetailModel *> *resp;
 
@@ -55,7 +55,7 @@
 
 @property (nonatomic, strong) Stadium *stadium;
 
-@property (nonatomic, copy) NSString *latestNews;
+@property (nonatomic, strong) LatestNews *latestNews;
 
 @property (nonatomic, assign) NSInteger penaltyAway;
 
@@ -118,6 +118,5 @@
 @property (nonatomic, copy) NSString *logo;
 
 @end
-
 
 

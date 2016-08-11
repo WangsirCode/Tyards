@@ -13,4 +13,8 @@
 {
     return [UIColor colorWithHexString:@"#1EA11F"];
 }
++ (UIColor *)BackGroundColor
+{
+    return [UIColor colorWithHexString:@"F2F2F2"];
+}
 @end

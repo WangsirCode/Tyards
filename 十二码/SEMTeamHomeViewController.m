@@ -18,22 +18,26 @@
 #import "NoticeGameviewCell.h"
 #import "CostomView.h"
 #import "SEMTeamPhotoController.h"
+#import "TeamDetailInfoView.h"
+#import "PlayerDetailViewController.h"
+#import "SEMNewsDetailController.h"
 @interface SEMTeamHomeViewController ()<UITableViewDelegate,UITableViewDataSource,LazyPageScrollViewDelegate,UIScrollViewDelegate,ShareViewDelegate>
-@property (nonatomic,strong)SEMTeamHomeModel* viewModel;
-@property (nonatomic,strong)UIImageView* logoImageView;
-@property (nonatomic,strong) LazyPageScrollView* pageView;
-@property (nonatomic,strong)UITableView* messageTableview;
-@property (nonatomic,strong)UITableView* newsTableview;
-@property (nonatomic,strong)UITableView* listTableview;
-@property (nonatomic,strong)UITableView* scheduleTableview;
-@property (nonatomic,strong)UITableView* infoTableview;
-@property (nonatomic,strong)MBProgressHUD *hud;
-@property (nonatomic,strong)UIBarButtonItem* shareItem;
-@property (nonatomic,strong)UIBarButtonItem* favoriteItem;
-@property (nonatomic,strong)UIBarButtonItem* blankItem;
-@property (nonatomic,strong)ShareView* shareView;
-@property (nonatomic,strong)UIView* maskView;
-@property (nonatomic,strong)CostomView* photoview;
+@property (nonatomic,strong) SEMTeamHomeModel   * viewModel;
+@property (nonatomic,strong) UIImageView        * logoImageView;
+@property (nonatomic,strong) LazyPageScrollView * pageView;
+@property (nonatomic,strong) UITableView        * messageTableview;
+@property (nonatomic,strong) UITableView        * newsTableview;
+@property (nonatomic,strong) UITableView        * listTableview;
+@property (nonatomic,strong) UITableView        * scheduleTableview;
+@property (nonatomic,strong) TeamDetailInfoView * infoView;;
+@property (nonatomic,strong) MBProgressHUD      * hud;
+@property (nonatomic,strong) UIBarButtonItem    * shareItem;
+@property (nonatomic,strong) UIBarButtonItem    * favoriteItem;
+@property (nonatomic,strong) UIBarButtonItem    * blankItem;
+@property (nonatomic,strong) ShareView          * shareView;
+@property (nonatomic,strong) UIView             * maskView;
+@property (nonatomic,strong) CostomView         * photoview;
+@property (nonatomic,strong) UIScrollView       * scrollView;
 @end
 
 @implementation SEMTeamHomeViewController
@@ -72,6 +76,7 @@
     self.navigationItem.rightBarButtonItems = @[self.shareItem,self.blankItem,self.favoriteItem];
     [self.view addSubview:self.maskView];
     [self.view addSubview:self.shareView];
+    [self.scrollView addSubview:self.infoView];
     self.hud.labelText = @"加载中";
 }
 
@@ -88,12 +93,22 @@
         make.left.equalTo(self.view.mas_left);
         make.right.equalTo(self.view.mas_right);
     }];
+//    [self.infoView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.width.equalTo(self.view.mas_width);
+//        make.top.equalTo(self.scrollView.mas_top);
+//        make.left.equalTo(self.scrollView.mas_left);
+//    }];
+    self.infoView.sd_layout
+    .widthIs(self.view.width)
+    .topEqualToView(self.scrollView)
+    .leftEqualToView(self.scrollView);
+    [self.scrollView setupAutoContentSizeWithBottomView:self.infoView bottomMargin:20];
 }
 - (void)bindModel
 {
     //当加载完毕之后隐藏hud
     [RACObserve(self.viewModel, loadingStatus) subscribeNext:^(id x) {
-        if (self.viewModel.loadingStatus == 4) {
+        if (self.viewModel.loadingStatus == 5) {
             [self.hud hide:YES];
             self.navigationItem.title = self.viewModel.model.info.name;
             NSString* urlstring = self.viewModel.model.info.cover.url;
@@ -121,6 +136,7 @@
                 [self.navigationController pushViewController:controller animated:YES];
             }];
             [self.photoview.label addGestureRecognizer:tap];
+            self.infoView.model = self.viewModel.InfoModel;
         }
     }];
     [[self.viewModel.shareCommand executionSignals] subscribeNext:^(id x) {
@@ -313,7 +329,7 @@
         NSString* cap = self.viewModel.model.info.captain;
         if (indexPath.section == 0 && self.viewModel.model.info.coach)
         {
-            NSMutableAttributedString* attr = [[NSMutableAttributedString alloc] initWithString:self.viewModel.model.info.coach];
+            NSMutableAttributedString* attr = [[NSMutableAttributedString alloc] initWithString:self.viewModel.model.info.coach.name];
             NSRange range = NSMakeRange(0, self.viewModel.model.info.coach.name.length);
             [attr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#1EA11F"] range:range];
             cell.textLabel.attributedText = attr;
@@ -448,6 +464,31 @@
     }
     return nil;
 }
+#pragma mark -tableViewDelegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (tableView.tag == 102)
+    {
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        if (indexPath.section == 0 && self.viewModel.model.info.coach)
+        {
+            PlayerDetailViewController *controller= [[PlayerDetailViewController alloc] initWithDictionary:@{@"id":@(self.viewModel.model.info.coach.id)}];
+            [self.navigationController pushViewController:controller animated:YES];
+        }
+        else
+        {
+            PlayerDetailViewController *controller= [[PlayerDetailViewController alloc] initWithDictionary:@{@"id":@(self.viewModel.players[indexPath.row].player.id)}];
+            [self.navigationController pushViewController:controller animated:YES];
+        }
+    }
+    else if (tableView.tag == 101)
+    {
+        NSInteger ide = self.viewModel.model.articles[indexPath.row].id;
+        SEMNewsDetailController* controller = [[SEMNewsDetailController alloc] initWithDictionary:@{@"ides":@(ide)}];
+        controller.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:controller animated:YES];
+    }
+}
 #pragma  mark- scrollviewdelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
@@ -486,7 +527,7 @@
         [_pageView addTab:@"新闻" View:self.newsTableview Info:nil];
         [_pageView addTab:@"名单" View:self.listTableview Info:nil];
         [_pageView addTab:@"赛程" View:self.scheduleTableview Info:nil];
-        [_pageView addTab:@"资料" View:self.infoTableview Info:nil];
+        [_pageView addTab:@"资料" View:self.scrollView Info:nil];
         [_pageView setTitleStyle:[UIFont systemFontOfSize:15] SelFont:[UIFont systemFontOfSize:20] Color:[UIColor blackColor] SelColor:[UIColor colorWithHexString:@"#1EA11F"]];
         [_pageView enableBreakLine:YES Width:1 TopMargin:0 BottomMargin:0 Color:[UIColor groupTableViewBackgroundColor]];
         [_pageView generate:^(UIButton *firstTitleControl, UIView *viewTitleEffect) {
@@ -540,8 +581,6 @@
         _listTableview.delegate = self;
         _listTableview.dataSource = self;
         _listTableview.tag = 102;
-        
-        //        [_newsTableview registerClass:[MessageTableviewCell class] forCellReuseIdentifier:@"_messageTableviewCell"];
     }
     return _listTableview;
 }
@@ -556,17 +595,7 @@
     }
     return _scheduleTableview;
 }
-- (UITableView*)infoTableview
-{
-    if (!_infoTableview) {
-        _infoTableview = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-        _infoTableview.delegate = self;
-        _infoTableview.dataSource = self;
-        _infoTableview.tag = 104;
-        //        [_newsTableview registerClass:[MessageTableviewCell class] forCellReuseIdentifier:@"_messageTableviewCell"];
-    }
-    return _infoTableview;
-}
+
 - (UIImageView *)logoImageView
 {
     if (!_logoImageView) {
@@ -640,6 +669,24 @@
         _blankItem.width = 20;
     }
     return _blankItem;
+}
+- (TeamDetailInfoView *)infoView
+{
+    if (!_infoView) {
+        _infoView = [[TeamDetailInfoView alloc] initWithFrame:CGRectZero];
+        _infoView.userInteractionEnabled = YES;
+    }
+    return _infoView;
+}
+- (UIScrollView *)scrollView
+{
+    if (!_scrollView) {
+        _scrollView = [[UIScrollView alloc] init];
+        _scrollView.delegate = self;
+        _scrollView.contentSize = CGSizeMake(self.view.width, 1000);
+        _scrollView.tag = 1000;
+    }
+    return _scrollView;
 }
 #pragma mark -LazyPageScrollViewDelegate
 -(void)LazyPageScrollViewPageChange:(LazyPageScrollView *)pageScrollView Index:(NSInteger)index PreIndex:(NSInteger)preIndex TitleEffectView:(UIView *)viewTitleEffect SelControl:(UIButton *)selBtn

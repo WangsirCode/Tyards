@@ -14,7 +14,7 @@
 @implementation NewsDetailModel
 
 + (NSDictionary *)objectClassInArray{
-    return @{@"comments" : [Comments class]};
+    return @{@"comments" : [Comments class],@"tags" : [Tag class]};
 }
 - (NSString*)getDate
 {
@@ -97,6 +97,13 @@
 }
 
 @end
+@implementation Tag
 
 
 
+@end
+
+@implementation BackNews
+
+
+@end

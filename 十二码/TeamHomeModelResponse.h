@@ -10,7 +10,7 @@
 #import "ReCommendNews.h"
 #import "SearchModel.h"
 #import "MDABizManager.h"
-@class TeamHomeModel,Info,Cover,Articles,Thumbnail,Newses,Comments1,Coach;
+@class TeamHomeModel,Info,Cover,Articles,Thumbnail,Newses,Comments1,Coach,Record,Comments;
 
 @interface TeamHomeModelResponse : NSObject
 
@@ -30,25 +30,7 @@
 
 @end
 
-@interface Info : NSObject
 
-@property (nonatomic, assign) BOOL active;
-
-@property (nonatomic, copy) NSString *captain;
-
-@property (nonatomic, strong) Logo *logo;
-
-@property (nonatomic, assign) NSInteger id;
-
-@property (nonatomic, strong) Cover *cover;
-
-@property (nonatomic, strong) Coach *coach;
-
-@property (nonatomic, copy) NSString *name;
-
-@property (nonatomic, copy) NSString *desc;
-
-@end
 
 @interface Cover : NSObject
 
@@ -90,7 +72,7 @@
 
 @property (nonatomic, copy) NSString *detail;
 
-@property (nonatomic, strong) NSArray<Comments1 *> *comments;
+@property (nonatomic, strong) NSArray<Comments *> *comments;
 
 @property (nonatomic, assign) long long dateCreated;
 
@@ -116,19 +98,21 @@
 
 
 
-@interface Comments1 : NSObject
+//@interface Comments1 : NSObject
+//
+//@property (nonatomic, assign) NSInteger id;
+//
+//@property (nonatomic, assign) long long dateCreated;
+//
+//@property (nonatomic, copy) NSString *content;
+//
+//@property (nonatomic, strong) Creator *creator;
+//
+//@property (nonatomic, copy) NSString *replyUser;
+//
+//@end
 
-@property (nonatomic, assign) NSInteger id;
 
-@property (nonatomic, assign) long long dateCreated;
-
-@property (nonatomic, copy) NSString *content;
-
-@property (nonatomic, strong) Creator *creator;
-
-@property (nonatomic, copy) NSString *replyUser;
-
-@end
 
 
 

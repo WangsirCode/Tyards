@@ -13,6 +13,7 @@
  *
  *  @brief 比赛预告的cell
  */
+@class NoticeCellView;
 @interface NoticeGameviewCell : UITableViewCell
 @property (nonatomic,strong) NoticeCellView* view;
 @end

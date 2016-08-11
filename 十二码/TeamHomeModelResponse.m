@@ -20,10 +20,6 @@
 @end
 
 
-@implementation Info
-
-@end
-
 
 @implementation Cover
 
@@ -56,18 +52,16 @@
 @implementation Newses
 
 + (NSDictionary *)objectClassInArray{
-    return @{@"comments" : [Comments1 class]};
+    return @{@"comments" : [Comments class]};
 }
 
 @end
 
 
-
-@implementation Comments1
-
-@end
-
-
+//
+//@implementation Comments1
+//
+//@end
 
 
 

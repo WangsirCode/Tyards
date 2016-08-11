@@ -356,12 +356,12 @@
         NSMutableArray *temp = [NSMutableArray new];
         NSInteger count = self.viewModel.newdetail.tags.count;
         if (count > 0) {
-            NSArray* strings = self.viewModel.newdetail.tags;
+            NSArray<Tag*>* strings = self.viewModel.newdetail.tags;
             for (int i = 0; i < count; i++) {
                 UILabel* label = [UILabel new];
                 label.layer.borderWidth = 1;
                 label.textColor = [UIColor colorWithHexString:@"#1EA11f"];
-                label.text = strings[i];
+                label.text = strings[i].text;
                 label.font = [UIFont systemFontOfSize:16];
                 label.layer.borderColor = [UIColor colorWithHexString:@"#C8C8C8"].CGColor;
                 label.textAlignment = NSTextAlignmentCenter;

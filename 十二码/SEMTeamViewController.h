@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "PhotoCollectionCell.h"
 @interface SEMTeamViewController : UIViewController
 
 @end

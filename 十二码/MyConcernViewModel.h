@@ -10,5 +10,4 @@
 #import "MDABizManager.h"
 @interface MyConcernViewModel : SEMViewModel
 @property (nonatomic, strong) NSArray<ConcernModel *> *model;
-@property (nonatomic,assign ) BOOL           shouldReloadData;
 @end

@@ -42,7 +42,8 @@
     }];
     [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.titleLabel.mas_bottom).offset(10 * self.scale);
-        make.left.and.right.equalTo(self.titleLabel);
+        make.left.equalTo(self.contentView.mas_left).offset(10*self.scale);
+        make.right.equalTo(self.contentView.mas_right).offset(10*self.scale);
         make.height.equalTo(@(18 * self.scale));
     }];
 }

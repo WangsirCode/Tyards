@@ -279,6 +279,28 @@
 {
     return 16*self.view.scale;
 }
+#pragma mark -tableviewDeleagate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (tableView.tag == 101) {
+        GameInfoDetailViewController* controller = [[GameInfoDetailViewController alloc] initWithDictionay:@{@"id":@(self.viewModel.gameListDatasource[indexPath.row].id)}];
+        controller.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:controller animated:YES];
+    }
+    else if (tableView.tag == 100)
+    {
+        RaceInfoDetailController* controller = [[RaceInfoDetailController alloc] initWithDictionay:@{@"id":@(self.viewModel.noticeGameDatasource[indexPath.section].games[indexPath.row].id)}];
+        controller.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:controller animated:YES];
+    }
+    else
+    {
+        RaceInfoDetailController* controller = [[RaceInfoDetailController alloc] initWithDictionay:@{@"id":@(self.viewModel.historyGameDatasource[indexPath.section].games[indexPath.row].id)}];
+        controller.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:controller animated:YES];
+    }
+}
 #pragma mark- Getter
 - (UITableView*)noticegameTableview
 {

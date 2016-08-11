@@ -11,7 +11,7 @@
 @interface SEMViewModel : RVMViewModel
 
 @property (nonatomic, strong, readonly) NSDictionary* userInfo;
-
+@property (nonatomic,assign)BOOL shouldReloadData;
 - (instancetype)initWithDictionary:(NSDictionary*)dictionary;
 
 - (void)setup;

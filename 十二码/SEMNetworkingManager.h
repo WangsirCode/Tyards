@@ -294,6 +294,22 @@
 
 
 /*!
+ *  @author 汪宇豪, 16-08-09 20:08:46
+ *
+ *  @brief 获取球队信息
+ *
+ *  @param ide          ide
+ *  @param successBlock <#successBlock description#>
+ *  @param failureBlock <#failureBlock description#>
+ *
+ *  @return <#return value description#>
+ */
+- (NSURLSessionTask*)fetchTeamDetailInfo:(NSString*)ide
+                            success:(void (^)(id data))successBlock
+                            failure:(void (^)(NSError *aError))failureBlock;
+
+
+/*!
  *  @author 汪宇豪, 16-08-06 20:08:40
  *
  *  @brief 获取个人信息
@@ -394,5 +410,281 @@
 - (NSURLSessionTask*)postFeebback:(NSString*)feedback
                             success:(void (^)(id data))successBlock
                             failure:(void (^)(NSError *aError))failureBlock;
+
+
+/*!
+ *  @author 汪宇豪, 16-08-09 09:08:37
+ *
+ *  @brief 获取球队相册
+ *
+ *  @param teamId       球队id
+ *  @param successBlock 层共
+ *  @param failureBlock 失败
+ *
+ *  @return NSURLSessionTask
+ */
+- (NSURLSessionTask*)fetchTeamAlbums:(NSString*)teamId
+                          success:(void (^)(id data))successBlock
+                          failure:(void (^)(NSError *aError))failureBlock;
+
+/*!
+ *  @author 汪宇豪, 16-08-09 09:08:16
+ *
+ *  @brief 获取相册详情
+ *
+ *  @param teamId       相册id
+ *  @param successBlock 成功
+ *  @param failureBlock 失败
+ *
+ *  @return NSURLSessionTask
+ */
+- (NSURLSessionTask*)fetchAlbumDetail:(NSInteger)albumId
+                             success:(void (^)(id data))successBlock
+                             failure:(void (^)(NSError *aError))failureBlock;
+
+
+
+/*!
+ *  @author 汪宇豪, 16-08-10 09:08:56
+ *
+ *  @brief 获取球员信息
+ *
+ *  @param playerId     球员id
+ *  @param successBlock 成功
+ *  @param failureBlock 失败
+ *
+ *  @return NSURLSessionTask
+ */
+- (NSURLSessionTask*)fetchPlayerInfo:(NSString*)playerId
+                              success:(void (^)(id data))successBlock
+                              failure:(void (^)(NSError *aError))failureBlock;
+
+
+/*!
+ *  @author 汪宇豪, 16-08-10 16:08:40
+ *
+ *  @brief 关注球员
+ *
+ *  @param playerId     <#playerId description#>
+ *  @param token        <#token description#>
+ *  @param successBlock <#successBlock description#>
+ *  @param failureBlock <#failureBlock description#>
+ *
+ *  @return <#return value description#>
+ */
+- (NSURLSessionTask*)postLikePlayer:(NSString*)playerId
+                              token:(NSString*)token
+                             success:(void (^)(id data))successBlock
+                             failure:(void (^)(NSError *aError))failureBlock;
+
+/*!
+ *  @author 汪宇豪, 16-08-10 16:08:58
+ *
+ *  @brief 取消关注球员
+ *
+ *  @param playerId     <#playerId description#>
+ *  @param token        <#token description#>
+ *  @param successBlock <#successBlock description#>
+ *  @param failureBlock <#failureBlock description#>
+ *
+ *  @return <#return value description#>
+ */
+- (NSURLSessionTask*)postdisLikePlayer:(NSString*)playerId
+                              token:(NSString*)token
+                            success:(void (^)(id data))successBlock
+                            failure:(void (^)(NSError *aError))failureBlock;
+/*!
+ *  @author 汪宇豪, 16-08-10 16:08:09
+ *
+ *  @brief 关注球队
+ *
+ *  @param teamId       <#teamId description#>
+ *  @param token        <#token description#>
+ *  @param successBlock <#successBlock description#>
+ *  @param failureBlock <#failureBlock description#>
+ *
+ *  @return <#return value description#>
+ */
+- (NSURLSessionTask*)postLikeTeam:(NSString*)teamId
+                              token:(NSString*)token
+                            success:(void (^)(id data))successBlock
+                            failure:(void (^)(NSError *aError))failureBlock;
+
+/*!
+ *  @author 汪宇豪, 16-08-10 16:08:41
+ *
+ *  @brief 取消关注球队
+ *
+ *  @param teamId       <#teamId description#>
+ *  @param token        <#token description#>
+ *  @param successBlock <#successBlock description#>
+ *  @param failureBlock <#failureBlock description#>
+ *
+ *  @return <#return value description#>
+ */
+- (NSURLSessionTask*)postdisLikeTeam:(NSString*)teamId
+                            token:(NSString*)token
+                          success:(void (^)(id data))successBlock
+                          failure:(void (^)(NSError *aError))failureBlock;
+
+
+/*!
+ *  @author 汪宇豪, 16-08-10 16:08:58
+ *
+ *  @brief 关注赛事
+ *
+ *  @param tournamentId <#tournamentId description#>
+ *  @param token        <#token description#>
+ *  @param successBlock <#successBlock description#>
+ *  @param failureBlock <#failureBlock description#>
+ *
+ *  @return <#return value description#>
+ */
+- (NSURLSessionTask*)postLikeTournament:(NSString*)tournamentId
+                            token:(NSString*)token
+                          success:(void (^)(id data))successBlock
+                          failure:(void (^)(NSError *aError))failureBlock;
+/*!
+ *  @author 汪宇豪, 16-08-10 16:08:57
+ *
+ *  @brief 取消关注赛事
+ *
+ *  @param tournamentId <#tournamentId description#>
+ *  @param token        <#token description#>
+ *  @param successBlock <#successBlock description#>
+ *  @param failureBlock <#failureBlock description#>
+ *
+ *  @return <#return value description#>
+ */
+- (NSURLSessionTask*)postdisLikeTournament:(NSString*)tournamentId
+                                  token:(NSString*)token
+                                success:(void (^)(id data))successBlock
+                                failure:(void (^)(NSError *aError))failureBlock;
+
+/*!
+ *  @author 汪宇豪, 16-08-10 16:08:34
+ *
+ *  @brief 关注教练
+ *
+ *  @param tournamentId <#tournamentId description#>
+ *  @param token        <#token description#>
+ *  @param successBlock <#successBlock description#>
+ *  @param failureBlock <#failureBlock description#>
+ *
+ *  @return <#return value description#>
+ */
+- (NSURLSessionTask*)postLikeCoach:(NSString*)coachId
+                                  token:(NSString*)token
+                                success:(void (^)(id data))successBlock
+                                failure:(void (^)(NSError *aError))failureBlock;
+
+/*!
+ *  @author 汪宇豪, 16-08-10 16:08:52
+ *
+ *  @brief 取消关注教练
+ *
+ *  @param coachId      <#coachId description#>
+ *  @param token        <#token description#>
+ *  @param successBlock <#successBlock description#>
+ *  @param failureBlock <#failureBlock description#>
+ *
+ *  @return <#return value description#>
+ */
+- (NSURLSessionTask*)postdislikeCoach:(NSString*)fansId
+                             token:(NSString*)token
+                           success:(void (^)(id data))successBlock
+                           failure:(void (^)(NSError *aError))failureBlock;
+
+
+
+/*!
+ *  @author 汪宇豪, 16-08-10 17:08:12
+ *
+ *  @brief 获取赛事简介
+ *
+ *  @param tournamentId 赛事id
+ *  @param successBlock 成功
+ *  @param failureBlock 失败
+ *
+ *  @return NSURLSessionTask
+ */
+- (NSURLSessionTask*)fetchGameInfo:(NSString*)tournamentId
+                              success:(void (^)(id data))successBlock
+                              failure:(void (^)(NSError *aError))failureBlock;
+
+/*!
+ *  @author 汪宇豪, 16-08-11 09:08:26
+ *
+ *  @brief 获取赛程
+ *
+ *  @param tournamentId id
+ *  @param successBlock 成功
+ *  @param failureBlock 失败
+ *
+ *  @return NSURLSessionTask
+ */
+- (NSURLSessionTask*)fetchGameSchedule:(NSString*)tournamentId
+                           success:(void (^)(id data))successBlock
+                           failure:(void (^)(NSError *aError))failureBlock;
+
+/*!
+ *  @author 汪宇豪, 16-08-11 09:08:51
+ *
+ *  @brief 获取赛事的球队
+ *
+ *  @param tournamentId id
+ *  @param successBlock 成功
+ *  @param failureBlock 是吧
+ *
+ *  @return NSURLSessionTask
+ */
+- (NSURLSessionTask*)fetchGameTeams:(NSString*)tournamentId
+                               success:(void (^)(id data))successBlock
+                               failure:(void (^)(NSError *aError))failureBlock;
+
+/*!
+ *  @author 汪宇豪, 16-08-11 10:08:01
+ *
+ *  @brief 获取比赛的新闻
+ *
+ *  @param matchId      比赛id
+ *  @param successBlock 成功
+ *  @param failureBlock 失败
+ *
+ *  @return NSURLSessionTask
+ */
+- (NSURLSessionTask*)fetchGameNews:(NSString*)matchId
+                            success:(void (^)(id data))successBlock
+                            failure:(void (^)(NSError *aError))failureBlock;
+
+/*!
+ *  @author 汪宇豪, 16-08-11 10:08:10
+ *
+ *  @brief 获取比赛详情
+ *
+ *  @param matchId      id
+ *  @param successBlock 成功
+ *  @param failureBlock 失败
+ *
+ *  @return NSURLSessionTask
+ */
+- (NSURLSessionTask*)fetchGameDetail:(NSString*)matchId
+                           success:(void (^)(id data))successBlock
+                           failure:(void (^)(NSError *aError))failureBlock;
+
+/*!
+ *  @author 汪宇豪, 16-08-11 11:08:46
+ *
+ *  @brief 获取比赛留言
+ *
+ *  @param matchId      id
+ *  @param successBlock 成功
+ *  @param failureBlock 失败
+ *
+ *  @return NSURLSessionTask
+ */
+- (NSURLSessionTask*)fetchGameMessage:(NSString*)matchId
+                             success:(void (^)(id data))successBlock
+                             failure:(void (^)(NSError *aError))failureBlock;
 @end
 
