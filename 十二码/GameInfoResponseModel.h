@@ -20,7 +20,7 @@
 
 @property (nonatomic, assign) NSInteger id;
 
-@property (nonatomic, copy) NSString *description;
+@property (nonatomic, copy) NSString *desc;
 
 @property (nonatomic, assign) NSInteger teamSize;
 
@@ -30,7 +30,7 @@
 
 @property (nonatomic, copy) NSString *sponsor;
 
-@property (nonatomic, copy) NSString *college;
+@property (nonatomic, strong) NSString *college;
 
 @property (nonatomic, strong) Logo *logo;
 
@@ -49,7 +49,8 @@
 @property (nonatomic, assign) long long completeDate;
 
 @property (nonatomic, copy) NSString *name;
-
+- (NSString*)getDateInfo;
+- (NSString*)getMatchTypeInfo;
 @end
 
 

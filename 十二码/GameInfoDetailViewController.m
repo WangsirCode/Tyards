@@ -118,6 +118,7 @@
             }
             [self.gameTableView reloadData];
             [self.teamTableView reloadData];
+            [self.infoTableView reloadData];
         }
     }];
     [[self.viewModel.shareCommand executionSignals] subscribeNext:^(id x) {
@@ -190,7 +191,10 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     if (tableView.tag == 100) {
-        return 2;
+
+        if (self.viewModel.model) {
+            return 2;
+        }
     }
     else if (tableView.tag == 101)
     {
@@ -210,7 +214,9 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (tableView.tag == 100) {
-        return 0;
+        if (self.viewModel.model) {
+            return [self.viewModel.infoTableviewRowNumber[section] integerValue];
+        }
     }
     else if (tableView.tag == 101)
     {
@@ -230,7 +236,25 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (tableView.tag == 100) {
-        return nil;
+        if (self.viewModel.model) {
+            if (indexPath.section == 0) {
+                BasicInfoCell* cell = (BasicInfoCell*)[tableView dequeueReusableCellWithIdentifier:@"BasicInfoCell"];
+                cell.text = self.viewModel.model.desc;
+                return cell;
+            }
+            else
+            {
+                UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"infoCell"];
+                cell.textLabel.text = self.viewModel.infotableviewCellname[indexPath.row];
+                cell.textLabel.textColor = [UIColor colorWithHexString:@"A1B2BA"];
+                cell.detailTextLabel.text = self.viewModel.infoTableViewCellInfo[indexPath.row];
+                [cell.detailTextLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.left.equalTo(cell.contentView.mas_left).offset(98*self.view.scale);
+                    make.centerY.equalTo(cell.contentView.mas_centerY);
+                }];
+                return cell;
+            }
+        }
     }
     else if (tableView.tag == 101)
     {
@@ -298,6 +322,19 @@
     {
         return 48 *self.view.scale;
     }
+    else if (tableView.tag == 100)
+    {
+        if (self.viewModel.model) {
+            if (indexPath.section == 0) {
+                return [tableView cellHeightForIndexPath:indexPath model:self.viewModel.model.desc keyPath:@"text" cellClass:[BasicInfoCell class] contentViewWidth:self.view.width];
+            }
+            else
+            {
+                return 48*self.view.scale;
+            }
+        }
+       
+    }
     return 0;
 }
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
@@ -309,6 +346,10 @@
 {
     if (tableView.tag == 101) {
         return 30*self.view.scale;
+    }
+    else if (tableView.tag == 100)
+    {
+        return 44*self.view.scale;
     }
     return 0;
 }
@@ -329,6 +370,28 @@
         .rightEqualToView(view)
         .centerYEqualToView(view)
         .leftEqualToView(view)
+        .heightIs(30*self.view.scale);
+        return view;
+    }
+    else if (tableView.tag == 100)
+    {
+        UIView* view = [UIView new];
+        UILabel* label = [UILabel new];
+        if (section == 0) {
+            label.text = @"基本资料";
+        }
+        else
+        {
+            label.text = @"赛事章程";
+        }
+        label.textAlignment = NSTextAlignmentLeft;
+        [view addSubview:label];
+        label.font = [UIFont systemFontOfSize:14];
+        label.textColor = [UIColor MyColor];
+        label.sd_layout
+        .rightEqualToView(view)
+        .centerYEqualToView(view)
+        .leftSpaceToView(view,10)
         .heightIs(30*self.view.scale);
         return view;
     }
@@ -407,6 +470,8 @@
         _infoTableView.delegate = self;
         _infoTableView.dataSource = self;
         _infoTableView.tag = 100;
+        _infoTableView.separatorColor = [UIColor whiteColor];
+        [_infoTableView registerClass:[BasicInfoCell class] forCellReuseIdentifier:@"BasicInfoCell"];
     }
     return _infoTableView;
 }

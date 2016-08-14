@@ -459,7 +459,22 @@
                               success:(void (^)(id data))successBlock
                               failure:(void (^)(NSError *aError))failureBlock;
 
-
+/*!
+ *  @author 汪宇豪, 16-08-14 18:08:23
+ *
+ *  @brief 获取球员数据
+ *
+ *  @param playerId     球员id
+ *  @param token        token
+ *  @param successBlock 成功
+ *  @param failureBlock 失败
+ *
+ *  @return NSURLSessionTask
+ */
+- (NSURLSessionTask*)fetchPlayerData:(NSString*)playerId
+                               token:(NSString*)token
+                             success:(void (^)(id data))successBlock
+                             failure:(void (^)(NSError *aError))failureBlock;
 /*!
  *  @author 汪宇豪, 16-08-10 16:08:40
  *

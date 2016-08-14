@@ -18,6 +18,9 @@
         //[self fetchData:[(NSNumber*)dictionary[@"id"] stringValue]];
         //先用这个测试
         [self fetchData:@"9"];
+        self.infoTableviewRowNumber = @[@1,@5];
+        self.infotableviewCellname = @[@"主办方",@"赛制",@"时间",@"地区",@"球队数量"];
+        
     }
     return self;
 }
@@ -26,6 +29,40 @@
     SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
     [manager fetchGameInfo:tournamentId success:^(id data) {
         self.model = data;
+        NSMutableArray* array = [[NSMutableArray alloc] init];
+        if (self.model.host) {
+            [array addObject:self.model.host];
+        }
+        else
+        {
+            [array addObject:@""];
+        }
+        if ([self.model getMatchTypeInfo]) {
+            [array addObject:[self.model getMatchTypeInfo]];
+        }
+        else
+        {
+            [array appendObject:@""];
+        }
+        if ([self.model getDateInfo]) {
+            [array addObject:[self.model getDateInfo]];
+        }
+        else
+        {
+            [array addObject:@""];
+        }
+        if (self.model.area.name) {
+            [array addObject:self.model.area.name];
+        }
+        else
+        {
+            [array addObject:@""];
+        }
+        [array addObject:[@(self.model.teamSize) stringValue]];
+    
+        
+        self.infoTableViewCellInfo = array;
+        
         self.status += 1;
     } failure:^(NSError *aError) {
 

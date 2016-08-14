@@ -58,6 +58,8 @@
 #import "GameDetailResponseModel.h"
 #import "NoticeCellView.h"
 #import "GameMessageResponseModel.h"
+#import "BasicInfoCell.h"
+#import "PlayerDataResponseModel.h"
 @interface MDABizManager : NSObject
 @property (nonatomic,assign)BOOL userLogined;
 /**

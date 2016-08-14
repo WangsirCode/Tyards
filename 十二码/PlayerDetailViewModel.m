@@ -14,6 +14,7 @@
     self = [super initWithDictionary:dictionary];
     if (self)
     {
+        self.status = 0;
         [self fetchData:[(NSNumber*)dictionary[@"id"] stringValue]];
     }
     return self;
@@ -29,8 +30,14 @@
             [array appendObject:obj.comments];
         }];
         self.comments = [NSArray arrayWithArray:array];
-        self.shouldReloadData = YES;
+        self.status += 1;
     } failure:^(NSError *aError) {
+    }];
+    [manager fetchPlayerData:@"583" token:[self getToken] success:^(id data) {
+        self.palyerData = data;
+        self.status += 1;
+    } failure:^(NSError *aError) {
+        
     }];
 }
 -(RACCommand *)likeCommand

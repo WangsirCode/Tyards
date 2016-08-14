@@ -29,6 +29,7 @@
 #import "SEMTeamPhotoController.h"
 #import "TeamDetailInfoView.h"
 #import "PlayerInfoView.h"
+#import "InfoViewCell.h"
 @interface PlayerDetailViewController ()<UITableViewDelegate,UITableViewDataSource,LazyPageScrollViewDelegate,UIScrollViewDelegate,ShareViewDelegate>
 @property (nonatomic,strong) PlayerDetailViewModel *viewModel;
 @property (nonatomic,strong) UIImageView        * logoImageView;
@@ -37,15 +38,14 @@
 @property (nonatomic,strong) UITableView        * newsTableview;
 @property (nonatomic,strong) UITableView        * listTableview;
 @property (nonatomic,strong) UITableView        * scheduleTableview;
-@property (nonatomic,strong) PlayerInfoView * infoView;;
 @property (nonatomic,strong) MBProgressHUD      * hud;
 @property (nonatomic,strong) UIBarButtonItem    * shareItem;
 @property (nonatomic,strong) UIBarButtonItem    * favoriteItem;
 @property (nonatomic,strong) UIBarButtonItem    * blankItem;
 @property (nonatomic,strong) ShareView          * shareView;
 @property (nonatomic,strong) UIView             * maskView;
-@property (nonatomic,strong) UIScrollView       * scrollView;
 @property (nonatomic,strong) UIBarButtonItem      *backItem;
+@property (nonatomic,strong) UITableView        *infoTableView;
 @end
 
 @implementation PlayerDetailViewController
@@ -93,7 +93,6 @@
     self.navigationItem.rightBarButtonItems = @[self.shareItem,self.blankItem,self.favoriteItem];
     [self.view addSubview:self.maskView];
     [self.view addSubview:self.shareView];
-    [self.scrollView addSubview:self.infoView];
     self.hud.labelText = @"加载中";
 }
 
@@ -110,17 +109,12 @@
         make.left.equalTo(self.view.mas_left);
         make.right.equalTo(self.view.mas_right);
     }];
-    self.infoView.sd_layout
-    .widthIs(self.view.width)
-    .topEqualToView(self.scrollView)
-    .leftEqualToView(self.scrollView);
-    [self.scrollView setupAutoContentSizeWithBottomView:self.infoView bottomMargin:20];
 }
 - (void)bindModel
 {
     //当加载完毕之后隐藏hud
-    [RACObserve(self.viewModel, shouldReloadData) subscribeNext:^(id x) {
-        if (self.viewModel.shouldReloadData == YES) {
+    [RACObserve(self.viewModel, status) subscribeNext:^(id x) {
+        if (self.viewModel.status == 2) {
             [self.hud hide:YES];
             self.navigationItem.title = self.viewModel.model.player.name;
             NSString* urlstring = self.viewModel.model.player.cover.url;
@@ -133,7 +127,7 @@
                 self.logoImageView.image = [UIImage placeholderImage];
             }
             [self.messageTableview reloadData];
-            self.infoView.model = self.viewModel.model.player;
+            [self.infoTableView reloadData];
         }
     }];
     [[self.viewModel.shareCommand executionSignals] subscribeNext:^(id x) {
@@ -217,12 +211,33 @@
 #pragma mark- tableiviewDelegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+    if (tableView.tag == 102) {
+        return 3;
+    }
     return 1;
+    
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (tableView.tag == 100) {
         return self.viewModel.model.newses.count;
+    }
+    else if (tableView.tag == 102)
+    {
+        switch (section) {
+            case 0:
+                return 1;
+                break;
+            case 1:
+                return self.viewModel.palyerData.history.count;
+                break;
+            case 2:
+                return self.viewModel.palyerData.honours.count;
+                break;
+            default:
+                return 0;
+                break;
+        }
     }
     else
     {
@@ -258,7 +273,37 @@
         }
         return cell;
     }
-
+    else
+    {
+        if (indexPath.section == 0) {
+            InfoViewCell* cell = (InfoViewCell*)[tableView dequeueReusableCellWithIdentifier:@"InfoViewCell"];
+            cell.model = self.viewModel.palyerData.data;
+            return cell;
+        }
+        else if(indexPath.section == 1)
+        {
+            UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"reamcell"];
+            cell.textLabel.text = [self.viewModel.palyerData.history[indexPath.row] timeInfo];
+            cell.detailTextLabel.text = [self.viewModel.palyerData.history[indexPath.row] teamInfo];
+            cell.detailTextLabel.textColor = [UIColor MyColor];
+            return cell;
+        }
+        else
+        {
+            UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"honorCell"];
+            UIImageView* imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Copa del Rey"]];
+            [cell addSubview:imageView];
+            imageView.sd_layout.
+            leftSpaceToView(cell,12*self.view.scale)
+            .centerYEqualToView(cell)
+            .heightIs(23*self.view.scale);
+            cell.textLabel.text = [self.viewModel.palyerData.honours[indexPath.row] honorInfo];
+            cell.textLabel.sd_layout
+            .leftSpaceToView(imageView,8)
+            .rightEqualToView(cell);
+            return cell;
+        }
+    }
     return nil;
 }
 
@@ -272,7 +317,54 @@
     {
         return 100 * self.view.scale;
     }
+    else
+    {
+        if (indexPath.section == 0) {
+            return [tableView cellHeightForIndexPath:indexPath model:self.viewModel.palyerData.data keyPath:@"model" cellClass:[InfoViewCell class] contentViewWidth:self.view.width];
+        }
+        else
+        {
+            return 48*self.view.scale;
+        }
+    }
     return 0;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if (tableView.tag == 102) {
+        return 48*self.view.scale;
+    }
+    return 0;
+}
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    if (tableView.tag == 102)
+    {
+        UIView* view = [UIView new];
+        UILabel* label = [UILabel new];
+        if (section == 0) {
+            label.text = @"个人简介";
+        }
+        else if(section == 1)
+        {
+            label.text = @"效力/执教球队";
+        }
+        else
+        {
+            label.text = @"荣誉";
+        }
+        label.textAlignment = NSTextAlignmentLeft;
+        [view addSubview:label];
+        label.font = [UIFont systemFontOfSize:16];
+        label.textColor = [UIColor MyColor];
+        label.sd_layout
+        .rightEqualToView(view)
+        .centerYEqualToView(view)
+        .leftSpaceToView(view,10)
+        .heightIs(30*self.view.scale);
+        return view;
+    }
+    return nil;
 }
 #pragma  mark- scrollviewdelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -302,37 +394,49 @@
 #pragma mark- getter
 - (LazyPageScrollView*)pageView
 {
-    if (!_pageView) {
-        _pageView = [[LazyPageScrollView alloc] init];
-        _pageView.frame =self.view.frame;
-        _pageView.delegate = self;
-        [_pageView initTab:YES Gap:self.view.width / 3 TabHeight:40 VerticalDistance:10 BkColor:[UIColor whiteColor]];
-        
-        [_pageView addTab:@"留言" View:self.messageTableview Info:nil];
-        [_pageView addTab:@"新闻" View:self.newsTableview Info:nil];
-        [_pageView addTab:@"资料" View:self.scrollView Info:nil];
-        [_pageView setTitleStyle:[UIFont systemFontOfSize:15] SelFont:[UIFont systemFontOfSize:20] Color:[UIColor blackColor] SelColor:[UIColor colorWithHexString:@"#1EA11F"]];
-        [_pageView enableBreakLine:YES Width:1 TopMargin:0 BottomMargin:0 Color:[UIColor groupTableViewBackgroundColor]];
-        [_pageView generate:^(UIButton *firstTitleControl, UIView *viewTitleEffect) {
-            CGRect frame= firstTitleControl.frame;
-            frame.size.height-=5;
-            frame.size.width-=6;
-            viewTitleEffect.frame=frame;
-            viewTitleEffect.center=firstTitleControl.center;
-        }];
-        UIView *topView=[_pageView getTopContentView];
-        UILabel *lb=[[UILabel alloc] init];
-        lb.translatesAutoresizingMaskIntoConstraints=NO;
-        lb.backgroundColor=[UIColor colorWithHexString:@"#"];
-        [topView addSubview:lb];
-        [topView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[lb]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(lb)]];
-        [topView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[lb(==1)]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(lb)]];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            //_pageView.selectedIndex=4;
+        if (!_pageView) {
+            _pageView = [[LazyPageScrollView alloc] init];
+            _pageView.frame =self.view.frame;
+            _pageView.delegate = self;
+            [_pageView initTab:YES Gap:self.view.width / 5 TabHeight:40 VerticalDistance:10 BkColor:[UIColor whiteColor]];
             
-        });
+            [_pageView addTab:@"留言" View:self.messageTableview Info:nil];
+            [_pageView addTab:@"新闻" View:self.newsTableview Info:nil];
+            [_pageView addTab:@"资料" View:self.infoTableView Info:nil];
+            [_pageView setTitleStyle:[UIFont systemFontOfSize:15] SelFont:[UIFont systemFontOfSize:20] Color:[UIColor blackColor] SelColor:[UIColor colorWithHexString:@"#1EA11F"]];
+            [_pageView enableBreakLine:YES Width:1 TopMargin:0 BottomMargin:0 Color:[UIColor groupTableViewBackgroundColor]];
+            [_pageView generate:^(UIButton *firstTitleControl, UIView *viewTitleEffect) {
+                CGRect frame= firstTitleControl.frame;
+                frame.size.height-=5;
+                frame.size.width-=6;
+                viewTitleEffect.frame=frame;
+                viewTitleEffect.center=firstTitleControl.center;
+            }];
+            UIView *topView=[_pageView getTopContentView];
+            UILabel *lb=[[UILabel alloc] init];
+            lb.translatesAutoresizingMaskIntoConstraints=NO;
+            lb.backgroundColor=[UIColor colorWithHexString:@"#"];
+            [topView addSubview:lb];
+            [topView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[lb]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(lb)]];
+            [topView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[lb(==1)]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(lb)]];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                //_pageView.selectedIndex=4;
+                
+            });
+        }
+        return _pageView;
+}
+- (UITableView *)infoTableView
+{
+    if (!_infoTableView) {
+        _infoTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+        _infoTableView.delegate = self;
+        _infoTableView.dataSource = self;
+        _infoTableView.tag = 102;
+        _infoTableView.contentSize = CGSizeMake(self.view.width, 2 * self.view.height);
+        [_infoTableView registerClass:[CommentCell class] forCellReuseIdentifier:@"InfoViewCell"];
     }
-    return _pageView;
+    return _infoTableView;
 }
 - (UITableView*)messageTableview
 {
@@ -431,24 +535,6 @@
         _blankItem.width = 20;
     }
     return _blankItem;
-}
-- (PlayerInfoView *)infoView
-{
-    if (!_infoView) {
-        _infoView = [[PlayerInfoView alloc] initWithFrame:CGRectZero];
-        _infoView.userInteractionEnabled = YES;
-    }
-    return _infoView;
-}
-- (UIScrollView *)scrollView
-{
-    if (!_scrollView) {
-        _scrollView = [[UIScrollView alloc] init];
-        _scrollView.delegate = self;
-        _scrollView.contentSize = CGSizeMake(self.view.width, 1000);
-        _scrollView.tag = 1000;
-    }
-    return _scrollView;
 }
 -(UIBarButtonItem *)backItem
 {

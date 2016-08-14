@@ -44,11 +44,14 @@
 
 @property (nonatomic, strong) Avatar *avatar;
 
-@property (nonatomic, copy) NSString *description;
+@property (nonatomic, copy) NSString *desc;
 
 @property (nonatomic, strong) Cover *cover;
 
 @property (nonatomic, copy) NSString *name;
 
+- (NSString*)heightInfo;
+- (NSString*)weightInfo;
+- (NSString*)PosionInfo;
 @end
 

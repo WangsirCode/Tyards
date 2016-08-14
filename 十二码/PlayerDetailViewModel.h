@@ -9,8 +9,10 @@
 #import "SEMViewModel.h"
 #import "MDABizManager.h"
 @interface PlayerDetailViewModel : SEMViewModel
-@property (nonatomic, strong) PlayerModel *model;
-@property (nonatomic,strong) NSArray<Comments*>* comments;
+@property (nonatomic, strong) PlayerModel     *model;
+@property (nonatomic,strong ) NSArray<Comments       *> * comments;
 @property (nonatomic,strong ) RACCommand      * shareCommand;
 @property (nonatomic,strong ) RACCommand      * likeCommand;
+@property (nonatomic, strong) PlayerDataModel *palyerData;
+@property (nonatomic,assign) NSInteger status;
 @end

@@ -692,6 +692,9 @@ NSString* const GameMessage = @"/match/newses/";
     return [self GET:URL parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [GameInfoModel mj_setupReplacedKeyFromPropertyName:^NSDictionary *{
+            return @{@"desc":@"description"};
+        }];
         GameInfoResponseModel* model = [GameInfoResponseModel mj_objectWithKeyValues:responseObject];
         successBlock(model.resp);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -780,6 +783,27 @@ NSString* const GameMessage = @"/match/newses/";
         }];
         NSArray* result1 = [[NSArray alloc] initWithArray:array];
         successBlock(result1);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }];
+}
+//获取球员数据
+- (NSURLSessionTask *)fetchPlayerData:(NSString *)playerId token:(NSString *)token success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
+{
+    [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
+    NSMutableString* URL = [[NSMutableString alloc] init];
+    [URL appendString:@"/player/data/"
+     ];
+    [URL appendString:playerId];
+    NSDictionary* para = @{@"token":token};
+    return [self GET:URL parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [PlayerDetail mj_setupReplacedKeyFromPropertyName:^NSDictionary *{
+            return @{@"desc":@"description"};
+        }];
+        PlayerDataResponseModel* model = [PlayerDataResponseModel mj_objectWithKeyValues:responseObject];
+        successBlock(model.resp);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failureBlock(error);
     }];

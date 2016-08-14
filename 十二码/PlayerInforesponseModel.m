@@ -15,11 +15,41 @@
 + (NSDictionary *)objectClassInArray{
     return @{@"articles" : [Articles class], @"newses" : [Newses class]};
 }
+
 @end
 
 
 @implementation PlayerDetail
-
+- (NSString *)weightInfo
+{
+    return [NSString stringWithFormat:@"%ldkg",(long)self.weight];
+}
+- (NSString *)heightInfo
+{
+    return [NSString stringWithFormat:@"%ldm",self.height];
+}
+- (NSString *)PosionInfo
+{
+    if ([self.position isEqualToString:@"UNKNOWN"]) {
+        return @"未知";
+    }
+    else if ([self.position isEqualToString:@"BACKFIELD"])
+    {
+        return @"后卫";
+    }
+    else if ([self.position isEqualToString:@"MIDFIELD"])
+    {
+        return @"中场";
+    }
+    else if ([self.position isEqualToString:@"FORWARD"])
+    {
+        return @"前锋";
+    }
+    else
+    {
+        return @"守门员";
+    }
+}
 @end
 
 

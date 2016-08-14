@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4704AD811D6004620057D502 /* BasicInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4704AD801D6004620057D502 /* BasicInfoCell.m */; };
 		4708D2E61D4A67BD0094FAF9 /* NoticeCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4708D2E51D4A67BD0094FAF9 /* NoticeCellView.m */; };
 		470BEE111D582909003167ED /* SetUpController.m in Sources */ = {isa = PBXBuildFile; fileRef = 470BEE101D582909003167ED /* SetUpController.m */; };
 		470BEE141D58295C003167ED /* SetUpViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 470BEE131D58295C003167ED /* SetUpViewModel.m */; };
@@ -199,6 +200,9 @@
 		47A364CF1D5AB9D5002FC59E /* PlayerDetailViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A364CE1D5AB9D5002FC59E /* PlayerDetailViewModel.m */; };
 		47A364D51D5ABA93002FC59E /* TemplateController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A364D41D5ABA93002FC59E /* TemplateController.m */; };
 		47A364D81D5ABC7F002FC59E /* PlayerInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A364D71D5ABC7F002FC59E /* PlayerInfoView.m */; };
+		47ABD96B1D60799600CD18CF /* PlayerDataResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47ABD96A1D60799600CD18CF /* PlayerDataResponseModel.m */; };
+		47ABD96E1D607E8300CD18CF /* InfoViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 47ABD96D1D607E8300CD18CF /* InfoViewCell.m */; };
+		47ABD9701D60AA4E00CD18CF /* Copa del Rey.png in Resources */ = {isa = PBXBuildFile; fileRef = 47ABD96F1D60AA4E00CD18CF /* Copa del Rey.png */; };
 		47AF5D2B1D56468F00728933 /* MyConcernController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47AF5D2A1D56468F00728933 /* MyConcernController.m */; };
 		47AF5D2E1D5646A700728933 /* MyConcernViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47AF5D2D1D5646A700728933 /* MyConcernViewModel.m */; };
 		47AF5D311D564AA200728933 /* MeReplyResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47AF5D301D564AA200728933 /* MeReplyResponseModel.m */; };
@@ -250,6 +254,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4704AD7F1D6004620057D502 /* BasicInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicInfoCell.h; sourceTree = "<group>"; };
+		4704AD801D6004620057D502 /* BasicInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicInfoCell.m; sourceTree = "<group>"; };
 		4708D2E41D4A67BD0094FAF9 /* NoticeCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoticeCellView.h; sourceTree = "<group>"; };
 		4708D2E51D4A67BD0094FAF9 /* NoticeCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoticeCellView.m; sourceTree = "<group>"; };
 		470BEE0F1D582909003167ED /* SetUpController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetUpController.h; sourceTree = "<group>"; };
@@ -562,6 +568,11 @@
 		47A364D41D5ABA93002FC59E /* TemplateController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TemplateController.m; sourceTree = "<group>"; };
 		47A364D61D5ABC7F002FC59E /* PlayerInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerInfoView.h; sourceTree = "<group>"; };
 		47A364D71D5ABC7F002FC59E /* PlayerInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerInfoView.m; sourceTree = "<group>"; };
+		47ABD9691D60799600CD18CF /* PlayerDataResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerDataResponseModel.h; sourceTree = "<group>"; };
+		47ABD96A1D60799600CD18CF /* PlayerDataResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerDataResponseModel.m; sourceTree = "<group>"; };
+		47ABD96C1D607E8300CD18CF /* InfoViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoViewCell.h; sourceTree = "<group>"; };
+		47ABD96D1D607E8300CD18CF /* InfoViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoViewCell.m; sourceTree = "<group>"; };
+		47ABD96F1D60AA4E00CD18CF /* Copa del Rey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Copa del Rey.png"; sourceTree = "<group>"; };
 		47AF5D291D56468F00728933 /* MyConcernController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyConcernController.h; sourceTree = "<group>"; };
 		47AF5D2A1D56468F00728933 /* MyConcernController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyConcernController.m; sourceTree = "<group>"; };
 		47AF5D2C1D5646A700728933 /* MyConcernViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyConcernViewModel.h; sourceTree = "<group>"; };
@@ -697,6 +708,8 @@
 				4708D2E51D4A67BD0094FAF9 /* NoticeCellView.m */,
 				47405DCE1D521791000A980A /* GameListView.h */,
 				47405DCF1D521791000A980A /* GameListView.m */,
+				4704AD7F1D6004620057D502 /* BasicInfoCell.h */,
+				4704AD801D6004620057D502 /* BasicInfoCell.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1025,6 +1038,7 @@
 		4734CDE21D41CD27006536DF /* picture */ = {
 			isa = PBXGroup;
 			children = (
+				47ABD96F1D60AA4E00CD18CF /* Copa del Rey.png */,
 				4735FA101D5616F000FDF2ED /* Group 19.png */,
 				476088051D55874400F36597 /* camera_L.png */,
 				4735FA141D561E2100FDF2ED /* 头像背景.png */,
@@ -1253,6 +1267,8 @@
 				47A364C21D5A0735002FC59E /* TeamInfoResponseModel.m */,
 				47A364CA1D5AB870002FC59E /* PlayerInforesponseModel.h */,
 				47A364CB1D5AB870002FC59E /* PlayerInforesponseModel.m */,
+				47ABD9691D60799600CD18CF /* PlayerDataResponseModel.h */,
+				47ABD96A1D60799600CD18CF /* PlayerDataResponseModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1297,6 +1313,8 @@
 				47A364BF1D59D88F002FC59E /* RecordLabel.m */,
 				47A364D61D5ABC7F002FC59E /* PlayerInfoView.h */,
 				47A364D71D5ABC7F002FC59E /* PlayerInfoView.m */,
+				47ABD96C1D607E8300CD18CF /* InfoViewCell.h */,
+				47ABD96D1D607E8300CD18CF /* InfoViewCell.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1515,6 +1533,7 @@
 				4734CE011D41CD42006536DF /* 足球logo.png in Resources */,
 				4734CE021D41CD42006536DF /* 返回icon.png in Resources */,
 				4734CE471D41CD5E006536DF /* 点-绿.png in Resources */,
+				47ABD9701D60AA4E00CD18CF /* Copa del Rey.png in Resources */,
 				4735FA151D561E2100FDF2ED /* 头像背景.png in Resources */,
 				4734CE171D41CD4B006536DF /* 深色背景.png in Resources */,
 				4734CE341D41CD55006536DF /* Rectangle 301.png in Resources */,
@@ -1654,6 +1673,7 @@
 				470BEE111D582909003167ED /* SetUpController.m in Sources */,
 				4735F9F71D55FA8F00FDF2ED /* PersonalInfoController.m in Sources */,
 				473BCCDB1D59682A005DBD2F /* AlbumDetailResponseModel.m in Sources */,
+				47ABD96E1D607E8300CD18CF /* InfoViewCell.m in Sources */,
 				47A364CF1D5AB9D5002FC59E /* PlayerDetailViewModel.m in Sources */,
 				476B99601D4F757B00D52B31 /* CommentCell.m in Sources */,
 				4725D2D11D5B677A00A13AEB /* ScheduleResponseModel.m in Sources */,
@@ -1706,6 +1726,7 @@
 				47A364D51D5ABA93002FC59E /* TemplateController.m in Sources */,
 				4739B5E11D4867DF007842CC /* GameListResponseModel.m in Sources */,
 				4768237E1D44F44F00B224E6 /* SearchResultsModel.m in Sources */,
+				47ABD96B1D60799600CD18CF /* PlayerDataResponseModel.m in Sources */,
 				478B5E561D420AC5007AABC4 /* hotTopicsModel.m in Sources */,
 				4762521D1D5196A0003788C0 /* UIView+Scale.m in Sources */,
 				4739B5DB1D483FE4007842CC /* TopicCell.m in Sources */,
@@ -1736,6 +1757,7 @@
 				4776426B1D5485F300548C9F /* TeamNewsCell.m in Sources */,
 				47A364B71D5988AF002FC59E /* PhotoDetailCell.m in Sources */,
 				4734CDA41D41BE54006536DF /* UIViewController+HRTRouter.m in Sources */,
+				4704AD811D6004620057D502 /* BasicInfoCell.m in Sources */,
 				477642681D546F0800548C9F /* UIImage+placeholder.m in Sources */,
 				47A364C31D5A0735002FC59E /* TeamInfoResponseModel.m in Sources */,
 				4772FE671D5659E40008ED37 /* MyMessageModel.m in Sources */,

@@ -15,4 +15,7 @@
 @property (nonatomic,assign ) NSInteger     status;
 @property (nonatomic,strong ) RACCommand    * shareCommand;
 @property (nonatomic,strong ) RACCommand    * likeCommand;
+@property (nonatomic,strong) NSArray* infoTableviewRowNumber;
+@property (nonatomic,strong) NSArray* infoTableViewCellInfo;
+@property (nonatomic,strong) NSArray* infotableviewCellname;
 @end
