@@ -81,11 +81,9 @@
 {
 
     Medias* model = self.viewModel.model.medias[indexPath.row];
-
     PhotoDetailCell* cell = (PhotoDetailCell*)[collectionView dequeueReusableCellWithReuseIdentifier:@"detailcell" forIndexPath:indexPath];
     cell.model = model.media;
     return cell;
-    
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
@@ -97,9 +95,12 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    PictureShowController* controller = [[PictureShowController alloc] init];
-    controller.model = self.viewModel.model.medias;
-    controller.index = indexPath.row;
+
+    NSMutableArray* array = [NSMutableArray new];
+    [self.viewModel.model.medias enumerateObjectsUsingBlock:^(Medias * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [array addObject:obj.media.url];
+    }];
+    PictureShowController* controller = [[PictureShowController alloc] initWithImages:array index:indexPath.row];
     [self.navigationController pushViewController:controller animated:YES];
 }
 

@@ -79,6 +79,24 @@
     } failure:^(NSError *aError) {
         
     }];
+    [manager fetchAwardList:tournamentId success:^(id data) {
+        self.awardModel = data;
+        self.status += 1;
+    } failure:^(NSError *aError) {
+        
+    }];
+    [manager fetchScorerList:tournamentId success:^(id data) {
+        self.scorerModel = data;
+        self.status += 1;
+    } failure:^(NSError *aError) {
+        
+    }];
+    [manager fetchScoreList:tournamentId success:^(id data) {
+        self.scoreModel = data;
+        self.status += 1;
+    } failure:^(NSError *aError) {
+        
+    }];
 }
 -(RACCommand *)likeCommand
 {

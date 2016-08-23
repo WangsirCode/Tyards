@@ -559,6 +559,7 @@
         _messageTableview.dataSource = self;
         _messageTableview.tag = 100;
         _messageTableview.contentSize = CGSizeMake(self.view.width, 2 * self.view.height);
+        _messageTableview.bounces = NO;
         [_messageTableview registerClass:[CommentCell class] forCellReuseIdentifier:@"CommentCell"];
     }
     return _messageTableview;
@@ -570,6 +571,7 @@
         _newsTableview.delegate = self;
         _newsTableview.dataSource = self;
         _newsTableview.tag = 101;
+        _newsTableview.bounces = NO;
         [_newsTableview registerClass:[TeamNewsCell class] forCellReuseIdentifier:@"TeamNewsCell"];
     }
     return _newsTableview;
@@ -581,6 +583,7 @@
         _listTableview.delegate = self;
         _listTableview.dataSource = self;
         _listTableview.tag = 102;
+        _listTableview.bounces = NO;
     }
     return _listTableview;
 }
@@ -591,6 +594,7 @@
         _scheduleTableview.delegate = self;
         _scheduleTableview.dataSource = self;
         _scheduleTableview.tag = 103;
+        _scheduleTableview.bounces = NO;
         [_scheduleTableview registerClass:[NoticeGameviewCell class] forCellReuseIdentifier:@"NoticeGameviewCell"];
     }
     return _scheduleTableview;
@@ -685,6 +689,7 @@
         _scrollView.delegate = self;
         _scrollView.contentSize = CGSizeMake(self.view.width, 1000);
         _scrollView.tag = 1000;
+        _scrollView.bounces = NO;
     }
     return _scrollView;
 }

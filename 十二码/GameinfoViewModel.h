@@ -9,6 +9,9 @@
 #import "SEMViewModel.h"
 #import "MDABizManager.h"
 @interface GameinfoViewModel : SEMViewModel
+@property (nonatomic, strong) NSArray<ScoreListModel *> *scoreModel;
+@property (nonatomic, strong) NSArray<ScorerListModel *> *scorerModel;
+@property (nonatomic, strong) NSArray<AwardListModel *> *awardModel;
 @property (nonatomic, strong) GameInfoModel *model;
 @property (nonatomic, strong) ScheduleModel *scheduleModel;
 @property (nonatomic, strong) NSArray<MatchTeamModel *> *teamModel;

@@ -23,7 +23,7 @@
 #import "PlayerDetailViewController.h"
 #import "SEMNewsDetailController.h"
 #import "GameinfoViewModel.h"
-@interface GameInfoDetailViewController ()<UITableViewDelegate,UITableViewDataSource,LazyPageScrollViewDelegate,UIScrollViewDelegate,ShareViewDelegate>
+@interface GameInfoDetailViewController ()<UITableViewDelegate,UITableViewDataSource,LazyPageScrollViewDelegate,UIScrollViewDelegate,ShareViewDelegate,ListTableHeaderVIewDelegate>
 @property (nonatomic,strong) GameinfoViewModel  * viewModel;
 @property (nonatomic,strong) UIImageView        * logoImageView;
 @property (nonatomic,strong) LazyPageScrollView * pageView;
@@ -38,6 +38,7 @@
 @property (nonatomic,strong) ShareView          * shareView;
 @property (nonatomic,strong) UIView             * maskView;
 @property (nonatomic,strong) UIBarButtonItem    * backItem;
+@property (nonatomic,strong) ListTableHeaderVIew* listTableHeaderView;
 @end
 
 @implementation GameInfoDetailViewController
@@ -106,7 +107,7 @@
 {
     //当加载完毕之后隐藏hud
     [RACObserve(self.viewModel, status) subscribeNext:^(id x) {
-        if (self.viewModel.status == 3) {
+        if (self.viewModel.status == 6) {
             [self.hud hide:YES];
             self.navigationItem.title = self.viewModel.model.name;
             if (self.viewModel.model.logo.url) {
@@ -493,6 +494,7 @@
         _listTableview.delegate = self;
         _listTableview.dataSource = self;
         _listTableview.tag = 102;
+        _listTableview.tableHeaderView = self.listTableHeaderView;
     }
     return _listTableview;
 }
@@ -595,6 +597,18 @@
     }
     return _backItem;
 }
+- (ListTableHeaderVIew *)listTableHeaderView
+{
+    if (!_listTableHeaderView) {
+        _listTableHeaderView = [ListTableHeaderVIew new];
+        _listTableHeaderView.frame = CGRectMake(0, 0, self.view.width, self.view.scale * 60);
+        _listTableHeaderView.layer.borderWidth = 1;
+        _listTableHeaderView.layer.borderColor = [UIColor BackGroundColor].CGColor;
+        _listTableHeaderView.delegate = self;
+    
+    }
+    return _listTableHeaderView;
+}
 #pragma mark -LazyPageScrollViewDelegate
 -(void)LazyPageScrollViewPageChange:(LazyPageScrollView *)pageScrollView Index:(NSInteger)index PreIndex:(NSInteger)preIndex TitleEffectView:(UIView *)viewTitleEffect SelControl:(UIButton *)selBtn
 {
@@ -614,6 +628,10 @@
         [self.teamTableView reloadData];
     }
 }
-
+#pragma mark -HeaderViewDelagate
+- (void)didClickButtonAtIndex:(NSInteger)index
+{
+    
+}
 @end
 

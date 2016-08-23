@@ -216,6 +216,10 @@
 		47BB49A81D45F5C80052E4D0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47BB49A71D45F5C80052E4D0 /* SystemConfiguration.framework */; };
 		47BB49AA1D45F5D80052E4D0 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47BB49A91D45F5D80052E4D0 /* CoreTelephony.framework */; };
 		47BB49B61D460AF00052E4D0 /* NewsViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 47BB49B51D460AF00052E4D0 /* NewsViewCell.m */; };
+		47C3220F1D6BF50800317A4C /* ScoreListResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C3220E1D6BF50800317A4C /* ScoreListResponseModel.m */; };
+		47C322121D6BF64E00317A4C /* ScorerListResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C322111D6BF64E00317A4C /* ScorerListResponseModel.m */; };
+		47C322151D6BF6FE00317A4C /* AwardListResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C322141D6BF6FE00317A4C /* AwardListResponseModel.m */; };
+		47C322181D6BFA3F00317A4C /* ListTableHeaderVIew.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C322171D6BFA3F00317A4C /* ListTableHeaderVIew.m */; };
 		47E8BCF91D5C1315007621F8 /* TeamResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47E8BCF81D5C1315007621F8 /* TeamResponseModel.m */; };
 		47E8BCFC1D5C18A6007621F8 /* GameNewsDetailResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47E8BCFB1D5C18A6007621F8 /* GameNewsDetailResponseModel.m */; };
 		47E8BCFF1D5C1A4A007621F8 /* GameMessageResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47E8BCFE1D5C1A4A007621F8 /* GameMessageResponseModel.m */; };
@@ -596,6 +600,14 @@
 		47BB49A91D45F5D80052E4D0 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		47BB49B41D460AF00052E4D0 /* NewsViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsViewCell.h; sourceTree = "<group>"; };
 		47BB49B51D460AF00052E4D0 /* NewsViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsViewCell.m; sourceTree = "<group>"; };
+		47C3220D1D6BF50800317A4C /* ScoreListResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreListResponseModel.h; sourceTree = "<group>"; };
+		47C3220E1D6BF50800317A4C /* ScoreListResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoreListResponseModel.m; sourceTree = "<group>"; };
+		47C322101D6BF64E00317A4C /* ScorerListResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScorerListResponseModel.h; sourceTree = "<group>"; };
+		47C322111D6BF64E00317A4C /* ScorerListResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScorerListResponseModel.m; sourceTree = "<group>"; };
+		47C322131D6BF6FE00317A4C /* AwardListResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AwardListResponseModel.h; sourceTree = "<group>"; };
+		47C322141D6BF6FE00317A4C /* AwardListResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AwardListResponseModel.m; sourceTree = "<group>"; };
+		47C322161D6BFA3F00317A4C /* ListTableHeaderVIew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListTableHeaderVIew.h; sourceTree = "<group>"; };
+		47C322171D6BFA3F00317A4C /* ListTableHeaderVIew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListTableHeaderVIew.m; sourceTree = "<group>"; };
 		47E8BCF71D5C1315007621F8 /* TeamResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamResponseModel.h; sourceTree = "<group>"; };
 		47E8BCF81D5C1315007621F8 /* TeamResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamResponseModel.m; sourceTree = "<group>"; };
 		47E8BCFA1D5C18A6007621F8 /* GameNewsDetailResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameNewsDetailResponseModel.h; sourceTree = "<group>"; };
@@ -676,6 +688,12 @@
 				47E8BCFE1D5C1A4A007621F8 /* GameMessageResponseModel.m */,
 				47E8BD001D5C1DF0007621F8 /* GameDetailResponseModel.h */,
 				47E8BD011D5C1DF0007621F8 /* GameDetailResponseModel.m */,
+				47C3220D1D6BF50800317A4C /* ScoreListResponseModel.h */,
+				47C3220E1D6BF50800317A4C /* ScoreListResponseModel.m */,
+				47C322101D6BF64E00317A4C /* ScorerListResponseModel.h */,
+				47C322111D6BF64E00317A4C /* ScorerListResponseModel.m */,
+				47C322131D6BF6FE00317A4C /* AwardListResponseModel.h */,
+				47C322141D6BF6FE00317A4C /* AwardListResponseModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -710,6 +728,8 @@
 				47405DCF1D521791000A980A /* GameListView.m */,
 				4704AD7F1D6004620057D502 /* BasicInfoCell.h */,
 				4704AD801D6004620057D502 /* BasicInfoCell.m */,
+				47C322161D6BFA3F00317A4C /* ListTableHeaderVIew.h */,
+				47C322171D6BFA3F00317A4C /* ListTableHeaderVIew.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -752,7 +772,6 @@
 		4734CD381D41B511006536DF /* 十二码 */ = {
 			isa = PBXGroup;
 			children = (
-				4725D2B21D5B2B6E00A13AEB /* Game */,
 				47A364D31D5ABA93002FC59E /* TemplateController.h */,
 				47A364D41D5ABA93002FC59E /* TemplateController.m */,
 				4734CD3C1D41B512006536DF /* AppDelegate.h */,
@@ -761,6 +780,7 @@
 				4734CDA61D41BE7D006536DF /* MDABizManager.h */,
 				478B5E511D420728007AABC4 /* SEMNetworkingManager.h */,
 				478B5E521D420728007AABC4 /* SEMNetworkingManager.m */,
+				4725D2B21D5B2B6E00A13AEB /* Game */,
 				4735F9F01D55F9D700FDF2ED /* Me */,
 				476088141D55892B00F36597 /* Team */,
 				4734CD6E1D41B7B7006536DF /* Model */,
@@ -1635,6 +1655,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4725D2B91D5B2CB100A13AEB /* GameInfoResponseModel.m in Sources */,
+				47C3220F1D6BF50800317A4C /* ScoreListResponseModel.m in Sources */,
 				4735FA001D55FB3700FDF2ED /* PersonalInfoViewModel.m in Sources */,
 				477642621D5440AA00548C9F /* TeamHomeModelResponse.m in Sources */,
 				47E8BCF91D5C1315007621F8 /* TeamResponseModel.m in Sources */,
@@ -1691,9 +1712,11 @@
 				475307501D46F964003ECEBF /* MeinfoVIew.m in Sources */,
 				4776425C1D5434F100548C9F /* SEMTeamHomeModel.m in Sources */,
 				477642521D541F8300548C9F /* TeamLisstResponseModel.m in Sources */,
+				47C322151D6BF6FE00317A4C /* AwardListResponseModel.m in Sources */,
 				4734CDE11D41CBEA006536DF /* SEMTabViewController.m in Sources */,
 				4734CDC51D41C84C006536DF /* SEMNavigationController.m in Sources */,
 				47A364B41D597C8B002FC59E /* AlbumDetailViewModel.m in Sources */,
+				47C322181D6BFA3F00317A4C /* ListTableHeaderVIew.m in Sources */,
 				4735F9FD1D55FAF600FDF2ED /* ColleageSearchController.m in Sources */,
 				4734CD891D41BB49006536DF /* SEMHomeVIewModel.m in Sources */,
 				472A92471D47B1FA00F8620F /* WeChatUserModel.m in Sources */,
@@ -1742,6 +1765,7 @@
 				472A92411D473F8B00F8620F /* MeLoginView.m in Sources */,
 				4739B5EA1D488E84007842CC /* GameListViewCell.m in Sources */,
 				477642651D546ADE00548C9F /* MessageTableviewCell.m in Sources */,
+				47C322121D6BF64E00317A4C /* ScorerListResponseModel.m in Sources */,
 				4734CDAD1D41BFF2006536DF /* NSArray+Safe.m in Sources */,
 				4734CDB91D41C4CD006536DF /* SEMGameViewController.m in Sources */,
 				4776766F1D58610600E10594 /* AboutVIewModel.m in Sources */,

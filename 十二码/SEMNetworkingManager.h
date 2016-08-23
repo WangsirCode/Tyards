@@ -701,5 +701,53 @@
 - (NSURLSessionTask*)fetchGameMessage:(NSString*)matchId
                              success:(void (^)(id data))successBlock
                              failure:(void (^)(NSError *aError))failureBlock;
+
+/*!
+ *  @author 汪宇豪, 16-08-23 10:08:03
+ *
+ *  @brief 获取积分榜
+ *
+ *  @param tournamentid 赛事ID
+ *  @param successBlock 成功
+ *  @param failureBlock 失败
+ *
+ *  @return NSURLSessionTask
+ */
+- (NSURLSessionTask*)fetchScoreList:(NSString*)tournamentid
+                              success:(void (^)(id data))successBlock
+                              failure:(void (^)(NSError *aError))failureBlock;
+
+
+/*!
+ *  @author 汪宇豪, 16-08-23 11:08:15
+ *
+ *  @brief 获取射手榜
+ *
+ *  @param tournamentid 赛事ID
+ *  @param successBlock 成功
+ *  @param failureBlock 失败
+ *
+ *  @return NSURLSessionTask
+ */
+- (NSURLSessionTask*)fetchScorerList:(NSString*)tournamentid
+                            success:(void (^)(id data))successBlock
+                            failure:(void (^)(NSError *aError))failureBlock;
+
+/*!
+ *  @author 汪宇豪, 16-08-23 11:08:16
+ *
+ *  @brief 获取奖项
+ *
+ *  @param tournamentid 赛事ID
+ *  @param successBlock 成功
+ *  @param failureBlock 失败
+ *
+ *  @return NSURLSessionTask
+ */
+- (NSURLSessionTask*)fetchAwardList:(NSString*)tournamentid
+                             success:(void (^)(id data))successBlock
+                             failure:(void (^)(NSError *aError))failureBlock;
+
+
 @end
 
