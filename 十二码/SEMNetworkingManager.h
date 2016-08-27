@@ -748,6 +748,20 @@
                              success:(void (^)(id data))successBlock
                              failure:(void (^)(NSError *aError))failureBlock;
 
+/*!
+ *  @author 汪宇豪, 16-08-27 21:08:08
+ *
+ *  @brief 获取比赛数据
+ *
+ *  @param matchId      matchId
+ *  @param successBlock 成功
+ *  @param failureBlock 失败
+ *
+ *  @return NSURLSessionTask
+ */
+- (NSURLSessionTask*)fetchRaceData:(NSString*)matchId
+                            success:(void (^)(id data))successBlock
+                            failure:(void (^)(NSError *aError))failureBlock;
 
 @end
 

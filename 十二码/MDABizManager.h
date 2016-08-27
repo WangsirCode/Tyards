@@ -64,6 +64,8 @@
 #import "ScoreListResponseModel.h"
 #import "PlayerDataResponseModel.h"
 #import "ListTableHeaderVIew.h"
+#import "RaceDataResponseModel.h"
+#import "DataView.h"
 @interface MDABizManager : NSObject
 @property (nonatomic,assign)BOOL userLogined;
 /**

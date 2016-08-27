@@ -16,6 +16,9 @@
 		470F56CC1D71346700110FCE /* scorer.png in Resources */ = {isa = PBXBuildFile; fileRef = 470F56C91D71346700110FCE /* scorer.png */; };
 		470F56CD1D71346700110FCE /* scorer2.png in Resources */ = {isa = PBXBuildFile; fileRef = 470F56CA1D71346700110FCE /* scorer2.png */; };
 		470F56CE1D71346700110FCE /* scorer3.png in Resources */ = {isa = PBXBuildFile; fileRef = 470F56CB1D71346700110FCE /* scorer3.png */; };
+		470F56D11D71D2D400110FCE /* RaceDataResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 470F56D01D71D2D400110FCE /* RaceDataResponseModel.m */; };
+		470F56D41D71D59700110FCE /* DataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 470F56D31D71D59700110FCE /* DataView.m */; };
+		470F56D71D71DF9400110FCE /* HistoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 470F56D61D71DF9400110FCE /* HistoryView.m */; };
 		4725D2B91D5B2CB100A13AEB /* GameInfoResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4725D2B81D5B2CB100A13AEB /* GameInfoResponseModel.m */; };
 		4725D2BC1D5B2E6E00A13AEB /* GameInfoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4725D2BB1D5B2E6E00A13AEB /* GameInfoDetailViewController.m */; };
 		4725D2C21D5B30EC00A13AEB /* MyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4725D2C11D5B30EC00A13AEB /* MyViewController.m */; };
@@ -188,6 +191,7 @@
 		477676751D58CB2C00E10594 /* TeamCommentsResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 477676741D58CB2C00E10594 /* TeamCommentsResponseModel.m */; };
 		477676771D58D1BF00E10594 /* zhanwei.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 477676761D58D1BF00E10594 /* zhanwei.jpg */; };
 		4783923B1D53242F00C31D37 /* UITableViewCell+Scale.m in Sources */ = {isa = PBXBuildFile; fileRef = 4783923A1D53242F00C31D37 /* UITableViewCell+Scale.m */; };
+		4788AA9D1D71EA6D0057B954 /* PlayHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 4788AA9C1D71EA6D0057B954 /* PlayHistory.m */; };
 		478B5E531D420728007AABC4 /* SEMNetworkingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 478B5E521D420728007AABC4 /* SEMNetworkingManager.m */; };
 		478B5E561D420AC5007AABC4 /* hotTopicsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 478B5E551D420AC5007AABC4 /* hotTopicsModel.m */; };
 		47A364B11D597C78002FC59E /* AlbumDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A364B01D597C78002FC59E /* AlbumDetailController.m */; };
@@ -276,6 +280,12 @@
 		470F56C91D71346700110FCE /* scorer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scorer.png; sourceTree = "<group>"; };
 		470F56CA1D71346700110FCE /* scorer2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scorer2.png; sourceTree = "<group>"; };
 		470F56CB1D71346700110FCE /* scorer3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scorer3.png; sourceTree = "<group>"; };
+		470F56CF1D71D2D400110FCE /* RaceDataResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RaceDataResponseModel.h; sourceTree = "<group>"; };
+		470F56D01D71D2D400110FCE /* RaceDataResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RaceDataResponseModel.m; sourceTree = "<group>"; };
+		470F56D21D71D59700110FCE /* DataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataView.h; sourceTree = "<group>"; };
+		470F56D31D71D59700110FCE /* DataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataView.m; sourceTree = "<group>"; };
+		470F56D51D71DF9400110FCE /* HistoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryView.h; sourceTree = "<group>"; };
+		470F56D61D71DF9400110FCE /* HistoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryView.m; sourceTree = "<group>"; };
 		4725D2B71D5B2CB100A13AEB /* GameInfoResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameInfoResponseModel.h; sourceTree = "<group>"; };
 		4725D2B81D5B2CB100A13AEB /* GameInfoResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameInfoResponseModel.m; sourceTree = "<group>"; };
 		4725D2BA1D5B2E6E00A13AEB /* GameInfoDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameInfoDetailViewController.h; sourceTree = "<group>"; };
@@ -548,6 +558,8 @@
 		477676761D58D1BF00E10594 /* zhanwei.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = zhanwei.jpg; sourceTree = "<group>"; };
 		478392391D53242F00C31D37 /* UITableViewCell+Scale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+Scale.h"; sourceTree = "<group>"; };
 		4783923A1D53242F00C31D37 /* UITableViewCell+Scale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+Scale.m"; sourceTree = "<group>"; };
+		4788AA9B1D71EA6D0057B954 /* PlayHistory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayHistory.h; sourceTree = "<group>"; };
+		4788AA9C1D71EA6D0057B954 /* PlayHistory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayHistory.m; sourceTree = "<group>"; };
 		478B5E511D420728007AABC4 /* SEMNetworkingManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEMNetworkingManager.h; sourceTree = "<group>"; };
 		478B5E521D420728007AABC4 /* SEMNetworkingManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SEMNetworkingManager.m; sourceTree = "<group>"; };
 		478B5E541D420AC5007AABC4 /* hotTopicsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hotTopicsModel.h; sourceTree = "<group>"; };
@@ -700,6 +712,10 @@
 				47C322111D6BF64E00317A4C /* ScorerListResponseModel.m */,
 				47C322131D6BF6FE00317A4C /* AwardListResponseModel.h */,
 				47C322141D6BF6FE00317A4C /* AwardListResponseModel.m */,
+				470F56CF1D71D2D400110FCE /* RaceDataResponseModel.h */,
+				470F56D01D71D2D400110FCE /* RaceDataResponseModel.m */,
+				4788AA9B1D71EA6D0057B954 /* PlayHistory.h */,
+				4788AA9C1D71EA6D0057B954 /* PlayHistory.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -736,6 +752,10 @@
 				4704AD801D6004620057D502 /* BasicInfoCell.m */,
 				47C322161D6BFA3F00317A4C /* ListTableHeaderVIew.h */,
 				47C322171D6BFA3F00317A4C /* ListTableHeaderVIew.m */,
+				470F56D21D71D59700110FCE /* DataView.h */,
+				470F56D31D71D59700110FCE /* DataView.m */,
+				470F56D51D71DF9400110FCE /* HistoryView.h */,
+				470F56D61D71DF9400110FCE /* HistoryView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1681,12 +1701,14 @@
 				47A364C91D5AB78C002FC59E /* PlayerDetailViewController.m in Sources */,
 				4772FE611D56579B0008ED37 /* MyMessageController.m in Sources */,
 				472A923A1D4705A000F8620F /* SEMLoginViewController.m in Sources */,
+				4788AA9D1D71EA6D0057B954 /* PlayHistory.m in Sources */,
 				4734CDBF1D41C585006536DF /* SEMNewsVIewModel.m in Sources */,
 				4772FE6A1D565C780008ED37 /* MyMessageCell.m in Sources */,
 				4735FA0F1D560EBE00FDF2ED /* MeUserInfoResponseModel.m in Sources */,
 				476823751D44EA7E00B224E6 /* SearchModel.m in Sources */,
 				4734CD991D41BE3E006536DF /* DataArchive.m in Sources */,
 				473BCCD51D5961F1005DBD2F /* PhotoCollectionCell.m in Sources */,
+				470F56D41D71D59700110FCE /* DataView.m in Sources */,
 				4734CD951D41BCE3006536DF /* SEMTeamViewModel.m in Sources */,
 				476823721D44E43E00B224E6 /* SEMSearchViewModel.m in Sources */,
 				4746A6701D49B3D8009E0645 /* MeinfoViewModel.m in Sources */,
@@ -1750,6 +1772,7 @@
 				4708D2E61D4A67BD0094FAF9 /* NoticeCellView.m in Sources */,
 				4734CD921D41BCB9006536DF /* SEMMeViewModel.m in Sources */,
 				477676661D5853CD00E10594 /* FeedBackController.m in Sources */,
+				470F56D71D71DF9400110FCE /* HistoryView.m in Sources */,
 				470BEE141D58295C003167ED /* SetUpViewModel.m in Sources */,
 				4772FE641D5657B40008ED37 /* MyMessageViewModel.m in Sources */,
 				47405DD31D521ABB000A980A /* CostomView.m in Sources */,
@@ -1787,6 +1810,7 @@
 				47A364BD1D59C310002FC59E /* OvalView.m in Sources */,
 				47AF5D2B1D56468F00728933 /* MyConcernController.m in Sources */,
 				47A364C01D59D88F002FC59E /* RecordLabel.m in Sources */,
+				470F56D11D71D2D400110FCE /* RaceDataResponseModel.m in Sources */,
 				4725D2CE1D5B63CD00A13AEB /* RaceInfoViewModel.m in Sources */,
 				4746A63B1D489365009E0645 /* SchoolInfoView.m in Sources */,
 				47E8BCFF1D5C1A4A007621F8 /* GameMessageResponseModel.m in Sources */,

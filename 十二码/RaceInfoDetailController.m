@@ -25,6 +25,8 @@
 #import "PlayerDetailViewController.h"
 #import "SEMNewsDetailController.h"
 #import "RaceInfoViewModel.h"
+#import "PlayHistory.h"
+#import "HistoryView.h"
 @interface RaceInfoDetailController ()<UITableViewDelegate,UITableViewDataSource,LazyPageScrollViewDelegate,UIScrollViewDelegate,ShareViewDelegate>
 @property (nonatomic,strong) RaceInfoViewModel  * viewModel;
 @property (nonatomic,strong) NoticeCellView        * headerView;
@@ -32,7 +34,7 @@
 @property (nonatomic,strong) LazyPageScrollView * pageView;
 @property (nonatomic,strong) UITableView        * newsTableView;
 @property (nonatomic,strong) UITableView        * statusTableView;
-@property (nonatomic,strong) UITableView        * dataTableView;
+@property (nonatomic,strong) UIScrollView       * dataView;
 @property (nonatomic,strong) UITableView        * messageTableView;
 @property (nonatomic,strong) MBProgressHUD      * hud;
 @property (nonatomic,strong) UIBarButtonItem    * shareItem;
@@ -115,10 +117,11 @@
 {
     //当加载完毕之后隐藏hud
     [RACObserve(self.viewModel, status) subscribeNext:^(id x) {
-        if (self.viewModel.status == 2) {
+        if (self.viewModel.status == 4) {
             [self.hud hide:YES];
             self.navigationItem.title = self.viewModel.gameModel.tournament.name;
             [self setUpHeaderView];
+            [self setUpDataView];
             [self.newsTableView reloadData];
             [self.messageTableView reloadData];
         }
@@ -191,6 +194,71 @@
         self.headerView.awayImgaeview.image = image;
     }
     self.headerView.location = 1;
+}
+- (void)setUpDataView
+{
+    UIView* view = [UIView new];
+    view.frame = CGRectMake(0, 0, self.view.width, 8);
+    view.backgroundColor = [UIColor BackGroundColor];
+    [self.dataView addSubview:view];
+    
+    UILabel* fisrtLabel = [UILabel new];
+    fisrtLabel.text = @"球队战绩";
+    fisrtLabel.textColor = [UIColor MyColor];
+    fisrtLabel.font = [UIFont systemFontOfSize:16*self.view.scale];
+    [self.dataView addSubview:fisrtLabel];
+    fisrtLabel.sd_layout
+    .topSpaceToView(view,0)
+    .leftSpaceToView(self.dataView,12)
+    .rightEqualToView(self.dataView)
+    .heightIs(44*self.view.scale);
+    
+    DataView* homeData = [[DataView alloc] init];
+    homeData.titleLabel.text = @"主队";
+    homeData.numLabel.text = [@([self.viewModel.dataModel.homeData getNum]) stringValue];
+    homeData.winLabel.text = [NSString stringWithFormat:@"%ld",self.viewModel.dataModel.homeData.wins];
+    homeData.loseLabel.text = [NSString stringWithFormat:@"%ld",self.viewModel.dataModel.homeData.loses];
+    homeData.drawLabel.text = [NSString stringWithFormat:@"%ld",self.viewModel.dataModel.homeData.draws];
+    [self.dataView addSubview:homeData];
+    homeData.sd_layout.topSpaceToView(fisrtLabel,12)
+    .leftSpaceToView(self.dataView,12)
+    .rightSpaceToView(self.dataView,12)
+    .heightIs(144*self.view.scale);
+    
+    DataView* awayData = [[DataView alloc] init];
+    awayData.titleLabel.text = @"客队";
+    awayData.numLabel.text = [@([self.viewModel.dataModel.awayData getNum]) stringValue];
+    awayData.winLabel.text = [NSString stringWithFormat:@"%ld",self.viewModel.dataModel.awayData.wins];
+    awayData.loseLabel.text = [NSString stringWithFormat:@"%ld",self.viewModel.dataModel.awayData.loses];
+    awayData.drawLabel.text = [NSString stringWithFormat:@"%ld",self.viewModel.dataModel.awayData.draws];
+    [self.dataView addSubview:awayData];
+    awayData.sd_layout.topSpaceToView(homeData,16)
+    .leftSpaceToView(self.dataView,12)
+    .rightSpaceToView(self.dataView,12)
+    .heightIs(144*self.view.scale);
+    
+    UILabel* secLabel = [UILabel new];
+    secLabel.text = @"历史交锋";
+    secLabel.textColor = [UIColor MyColor];
+    secLabel.font = [UIFont systemFontOfSize:16*self.view.scale];
+    [self.dataView addSubview:secLabel];
+    secLabel.sd_layout
+    .topSpaceToView(awayData,12)
+    .leftSpaceToView(self.dataView,12)
+    .rightEqualToView(self.dataView)
+    .heightIs(44*self.view.scale);
+    
+    HistoryView* histoty = [[HistoryView alloc] init];
+    histoty.layer.borderColor = [UIColor BackGroundColor].CGColor;
+    histoty.layer.borderWidth = 1;
+    histoty.history = self.viewModel.dataModel.history;
+    [self.dataView addSubview:histoty];
+    histoty.sd_layout
+    .topSpaceToView(secLabel,12)
+    .leftSpaceToView(self.dataView,12)
+    .rightSpaceToView(self.dataView,12)
+    .heightIs(48*(self.viewModel.dataModel.history.count+1)*self.view.scale);
+    
 }
 - (void)hideMaskView
 {
@@ -390,7 +458,7 @@
         [_pageView initTab:YES Gap:self.view.width / 4 TabHeight:40 VerticalDistance:10 BkColor:[UIColor whiteColor]];
         [_pageView addTab:@"新闻" View:self.newsTableView Info:nil];
         [_pageView addTab:@"赛况" View:self.statusTableView Info:nil];
-        [_pageView addTab:@"数据" View:self.dataTableView Info:nil];
+        [_pageView addTab:@"数据" View:self.dataView Info:nil];
         [_pageView addTab:@"互动" View:self.messageTableView Info:nil];
         [_pageView setTitleStyle:[UIFont systemFontOfSize:15] SelFont:[UIFont systemFontOfSize:20] Color:[UIColor blackColor] SelColor:[UIColor colorWithHexString:@"#1EA11F"]];
         [_pageView enableBreakLine:YES Width:1 TopMargin:0 BottomMargin:0 Color:[UIColor groupTableViewBackgroundColor]];
@@ -436,15 +504,14 @@
     }
     return _statusTableView;
 }
-- (UITableView*)dataTableView
+- (UIScrollView *)dataView
 {
-    if (!_dataTableView) {
-        _dataTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-        _dataTableView.delegate = self;
-        _dataTableView.dataSource = self;
-        _dataTableView.tag = 102;
+    if (!_dataView) {
+        _dataView = [UIScrollView new];
+        _dataView.delegate = self;
+        _dataView.contentSize = CGSizeMake(self.view.width, 1000);
     }
-    return _dataTableView;
+    return _dataView;
 }
 - (UITableView*)messageTableView
 {
@@ -559,7 +626,7 @@
     }
     else if (index == 2)
     {
-        [self.dataTableView reloadData];
+        
     }
     else if (index == 0)
     {

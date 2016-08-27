@@ -37,10 +37,16 @@
     }];
     [manager fetchGameMessage:matchId success:^(id data) {
         self.messageModel = data;
+        self.status += 1;
     } failure:^(NSError *aError) {
         
     }];
-    
+    [manager fetchRaceData:matchId success:^(id data) {
+        self.dataModel = data;
+        self.status += 1;
+    } failure:^(NSError *aError) {
+        
+    }];
 }
 -(RACCommand *)likeCommand
 {
