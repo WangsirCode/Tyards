@@ -120,6 +120,8 @@
             [self.gameTableView reloadData];
             [self.teamTableView reloadData];
             [self.infoTableView reloadData];
+            self.listTableHeaderView.scoreButton.selected = YES;
+            self.listTableHeaderView.scoreButton.layer.borderColor = [UIColor MyColor].CGColor;
         }
     }];
     [[self.viewModel.shareCommand executionSignals] subscribeNext:^(id x) {
@@ -203,8 +205,10 @@
     }
     else if (tableView.tag == 102)
     {
-        return 0;
-        
+        if (self.viewModel.listTableIndex == 0) {
+            return self.viewModel.scoreModel.count;
+        }
+        return 1;
     }
     else if(tableView.tag == 103)
     {
@@ -225,7 +229,17 @@
     }
     else if (tableView.tag == 102)
     {
-        return 0;
+        if (self.viewModel.listTableIndex == 0) {
+            return self.viewModel.scoreModel[section].grids.count;
+        }
+        else if (self.viewModel.listTableIndex == 1)
+        {
+            return self.viewModel.scorerModel.count;
+        }
+        else
+        {
+            return self.viewModel.awardModel.count;
+        }
     }
     else if(tableView.tag == 103)
     {
@@ -301,6 +315,132 @@
     }
     else if (tableView.tag == 102)
     {
+        if (self.viewModel.listTableIndex == 0) {
+            Grids* model = self.viewModel.scoreModel[indexPath.section].grids[indexPath.row];
+            UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"scroreCell"];
+            cell.textLabel.text = [NSString stringWithFormat:@"%ld.",(long)(indexPath.row + 1)];
+            cell.textLabel.textColor = [UIColor blackColor];
+            cell.detailTextLabel.textColor = [UIColor MyColor];
+            cell.detailTextLabel.text = model.team.name;
+            cell.detailTextLabel.textAlignment = NSTextAlignmentLeft;
+            cell.detailTextLabel.sd_layout
+            .centerYEqualToView(cell.contentView)
+            .leftSpaceToView(cell.textLabel,24*self.view.scale)
+            .heightIs(cell.contentView.height)
+            .maxWidthIs(140*self.view.scale);
+            NSArray<NSNumber*>* array = @[@([model getNum]),@(model.wins),@(model.draws),@(model.loses),@(model.points)];
+            for (int i = 0; i < 5; i++) {
+                UILabel* label = [UILabel new];
+                label.textColor = [UIColor blackColor];
+                label.text = [array[i] stringValue];
+                label.textAlignment = NSTextAlignmentCenter;
+                [cell.contentView addSubview:label];
+                label.sd_layout
+                .leftSpaceToView(cell.contentView,160*self.view.scale + i * 42 *self.view.scale)
+                .centerYEqualToView(cell.contentView)
+                .widthIs(35*self.view.scale)
+                .heightIs(cell.contentView.height);
+            }
+            return cell;
+        }
+        else if (self.viewModel.listTableIndex == 1)
+        {
+            ScorerListModel* model = self.viewModel.scorerModel[indexPath.row];
+            UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"scorerCell"];
+            if (indexPath.row < 3) {
+                UIImageView* imageView = [UIImageView new];
+                [cell.contentView addSubview:imageView];
+                imageView.sd_layout
+                .centerYEqualToView(cell.contentView)
+                .leftSpaceToView(cell.contentView,17*self.view.scale)
+                .widthIs(17*self.view.scale)
+                .heightIs(13.3*self.view.scale);
+                switch (indexPath.row) {
+                    case 0:
+                        imageView.image = [UIImage imageNamed:@"scorer"];
+                        break;
+                    case 1:
+                        imageView.image = [UIImage imageNamed:@"scorer2"];
+                        break;
+                    case 2:
+                        imageView.image = [UIImage imageNamed:@"scorer3"];
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                UILabel* label = [UILabel new];
+                label.text = [NSString stringWithFormat:@"%ld.",(indexPath.row + 1)];
+                [cell.contentView addSubview:label];
+                label.sd_layout
+                .leftSpaceToView(cell.contentView,17*self.view.scale)
+                .centerYEqualToView(cell.contentView)
+                .heightIs(cell.contentView.height)
+                .widthIs(20);
+            }
+            cell.textLabel.text = model.player.name;
+            cell.textLabel.textColor = [UIColor MyColor];
+            cell.textLabel.sd_layout
+            .centerYEqualToView(cell.contentView)
+            .leftSpaceToView(cell.contentView,70*self.view.scale)
+            .heightIs(cell.contentView.height)
+            .widthIs(85*self.view.scale);
+            cell.detailTextLabel.textColor = [UIColor MyColor];
+            cell.detailTextLabel.text = model.team.name;
+            cell.detailTextLabel.textAlignment = NSTextAlignmentLeft;
+            cell.detailTextLabel.sd_layout
+            .leftSpaceToView(cell.contentView,165*self.view.scale)
+            .centerYEqualToView(cell.contentView)
+            .heightIs(cell.contentView.height)
+            .maxWidthIs(135*self.view.scale);
+            
+            UILabel* num = [UILabel new];
+            [cell.contentView addSubview:num];
+            num.textAlignment = NSTextAlignmentCenter;
+            num.text = [NSString stringWithFormat:@"%ld",model.score];
+            num.sd_layout
+            .centerYEqualToView(cell.contentView)
+            .leftSpaceToView(cell.contentView,310*self.view.scale)
+            .heightIs(cell.contentView.height)
+            .widthIs(35*self.view.scale);
+            return cell;
+        }
+        else
+        {
+            AwardListModel* model = self.viewModel.awardModel[indexPath.row];
+            UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"awardCell"];
+            if (model.logo.url) {
+                NSURL* url = [[NSURL alloc] initWithString:model.logo.url];
+                [cell.imageView sd_setImageWithURL:url placeholderImage:[UIImage placeholderImage]];
+            }
+            else
+            {
+                cell.imageView.image = [UIImage placeholderImage];
+            }
+            cell.imageView.sd_cornerRadiusFromWidthRatio = @0.5;
+            cell.imageView.sd_layout
+            .centerYEqualToView(cell.contentView)
+            .leftSpaceToView(cell.contentView,10*self.view.scale)
+            .heightIs(25*self.view.scale)
+            .widthEqualToHeight();
+            cell.textLabel.text = model.name;
+            cell.textLabel.font = [UIFont systemFontOfSize:14];
+            cell.textLabel.sd_layout
+            .leftSpaceToView(cell.imageView,8)
+            .centerYEqualToView(cell.contentView)
+            .heightIs(cell.contentView.height)
+            .widthIs(140*self.view.scale);
+            cell.detailTextLabel.text = model.owner;
+            cell.detailTextLabel.textColor = [UIColor MyColor];
+            cell.detailTextLabel.font = [UIFont systemFontOfSize:16];
+            cell.detailTextLabel.sd_layout
+            .leftSpaceToView(cell.contentView,185*self.view.scale)
+            .centerYEqualToView(cell.contentView)
+            .heightIs(cell.contentView.height)
+            .widthIs(150);
+            return cell;
+        }
         return nil;
     }
     else if (tableView.tag == 103)
@@ -336,6 +476,10 @@
         }
        
     }
+    else if (tableView.tag == 102)
+    {
+        return 48*self.view.scale;
+    }
     return 0;
 }
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
@@ -351,6 +495,10 @@
     else if (tableView.tag == 100)
     {
         return 44*self.view.scale;
+    }
+    else if(tableView.tag == 102)
+    {
+        return 48*self.view.scale;
     }
     return 0;
 }
@@ -395,6 +543,87 @@
         .leftSpaceToView(view,10)
         .heightIs(30*self.view.scale);
         return view;
+    }
+    else if (tableView.tag == 102)
+    {
+        if (self.viewModel.listTableIndex == 0) {
+            UIView* view = [UIView new];
+            UILabel* label = [UILabel new];
+            label.textColor = [UIColor colorWithHexString:@"#A1B2BA"];
+            label.textAlignment = NSTextAlignmentLeft;
+            label.text = self.viewModel.scoreModel[section].name;
+            [view addSubview:label];
+            label.sd_layout
+            .centerYEqualToView(view)
+            .leftSpaceToView(view,12*self.view.scale)
+            .heightIs(48*self.view.scale)
+            .maxWidthIs(170*self.view.scale);
+            NSArray<NSString*> *array = @[@"场次",@"胜",@"平",@"负",@"积分"];
+            for (int i = 0; i < 5; i ++) {
+                UILabel* label = [UILabel new];
+                label.textColor = [UIColor colorWithHexString:@"#A1B2BA"];
+                label.text = array[i];
+                label.textAlignment = NSTextAlignmentCenter;
+                [view addSubview:label];
+                label.sd_layout
+                .leftSpaceToView(view,160*self.view.scale + i * 42 *self.view.scale)
+                .centerYEqualToView(view)
+                .widthIs(35*self.view.scale)
+                .heightIs(48*self.view.scale);
+            }
+            view.backgroundColor = [UIColor whiteColor];
+            return view;
+        }
+        else if (self.viewModel.listTableIndex == 1)
+        {
+            UIView* view = [UIView new];
+            view.backgroundColor = [UIColor whiteColor];
+            NSArray<NSNumber*>* array = @[@12,@70,@165,@295];
+            NSArray<NSString*>* stringArray = @[@"排名",@"球员",@"所属球队",@"进球数"];
+            for (int i = 0; i < 4 ; i ++) {
+                UILabel *label = [UILabel new];
+                label.text = stringArray[i];
+                label.textColor = [UIColor colorWithHexString:@"#A1B2BA"];
+                if (i == 3) {
+                    label.textAlignment = NSTextAlignmentCenter;
+                }
+                [view addSubview:label];
+                label.sd_layout
+                .leftSpaceToView(view,[array[i] integerValue]*self.view.scale)
+                .centerYEqualToView(view)
+                .heightIs(48*self.view.scale)
+                .widthIs(70);
+            }
+            view.layer.borderColor = [UIColor BackGroundColor].CGColor;
+            view.layer.borderWidth = 1;
+            return view;
+        }
+        else
+        {
+            UIView* view = [UIView new];
+            view.backgroundColor = [UIColor whiteColor];
+            view.layer.borderWidth = 1;
+            view.layer.borderColor = [UIColor BackGroundColor].CGColor;
+            UILabel* label = [UILabel new];
+            label.textColor = [UIColor colorWithHexString:@"#A1B2BA"];
+            label.text = @"奖项名称";
+            UILabel* label2 = [UILabel new];
+            label2.text = @"球队/球员/教练";
+            label2.textColor = [UIColor colorWithHexString:@"#A1B2BA"];
+            [view sd_addSubviews:@[label2,label]];
+            label.sd_layout
+            .leftSpaceToView(view,12)
+            .centerYEqualToView(view)
+            .heightIs(48*self.view.scale)
+            .widthIs(100);
+            label2.sd_layout
+            .leftSpaceToView(view,185*self.view.scale)
+            .centerYEqualToView(view)
+            .heightIs(48*self.view.scale)
+            .widthIs(150);
+            return view;
+        }
+        
     }
     return nil;
     
@@ -484,6 +713,7 @@
         _gameTableView.dataSource = self;
         _gameTableView.tag = 101;
         [_gameTableView registerClass:[NoticeGameviewCell class] forCellReuseIdentifier:@"NoticeGameviewCell"];
+        _gameTableView.bounces = NO;
     }
     return _gameTableView;
 }
@@ -494,7 +724,13 @@
         _listTableview.delegate = self;
         _listTableview.dataSource = self;
         _listTableview.tag = 102;
-        _listTableview.tableHeaderView = self.listTableHeaderView;
+        UIView* view = [UIView new];
+        view.backgroundColor = [UIColor BackGroundColor];
+        view.frame = CGRectMake(0, 0, self.view.width, self.view.scale * 68);
+        [view addSubview:self.listTableHeaderView];
+        self.listTableHeaderView.backgroundColor = [UIColor whiteColor];
+        _listTableview.tableHeaderView = view;
+        _listTableview.separatorInset = UIEdgeInsetsZero;
     }
     return _listTableview;
 }
@@ -600,7 +836,7 @@
 - (ListTableHeaderVIew *)listTableHeaderView
 {
     if (!_listTableHeaderView) {
-        _listTableHeaderView = [ListTableHeaderVIew new];
+        _listTableHeaderView = [[ListTableHeaderVIew alloc] init];
         _listTableHeaderView.frame = CGRectMake(0, 0, self.view.width, self.view.scale * 60);
         _listTableHeaderView.layer.borderWidth = 1;
         _listTableHeaderView.layer.borderColor = [UIColor BackGroundColor].CGColor;
@@ -631,7 +867,40 @@
 #pragma mark -HeaderViewDelagate
 - (void)didClickButtonAtIndex:(NSInteger)index
 {
-    
+    switch (index) {
+        case 0:
+            self.listTableHeaderView.scorerButton.layer.borderColor = [UIColor colorWithHexString:@"#A1B2BA"].CGColor;
+            self.listTableHeaderView.scorerButton.selected = NO;
+            self.listTableHeaderView.awardButton.layer.borderColor = [UIColor colorWithHexString:@"#A1B2BA"].CGColor;
+            self.listTableHeaderView.awardButton.selected = NO;
+            if (self.viewModel.listTableIndex != 0) {
+                self.viewModel.listTableIndex = 0;
+                [self.listTableview reloadData];
+            }
+            break;
+        case 1:
+            self.listTableHeaderView.scoreButton.layer.borderColor = [UIColor colorWithHexString:@"#A1B2BA"].CGColor;
+            self.listTableHeaderView.scoreButton.selected = NO;
+            self.listTableHeaderView.awardButton.layer.borderColor = [UIColor colorWithHexString:@"#A1B2BA"].CGColor;
+            self.listTableHeaderView.awardButton.selected = NO;
+            if (self.viewModel.listTableIndex != 1) {
+                self.viewModel.listTableIndex = 1;
+                [self.listTableview reloadData];
+            }
+            break;
+        case 2:
+            self.listTableHeaderView.scoreButton.layer.borderColor = [UIColor colorWithHexString:@"#A1B2BA"].CGColor;
+            self.listTableHeaderView.scoreButton.selected = NO;
+            self.listTableHeaderView.scorerButton.layer.borderColor = [UIColor colorWithHexString:@"#A1B2BA"].CGColor;
+            self.listTableHeaderView.scorerButton.selected = NO;
+            if (self.viewModel.listTableIndex != 2) {
+                self.viewModel.listTableIndex = 2;
+                [self.listTableview reloadData];
+            }
+            break;
+        default:
+            break;
+    }
 }
 @end
 

@@ -21,4 +21,5 @@
 @property (nonatomic,strong) NSArray* infoTableviewRowNumber;
 @property (nonatomic,strong) NSArray* infoTableViewCellInfo;
 @property (nonatomic,strong) NSArray* infotableviewCellname;
+@property (nonatomic,assign) NSInteger listTableIndex;
 @end

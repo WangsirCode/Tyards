@@ -15,6 +15,7 @@
     if (self)
     {
         self.status = 0;
+        self.listTableIndex = 0;
         //[self fetchData:[(NSNumber*)dictionary[@"id"] stringValue]];
         //先用这个测试
         [self fetchData:@"9"];

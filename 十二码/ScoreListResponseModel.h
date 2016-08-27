@@ -36,6 +36,8 @@
 
 @property (nonatomic, assign) NSInteger draws;
 
+@property (nonatomic,assign) NSInteger points;
+
 @property (nonatomic, strong) Team *team;
 
 @property (nonatomic, assign) NSInteger wins;
@@ -44,6 +46,7 @@
 
 @property (nonatomic, copy) NSString *description;
 
+- (NSInteger)getNum;
 @end
 
 

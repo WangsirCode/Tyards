@@ -24,7 +24,21 @@
     self.scorerButton.sd_cornerRadiusFromHeightRatio = @0.5;
     self.scoreButton.sd_cornerRadiusFromHeightRatio = @0.5;
     self.awardButton.sd_cornerRadiusFromHeightRatio = @0.5;
-    [self setupAutoMarginFlowItems:@[self.scoreButton,self.scorerButton,self.awardButton] withPerRowItemsCount:3 itemWidth:69*self.scale verticalMargin:10 verticalEdgeInset:4 horizontalEdgeInset:10];
+    self.scoreButton.sd_layout
+    .leftSpaceToView(self,24*self.scale)
+    .centerYEqualToView(self)
+    .heightIs(24*self.scale)
+    .widthIs(69*self.scale);
+    self.scorerButton.sd_layout
+    .leftSpaceToView(self,144*self.scale)
+    .centerYEqualToView(self)
+    .heightIs(24*self.scale)
+    .widthIs(69*self.scale);
+    self.awardButton.sd_layout
+    .leftSpaceToView(self,264*self.scale)
+    .centerYEqualToView(self)
+    .heightIs(24*self.scale)
+    .widthIs(69*self.scale);
     
 }
 - (UIButton *)scoreButton
@@ -33,12 +47,13 @@
         _scoreButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_scoreButton setTitle:@"积分榜" forState:UIControlStateNormal];
         [_scoreButton setTitleColor:[UIColor colorWithHexString:@"#A1B2BA"] forState:UIControlStateNormal];
-        [_scoreButton setTitleColor:[UIColor MyColor] forState:UIControlStateSelected];
         _scoreButton.layer.borderWidth = 1;
         _scoreButton.layer.borderColor = [UIColor colorWithHexString:@"#A1B2BA"].CGColor;
         _scoreButton.titleLabel.font = [UIFont systemFontOfSize:14];
+        [_scoreButton setTitleColor:[UIColor MyColor] forState:UIControlStateSelected];
         [[_scoreButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
             _scoreButton.layer.borderColor = [UIColor MyColor].CGColor;
+            _scoreButton.selected = YES;
             [self.delegate didClickButtonAtIndex:0];
             
         }];
@@ -57,6 +72,7 @@
         _scorerButton.titleLabel.font = [UIFont systemFontOfSize:14];
         [[_scorerButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
             _scorerButton.layer.borderColor = [UIColor MyColor].CGColor;
+            _scorerButton.selected = YES;
             [self.delegate didClickButtonAtIndex:1];
             
         }];
@@ -76,6 +92,7 @@
         [[_awardButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
             _awardButton.layer.borderColor = [UIColor MyColor].CGColor;
             [self.delegate didClickButtonAtIndex:2];
+            _awardButton.selected = YES;
             
         }];
     }

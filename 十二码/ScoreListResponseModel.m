@@ -25,6 +25,9 @@
 
 
 @implementation Grids
-
+- (NSInteger)getNum
+{
+    return self.loses + self.wins + self.draws;
+}
 @end
 

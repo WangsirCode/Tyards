@@ -13,6 +13,9 @@
 		470BEE141D58295C003167ED /* SetUpViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 470BEE131D58295C003167ED /* SetUpViewModel.m */; };
 		470C5E751D44BFC800DDF90B /* BottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 470C5E741D44BFC800DDF90B /* BottomView.m */; };
 		470C5EF61D44D7E700DDF90B /* SEMSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 470C5EF51D44D7E700DDF90B /* SEMSearchViewController.m */; };
+		470F56CC1D71346700110FCE /* scorer.png in Resources */ = {isa = PBXBuildFile; fileRef = 470F56C91D71346700110FCE /* scorer.png */; };
+		470F56CD1D71346700110FCE /* scorer2.png in Resources */ = {isa = PBXBuildFile; fileRef = 470F56CA1D71346700110FCE /* scorer2.png */; };
+		470F56CE1D71346700110FCE /* scorer3.png in Resources */ = {isa = PBXBuildFile; fileRef = 470F56CB1D71346700110FCE /* scorer3.png */; };
 		4725D2B91D5B2CB100A13AEB /* GameInfoResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4725D2B81D5B2CB100A13AEB /* GameInfoResponseModel.m */; };
 		4725D2BC1D5B2E6E00A13AEB /* GameInfoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4725D2BB1D5B2E6E00A13AEB /* GameInfoDetailViewController.m */; };
 		4725D2C21D5B30EC00A13AEB /* MyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4725D2C11D5B30EC00A13AEB /* MyViewController.m */; };
@@ -270,6 +273,9 @@
 		470C5E741D44BFC800DDF90B /* BottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BottomView.m; sourceTree = "<group>"; };
 		470C5EF41D44D7E700DDF90B /* SEMSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEMSearchViewController.h; sourceTree = "<group>"; };
 		470C5EF51D44D7E700DDF90B /* SEMSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SEMSearchViewController.m; sourceTree = "<group>"; };
+		470F56C91D71346700110FCE /* scorer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scorer.png; sourceTree = "<group>"; };
+		470F56CA1D71346700110FCE /* scorer2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scorer2.png; sourceTree = "<group>"; };
+		470F56CB1D71346700110FCE /* scorer3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scorer3.png; sourceTree = "<group>"; };
 		4725D2B71D5B2CB100A13AEB /* GameInfoResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameInfoResponseModel.h; sourceTree = "<group>"; };
 		4725D2B81D5B2CB100A13AEB /* GameInfoResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameInfoResponseModel.m; sourceTree = "<group>"; };
 		4725D2BA1D5B2E6E00A13AEB /* GameInfoDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameInfoDetailViewController.h; sourceTree = "<group>"; };
@@ -1064,6 +1070,9 @@
 				4735FA141D561E2100FDF2ED /* 头像背景.png */,
 				476088061D55874400F36597 /* calender_L.png */,
 				476088071D55874400F36597 /* 约战-助攻.png */,
+				470F56C91D71346700110FCE /* scorer.png */,
+				470F56CA1D71346700110FCE /* scorer2.png */,
+				470F56CB1D71346700110FCE /* scorer3.png */,
 				476088081D55874400F36597 /* 约战-乌龙.png */,
 				477676761D58D1BF00E10594 /* zhanwei.jpg */,
 				476088091D55874400F36597 /* 约战-时间.png */,
@@ -1514,6 +1523,7 @@
 				4734CE2E1D41CD55006536DF /* clock.png in Resources */,
 				4734CDEE1D41CD39006536DF /* 资讯icon-灰.png in Resources */,
 				4734CE141D41CD4B006536DF /* 意见反馈icon.png in Resources */,
+				470F56CC1D71346700110FCE /* scorer.png in Resources */,
 				4734CE111D41CD4B006536DF /* 个人资料icon.png in Resources */,
 				4734CE461D41CD5E006536DF /* 点-灰.png in Resources */,
 				4734CE2F1D41CD55006536DF /* cursor.png in Resources */,
@@ -1534,6 +1544,7 @@
 				4760880E1D55874400F36597 /* 约战-乌龙.png in Resources */,
 				4734CE1A1D41CD4B006536DF /* 设置icon.png in Resources */,
 				4734CE121D41CD4B006536DF /* 修个人信息-修改icon.png in Resources */,
+				470F56CD1D71346700110FCE /* scorer2.png in Resources */,
 				4760880D1D55874400F36597 /* 约战-助攻.png in Resources */,
 				4734CDDB1D41C95D006536DF /* iconfont.woff in Resources */,
 				4734CE351D41CD55006536DF /* right-arrow.png in Resources */,
@@ -1578,6 +1589,7 @@
 				4734CDF31D41CD39006536DF /* 首页icon-绿.png in Resources */,
 				4734CE4B1D41CD5E006536DF /* 消息icon.png in Resources */,
 				4734CE1B1D41CD4B006536DF /* 黑色透明度.png in Resources */,
+				470F56CE1D71346700110FCE /* scorer3.png in Resources */,
 				4734CE3E1D41CD55006536DF /* 标题背景.png in Resources */,
 				4734CE4C1D41CD5E006536DF /* 信息发送icon.png in Resources */,
 				4734CE001D41CD42006536DF /* 背景.png in Resources */,

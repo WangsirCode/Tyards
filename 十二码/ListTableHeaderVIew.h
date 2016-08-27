@@ -14,8 +14,8 @@
 @end
 
 @interface ListTableHeaderVIew : UIView
-@property (nonatomic,strong) UIButton* scoreButton;
-@property (nonatomic,strong) UIButton* scorerButton;
-@property (nonatomic,strong) UIButton* awardButton;
+@property (nonatomic,strong) UIButton                    * scoreButton;
+@property (nonatomic,strong) UIButton                    * scorerButton;
+@property (nonatomic,strong) UIButton                    * awardButton;
 @property (nonatomic,strong) id<ListTableHeaderVIewDelegate> delegate;
 @end
