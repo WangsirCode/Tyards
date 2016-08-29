@@ -1,14 +1,14 @@
 //
-//  PlayerDetailViewModel.m
+//  CoachDetailViewModel.m
 //  十二码
 //
-//  Created by 汪宇豪 on 16/8/10.
+//  Created by 汪宇豪 on 16/8/29.
 //  Copyright © 2016年 汪宇豪. All rights reserved.
 //
 
-#import "PlayerDetailViewModel.h"
+#import "CoachDetailViewModel.h"
 
-@implementation PlayerDetailViewModel
+@implementation CoachDetailViewModel
 - (instancetype) initWithDictionary:(NSDictionary *)dictionary
 {
     self = [super initWithDictionary:dictionary];
@@ -19,21 +19,23 @@
     }
     return self;
 }
-- (void)fetchData:(NSString*)playerId
+- (void)fetchData:(NSString*)coachId
 {
     SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
     //暂时用这个id测试
-    [manager fetchPlayerInfo:playerId success:^(id data) {
+    [manager fetchCoachInfo:coachId success:^(id data) {
         self.model = data;
         NSMutableArray* array = [[NSMutableArray alloc] init];
         [self.model.newses enumerateObjectsUsingBlock:^(Newses * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            [array appendObjects:obj.comments];
+            if (obj.comments.count > 0) {
+                [array appendObjects:obj.comments];
+            }
         }];
         self.comments = [NSArray arrayWithArray:array];
         self.status += 1;
     } failure:^(NSError *aError) {
     }];
-    [manager fetchPlayerData:playerId token:[self getToken] success:^(id data) {
+    [manager fetchCoachData:coachId token:[self getToken] success:^(id data) {
         self.palyerData = data;
         self.status += 1;
         self.fan = self.palyerData.fan;
@@ -48,7 +50,7 @@
             return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
                 SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
                 if (self.fan) {
-                    [manager postdisLikePlayer:[@(self.model.player.id) stringValue] token:[self getToken] success:^(id data) {
+                    [manager postdislikeCoach:[@(self.model.coach.id) stringValue] token:[self getToken] success:^(id data) {
                         self.didFaned = YES;
                         self.fan = NO;
                         [subscriber sendNext:@1];
@@ -59,7 +61,7 @@
                 }
                 else
                 {
-                    [manager postLikePlayer:[@(self.model.player.id) stringValue] token:[self getToken] success:^(id data) {
+                    [manager postLikeCoach:[@(self.model.coach.id) stringValue] token:[self getToken] success:^(id data) {
                         self.didFaned = YES;
                         self.fan = YES;
                         [subscriber sendNext:@1];

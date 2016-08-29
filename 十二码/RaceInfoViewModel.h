@@ -10,6 +10,7 @@
 #import "MDABizManager.h"
 @interface RaceInfoViewModel : SEMViewModel
 @property (nonatomic, strong) RaceDataModel *dataModel;
+@property (nonatomic, strong) MetchEventModel *eventModel;
 @property (nonatomic, strong) NSArray<News *> * newsModel;
 @property (nonatomic, strong) Games *gameModel;
 @property (nonatomic,strong) NSArray<Comments*>* messageModel;

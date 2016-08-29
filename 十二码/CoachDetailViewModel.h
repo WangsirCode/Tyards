@@ -1,19 +1,19 @@
 //
-//  PlayerDetailViewModel.h
+//  CoachDetailViewModel.h
 //  十二码
 //
-//  Created by 汪宇豪 on 16/8/10.
+//  Created by 汪宇豪 on 16/8/29.
 //  Copyright © 2016年 汪宇豪. All rights reserved.
 //
 
 #import "SEMViewModel.h"
 #import "MDABizManager.h"
-@interface PlayerDetailViewModel : SEMViewModel
-@property (nonatomic, strong) PlayerModel     *model;
+@interface CoachDetailViewModel : SEMViewModel
+@property (nonatomic, strong) CoachModel     *model;
 @property (nonatomic,strong ) NSArray<Comments       *> * comments;
 @property (nonatomic,strong ) RACCommand      * shareCommand;
 @property (nonatomic,strong ) RACCommand      * likeCommand;
-@property (nonatomic, strong) PlayerDataModel *palyerData;
+@property (nonatomic, strong) CoachDataModel *palyerData;
 @property (nonatomic,assign) NSInteger status;
 @property (nonatomic,assign) BOOL fan;
 @property (nonatomic,assign) BOOL didFaned;

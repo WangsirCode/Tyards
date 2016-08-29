@@ -47,6 +47,12 @@
     } failure:^(NSError *aError) {
         
     }];
+    [manager fetchRaceEvents:matchId success:^(id data) {
+        self.eventModel = data;
+        self.status += 1;
+    } failure:^(NSError *aError) {
+        
+    }];
 }
 -(RACCommand *)likeCommand
 {

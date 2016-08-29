@@ -8,10 +8,17 @@
 
 #import <Foundation/Foundation.h>
 #import "MDABizManager.h"
-@class PlayerModel,PlayerDetail,Newses,Articles,Cover;
+@class PlayerModel,PlayerDetail,Newses,Articles,Cover,CoachModel;
 @interface PlayerInforesponseModel : NSObject
 
 @property (nonatomic, strong) PlayerModel *resp;
+
+@property (nonatomic, assign) NSInteger code;
+
+@end
+@interface CoachInfoResponseModel : NSObject
+
+@property (nonatomic, strong) CoachModel *resp;
 
 @property (nonatomic, assign) NSInteger code;
 
@@ -25,7 +32,15 @@
 @property (nonatomic, strong) NSArray<Articles *> *articles;
 
 @end
+@interface CoachModel : NSObject
 
+@property (nonatomic, strong) PlayerDetail *coach;
+
+@property (nonatomic, strong) NSArray<Newses *> *newses;
+
+@property (nonatomic, strong) NSArray<Articles *> *articles;
+
+@end
 @interface PlayerDetail : NSObject
 
 @property (nonatomic, assign) NSInteger height;
@@ -55,3 +70,6 @@
 - (NSString*)PosionInfo;
 @end
 
+@interface CoachDetail : NSObject
+
+@end

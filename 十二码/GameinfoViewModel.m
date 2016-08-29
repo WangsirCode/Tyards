@@ -28,8 +28,9 @@
 - (void)fetchData:(NSString*)tournamentId
 {
     SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
-    [manager fetchGameInfo:tournamentId success:^(id data) {
+    [manager fetchGameInfo:tournamentId token:[self getToken] success:^(id data) {
         self.model = data;
+        self.fan = self.model.fan;
         NSMutableArray* array = [[NSMutableArray alloc] init];
         if (self.model.host) {
             [array addObject:self.model.host];
@@ -105,12 +106,28 @@
         _likeCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
             return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
                 SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
-                [manager postLikeTournament:[@(self.model.id) stringValue] token:[self getToken] success:^(id data) {
-                    [subscriber sendNext:@1];
-                    [subscriber sendCompleted];
-                } failure:^(NSError *aError) {
-
-                }];
+                if (self.fan) {
+                    [manager postdisLikeTournament:[@(self.model.id) stringValue] token:[self getToken] success:^(id data) {
+                        self.didFaned = YES;
+                        self.fan = NO;
+                        [subscriber sendNext:@1];
+                        [subscriber sendCompleted];
+                    } failure:^(NSError *aError) {
+                        
+                    }];
+                }
+                else
+                {
+                    [manager postLikeTournament:[@(self.model.id) stringValue] token:[self getToken] success:^(id data) {
+                        self.didFaned = YES;
+                        self.fan = YES;
+                        [subscriber sendNext:@1];
+                        [subscriber sendCompleted];
+                    } failure:^(NSError *aError) {
+                        
+                    }];
+                }
+                
                 return nil;
             }];
         }];

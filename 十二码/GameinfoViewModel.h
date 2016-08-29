@@ -22,4 +22,6 @@
 @property (nonatomic,strong) NSArray* infoTableViewCellInfo;
 @property (nonatomic,strong) NSArray* infotableviewCellname;
 @property (nonatomic,assign) NSInteger listTableIndex;
+@property (nonatomic,assign) BOOL fan;
+@property (nonatomic,assign) BOOL didFaned;
 @end

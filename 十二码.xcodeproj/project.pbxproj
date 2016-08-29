@@ -19,6 +19,12 @@
 		470F56D11D71D2D400110FCE /* RaceDataResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 470F56D01D71D2D400110FCE /* RaceDataResponseModel.m */; };
 		470F56D41D71D59700110FCE /* DataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 470F56D31D71D59700110FCE /* DataView.m */; };
 		470F56D71D71DF9400110FCE /* HistoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 470F56D61D71DF9400110FCE /* HistoryView.m */; };
+		47184FB11D72BB38008A4591 /* MatchEventResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47184FB01D72BB38008A4591 /* MatchEventResponseModel.m */; };
+		47184FB31D72BCEA008A4591 /* 约战-黄.png in Resources */ = {isa = PBXBuildFile; fileRef = 47184FB21D72BCEA008A4591 /* 约战-黄.png */; };
+		47184FB51D72BCF1008A4591 /* 约战-红.png in Resources */ = {isa = PBXBuildFile; fileRef = 47184FB41D72BCF1008A4591 /* 约战-红.png */; };
+		47184FB71D72C81D008A4591 /* 约战-乌龙.png in Resources */ = {isa = PBXBuildFile; fileRef = 47184FB61D72C81D008A4591 /* 约战-乌龙.png */; };
+		47184FBD1D73C2FD008A4591 /* icon_follow(1).png in Resources */ = {isa = PBXBuildFile; fileRef = 47184FBC1D73C2FD008A4591 /* icon_follow(1).png */; };
+		47184FBF1D73C303008A4591 /* icon_followed(1).png in Resources */ = {isa = PBXBuildFile; fileRef = 47184FBE1D73C303008A4591 /* icon_followed(1).png */; };
 		4725D2B91D5B2CB100A13AEB /* GameInfoResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4725D2B81D5B2CB100A13AEB /* GameInfoResponseModel.m */; };
 		4725D2BC1D5B2E6E00A13AEB /* GameInfoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4725D2BB1D5B2E6E00A13AEB /* GameInfoDetailViewController.m */; };
 		4725D2C21D5B30EC00A13AEB /* MyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4725D2C11D5B30EC00A13AEB /* MyViewController.m */; };
@@ -157,7 +163,7 @@
 		4760880B1D55874400F36597 /* camera_L.png in Resources */ = {isa = PBXBuildFile; fileRef = 476088051D55874400F36597 /* camera_L.png */; };
 		4760880C1D55874400F36597 /* calender_L.png in Resources */ = {isa = PBXBuildFile; fileRef = 476088061D55874400F36597 /* calender_L.png */; };
 		4760880D1D55874400F36597 /* 约战-助攻.png in Resources */ = {isa = PBXBuildFile; fileRef = 476088071D55874400F36597 /* 约战-助攻.png */; };
-		4760880E1D55874400F36597 /* 约战-乌龙.png in Resources */ = {isa = PBXBuildFile; fileRef = 476088081D55874400F36597 /* 约战-乌龙.png */; };
+		4760880E1D55874400F36597 /* c.png in Resources */ = {isa = PBXBuildFile; fileRef = 476088081D55874400F36597 /* c.png */; };
 		4760880F1D55874400F36597 /* 约战-时间.png in Resources */ = {isa = PBXBuildFile; fileRef = 476088091D55874400F36597 /* 约战-时间.png */; };
 		476088101D55874400F36597 /* 约战-进球.png in Resources */ = {isa = PBXBuildFile; fileRef = 4760880A1D55874400F36597 /* 约战-进球.png */; };
 		476088131D5588D900F36597 /* SEMTeamPhotoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 476088121D5588D900F36597 /* SEMTeamPhotoController.m */; };
@@ -207,9 +213,15 @@
 		47A364CF1D5AB9D5002FC59E /* PlayerDetailViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A364CE1D5AB9D5002FC59E /* PlayerDetailViewModel.m */; };
 		47A364D51D5ABA93002FC59E /* TemplateController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A364D41D5ABA93002FC59E /* TemplateController.m */; };
 		47A364D81D5ABC7F002FC59E /* PlayerInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A364D71D5ABC7F002FC59E /* PlayerInfoView.m */; };
+		47A626291D74878400ABE897 /* InvitationResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A626281D74878400ABE897 /* InvitationResponseModel.m */; };
+		47A6262C1D748A1500ABE897 /* InvitationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A6262B1D748A1500ABE897 /* InvitationViewController.m */; };
+		47A6262F1D748A8C00ABE897 /* InvitationVIewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A6262E1D748A8C00ABE897 /* InvitationVIewModel.m */; };
+		47A626321D748CF700ABE897 /* InvitationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A626311D748CF700ABE897 /* InvitationView.m */; };
 		47ABD96B1D60799600CD18CF /* PlayerDataResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47ABD96A1D60799600CD18CF /* PlayerDataResponseModel.m */; };
 		47ABD96E1D607E8300CD18CF /* InfoViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 47ABD96D1D607E8300CD18CF /* InfoViewCell.m */; };
 		47ABD9701D60AA4E00CD18CF /* Copa del Rey.png in Resources */ = {isa = PBXBuildFile; fileRef = 47ABD96F1D60AA4E00CD18CF /* Copa del Rey.png */; };
+		47ADE43E1D73CFAD006C130B /* CoachDetailViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47ADE43D1D73CFAD006C130B /* CoachDetailViewModel.m */; };
+		47ADE4411D73D064006C130B /* CoachDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47ADE4401D73D064006C130B /* CoachDetailViewController.m */; };
 		47AF5D2B1D56468F00728933 /* MyConcernController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47AF5D2A1D56468F00728933 /* MyConcernController.m */; };
 		47AF5D2E1D5646A700728933 /* MyConcernViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47AF5D2D1D5646A700728933 /* MyConcernViewModel.m */; };
 		47AF5D311D564AA200728933 /* MeReplyResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47AF5D301D564AA200728933 /* MeReplyResponseModel.m */; };
@@ -286,6 +298,13 @@
 		470F56D31D71D59700110FCE /* DataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataView.m; sourceTree = "<group>"; };
 		470F56D51D71DF9400110FCE /* HistoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryView.h; sourceTree = "<group>"; };
 		470F56D61D71DF9400110FCE /* HistoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryView.m; sourceTree = "<group>"; };
+		47184FAF1D72BB38008A4591 /* MatchEventResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchEventResponseModel.h; sourceTree = "<group>"; };
+		47184FB01D72BB38008A4591 /* MatchEventResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchEventResponseModel.m; sourceTree = "<group>"; };
+		47184FB21D72BCEA008A4591 /* 约战-黄.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "约战-黄.png"; sourceTree = "<group>"; };
+		47184FB41D72BCF1008A4591 /* 约战-红.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "约战-红.png"; sourceTree = "<group>"; };
+		47184FB61D72C81D008A4591 /* 约战-乌龙.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "约战-乌龙.png"; sourceTree = "<group>"; };
+		47184FBC1D73C2FD008A4591 /* icon_follow(1).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_follow(1).png"; sourceTree = "<group>"; };
+		47184FBE1D73C303008A4591 /* icon_followed(1).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_followed(1).png"; sourceTree = "<group>"; };
 		4725D2B71D5B2CB100A13AEB /* GameInfoResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameInfoResponseModel.h; sourceTree = "<group>"; };
 		4725D2B81D5B2CB100A13AEB /* GameInfoResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameInfoResponseModel.m; sourceTree = "<group>"; };
 		4725D2BA1D5B2E6E00A13AEB /* GameInfoDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameInfoDetailViewController.h; sourceTree = "<group>"; };
@@ -494,7 +513,7 @@
 		476088051D55874400F36597 /* camera_L.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera_L.png; sourceTree = "<group>"; };
 		476088061D55874400F36597 /* calender_L.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = calender_L.png; sourceTree = "<group>"; };
 		476088071D55874400F36597 /* 约战-助攻.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "约战-助攻.png"; sourceTree = "<group>"; };
-		476088081D55874400F36597 /* 约战-乌龙.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "约战-乌龙.png"; sourceTree = "<group>"; };
+		476088081D55874400F36597 /* c.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = c.png; sourceTree = "<group>"; };
 		476088091D55874400F36597 /* 约战-时间.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "约战-时间.png"; sourceTree = "<group>"; };
 		4760880A1D55874400F36597 /* 约战-进球.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "约战-进球.png"; sourceTree = "<group>"; };
 		476088111D5588D900F36597 /* SEMTeamPhotoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEMTeamPhotoController.h; sourceTree = "<group>"; };
@@ -590,11 +609,23 @@
 		47A364D41D5ABA93002FC59E /* TemplateController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TemplateController.m; sourceTree = "<group>"; };
 		47A364D61D5ABC7F002FC59E /* PlayerInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerInfoView.h; sourceTree = "<group>"; };
 		47A364D71D5ABC7F002FC59E /* PlayerInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerInfoView.m; sourceTree = "<group>"; };
+		47A626271D74878400ABE897 /* InvitationResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvitationResponseModel.h; sourceTree = "<group>"; };
+		47A626281D74878400ABE897 /* InvitationResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvitationResponseModel.m; sourceTree = "<group>"; };
+		47A6262A1D748A1500ABE897 /* InvitationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvitationViewController.h; sourceTree = "<group>"; };
+		47A6262B1D748A1500ABE897 /* InvitationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvitationViewController.m; sourceTree = "<group>"; };
+		47A6262D1D748A8C00ABE897 /* InvitationVIewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvitationVIewModel.h; sourceTree = "<group>"; };
+		47A6262E1D748A8C00ABE897 /* InvitationVIewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvitationVIewModel.m; sourceTree = "<group>"; };
+		47A626301D748CF700ABE897 /* InvitationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvitationView.h; sourceTree = "<group>"; };
+		47A626311D748CF700ABE897 /* InvitationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvitationView.m; sourceTree = "<group>"; };
 		47ABD9691D60799600CD18CF /* PlayerDataResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerDataResponseModel.h; sourceTree = "<group>"; };
 		47ABD96A1D60799600CD18CF /* PlayerDataResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerDataResponseModel.m; sourceTree = "<group>"; };
 		47ABD96C1D607E8300CD18CF /* InfoViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoViewCell.h; sourceTree = "<group>"; };
 		47ABD96D1D607E8300CD18CF /* InfoViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoViewCell.m; sourceTree = "<group>"; };
 		47ABD96F1D60AA4E00CD18CF /* Copa del Rey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Copa del Rey.png"; sourceTree = "<group>"; };
+		47ADE43C1D73CFAD006C130B /* CoachDetailViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoachDetailViewModel.h; sourceTree = "<group>"; };
+		47ADE43D1D73CFAD006C130B /* CoachDetailViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoachDetailViewModel.m; sourceTree = "<group>"; };
+		47ADE43F1D73D064006C130B /* CoachDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoachDetailViewController.h; sourceTree = "<group>"; };
+		47ADE4401D73D064006C130B /* CoachDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoachDetailViewController.m; sourceTree = "<group>"; };
 		47AF5D291D56468F00728933 /* MyConcernController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyConcernController.h; sourceTree = "<group>"; };
 		47AF5D2A1D56468F00728933 /* MyConcernController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyConcernController.m; sourceTree = "<group>"; };
 		47AF5D2C1D5646A700728933 /* MyConcernViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyConcernViewModel.h; sourceTree = "<group>"; };
@@ -716,6 +747,8 @@
 				470F56D01D71D2D400110FCE /* RaceDataResponseModel.m */,
 				4788AA9B1D71EA6D0057B954 /* PlayHistory.h */,
 				4788AA9C1D71EA6D0057B954 /* PlayHistory.m */,
+				47184FAF1D72BB38008A4591 /* MatchEventResponseModel.h */,
+				47184FB01D72BB38008A4591 /* MatchEventResponseModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1084,16 +1117,21 @@
 		4734CDE21D41CD27006536DF /* picture */ = {
 			isa = PBXGroup;
 			children = (
+				47184FBE1D73C303008A4591 /* icon_followed(1).png */,
 				47ABD96F1D60AA4E00CD18CF /* Copa del Rey.png */,
 				4735FA101D5616F000FDF2ED /* Group 19.png */,
+				47184FBC1D73C2FD008A4591 /* icon_follow(1).png */,
 				476088051D55874400F36597 /* camera_L.png */,
 				4735FA141D561E2100FDF2ED /* 头像背景.png */,
+				47184FB41D72BCF1008A4591 /* 约战-红.png */,
 				476088061D55874400F36597 /* calender_L.png */,
+				47184FB61D72C81D008A4591 /* 约战-乌龙.png */,
+				47184FB21D72BCEA008A4591 /* 约战-黄.png */,
 				476088071D55874400F36597 /* 约战-助攻.png */,
 				470F56C91D71346700110FCE /* scorer.png */,
 				470F56CA1D71346700110FCE /* scorer2.png */,
 				470F56CB1D71346700110FCE /* scorer3.png */,
-				476088081D55874400F36597 /* 约战-乌龙.png */,
+				476088081D55874400F36597 /* c.png */,
 				477676761D58D1BF00E10594 /* zhanwei.jpg */,
 				476088091D55874400F36597 /* 约战-时间.png */,
 				4760880A1D55874400F36597 /* 约战-进球.png */,
@@ -1218,6 +1256,8 @@
 				477676651D5853CD00E10594 /* FeedBackController.m */,
 				477676701D58614A00E10594 /* AboutViewController.h */,
 				477676711D58614A00E10594 /* AboutViewController.m */,
+				47A6262A1D748A1500ABE897 /* InvitationViewController.h */,
+				47A6262B1D748A1500ABE897 /* InvitationViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1233,6 +1273,8 @@
 				472A92401D473F8B00F8620F /* MeLoginView.m */,
 				4772FE681D565C780008ED37 /* MyMessageCell.h */,
 				4772FE691D565C780008ED37 /* MyMessageCell.m */,
+				47A626301D748CF700ABE897 /* InvitationView.h */,
+				47A626311D748CF700ABE897 /* InvitationView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1258,6 +1300,8 @@
 				477676681D58544D00E10594 /* FeedBackViewModel.m */,
 				4776766D1D58610600E10594 /* AboutVIewModel.h */,
 				4776766E1D58610600E10594 /* AboutVIewModel.m */,
+				47A6262D1D748A8C00ABE897 /* InvitationVIewModel.h */,
+				47A6262E1D748A8C00ABE897 /* InvitationVIewModel.m */,
 			);
 			name = ViewModel;
 			sourceTree = "<group>";
@@ -1273,6 +1317,8 @@
 				47AF5D331D564DDA00728933 /* MyConcernModel.m */,
 				4772FE651D5659E40008ED37 /* MyMessageModel.h */,
 				4772FE661D5659E40008ED37 /* MyMessageModel.m */,
+				47A626271D74878400ABE897 /* InvitationResponseModel.h */,
+				47A626281D74878400ABE897 /* InvitationResponseModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1337,6 +1383,8 @@
 				47A364B01D597C78002FC59E /* AlbumDetailController.m */,
 				47A364C71D5AB78C002FC59E /* PlayerDetailViewController.h */,
 				47A364C81D5AB78C002FC59E /* PlayerDetailViewController.m */,
+				47ADE43F1D73D064006C130B /* CoachDetailViewController.h */,
+				47ADE4401D73D064006C130B /* CoachDetailViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1381,6 +1429,8 @@
 				47A364B31D597C8B002FC59E /* AlbumDetailViewModel.m */,
 				47A364CD1D5AB9D5002FC59E /* PlayerDetailViewModel.h */,
 				47A364CE1D5AB9D5002FC59E /* PlayerDetailViewModel.m */,
+				47ADE43C1D73CFAD006C130B /* CoachDetailViewModel.h */,
+				47ADE43D1D73CFAD006C130B /* CoachDetailViewModel.m */,
 			);
 			name = ViewModel;
 			sourceTree = "<group>";
@@ -1552,6 +1602,7 @@
 				4734CE301D41CD55006536DF /* cursor02.png in Resources */,
 				4734CDD81D41C95D006536DF /* iconfont.eot in Resources */,
 				4734CDDA1D41C95D006536DF /* iconfont.ttf in Resources */,
+				47184FB51D72BCF1008A4591 /* 约战-红.png in Resources */,
 				4734CE381D41CD55006536DF /* up-arrow.png in Resources */,
 				4760880F1D55874400F36597 /* 约战-时间.png in Resources */,
 				4734CE3C1D41CD55006536DF /* wechat_s.png in Resources */,
@@ -1561,7 +1612,7 @@
 				4734CDD61D41C95D006536DF /* demo.html in Resources */,
 				472A923E1D473C6900F8620F /* logo.png in Resources */,
 				4734CD461D41B512006536DF /* Assets.xcassets in Resources */,
-				4760880E1D55874400F36597 /* 约战-乌龙.png in Resources */,
+				4760880E1D55874400F36597 /* c.png in Resources */,
 				4734CE1A1D41CD4B006536DF /* 设置icon.png in Resources */,
 				4734CE121D41CD4B006536DF /* 修个人信息-修改icon.png in Resources */,
 				470F56CD1D71346700110FCE /* scorer2.png in Resources */,
@@ -1581,10 +1632,12 @@
 				4734CE371D41CD55006536DF /* star_L副本.png in Resources */,
 				4734CE3D1D41CD55006536DF /* 头像 copy.png in Resources */,
 				4734CDFE1D41CD42006536DF /* 微信QQ分割线.png in Resources */,
+				47184FB31D72BCEA008A4591 /* 约战-黄.png in Resources */,
 				4734CE011D41CD42006536DF /* 足球logo.png in Resources */,
 				4734CE021D41CD42006536DF /* 返回icon.png in Resources */,
 				4734CE471D41CD5E006536DF /* 点-绿.png in Resources */,
 				47ABD9701D60AA4E00CD18CF /* Copa del Rey.png in Resources */,
+				47184FBD1D73C2FD008A4591 /* icon_follow(1).png in Resources */,
 				4735FA151D561E2100FDF2ED /* 头像背景.png in Resources */,
 				4734CE171D41CD4B006536DF /* 深色背景.png in Resources */,
 				4734CE341D41CD55006536DF /* Rectangle 301.png in Resources */,
@@ -1592,6 +1645,7 @@
 				4760880B1D55874400F36597 /* camera_L.png in Resources */,
 				4734CDF21D41CD39006536DF /* 首页icon-灰.png in Resources */,
 				4760880C1D55874400F36597 /* calender_L.png in Resources */,
+				47184FBF1D73C303008A4591 /* icon_followed(1).png in Resources */,
 				4734CE311D41CD55006536DF /* location_L.png in Resources */,
 				4734CDEF1D41CD39006536DF /* 资讯icon-绿.png in Resources */,
 				4734CE4E1D41CD6D006536DF /* 2.png in Resources */,
@@ -1600,6 +1654,7 @@
 				4734CDFF1D41CD42006536DF /* 微信QQ矩形框.png in Resources */,
 				4734CE321D41CD55006536DF /* qq_s.png in Resources */,
 				476088101D55874400F36597 /* 约战-进球.png in Resources */,
+				47184FB71D72C81D008A4591 /* 约战-乌龙.png in Resources */,
 				4734CE101D41CD4B006536DF /* 个人信息-向右箭头icon.png in Resources */,
 				4734CE391D41CD55006536DF /* upload_L.png in Resources */,
 				4734CDF11D41CD39006536DF /* 赛事icon=灰.png in Resources */,
@@ -1700,6 +1755,7 @@
 				47BB49941D45E0D40052E4D0 /* News.m in Sources */,
 				47A364C91D5AB78C002FC59E /* PlayerDetailViewController.m in Sources */,
 				4772FE611D56579B0008ED37 /* MyMessageController.m in Sources */,
+				47ADE43E1D73CFAD006C130B /* CoachDetailViewModel.m in Sources */,
 				472A923A1D4705A000F8620F /* SEMLoginViewController.m in Sources */,
 				4788AA9D1D71EA6D0057B954 /* PlayHistory.m in Sources */,
 				4734CDBF1D41C585006536DF /* SEMNewsVIewModel.m in Sources */,
@@ -1754,6 +1810,7 @@
 				4735F9FD1D55FAF600FDF2ED /* ColleageSearchController.m in Sources */,
 				4734CD891D41BB49006536DF /* SEMHomeVIewModel.m in Sources */,
 				472A92471D47B1FA00F8620F /* WeChatUserModel.m in Sources */,
+				47A6262C1D748A1500ABE897 /* InvitationViewController.m in Sources */,
 				4746A6411D489A90009E0645 /* NewsDetailViewModel.m in Sources */,
 				4734CD801D41B9D1006536DF /* SEMHomeVIewController.m in Sources */,
 				4746A6441D489B18009E0645 /* SEMNewsDetailController.m in Sources */,
@@ -1791,16 +1848,21 @@
 				478B5E531D420728007AABC4 /* SEMNetworkingManager.m in Sources */,
 				4734CDDD1D41C95D006536DF /* UIImage+IconFont.m in Sources */,
 				476252171D519027003788C0 /* ShareView.m in Sources */,
+				47A626321D748CF700ABE897 /* InvitationView.m in Sources */,
+				47A626291D74878400ABE897 /* InvitationResponseModel.m in Sources */,
 				47BB49B61D460AF00052E4D0 /* NewsViewCell.m in Sources */,
 				477676631D58527100E10594 /* XHToast.m in Sources */,
 				4739B5DE1D4862F1007842CC /* GameDetailModel.m in Sources */,
 				4746A6771D49DFC4009E0645 /* TagView.m in Sources */,
+				47ADE4411D73D064006C130B /* CoachDetailViewController.m in Sources */,
 				476088131D5588D900F36597 /* SEMTeamPhotoController.m in Sources */,
 				4725D2C21D5B30EC00A13AEB /* MyViewController.m in Sources */,
 				472A92411D473F8B00F8620F /* MeLoginView.m in Sources */,
 				4739B5EA1D488E84007842CC /* GameListViewCell.m in Sources */,
+				47184FB11D72BB38008A4591 /* MatchEventResponseModel.m in Sources */,
 				477642651D546ADE00548C9F /* MessageTableviewCell.m in Sources */,
 				47C322121D6BF64E00317A4C /* ScorerListResponseModel.m in Sources */,
+				47A6262F1D748A8C00ABE897 /* InvitationVIewModel.m in Sources */,
 				4734CDAD1D41BFF2006536DF /* NSArray+Safe.m in Sources */,
 				4734CDB91D41C4CD006536DF /* SEMGameViewController.m in Sources */,
 				4776766F1D58610600E10594 /* AboutVIewModel.m in Sources */,

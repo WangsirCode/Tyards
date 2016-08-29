@@ -16,6 +16,7 @@
 @property (nonatomic,strong)BottomButton* weightButton;
 @property (nonatomic,strong)BottomButton* positionButton;
 @property (nonatomic, strong)PlayerDetail *model;
+@property (nonatomic,assign) BOOL coach;
 @end
 
 @interface BottomButton : UIView

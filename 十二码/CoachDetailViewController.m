@@ -1,11 +1,12 @@
 //
-//  PlayerDetailViewController.m
+//  CoachDetailViewController.m
 //  十二码
 //
-//  Created by 汪宇豪 on 16/8/10.
+//  Created by 汪宇豪 on 16/8/29.
 //  Copyright © 2016年 汪宇豪. All rights reserved.
 //
 
+#import "CoachDetailViewController.h"
 #import "PlayerDetailViewController.h"
 #import "MDABizManager.h"
 #import "PlayerDetailViewModel.h"
@@ -30,8 +31,9 @@
 #import "TeamDetailInfoView.h"
 #import "PlayerInfoView.h"
 #import "InfoViewCell.h"
-@interface PlayerDetailViewController ()<UITableViewDelegate,UITableViewDataSource,LazyPageScrollViewDelegate,UIScrollViewDelegate,ShareViewDelegate>
-@property (nonatomic,strong) PlayerDetailViewModel *viewModel;
+#import "CoachDetailViewModel.h"
+@interface CoachDetailViewController ()<UITableViewDelegate,UITableViewDataSource,LazyPageScrollViewDelegate,UIScrollViewDelegate,ShareViewDelegate>
+@property (nonatomic,strong) CoachDetailViewModel *viewModel;
 @property (nonatomic,strong) UIImageView        * logoImageView;
 @property (nonatomic,strong) LazyPageScrollView * pageView;
 @property (nonatomic,strong) UITableView        * messageTableview;
@@ -44,18 +46,18 @@
 @property (nonatomic,strong) UIBarButtonItem    * blankItem;
 @property (nonatomic,strong) ShareView          * shareView;
 @property (nonatomic,strong) UIView             * maskView;
-@property (nonatomic,strong) UIBarButtonItem      *backItem;
-@property (nonatomic,strong) UITableView        *infoTableView;
+@property (nonatomic,strong) UIBarButtonItem    * backItem;
+@property (nonatomic,strong) UITableView        * infoTableView;
 @property (nonatomic,strong) UIButton           * likeButton;
 @end
 
-@implementation PlayerDetailViewController
+@implementation CoachDetailViewController
 #pragma mark- lifeCycle
 -(instancetype)initWithDictionary:(NSDictionary *)dictionary
 {
     self = [super init];
     if (self) {
-        self.viewModel = [[PlayerDetailViewModel alloc] initWithDictionary:dictionary];
+        self.viewModel = [[CoachDetailViewModel alloc] initWithDictionary:dictionary];
     }
     return self;
 }
@@ -115,8 +117,8 @@
     [RACObserve(self.viewModel, status) subscribeNext:^(id x) {
         if (self.viewModel.status == 2) {
             [self.hud hide:YES];
-            self.navigationItem.title = self.viewModel.model.player.name;
-            NSString* urlstring = self.viewModel.model.player.cover.url;
+            self.navigationItem.title = self.viewModel.model.coach.name;
+            NSString* urlstring = self.viewModel.model.coach.cover.url;
             if (urlstring) {
                 NSURL* url = [[NSURL alloc] initWithString:urlstring];
                 [self.logoImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"zhanwei.jpg"]];
@@ -232,7 +234,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (tableView.tag == 100) {
-        return self.viewModel.model.newses.count;
+        return self.viewModel.comments.count;
     }
     else if (tableView.tag == 102)
     {
@@ -289,6 +291,7 @@
     {
         if (indexPath.section == 0) {
             InfoViewCell* cell = (InfoViewCell*)[tableView dequeueReusableCellWithIdentifier:@"InfoViewCell"];
+            cell.coach = YES;
             cell.model = self.viewModel.palyerData.data;
             return cell;
         }
@@ -309,7 +312,7 @@
             leftSpaceToView(cell,12*self.view.scale)
             .centerYEqualToView(cell)
             .heightIs(23*self.view.scale);
-            cell.textLabel.text = [self.viewModel.palyerData.honours[indexPath.row] honorInfo];
+            cell.textLabel.text = self.viewModel.palyerData.honours[indexPath.row].name;
             cell.textLabel.sd_layout
             .leftSpaceToView(imageView,8)
             .rightEqualToView(cell);
@@ -406,37 +409,37 @@
 #pragma mark- getter
 - (LazyPageScrollView*)pageView
 {
-        if (!_pageView) {
-            _pageView = [[LazyPageScrollView alloc] init];
-            _pageView.frame =self.view.frame;
-            _pageView.delegate = self;
-            [_pageView initTab:YES Gap:self.view.width / 5 TabHeight:40 VerticalDistance:10 BkColor:[UIColor whiteColor]];
+    if (!_pageView) {
+        _pageView = [[LazyPageScrollView alloc] init];
+        _pageView.frame =self.view.frame;
+        _pageView.delegate = self;
+        [_pageView initTab:YES Gap:self.view.width / 5 TabHeight:40 VerticalDistance:10 BkColor:[UIColor whiteColor]];
+        
+        [_pageView addTab:@"留言" View:self.messageTableview Info:nil];
+        [_pageView addTab:@"新闻" View:self.newsTableview Info:nil];
+        [_pageView addTab:@"资料" View:self.infoTableView Info:nil];
+        [_pageView setTitleStyle:[UIFont systemFontOfSize:15] SelFont:[UIFont systemFontOfSize:20] Color:[UIColor blackColor] SelColor:[UIColor colorWithHexString:@"#1EA11F"]];
+        [_pageView enableBreakLine:YES Width:1 TopMargin:0 BottomMargin:0 Color:[UIColor groupTableViewBackgroundColor]];
+        [_pageView generate:^(UIButton *firstTitleControl, UIView *viewTitleEffect) {
+            CGRect frame= firstTitleControl.frame;
+            frame.size.height-=5;
+            frame.size.width-=6;
+            viewTitleEffect.frame=frame;
+            viewTitleEffect.center=firstTitleControl.center;
+        }];
+        UIView *topView=[_pageView getTopContentView];
+        UILabel *lb=[[UILabel alloc] init];
+        lb.translatesAutoresizingMaskIntoConstraints=NO;
+        lb.backgroundColor=[UIColor colorWithHexString:@"#"];
+        [topView addSubview:lb];
+        [topView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[lb]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(lb)]];
+        [topView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[lb(==1)]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(lb)]];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            //_pageView.selectedIndex=4;
             
-            [_pageView addTab:@"留言" View:self.messageTableview Info:nil];
-            [_pageView addTab:@"新闻" View:self.newsTableview Info:nil];
-            [_pageView addTab:@"资料" View:self.infoTableView Info:nil];
-            [_pageView setTitleStyle:[UIFont systemFontOfSize:15] SelFont:[UIFont systemFontOfSize:20] Color:[UIColor blackColor] SelColor:[UIColor colorWithHexString:@"#1EA11F"]];
-            [_pageView enableBreakLine:YES Width:1 TopMargin:0 BottomMargin:0 Color:[UIColor groupTableViewBackgroundColor]];
-            [_pageView generate:^(UIButton *firstTitleControl, UIView *viewTitleEffect) {
-                CGRect frame= firstTitleControl.frame;
-                frame.size.height-=5;
-                frame.size.width-=6;
-                viewTitleEffect.frame=frame;
-                viewTitleEffect.center=firstTitleControl.center;
-            }];
-            UIView *topView=[_pageView getTopContentView];
-            UILabel *lb=[[UILabel alloc] init];
-            lb.translatesAutoresizingMaskIntoConstraints=NO;
-            lb.backgroundColor=[UIColor colorWithHexString:@"#"];
-            [topView addSubview:lb];
-            [topView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|[lb]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(lb)]];
-            [topView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[lb(==1)]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(lb)]];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                //_pageView.selectedIndex=4;
-                
-            });
-        }
-        return _pageView;
+        });
+    }
+    return _pageView;
 }
 - (UITableView *)infoTableView
 {
@@ -596,5 +599,3 @@
 }
 
 @end
-
-

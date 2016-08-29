@@ -305,6 +305,7 @@
  *  @return <#return value description#>
  */
 - (NSURLSessionTask*)fetchTeamDetailInfo:(NSString*)ide
+                                   token:(NSString*)token
                             success:(void (^)(id data))successBlock
                             failure:(void (^)(NSError *aError))failureBlock;
 
@@ -460,6 +461,21 @@
                               failure:(void (^)(NSError *aError))failureBlock;
 
 /*!
+ *  @author 汪宇豪, 16-08-29 14:08:22
+ *
+ *  @brief 获取教练信息
+ *
+ *  @param coachId      coachId
+ *  @param successBlock 成功
+ *  @param failureBlock 失败
+ *
+ *  @return NSURLSessionTask
+ */
+- (NSURLSessionTask*)fetchCoachInfo:(NSString*)coachId
+                             success:(void (^)(id data))successBlock
+                             failure:(void (^)(NSError *aError))failureBlock;
+
+/*!
  *  @author 汪宇豪, 16-08-14 18:08:23
  *
  *  @brief 获取球员数据
@@ -475,7 +491,25 @@
                                token:(NSString*)token
                              success:(void (^)(id data))successBlock
                              failure:(void (^)(NSError *aError))failureBlock;
+
 /*!
+ *  @author 汪宇豪, 16-08-29 14:08:30
+ *
+ *  @brief 获取教练资料
+ *
+ *  @param coachId      教练id
+ *  @param token        token
+ *  @param successBlock 成功
+ *  @param failureBlock 失败
+ *
+ *  @return NSURLSessionTask
+ */
+- (NSURLSessionTask*)fetchCoachData:(NSString*)coachId
+                               token:(NSString*)token
+                             success:(void (^)(id data))successBlock
+                             failure:(void (^)(NSError *aError))failureBlock;
+/*!
+ 
  *  @author 汪宇豪, 16-08-10 16:08:40
  *
  *  @brief 关注球员
@@ -624,6 +658,7 @@
  *  @return NSURLSessionTask
  */
 - (NSURLSessionTask*)fetchGameInfo:(NSString*)tournamentId
+                             token:(NSString*)token
                               success:(void (^)(id data))successBlock
                               failure:(void (^)(NSError *aError))failureBlock;
 
@@ -762,6 +797,34 @@
 - (NSURLSessionTask*)fetchRaceData:(NSString*)matchId
                             success:(void (^)(id data))successBlock
                             failure:(void (^)(NSError *aError))failureBlock;
+
+/*!
+ *  @author 汪宇豪, 16-08-28 14:08:34
+ *
+ *  @brief 获取赛况
+ *
+ *  @param matchId      matchId
+ *  @param successBlock 成功
+ *  @param failureBlock 失败
+ *
+ *  @return NSURLSessionTask
+ */
+- (NSURLSessionTask*)fetchRaceEvents:(NSString*)matchId
+                           success:(void (^)(id data))successBlock
+                           failure:(void (^)(NSError *aError))failureBlock;
+
+/*!
+ *  @author 汪宇豪, 16-08-29 23:08:48
+ *
+ *  @brief 获取约战列表
+ *
+ *  @param successBlock 成功
+ *  @param failureBlock 失败
+ *
+ *  @return NSURLSessionTask
+ */
+- (NSURLSessionTask*)fetchInvitations:(void (^)(id data))successBlock
+                             failure:(void (^)(NSError *aError))failureBlock;
 
 @end
 

@@ -11,6 +11,11 @@
 @implementation PlayerDataResponseModel
 
 @end
+
+@implementation CoachDataResponseModel
+
+@end
+
 @implementation PlayerDataModel
 
 + (NSDictionary *)objectClassInArray{
@@ -20,7 +25,13 @@
 @end
 
 
+@implementation CoachDataModel
 
++ (NSDictionary *)objectClassInArray{
+    return @{@"honours" : [Honours class], @"history" : [History class]};
+}
+
+@end
 
 @implementation Honours
 - (NSString *)honorInfo

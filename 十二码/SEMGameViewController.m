@@ -329,6 +329,10 @@
                 [self endRefresh];
             }];
         }];
+        UIView* backView = [UIView new];
+        backView.backgroundColor = [UIColor BackGroundColor];
+        backView.frame = CGRectMake(0, 0, self.view.width, 8);
+        _noticegameTableview.tableHeaderView = backView;
     }
     return _noticegameTableview;
 }
@@ -361,6 +365,10 @@
         }];
         _historygameTableview.separatorInset = UIEdgeInsetsMake(8, 8, 8, 8);
         _historygameTableview.separatorColor = [UIColor colorWithHexString:@"#F2F2F2"];
+        UIView* backView = [UIView new];
+        backView.backgroundColor = [UIColor BackGroundColor];
+        backView.frame = CGRectMake(0, 0, self.view.width, 8);
+        _historygameTableview.tableHeaderView = backView;
     }
     return _historygameTableview;
 }

@@ -21,4 +21,6 @@
 @property (nonatomic,assign ) NSInteger       loadingStatus;
 @property (nonatomic, strong) NSArray<GameDetailModel *> *games;
 @property (nonatomic, strong) TeamInfoModel *InfoModel;
+@property (nonatomic,assign)  BOOL fan;
+@property (nonatomic,assign)  BOOL didFaned;
 @end

@@ -21,6 +21,7 @@
 #import "TeamDetailInfoView.h"
 #import "PlayerDetailViewController.h"
 #import "SEMNewsDetailController.h"
+#import "CoachDetailViewController.h"
 @interface SEMTeamHomeViewController ()<UITableViewDelegate,UITableViewDataSource,LazyPageScrollViewDelegate,UIScrollViewDelegate,ShareViewDelegate>
 @property (nonatomic,strong) SEMTeamHomeModel   * viewModel;
 @property (nonatomic,strong) UIImageView        * logoImageView;
@@ -36,8 +37,10 @@
 @property (nonatomic,strong) UIBarButtonItem    * blankItem;
 @property (nonatomic,strong) ShareView          * shareView;
 @property (nonatomic,strong) UIView             * maskView;
+@property (nonatomic,strong) UIBarButtonItem    * backItem;
 @property (nonatomic,strong) CostomView         * photoview;
 @property (nonatomic,strong) UIScrollView       * scrollView;
+@property (nonatomic,strong) UIButton           * likeButton;
 @end
 
 @implementation SEMTeamHomeViewController
@@ -77,6 +80,7 @@
     [self.view addSubview:self.maskView];
     [self.view addSubview:self.shareView];
     [self.scrollView addSubview:self.infoView];
+    self.navigationItem.leftBarButtonItem = self.backItem;
     self.hud.labelText = @"加载中";
 }
 
@@ -162,6 +166,18 @@
         if (self.pageView.frame.origin.y < -44) {
             [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
             [self.navigationController.navigationBar setShadowImage:nil];
+        }
+    }];
+    [RACObserve(self.viewModel,fan) subscribeNext:^(id x) {
+        self.likeButton.selected = self.viewModel.fan;
+        if (self.viewModel.didFaned) {
+            if (self.viewModel.fan) {
+                [XHToast showCenterWithText:@"关注成功"];
+            }
+            else
+            {
+                [XHToast showCenterWithText:@"取消关注成功"];
+            }
         }
     }];
 }
@@ -416,15 +432,6 @@
 }
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    if (tableView.tag == 102) {
-        if (section == 0 && self.viewModel.model.info.coach) {
-            return @"主教练";
-        }
-        else
-        {
-            return @"队员";
-        }
-    }
     return nil;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -462,6 +469,19 @@
     }];
     return view;
     }
+    else if (tableView.tag == 102)
+    {
+        UILabel* label = [UILabel new];
+        label.backgroundColor = [UIColor BackGroundColor];
+        if (section == 0) {
+            label.text = @"   主教练";
+        }
+        else
+        {
+            label.text = @"   队员";
+        }
+        return label;
+    }
     return nil;
 }
 #pragma mark -tableViewDelegate
@@ -472,17 +492,18 @@
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
         if (indexPath.section == 0 && self.viewModel.model.info.coach)
         {
-            PlayerDetailViewController *controller= [[PlayerDetailViewController alloc] initWithDictionary:@{@"id":@(self.viewModel.model.info.coach.id)}];
+            CoachDetailViewController *controller= [[CoachDetailViewController alloc] initWithDictionary:@{@"id":@(self.viewModel.model.info.coach.id),@"coach":@"YES"}];
             [self.navigationController pushViewController:controller animated:YES];
         }
         else
         {
-            PlayerDetailViewController *controller= [[PlayerDetailViewController alloc] initWithDictionary:@{@"id":@(self.viewModel.players[indexPath.row].player.id)}];
+            PlayerDetailViewController *controller= [[PlayerDetailViewController alloc] initWithDictionary:@{@"id":@(self.viewModel.players[indexPath.row].player.id),@"coach":@"NO"}];
             [self.navigationController pushViewController:controller animated:YES];
         }
     }
     else if (tableView.tag == 101)
     {
+        
         NSInteger ide = self.viewModel.model.articles[indexPath.row].id;
         SEMNewsDetailController* controller = [[SEMNewsDetailController alloc] initWithDictionary:@{@"ides":@(ide)}];
         controller.hidesBottomBarWhenPushed = YES;
@@ -561,6 +582,10 @@
         _messageTableview.contentSize = CGSizeMake(self.view.width, 2 * self.view.height);
         _messageTableview.bounces = NO;
         [_messageTableview registerClass:[CommentCell class] forCellReuseIdentifier:@"CommentCell"];
+        UIView* backView = [UIView new];
+        backView.backgroundColor = [UIColor BackGroundColor];
+        backView.frame = CGRectMake(0, 0, self.view.width, 8);
+        _messageTableview.tableHeaderView = backView;
     }
     return _messageTableview;
 }
@@ -573,6 +598,10 @@
         _newsTableview.tag = 101;
         _newsTableview.bounces = NO;
         [_newsTableview registerClass:[TeamNewsCell class] forCellReuseIdentifier:@"TeamNewsCell"];
+        UIView* backView = [UIView new];
+        backView.backgroundColor = [UIColor BackGroundColor];
+        backView.frame = CGRectMake(0, 0, self.view.width, 8);
+        _newsTableview.tableHeaderView = backView;
     }
     return _newsTableview;
 }
@@ -596,6 +625,10 @@
         _scheduleTableview.tag = 103;
         _scheduleTableview.bounces = NO;
         [_scheduleTableview registerClass:[NoticeGameviewCell class] forCellReuseIdentifier:@"NoticeGameviewCell"];
+        UIView* backView = [UIView new];
+        backView.backgroundColor = [UIColor BackGroundColor];
+        backView.frame = CGRectMake(0, 0, self.view.width, 8);
+        _scheduleTableview.tableHeaderView = backView;
     }
     return _scheduleTableview;
 }
@@ -658,11 +691,12 @@
 - (UIBarButtonItem *)favoriteItem
 {
     if (!_favoriteItem) {
-        UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.frame = CGRectMake(20, 0, 25, 25);
-        [button setImage:[UIImage imageNamed:@"star_L"] forState:UIControlStateNormal];
-        _favoriteItem = [[UIBarButtonItem alloc] initWithCustomView:button];
-        button.rac_command = self.viewModel.likeCommand;
+        self.likeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.likeButton.frame = CGRectMake(20, 0, 25, 25);
+        [self.likeButton setImage:[UIImage imageNamed:@"icon_follow(1)"] forState:UIControlStateNormal];
+        [self.likeButton setImage:[UIImage imageNamed:@"icon_followed(1)"] forState:UIControlStateSelected];
+        _favoriteItem = [[UIBarButtonItem alloc] initWithCustomView:self.likeButton];
+        self.likeButton.rac_command = self.viewModel.likeCommand;
     }
     return _favoriteItem;
 }
@@ -692,6 +726,20 @@
         _scrollView.bounces = NO;
     }
     return _scrollView;
+}
+-(UIBarButtonItem *)backItem
+{
+    if (!_backItem) {
+        UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
+        [button setImage:[UIImage imageNamed:@"返回icon"] forState:UIControlStateNormal];
+        button.frame = CGRectMake(0, 0, 20, 15);
+        _backItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+        [[button rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }];
+        
+    }
+    return _backItem;
 }
 #pragma mark -LazyPageScrollViewDelegate
 -(void)LazyPageScrollViewPageChange:(LazyPageScrollView *)pageScrollView Index:(NSInteger)index PreIndex:(NSInteger)preIndex TitleEffectView:(UIView *)viewTitleEffect SelControl:(UIButton *)selBtn

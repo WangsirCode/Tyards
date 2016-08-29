@@ -33,9 +33,10 @@
 @property (nonatomic,strong) UIImageView* backImageView;
 @property (nonatomic,strong) LazyPageScrollView * pageView;
 @property (nonatomic,strong) UITableView        * newsTableView;
-@property (nonatomic,strong) UITableView        * statusTableView;
+@property (nonatomic,strong) UIScrollView       * statusView;
 @property (nonatomic,strong) UIScrollView       * dataView;
 @property (nonatomic,strong) UITableView        * messageTableView;
+@property (nonatomic,strong) UIView             * bottomView;
 @property (nonatomic,strong) MBProgressHUD      * hud;
 @property (nonatomic,strong) UIBarButtonItem    * shareItem;
 @property (nonatomic,strong) UIBarButtonItem    * favoriteItem;
@@ -117,11 +118,12 @@
 {
     //当加载完毕之后隐藏hud
     [RACObserve(self.viewModel, status) subscribeNext:^(id x) {
-        if (self.viewModel.status == 4) {
+        if (self.viewModel.status == 5) {
             [self.hud hide:YES];
             self.navigationItem.title = self.viewModel.gameModel.tournament.name;
             [self setUpHeaderView];
             [self setUpDataView];
+            [self setUpstatusView];
             [self.newsTableView reloadData];
             [self.messageTableView reloadData];
         }
@@ -259,6 +261,99 @@
     .rightSpaceToView(self.dataView,12)
     .heightIs(48*(self.viewModel.dataModel.history.count+1)*self.view.scale);
     
+    [self.dataView setupAutoContentSizeWithBottomView:histoty bottomMargin:20];
+    
+}
+- (void)setUpstatusView
+{
+    UIView* backView = [UIView new];
+    backView.backgroundColor = [UIColor BackGroundColor];
+    [self.statusView addSubview:backView];
+    backView.sd_layout
+    .topEqualToView(self.statusView)
+    .leftEqualToView(self.statusView)
+    .rightEqualToView(self.statusView)
+    .heightIs(8);
+    NSDictionary* imageDic = @{@"GOAL":@"约战-进球",@"YELLOWCARD":@"约战-黄",@"REDCARD":@"约战-红",@"OWNGOAL":@"约战-乌龙",@"ASSIST":@"约战-助攻"};
+    for (int i = 0; i < self.viewModel.eventModel.events.count + 1; i++) {
+        UIView* line = [UIView new];
+        line.backgroundColor = [UIColor colorWithHexString:@"CACACA"];
+        UILabel* label = [UILabel new];
+        label.textColor = [UIColor colorWithHexString:@"#CACACA"];
+        UIImageView* imageView = [UIImageView new];
+        [self.statusView sd_addSubviews:@[line,label,imageView]];
+        imageView.sd_layout
+        .topSpaceToView(backView,50*i*self.view.scale + 8)
+        .centerXEqualToView(self.statusView)
+        .heightIs(14*self.view.scale)
+        .widthIs(14*self.view.scale);
+        line.sd_layout
+        .topSpaceToView(imageView,8*self.view.scale)
+        .centerXEqualToView(self.statusView)
+        .heightIs(20*self.view.scale)
+        .widthIs(1);
+        Events* model;
+        if (i!= 0) {
+            model = self.viewModel.eventModel.events[i-1];
+            imageView.image = [UIImage imageNamed:imageDic[model.type]];
+            label.text = model.player.name;
+            if (model.home) {
+                label.textAlignment = NSTextAlignmentRight;
+                label.sd_layout
+                .topSpaceToView(backView,50*self.view.scale*i + 8)
+                .rightSpaceToView(imageView,12*self.view.scale)
+                .heightIs(14*self.view.scale)
+                .widthIs(100);
+                
+            }
+            else
+            {
+                label.textAlignment = NSTextAlignmentLeft;
+                label.sd_layout
+                .topSpaceToView(backView,50*self.view.scale*i + 8)
+                .leftSpaceToView(imageView,12*self.view.scale)
+                .heightIs(14*self.view.scale)
+                .widthIs(100);
+            }
+        }
+        else
+        {
+            imageView.image = [UIImage imageNamed:@"约战-时间"];
+        }
+        if (i == self.viewModel.eventModel.events.count) {
+            line.hidden = YES;
+            [self.statusView setupAutoContentSizeWithRightView:imageView rightMargin:10];
+        }
+    }
+    self.bottomView = [UIView new];
+    _bottomView.backgroundColor = [UIColor BackGroundColor];
+    NSArray* imageName = @[@"约战-进球",@"约战-乌龙",@"约战-黄",@"约战-红",@"约战-助攻"];
+    NSArray* names = @[@"进球",@"乌龙",@"黄牌",@"红牌",@"助攻"];
+    for (int i = 0; i < 5 ; i ++) {
+        UIImageView* imageView = [UIImageView new];
+        imageView.image = [UIImage imageNamed:imageName[i]];
+        UILabel* label = [UILabel new];
+        label.text = names[i];
+        label.textColor = [UIColor colorWithHexString:@"#999999"];
+        [_bottomView sd_addSubviews:@[imageView,label]];
+        imageView.sd_layout
+        .centerYEqualToView(_bottomView)
+        .leftSpaceToView(_bottomView,self.view.scale*(10+i*73))
+        .heightIs(14*self.view.scale)
+        .widthIs(14*self.view.scale);
+        label.sd_layout
+        .leftSpaceToView(imageView,8*self.view.scale)
+        .centerYEqualToView(_bottomView)
+        .heightIs(20)
+        .widthIs(40);
+    }
+    [self.view addSubview:_bottomView];
+    _bottomView.sd_layout
+    .bottomEqualToView(self.view)
+    .leftEqualToView(self.view)
+    .rightEqualToView(self.view)
+    .heightIs(58*self.view.scale);
+    self.bottomView.hidden = YES;
 }
 - (void)hideMaskView
 {
@@ -324,7 +419,8 @@
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (tableView.tag == 100) {
+    if (tableView.tag == 100)
+    {
         return self.viewModel.newsModel.count;
     }
     else if (tableView.tag == 101)
@@ -457,7 +553,7 @@
         _pageView.delegate = self;
         [_pageView initTab:YES Gap:self.view.width / 4 TabHeight:40 VerticalDistance:10 BkColor:[UIColor whiteColor]];
         [_pageView addTab:@"新闻" View:self.newsTableView Info:nil];
-        [_pageView addTab:@"赛况" View:self.statusTableView Info:nil];
+        [_pageView addTab:@"赛况" View:self.statusView Info:nil];
         [_pageView addTab:@"数据" View:self.dataView Info:nil];
         [_pageView addTab:@"互动" View:self.messageTableView Info:nil];
         [_pageView setTitleStyle:[UIFont systemFontOfSize:15] SelFont:[UIFont systemFontOfSize:20] Color:[UIColor blackColor] SelColor:[UIColor colorWithHexString:@"#1EA11F"]];
@@ -491,25 +587,26 @@
         _newsTableView.dataSource = self;
         _newsTableView.tag = 100;
         [_newsTableView registerClass:[HomeCell class] forCellReuseIdentifier:@"HomeCell"];
+        UIView* backView = [UIView new];
+        backView.backgroundColor = [UIColor BackGroundColor];
+        backView.frame = CGRectMake(0, 0, self.view.width, 8);
+        _newsTableView.tableHeaderView = backView;
     }
     return _newsTableView;
 }
-- (UITableView*)statusTableView
+- (UIScrollView *)statusView
 {
-    if (!_statusTableView) {
-        _statusTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-        _statusTableView.delegate = self;
-        _statusTableView.dataSource = self;
-        _statusTableView.tag = 101;
+    if (!_statusView) {
+        _statusView = [UIScrollView new];
+        _statusView.delegate = self;
     }
-    return _statusTableView;
+    return _statusView;
 }
 - (UIScrollView *)dataView
 {
     if (!_dataView) {
         _dataView = [UIScrollView new];
         _dataView.delegate = self;
-        _dataView.contentSize = CGSizeMake(self.view.width, 1000);
     }
     return _dataView;
 }
@@ -521,6 +618,10 @@
         _messageTableView.dataSource = self;
         _messageTableView.tag = 103;
         [_messageTableView registerClass:[CommentCell class] forCellReuseIdentifier:@"CommentCell"];
+        UIView* backView = [UIView new];
+        backView.backgroundColor = [UIColor BackGroundColor];
+        backView.frame = CGRectMake(0, 0, self.view.width, 8);
+        _messageTableView.tableHeaderView = backView;
     }
     return _messageTableView;
 }
@@ -547,7 +648,6 @@
         _shareView.frame = CGRectMake(0, self.view.height, self.view.width, 200*self.view.scale);
         _shareView.delegate = self;
         _shareView.layer.anchorPoint = CGPointMake(0, 0);
-        NSLog(@"%@",_shareView.description);
     }
     return _shareView;
 }
@@ -601,7 +701,7 @@
     if (!_backItem) {
         UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
         [button setImage:[UIImage imageNamed:@"返回icon"] forState:UIControlStateNormal];
-        button.frame = CGRectMake(0, 0, 25, 20);
+        button.frame = CGRectMake(0, 0, 20, 15);
         _backItem = [[UIBarButtonItem alloc] initWithCustomView:button];
         [[button rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
             [self.navigationController popViewControllerAnimated:YES];
@@ -622,18 +722,20 @@
 -(void)LazyPageScrollViewPageChange:(LazyPageScrollView *)pageScrollView Index:(NSInteger)index PreIndex:(NSInteger)preIndex TitleEffectView:(UIView *)viewTitleEffect SelControl:(UIButton *)selBtn
 {
     if (index == 1) {
-        [self.newsTableView reloadData];
+        self.bottomView.hidden = NO;
     }
     else if (index == 2)
     {
-        
+        self.bottomView.hidden = YES;
     }
     else if (index == 0)
     {
+        self.bottomView.hidden = YES;
         [self.newsTableView reloadData];
     }
     else if (index == 3)
     {
+        self.bottomView.hidden = YES;
         [self.messageTableView reloadData];
     }
 }

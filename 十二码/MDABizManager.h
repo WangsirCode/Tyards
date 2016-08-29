@@ -66,6 +66,8 @@
 #import "ListTableHeaderVIew.h"
 #import "RaceDataResponseModel.h"
 #import "DataView.h"
+#import "MatchEventResponseModel.h"
+#import "InvitationResponseModel.h"
 @interface MDABizManager : NSObject
 @property (nonatomic,assign)BOOL userLogined;
 /**

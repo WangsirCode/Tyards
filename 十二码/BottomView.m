@@ -52,7 +52,6 @@
         make.bottom.equalTo(self.mas_bottom);
         make.top.equalTo(self.mas_top);
     }];
-    
 }
 
 - (void)updateConstraintsIfNeeded

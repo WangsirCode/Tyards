@@ -46,8 +46,9 @@
     } failure:^(NSError *aError) {
         
     }];
-    [manager fetchTeamDetailInfo:string success:^(id data) {
+    [manager fetchTeamDetailInfo:string token:[self getToken] success:^(id data) {
         self.InfoModel = data;
+        self.fan = self.InfoModel.fan;
         self.loadingStatus += 1;
     } failure:^(NSError *aError) {
         
@@ -59,12 +60,28 @@
         _likeCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
             return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
                 SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
-                [manager postdisLikeTeam:[@(self.model.info.id) stringValue] token:[self getToken] success:^(id data) {
-                    [subscriber sendNext:@1];
-                    [subscriber sendCompleted];
-                } failure:^(NSError *aError) {
-                    
-                }];
+                if (self.fan) {
+                    [manager postdisLikeTeam:[@(self.model.info.id) stringValue] token:[self getToken] success:^(id data) {
+                        self.didFaned = YES;
+                        self.fan = NO;
+                        [subscriber sendNext:@1];
+                        [subscriber sendCompleted];
+                    } failure:^(NSError *aError) {
+                        
+                    }];
+                }
+                else
+                {
+                    [manager postLikeTeam:[@(self.model.info.id) stringValue] token:[self getToken] success:^(id data) {
+                        self.didFaned = YES;
+                        self.fan = YES;
+                        [subscriber sendNext:@1];
+                        [subscriber sendCompleted];
+                    } failure:^(NSError *aError) {
+                        
+                    }];
+                }
+
                 return nil;
             }];
         }];

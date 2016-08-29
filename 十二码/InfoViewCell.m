@@ -13,6 +13,7 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        self.coach = NO;
         [self makeConstraits];
     }
     return self;
@@ -50,7 +51,6 @@
     .bottomEqualToView(self.bottomView)
     .widthIs([UIScreen mainScreen].bounds.size.width / 3);
     
-    [self setupAutoHeightWithBottomView:self.bottomView bottomMargin:0];
     
     
 }
@@ -67,6 +67,21 @@
     self.weightButton.dataLabel.text = [_model weightInfo];
     self.heightButton.dataLabel.text = [_model heightInfo];
     self.positionButton.dataLabel.text = [_model PosionInfo];
+    if (self.coach) {
+        [self.bottomView removeFromSuperview];
+        UIView* view = [UIView new];
+        view.sd_layout
+        .topSpaceToView(self.label,0)
+        .leftEqualToView(self.contentView)
+        .rightEqualToView(self.contentView)
+        .heightIs(5);
+        [self.contentView addSubview:view];
+        [self setupAutoHeightWithBottomView:view bottomMargin:-20];
+    }
+    else
+    {
+        [self setupAutoHeightWithBottomView:self.bottomView bottomMargin:0];
+    }
 }
 - (UILabel *)label
 {

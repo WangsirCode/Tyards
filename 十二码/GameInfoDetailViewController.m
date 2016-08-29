@@ -39,6 +39,7 @@
 @property (nonatomic,strong) UIView             * maskView;
 @property (nonatomic,strong) UIBarButtonItem    * backItem;
 @property (nonatomic,strong) ListTableHeaderVIew* listTableHeaderView;
+@property (nonatomic,strong) UIButton           * likeButton;
 @end
 
 @implementation GameInfoDetailViewController
@@ -148,6 +149,19 @@
             [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
             [self.navigationController.navigationBar setShadowImage:nil];
         }
+    }];
+    [RACObserve(self.viewModel,fan) subscribeNext:^(id x) {
+        self.likeButton.selected = self.viewModel.fan;
+        if (self.viewModel.didFaned) {
+            if (self.viewModel.fan) {
+                [XHToast showCenterWithText:@"关注成功"];
+            }
+            else
+            {
+                [XHToast showCenterWithText:@"取消关注成功"];
+            }
+        }
+  
     }];
 }
 - (void)hideMaskView
@@ -702,6 +716,10 @@
         _infoTableView.tag = 100;
         _infoTableView.separatorColor = [UIColor whiteColor];
         [_infoTableView registerClass:[BasicInfoCell class] forCellReuseIdentifier:@"BasicInfoCell"];
+        UIView* backView = [UIView new];
+        backView.backgroundColor = [UIColor BackGroundColor];
+        backView.frame = CGRectMake(0, 0, self.view.width, 8);
+        _infoTableView.tableHeaderView = backView;
     }
     return _infoTableView;
 }
@@ -741,6 +759,10 @@
         _teamTableView.delegate = self;
         _teamTableView.dataSource = self;
         _teamTableView.tag = 103;
+        UIView* backView = [UIView new];
+        backView.backgroundColor = [UIColor BackGroundColor];
+        backView.frame = CGRectMake(0, 0, self.view.width, 8);
+        _teamTableView.tableHeaderView = backView;
     }
     return _teamTableView;
 }
@@ -803,11 +825,12 @@
 - (UIBarButtonItem *)favoriteItem
 {
     if (!_favoriteItem) {
-        UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.frame = CGRectMake(20, 0, 25, 25);
-        [button setImage:[UIImage imageNamed:@"star_L"] forState:UIControlStateNormal];
-        _favoriteItem = [[UIBarButtonItem alloc] initWithCustomView:button];
-        button.rac_command = self.viewModel.likeCommand;
+        self.likeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.likeButton.frame = CGRectMake(20, 0, 25, 25);
+        [self.likeButton setImage:[UIImage imageNamed:@"icon_follow(1)"] forState:UIControlStateNormal];
+        [self.likeButton setImage:[UIImage imageNamed:@"icon_followed(1)"] forState:UIControlStateSelected];
+        _favoriteItem = [[UIBarButtonItem alloc] initWithCustomView:self.likeButton];
+        self.likeButton.rac_command = self.viewModel.likeCommand;
     }
     return _favoriteItem;
 }
@@ -824,7 +847,7 @@
     if (!_backItem) {
         UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
         [button setImage:[UIImage imageNamed:@"返回icon"] forState:UIControlStateNormal];
-        button.frame = CGRectMake(0, 0, 25, 20);
+        button.frame = CGRectMake(0, 0, 20, 15);
         _backItem = [[UIBarButtonItem alloc] initWithCustomView:button];
         [[button rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
             [self.navigationController popViewControllerAnimated:YES];

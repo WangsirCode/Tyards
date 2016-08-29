@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "MDABizManager.h"
-@class PlayerDataModel,Avatar,Honours,Player,Avatar,Tournament,University,Shortcut,Logo,Logo,Area,Universities,Shortcut,Logo,History,Player,Avatar,Team,Logo,PlayerDetail;
+@class PlayerDataModel,Avatar,Honours,Player,Avatar,Tournament,University,Shortcut,Logo,Logo,Area,Universities,Shortcut,Logo,History,Player,Avatar,Team,Logo,PlayerDetail,CoachDataModel;
 @interface PlayerDataResponseModel : NSObject
 
 @property (nonatomic, strong) PlayerDataModel *resp;
@@ -16,6 +16,13 @@
 @property (nonatomic, assign) NSInteger code;
 
 @end
+@interface CoachDataResponseModel : NSObject
+
+@property (nonatomic, strong) CoachDataModel *resp;
+
+@property (nonatomic, assign) NSInteger code;
+@end
+
 @interface PlayerDataModel : NSObject
 
 @property (nonatomic, strong) PlayerDetail *data;
@@ -26,6 +33,15 @@
 
 @property (nonatomic, strong) NSArray<History *> *history;
 
+@end
+@interface CoachDataModel : NSObject
+@property (nonatomic, strong) PlayerDetail *data;
+
+@property (nonatomic, strong) NSArray<Honours *> *honours;
+
+@property (nonatomic, assign) BOOL fan;
+
+@property (nonatomic, strong) NSArray<History *> *history;
 @end
 
 @interface Honours : NSObject

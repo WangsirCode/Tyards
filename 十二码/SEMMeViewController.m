@@ -19,6 +19,7 @@
 #import "SEMTabViewController.h"
 #import "MyConcernController.h"
 #import "MyMessageController.h"
+#import "InvitationViewController.h"
 @interface SEMMeViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong,nonatomic)SEMMeViewModel* viewModel;
 @property (nonatomic,strong)MeTopView* topView;
@@ -196,6 +197,15 @@
         UINavigationController* nav = (UINavigationController*)(((SEMTabViewController*)self.mm_drawerController.centerViewController).selectedViewController);
         
         MyMessageController* controller = [HRTRouter objectForURL:@"setup" withUserInfo:@{@"login":@(self.viewModel.isLogined)}];
+        controller.hidesBottomBarWhenPushed = YES;
+        [nav pushViewController:controller animated:YES];
+    }
+    else if (indexPath.row == 3)
+    {
+        [self.mm_drawerController closeDrawerAnimated: YES completion:^(BOOL finished) {
+        }];
+        UINavigationController* nav = (UINavigationController*)(((SEMTabViewController*)self.mm_drawerController.centerViewController).selectedViewController);
+        InvitationViewController* controller = [[InvitationViewController alloc] initWithDictionary:@{}];
         controller.hidesBottomBarWhenPushed = YES;
         [nav pushViewController:controller animated:YES];
     }

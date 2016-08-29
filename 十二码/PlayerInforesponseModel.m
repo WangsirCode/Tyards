@@ -11,6 +11,11 @@
 @implementation PlayerInforesponseModel
 
 @end
+
+@implementation CoachInfoResponseModel
+
+@end
+
 @implementation PlayerModel
 + (NSDictionary *)objectClassInArray{
     return @{@"articles" : [Articles class], @"newses" : [Newses class]};
@@ -18,7 +23,12 @@
 
 @end
 
+@implementation CoachModel
++ (NSDictionary *)objectClassInArray{
+    return @{@"articles" : [Articles class], @"newses" : [Newses class]};
+}
 
+@end
 @implementation PlayerDetail
 - (NSString *)weightInfo
 {
