@@ -826,5 +826,35 @@
 - (NSURLSessionTask*)fetchInvitations:(void (^)(id data))successBlock
                              failure:(void (^)(NSError *aError))failureBlock;
 
+/*!
+ *  @author 汪宇豪, 16-08-30 19:08:55
+ *
+ *  @brief 获取我的约战
+ *
+ *  @param token        token
+ *  @param successBlock 成功
+ *  @param failureBlock 失败
+ *
+ *  @return NSURLSessionTask
+ */
+- (NSURLSessionTask*)fetchMyInvitations:(NSString*)token
+                             success:(void (^)(id data))successBlock
+                             failure:(void (^)(NSError *aError))failureBlock;
+
+/*!
+ *  @author 汪宇豪, 16-08-30 19:08:30
+ *
+ *  @brief 获取我的已关闭的约战
+ *
+ *  @param token        token
+ *  @param successBlock 成功
+ *  @param failureBlock 失败
+ *
+ *  @return NSURLSessionTask
+ */
+- (NSURLSessionTask*)fetchMyClosedInvitations:(NSString*)token
+                                success:(void (^)(id data))successBlock
+                                failure:(void (^)(NSError *aError))failureBlock;
+
 @end
 

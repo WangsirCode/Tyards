@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "MDABizManager.h"
-@class InvitationModel,StaDium,University;
+@class InvitationModel,Stadium,University;
 @interface InvitationResponseModel : NSObject
 
 @property (nonatomic, strong) NSArray<InvitationModel *> *resp;
@@ -28,7 +28,7 @@
 
 @property (nonatomic, copy) NSString *linkman;
 
-@property (nonatomic, strong) StaDium *stadium;
+@property (nonatomic, strong) Stadium *stadium;
 
 @property (nonatomic, copy) NSString *desc;
 
@@ -38,24 +38,13 @@
 
 @property (nonatomic, assign) BOOL complete;
 
+- (NSString*)getDate;
 @end
 
-@interface StaDium : NSObject
-
-@property (nonatomic, copy) NSString *area;
-
-@property (nonatomic, assign) BOOL deleted;
-
-@property (nonatomic, assign) NSInteger id;
-
-@property (nonatomic, copy) NSString *lastUpdated;
-
-@property (nonatomic, copy) NSString *dateCreated;
-
-@property (nonatomic, copy) NSString *class;
-
-@property (nonatomic, copy) NSString *name;
-
-@end
+//@interface Stadium : NSObject
+//
+//
+//
+//@end
 
 

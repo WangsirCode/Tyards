@@ -235,6 +235,26 @@
 		47BB49A81D45F5C80052E4D0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47BB49A71D45F5C80052E4D0 /* SystemConfiguration.framework */; };
 		47BB49AA1D45F5D80052E4D0 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47BB49A91D45F5D80052E4D0 /* CoreTelephony.framework */; };
 		47BB49B61D460AF00052E4D0 /* NewsViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 47BB49B51D460AF00052E4D0 /* NewsViewCell.m */; };
+		47C053C11D7520D900AEBF86 /* bg_combined_shape.png in Resources */ = {isa = PBXBuildFile; fileRef = 47C053B41D7520D900AEBF86 /* bg_combined_shape.png */; };
+		47C053C21D7520D900AEBF86 /* Combined Shape 02.png in Resources */ = {isa = PBXBuildFile; fileRef = 47C053B51D7520D900AEBF86 /* Combined Shape 02.png */; };
+		47C053C31D7520D900AEBF86 /* icon_arrow_down.png in Resources */ = {isa = PBXBuildFile; fileRef = 47C053B61D7520D900AEBF86 /* icon_arrow_down.png */; };
+		47C053C41D7520D900AEBF86 /* icon_arrow_up.png in Resources */ = {isa = PBXBuildFile; fileRef = 47C053B71D7520D900AEBF86 /* icon_arrow_up.png */; };
+		47C053C51D7520D900AEBF86 /* icon_C.png in Resources */ = {isa = PBXBuildFile; fileRef = 47C053B81D7520D900AEBF86 /* icon_C.png */; };
+		47C053C61D7520D900AEBF86 /* icon_clock.png in Resources */ = {isa = PBXBuildFile; fileRef = 47C053B91D7520D900AEBF86 /* icon_clock.png */; };
+		47C053C71D7520D900AEBF86 /* icon_location.png in Resources */ = {isa = PBXBuildFile; fileRef = 47C053BA1D7520D900AEBF86 /* icon_location.png */; };
+		47C053C81D7520D900AEBF86 /* icon_more.png in Resources */ = {isa = PBXBuildFile; fileRef = 47C053BB1D7520D900AEBF86 /* icon_more.png */; };
+		47C053C91D7520D900AEBF86 /* icon_msg.png in Resources */ = {isa = PBXBuildFile; fileRef = 47C053BC1D7520D900AEBF86 /* icon_msg.png */; };
+		47C053CA1D7520D900AEBF86 /* icon_pen_edit.png in Resources */ = {isa = PBXBuildFile; fileRef = 47C053BD1D7520D900AEBF86 /* icon_pen_edit.png */; };
+		47C053CB1D7520D900AEBF86 /* icon_phone.png in Resources */ = {isa = PBXBuildFile; fileRef = 47C053BE1D7520D900AEBF86 /* icon_phone.png */; };
+		47C053CC1D7520D900AEBF86 /* icon_small_soccer.png in Resources */ = {isa = PBXBuildFile; fileRef = 47C053BF1D7520D900AEBF86 /* icon_small_soccer.png */; };
+		47C053CD1D7520D900AEBF86 /* right-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 47C053C01D7520D900AEBF86 /* right-arrow.png */; };
+		47C053D01D75927400AEBF86 /* InvitationViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C053CF1D75927400AEBF86 /* InvitationViewCell.m */; };
+		47C053D31D759AAF00AEBF86 /* MyInvitationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C053D21D759AAF00AEBF86 /* MyInvitationViewController.m */; };
+		47C053D61D759B0B00AEBF86 /* MyInvitationViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C053D51D759B0B00AEBF86 /* MyInvitationViewModel.m */; };
+		47C053D91D759C5800AEBF86 /* MakeInvitationViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C053D81D759C5800AEBF86 /* MakeInvitationViewModel.m */; };
+		47C053DC1D759C8F00AEBF86 /* MakeInvitationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C053DB1D759C8F00AEBF86 /* MakeInvitationController.m */; };
+		47C053E21D759FEF00AEBF86 /* MyInvitationResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C053E11D759FEF00AEBF86 /* MyInvitationResponseModel.m */; };
+		47C053E51D75A14C00AEBF86 /* MyClosedInvitationResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C053E41D75A14C00AEBF86 /* MyClosedInvitationResponseModel.m */; };
 		47C3220F1D6BF50800317A4C /* ScoreListResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C3220E1D6BF50800317A4C /* ScoreListResponseModel.m */; };
 		47C322121D6BF64E00317A4C /* ScorerListResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C322111D6BF64E00317A4C /* ScorerListResponseModel.m */; };
 		47C322151D6BF6FE00317A4C /* AwardListResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C322141D6BF6FE00317A4C /* AwardListResponseModel.m */; };
@@ -649,6 +669,33 @@
 		47BB49A91D45F5D80052E4D0 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		47BB49B41D460AF00052E4D0 /* NewsViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsViewCell.h; sourceTree = "<group>"; };
 		47BB49B51D460AF00052E4D0 /* NewsViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsViewCell.m; sourceTree = "<group>"; };
+		47C053B41D7520D900AEBF86 /* bg_combined_shape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_combined_shape.png; sourceTree = "<group>"; };
+		47C053B51D7520D900AEBF86 /* Combined Shape 02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Combined Shape 02.png"; sourceTree = "<group>"; };
+		47C053B61D7520D900AEBF86 /* icon_arrow_down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_arrow_down.png; sourceTree = "<group>"; };
+		47C053B71D7520D900AEBF86 /* icon_arrow_up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_arrow_up.png; sourceTree = "<group>"; };
+		47C053B81D7520D900AEBF86 /* icon_C.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_C.png; sourceTree = "<group>"; };
+		47C053B91D7520D900AEBF86 /* icon_clock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_clock.png; sourceTree = "<group>"; };
+		47C053BA1D7520D900AEBF86 /* icon_location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_location.png; sourceTree = "<group>"; };
+		47C053BB1D7520D900AEBF86 /* icon_more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_more.png; sourceTree = "<group>"; };
+		47C053BC1D7520D900AEBF86 /* icon_msg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_msg.png; sourceTree = "<group>"; };
+		47C053BD1D7520D900AEBF86 /* icon_pen_edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_pen_edit.png; sourceTree = "<group>"; };
+		47C053BE1D7520D900AEBF86 /* icon_phone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_phone.png; sourceTree = "<group>"; };
+		47C053BF1D7520D900AEBF86 /* icon_small_soccer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_small_soccer.png; sourceTree = "<group>"; };
+		47C053C01D7520D900AEBF86 /* right-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "right-arrow.png"; sourceTree = "<group>"; };
+		47C053CE1D75927400AEBF86 /* InvitationViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvitationViewCell.h; sourceTree = "<group>"; };
+		47C053CF1D75927400AEBF86 /* InvitationViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvitationViewCell.m; sourceTree = "<group>"; };
+		47C053D11D759AAF00AEBF86 /* MyInvitationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInvitationViewController.h; sourceTree = "<group>"; };
+		47C053D21D759AAF00AEBF86 /* MyInvitationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInvitationViewController.m; sourceTree = "<group>"; };
+		47C053D41D759B0B00AEBF86 /* MyInvitationViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInvitationViewModel.h; sourceTree = "<group>"; };
+		47C053D51D759B0B00AEBF86 /* MyInvitationViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInvitationViewModel.m; sourceTree = "<group>"; };
+		47C053D71D759C5800AEBF86 /* MakeInvitationViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MakeInvitationViewModel.h; sourceTree = "<group>"; };
+		47C053D81D759C5800AEBF86 /* MakeInvitationViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MakeInvitationViewModel.m; sourceTree = "<group>"; };
+		47C053DA1D759C8F00AEBF86 /* MakeInvitationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MakeInvitationController.h; sourceTree = "<group>"; };
+		47C053DB1D759C8F00AEBF86 /* MakeInvitationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MakeInvitationController.m; sourceTree = "<group>"; };
+		47C053E01D759FEF00AEBF86 /* MyInvitationResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInvitationResponseModel.h; sourceTree = "<group>"; };
+		47C053E11D759FEF00AEBF86 /* MyInvitationResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInvitationResponseModel.m; sourceTree = "<group>"; };
+		47C053E31D75A14C00AEBF86 /* MyClosedInvitationResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyClosedInvitationResponseModel.h; sourceTree = "<group>"; };
+		47C053E41D75A14C00AEBF86 /* MyClosedInvitationResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyClosedInvitationResponseModel.m; sourceTree = "<group>"; };
 		47C3220D1D6BF50800317A4C /* ScoreListResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreListResponseModel.h; sourceTree = "<group>"; };
 		47C3220E1D6BF50800317A4C /* ScoreListResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoreListResponseModel.m; sourceTree = "<group>"; };
 		47C322101D6BF64E00317A4C /* ScorerListResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScorerListResponseModel.h; sourceTree = "<group>"; };
@@ -1121,6 +1168,19 @@
 				47ABD96F1D60AA4E00CD18CF /* Copa del Rey.png */,
 				4735FA101D5616F000FDF2ED /* Group 19.png */,
 				47184FBC1D73C2FD008A4591 /* icon_follow(1).png */,
+				47C053B41D7520D900AEBF86 /* bg_combined_shape.png */,
+				47C053B51D7520D900AEBF86 /* Combined Shape 02.png */,
+				47C053B61D7520D900AEBF86 /* icon_arrow_down.png */,
+				47C053B71D7520D900AEBF86 /* icon_arrow_up.png */,
+				47C053B81D7520D900AEBF86 /* icon_C.png */,
+				47C053B91D7520D900AEBF86 /* icon_clock.png */,
+				47C053BA1D7520D900AEBF86 /* icon_location.png */,
+				47C053BB1D7520D900AEBF86 /* icon_more.png */,
+				47C053BC1D7520D900AEBF86 /* icon_msg.png */,
+				47C053BD1D7520D900AEBF86 /* icon_pen_edit.png */,
+				47C053BE1D7520D900AEBF86 /* icon_phone.png */,
+				47C053BF1D7520D900AEBF86 /* icon_small_soccer.png */,
+				47C053C01D7520D900AEBF86 /* right-arrow.png */,
 				476088051D55874400F36597 /* camera_L.png */,
 				4735FA141D561E2100FDF2ED /* 头像背景.png */,
 				47184FB41D72BCF1008A4591 /* 约战-红.png */,
@@ -1258,6 +1318,10 @@
 				477676711D58614A00E10594 /* AboutViewController.m */,
 				47A6262A1D748A1500ABE897 /* InvitationViewController.h */,
 				47A6262B1D748A1500ABE897 /* InvitationViewController.m */,
+				47C053D11D759AAF00AEBF86 /* MyInvitationViewController.h */,
+				47C053D21D759AAF00AEBF86 /* MyInvitationViewController.m */,
+				47C053DA1D759C8F00AEBF86 /* MakeInvitationController.h */,
+				47C053DB1D759C8F00AEBF86 /* MakeInvitationController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1275,6 +1339,8 @@
 				4772FE691D565C780008ED37 /* MyMessageCell.m */,
 				47A626301D748CF700ABE897 /* InvitationView.h */,
 				47A626311D748CF700ABE897 /* InvitationView.m */,
+				47C053CE1D75927400AEBF86 /* InvitationViewCell.h */,
+				47C053CF1D75927400AEBF86 /* InvitationViewCell.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1302,6 +1368,10 @@
 				4776766E1D58610600E10594 /* AboutVIewModel.m */,
 				47A6262D1D748A8C00ABE897 /* InvitationVIewModel.h */,
 				47A6262E1D748A8C00ABE897 /* InvitationVIewModel.m */,
+				47C053D41D759B0B00AEBF86 /* MyInvitationViewModel.h */,
+				47C053D51D759B0B00AEBF86 /* MyInvitationViewModel.m */,
+				47C053D71D759C5800AEBF86 /* MakeInvitationViewModel.h */,
+				47C053D81D759C5800AEBF86 /* MakeInvitationViewModel.m */,
 			);
 			name = ViewModel;
 			sourceTree = "<group>";
@@ -1319,6 +1389,10 @@
 				4772FE661D5659E40008ED37 /* MyMessageModel.m */,
 				47A626271D74878400ABE897 /* InvitationResponseModel.h */,
 				47A626281D74878400ABE897 /* InvitationResponseModel.m */,
+				47C053E01D759FEF00AEBF86 /* MyInvitationResponseModel.h */,
+				47C053E11D759FEF00AEBF86 /* MyInvitationResponseModel.m */,
+				47C053E31D75A14C00AEBF86 /* MyClosedInvitationResponseModel.h */,
+				47C053E41D75A14C00AEBF86 /* MyClosedInvitationResponseModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1601,6 +1675,7 @@
 				4734CE181D41CD4B006536DF /* 约战icon.png in Resources */,
 				4734CE301D41CD55006536DF /* cursor02.png in Resources */,
 				4734CDD81D41C95D006536DF /* iconfont.eot in Resources */,
+				47C053CB1D7520D900AEBF86 /* icon_phone.png in Resources */,
 				4734CDDA1D41C95D006536DF /* iconfont.ttf in Resources */,
 				47184FB51D72BCF1008A4591 /* 约战-红.png in Resources */,
 				4734CE381D41CD55006536DF /* up-arrow.png in Resources */,
@@ -1612,6 +1687,8 @@
 				4734CDD61D41C95D006536DF /* demo.html in Resources */,
 				472A923E1D473C6900F8620F /* logo.png in Resources */,
 				4734CD461D41B512006536DF /* Assets.xcassets in Resources */,
+				47C053C91D7520D900AEBF86 /* icon_msg.png in Resources */,
+				47C053CD1D7520D900AEBF86 /* right-arrow.png in Resources */,
 				4760880E1D55874400F36597 /* c.png in Resources */,
 				4734CE1A1D41CD4B006536DF /* 设置icon.png in Resources */,
 				4734CE121D41CD4B006536DF /* 修个人信息-修改icon.png in Resources */,
@@ -1623,7 +1700,9 @@
 				4734CE361D41CD55006536DF /* star_L.png in Resources */,
 				477676771D58D1BF00E10594 /* zhanwei.jpg in Resources */,
 				4734CE3B1D41CD55006536DF /* wechat moment-s.png in Resources */,
+				47C053C11D7520D900AEBF86 /* bg_combined_shape.png in Resources */,
 				4734CDD91D41C95D006536DF /* iconfont.svg in Resources */,
+				47C053C71D7520D900AEBF86 /* icon_location.png in Resources */,
 				4734CDD71D41C95D006536DF /* iconfont.css in Resources */,
 				4734CDFD1D41CD42006536DF /* 微信icon.png in Resources */,
 				4734CE481D41CD5E006536DF /* 返回icon.png in Resources */,
@@ -1632,7 +1711,9 @@
 				4734CE371D41CD55006536DF /* star_L副本.png in Resources */,
 				4734CE3D1D41CD55006536DF /* 头像 copy.png in Resources */,
 				4734CDFE1D41CD42006536DF /* 微信QQ分割线.png in Resources */,
+				47C053CC1D7520D900AEBF86 /* icon_small_soccer.png in Resources */,
 				47184FB31D72BCEA008A4591 /* 约战-黄.png in Resources */,
+				47C053C81D7520D900AEBF86 /* icon_more.png in Resources */,
 				4734CE011D41CD42006536DF /* 足球logo.png in Resources */,
 				4734CE021D41CD42006536DF /* 返回icon.png in Resources */,
 				4734CE471D41CD5E006536DF /* 点-绿.png in Resources */,
@@ -1641,12 +1722,14 @@
 				4735FA151D561E2100FDF2ED /* 头像背景.png in Resources */,
 				4734CE171D41CD4B006536DF /* 深色背景.png in Resources */,
 				4734CE341D41CD55006536DF /* Rectangle 301.png in Resources */,
+				47C053C51D7520D900AEBF86 /* icon_C.png in Resources */,
 				4734CE4A1D41CD5E006536DF /* 搜索icon.png in Resources */,
 				4760880B1D55874400F36597 /* camera_L.png in Resources */,
 				4734CDF21D41CD39006536DF /* 首页icon-灰.png in Resources */,
 				4760880C1D55874400F36597 /* calender_L.png in Resources */,
 				47184FBF1D73C303008A4591 /* icon_followed(1).png in Resources */,
 				4734CE311D41CD55006536DF /* location_L.png in Resources */,
+				47C053C21D7520D900AEBF86 /* Combined Shape 02.png in Resources */,
 				4734CDEF1D41CD39006536DF /* 资讯icon-绿.png in Resources */,
 				4734CE4E1D41CD6D006536DF /* 2.png in Resources */,
 				4734CE151D41CD4B006536DF /* 我的关注icon.png in Resources */,
@@ -1661,6 +1744,7 @@
 				4734CE161D41CD4B006536DF /* 消息通知icon.png in Resources */,
 				4734CE191D41CD4B006536DF /* 绿白圈圈icon.png in Resources */,
 				4734CE331D41CD55006536DF /* qzone_s.png in Resources */,
+				47C053C41D7520D900AEBF86 /* icon_arrow_up.png in Resources */,
 				4734CDF31D41CD39006536DF /* 首页icon-绿.png in Resources */,
 				4734CE4B1D41CD5E006536DF /* 消息icon.png in Resources */,
 				4734CE1B1D41CD4B006536DF /* 黑色透明度.png in Resources */,
@@ -1668,6 +1752,9 @@
 				4734CE3E1D41CD55006536DF /* 标题背景.png in Resources */,
 				4734CE4C1D41CD5E006536DF /* 信息发送icon.png in Resources */,
 				4734CE001D41CD42006536DF /* 背景.png in Resources */,
+				47C053CA1D7520D900AEBF86 /* icon_pen_edit.png in Resources */,
+				47C053C31D7520D900AEBF86 /* icon_arrow_down.png in Resources */,
+				47C053C61D7520D900AEBF86 /* icon_clock.png in Resources */,
 				4734CDFC1D41CD42006536DF /* QQicon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1751,6 +1838,7 @@
 				47E8BCFC1D5C18A6007621F8 /* GameNewsDetailResponseModel.m in Sources */,
 				4725D2BC1D5B2E6E00A13AEB /* GameInfoDetailViewController.m in Sources */,
 				47405DD01D521791000A980A /* GameListView.m in Sources */,
+				47C053E51D75A14C00AEBF86 /* MyClosedInvitationResponseModel.m in Sources */,
 				470C5E751D44BFC800DDF90B /* BottomView.m in Sources */,
 				47BB49941D45E0D40052E4D0 /* News.m in Sources */,
 				47A364C91D5AB78C002FC59E /* PlayerDetailViewController.m in Sources */,
@@ -1774,7 +1862,9 @@
 				472930F91D430AD1008587A6 /* HomeCell.m in Sources */,
 				473BCCD81D596668005DBD2F /* TeamAlbumsResponseModel.m in Sources */,
 				4734CD3E1D41B512006536DF /* AppDelegate.m in Sources */,
+				47C053D31D759AAF00AEBF86 /* MyInvitationViewController.m in Sources */,
 				4776425F1D54357700548C9F /* SEMTeamHomeViewController.m in Sources */,
+				47C053E21D759FEF00AEBF86 /* MyInvitationResponseModel.m in Sources */,
 				47A364C61D5A1935002FC59E /* PictureShowController.m in Sources */,
 				4746A66A1D49AB17009E0645 /* UserModel.m in Sources */,
 				477676721D58614A00E10594 /* AboutViewController.m in Sources */,
@@ -1820,11 +1910,14 @@
 				47A364D81D5ABC7F002FC59E /* PlayerInfoView.m in Sources */,
 				47A364BA1D59AFA9002FC59E /* TeamDetailInfoView.m in Sources */,
 				4753074D1D46F74A003ECEBF /* MeTopView.m in Sources */,
+				47C053D01D75927400AEBF86 /* InvitationViewCell.m in Sources */,
 				47E8BD021D5C1DF0007621F8 /* GameDetailResponseModel.m in Sources */,
 				4734CDC21D41C835006536DF /* SEMInitialViewController.m in Sources */,
 				4735FA0C1D55FCDA00FDF2ED /* MeColleageSearchViewModel.m in Sources */,
 				477676751D58CB2C00E10594 /* TeamCommentsResponseModel.m in Sources */,
+				47C053D61D759B0B00AEBF86 /* MyInvitationViewModel.m in Sources */,
 				4772FE6D1D565DEB0008ED37 /* UIColor+MyColor.m in Sources */,
+				47C053D91D759C5800AEBF86 /* MakeInvitationViewModel.m in Sources */,
 				4734CD831D41BA54006536DF /* SEMViewModel.m in Sources */,
 				4708D2E61D4A67BD0094FAF9 /* NoticeCellView.m in Sources */,
 				4734CD921D41BCB9006536DF /* SEMMeViewModel.m in Sources */,
@@ -1846,6 +1939,7 @@
 				4762521D1D5196A0003788C0 /* UIView+Scale.m in Sources */,
 				4739B5DB1D483FE4007842CC /* TopicCell.m in Sources */,
 				478B5E531D420728007AABC4 /* SEMNetworkingManager.m in Sources */,
+				47C053DC1D759C8F00AEBF86 /* MakeInvitationController.m in Sources */,
 				4734CDDD1D41C95D006536DF /* UIImage+IconFont.m in Sources */,
 				476252171D519027003788C0 /* ShareView.m in Sources */,
 				47A626321D748CF700ABE897 /* InvitationView.m in Sources */,

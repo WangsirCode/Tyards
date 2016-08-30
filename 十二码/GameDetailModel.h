@@ -97,6 +97,18 @@
 
 @property (nonatomic, copy) NSString *name;
 
+@property (nonatomic, copy) NSString *area;
+
+@property (nonatomic, assign) BOOL deleted;
+
+
+@property (nonatomic, copy) NSString *lastUpdated;
+
+@property (nonatomic, copy) NSString *dateCreated;
+
+//@property (nonatomic, copy) NSString *class;
+
+
 @end
 
 @interface Round : NSObject<NSCoding>

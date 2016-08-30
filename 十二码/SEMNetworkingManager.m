@@ -690,7 +690,7 @@ NSString* const GameMessage = @"/match/newses/";
 {
     [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
     NSMutableString* URL = [[NSMutableString alloc] init];
-    [URL appendString:disLikeCoach
+    [URL appendString:@"/user/removeFansCoach/"
      ];
     [URL appendString:fansId];
     NSDictionary* para = @{@"token":token};
@@ -942,6 +942,7 @@ NSString* const GameMessage = @"/match/newses/";
         failureBlock(error);
     }];
 }
+//获取约战列表
 - (NSURLSessionTask *)fetchInvitations:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
 {
     [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
@@ -956,6 +957,48 @@ NSString* const GameMessage = @"/match/newses/";
             return @{@"desc":@"description"};
         }];
         InvitationResponseModel* model = [InvitationResponseModel mj_objectWithKeyValues:responseObject];
+        successBlock(model.resp);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }];
+}
+//获取我的约战
+- (NSURLSessionTask *)fetchMyInvitations:(NSString *)token success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
+{
+    [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
+    NSMutableString* URL = [[NSMutableString alloc] init];
+    [URL appendString:@"/match/myInvitations"
+     ];
+    NSDictionary* para = @{@"token":token};
+    return [self GET:URL parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        [InvitationModel mj_setupReplacedKeyFromPropertyName:^NSDictionary *{
+            return @{@"desc":@"description"};
+        }];
+        MyInvitationResponseModel* model = [MyInvitationResponseModel mj_objectWithKeyValues:responseObject];
+        successBlock(model.resp);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }];
+}
+//获取我的已关闭约战
+- (NSURLSessionTask *)fetchMyClosedInvitations:(NSString *)token success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
+{
+    [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
+    NSMutableString* URL = [[NSMutableString alloc] init];
+    [URL appendString:@"/match/myClosedInvitations"
+     ];
+    NSDictionary* para = @{@"token":token};
+    return [self GET:URL parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        [InvitationModel mj_setupReplacedKeyFromPropertyName:^NSDictionary *{
+            return @{@"desc":@"description"};
+        }];
+        MyClosedInvitationResponseModel* model = [MyClosedInvitationResponseModel mj_objectWithKeyValues:responseObject];
         successBlock(model.resp);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failureBlock(error);

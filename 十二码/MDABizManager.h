@@ -68,6 +68,8 @@
 #import "DataView.h"
 #import "MatchEventResponseModel.h"
 #import "InvitationResponseModel.h"
+#import "MyClosedInvitationResponseModel.h"
+#import "MyInvitationResponseModel.h"
 @interface MDABizManager : NSObject
 @property (nonatomic,assign)BOOL userLogined;
 /**
