@@ -85,32 +85,32 @@
             self.dateLabel.text = [self.model getDate];
             self.messageLabel.text = self.model.desc;
             if ([self.model.type isEqualToString:@"FIVE"]) {
-                self.typeLabel.text = @"五人场";
+                self.typeLabel.text = @"5人场";
                 self.typeLabel.backgroundColor = [UIColor colorWithHexString:@"#7ED97C"];
             }
             else if([self.model.type isEqualToString:@"SIX"])
             {
-                self.typeLabel.text = @"六人场";
+                self.typeLabel.text = @"6人场";
                 self.typeLabel.backgroundColor = [UIColor colorWithHexString:@"#FFC057"];
             }
             else if([self.model.type isEqualToString:@"SEVEN"])
             {
-                self.typeLabel.text = @"七人场";
+                self.typeLabel.text = @"7人场";
                 self.typeLabel.backgroundColor = [UIColor colorWithHexString:@"#89DAC7"];
             }
             else if([self.model.type isEqualToString:@"EIGHT"])
             {
-                self.typeLabel.text = @"八人场";
+                self.typeLabel.text = @"8人场";
                 self.typeLabel.backgroundColor = [UIColor colorWithHexString:@"#8CB8EF"];
             }
             else if([self.model.type isEqualToString:@"NINE"])
             {
-                self.typeLabel.text = @"九人场";
+                self.typeLabel.text = @"9人场";
                 self.typeLabel.backgroundColor = [UIColor colorWithHexString:@"#AEAEF5"];
             }
             else if([self.model.type isEqualToString:@"ELEVEN"])
             {
-                self.typeLabel.text = @"六人场";
+                self.typeLabel.text = @"11人场";
                 self.typeLabel.backgroundColor = [UIColor colorWithHexString:@"#40BC57"];
             }
         }
@@ -170,6 +170,7 @@
     }
     return _nameLabel;
 }
+
 -(UILabel *)placeLabel
 {
     if (!_placeLabel) {
@@ -179,6 +180,7 @@
     }
     return _placeLabel;
 }
+
 - (UILabel *)dateLabel
 {
     if (!_dateLabel) {

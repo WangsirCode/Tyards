@@ -259,6 +259,10 @@
 		47C322121D6BF64E00317A4C /* ScorerListResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C322111D6BF64E00317A4C /* ScorerListResponseModel.m */; };
 		47C322151D6BF6FE00317A4C /* AwardListResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C322141D6BF6FE00317A4C /* AwardListResponseModel.m */; };
 		47C322181D6BFA3F00317A4C /* ListTableHeaderVIew.m in Sources */ = {isa = PBXBuildFile; fileRef = 47C322171D6BFA3F00317A4C /* ListTableHeaderVIew.m */; };
+		47CAC1D71D76630E001D3708 /* TypeSelectController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47CAC1D61D76630E001D3708 /* TypeSelectController.m */; };
+		47CAC1DA1D766738001D3708 /* PlaceSelectController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47CAC1D91D766738001D3708 /* PlaceSelectController.m */; };
+		47CAC1DD1D7667F0001D3708 /* PlaceViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47CAC1DC1D7667F0001D3708 /* PlaceViewModel.m */; };
+		47CAC1E01D766837001D3708 /* PlacceResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47CAC1DF1D766837001D3708 /* PlacceResponseModel.m */; };
 		47E8BCF91D5C1315007621F8 /* TeamResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47E8BCF81D5C1315007621F8 /* TeamResponseModel.m */; };
 		47E8BCFC1D5C18A6007621F8 /* GameNewsDetailResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47E8BCFB1D5C18A6007621F8 /* GameNewsDetailResponseModel.m */; };
 		47E8BCFF1D5C1A4A007621F8 /* GameMessageResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47E8BCFE1D5C1A4A007621F8 /* GameMessageResponseModel.m */; };
@@ -704,6 +708,14 @@
 		47C322141D6BF6FE00317A4C /* AwardListResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AwardListResponseModel.m; sourceTree = "<group>"; };
 		47C322161D6BFA3F00317A4C /* ListTableHeaderVIew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListTableHeaderVIew.h; sourceTree = "<group>"; };
 		47C322171D6BFA3F00317A4C /* ListTableHeaderVIew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListTableHeaderVIew.m; sourceTree = "<group>"; };
+		47CAC1D51D76630E001D3708 /* TypeSelectController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TypeSelectController.h; sourceTree = "<group>"; };
+		47CAC1D61D76630E001D3708 /* TypeSelectController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TypeSelectController.m; sourceTree = "<group>"; };
+		47CAC1D81D766738001D3708 /* PlaceSelectController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceSelectController.h; sourceTree = "<group>"; };
+		47CAC1D91D766738001D3708 /* PlaceSelectController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceSelectController.m; sourceTree = "<group>"; };
+		47CAC1DB1D7667F0001D3708 /* PlaceViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceViewModel.h; sourceTree = "<group>"; };
+		47CAC1DC1D7667F0001D3708 /* PlaceViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceViewModel.m; sourceTree = "<group>"; };
+		47CAC1DE1D766837001D3708 /* PlacceResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlacceResponseModel.h; sourceTree = "<group>"; };
+		47CAC1DF1D766837001D3708 /* PlacceResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlacceResponseModel.m; sourceTree = "<group>"; };
 		47E8BCF71D5C1315007621F8 /* TeamResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamResponseModel.h; sourceTree = "<group>"; };
 		47E8BCF81D5C1315007621F8 /* TeamResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamResponseModel.m; sourceTree = "<group>"; };
 		47E8BCFA1D5C18A6007621F8 /* GameNewsDetailResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameNewsDetailResponseModel.h; sourceTree = "<group>"; };
@@ -1322,6 +1334,10 @@
 				47C053D21D759AAF00AEBF86 /* MyInvitationViewController.m */,
 				47C053DA1D759C8F00AEBF86 /* MakeInvitationController.h */,
 				47C053DB1D759C8F00AEBF86 /* MakeInvitationController.m */,
+				47CAC1D51D76630E001D3708 /* TypeSelectController.h */,
+				47CAC1D61D76630E001D3708 /* TypeSelectController.m */,
+				47CAC1D81D766738001D3708 /* PlaceSelectController.h */,
+				47CAC1D91D766738001D3708 /* PlaceSelectController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1372,6 +1388,8 @@
 				47C053D51D759B0B00AEBF86 /* MyInvitationViewModel.m */,
 				47C053D71D759C5800AEBF86 /* MakeInvitationViewModel.h */,
 				47C053D81D759C5800AEBF86 /* MakeInvitationViewModel.m */,
+				47CAC1DB1D7667F0001D3708 /* PlaceViewModel.h */,
+				47CAC1DC1D7667F0001D3708 /* PlaceViewModel.m */,
 			);
 			name = ViewModel;
 			sourceTree = "<group>";
@@ -1393,6 +1411,8 @@
 				47C053E11D759FEF00AEBF86 /* MyInvitationResponseModel.m */,
 				47C053E31D75A14C00AEBF86 /* MyClosedInvitationResponseModel.h */,
 				47C053E41D75A14C00AEBF86 /* MyClosedInvitationResponseModel.m */,
+				47CAC1DE1D766837001D3708 /* PlacceResponseModel.h */,
+				47CAC1DF1D766837001D3708 /* PlacceResponseModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1851,10 +1871,12 @@
 				4735FA0F1D560EBE00FDF2ED /* MeUserInfoResponseModel.m in Sources */,
 				476823751D44EA7E00B224E6 /* SearchModel.m in Sources */,
 				4734CD991D41BE3E006536DF /* DataArchive.m in Sources */,
+				47CAC1D71D76630E001D3708 /* TypeSelectController.m in Sources */,
 				473BCCD51D5961F1005DBD2F /* PhotoCollectionCell.m in Sources */,
 				470F56D41D71D59700110FCE /* DataView.m in Sources */,
 				4734CD951D41BCE3006536DF /* SEMTeamViewModel.m in Sources */,
 				476823721D44E43E00B224E6 /* SEMSearchViewModel.m in Sources */,
+				47CAC1DD1D7667F0001D3708 /* PlaceViewModel.m in Sources */,
 				4746A6701D49B3D8009E0645 /* MeinfoViewModel.m in Sources */,
 				4734CDA81D41BE7D006536DF /* MDABizManager.m in Sources */,
 				47AF5D2E1D5646A700728933 /* MyConcernViewModel.m in Sources */,
@@ -1862,11 +1884,13 @@
 				472930F91D430AD1008587A6 /* HomeCell.m in Sources */,
 				473BCCD81D596668005DBD2F /* TeamAlbumsResponseModel.m in Sources */,
 				4734CD3E1D41B512006536DF /* AppDelegate.m in Sources */,
+				47CAC1E01D766837001D3708 /* PlacceResponseModel.m in Sources */,
 				47C053D31D759AAF00AEBF86 /* MyInvitationViewController.m in Sources */,
 				4776425F1D54357700548C9F /* SEMTeamHomeViewController.m in Sources */,
 				47C053E21D759FEF00AEBF86 /* MyInvitationResponseModel.m in Sources */,
 				47A364C61D5A1935002FC59E /* PictureShowController.m in Sources */,
 				4746A66A1D49AB17009E0645 /* UserModel.m in Sources */,
+				47CAC1DA1D766738001D3708 /* PlaceSelectController.m in Sources */,
 				477676721D58614A00E10594 /* AboutViewController.m in Sources */,
 				47A364B11D597C78002FC59E /* AlbumDetailController.m in Sources */,
 				4783923B1D53242F00C31D37 /* UITableViewCell+Scale.m in Sources */,

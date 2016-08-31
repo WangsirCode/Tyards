@@ -10,4 +10,7 @@
 #import "MDABizManager.h"
 @interface InvitationVIewModel : SEMViewModel
 @property (nonatomic, strong) NSArray<InvitationModel *> *model;
+@property (nonatomic,strong) NSArray * menuArray;
+@property (nonatomic,strong) NSArray<InvitationModel*>* anothorModel;
+- (void)didSelectItem:(NSInteger)num;
 @end

@@ -17,12 +17,14 @@
 #import "InvitationViewCell.h"
 #import "MyInvitationViewController.h"
 #import "MakeInvitationController.h"
-@interface InvitationViewController ()<UITableViewDelegate,UITableViewDataSource>
+#import "DOPDropDownMenu.h"
+@interface InvitationViewController ()<UITableViewDelegate,UITableViewDataSource,DOPDropDownMenuDataSource,DOPDropDownMenuDelegate>
 @property (nonatomic,strong) UIBarButtonItem      *backItem;
 @property (nonatomic,strong) MBProgressHUD        *hud;
 @property (nonatomic,strong) InvitationVIewModel  *viewModel;
 @property (nonatomic,strong) UITableView          *invitationTableView;
 @property (nonatomic,strong) UIBarButtonItem      *rightBarItem;
+@property (nonatomic,strong) DOPDropDownMenu      *menu;
 @end
 @implementation InvitationViewController
 - (instancetype)initWithDictionary:(NSDictionary*)dictionary
@@ -48,6 +50,7 @@
     self.view.backgroundColor = [UIColor BackGroundColor];
     [self addSubviews];
     [self makeConstraits];
+    [self.menu selectDefalutIndexPath];
     self.hud.labelText = @"加载中";
     
 }
@@ -57,14 +60,20 @@
     self.navigationItem.leftBarButtonItem = self.backItem;
     self.navigationItem.rightBarButtonItem = self.rightBarItem;
     [self.view addSubview:self.invitationTableView];
+    [self.view addSubview:self.menu];
 }
 - (void)makeConstraits
 {
     self.invitationTableView.sd_layout
-    .topEqualToView(self.view)
+    .topSpaceToView(self.menu,0)
     .leftEqualToView(self.view)
     .rightEqualToView(self.view)
     .bottomEqualToView(self.view);
+    self.menu.sd_layout
+    .topEqualToView(self.view)
+    .leftEqualToView(self.view)
+    .rightEqualToView(self.view)
+    .heightIs(44*self.view.scale);
 }
 - (void)bindModel
 {
@@ -93,14 +102,32 @@
     InvitationViewCell* cell = (InvitationViewCell*)[tableView dequeueReusableCellWithIdentifier:@"InvitationViewCell"];
     cell.view.model = self.viewModel.model[indexPath.row];
     cell.contentView.backgroundColor = [UIColor BackGroundColor];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 212*self.view.scale;
 }
-#pragma mark - tableViewDeleagte
+#pragma mark -DOPDropDownMenuDataSource
+- (NSInteger)numberOfColumnsInMenu:(DOPDropDownMenu *)menu
+{
+    return 1;
+}
+- (NSInteger)menu:(DOPDropDownMenu *)menu numberOfRowsInColumn:(NSInteger)column
+{
+    return self.viewModel.menuArray.count;
+}
+- (NSString *)menu:(DOPDropDownMenu *)menu titleForRowAtIndexPath:(DOPIndexPath *)indexPath
+{
+    return self.viewModel.menuArray[indexPath.row];
+}
 
+- (void)menu:(DOPDropDownMenu *)menu didSelectRowAtIndexPath:(DOPIndexPath *)indexPath
+{
+    [self.viewModel didSelectItem:indexPath.row];
+    [self.invitationTableView reloadData];
+}
 #pragma mark- getter
 
 -(UIBarButtonItem *)backItem
@@ -160,5 +187,15 @@
         }];
     }
     return _rightBarItem;
+}
+- (DOPDropDownMenu *)menu
+{
+    if (!_menu) {
+        _menu = [[DOPDropDownMenu alloc] initWithOrigin:CGPointMake(0, 64) andHeight:44];
+        _menu.backgroundColor = [UIColor MyColor];
+        _menu.delegate = self;
+        _menu.dataSource = self;
+    }
+    return _menu;
 }
 @end

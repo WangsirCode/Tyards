@@ -108,9 +108,8 @@
                 }];
                 self.headView.scrollView.titlesGroup = titles;
                 self.headView.scrollView.imageURLStringsGroup = url;
+                self.headView.scrollView.placeholderImage = [UIImage placeholderImage];
             }
-
-
             NSLog(@"已经更新完了");
             [self endRefresh];
         }];
@@ -123,6 +122,7 @@
             NSLog(@"%@",x);
             [self.tableView reloadData];
             [self endRefresh];
+        
         }];
         
     }];
@@ -175,6 +175,7 @@
 - (void)didSelectedItem:(NSString *)name diplayname:(NSString *)dispalyname uni:(Universities *)uni
 {
     self.viewModel.code = name;
+    [DataArchive archiveData:name withFileName:@"school"];
     self.viewModel.title = dispalyname;
     NSUserDefaults *database = [NSUserDefaults standardUserDefaults];
     [database setObject:name forKey:@"name"];

@@ -11,11 +11,13 @@ SDAutoLayout使用者开发的部分app截图 http://www.jianshu.com/p/9bc04d3ef
 
 ##Pod支持：
 
-支持pod：  pod 'SDAutoLayout', '~> 2.1.2'
+支持pod：  pod 'SDAutoLayout', '~> 2.1.3'
 
 如果发现pod search SDAutoLayout 搜索出来的不是最新版本，需要在终端执行cd转换文件路径命令退回到desktop，然后执行pod setup命令更新本地spec缓存（可能需要几分钟），然后再搜索就可以了
 
 ## 更新记录：
+
+2016.08.12 -- 实现在tableview插入新的cell数据时自动缓存管理
 
 2016.06.30 -- 增加多参照view的leftSpaceToView和topSpaceToView约束，例：topSpaceToView(@[self.view3, self.view4], 30)
 
@@ -56,6 +58,8 @@ SDAutoLayout使用者开发的部分app截图 http://www.jianshu.com/p/9bc04d3ef
 ☆☆ SDAutoLayout 进阶版视频教程：http://www.letv.com/ptv/vplay/24381390.html ☆☆
 
 ☆☆ SDAutoLayout 原理简介视频教程：http://www.iqiyi.com/w_19rt0tec4p.html ☆☆
+
+☆☆ SDAutoLayout 朋友圈demo视频教程：http://v.youku.com/v_show/id_XMTYzNzg2NzA0MA==.html ☆☆
 
 ## 部分SDAutoLayout的DEMO：
 

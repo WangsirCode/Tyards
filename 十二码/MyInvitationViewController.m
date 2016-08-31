@@ -97,6 +97,7 @@
         }
         cell.view.model = self.viewModel.myInvitaions[indexPath.row];
         cell.contentView.backgroundColor = [UIColor BackGroundColor];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
     else
@@ -107,6 +108,7 @@
         }
         cell.contentView.backgroundColor= [UIColor BackGroundColor];
         cell.view.model = self.viewModel.myClosedInvitations[indexPath.row];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
 }

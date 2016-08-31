@@ -8,8 +8,10 @@
 
 #import "MakeInvitationController.h"
 #import "MDABizManager.h"
+#import "TypeSelectController.h"
 #import "MakeInvitationViewModel.h"
-@interface MakeInvitationController () <UITableViewDelegate,UITableViewDataSource,UITextViewDelegate,UITextFieldDelegate>
+#import "PlaceSelectController.h"
+@interface MakeInvitationController () <UITableViewDelegate,UITableViewDataSource,UITextViewDelegate,UITextFieldDelegate,TypeSelectControllerDelegate,PlaceSelectControllerDelegate>
 @property (nonatomic,strong) UIBarButtonItem      *backItem;
 @property (nonatomic,strong) MBProgressHUD        *hud;
 @property (nonatomic,strong) MakeInvitationViewModel         *viewModel;
@@ -55,14 +57,59 @@
     [self makeConstraits];
     self.hud.labelText = @"加载中";
 }
-
+-(void)KeyboardWillShow:(NSNotification *)notification
+{
+    NSDictionary *info = [notification userInfo];
+    
+    //获取高度
+    NSValue *value = [info objectForKey:@"UIKeyboardBoundsUserInfoKey"];//关键的一句，网上关于获取键盘高度的解决办法，多到这句就over了。系统宏定义的UIKeyboardBoundsUserInfoKey等测试都不能获取正确的值。不知道为什么。。。
+    
+    CGSize keyboardSize = [value CGRectValue].size;
+    float keyboardHeight = keyboardSize.height;
+    
+    // 获取键盘弹出的时间
+    NSValue *animationDurationValue = [[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey];
+    NSTimeInterval animationDuration;
+    [animationDurationValue getValue:&animationDuration];
+    
+    //自定义的frame大小的改变的语句
+    self.postTableView.sd_resetLayout
+    .topSpaceToView(self.view,-keyboardHeight + 48)
+    .leftEqualToView(self.view)
+    .rightEqualToView(self.view)
+    .heightIs(self.view.height);
+}
+- (void)KeyboardWillhide:(NSNotification *)notification
+{
+    NSDictionary *info = [notification userInfo];
+    
+    //获取高度
+    NSValue *value = [info objectForKey:@"UIKeyboardBoundsUserInfoKey"];//关键的一句，网上关于获取键盘高度的解决办法，多到这句就over了。系统宏定义的UIKeyboardBoundsUserInfoKey等测试都不能获取正确的值。不知道为什么。。。
+    
+    CGSize keyboardSize = [value CGRectValue].size;
+    float keyboardHeight = keyboardSize.height;
+    
+    // 获取键盘弹出的时间
+    NSValue *animationDurationValue = [[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey];
+    NSTimeInterval animationDuration;
+    [animationDurationValue getValue:&animationDuration];
+    
+    //自定义的frame大小的改变的语句
+    self.postTableView.sd_resetLayout
+    .topEqualToView(self.view)
+    .leftEqualToView(self.view)
+    .rightEqualToView(self.view)
+    .heightIs(self.view.height);
+}
 - (void)addSubviews
 {
     self.navigationItem.leftBarButtonItem = self.backItem;
+    
     [self.view addSubview:self.postTableView];
-    [self.view addSubview:self.postButton];
     [self.view addSubview:self.datePicker];
     [self.view addSubview:self.timePicker];
+
+    [self.view addSubview:self.postButton];
 }
 - (void)makeConstraits
 {
@@ -79,14 +126,14 @@
     .heightIs(48*self.view.scale);
     
     self.datePicker.sd_layout
-    .bottomSpaceToView(self.postButton,0)
+    .bottomSpaceToView(self.view,0)
     .heightIs(210*self.view.scale)
     .widthIs(self.view.width)
     .centerXEqualToView(self.view);
     
     self.timePicker.sd_layout
     .centerXEqualToView(self.view)
-    .bottomSpaceToView(self.postButton,0)
+    .bottomSpaceToView(self.view,0)
     .widthIs(self.view.width)
     .heightIs(210*self.view.scale);
 }
@@ -98,6 +145,41 @@
             [self.hud hide:YES];
         }
     }];
+    [[self.viewModel.postCommand executionSignals] subscribeNext:^(id x) {
+        [XHToast showCenterWithText:@"发布成功"];
+    }];
+    [RACObserve(self.timeLabel, text) subscribeNext:^(id x) {
+        self.viewModel.model.title = self.titleFiled.text;
+    }];
+    [RACObserve(self.typeLabel, text) subscribeNext:^(id x) {
+        if ([self.typeLabel.text isEqualToString:@"5人场"]) {
+            self.viewModel.model.type = @"FIVE";
+        }
+        else if ([self.typeLabel.text isEqualToString:@"6人场"])
+        {
+            self.viewModel.model.type = @"SIX";
+        }
+        else if ([self.typeLabel.text isEqualToString:@"7人场"])
+        {
+            self.viewModel.model.type = @"SEVEN";
+        }
+        else if ([self.typeLabel.text isEqualToString:@"8人场"])
+        {
+            self.viewModel.model.type = @"EIGHT";
+        }
+        else if ([self.typeLabel.text isEqualToString:@"9人场"])
+        {
+            self.viewModel.model.type = @"NINE";
+        }
+        else if ([self.typeLabel.text isEqualToString:@"11人场"])
+        {
+            self.viewModel.model.type = @"ELEVEN";
+        }
+    }];
+    RAC(self.viewModel.model.stadium,name) = RACObserve(self.placeLabel, text);
+    RAC(self.viewModel.model,linkman) = RACObserve(self.cmanFiled, text);
+    RAC(self.viewModel.model,contact) = RACObserve(self.cteleFiled, text);
+    RAC(self.viewModel.model,desc) = RACObserve(self.messageView, text);
 }
 #pragma mark - tableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -237,16 +319,37 @@
     if (indexPath.row == 1)
     {
         self.datePicker.hidden = NO;
+        self.postButton.hidden = YES;
         self.navigationItem.leftBarButtonItem = self.doneItem;
         self.navigationItem.rightBarButtonItem = self.cancelItem;
     }
     else if (indexPath.row == 2)
     {
         self.timePicker.hidden = NO;
+        self.postButton.hidden = YES;
         self.navigationItem.leftBarButtonItem = self.doneItem;
         self.navigationItem.rightBarButtonItem = self.cancelItem;
     }
+    else if (indexPath.row == 4)
+    {
+        TypeSelectController* controller = [[TypeSelectController alloc ] init];
+        controller.delegate = self;
+        [self.navigationController pushViewController:controller animated:YES];
+    }
+    else if (indexPath.row == 3)
+    {
+        PlaceSelectController* controler = [[PlaceSelectController alloc] init];
+        controler.delegate = self;
+        [self.navigationController pushViewController:controler animated:YES];
+    }
 }
+#pragma mark - PlaceSelectControllerDelegate
+- (void)didSelectPlace:(NSString *)place iden:(NSInteger)iden
+{
+    self.placeLabel.text = place;
+    self.viewModel.model.stadium.id = iden;
+}
+
 #pragma mark -textViewDelegate
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
@@ -258,9 +361,17 @@
     {
         textView.textColor = [UIColor colorWithHexString:@"000000"];
     }
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(KeyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(KeyboardWillhide:) name:UIKeyboardWillHideNotification object:nil];
+    return YES;
 }
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
+
     if ([textView.text isEqualToString:@"备注信息让各大球队提高对你的兴趣吧"]) {
         textView.text = @"";
         textView.textColor = [UIColor blackColor];
@@ -273,6 +384,15 @@
         return NO;
     }
     return YES;
+}
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return NO;
+}
+#pragma  mark - typeControllerDelegate
+- (void)didSelectedItem:(NSString *)type
+{
+    self.typeLabel.text = type;
 }
 #pragma mark- getter
 
@@ -319,6 +439,7 @@
         [_postButton setTitle:@"发布" forState:UIControlStateNormal];
         [_postButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         _postButton.backgroundColor = [UIColor whiteColor];
+        _postButton.userInteractionEnabled = YES;
         _postButton.rac_command = self.viewModel.postCommand;
     }
     return _postButton;
@@ -338,6 +459,7 @@
 {
     if (!_titleFiled) {
         _titleFiled = [[UITextField alloc] init];
+        _titleFiled.delegate = self;
         
     }
     return _titleFiled;
@@ -346,6 +468,7 @@
 {
     if (!_cmanFiled) {
         _cmanFiled = [[UITextField alloc] init];
+        _cmanFiled.delegate = self;
     }
     return _cmanFiled;
 }
@@ -353,6 +476,7 @@
 {
     if (!_cteleFiled) {
         _cteleFiled = [UITextField new];
+        _cteleFiled.delegate = self;
     }
     return _cteleFiled;
 }
@@ -423,6 +547,7 @@
 {
     self.datePicker.hidden = YES;
     self.timePicker.hidden = YES;
+    self.postButton.hidden = NO;
     self.navigationItem.rightBarButtonItem = nil;
     self.navigationItem.leftBarButtonItem = self.backItem;
 }
@@ -437,11 +562,13 @@
 {
     self.datePicker.hidden = YES;
     self.timePicker.hidden = YES;
+    self.postButton.hidden = NO;
     self.navigationItem.rightBarButtonItem = nil;
     self.navigationItem.leftBarButtonItem = self.backItem;
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = @"yyyy年MM月dd日";
     self.dateLabel.text = [formatter stringFromDate:self.datePicker.date];
+    self.viewModel.model.playDate = [self.datePicker.date timeIntervalSince1970] * 1000;
     formatter.dateFormat = @"HH: mm";
     self.timeLabel.text = [formatter stringFromDate:self.timePicker.date];
 }

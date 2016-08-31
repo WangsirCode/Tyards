@@ -22,4 +22,5 @@ target ‘十二码’ do
     pod 'TencentOpenApiSDK'
     pod 'SDAutoLayout'
     pod 'MBProgressHUD'
+    pod 'DOPDropDownMenu-Enhanced', '~> 1.0.0'
 end

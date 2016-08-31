@@ -15,6 +15,7 @@ PODS:
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
   - BHBPopView (1.2.0)
+  - DOPDropDownMenu-Enhanced (1.0.0)
   - FDFullscreenPopGesture (1.1)
   - JLRoutes (1.6)
   - LazyPageScrollView (1.2)
@@ -61,6 +62,7 @@ PODS:
 DEPENDENCIES:
   - AFNetworking
   - BHBPopView (from `git@github.com:Novel111/BHBPopView.git`)
+  - DOPDropDownMenu-Enhanced (~> 1.0.0)
   - FDFullscreenPopGesture
   - JLRoutes
   - LazyPageScrollView
@@ -91,6 +93,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   BHBPopView: e67d87a44526d9542d3abb35773c0297e6054baa
+  DOPDropDownMenu-Enhanced: 9ec473b16351b5b0b2d6ef87e7f666fe5ff54ad5
   FDFullscreenPopGesture: a8a620179e3d9c40e8e00256dcee1c1a27c6d0f0
   JLRoutes: 435d791422e96c9b9b5e1c4db1aedb3ae1b1a08f
   LazyPageScrollView: 03ba7705e9f9cfecb1577f9ee2c6e194cca47c7e
@@ -109,6 +112,6 @@ SPEC CHECKSUMS:
   UITableView+FDTemplateLayoutCell: 234e1582bcc4e18461af91155123bb96538ed030
   YYCategories: 0fd4d9eb0994d8d0e355beb4081c8f7202a82b7b
 
-PODFILE CHECKSUM: ed0d8dfac0f9ea78308e1a3f2e1e3a6034dc01af
+PODFILE CHECKSUM: 57a6c70714410ef82d90fa4db32371114b6275fd
 
 COCOAPODS: 1.0.1

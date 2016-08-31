@@ -856,5 +856,49 @@
                                 success:(void (^)(id data))successBlock
                                 failure:(void (^)(NSError *aError))failureBlock;
 
+/*!
+ *  @author 汪宇豪, 16-08-31 09:08:44
+ *
+ *  @brief 获取球场列表
+ *
+ *  @param schoolCode   schoolCode
+ *  @param successBlock 成功
+ *  @param failureBlock 失败
+ *
+ *  @return NSURLSessionTask
+ */
+- (NSURLSessionTask*)fetchPlaceList:(NSString*)schoolCode
+                                      success:(void (^)(id data))successBlock
+                                      failure:(void (^)(NSError *aError))failureBlock;
+
+/*!
+ *  @author 汪宇豪, 16-08-31 14:08:06
+ *
+ *  @brief 发送约战
+ *
+ *  @param title        标题
+ *  @param date         日期
+ *  @param stadium      场馆
+ *  @param type         类型
+ *  @param contact      联系方式
+ *  @param linkman      联系人
+ *  @param description  附加信息
+ *  @param token        token
+ *  @param successBlock 成功
+ *  @param failureBlock 失败
+ *
+ *  @return NSURLSessionTask
+ */
+- (NSURLSessionTask*)postInvitation:(NSString*)title
+                               date:(long long)date
+                            stadium:(NSInteger)stadium
+                               type:(NSString*)type
+                            contact:(NSString*)contact
+                            linkman:(NSString*)linkman
+                        description:(NSString*)description
+                              token:(NSString*)token
+                            success:(void (^)(id data))successBlock
+                            failure:(void (^)(NSError *aError))failureBlock;
+
 @end
 

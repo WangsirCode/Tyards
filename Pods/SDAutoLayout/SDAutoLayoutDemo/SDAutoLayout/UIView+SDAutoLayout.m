@@ -1090,7 +1090,13 @@
         
         [self.autoLayoutModelsArray enumerateObjectsUsingBlock:^(SDAutoLayoutModel *model, NSUInteger idx, BOOL *stop) {
             if (idx < caches.count) {
-                model.needsAutoResizeView.frame = [[caches objectAtIndex:idx] CGRectValue];
+                CGRect originalFrame = model.needsAutoResizeView.frame;
+                CGRect newFrame = [[caches objectAtIndex:idx] CGRectValue];
+                if (CGRectEqualToRect(originalFrame, newFrame)) {
+                    [model.needsAutoResizeView setNeedsLayout];
+                } else {
+                    model.needsAutoResizeView.frame = newFrame;
+                }
                 [self setupCornerRadiusWithView:model.needsAutoResizeView model:model];
                 model.needsAutoResizeView.sd_categoryManager.hasSetFrameWithCache = YES;
             } else {
@@ -1260,9 +1266,7 @@
         [view layoutSubviews];
     }
     
-    
     [self setupCornerRadiusWithView:view model:model];
-    
 }
 
 - (void)layoutAutoHeightWidthView:(UIView *)view model:(SDAutoLayoutModel *)model
@@ -1297,7 +1301,10 @@
         label.numberOfLines = 1;
         if (label.text.length) {
             if (!label.isAttributedContent) {
-                CGRect rect = [label.text boundingRectWithSize:CGSizeMake(width, label.height_sd) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName : label.font} context:nil];
+                CGRect rect = [label.text boundingRectWithSize:CGSizeMake(MAXFLOAT, label.height_sd) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName : label.font} context:nil];
+                if (rect.size.width > width) {
+                    rect.size.width = width;
+                }
                 label.width_sd = rect.size.width + 0.1;
             } else{
                 [label sizeToFit];

@@ -1004,5 +1004,38 @@ NSString* const GameMessage = @"/match/newses/";
         failureBlock(error);
     }];
 }
+//获取球场列表
+- (NSURLSessionTask *)fetchPlaceList:(NSString *)schoolCode success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
+{
+    [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
+    NSMutableString* URL = [[NSMutableString alloc] init];
+    [URL appendString:@"/"
+     ];
+    [URL appendString:schoolCode];
+    [URL appendString:@"/match/stadiums"];
+    return [self GET:URL parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        PlacceResponseModel* model = [PlacceResponseModel mj_objectWithKeyValues:responseObject];
+        successBlock(model.resp);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }];
+}
+//上传约战
+- (NSURLSessionTask *)postInvitation:(NSString *)title date:(long long)date stadium:(NSInteger)stadium type:(NSString *)type contact:(NSString *)contact linkman:(NSString *)linkman description:(NSString *)description token:(NSString *)token success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
+{
+    [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
+    NSMutableString* URL = [[NSMutableString alloc] init];
+    [URL appendString:@"/match/updateInvitation"];
+    NSDictionary* para = @{@"title":title,@"date":@(date),@"stadium":@(stadium),@"type":type,@"contact":contact,@"linkman":linkman,@"description":description,@"token":token};
+    return [self POST:URL parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        successBlock(responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }];
+}
 @end
 

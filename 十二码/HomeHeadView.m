@@ -67,6 +67,7 @@
         _scrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectZero delegate:self placeholderImage:[UIImage imageNamed:@"placeholder"]];
         _scrollView.pageControlAliment = SDCycleScrollViewPageContolAlimentRight;
         _scrollView.currentPageDotColor = [UIColor whiteColor];
+        _scrollView.bannerImageViewContentMode = UIViewContentModeScaleAspectFill;
     }
     return _scrollView;
 }

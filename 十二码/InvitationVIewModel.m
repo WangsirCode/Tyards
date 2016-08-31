@@ -14,6 +14,7 @@
     self = [super initWithDictionary:dictionary];
     if (self)
     {
+        self.menuArray = @[@"全部类型",@"5人场",@"6人场",@"7人场",@"8人场",@"9人场",@"11人场"];
         [self fetchData];
     }
     return self;
@@ -23,9 +24,22 @@
     SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
     [manager fetchInvitations:^(id data) {
         self.model = data;
+        self.anothorModel = data;
         self.shouldReloadData = YES;
     } failure:^(NSError *aError) {
         
     }];
+}
+- (void)didSelectItem:(NSInteger)num
+{
+    NSDictionary* dic = @{@1:@"FIVE",@2:@"SIX",@3:@"SEVEN",@4:@"EIGHT",@5:@"NINE",@6:@"ELEVEN"};
+    NSPredicate* pre = [NSPredicate predicateWithFormat:@"type CONTAINS %@",dic[@(num)]];
+    if (num == 0) {
+        self.model = self.anothorModel;
+    }
+    else
+    {
+        self.model = [self.anothorModel filteredArrayUsingPredicate:pre];
+    }
 }
 @end

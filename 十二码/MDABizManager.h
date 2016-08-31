@@ -70,6 +70,7 @@
 #import "InvitationResponseModel.h"
 #import "MyClosedInvitationResponseModel.h"
 #import "MyInvitationResponseModel.h"
+#import "PlacceResponseModel.h"
 @interface MDABizManager : NSObject
 @property (nonatomic,assign)BOOL userLogined;
 /**
