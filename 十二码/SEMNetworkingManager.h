@@ -900,5 +900,38 @@
                             success:(void (^)(id data))successBlock
                             failure:(void (^)(NSError *aError))failureBlock;
 
+/*!
+ *  @author 汪宇豪, 16-09-03 09:09:07
+ *
+ *  @brief 获取关注新闻
+ *
+ *  @param token        token
+ *  @param successBlock 成功
+ *  @param failureBlock 失败
+ *
+ *  @return NSURLSessionTask
+ */
+- (NSURLSessionTask*)fetchMyFans:(NSString*)token
+                          offset:(NSInteger)offset
+                            success:(void (^)(id data))successBlock
+                            failure:(void (^)(NSError *aError))failureBlock;
+
+
+/*!
+ *  @author 汪宇豪, 16-09-03 17:09:04
+ *
+ *  @brief 修改昵称
+ *
+ *  @param token        token
+ *  @param nickName     昵称
+ *  @param successBlock 成功
+ *  @param failureBlock 失败
+ *
+ *  @return NSURLSessionTask
+ */
+- (NSURLSessionTask*)changeNickName:(NSString*)token
+                          name:(NSString*)nickName
+                         success:(void (^)(id data))successBlock
+                         failure:(void (^)(NSError *aError))failureBlock;
 @end
 

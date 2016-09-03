@@ -45,6 +45,9 @@
 	<string>1</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
+		<string>mppwpa</string>
+		<string>mqqbrowser</string>
+		<string>wtloginmqq2</string>
 		<string>mqqapi</string>
 		<string>mqq</string>
 		<string>mqqOpensdkSSoLogin</string>

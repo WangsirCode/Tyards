@@ -60,7 +60,7 @@
 
 @property (nonatomic, copy) NSString *name;
 
-@property (nonatomic, copy) NSString *logo;
+@property (nonatomic, strong) Logo *logo;
 
 - (NSString*)honorInfo;
 @end

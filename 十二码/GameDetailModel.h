@@ -37,7 +37,7 @@
 
 @property (nonatomic, assign) NSInteger penaltyHome;
 
-@property (nonatomic, copy) NSString *description;
+@property (nonatomic, copy) NSString *desc;
 
 @property (nonatomic, assign) NSInteger homeScore;
 
@@ -101,13 +101,9 @@
 
 @property (nonatomic, assign) BOOL deleted;
 
-
 @property (nonatomic, copy) NSString *lastUpdated;
 
 @property (nonatomic, copy) NSString *dateCreated;
-
-//@property (nonatomic, copy) NSString *class;
-
 
 @end
 
@@ -127,7 +123,7 @@
 
 @property (nonatomic, copy) NSString *name;
 
-@property (nonatomic, copy) NSString *logo;
+@property (nonatomic, strong) Logo *logo;
 
 @end
 

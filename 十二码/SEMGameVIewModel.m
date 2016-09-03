@@ -29,7 +29,7 @@ NSString* const GameListCache = @"GameListCache";
 }
 - (void)fecthData
 {
-    NSArray<GameDetailModel*> *noticeGames = (NSArray<GameDetailModel*>*) [DataArchive unarchiveDataWithFileName:NoticeGameCache];
+    NSArray *noticeGames = (NSArray*) [DataArchive unarchiveDataWithFileName:NoticeGameCache];
     if (noticeGames.count > 0) {
         self.noticeGameDatasource = noticeGames;
     }
@@ -66,9 +66,6 @@ NSString* const GameListCache = @"GameListCache";
                 [manager fetchNoticeGame:self.code offset:0 success:^(id data) {
                     self.noticeGameDatasource = data;
                     [DataArchive archiveData:self.noticeGameDatasource withFileName:NoticeGameCache];
-                    NSArray<GameDetailModel*> *noticeGames = (NSArray<GameDetailModel*>*) [DataArchive unarchiveDataWithFileName:NoticeGameCache];
-                    
-                    NSLog(@"%lu",(unsigned long)noticeGames.count);
                     [subscriber sendNext:@1];
                     [subscriber sendCompleted];
                     
@@ -90,7 +87,8 @@ NSString* const GameListCache = @"GameListCache";
                 SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
                 [manager fetchHistoryGame:self.code offset:0 success:^(id data) {
                     self.historyGameDatasource = data;
-                    [DataArchive archiveData:self.historyGameDatasource withFileName:NoticeGameCache];
+                    [DataArchive archiveData:self.historyGameDatasource withFileName:HistoryGameCache];
+                    [DataArchive unarchiveDataWithFileName:HistoryGameCache];
                     [subscriber sendNext:@1];
                     [subscriber sendCompleted];
                     
@@ -141,7 +139,6 @@ NSString* const GameListCache = @"GameListCache";
                     [DataArchive archiveData:self.noticeGameDatasource withFileName:NoticeGameCache];
                     [subscriber sendNext:@1];
                     [subscriber sendCompleted];
-                    
                 } failure:^(NSError *aError) {
                     [subscriber sendError:aError];
                 }];

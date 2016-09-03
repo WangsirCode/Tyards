@@ -41,10 +41,5 @@
 - (NSString*)getDate;
 @end
 
-//@interface Stadium : NSObject
-//
-//
-//
-//@end
 
 

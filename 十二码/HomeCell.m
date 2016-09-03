@@ -66,7 +66,7 @@
     .autoHeightRatio(0)
     .maxHeightIs(60*self.scale);
     [self.bottomview mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.titleLabel.mas_left);
+        make.left.equalTo(self.contentView.mas_left).offset(120*self.scale);
         make.right.equalTo(self.contentView.mas_right);
         make.bottom.equalTo(self.contentView.mas_bottom).offset(-6*scale);
         make.height.equalTo(@(20*self.scale));
@@ -93,6 +93,8 @@
 {
     if (!_newsImage){
         _newsImage = [[UIImageView alloc] init];
+        _newsImage.contentMode = UIViewContentModeScaleAspectFill;
+        _newsImage.clipsToBounds = YES;
     }
     return _newsImage;
 }

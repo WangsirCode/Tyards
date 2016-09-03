@@ -114,13 +114,8 @@
     .rightEqualToView(self)
     .heightIs(44*scale);
     
-    if (self.model.data.honours) {
-        
-    }
-    else
-    {
-        [self setupAutoHeightWithBottomView:self.honorLabel bottomMargin:20];
-    }
+    [self setupAutoHeightWithBottomView:self.honorLabel bottomMargin:10];
+
     
 }
 - (void)bindModel
@@ -167,6 +162,78 @@
             self.winlabel.model = self.model.data;
             self.dragLabel.model = self.model.data;
             self.loseLabel.model = self.model.data;
+            if (self.model.data.honours) {
+                for (int i = 0; i < self.model.data.honours.count; i++) {
+                    Honours* model = self.model.data.honours[i];
+                    UIView* view = [[UIView alloc] init];
+                    view.layer.borderWidth = 1;
+                    view.layer.borderColor = [UIColor BackGroundColor].CGColor;
+                    [self addSubview:view];
+                    view.sd_layout
+                    .topSpaceToView(self.honorLabel,53*i*self.scale)
+                    .leftEqualToView(self)
+                    .rightEqualToView(self)
+                    .heightIs(53*self.scale);
+                    UIImageView* iamgeView = [UIImageView new];
+                    if (model.logo.url) {
+                        [iamgeView sd_setImageWithURL:[[NSURL alloc] initWithString:model.logo.url ] placeholderImage:[UIImage placeholderImage]];
+                        
+                    }
+                    else
+                    {
+                        iamgeView.image = [UIImage placeholderImage];
+                    }
+                    iamgeView.sd_cornerRadiusFromWidthRatio = @0.5;
+                    [view addSubview:iamgeView];
+                    iamgeView.sd_layout
+                    .centerYEqualToView(view)
+                    .heightIs(20*self.scale)
+                    .leftSpaceToView(view,10*self.scale)
+                     .widthEqualToHeight();
+                    UILabel* label = [UILabel new];
+                    label.text = model.name;
+                    [view addSubview:label];
+                    label.sd_layout
+                    .topSpaceToView(view,10*self.scale)
+                    .leftSpaceToView(iamgeView,20*self.scale)
+                    .heightIs(15)
+                    .widthIs(200);
+                    label.font = [UIFont systemFontOfSize:14];
+                    UIImageView* plateImage = [UIImageView new];
+                    plateImage.image = [UIImage imageNamed:@"赛事icon=灰"];
+                    [view addSubview:plateImage];
+                    plateImage.sd_layout
+                    .topSpaceToView(label,5)
+                    .leftEqualToView(label)
+                    .heightIs(12*self.scale)
+                    .widthIs(7*self.scale);
+                    UIImageView* timeImage = [UIImageView new];
+                    timeImage.image = [UIImage imageNamed:@"约战-时间"];
+                    [view addSubview:timeImage];
+                    timeImage.sd_layout
+                    .topSpaceToView(label,5)
+                    .leftSpaceToView(plateImage,20*self.scale)
+                    .heightIs(12*self.scale)
+                    .widthIs(7*self.scale);
+                    UILabel* yearLabel = [UILabel new];
+                    yearLabel.text = [@(model.year) stringValue];
+                    [view addSubview:yearLabel];
+                    yearLabel.sd_layout
+                    .topEqualToView(plateImage)
+                    .bottomEqualToView(plateImage)
+                    .leftSpaceToView(timeImage,5*self.scale)
+                    .widthIs(100);
+                    yearLabel.font = [UIFont systemFontOfSize:11];
+                    yearLabel.textColor = [UIColor colorWithHexString:@"#CACACA"];
+                    if (i == self.model.data.honours.count - 1) {
+                        [self setupAutoHeightWithBottomView:view bottomMargin:10];
+                    }
+                }
+            }
+            else
+            {
+                [self setupAutoHeightWithBottomView:self.honorLabel bottomMargin:20];
+            }
         }
     }];
 }

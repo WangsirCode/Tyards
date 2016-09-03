@@ -16,5 +16,7 @@
 @property (nonatomic,strong) UILabel     * inifoLabel;
 @property (nonatomic,strong) UILabel     * commentLabel;
 @property (nonatomic,strong) UIImageView * conmmentView;
+@property (nonatomic,strong) UILabel     * viewLabel;
+@property (nonatomic,strong) UIImageView * viewImage;
 @property (nonatomic,assign)CGFloat scale;
 @end

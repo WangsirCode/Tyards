@@ -152,7 +152,7 @@
         }
         NSURL *awayurl;
         if (model.away.logo) {
-            awayurl = [[NSURL alloc] initWithString:model.away.logo];
+            awayurl = [[NSURL alloc] initWithString:model.away.logo.url];
             [cell.view.awayImgaeview sd_setImageWithURL:awayurl placeholderImage:image options:SDWebImageRefreshCached];
         }
         else
@@ -218,7 +218,7 @@
         }
         NSURL *awayurl;
         if (model.away.logo) {
-            awayurl = [[NSURL alloc] initWithString:model.away.logo];
+            awayurl = [[NSURL alloc] initWithString:model.away.logo.url];
             [cell.view.awayImgaeview sd_setImageWithURL:awayurl placeholderImage:image options:SDWebImageRefreshCached];
         }
         else
@@ -267,17 +267,21 @@
      
                           value:[UIColor colorWithHexString:@"#1EA11F"]
      
-                          range:range];
+                          range:range]  ;
     label.attributedText = AttributedStr;
     label.textAlignment = NSTextAlignmentCenter;
     [label mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(view);
     }];
+    view.backgroundColor = [UIColor BackGroundColor];
     return view;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 16*self.view.scale;
+    if (tableView.tag != 101) {
+        return 30*self.view.scale;
+    }
+    return 0;
 }
 #pragma mark -tableviewDeleagate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -333,6 +337,7 @@
         backView.backgroundColor = [UIColor BackGroundColor];
         backView.frame = CGRectMake(0, 0, self.view.width, 8);
         _noticegameTableview.tableHeaderView = backView;
+        _noticegameTableview.backgroundColor = [UIColor BackGroundColor];
     }
     return _noticegameTableview;
 }
@@ -369,6 +374,8 @@
         backView.backgroundColor = [UIColor BackGroundColor];
         backView.frame = CGRectMake(0, 0, self.view.width, 8);
         _historygameTableview.tableHeaderView = backView;
+        _historygameTableview.backgroundColor = [UIColor BackGroundColor];
+        _historygameTableview.separatorInset = UIEdgeInsetsMake(5, 0, 5, 0);
     }
     return _historygameTableview;
 }
@@ -400,6 +407,11 @@
                 [self endRefresh];
             }];
         }];
+        _gamelistTableview.backgroundColor = [UIColor BackGroundColor];
+        UIView* backView = [UIView new];
+        backView.backgroundColor = [UIColor BackGroundColor];
+        backView.frame = CGRectMake(0, 0, self.view.width, 8);
+        _gamelistTableview.tableHeaderView = backView;
     }
     return _gamelistTableview;
 }
@@ -408,7 +420,7 @@
     if (!_pageView) {
         _pageView = [[LazyPageScrollView alloc] init];
         _pageView.delegate = self;
-        [_pageView initTab:YES Gap:self.view.width / 3 TabHeight:40 VerticalDistance:10 BkColor:[UIColor whiteColor]];
+        [_pageView initTab:YES Gap:self.view.width / 3 TabHeight:27 VerticalDistance:10 BkColor:[UIColor whiteColor]];
         UIView *view=[[UIView alloc] init];
         view.backgroundColor=[UIColor orangeColor];
         [_pageView addTab:@"比赛预告" View:self.noticegameTableview Info:nil];

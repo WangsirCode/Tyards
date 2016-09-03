@@ -8,12 +8,24 @@
 
 #import "HomeCell.h"
 
-@class TeamPlayerModel,Player,Avatar,Team1;
-@interface TeamPlayerResponseModel : HomeCell
+@class TeamPlayerModel,Player,Avatar,Team1,TeamPlayerModel1,Coaches;
+@class Coach,Avatar,Team,Logo;
+@interface TeamPlayerResponseModel : NSObject
 
-@property (nonatomic, strong) NSArray<TeamPlayerModel *> *resp;
+@property (nonatomic, strong)TeamPlayerModel1 *resp;
 
 @property (nonatomic, assign) NSInteger code;
+
+@end
+
+@interface TeamPlayerModel1 : NSObject
+
+@property (nonatomic,strong) NSArray<TeamPlayerModel*> *players;
+
+@property (nonatomic,strong) NSArray<Coaches*> *coaches;
+
+@property (nonatomic,strong) TeamPlayerModel* captain;
+
 
 @end
 @interface TeamPlayerModel : NSObject
@@ -67,6 +79,21 @@
 @property (nonatomic, copy) NSString *name;
 
 @property (nonatomic, copy) NSString *logo;
+
+@end
+
+@interface Coaches : NSObject
+@property (nonatomic, assign) NSInteger id;
+
+@property (nonatomic, assign) long long joinDate;
+
+@property (nonatomic, strong) Coach *coach;
+
+@property (nonatomic, strong) Team1 *team;
+
+@property (nonatomic, assign) BOOL retire;
+
+@property (nonatomic, copy) NSString *retireDate;
 
 @end
 

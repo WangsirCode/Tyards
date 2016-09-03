@@ -15,8 +15,8 @@
     if (self)
     {
         self.status = 0;
-        //[self fetchData:[(NSNumber*)dictionary[@"id"] stringValue]];
-        [self fetchData:@"291"];
+        [self fetchData:[(NSNumber*)dictionary[@"id"] stringValue]];
+//        [self fetchData:@"291"];
     }
     return self;
 }

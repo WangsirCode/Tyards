@@ -10,8 +10,7 @@
 
 @interface SetUpViewModel : SEMViewModel
 @property (nonatomic,assign)BOOL isLogined;
-@property (nonatomic,strong)NSArray* itemName1;
-@property (nonatomic,strong)NSArray* itemName2;
+@property (nonatomic,strong)NSArray* itemName;
 @property (nonatomic,strong)NSString* version;
 @property (nonatomic,assign)NSString* fileSize;
 - (void)clearCache;

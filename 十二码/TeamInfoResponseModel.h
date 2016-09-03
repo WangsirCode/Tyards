@@ -11,6 +11,8 @@
 #import "TeamHomeModelResponse.h"
 @class TeamInfoModel;
 @class Cover;
+@class Honours;
+@class Team,Logo,Logo;
 @interface TeamInfoResponseModel : NSObject
 
 @property (nonatomic, strong) TeamInfoModel *resp;
@@ -21,7 +23,7 @@
 @interface Record : NSObject
 @property (nonatomic, assign) NSInteger draws;
 
-@property (nonatomic, strong) NSArray *honours;
+@property (nonatomic, strong) NSArray<Honours*> *honours;
 
 @property (nonatomic, assign) NSInteger wins;
 
@@ -57,5 +59,6 @@
 @property (nonatomic, strong) Record *data;
 
 @end
+
 
 

@@ -14,7 +14,7 @@
 #import "GameDetailModel.h"
 @interface SEMTeamHomeModel : SEMViewModel
 @property (nonatomic, strong) TeamHomeModel   *model;
-@property (nonatomic, strong) NSArray<TeamPlayerModel *> *players;
+@property (nonatomic, strong) TeamPlayerModel1 *players;
 @property (nonatomic, strong) NSArray<Comments        *> *comments;
 @property (nonatomic,strong ) RACCommand      * shareCommand;
 @property (nonatomic,strong ) RACCommand      * likeCommand;

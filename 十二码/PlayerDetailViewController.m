@@ -30,6 +30,7 @@
 #import "TeamDetailInfoView.h"
 #import "PlayerInfoView.h"
 #import "InfoViewCell.h"
+#import "SEMNewsDetailController.h"
 @interface PlayerDetailViewController ()<UITableViewDelegate,UITableViewDataSource,LazyPageScrollViewDelegate,UIScrollViewDelegate,ShareViewDelegate>
 @property (nonatomic,strong) PlayerDetailViewModel *viewModel;
 @property (nonatomic,strong) UIImageView        * logoImageView;
@@ -378,6 +379,17 @@
     }
     return nil;
 }
+#pragma mark- tableViewDelegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (tableView.tag == 101) {
+        NSInteger ide = self.viewModel.model.articles[indexPath.row].id;
+        SEMNewsDetailController* controller = [[SEMNewsDetailController alloc] initWithDictionary:@{@"ides":@(ide)}];
+        controller.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:controller animated:YES];
+
+    }
+}
 #pragma  mark- scrollviewdelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
@@ -410,7 +422,7 @@
             _pageView = [[LazyPageScrollView alloc] init];
             _pageView.frame =self.view.frame;
             _pageView.delegate = self;
-            [_pageView initTab:YES Gap:self.view.width / 5 TabHeight:40 VerticalDistance:10 BkColor:[UIColor whiteColor]];
+            [_pageView initTab:YES Gap:self.view.width / 5 TabHeight:27 VerticalDistance:10 BkColor:[UIColor whiteColor]];
             
             [_pageView addTab:@"留言" View:self.messageTableview Info:nil];
             [_pageView addTab:@"新闻" View:self.newsTableview Info:nil];

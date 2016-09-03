@@ -134,6 +134,7 @@
         {
             cell.newsImage.image = [UIImage imageNamed:@"zhanwei.jpg"];
         }
+        cell.bottomview.viewLabel.text = [@(news.viewed) stringValue];
         return cell;
     }
     else if(tableView.tag == 101)
@@ -144,6 +145,7 @@
         cell.titleImageURL = topic.thumbnail.url;
         cell.comment = [@(topic.commentCount) stringValue];
         cell.info = [topic getInfo];
+        cell.bottomView.viewLabel.text = [@(topic.viewed) stringValue];
         return cell;
     }
     else
@@ -165,6 +167,7 @@
         {
             cell.newsImage.image = [UIImage imageNamed:@"zhanwei.jpg"];
         }
+        cell.bottomview.viewLabel.text = [@(news.viewed) stringValue];
         return cell;
     }
 }
@@ -193,6 +196,13 @@
     else if (tableView.tag == 101)
     {
         NSInteger ide = self.viewModel.topicDataSource[indexPath.row].id;
+        SEMNewsDetailController* controller = [[SEMNewsDetailController alloc] initWithDictionary:@{@"ides":@(ide)}];
+        controller.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:controller animated:YES];
+    }
+    else
+    {
+        NSInteger ide = self.viewModel.attensionDatasource[indexPath.row].id;
         SEMNewsDetailController* controller = [[SEMNewsDetailController alloc] initWithDictionary:@{@"ides":@(ide)}];
         controller.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:controller animated:YES];
@@ -248,6 +258,7 @@
                 [self endRefresh];
             }];
         }];
+        
         _topictableview.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
             
             [[self.viewModel.loadMoreTopicsCommand execute: nil] subscribeNext:^(id x) {
@@ -271,6 +282,20 @@
         _attensionTableview.dataSource = self;
         _attensionTableview.tag = 3;
         [_attensionTableview registerClass:[NewsViewCell class] forCellReuseIdentifier:@"attensioncell"];
+        _attensionTableview.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+            
+            
+            [[self.viewModel.loadNewFansCommand execute: nil] subscribeNext:^(id x) {
+                [self.attensionTableview reloadData];
+                [self endRefresh];
+            }];
+        }];
+        _attensionTableview.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+            [[self.viewModel.loadMoreFansCommand execute: nil] subscribeNext:^(id x) {
+                [_attensionTableview reloadData];
+                [self endRefresh];
+            }];
+        }];
     }
     return _attensionTableview;
 }
@@ -280,7 +305,7 @@
         _pageView = [[LazyPageScrollView alloc] init];
         _pageView.frame =self.view.frame;
         _pageView.delegate = self;
-        [_pageView initTab:YES Gap:self.view.width / 3 TabHeight:40 VerticalDistance:10 BkColor:[UIColor whiteColor]];
+        [_pageView initTab:YES Gap:self.view.width / 3 TabHeight:27 VerticalDistance:10 BkColor:[UIColor whiteColor]];
         UIView *view=[[UIView alloc] init];
         view.backgroundColor=[UIColor orangeColor];
         [_pageView addTab:@"新闻" View:self.newstableview Info:nil];

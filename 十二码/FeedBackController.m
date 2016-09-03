@@ -13,9 +13,18 @@
 @property (strong,nonatomic)FeedBackViewModel* viewModel;
 @property (nonatomic,strong)UIBarButtonItem* backItem;
 @property (nonatomic,strong)UITextView* textField;
+@property (nonatomic,strong)UILabel* label;
 @property (nonatomic,strong)UIBarButtonItem* submiteItem;
 @end
 @implementation FeedBackController
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.viewModel = [[FeedBackViewModel alloc] initWithDictionary: @{}];
+    }
+    return self;
+}
 #pragma mark- lifeCycle
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -40,6 +49,7 @@
     self.navigationItem.leftBarButtonItem = self.backItem;
     self.navigationItem.rightBarButtonItem = self.submiteItem;
     [self.view addSubview:self.textField];
+    [self.view addSubview:self.label];
 }
 - (void)makeConstraits
 {
@@ -48,6 +58,11 @@
     .leftSpaceToView(self.view,10)
     .rightSpaceToView(self.view,10)
     .heightIs(218*self.view.scale);
+    self.label.sd_layout
+    .leftEqualToView(self.view)
+    .rightEqualToView(self.view)
+    .bottomSpaceToView(self.view,10)
+    .heightIs(30);
 }
 
 - (void)bindModel
@@ -118,5 +133,15 @@
     }
     return _submiteItem;
 }
-
+- (UILabel *)label
+{
+    if (!_label) {
+        _label = [UILabel new];
+        _label.text = @"欢迎加入十二码用户QQ群 : 104790917";
+        _label.textColor = [UIColor colorWithHexString:@"#CACACA"];
+        _label.font = [UIFont systemFontOfSize:14];
+        _label.textAlignment = NSTextAlignmentCenter;
+    }
+    return _label;
+}
 @end

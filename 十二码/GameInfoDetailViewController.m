@@ -315,8 +315,8 @@
             cell.view.homeImageview.image = image;
         }
         NSURL *awayurl;
-        if (model.away.logo) {
-            awayurl = [[NSURL alloc] initWithString:model.away.logo];
+        if (model.away.logo.url) {
+            awayurl = [[NSURL alloc] initWithString:model.away.logo.url];
             [cell.view.awayImgaeview sd_setImageWithURL:awayurl placeholderImage:image options:SDWebImageRefreshCached];
         }
         else
@@ -645,7 +645,10 @@
 #pragma mark -tableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
+    if (tableView.tag == 101) {
+        RaceInfoDetailController* controller = [[RaceInfoDetailController alloc] initWithDictionay:@{@"id":@(self.viewModel.scheduleModel.latestsrounds[indexPath.section].games[indexPath.row].id)}];
+        [self.navigationController pushViewController:controller animated:YES];
+    }
 }
 #pragma  mark- scrollviewdelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -679,7 +682,7 @@
         _pageView = [[LazyPageScrollView alloc] init];
         _pageView.frame =self.view.frame;
         _pageView.delegate = self;
-        [_pageView initTab:YES Gap:self.view.width / 4 TabHeight:40 VerticalDistance:10 BkColor:[UIColor whiteColor]];
+        [_pageView initTab:YES Gap:self.view.width / 4 TabHeight:27 VerticalDistance:10 BkColor:[UIColor whiteColor]];
         [_pageView addTab:@"简介" View:self.infoTableView Info:nil];
         [_pageView addTab:@"赛程" View:self.gameTableView Info:nil];
         [_pageView addTab:@"榜单" View:self.listTableview Info:nil];
@@ -732,6 +735,7 @@
         _gameTableView.tag = 101;
         [_gameTableView registerClass:[NoticeGameviewCell class] forCellReuseIdentifier:@"NoticeGameviewCell"];
         _gameTableView.bounces = NO;
+        _gameTableView.backgroundColor = [UIColor BackGroundColor];
     }
     return _gameTableView;
 }
@@ -749,6 +753,7 @@
         self.listTableHeaderView.backgroundColor = [UIColor whiteColor];
         _listTableview.tableHeaderView = view;
         _listTableview.separatorInset = UIEdgeInsetsZero;
+        _listTableview.bounces = NO;
     }
     return _listTableview;
 }
@@ -763,6 +768,8 @@
         backView.backgroundColor = [UIColor BackGroundColor];
         backView.frame = CGRectMake(0, 0, self.view.width, 8);
         _teamTableView.tableHeaderView = backView;
+        _teamTableView.backgroundColor = [UIColor BackGroundColor];
+        _teamTableView.separatorColor = [UIColor BackGroundColor];
     }
     return _teamTableView;
 }

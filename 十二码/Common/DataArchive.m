@@ -158,7 +158,7 @@
     }else{ // 是文件
         size += [fileManager attributesOfItemAtPath:filePath error:nil].fileSize;
     }
-    return size / 1000000;
+    return size / 1000;
 }
 
 @end

@@ -39,7 +39,6 @@
 @property (nonatomic,strong) UIView             * bottomView;
 @property (nonatomic,strong) MBProgressHUD      * hud;
 @property (nonatomic,strong) UIBarButtonItem    * shareItem;
-@property (nonatomic,strong) UIBarButtonItem    * favoriteItem;
 @property (nonatomic,strong) UIBarButtonItem    * blankItem;
 @property (nonatomic,strong) ShareView          * shareView;
 @property (nonatomic,strong) UIView             * maskView;
@@ -87,7 +86,7 @@
 {
     [self.view addSubview:self.backImageView];
     [self.view addSubview:self.pageView];
-    self.navigationItem.rightBarButtonItems = @[self.shareItem,self.blankItem,self.favoriteItem];
+    self.navigationItem.rightBarButtonItems = @[self.shareItem,self.blankItem];
     [self.view addSubview:self.maskView];
     [self.view addSubview:self.shareView];
     self.navigationItem.leftBarButtonItem = self.backItem;
@@ -187,8 +186,8 @@
         self.headerView.homeImageview.image = image;
     }
     NSURL *awayurl;
-    if (model.away.logo) {
-        awayurl = [[NSURL alloc] initWithString:model.away.logo];
+    if (model.away.logo.url) {
+        awayurl = [[NSURL alloc] initWithString:model.away.logo.url];
         [self.headerView.awayImgaeview sd_setImageWithURL:awayurl placeholderImage:image options:SDWebImageRefreshCached];
     }
     else
@@ -459,6 +458,7 @@
         {
             cell.newsImage.image = [UIImage imageNamed:@"zhanwei.jpg"];
         }
+        cell.bottomview.viewLabel.text = [@(news.viewed) stringValue];
         return cell;
     }
     else if (tableView.tag == 101)
@@ -551,7 +551,7 @@
         _pageView = [[LazyPageScrollView alloc] init];
         _pageView.frame =self.view.frame;
         _pageView.delegate = self;
-        [_pageView initTab:YES Gap:self.view.width / 4 TabHeight:40 VerticalDistance:10 BkColor:[UIColor whiteColor]];
+        [_pageView initTab:YES Gap:self.view.width / 4 TabHeight:27 VerticalDistance:10 BkColor:[UIColor whiteColor]];
         [_pageView addTab:@"新闻" View:self.newsTableView Info:nil];
         [_pageView addTab:@"赛况" View:self.statusView Info:nil];
         [_pageView addTab:@"数据" View:self.dataView Info:nil];
@@ -591,6 +591,8 @@
         backView.backgroundColor = [UIColor BackGroundColor];
         backView.frame = CGRectMake(0, 0, self.view.width, 8);
         _newsTableView.tableHeaderView = backView;
+        _newsTableView.backgroundColor = [UIColor BackGroundColor];
+        _newsTableView.separatorColor = [UIColor BackGroundColor];
     }
     return _newsTableView;
 }
@@ -599,6 +601,7 @@
     if (!_statusView) {
         _statusView = [UIScrollView new];
         _statusView.delegate = self;
+        _statusView.bounces = NO;
     }
     return _statusView;
 }
@@ -607,6 +610,7 @@
     if (!_dataView) {
         _dataView = [UIScrollView new];
         _dataView.delegate = self;
+        _dataView.bounces = NO;
     }
     return _dataView;
 }
@@ -622,6 +626,8 @@
         backView.backgroundColor = [UIColor BackGroundColor];
         backView.frame = CGRectMake(0, 0, self.view.width, 8);
         _messageTableView.tableHeaderView = backView;
+        _messageTableView.backgroundColor = [UIColor BackGroundColor];
+        _messageTableView.separatorColor = [UIColor BackGroundColor];
     }
     return _messageTableView;
 }
@@ -676,17 +682,6 @@
         button.rac_command = self.viewModel.shareCommand;
     }
     return _shareItem;
-}
-- (UIBarButtonItem *)favoriteItem
-{
-    if (!_favoriteItem) {
-        UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.frame = CGRectMake(20, 0, 25, 25);
-        [button setImage:[UIImage imageNamed:@"star_L"] forState:UIControlStateNormal];
-        _favoriteItem = [[UIBarButtonItem alloc] initWithCustomView:button];
-        button.rac_command = self.viewModel.likeCommand;
-    }
-    return _favoriteItem;
 }
 - (UIBarButtonItem *)blankItem
 {

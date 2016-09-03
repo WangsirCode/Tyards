@@ -10,13 +10,15 @@
 #define PI 3.14159265358979323846
 @implementation OvalView
 
-- (instancetype)initWithData:(Record*)data
+- (instancetype)init
 {
     self = [super init];
     if (self) {
-        self.model = data;
         self.backgroundColor = [UIColor whiteColor];
         [self setNeedsDisplay];
+        [RACObserve(self,model) subscribeNext:^(id x) {
+            [self setNeedsDisplay];
+        }];
     }
     return self;
 }

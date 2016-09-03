@@ -43,17 +43,15 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    UIImage* model = (UIImage*)[DataArchive unarchiveDataWithFileName:@"headimage"];
+    UIImage* model = (UIImage*)[DataArchive unarchiveUserDataWithFileName:@"headimage"];
     if (model)
     {
         [self.button setImage:model forState:UIControlStateNormal];
     }
     else
     {
-        [self.button setImage:[UIImage imageNamed:@"个人资料icon"] forState:UIControlStateNormal];
+        [self.button setImage:[UIImage imageNamed:@"Group 2"] forState:UIControlStateNormal];
     }
-    
-    
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -211,6 +209,7 @@
     {
         cell.newsImage.image = [UIImage imageNamed:@"zhanwei.jpg"];
     }
+    cell.bottomview.viewLabel.text = [@(news.viewed) stringValue];
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

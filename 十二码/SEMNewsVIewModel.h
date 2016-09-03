@@ -18,6 +18,8 @@
 @property (nonatomic,strong ) RACCommand * loadMoreNewsCommad;
 @property (nonatomic,strong ) RACCommand * loadNewTopicsCommand;
 @property (nonatomic,strong ) RACCommand * loadMoreTopicsCommand;
+@property (nonatomic,strong) RACCommand  * loadNewFansCommand;
+@property (nonatomic,strong) RACCommand  * loadMoreFansCommand;
 @property (nonatomic,strong ) NSString   * code;
 @property (nonatomic,assign ) NSInteger  selectedItem;
 @property (nonatomic,assign) BOOL isLogined;

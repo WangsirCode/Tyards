@@ -47,8 +47,9 @@
         _infoLabel.font = [UIFont systemFontOfSize:13];
         [_infoLabel setTextColor:[UIColor colorWithHexString:@"#506185"]];
         _infoLabel.backgroundColor = [UIColor clearColor];
-        _infoLabel.text = @"修改";
+        _infoLabel.text = @"修改昵称";
         _infoLabel.numberOfLines = 1;
+        _infoLabel.userInteractionEnabled = YES;
         _infoLabel.textAlignment = NSTextAlignmentRight;
     }
     return _infoLabel;

@@ -13,6 +13,10 @@
 		470BEE141D58295C003167ED /* SetUpViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 470BEE131D58295C003167ED /* SetUpViewModel.m */; };
 		470C5E751D44BFC800DDF90B /* BottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 470C5E741D44BFC800DDF90B /* BottomView.m */; };
 		470C5EF61D44D7E700DDF90B /* SEMSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 470C5EF51D44D7E700DDF90B /* SEMSearchViewController.m */; };
+		470D2EE41D7A4AF3001047BD /* visible.png in Resources */ = {isa = PBXBuildFile; fileRef = 470D2EE31D7A4AF3001047BD /* visible.png */; };
+		470D2EE61D7ABFBA001047BD /* Group 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 470D2EE51D7ABFBA001047BD /* Group 2.png */; };
+		470D2EE91D7AC8B1001047BD /* ChangeNickNameController.m in Sources */ = {isa = PBXBuildFile; fileRef = 470D2EE81D7AC8B1001047BD /* ChangeNickNameController.m */; };
+		470D2EEC1D7AC93A001047BD /* ChangeNickNameViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 470D2EEB1D7AC93A001047BD /* ChangeNickNameViewModel.m */; };
 		470F56CC1D71346700110FCE /* scorer.png in Resources */ = {isa = PBXBuildFile; fileRef = 470F56C91D71346700110FCE /* scorer.png */; };
 		470F56CD1D71346700110FCE /* scorer2.png in Resources */ = {isa = PBXBuildFile; fileRef = 470F56CA1D71346700110FCE /* scorer2.png */; };
 		470F56CE1D71346700110FCE /* scorer3.png in Resources */ = {isa = PBXBuildFile; fileRef = 470F56CB1D71346700110FCE /* scorer3.png */; };
@@ -313,6 +317,12 @@
 		470C5E741D44BFC800DDF90B /* BottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BottomView.m; sourceTree = "<group>"; };
 		470C5EF41D44D7E700DDF90B /* SEMSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEMSearchViewController.h; sourceTree = "<group>"; };
 		470C5EF51D44D7E700DDF90B /* SEMSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SEMSearchViewController.m; sourceTree = "<group>"; };
+		470D2EE31D7A4AF3001047BD /* visible.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = visible.png; sourceTree = "<group>"; };
+		470D2EE51D7ABFBA001047BD /* Group 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Group 2.png"; sourceTree = "<group>"; };
+		470D2EE71D7AC8B1001047BD /* ChangeNickNameController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeNickNameController.h; sourceTree = "<group>"; };
+		470D2EE81D7AC8B1001047BD /* ChangeNickNameController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeNickNameController.m; sourceTree = "<group>"; };
+		470D2EEA1D7AC93A001047BD /* ChangeNickNameViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeNickNameViewModel.h; sourceTree = "<group>"; };
+		470D2EEB1D7AC93A001047BD /* ChangeNickNameViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeNickNameViewModel.m; sourceTree = "<group>"; };
 		470F56C91D71346700110FCE /* scorer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scorer.png; sourceTree = "<group>"; };
 		470F56CA1D71346700110FCE /* scorer2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scorer2.png; sourceTree = "<group>"; };
 		470F56CB1D71346700110FCE /* scorer3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scorer3.png; sourceTree = "<group>"; };
@@ -1178,6 +1188,7 @@
 			children = (
 				47184FBE1D73C303008A4591 /* icon_followed(1).png */,
 				47ABD96F1D60AA4E00CD18CF /* Copa del Rey.png */,
+				470D2EE31D7A4AF3001047BD /* visible.png */,
 				4735FA101D5616F000FDF2ED /* Group 19.png */,
 				47184FBC1D73C2FD008A4591 /* icon_follow(1).png */,
 				47C053B41D7520D900AEBF86 /* bg_combined_shape.png */,
@@ -1187,6 +1198,7 @@
 				47C053B81D7520D900AEBF86 /* icon_C.png */,
 				47C053B91D7520D900AEBF86 /* icon_clock.png */,
 				47C053BA1D7520D900AEBF86 /* icon_location.png */,
+				470D2EE51D7ABFBA001047BD /* Group 2.png */,
 				47C053BB1D7520D900AEBF86 /* icon_more.png */,
 				47C053BC1D7520D900AEBF86 /* icon_msg.png */,
 				47C053BD1D7520D900AEBF86 /* icon_pen_edit.png */,
@@ -1338,6 +1350,8 @@
 				47CAC1D61D76630E001D3708 /* TypeSelectController.m */,
 				47CAC1D81D766738001D3708 /* PlaceSelectController.h */,
 				47CAC1D91D766738001D3708 /* PlaceSelectController.m */,
+				470D2EE71D7AC8B1001047BD /* ChangeNickNameController.h */,
+				470D2EE81D7AC8B1001047BD /* ChangeNickNameController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1390,6 +1404,8 @@
 				47C053D81D759C5800AEBF86 /* MakeInvitationViewModel.m */,
 				47CAC1DB1D7667F0001D3708 /* PlaceViewModel.h */,
 				47CAC1DC1D7667F0001D3708 /* PlaceViewModel.m */,
+				470D2EEA1D7AC93A001047BD /* ChangeNickNameViewModel.h */,
+				470D2EEB1D7AC93A001047BD /* ChangeNickNameViewModel.m */,
 			);
 			name = ViewModel;
 			sourceTree = "<group>";
@@ -1701,6 +1717,7 @@
 				4734CE381D41CD55006536DF /* up-arrow.png in Resources */,
 				4760880F1D55874400F36597 /* 约战-时间.png in Resources */,
 				4734CE3C1D41CD55006536DF /* wechat_s.png in Resources */,
+				470D2EE61D7ABFBA001047BD /* Group 2.png in Resources */,
 				4734CDF01D41CD39006536DF /* 赛事icon-绿.png in Resources */,
 				4735FA121D5616F000FDF2ED /* Group 19.png in Resources */,
 				4734CE3A1D41CD55006536DF /* upload_L副本.png in Resources */,
@@ -1753,6 +1770,7 @@
 				4734CDEF1D41CD39006536DF /* 资讯icon-绿.png in Resources */,
 				4734CE4E1D41CD6D006536DF /* 2.png in Resources */,
 				4734CE151D41CD4B006536DF /* 我的关注icon.png in Resources */,
+				470D2EE41D7A4AF3001047BD /* visible.png in Resources */,
 				4734CE131D41CD4B006536DF /* 好友推荐icon.png in Resources */,
 				4734CDFF1D41CD42006536DF /* 微信QQ矩形框.png in Resources */,
 				4734CE321D41CD55006536DF /* qq_s.png in Resources */,
@@ -1886,6 +1904,7 @@
 				4734CD3E1D41B512006536DF /* AppDelegate.m in Sources */,
 				47CAC1E01D766837001D3708 /* PlacceResponseModel.m in Sources */,
 				47C053D31D759AAF00AEBF86 /* MyInvitationViewController.m in Sources */,
+				470D2EEC1D7AC93A001047BD /* ChangeNickNameViewModel.m in Sources */,
 				4776425F1D54357700548C9F /* SEMTeamHomeViewController.m in Sources */,
 				47C053E21D759FEF00AEBF86 /* MyInvitationResponseModel.m in Sources */,
 				47A364C61D5A1935002FC59E /* PictureShowController.m in Sources */,
@@ -1945,6 +1964,7 @@
 				4734CD831D41BA54006536DF /* SEMViewModel.m in Sources */,
 				4708D2E61D4A67BD0094FAF9 /* NoticeCellView.m in Sources */,
 				4734CD921D41BCB9006536DF /* SEMMeViewModel.m in Sources */,
+				470D2EE91D7AC8B1001047BD /* ChangeNickNameController.m in Sources */,
 				477676661D5853CD00E10594 /* FeedBackController.m in Sources */,
 				470F56D71D71DF9400110FCE /* HistoryView.m in Sources */,
 				470BEE141D58295C003167ED /* SetUpViewModel.m in Sources */,

@@ -252,15 +252,7 @@
     }
     else if (tableView.tag == 102)
     {
-        if(self.viewModel.model.info.coach)
-        {
-          return 2;
-        }
-        else
-        {
-            return 1;
-        }
-        
+        return 2;
     }
     else if(tableView.tag == 103)
     {
@@ -283,21 +275,18 @@
     }
     else if (tableView.tag == 102)
     {
-        if (self.viewModel.model.info.coach) {
-            switch (section) {
-                case 0:
-                    return 1;
-                    break;
-                case 1:
-                    return self.viewModel.players.count;
-                    break;
-                default:
-                    break;
-            }
-        }
-        else
-        {
-            return self.viewModel.players.count;
+        switch (section) {
+            case 0:
+                return self.viewModel.players.coaches.count;
+                break;
+            case 1:
+                if (self.viewModel.players.captain) {
+                    return self.viewModel.players.players.count + 1;
+                }
+                return self.viewModel.players.players.count;
+                break;
+            default:
+                break;
         }
     }
     else if(tableView.tag == 103)
@@ -342,26 +331,28 @@
     else if (tableView.tag == 102)
     {
         UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"TeamPlayerCell"];
-        NSString* cap = self.viewModel.model.info.captain;
-        if (indexPath.section == 0 && self.viewModel.model.info.coach)
-        {
-            NSMutableAttributedString* attr = [[NSMutableAttributedString alloc] initWithString:self.viewModel.model.info.coach.name];
-            NSRange range = NSMakeRange(0, self.viewModel.model.info.coach.name.length);
-            [attr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#1EA11F"] range:range];
-            cell.textLabel.attributedText = attr;
-        }
-        else if ((indexPath.section == 0) && (indexPath.row == 0) && cap)
-        {
-            NSMutableAttributedString* attr = [[NSMutableAttributedString alloc] initWithString:cap];
-            NSRange range = NSMakeRange(0, self.viewModel.model.info.coach.name.length);
-            [attr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#1EA11F"] range:range];
-            cell.textLabel.attributedText = attr;
-            cell.detailTextLabel.text = @"教练";
+        cell.textLabel.textColor = [UIColor colorWithHexString:@"#1EA11F"];
+        if (indexPath.section == 0) {
+            cell.textLabel.text = self.viewModel.players.coaches[indexPath.row].coach.name;
         }
         else
         {
-            cell.textLabel.text = self.viewModel.players[indexPath.row].player.name;
-            cell.textLabel.textColor = [UIColor colorWithHexString:@"#1EA11F"];
+            if (self.viewModel.players.captain) {
+                
+                if (indexPath.row == 0) {
+                    cell.textLabel.text = self.viewModel.players.captain.player.name;
+                    cell.detailTextLabel.text = @"队长";
+                }
+                else
+                {
+                    cell.textLabel.text = self.viewModel.players.players[indexPath.row - 1].player.name;
+                }
+            }
+            else
+            {
+                cell.textLabel.text = self.viewModel.players.players[indexPath.row].player.name;
+            }
+            
         }
         return cell;
     }
@@ -441,7 +432,7 @@
     }
     else if (tableView.tag == 103)
     {
-        return 16*self.view.scale;
+        return 30*self.view.scale;
     }
     return 0;
 }
@@ -464,6 +455,7 @@
                           range:range];
     label.attributedText = AttributedStr;
     label.textAlignment = NSTextAlignmentCenter;
+    view.backgroundColor = [UIColor BackGroundColor];
     [label mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(view);
     }];
@@ -495,9 +487,17 @@
             CoachDetailViewController *controller= [[CoachDetailViewController alloc] initWithDictionary:@{@"id":@(self.viewModel.model.info.coach.id),@"coach":@"YES"}];
             [self.navigationController pushViewController:controller animated:YES];
         }
-        else
+        else if(indexPath.section == 1)
         {
-            PlayerDetailViewController *controller= [[PlayerDetailViewController alloc] initWithDictionary:@{@"id":@(self.viewModel.players[indexPath.row].player.id),@"coach":@"NO"}];
+            NSInteger inde;
+            if (indexPath.row == 0) {
+                inde = self.viewModel.players.captain.player.id;
+            }
+            else
+            {
+                inde = self.viewModel.players.players[indexPath.row - 1].player.id;
+            }
+            PlayerDetailViewController *controller= [[PlayerDetailViewController alloc] initWithDictionary:@{@"id":@(inde)}];
             [self.navigationController pushViewController:controller animated:YES];
         }
     }
@@ -506,6 +506,12 @@
         
         NSInteger ide = self.viewModel.model.articles[indexPath.row].id;
         SEMNewsDetailController* controller = [[SEMNewsDetailController alloc] initWithDictionary:@{@"ides":@(ide)}];
+        controller.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:controller animated:YES];
+    }
+    else if (tableView.tag == 103)
+    {
+        RaceInfoDetailController* controller = [[RaceInfoDetailController alloc] initWithDictionay:@{@"id":@(self.viewModel.games[indexPath.section].games[indexPath.row].id)}];
         controller.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:controller animated:YES];
     }
@@ -542,7 +548,7 @@
         _pageView = [[LazyPageScrollView alloc] init];
         _pageView.frame =self.view.frame;
         _pageView.delegate = self;
-        [_pageView initTab:YES Gap:self.view.width / 5 TabHeight:40 VerticalDistance:10 BkColor:[UIColor whiteColor]];
+        [_pageView initTab:YES Gap:self.view.width / 5 TabHeight:27 VerticalDistance:10 BkColor:[UIColor whiteColor]];
 
         [_pageView addTab:@"留言" View:self.messageTableview Info:nil];
         [_pageView addTab:@"新闻" View:self.newsTableview Info:nil];
@@ -586,6 +592,8 @@
         backView.backgroundColor = [UIColor BackGroundColor];
         backView.frame = CGRectMake(0, 0, self.view.width, 8);
         _messageTableview.tableHeaderView = backView;
+        _messageTableview.backgroundColor = [UIColor BackGroundColor];
+        _messageTableview.separatorColor = [UIColor BackGroundColor];
     }
     return _messageTableview;
 }
@@ -602,6 +610,8 @@
         backView.backgroundColor = [UIColor BackGroundColor];
         backView.frame = CGRectMake(0, 0, self.view.width, 8);
         _newsTableview.tableHeaderView = backView;
+        _newsTableview.backgroundColor = [UIColor BackGroundColor];
+        _newsTableview.separatorColor = [UIColor BackGroundColor];
     }
     return _newsTableview;
 }
@@ -629,6 +639,8 @@
         backView.backgroundColor = [UIColor BackGroundColor];
         backView.frame = CGRectMake(0, 0, self.view.width, 8);
         _scheduleTableview.tableHeaderView = backView;
+        _scheduleTableview.backgroundColor = [UIColor BackGroundColor];
+        _scheduleTableview.separatorColor = [UIColor BackGroundColor];
     }
     return _scheduleTableview;
 }

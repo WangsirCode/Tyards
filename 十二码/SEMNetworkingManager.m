@@ -1037,5 +1037,37 @@ NSString* const GameMessage = @"/match/newses/";
         failureBlock(error);
     }];
 }
+//获取关注新闻
+- (NSURLSessionTask *)fetchMyFans:(NSString *)token offset:(NSInteger)offset success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
+{
+    [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
+    NSMutableString* URL = [[NSMutableString alloc] init];
+    [URL appendString:@"/user/fansNews"];
+    NSDictionary* para = @{@"token":token,@"offset":@(offset)};
+    return [self GET:URL parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NewsModel *model = [NewsModel mj_objectWithKeyValues:responseObject];
+        successBlock(model.resp);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }];
+}
+//修改昵称
+- (NSURLSessionTask *)changeNickName:(NSString *)token name:(NSString *)nickName success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
+{
+    [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
+    NSMutableString* URL = [[NSMutableString alloc] init];
+    [URL appendString:@"/user/info/"];
+    [URL appendString:nickName];
+    NSDictionary* para = @{@"token":token};
+    return [self POST:URL parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        successBlock(responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }];
+}
 @end
 

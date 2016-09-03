@@ -62,6 +62,11 @@
         make.centerX.equalTo(self.homeImageview.mas_centerX);
         make.top.equalTo(self.homeImageview.mas_bottom).offset(12*scale);
     }];
+//    self.homeTitleLabel.sd_layout
+//    .topSpaceToView(self.homeImageview,12*self.scale)
+//    .centerXEqualToView(self.homeImageview)
+//    .maxWidthIs(100*self.scale)
+//    .autoHeightRatio(0);
     [self.awayTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.awayImgaeview.mas_centerX);
         make.top.equalTo(self.awayImgaeview.mas_bottom).offset(12*scale);
@@ -86,9 +91,10 @@
         make.top.equalTo(self.homeTitleLabel.mas_bottom).offset(10);
     }];
     [self.locationImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.and.height.equalTo(@(12*scale));
+        make.width.and.height.equalTo(@(10*scale));
         make.top.equalTo(self.homeLabel.mas_top);
-        make.right.equalTo(self.homeLabel.mas_left).offset(-7*scale);
+        make.right.equalTo(self.homeLabel.mas_left).offset(-3*scale);
+        make.bottom.equalTo(self.homeLabel.mas_bottom);
     }];
 }
 - (void)bindModel
@@ -175,7 +181,7 @@
     if (!_homeTitleLabel) {
         _homeTitleLabel = [[UILabel alloc] init];
         _homeTitleLabel.textAlignment = NSTextAlignmentCenter;
-        _homeTitleLabel.font = [UIFont systemFontOfSize:16];
+        _homeTitleLabel.font = [UIFont systemFontOfSize:14*self.scale];
     }
     return _homeTitleLabel;
 }
@@ -184,7 +190,7 @@
     if (!_awayTitleLabel) {
         _awayTitleLabel = [[UILabel alloc] init];
         _awayTitleLabel.textAlignment = NSTextAlignmentCenter;
-        _awayTitleLabel.font = [UIFont systemFontOfSize:16];
+        _awayTitleLabel.font = [UIFont systemFontOfSize:14*self.scale];
     }
     return _awayTitleLabel;
 }

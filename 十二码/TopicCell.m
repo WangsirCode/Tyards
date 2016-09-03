@@ -88,6 +88,8 @@
     if (!_titleImageView) {
         _titleImageView = [[UIImageView alloc] init];
         [_titleImageView setUserInteractionEnabled:YES];
+        _titleImageView.contentMode = UIViewContentModeScaleAspectFill;
+        _titleImageView.clipsToBounds = YES;
     }
     return _titleImageView;
 }

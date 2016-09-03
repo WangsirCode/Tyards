@@ -27,6 +27,8 @@
     [self addSubview:self.inifoLabel];
     [self addSubview:self.commentLabel];
     [self addSubview:self.conmmentView];
+    [self addSubview:self.viewLabel];
+    [self addSubview:self.viewImage];
 }
 
 - (void)makeConstraits
@@ -36,15 +38,26 @@
     [self.commentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.mas_centerY);
         make.right.equalTo(self.mas_right);
-        make.width.equalTo(self.mas_width).dividedBy(10);
+        make.width.equalTo(@(25*self.scale));
 //        make.bottom.equalTo(self.mas_bottom);
     }];
     [self.conmmentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.mas_top);
-        make.bottom.equalTo(self.mas_bottom);
+        make.top.equalTo(self.mas_top).offset(3);
+        make.bottom.equalTo(self.mas_bottom).offset(-3);
 //        make.bottom.equalTo(self.commentLabel.mas_bottom);
         make.right.equalTo(self.commentLabel.mas_left).offset(-5*self.scale);
-        make.width.equalTo(self.mas_width).dividedBy(14);
+        make.width.equalTo(@(15*self.scale));
+    }];
+    [self.viewLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.mas_centerY);
+        make.right.equalTo(self.conmmentView.mas_left).offset(-5*self.scale);
+        make.width.equalTo(@(25*self.scale));
+    }];
+    [self.viewImage mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.mas_top).offset(4);
+        make.bottom.equalTo(self.mas_bottom).offset(-4);
+        make.right.equalTo(self.viewLabel.mas_left).offset(-5*self.scale);
+        make.width.equalTo(@(15*self.scale));
     }];
     [self.inifoLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.mas_left);
@@ -70,7 +83,15 @@
     }
     return _inifoLabel;
 }
-
+- (UILabel *)viewLabel
+{
+    if (!_viewLabel) {
+        _viewLabel = [UILabel new];
+        _viewLabel.font = [UIFont systemFontOfSize:14];
+        [_viewLabel setTextColor:[UIColor colorWithHexString:@"#C9C9C9"]];
+    }
+    return _viewLabel;
+}
 - (UILabel*)commentLabel
 {
     if (!_commentLabel) {
@@ -91,5 +112,12 @@
     }
     return _conmmentView;
 }
-
+- (UIImageView *)viewImage
+{
+    if (!_viewImage) {
+        _viewImage = [UIImageView new];
+        _viewImage.image = [UIImage imageNamed:@"visible"];
+    }
+    return _viewImage;
+}
 @end

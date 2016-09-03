@@ -111,11 +111,12 @@ NSString* const USER_INFO = @"userinfo";
                 [magager fetchWexinToken:accessToken openid:openID success:^(id data) {
                     NSString* token = data;
                     [DataArchive archiveUserData:token withFileName:@"token"];
+                    [self wechatLoginByRequestForUserInfo];
                 } failure:^(NSError *aError) {
                     NSLog(@"%@",aError);
                 }];
             }
-            [self wechatLoginByRequestForUserInfo];
+
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
              NSLog(@"获取access_token时出错 = %@", error);
         }

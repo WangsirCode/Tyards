@@ -35,7 +35,6 @@ MJCodingImplementation
 }
 @end
 
-
 @implementation Games
 MJCodingImplementation
 -(NSInteger)getStatus1

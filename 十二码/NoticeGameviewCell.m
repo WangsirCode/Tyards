@@ -14,8 +14,10 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         [self.contentView addSubview:self.view];
+        self.contentView.backgroundColor = [UIColor BackGroundColor];
+        self.view.backgroundColor = [UIColor whiteColor];
         [self.view mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.and.bottom.and.left.and.right.equalTo(self.contentView);
+            make.edges.equalTo(self.contentView).insets(UIEdgeInsetsMake(0, 10, 0, 10));
         }];
     }
     return self;

@@ -56,7 +56,7 @@
         make.centerX.equalTo(self.mas_centerX);
         make.height.equalTo(self.mas_height).dividedBy(20);
         make.top.equalTo(self.nameLabel.mas_bottom).offset(10*scale);
-        make.width.equalTo(self.mas_width).dividedBy(6);
+        make.width.equalTo(self.mas_width).dividedBy(4);
     }];
     
 }
@@ -87,6 +87,7 @@
 {
     if (!_infoView) {
         _infoView = [[MeinfoVIew alloc] initWithFrame:CGRectZero];
+        _infoView.userInteractionEnabled = YES;
     }
     return _infoView;
 }

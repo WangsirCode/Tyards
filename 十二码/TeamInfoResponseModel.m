@@ -20,7 +20,8 @@
 
 
 @implementation Record
-
-
++ (NSDictionary *)objectClassInArray{
+    return @{@"honours" : [Honours class]};
+}
 @end
 

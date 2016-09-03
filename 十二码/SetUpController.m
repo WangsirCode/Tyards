@@ -47,13 +47,7 @@
 - (void)makeConstraits
 {
     CGFloat height;
-    if (self.viewModel.isLogined) {
-        height = self.view.scale * 48 * 6 + 24;
-    }
-    else
-    {
-        height = self.view.scale * 48 * 4 + 16;
-    }
+    height = self.view.scale * 48 * 5 + 24;
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.and.left.and.right.equalTo(self.view);
         make.height.equalTo(@(height));
@@ -95,45 +89,32 @@
 #pragma mark- tableviewDatasource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if (self.viewModel.isLogined) {
-        return 3;
-    }
-    else{
-        return 2;
-    }
-   
-    
+    return 3;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (self.viewModel.isLogined) {
-        return 3 - section;
+    if (section == 2) {
+        return 1;
     }
-    else
-    {
-        if (section ==  0) {
-            return 3;
-        }
-        else{
-            return 1;
-        }
-    }
+    return 2;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString* text;
     NSString* detailText;
-   // NSString* detailText;
-    if (self.viewModel.isLogined) {
-        text = self.viewModel.itemName1[indexPath.section][indexPath.row];
-    }
-    else
-    {
-        text = self.viewModel.itemName2[indexPath.section][indexPath.row];
-
+    text = self.viewModel.itemName[indexPath.section][indexPath.row];
+    if (indexPath.section == 2) {
+        if (!self.viewModel.isLogined) {
+            text = @"登录";
+        }
     }
     UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"setcell"];
     if ([text isEqualToString:@"切换账号"]) {
+        [cell.textLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.center.equalTo(cell.contentView);
+        }];
+    }
+    if ([text isEqualToString:@"登录"]) {
         [cell.textLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.center.equalTo(cell.contentView);
         }];
@@ -165,13 +146,7 @@
             make.centerY.equalTo(cell.contentView.mas_centerY);
             make.right.equalTo(cell.contentView.mas_right).offset(10);
         }];
-        //        image.sd_layout
-        //        .centerYEqualToView(cell.contentView)
-        //        .rightSpaceToView(cell.contentView,10)
-        //        .heightIs(30)
-        //        .widthIs(30);
     }
- 
     return cell;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -198,6 +173,7 @@
         UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
         UIAlertAction* done = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             [self.viewModel clearCache];
+            [self.tableView reloadData];
         }];
         [alert addAction:cancel];
         [alert addAction:done];
@@ -236,6 +212,10 @@
         AboutViewController* controller = [HRTRouter objectForURL:@"about" withUserInfo:@{}];
         controller.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:controller animated:YES];
+    }
+    if ([text isEqualToString:@"登录"]) {
+        SEMLoginViewController* login = [HRTRouter objectForURL:@"login" withUserInfo:@{}];
+        [self presentViewController:login animated:YES completion:nil];
     }
 }
 - (void)hideMaskView

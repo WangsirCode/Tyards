@@ -125,7 +125,6 @@
     self.login = [LoginCommand sharedInstance];
     [[self.login.weixinLoginedCommand executionSignals] subscribeNext:^(id x) {
         [XHToast showCenterWithText:@"登录成功"];
-        [self dismiss];
     }];
     [[self.wexinView.button rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
         NSLog(@"请求微信登录");
@@ -146,7 +145,6 @@
         NSArray* permissions= [NSArray arrayWithObjects:@"get_user_info",@"get_simple_userinfo",@"add_t",nil];
         [_tencentOAuth authorize:permissions inSafari:NO];
     }];
-              
 }
 #pragma mark- Getter
 - (UIImageView*)logoImageview
@@ -266,20 +264,29 @@
 
 -(void)getUserInfoResponse:(APIResponse *)response
 {
-    NSLog(@"respons:%@",response.jsonResponse);
+    if (response && response.retCode == URLREQUEST_SUCCEED) {
+        
+        NSDictionary *userInfo = [response jsonResponse];
+        NSString *nickName = userInfo[@"nickname"];
+        
+        // 后续操作...
+        
+        
+    } else {
+        NSLog(@"QQ auth fail ,getUserInfoResponse:%d", response.detailRetCode);
+    }
 }
 - (void)tencentDidLogin
 {
 
-    
     if (_tencentOAuth.accessToken && 0 != [_tencentOAuth.accessToken length])
     {
-
+        // &nbsp;记录登录用户的OpenID、Token以及过期时间
         [_tencentOAuth getUserInfo];
     }
     else
     {
+        NSLog(@"登录不成功 没有获取accesstoken");
     }
 }
-
 @end

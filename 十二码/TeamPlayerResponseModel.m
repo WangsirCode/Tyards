@@ -11,15 +11,19 @@
 @implementation TeamPlayerResponseModel
 
 
-+ (NSDictionary *)objectClassInArray{
-    return @{@"resp" : [TeamPlayerModel class]};
-}
+
 @end
 @implementation TeamPlayerModel
 
 @end
 
+@implementation TeamPlayerModel1
 
++ (NSDictionary *)objectClassInArray{
+    return @{@"players" : [TeamPlayerModel class],@"coaches":[Coaches class]};
+}
+
+@end
 @implementation Player
 
 @end
@@ -35,3 +39,7 @@
 @end
 
 
+@implementation Coaches
+
+
+@end

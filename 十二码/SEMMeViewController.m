@@ -20,6 +20,8 @@
 #import "MyConcernController.h"
 #import "MyMessageController.h"
 #import "InvitationViewController.h"
+#import "FeedBackController.h"
+#import "ChangeNickNameController.h"
 @interface SEMMeViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong,nonatomic)SEMMeViewModel* viewModel;
 @property (nonatomic,strong)MeTopView* topView;
@@ -45,7 +47,7 @@
     else
     {
         self.topView.name = @"请登录";
-        self.topView.headImage = [UIImage imageNamed:@"个人资料icon"];
+        self.topView.headImage = [UIImage imageNamed:@"Group 2"];
         self.topView.infoView.hidden = YES;
         self.viewModel.isLogined = NO;
     }
@@ -84,7 +86,8 @@
     }];
     [self.tableview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.topView.mas_bottom);
-        make.left.and.right.and.bottom.equalTo(self.view);
+        make.left.and.right.equalTo(self.view);
+        make.height.equalTo(@(48*7*self.view.scale));
     }];
 }
 
@@ -97,6 +100,16 @@
 //        NSLog(@"%@",self.viewModel.info.nickname);
 //        NSLog(@"成功获取用户信息");
     }];
+    UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] initWithActionBlock:^(id  _Nonnull sender) {
+        [self.mm_drawerController closeDrawerAnimated: YES completion:^(BOOL finished) {
+            
+        }];
+        ChangeNickNameController* controller =[[ChangeNickNameController alloc] initWithDictionary:@{@"name":self.viewModel.info.nickname}];
+        UINavigationController* nav = (UINavigationController*)(((SEMTabViewController*)self.mm_drawerController.centerViewController).selectedViewController);
+        controller.hidesBottomBarWhenPushed = YES;
+        [nav pushViewController:controller animated:YES];
+    }];
+    [self.topView.infoView.infoLabel addGestureRecognizer:tap];
 }
 
 #pragma mark -viewModelSet
@@ -134,6 +147,10 @@
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+        {
+            return 48*self.view.scale;
+        }
 #pragma  mark-TableDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -209,6 +226,16 @@
         controller.hidesBottomBarWhenPushed = YES;
         [nav pushViewController:controller animated:YES];
     }
+    else if (indexPath.row == 4)
+    {
+        FeedBackController* controller = [[FeedBackController alloc] init];
+        [self.mm_drawerController closeDrawerAnimated: YES completion:^(BOOL finished) {
+        }];
+        UINavigationController* nav = (UINavigationController*)(((SEMTabViewController*)self.mm_drawerController.centerViewController).selectedViewController);
+        controller.hidesBottomBarWhenPushed = YES;
+        [nav pushViewController:controller animated:YES];
+        
+    }
 }
 #pragma mark -Getter
 - (MeTopView*)topView
@@ -217,6 +244,7 @@
         _topView = [[MeTopView alloc] initWithFrame:CGRectZero];
         _topView.name = @"爱足球的宝贝";
         _topView.headImage = [UIImage imageNamed:@"logo"];
+        _topView.userInteractionEnabled = YES;
         UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] initWithActionBlock:^(id  _Nonnull sender) {
             if (self.viewModel.isLogined == NO) {
                 SEMLoginViewController* login = [HRTRouter objectForURL:@"login" withUserInfo:@{}];
