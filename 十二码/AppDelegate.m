@@ -14,6 +14,16 @@
 #import "SEMNetworkingManager.h"
 #import <TencentOpenAPI/TencentOAuth.h>
 #import "UserModel.h"
+
+
+#import "UMSocialQQHandler.h"
+#import "UMSocial.h"
+#import "UMSocialWechatHandler.h"
+#import "UMSocialSinaSSOHandler.h"
+#define kYMAppKey @"57cfb44b67e58e4b32000157"
+#define kQQAppID @"101273513"
+#define kQQAppKey @"6001745f699da343ecd89cf2c51f9c76"
+
 NSString* const WXPatient_App_ID = @"wx9bdb6c74a8821ee3";
 NSString* const WXPatient_App_Secret = @"bda4135fa9aa74b8d4e123713d24b6fb";
 NSString* const WX_BASE_URL = @"https://api.weixin.qq.com/sns";
@@ -21,7 +31,7 @@ NSString* const WX_ACCESS_TOKEN = @"access_token";
 NSString* const WX_OPEN_ID = @"openid";
 NSString* const WX_REFRESH_TOKEN = @"refresh_token";
 NSString* const USER_INFO = @"userinfo";
-@interface AppDelegate ()<WXApiDelegate,TencentSessionDelegate>
+@interface AppDelegate ()<WXApiDelegate>
 @property (nonatomic,retain) id<WechatDelegate> delegate;
 @end
 
@@ -40,6 +50,13 @@ NSString* const USER_INFO = @"userinfo";
     [UINavigationBar appearance].titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
     [UINavigationBar appearance].tintColor = [UIColor whiteColor];
     self.window.rootViewController = [HRTRouter objectForURL: @"initial"];
+    //友盟
+    [UMSocialData setAppKey:kYMAppKey];
+    [UMSocialConfig hiddenNotInstallPlatforms:@[UMShareToWechatSession, UMShareToWechatTimeline,UMShareToQQ,UMShareToQzone]];
+    [UMSocialQQHandler setQQWithAppId:kQQAppID appKey:kQQAppKey url:@"http://www.umeng.com/social"];
+    [UMSocialQQHandler setSupportWebView:YES];
+    [UMSocialWechatHandler setWXAppId:WXPatient_App_ID appSecret:WXPatient_App_Secret url:@"http://www.umeng.com/social"];
+    
     // Override point for customization after application launch.
     return YES;
 }
@@ -67,25 +84,20 @@ NSString* const USER_INFO = @"userinfo";
 }
 -(BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary *)options{
     /*! @brief 处理微信通过URL启动App时传递的数据 * * 需要在 application:openURL:sourceApplication:annotation:或者application:handleOpenURL中调用。 * @param url 微信启动第三方应用时传递过来的URL * @param delegate WXApiDelegate对象，用来接收微信触发的消息。 * @return 成功返回YES，失败返回NO。 */
-    return [TencentOAuth HandleOpenURL:url]||[WXApi handleOpenURL:url delegate:self];
+    return [TencentOAuth HandleOpenURL:url]||[WXApi handleOpenURL:url delegate:self]||[UMSocialSnsService handleOpenURL:url];
 
 }
 
-- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
-{
-    
-    
-    
-    return [TencentOAuth HandleOpenURL:url]||[WXApi handleOpenURL:url delegate:self];
-}
-
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
-{
-    
-    
-    
-    return [TencentOAuth HandleOpenURL:url]||[WXApi handleOpenURL:url delegate:self];
-}
+//- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+//{
+//    return [TencentOAuth HandleOpenURL:url]||[WXApi handleOpenURL:url delegate:self];
+//}
+//
+//- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+//{
+//
+//    return [TencentOAuth HandleOpenURL:url]||[WXApi handleOpenURL:url delegate:self];
+//}
 - (void)onResp:(BaseResp *)resp {
     // 向微信请求授权后,得到响应结果
     if ([resp isKindOfClass:[SendAuthResp class]]) {
