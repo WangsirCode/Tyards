@@ -125,6 +125,7 @@
     self.login = [LoginCommand sharedInstance];
     [[self.login.weixinLoginedCommand executionSignals] subscribeNext:^(id x) {
         [XHToast showCenterWithText:@"登录成功"];
+        [self dismiss];
     }];
     [[self.wexinView.button rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
         NSLog(@"请求微信登录");
@@ -144,6 +145,7 @@
         _tencentOAuth = [[TencentOAuth alloc] initWithAppId:@"101273513" andDelegate:self];
         NSArray* permissions= [NSArray arrayWithObjects:@"get_user_info",@"get_simple_userinfo",@"add_t",nil];
         [_tencentOAuth authorize:permissions inSafari:NO];
+    
     }];
 }
 #pragma mark- Getter
@@ -283,6 +285,7 @@
     {
         // &nbsp;记录登录用户的OpenID、Token以及过期时间
         [_tencentOAuth getUserInfo];
+        [self dismiss];
     }
     else
     {

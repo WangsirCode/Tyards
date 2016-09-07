@@ -21,7 +21,7 @@ NSString* const WX_ACCESS_TOKEN = @"access_token";
 NSString* const WX_OPEN_ID = @"openid";
 NSString* const WX_REFRESH_TOKEN = @"refresh_token";
 NSString* const USER_INFO = @"userinfo";
-@interface AppDelegate ()<WXApiDelegate>
+@interface AppDelegate ()<WXApiDelegate,TencentSessionDelegate>
 @property (nonatomic,retain) id<WechatDelegate> delegate;
 @end
 
@@ -67,19 +67,24 @@ NSString* const USER_INFO = @"userinfo";
 }
 -(BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary *)options{
     /*! @brief 处理微信通过URL启动App时传递的数据 * * 需要在 application:openURL:sourceApplication:annotation:或者application:handleOpenURL中调用。 * @param url 微信启动第三方应用时传递过来的URL * @param delegate WXApiDelegate对象，用来接收微信触发的消息。 * @return 成功返回YES，失败返回NO。 */
-    return [WXApi handleOpenURL:url delegate:self];
+    return [TencentOAuth HandleOpenURL:url]||[WXApi handleOpenURL:url delegate:self];
 
 }
+
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
 {
-   return  [WXApi handleOpenURL:url delegate:self];
-//    return [TencentOAuth HandleOpenURL:url];
+    
+    
+    
+    return [TencentOAuth HandleOpenURL:url]||[WXApi handleOpenURL:url delegate:self];
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-//    return [TencentOAuth HandleOpenURL:url];
-    return  [WXApi handleOpenURL:url delegate:self];
+    
+    
+    
+    return [TencentOAuth HandleOpenURL:url]||[WXApi handleOpenURL:url delegate:self];
 }
 - (void)onResp:(BaseResp *)resp {
     // 向微信请求授权后,得到响应结果
@@ -157,4 +162,5 @@ NSString* const USER_INFO = @"userinfo";
         NSLog(@"获取用户信息时出错 = %@", error);
     }];
 }
+
 @end
