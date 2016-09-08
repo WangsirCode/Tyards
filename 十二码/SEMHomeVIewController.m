@@ -259,6 +259,7 @@
     {
         _headView = [[HomeHeadView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height / 2)];
         _headView.scrollView.delegate = self;
+        _headView.backgroundColor = [UIColor whiteColor];
         if (self.viewModel.topics) {
             NSMutableArray* titles = [[NSMutableArray alloc] init];
             NSMutableArray* url = [[NSMutableArray alloc]init];
@@ -283,6 +284,8 @@
         [_tableView registerClass:[HomeCell class] forCellReuseIdentifier:@"HomeCell"];
         
         _tableView.tableHeaderView = self.headView;
+        _tableView.backgroundColor = [UIColor BackGroundColor];
+        _tableView.separatorColor = [UIColor BackGroundColor];
     }
     return _tableView;
 }

@@ -267,7 +267,6 @@
     if (response && response.retCode == URLREQUEST_SUCCEED) {
         
         NSDictionary *userInfo = [response jsonResponse];
-        NSString *nickName = userInfo[@"nickname"];
         
         // 后续操作...
         

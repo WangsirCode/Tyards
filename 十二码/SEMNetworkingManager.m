@@ -347,9 +347,9 @@ NSString* const GameMessage = @"/match/newses/";
     NSMutableString* URL = [[NSMutableString alloc] init];
     [URL appendString:TeamGames];
     //测试以这个未测试
-    [URL appendString:@"75"];
+//    [URL appendString:@"75"];
     
-   // [URL appendString:ide];
+    [URL appendString:ide];
     NSDictionary* para = @{@"group":@YES};
     return [self GET:URL parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
         

@@ -325,6 +325,9 @@
         }
         cell.view.location = 1;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        if (model.latestNews) {
+            [cell.button setTitle:model.latestNews.detail forState:UIControlStateNormal];
+        }
         return cell;
     }
     else if (tableView.tag == 102)
@@ -471,6 +474,9 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (tableView.tag == 101) {
+        if (self.viewModel.scheduleModel.latestsrounds[indexPath.row].games[indexPath.section].latestNews.detail) {
+            return 181*self.view.scale;
+        }
         return 156 * self.view.scale;
     }
     else if(tableView.tag == 103)

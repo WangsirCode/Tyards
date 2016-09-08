@@ -17,6 +17,7 @@
 		470D2EE61D7ABFBA001047BD /* Group 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 470D2EE51D7ABFBA001047BD /* Group 2.png */; };
 		470D2EE91D7AC8B1001047BD /* ChangeNickNameController.m in Sources */ = {isa = PBXBuildFile; fileRef = 470D2EE81D7AC8B1001047BD /* ChangeNickNameController.m */; };
 		470D2EEC1D7AC93A001047BD /* ChangeNickNameViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 470D2EEB1D7AC93A001047BD /* ChangeNickNameViewModel.m */; };
+		470D2EEE1D7BC7C2001047BD /* volume.png in Resources */ = {isa = PBXBuildFile; fileRef = 470D2EED1D7BC7C2001047BD /* volume.png */; };
 		470F56CC1D71346700110FCE /* scorer.png in Resources */ = {isa = PBXBuildFile; fileRef = 470F56C91D71346700110FCE /* scorer.png */; };
 		470F56CD1D71346700110FCE /* scorer2.png in Resources */ = {isa = PBXBuildFile; fileRef = 470F56CA1D71346700110FCE /* scorer2.png */; };
 		470F56CE1D71346700110FCE /* scorer3.png in Resources */ = {isa = PBXBuildFile; fileRef = 470F56CB1D71346700110FCE /* scorer3.png */; };
@@ -323,6 +324,7 @@
 		470D2EE81D7AC8B1001047BD /* ChangeNickNameController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeNickNameController.m; sourceTree = "<group>"; };
 		470D2EEA1D7AC93A001047BD /* ChangeNickNameViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeNickNameViewModel.h; sourceTree = "<group>"; };
 		470D2EEB1D7AC93A001047BD /* ChangeNickNameViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeNickNameViewModel.m; sourceTree = "<group>"; };
+		470D2EED1D7BC7C2001047BD /* volume.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = volume.png; sourceTree = "<group>"; };
 		470F56C91D71346700110FCE /* scorer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scorer.png; sourceTree = "<group>"; };
 		470F56CA1D71346700110FCE /* scorer2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scorer2.png; sourceTree = "<group>"; };
 		470F56CB1D71346700110FCE /* scorer3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scorer3.png; sourceTree = "<group>"; };
@@ -1190,6 +1192,7 @@
 				47ABD96F1D60AA4E00CD18CF /* Copa del Rey.png */,
 				470D2EE31D7A4AF3001047BD /* visible.png */,
 				4735FA101D5616F000FDF2ED /* Group 19.png */,
+				470D2EED1D7BC7C2001047BD /* volume.png */,
 				47184FBC1D73C2FD008A4591 /* icon_follow(1).png */,
 				47C053B41D7520D900AEBF86 /* bg_combined_shape.png */,
 				47C053B51D7520D900AEBF86 /* Combined Shape 02.png */,
@@ -1759,6 +1762,7 @@
 				4735FA151D561E2100FDF2ED /* 头像背景.png in Resources */,
 				4734CE171D41CD4B006536DF /* 深色背景.png in Resources */,
 				4734CE341D41CD55006536DF /* Rectangle 301.png in Resources */,
+				470D2EEE1D7BC7C2001047BD /* volume.png in Resources */,
 				47C053C51D7520D900AEBF86 /* icon_C.png in Resources */,
 				4734CE4A1D41CD5E006536DF /* 搜索icon.png in Resources */,
 				4760880B1D55874400F36597 /* camera_L.png in Resources */,

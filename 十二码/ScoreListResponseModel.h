@@ -44,7 +44,7 @@
 
 @property (nonatomic, assign) NSInteger place;
 
-@property (nonatomic, copy) NSString *description;
+@property (nonatomic, copy) NSString *desc;
 
 - (NSInteger)getNum;
 @end

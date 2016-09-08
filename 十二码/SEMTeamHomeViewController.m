@@ -22,6 +22,10 @@
 #import "PlayerDetailViewController.h"
 #import "SEMNewsDetailController.h"
 #import "CoachDetailViewController.h"
+#define LISTTABLEVIEWTAG 101
+#define SCHEDULETABLEVIETAG 102
+#define NEWSTABLEVIEWTAG 103
+#define MESSAGETABLEVIEWTAG 104
 @interface SEMTeamHomeViewController ()<UITableViewDelegate,UITableViewDataSource,LazyPageScrollViewDelegate,UIScrollViewDelegate,ShareViewDelegate>
 @property (nonatomic,strong) SEMTeamHomeModel   * viewModel;
 @property (nonatomic,strong) UIImageView        * logoImageView;
@@ -124,7 +128,6 @@
             {
                 self.logoImageView.image = [UIImage placeholderImage];
             }
-            [self.messageTableview reloadData];
             UIImage* image = [UIImage imageNamed:@"camera_L"];
             self.photoview = [[CostomView alloc] initWithInfo:@"相册" image:image FontSize:14];
             self.photoview.label.textColor = [UIColor whiteColor];
@@ -243,18 +246,18 @@
 #pragma mark- tableiviewDelegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if (tableView.tag == 100) {
+    if (tableView.tag == MESSAGETABLEVIEWTAG) {
         return 1;
     }
-    else if (tableView.tag == 101)
+    else if (tableView.tag == NEWSTABLEVIEWTAG)
     {
         return 1;
     }
-    else if (tableView.tag == 102)
+    else if (tableView.tag == LISTTABLEVIEWTAG)
     {
         return 2;
     }
-    else if(tableView.tag == 103)
+    else if(tableView.tag == SCHEDULETABLEVIETAG)
     {
         return self.viewModel.games.count;
     }
@@ -266,14 +269,14 @@
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (tableView.tag == 100) {
+    if (tableView.tag == MESSAGETABLEVIEWTAG) {
         return self.viewModel.comments.count;
     }
-    else if (tableView.tag == 101)
+    else if (tableView.tag == NEWSTABLEVIEWTAG)
     {
         return self.viewModel.model.articles.count;
     }
-    else if (tableView.tag == 102)
+    else if (tableView.tag == LISTTABLEVIEWTAG)
     {
         switch (section) {
             case 0:
@@ -289,7 +292,7 @@
                 break;
         }
     }
-    else if(tableView.tag == 103)
+    else if(tableView.tag == SCHEDULETABLEVIETAG)
     {
         return self.viewModel.games[section].games.count;
     }
@@ -301,13 +304,13 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (tableView.tag == 100) {
+    if (tableView.tag == MESSAGETABLEVIEWTAG) {
         CommentCell* cell = (CommentCell*)[tableView dequeueReusableCellWithIdentifier:@"CommentCell" forIndexPath:indexPath];
         cell.model = self.viewModel.comments[indexPath.row];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
-    else if (tableView.tag == 101)
+    else if (tableView.tag == NEWSTABLEVIEWTAG)
     {
         Articles* news = self.viewModel.model.articles[indexPath.row];
         TeamNewsCell* cell = (TeamNewsCell*)[tableView dequeueReusableCellWithIdentifier:@"TeamNewsCell"];
@@ -328,7 +331,7 @@
         }
         return cell;
     }
-    else if (tableView.tag == 102)
+    else if (tableView.tag == LISTTABLEVIEWTAG)
     {
         UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"TeamPlayerCell"];
         cell.textLabel.textColor = [UIColor colorWithHexString:@"#1EA11F"];
@@ -356,7 +359,7 @@
         }
         return cell;
     }
-    else if (tableView.tag == 103)
+    else if (tableView.tag == SCHEDULETABLEVIETAG)
     {
         NoticeGameviewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"NoticeGameviewCell" forIndexPath:indexPath];
         GameDetailModel* model1 = self.viewModel.games[indexPath.section];
@@ -404,19 +407,19 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (tableView.tag == 100) {
+    if (tableView.tag == MESSAGETABLEVIEWTAG) {
          CGFloat height = [tableView cellHeightForIndexPath:indexPath model:self.viewModel.comments[indexPath.row] keyPath:@"model" cellClass:[CommentCell class]  contentViewWidth:[UIScreen mainScreen].bounds.size.width];
         return height;
     }
-    else if(tableView.tag == 101)
+    else if(tableView.tag == NEWSTABLEVIEWTAG)
     {
         return 100 * self.view.scale;
     }
-    else if (tableView.tag == 102)
+    else if (tableView.tag == LISTTABLEVIEWTAG)
     {
         return 48 * self.view.scale;
     }
-    else if (tableView.tag == 103) {
+    else if (tableView.tag == SCHEDULETABLEVIETAG) {
         return 156 * self.view.scale;
     }
     return 0;
@@ -427,10 +430,10 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    if (tableView.tag == 102) {
+    if (tableView.tag == LISTTABLEVIEWTAG) {
         return 48 * self.view.scale;
     }
-    else if (tableView.tag == 103)
+    else if (tableView.tag == SCHEDULETABLEVIETAG)
     {
         return 30*self.view.scale;
     }
@@ -438,7 +441,7 @@
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    if (tableView.tag == 103) {
+    if (tableView.tag == SCHEDULETABLEVIETAG) {
     UIView* view = [[UIView alloc] init];
     view.backgroundColor = [UIColor whiteColor];
     UILabel* label = [[UILabel alloc] init];
@@ -461,7 +464,7 @@
     }];
     return view;
     }
-    else if (tableView.tag == 102)
+    else if (tableView.tag == LISTTABLEVIEWTAG)
     {
         UILabel* label = [UILabel new];
         label.backgroundColor = [UIColor BackGroundColor];
@@ -479,7 +482,7 @@
 #pragma mark -tableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (tableView.tag == 102)
+    if (tableView.tag == LISTTABLEVIEWTAG)
     {
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
         if (indexPath.section == 0 && self.viewModel.model.info.coach)
@@ -490,18 +493,25 @@
         else if(indexPath.section == 1)
         {
             NSInteger inde;
-            if (indexPath.row == 0) {
-                inde = self.viewModel.players.captain.player.id;
+            if (self.viewModel.players.captain) {
+                if (indexPath.row == 0 &&self.viewModel.players.captain) {
+                    inde = self.viewModel.players.captain.player.id;
+                }
+                else if(indexPath.row != 0 && self.viewModel.players.captain)
+                {
+                    inde = self.viewModel.players.players[indexPath.row - 1].player.id;
+                }
             }
             else
             {
-                inde = self.viewModel.players.players[indexPath.row - 1].player.id;
+                inde = self.viewModel.players.players[indexPath.row].player.id;
             }
+        
             PlayerDetailViewController *controller= [[PlayerDetailViewController alloc] initWithDictionary:@{@"id":@(inde)}];
             [self.navigationController pushViewController:controller animated:YES];
         }
     }
-    else if (tableView.tag == 101)
+    else if (tableView.tag == NEWSTABLEVIEWTAG)
     {
         
         NSInteger ide = self.viewModel.model.articles[indexPath.row].id;
@@ -509,7 +519,7 @@
         controller.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:controller animated:YES];
     }
-    else if (tableView.tag == 103)
+    else if (tableView.tag == SCHEDULETABLEVIETAG)
     {
         RaceInfoDetailController* controller = [[RaceInfoDetailController alloc] initWithDictionay:@{@"id":@(self.viewModel.games[indexPath.section].games[indexPath.row].id)}];
         controller.hidesBottomBarWhenPushed = YES;
@@ -549,12 +559,11 @@
         _pageView.frame =self.view.frame;
         _pageView.delegate = self;
         [_pageView initTab:YES Gap:self.view.width / 5 TabHeight:27 VerticalDistance:10 BkColor:[UIColor whiteColor]];
-
-        [_pageView addTab:@"留言" View:self.messageTableview Info:nil];
-        [_pageView addTab:@"新闻" View:self.newsTableview Info:nil];
+        [_pageView addTab:@"资料" View:self.scrollView Info:nil];
         [_pageView addTab:@"名单" View:self.listTableview Info:nil];
         [_pageView addTab:@"赛程" View:self.scheduleTableview Info:nil];
-        [_pageView addTab:@"资料" View:self.scrollView Info:nil];
+        [_pageView addTab:@"新闻" View:self.newsTableview Info:nil];
+        [_pageView addTab:@"留言" View:self.messageTableview Info:nil];
         [_pageView setTitleStyle:[UIFont systemFontOfSize:15] SelFont:[UIFont systemFontOfSize:20] Color:[UIColor blackColor] SelColor:[UIColor colorWithHexString:@"#1EA11F"]];
         [_pageView enableBreakLine:YES Width:1 TopMargin:0 BottomMargin:0 Color:[UIColor groupTableViewBackgroundColor]];
         [_pageView generate:^(UIButton *firstTitleControl, UIView *viewTitleEffect) {
@@ -584,7 +593,7 @@
         _messageTableview = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _messageTableview.delegate = self;
         _messageTableview.dataSource = self;
-        _messageTableview.tag = 100;
+        _messageTableview.tag = MESSAGETABLEVIEWTAG;
         _messageTableview.contentSize = CGSizeMake(self.view.width, 2 * self.view.height);
         _messageTableview.bounces = NO;
         [_messageTableview registerClass:[CommentCell class] forCellReuseIdentifier:@"CommentCell"];
@@ -603,7 +612,7 @@
         _newsTableview = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _newsTableview.delegate = self;
         _newsTableview.dataSource = self;
-        _newsTableview.tag = 101;
+        _newsTableview.tag = NEWSTABLEVIEWTAG;
         _newsTableview.bounces = NO;
         [_newsTableview registerClass:[TeamNewsCell class] forCellReuseIdentifier:@"TeamNewsCell"];
         UIView* backView = [UIView new];
@@ -621,7 +630,7 @@
         _listTableview = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _listTableview.delegate = self;
         _listTableview.dataSource = self;
-        _listTableview.tag = 102;
+        _listTableview.tag = LISTTABLEVIEWTAG;
         _listTableview.bounces = NO;
     }
     return _listTableview;
@@ -632,7 +641,7 @@
         _scheduleTableview = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _scheduleTableview.delegate = self;
         _scheduleTableview.dataSource = self;
-        _scheduleTableview.tag = 103;
+        _scheduleTableview.tag = SCHEDULETABLEVIETAG;
         _scheduleTableview.bounces = NO;
         [_scheduleTableview registerClass:[NoticeGameviewCell class] forCellReuseIdentifier:@"NoticeGameviewCell"];
         UIView* backView = [UIView new];
@@ -756,18 +765,18 @@
 #pragma mark -LazyPageScrollViewDelegate
 -(void)LazyPageScrollViewPageChange:(LazyPageScrollView *)pageScrollView Index:(NSInteger)index PreIndex:(NSInteger)preIndex TitleEffectView:(UIView *)viewTitleEffect SelControl:(UIButton *)selBtn
 {
-    if (index == 1) {
+    if (index == 3) {
         [self.newsTableview reloadData];
     }
-    else if (index == 2)
+    else if (index == 1)
     {
         [self.listTableview reloadData];
     }
-    else if (index == 0)
+    else if (index == 4)
     {
         [self.messageTableview reloadData];
     }
-    else if (index == 3)
+    else if (index == 2)
     {
         [self.scheduleTableview reloadData];
     }

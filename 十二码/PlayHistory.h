@@ -14,7 +14,7 @@
 
 @property (nonatomic, assign) NSInteger penaltyHome;
 
-@property (nonatomic, copy) NSString *description;
+@property (nonatomic, copy) NSString *desc;
 
 @property (nonatomic, assign) NSInteger homeScore;
 
