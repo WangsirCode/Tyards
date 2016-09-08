@@ -40,8 +40,8 @@
     
     [self.userHeadView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self);
-        make.height.equalTo(self.mas_height).dividedBy(3.1);
-        make.width.equalTo(self.mas_height).dividedBy(3.1);
+        make.height.equalTo(self.mas_height).dividedBy(2.85);
+        make.width.equalTo(self.mas_height).dividedBy(2.85);
     }];
     [self.userHeadBackView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self);

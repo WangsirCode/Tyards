@@ -73,6 +73,7 @@
     }];
     [[self.viewModel.submitCommand executionSignals] subscribeNext:^(id x) {
         [XHToast showCenterWithText:@"提交成功"];
+        [self.navigationController popViewControllerAnimated:YES];
     }];
 }
 

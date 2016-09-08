@@ -163,9 +163,9 @@
     if (!_searchBar) {
         _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width / 2, 30)];
         _searchBar.delegate = self;
-        _searchBar.placeholder = @"搜索学校";
+        _searchBar.placeholder = @"搜索学院";
         _searchBar.translucent = YES;
-        [_searchBar setTintColor:[UIColor whiteColor]];
+        [_searchBar setTintColor:[UIColor colorWithHexString:@"#1EA11F"]];
     }
     return _searchBar;
 }
