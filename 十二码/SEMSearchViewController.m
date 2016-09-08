@@ -218,7 +218,7 @@
         _searchBar.delegate = self;
         _searchBar.placeholder = @"搜索学校";
         _searchBar.translucent = YES;
-        [_searchBar setTintColor:[UIColor whiteColor]];
+        [_searchBar setTintColor:[UIColor colorWithHexString:@"#1EA11F"]];
 //        _searchBar.barTintColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:1];
 //        [UISearchBar appearance].backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
     }
