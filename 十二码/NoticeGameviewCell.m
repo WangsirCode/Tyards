@@ -23,13 +23,40 @@
             make.right.equalTo(self.contentView.mas_right).offset(-10*self.view.scale);
             make.height.equalTo(@(156*self.scale));
         }];
-        [self.button mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.view.mas_bottom);
-            make.left.equalTo(self.contentView.mas_left);
-            make.right.equalTo(self.contentView.mas_right);
-            make.height.equalTo(@(25*self.view.scale));
+        [RACObserve(self, news) subscribeNext:^(id x) {
+            if (self.news) {
+                UIView* view = [UIView new];
+                view.backgroundColor = [UIColor whiteColor];
+                view.layer.borderColor = [UIColor BackGroundColor].CGColor;
+                view.layer.borderWidth = 0.8;
+                [self.contentView addSubview:view];
+                view.sd_layout
+                .topSpaceToView(self.view,0)
+                .leftSpaceToView(self.contentView,10*self.scale)
+                .rightSpaceToView(self.contentView,10*self.scale)
+                .heightIs(40*self.scale);
+                UIImageView* imageview = [UIImageView new];
+                imageview.image = [UIImage imageNamed:@"volume"];
+                [view addSubview:imageview];
+                imageview.sd_layout
+                .leftSpaceToView(view,16*self.scale)
+                .centerYEqualToView(view)
+                .heightIs(13*self.scale)
+                .widthEqualToHeight();
+                UILabel* label = [UILabel new];
+                label.text = self.news;
+                label.font = [UIFont systemFontOfSize:13*self.scale];
+                [view addSubview:label];
+                label.sd_layout
+                .centerYEqualToView(view)
+                .leftSpaceToView(imageview,8*self.scale)
+                .widthIs(300)
+                .autoHeightRatio(0);
+                
+            }
         }];
     }
+    
     return self;
 }
 

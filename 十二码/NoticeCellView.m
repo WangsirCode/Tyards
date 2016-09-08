@@ -88,13 +88,13 @@
         make.top.equalTo(self.homeTitleLabel.mas_top);
     }];
     [self.homeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.homeTitleLabel.mas_bottom).offset(10);
+        
     }];
     [self.locationImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.and.height.equalTo(@(10*scale));
-        make.top.equalTo(self.homeLabel.mas_top);
-        make.right.equalTo(self.homeLabel.mas_left).offset(-3*scale);
-        make.bottom.equalTo(self.homeLabel.mas_bottom);
+        make.height.equalTo(@(10*scale));
+        make.width.equalTo(@(7*scale));
+        make.top.equalTo(self.homeTitleLabel.mas_bottom).offset(10);
+        make.left.equalTo(self.mas_left).offset(8*self.scale);
     }];
 }
 - (void)bindModel
@@ -126,14 +126,10 @@
     [RACObserve(self, location) subscribeNext:^(id x) {
         //左边是主场
         if (self.location == 1) {
-            [self.homeLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.centerX.equalTo(self.homeImageview.mas_centerX);
-            }];
-        }
-        else
-        {
-            [self.homeLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.centerX.equalTo(self.awayImgaeview.mas_centerX);
+            [self.homeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.equalTo(self.locationImageView.mas_right).offset(10*self.scale);
+                make.top.equalTo(self.locationImageView.mas_top);
+                make.bottom.equalTo(self.locationImageView.mas_bottom);
             }];
         }
     }];

@@ -31,14 +31,15 @@
 #import "PlayerInfoView.h"
 #import "InfoViewCell.h"
 #import "SEMNewsDetailController.h"
+#define INFOTABLEVIEWTAG 100
+#define NEWSTABLEVIEWTAG 101
+#define MESSAGETABLEVIEWTAG 102
 @interface PlayerDetailViewController ()<UITableViewDelegate,UITableViewDataSource,LazyPageScrollViewDelegate,UIScrollViewDelegate,ShareViewDelegate>
 @property (nonatomic,strong) PlayerDetailViewModel *viewModel;
 @property (nonatomic,strong) UIImageView        * logoImageView;
 @property (nonatomic,strong) LazyPageScrollView * pageView;
 @property (nonatomic,strong) UITableView        * messageTableview;
 @property (nonatomic,strong) UITableView        * newsTableview;
-@property (nonatomic,strong) UITableView        * listTableview;
-@property (nonatomic,strong) UITableView        * scheduleTableview;
 @property (nonatomic,strong) MBProgressHUD      * hud;
 @property (nonatomic,strong) UIBarButtonItem    * shareItem;
 @property (nonatomic,strong) UIBarButtonItem    * favoriteItem;
@@ -117,7 +118,7 @@
         if (self.viewModel.status == 2) {
             [self.hud hide:YES];
             self.navigationItem.title = self.viewModel.model.player.name;
-            NSString* urlstring = self.viewModel.model.player.cover.url;
+            NSString* urlstring = self.viewModel.model.player.avatar.url;
             if (urlstring) {
                 NSURL* url = [[NSURL alloc] initWithString:urlstring];
                 [self.logoImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"zhanwei.jpg"]];
@@ -224,7 +225,7 @@
 #pragma mark- tableiviewDelegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if (tableView.tag == 102) {
+    if (tableView.tag == INFOTABLEVIEWTAG) {
         return 3;
     }
     return 1;
@@ -232,10 +233,10 @@
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (tableView.tag == 100) {
+    if (tableView.tag == MESSAGETABLEVIEWTAG) {
         return self.viewModel.model.newses.count;
     }
-    else if (tableView.tag == 102)
+    else if (tableView.tag == INFOTABLEVIEWTAG)
     {
         switch (section) {
             case 0:
@@ -259,13 +260,14 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (tableView.tag == 100) {
+    if (tableView.tag == MESSAGETABLEVIEWTAG) {
         CommentCell* cell = (CommentCell*)[tableView dequeueReusableCellWithIdentifier:@"CommentCell" forIndexPath:indexPath];
         cell.model = self.viewModel.comments[indexPath.row];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
-    else if (tableView.tag == 101)
+    
+    else if (tableView.tag == NEWSTABLEVIEWTAG)
     {
         Articles* news = self.viewModel.model.articles[indexPath.row];
         TeamNewsCell* cell = (TeamNewsCell*)[tableView dequeueReusableCellWithIdentifier:@"TeamNewsCell"];
@@ -322,11 +324,11 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (tableView.tag == 100) {
+    if (tableView.tag == MESSAGETABLEVIEWTAG) {
         CGFloat height = [tableView cellHeightForIndexPath:indexPath model:self.viewModel.comments[indexPath.row] keyPath:@"model" cellClass:[CommentCell class]  contentViewWidth:[UIScreen mainScreen].bounds.size.width];
         return height;
     }
-    else if(tableView.tag == 101)
+    else if(tableView.tag == NEWSTABLEVIEWTAG)
     {
         return 100 * self.view.scale;
     }
@@ -344,14 +346,14 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    if (tableView.tag == 102) {
+    if (tableView.tag == INFOTABLEVIEWTAG) {
         return 48*self.view.scale;
     }
     return 0;
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    if (tableView.tag == 102)
+    if (tableView.tag == INFOTABLEVIEWTAG)
     {
         UIView* view = [UIView new];
         UILabel* label = [UILabel new];
@@ -382,7 +384,7 @@
 #pragma mark- tableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (tableView.tag == 101) {
+    if (tableView.tag == NEWSTABLEVIEWTAG) {
         NSInteger ide = self.viewModel.model.articles[indexPath.row].id;
         SEMNewsDetailController* controller = [[SEMNewsDetailController alloc] initWithDictionary:@{@"ides":@(ide)}];
         controller.hidesBottomBarWhenPushed = YES;
@@ -423,10 +425,9 @@
             _pageView.frame =self.view.frame;
             _pageView.delegate = self;
             [_pageView initTab:YES Gap:self.view.width / 5 TabHeight:27 VerticalDistance:10 BkColor:[UIColor whiteColor]];
-            
-            [_pageView addTab:@"留言" View:self.messageTableview Info:nil];
-            [_pageView addTab:@"新闻" View:self.newsTableview Info:nil];
             [_pageView addTab:@"资料" View:self.infoTableView Info:nil];
+            [_pageView addTab:@"新闻" View:self.newsTableview Info:nil];
+            [_pageView addTab:@"留言" View:self.messageTableview Info:nil];
             [_pageView setTitleStyle:[UIFont systemFontOfSize:15] SelFont:[UIFont systemFontOfSize:20] Color:[UIColor blackColor] SelColor:[UIColor colorWithHexString:@"#1EA11F"]];
             [_pageView enableBreakLine:YES Width:1 TopMargin:0 BottomMargin:0 Color:[UIColor groupTableViewBackgroundColor]];
             [_pageView generate:^(UIButton *firstTitleControl, UIView *viewTitleEffect) {
@@ -456,7 +457,7 @@
         _infoTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _infoTableView.delegate = self;
         _infoTableView.dataSource = self;
-        _infoTableView.tag = 102;
+        _infoTableView.tag = INFOTABLEVIEWTAG;
         _infoTableView.contentSize = CGSizeMake(self.view.width, 2 * self.view.height);
         [_infoTableView registerClass:[CommentCell class] forCellReuseIdentifier:@"InfoViewCell"];
         UIView* backView = [UIView new];
@@ -473,13 +474,15 @@
         _messageTableview = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _messageTableview.delegate = self;
         _messageTableview.dataSource = self;
-        _messageTableview.tag = 100;
+        _messageTableview.tag = MESSAGETABLEVIEWTAG;
         _messageTableview.contentSize = CGSizeMake(self.view.width, 2 * self.view.height);
         [_messageTableview registerClass:[CommentCell class] forCellReuseIdentifier:@"CommentCell"];
         UIView* backView = [UIView new];
         backView.backgroundColor = [UIColor BackGroundColor];
         backView.frame = CGRectMake(0, 0, self.view.width, 8);
         _messageTableview.tableHeaderView = backView;
+        _messageTableview.backgroundColor = [UIColor BackGroundColor];
+        _messageTableview.separatorColor = [UIColor BackGroundColor];
     }
     return _messageTableview;
 }
@@ -489,12 +492,14 @@
         _newsTableview = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _newsTableview.delegate = self;
         _newsTableview.dataSource = self;
-        _newsTableview.tag = 101;
+        _newsTableview.tag = NEWSTABLEVIEWTAG;
         [_newsTableview registerClass:[TeamNewsCell class] forCellReuseIdentifier:@"TeamNewsCell"];
         UIView* backView = [UIView new];
         backView.backgroundColor = [UIColor BackGroundColor];
         backView.frame = CGRectMake(0, 0, self.view.width, 8);
         _newsTableview.tableHeaderView = backView;
+        _newsTableview.backgroundColor = [UIColor BackGroundColor];
+        _newsTableview.separatorColor = [UIColor BackGroundColor];
     }
     return _newsTableview;
 }
@@ -593,17 +598,13 @@
     if (index == 1) {
         [self.newsTableview reloadData];
     }
-    else if (index == 2)
-    {
-        [self.listTableview reloadData];
-    }
     else if (index == 0)
     {
-        [self.messageTableview reloadData];
+        [self.infoTableView reloadData];
     }
-    else if (index == 3)
+    else if (index == 2)
     {
-        [self.scheduleTableview reloadData];
+        [self.messageTableview reloadData];
     }
 }
 

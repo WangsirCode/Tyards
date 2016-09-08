@@ -17,4 +17,5 @@
 @interface NoticeGameviewCell : UITableViewCell
 @property (nonatomic,strong) NoticeCellView* view;
 @property (nonatomic,strong) UIButton* button;
+@property (nonatomic,strong) NSString* news;
 @end

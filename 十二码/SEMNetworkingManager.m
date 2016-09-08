@@ -485,13 +485,13 @@ NSString* const GameMessage = @"/match/newses/";
 }
 
 //获取相册详情
-- (NSURLSessionTask *)fetchAlbumDetail:(NSInteger)albumId success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
+- (NSURLSessionTask *)fetchAlbumDetail:(NSInteger)albumId offset:(NSInteger)offset success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
 {
     {
         [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
         NSMutableString* URL = [[NSMutableString alloc] init];
         [URL appendString:AlbumDetail];
-        NSDictionary *para = @{@"id":@(albumId)};
+        NSDictionary *para = @{@"id":@(albumId),@"offset":@(offset)};
         return [self GET:URL parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
             
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -1065,6 +1065,22 @@ NSString* const GameMessage = @"/match/newses/";
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         successBlock(responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }];
+}
+//获取热点详情
+- (NSURLSessionTask *)fetchHotDetail:(NSString *)newsId success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
+{
+    [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
+    self.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSMutableString* string = [NSMutableString stringWithString: @"/news/hotTopicDetail/"];
+    [string appendString:newsId];
+    return [self GET:string parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NewsDetailResponseModel* model = [NewsDetailResponseModel mj_objectWithKeyValues:responseObject];
+        successBlock(model.resp);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failureBlock(error);
     }];

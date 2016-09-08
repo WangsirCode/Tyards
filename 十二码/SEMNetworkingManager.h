@@ -440,6 +440,7 @@
  *  @return NSURLSessionTask
  */
 - (NSURLSessionTask*)fetchAlbumDetail:(NSInteger)albumId
+                               offset:(NSInteger)offset
                              success:(void (^)(id data))successBlock
                              failure:(void (^)(NSError *aError))failureBlock;
 
@@ -933,5 +934,21 @@
                           name:(NSString*)nickName
                          success:(void (^)(id data))successBlock
                          failure:(void (^)(NSError *aError))failureBlock;
+
+/*!
+ *  @author 汪宇豪, 16-09-08 22:09:52
+ *
+ *  @brief 获取热点详情
+ *
+ *  @param newsId       newsId
+ *  @param successBlock 成功
+ *  @param failureBlock 失败
+ *
+ *  @return NSURLSessionTask
+ */
+- (NSURLSessionTask*)fetchHotDetail:(NSString*)newsId
+                            success:(void (^)(id data))successBlock
+                            failure:(void (^)(NSError *aError))failureBlock;
+
 @end
 

@@ -378,7 +378,7 @@
         }
         cell.view.homeTitleLabel.text = model.home.name;
         cell.view.awayTitleLabel.text = model.away.name;
-        cell.view.homeLabel.text = model.home.name;
+        cell.view.homeLabel.text = model.stadium.name;
         UIImage *image = [UIImage imageNamed:@"zhanwei.jpg"];
         NSURL *homeurl;
         if (model.home.logo.url) {
@@ -391,7 +391,7 @@
         }
         NSURL *awayurl;
         if (model.away.logo) {
-            awayurl = [[NSURL alloc] initWithString:model.away.logo];
+            awayurl = [[NSURL alloc] initWithString:model.away.logo.url];
             [cell.view.awayImgaeview sd_setImageWithURL:awayurl placeholderImage:image options:SDWebImageRefreshCached];
         }
         else
@@ -399,6 +399,9 @@
             cell.view.awayImgaeview.image = image;
         }
         cell.view.location = 1;
+        if (model.latestNews.detail) {
+            cell.news = model.latestNews.detail;
+        }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
@@ -420,7 +423,12 @@
         return 48 * self.view.scale;
     }
     else if (tableView.tag == SCHEDULETABLEVIETAG) {
-        return 156 * self.view.scale;
+        GameDetailModel* model1 = self.viewModel.games[indexPath.section];
+        Games* model = model1.games[indexPath.row];
+        if (model.latestNews.detail) {
+            return 196 * self.view.scale;
+        }
+        return 156*self.view.scale;
     }
     return 0;
 }

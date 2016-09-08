@@ -16,15 +16,25 @@
     {
         [self fetchData:[(NSNumber*)dictionary[@"id"] integerValue]];
         self.title = dictionary[@"title"];
+        self.medias = [[NSMutableArray alloc] init];
     }
     return self;
 }
 - (void)fetchData:(NSInteger)albumId
 {
     SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
-    [manager fetchAlbumDetail:albumId success:^(id data) {
-        self.model = data;
-        self.shouldReloadData = YES;
+    [manager fetchAlbumDetail:albumId offset:self.medias.count success:^(id data) {
+        [self.medias appendObjects:((AlbumModel*)data).medias];
+        self.number = ((AlbumModel*)data).total;
+        if (self.medias.count < self.number) {
+            [self fetchData:albumId];
+        }
+        else
+        {
+            self.model = [AlbumModel new];
+            self.model.medias = self.medias;
+            self.shouldReloadData = YES;
+        }
     } failure:^(NSError *aError) {
     }];
 }

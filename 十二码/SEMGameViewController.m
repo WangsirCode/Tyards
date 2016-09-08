@@ -12,12 +12,15 @@
 #import "GameListViewCell.h"
 #import "HistoryviewCell.h"
 #import "NoticeGameviewCell.h"
+#define NOTICETABLEVIEW 100
+#define HISTORYTABLEVIEW 101
+#define GAMELISTTABLEVIEW 102
 @interface SEMGameViewController ()<UITableViewDelegate,UITableViewDataSource,LazyPageScrollViewDelegate>
-@property (nonatomic,strong) LazyPageScrollView* pageView;
-@property (nonatomic,strong)SEMGameVIewModel* viewModel;
-@property (nonatomic,strong)UITableView* noticegameTableview;
-@property (nonatomic,strong)UITableView* historygameTableview;
-@property (nonatomic,strong)UITableView* gamelistTableview;
+@property (nonatomic,strong) LazyPageScrollView * pageView;
+@property (nonatomic,strong) SEMGameVIewModel   * viewModel;
+@property (nonatomic,strong) UITableView        * noticegameTableview;
+@property (nonatomic,strong) UITableView        * historygameTableview;
+@property (nonatomic,strong) UITableView        * gamelistTableview;
 @end
 
 @implementation SEMGameViewController
@@ -91,10 +94,10 @@
 #pragma mark- tableviewdatasource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if (tableView.tag == 101) {
+    if (tableView.tag == GAMELISTTABLEVIEW) {
         return 1;
     }
-    else if (tableView.tag == 100)
+    else if (tableView.tag == NOTICETABLEVIEW)
     {
         return self.viewModel.noticeGameDatasource.count;
     }
@@ -104,10 +107,10 @@
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (tableView.tag == 100) {
+    if (tableView.tag == NOTICETABLEVIEW) {
         return self.viewModel.noticeGameDatasource[section].games.count;
     }
-    else if (tableView.tag == 101)
+    else if (tableView.tag == GAMELISTTABLEVIEW)
     {
         return self.viewModel.gameListDatasource.count;
     }
@@ -120,7 +123,7 @@
     
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(tableView.tag == 100)
+    if(tableView.tag == NOTICETABLEVIEW)
     {
         NoticeGameviewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"NoticeGameviewCell" forIndexPath:indexPath];
         GameDetailModel* model1 = self.viewModel.noticeGameDatasource[indexPath.section];
@@ -139,7 +142,7 @@
         }
         cell.view.homeTitleLabel.text = model.home.name;
         cell.view.awayTitleLabel.text = model.away.name;
-        cell.view.homeLabel.text = model.home.name;
+        cell.view.homeLabel.text = model.stadium.name;
         UIImage *image = [UIImage imageNamed:@"zhanwei.jpg"];
         NSURL *homeurl;
         if (model.home.logo.url) {
@@ -161,10 +164,13 @@
         }
         cell.view.location = 1;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        if (model.latestNews.detail) {
+            cell.news = model.latestNews.detail;
+        }
         return cell;
 
     }
-    else if (tableView.tag == 101)
+    else if (tableView.tag == GAMELISTTABLEVIEW)
     {
         GameListModel* model = self.viewModel.gameListDatasource[indexPath.row];
         GameListViewCell* cell = (GameListViewCell*)[tableView dequeueReusableCellWithIdentifier:@"GameListViewCell"];
@@ -205,7 +211,7 @@
         }
         cell.view.homeTitleLabel.text = model.home.name;
         cell.view.awayTitleLabel.text = model.away.name;
-        cell.view.homeLabel.text = model.home.name;
+        cell.view.homeLabel.text = model.stadium.name;
         UIImage *image = [UIImage imageNamed:@"zhanwei.jpg"];
         NSURL *homeurl;
         if (model.home.logo.url) {
@@ -227,6 +233,9 @@
         }
         cell.view.location = 1;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        if (model.latestNews.detail) {
+            cell.news = model.latestNews.detail;
+        }
         return cell;
         
     }
@@ -235,17 +244,23 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (tableView.tag == 101) {
+    if (tableView.tag == GAMELISTTABLEVIEW) {
         return 100 * self.view.scale;
     }
     else
     {
-        return 156 * self.view.scale;
+        GameDetailModel* model1 = self.viewModel.historyGameDatasource[indexPath.section];
+        Games* model = model1.games[indexPath.row];
+        if (model.latestNews.detail) {
+            return 196 * self.view.scale;
+        }
+        return 156*self.view.scale;
+   
     }
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    if (tableView.tag == 101) {
+    if (tableView.tag == GAMELISTTABLEVIEW) {
         return nil;
     }
     UIView* view = [[UIView alloc] init];
@@ -254,10 +269,10 @@
     view.frame = CGRectMake(0, 0, self.view.width, 16*self.view.scale);
     [view addSubview:label];
     NSString* string;
-    if (tableView.tag == 100) {
+    if (tableView.tag == NOTICETABLEVIEW) {
         string = [self.viewModel.noticeGameDatasource[section] getDate1];
     }
-    else if(tableView.tag == 102)
+    else if(tableView.tag == HISTORYTABLEVIEW)
     {
         string = [self.viewModel.historyGameDatasource[section] getDate1];
     }
@@ -278,7 +293,7 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    if (tableView.tag != 101) {
+    if (tableView.tag != GAMELISTTABLEVIEW) {
         return 30*self.view.scale;
     }
     return 0;
@@ -287,12 +302,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (tableView.tag == 101) {
+    if (tableView.tag == GAMELISTTABLEVIEW) {
         GameInfoDetailViewController* controller = [[GameInfoDetailViewController alloc] initWithDictionay:@{@"id":@(self.viewModel.gameListDatasource[indexPath.row].id)}];
         controller.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:controller animated:YES];
     }
-    else if (tableView.tag == 100)
+    else if (tableView.tag == NOTICETABLEVIEW)
     {
         RaceInfoDetailController* controller = [[RaceInfoDetailController alloc] initWithDictionay:@{@"id":@(self.viewModel.noticeGameDatasource[indexPath.section].games[indexPath.row].id)}];
         controller.hidesBottomBarWhenPushed = YES;
@@ -312,7 +327,7 @@
         _noticegameTableview = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _noticegameTableview.delegate = self;
         _noticegameTableview.dataSource = self;
-        _noticegameTableview.tag = 100;
+        _noticegameTableview.tag = NOTICETABLEVIEW;
         [_noticegameTableview registerClass:[NoticeGameviewCell class] forCellReuseIdentifier:@"NoticeGameviewCell"];
         _noticegameTableview.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
             
@@ -347,7 +362,7 @@
         _historygameTableview = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _historygameTableview.delegate = self;
         _historygameTableview.dataSource = self;
-        _historygameTableview.tag = 102;
+        _historygameTableview.tag = HISTORYTABLEVIEW;
         [_historygameTableview registerClass:[HistoryviewCell class] forCellReuseIdentifier:@"HistoryviewCell"];
         _historygameTableview.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
             
@@ -386,7 +401,7 @@
         _gamelistTableview = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _gamelistTableview.delegate = self;
         _gamelistTableview.dataSource = self;
-        _gamelistTableview.tag = 101;
+        _gamelistTableview.tag = GAMELISTTABLEVIEW;
         [_gamelistTableview registerClass:[GameListViewCell class] forCellReuseIdentifier:@"GameListViewCell"];
         _gamelistTableview.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
             
@@ -424,12 +439,8 @@
         UIView *view=[[UIView alloc] init];
         view.backgroundColor=[UIColor orangeColor];
         [_pageView addTab:@"比赛预告" View:self.noticegameTableview Info:nil];
-        view=[[UIView alloc] init];
-        view.backgroundColor=[UIColor greenColor];
-        [_pageView addTab:@"赛事一览" View:self.gamelistTableview Info:nil];
-        view=[[UIView alloc] init];
-        view.backgroundColor=[UIColor lightGrayColor];
         [_pageView addTab:@"历史战报" View:self.historygameTableview Info:nil];
+        [_pageView addTab:@"赛事一览" View:self.gamelistTableview Info:nil];
         [_pageView setTitleStyle:[UIFont systemFontOfSize:15] SelFont:[UIFont systemFontOfSize:20] Color:[UIColor blackColor] SelColor:[UIColor colorWithHexString:@"#1EA11F"]];
         [_pageView enableBreakLine:YES Width:1 TopMargin:0 BottomMargin:0 Color:[UIColor groupTableViewBackgroundColor]];
         [_pageView generate:^(UIButton *firstTitleControl, UIView *viewTitleEffect) {

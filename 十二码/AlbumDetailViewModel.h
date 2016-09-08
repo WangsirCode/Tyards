@@ -11,4 +11,6 @@
 @interface AlbumDetailViewModel : SEMViewModel
 @property (nonatomic, strong) AlbumModel *model;
 @property (nonatomic,strong ) NSString   * title;
+@property (nonatomic, strong) NSMutableArray<Medias *> *medias;
+@property (nonatomic,assign) NSInteger number;
 @end
