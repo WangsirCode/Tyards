@@ -10,9 +10,9 @@
 #import "MyConcernViewModel.h"
 #import "MDABizManager.h"
 @interface MyConcernController ()<UITableViewDelegate,UITableViewDataSource>
-@property (strong,nonatomic)MyConcernViewModel* viewModel;
-@property (nonatomic,strong)UITableView* tableView;
-@property (nonatomic,strong)UIBarButtonItem* backItem;
+@property (strong,nonatomic) MyConcernViewModel * viewModel;
+@property (nonatomic,strong) UITableView        * tableView;
+@property (nonatomic,strong) UIBarButtonItem    * backItem;
 @end
 
 
@@ -89,12 +89,73 @@
         string = model.coach.name;
     }
     cell.textLabel.text = string;
-    cell.detailTextLabel.text = @" 取消关注 ";
-    cell.detailTextLabel.textColor = [UIColor colorWithHexString:@"#1EA11f"];
-    cell.detailTextLabel.layer.borderWidth = 1;
-    cell.detailTextLabel.textAlignment = NSTextAlignmentCenter;
-    cell.detailTextLabel.layer.borderColor = [UIColor colorWithHexString:@"#1EA11F"].CGColor;
+    MyLabel* label = [[MyLabel alloc] init];
+    label.textInsets = UIEdgeInsetsMake(5, 5, 5, 5);
+    label.text = @"取消关注";
+    label.font = [UIFont systemFontOfSize:16*self.view.scale];
+    label.textColor = [UIColor colorWithHexString:@"#1EA11f"];
+    label.layer.borderWidth = 1;
+    label.textAlignment = NSTextAlignmentCenter;
+    label.layer.borderColor = [UIColor colorWithHexString:@"#1EA11F"].CGColor;
+    [cell.contentView addSubview:label];
+    label.sd_layout
+    .centerYEqualToView(cell.contentView)
+    .rightSpaceToView(cell.contentView,10)
+    .heightIs(30*self.view.scale)
+    .widthIs(80*self.view.scale);
+    UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] initWithActionBlock:^(id  _Nonnull sender) {
+        [self deFan:indexPath.row];
+    }];
+    [label addGestureRecognizer:tap];
+    label.userInteractionEnabled = YES;
     return cell;
+}
+#pragma mark  - TableviewDelegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    
+}
+#pragma mark - deFan
+- (void)deFan:(NSInteger)index
+{
+    ConcernModel* model = self.viewModel.model[index];
+    NSMutableArray<ConcernModel*>* array = [NSMutableArray arrayWithArray:self.viewModel.model];
+    [array removeObjectAtIndex:index];
+    self.viewModel.model = nil;
+    self.viewModel.model = array;
+    SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
+    if (model.player.name) {
+        [manager postdisLikePlayer:[@(model.player.id) stringValue] token:[self.viewModel getToken] success:^(id data) {
+            [self.tableView reloadData];
+        } failure:^(NSError *aError) {
+            
+        }];
+    }
+    else if (model.coach.name)
+    {
+        [manager postdislikeCoach:[@(model.coach.id) stringValue] token:[self.viewModel getToken] success:^(id data) {
+            [self.tableView reloadData];
+        } failure:^(NSError *aError) {
+            
+        }];
+    }
+    else if (model.tournament.name)
+    {
+        [manager postdisLikeTournament:[@(model.tournament.id) stringValue] token:[self.viewModel getToken] success:^(id data) {
+            [self.tableView reloadData];
+        } failure:^(NSError *aError) {
+            
+        }];
+    }
+    else
+    {
+        [manager postdisLikeTeam:[@(model.team.id) stringValue] token:[self.viewModel getToken] success:^(id data) {
+            [self.tableView reloadData];
+        } failure:^(NSError *aError) {
+            
+        }];
+    }
 }
 #pragma  mark -Getter
 -(UIBarButtonItem *)backItem
@@ -117,6 +178,8 @@
         _tableView = [[UITableView alloc ] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
+        _tableView.backgroundColor = [UIColor BackGroundColor];
+        _tableView.separatorColor = [UIColor BackGroundColor];
     }
     return _tableView;
 }

@@ -125,48 +125,10 @@
 {
     if(tableView.tag == NOTICETABLEVIEW)
     {
-        NoticeGameviewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"NoticeGameviewCell" forIndexPath:indexPath];
+        NoticeGameviewCell* cell = [[NoticeGameviewCell alloc] init];
         GameDetailModel* model1 = self.viewModel.noticeGameDatasource[indexPath.section];
         Games* model = model1.games[indexPath.row];
-        cell.view.titleLabel.text = model.tournament.name;
-        cell.view.roundLabel.text = model.round.name;
-        cell.view.status = [model getStatus1];
-        if (cell.view.status == 2) {
-            cell.view.homeScoreLabel.text = @"-";
-            cell.view.awaySocreLabel.text = @"-";
-        }
-        else
-        {
-            cell.view.homeScoreLabel.text = [NSString stringWithFormat: @"%ld", (long)model.homeScore];
-            cell.view.awaySocreLabel.text = [NSString stringWithFormat: @"%ld", (long)model.awayScore];
-        }
-        cell.view.homeTitleLabel.text = model.home.name;
-        cell.view.awayTitleLabel.text = model.away.name;
-        cell.view.homeLabel.text = model.stadium.name;
-        UIImage *image = [UIImage imageNamed:@"zhanwei.jpg"];
-        NSURL *homeurl;
-        if (model.home.logo.url) {
-            homeurl = [[NSURL alloc] initWithString:model.home.logo.url];
-            [cell.view.homeImageview sd_setImageWithURL:homeurl placeholderImage:image options:SDWebImageRefreshCached];
-        }
-        else
-        {
-            cell.view.homeImageview.image = image;
-        }
-        NSURL *awayurl;
-        if (model.away.logo) {
-            awayurl = [[NSURL alloc] initWithString:model.away.logo.url];
-            [cell.view.awayImgaeview sd_setImageWithURL:awayurl placeholderImage:image options:SDWebImageRefreshCached];
-        }
-        else
-        {
-            cell.view.awayImgaeview.image = image;
-        }
-        cell.view.location = 1;
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        if (model.latestNews.detail) {
-            cell.news = model.latestNews.detail;
-        }
+        cell.model = model;
         return cell;
 
     }
@@ -175,9 +137,9 @@
         GameListModel* model = self.viewModel.gameListDatasource[indexPath.row];
         GameListViewCell* cell = (GameListViewCell*)[tableView dequeueReusableCellWithIdentifier:@"GameListViewCell"];
         if (model.logo.url) {
-            NSURL *url = [[NSURL alloc] initWithString:model.logo.url];
+            NSString* encodedString = [model.logo.url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            NSURL *url = [[NSURL alloc] initWithString:encodedString];
             [cell.logoImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"zhanwei"]];
-            
         }
         else
         {
@@ -194,48 +156,10 @@
     }
     else
     {
-        HistoryviewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"HistoryviewCell" forIndexPath:indexPath];
+        NoticeGameviewCell* cell = [[NoticeGameviewCell alloc] init];
         GameDetailModel* model1 = self.viewModel.historyGameDatasource[indexPath.section];
         Games* model = model1.games[indexPath.row];
-        cell.view.titleLabel.text = model.tournament.name;
-        cell.view.roundLabel.text = model.round.name;
-        cell.view.status = [model getStatus1];
-        if (cell.view.status == 2) {
-            cell.view.homeScoreLabel.text = @"-";
-            cell.view.awaySocreLabel.text = @"-";
-        }
-        else
-        {
-            cell.view.homeScoreLabel.text = [NSString stringWithFormat: @"%ld", (long)model.homeScore];
-            cell.view.awaySocreLabel.text = [NSString stringWithFormat: @"%ld", (long)model.awayScore];
-        }
-        cell.view.homeTitleLabel.text = model.home.name;
-        cell.view.awayTitleLabel.text = model.away.name;
-        cell.view.homeLabel.text = model.stadium.name;
-        UIImage *image = [UIImage imageNamed:@"zhanwei.jpg"];
-        NSURL *homeurl;
-        if (model.home.logo.url) {
-            homeurl = [[NSURL alloc] initWithString:model.home.logo.url];
-            [cell.view.homeImageview sd_setImageWithURL:homeurl placeholderImage:image options:SDWebImageRefreshCached];
-        }
-        else
-        {
-            cell.view.homeImageview.image = image;
-        }
-        NSURL *awayurl;
-        if (model.away.logo) {
-            awayurl = [[NSURL alloc] initWithString:model.away.logo.url];
-            [cell.view.awayImgaeview sd_setImageWithURL:awayurl placeholderImage:image options:SDWebImageRefreshCached];
-        }
-        else
-        {
-            cell.view.awayImgaeview.image = image;
-        }
-        cell.view.location = 1;
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        if (model.latestNews.detail) {
-            cell.news = model.latestNews.detail;
-        }
+        cell.model = model;
         return cell;
         
     }
@@ -287,6 +211,7 @@
     label.textAlignment = NSTextAlignmentCenter;
     [label mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(view);
+        make.height.equalTo(view.mas_height);
     }];
     view.backgroundColor = [UIColor BackGroundColor];
     return view;
@@ -353,6 +278,7 @@
         backView.frame = CGRectMake(0, 0, self.view.width, 8);
         _noticegameTableview.tableHeaderView = backView;
         _noticegameTableview.backgroundColor = [UIColor BackGroundColor];
+        _noticegameTableview.separatorColor = [UIColor BackGroundColor];
     }
     return _noticegameTableview;
 }
@@ -390,7 +316,7 @@
         backView.frame = CGRectMake(0, 0, self.view.width, 8);
         _historygameTableview.tableHeaderView = backView;
         _historygameTableview.backgroundColor = [UIColor BackGroundColor];
-        _historygameTableview.separatorInset = UIEdgeInsetsMake(5, 0, 5, 0);
+        _historygameTableview.separatorColor = [UIColor BackGroundColor];
     }
     return _historygameTableview;
 }
@@ -427,6 +353,8 @@
         backView.backgroundColor = [UIColor BackGroundColor];
         backView.frame = CGRectMake(0, 0, self.view.width, 8);
         _gamelistTableview.tableHeaderView = backView;
+        _gamelistTableview.backgroundColor = [UIColor BackGroundColor];
+        _gamelistTableview.separatorColor = [UIColor BackGroundColor];
     }
     return _gamelistTableview;
 }
@@ -435,7 +363,7 @@
     if (!_pageView) {
         _pageView = [[LazyPageScrollView alloc] init];
         _pageView.delegate = self;
-        [_pageView initTab:YES Gap:self.view.width / 3 TabHeight:27 VerticalDistance:10 BkColor:[UIColor whiteColor]];
+        [_pageView initTab:YES Gap:self.view.width / 3 TabHeight:27*self.view.scale VerticalDistance:10 BkColor:[UIColor whiteColor]];
         UIView *view=[[UIView alloc] init];
         view.backgroundColor=[UIColor orangeColor];
         [_pageView addTab:@"比赛预告" View:self.noticegameTableview Info:nil];
@@ -476,12 +404,12 @@
 #pragma mark- pagescrollviewdeleagate
 -(void)LazyPageScrollViewPageChange:(LazyPageScrollView *)pageScrollView Index:(NSInteger)index PreIndex:(NSInteger)preIndex TitleEffectView:(UIView *)viewTitleEffect SelControl:(UIButton *)selBtn
 {
-    if (index == 1) {
+    if (index == 2) {
         if (self.viewModel.fisrtGotoGameListtable == YES) {
             [self.gamelistTableview.mj_header beginRefreshing];
         }
     }
-    else if (index == 2)
+    else if (index == 1)
     {
         if (self.viewModel.fisrtGotoHistoryTable == YES) {
             [self.historygameTableview.mj_header beginRefreshing];

@@ -41,7 +41,7 @@
 @property (nonatomic,strong) UITableView        * messageTableview;
 @property (nonatomic,strong) UITableView        * newsTableview;
 @property (nonatomic,strong) MBProgressHUD      * hud;
-@property (nonatomic,strong) UIBarButtonItem    * shareItem;
+//@property (nonatomic,strong) UIBarButtonItem    * shareItem;
 @property (nonatomic,strong) UIBarButtonItem    * favoriteItem;
 @property (nonatomic,strong) UIBarButtonItem    * blankItem;
 @property (nonatomic,strong) ShareView          * shareView;
@@ -91,7 +91,7 @@
     [self.view addSubview:self.logoImageView];
     [self.view addSubview:self.pageView];
     self.navigationItem.leftBarButtonItem = self.backItem;
-    self.navigationItem.rightBarButtonItems = @[self.shareItem,self.blankItem,self.favoriteItem];
+    self.navigationItem.rightBarButtonItems = @[self.favoriteItem];
     [self.view addSubview:self.maskView];
     [self.view addSubview:self.shareView];
     self.hud.labelText = @"加载中";
@@ -424,7 +424,7 @@
             _pageView = [[LazyPageScrollView alloc] init];
             _pageView.frame =self.view.frame;
             _pageView.delegate = self;
-            [_pageView initTab:YES Gap:self.view.width / 5 TabHeight:27 VerticalDistance:10 BkColor:[UIColor whiteColor]];
+            [_pageView initTab:YES Gap:self.view.width / 5 TabHeight:27*self.view.scale VerticalDistance:10 BkColor:[UIColor whiteColor]];
             [_pageView addTab:@"资料" View:self.infoTableView Info:nil];
             [_pageView addTab:@"新闻" View:self.newsTableview Info:nil];
             [_pageView addTab:@"留言" View:self.messageTableview Info:nil];
@@ -547,18 +547,18 @@
     }
     return _maskView;
 }
--(UIBarButtonItem *)shareItem
-{
-    if (!_shareItem) {
-        UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.frame = CGRectMake(0, 0, 20, 25);
-        
-        [button setImage:[UIImage imageNamed:@"upload_L"] forState:UIControlStateNormal];
-        _shareItem = [[UIBarButtonItem alloc] initWithCustomView:button];
-        button.rac_command = self.viewModel.shareCommand;
-    }
-    return _shareItem;
-}
+//-(UIBarButtonItem *)shareItem
+//{
+//    if (!_shareItem) {
+//        UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
+//        button.frame = CGRectMake(0, 0, 20, 25);
+//        
+//        [button setImage:[UIImage imageNamed:@"upload_L"] forState:UIControlStateNormal];
+//        _shareItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+//        button.rac_command = self.viewModel.shareCommand;
+//    }
+//    return _shareItem;
+//}
 - (UIBarButtonItem *)favoriteItem
 {
     if (!_favoriteItem) {

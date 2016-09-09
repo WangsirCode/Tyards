@@ -36,7 +36,7 @@
 @property (nonatomic,strong) UITableView        * scheduleTableview;
 @property (nonatomic,strong) TeamDetailInfoView * infoView;;
 @property (nonatomic,strong) MBProgressHUD      * hud;
-@property (nonatomic,strong) UIBarButtonItem    * shareItem;
+//@property (nonatomic,strong) UIBarButtonItem    * shareItem;
 @property (nonatomic,strong) UIBarButtonItem    * favoriteItem;
 @property (nonatomic,strong) UIBarButtonItem    * blankItem;
 @property (nonatomic,strong) ShareView          * shareView;
@@ -59,8 +59,6 @@
     [super viewDidLoad];
     [self setupView];
     [self bindModel];
-    
-    // Do any additional setup after loading the view.
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
@@ -80,7 +78,7 @@
 {
     [self.view addSubview:self.logoImageView];
     [self.view addSubview:self.pageView];
-    self.navigationItem.rightBarButtonItems = @[self.shareItem,self.blankItem,self.favoriteItem];
+    self.navigationItem.rightBarButtonItems = @[self.favoriteItem];
     [self.view addSubview:self.maskView];
     [self.view addSubview:self.shareView];
     [self.scrollView addSubview:self.infoView];
@@ -361,48 +359,10 @@
     }
     else if (tableView.tag == SCHEDULETABLEVIETAG)
     {
-        NoticeGameviewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"NoticeGameviewCell" forIndexPath:indexPath];
+        NoticeGameviewCell* cell = [[NoticeGameviewCell alloc] init];
         GameDetailModel* model1 = self.viewModel.games[indexPath.section];
         Games* model = model1.games[indexPath.row];
-        cell.view.titleLabel.text = model.tournament.name;
-        cell.view.roundLabel.text = model.round.name;
-        cell.view.status = [model getStatus1];
-        if (cell.view.status == 2) {
-            cell.view.homeScoreLabel.text = @"-";
-            cell.view.awaySocreLabel.text = @"-";
-        }
-        else
-        {
-            cell.view.homeScoreLabel.text = [NSString stringWithFormat: @"%ld", (long)model.homeScore];
-            cell.view.awaySocreLabel.text = [NSString stringWithFormat: @"%ld", (long)model.awayScore];
-        }
-        cell.view.homeTitleLabel.text = model.home.name;
-        cell.view.awayTitleLabel.text = model.away.name;
-        cell.view.homeLabel.text = model.stadium.name;
-        UIImage *image = [UIImage imageNamed:@"zhanwei.jpg"];
-        NSURL *homeurl;
-        if (model.home.logo.url) {
-            homeurl = [[NSURL alloc] initWithString:model.home.logo.url];
-            [cell.view.homeImageview sd_setImageWithURL:homeurl placeholderImage:image options:SDWebImageRefreshCached];
-        }
-        else
-        {
-            cell.view.homeImageview.image = image;
-        }
-        NSURL *awayurl;
-        if (model.away.logo) {
-            awayurl = [[NSURL alloc] initWithString:model.away.logo.url];
-            [cell.view.awayImgaeview sd_setImageWithURL:awayurl placeholderImage:image options:SDWebImageRefreshCached];
-        }
-        else
-        {
-            cell.view.awayImgaeview.image = image;
-        }
-        cell.view.location = 1;
-        if (model.latestNews.detail) {
-            cell.news = model.latestNews.detail;
-        }
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.model = model;
         return cell;
     }
     return nil;
@@ -566,7 +526,7 @@
         _pageView = [[LazyPageScrollView alloc] init];
         _pageView.frame =self.view.frame;
         _pageView.delegate = self;
-        [_pageView initTab:YES Gap:self.view.width / 5 TabHeight:27 VerticalDistance:10 BkColor:[UIColor whiteColor]];
+        [_pageView initTab:YES Gap:self.view.width / 5 TabHeight:27*self.view.scale VerticalDistance:10 BkColor:[UIColor whiteColor]];
         [_pageView addTab:@"资料" View:self.scrollView Info:nil];
         [_pageView addTab:@"名单" View:self.listTableview Info:nil];
         [_pageView addTab:@"赛程" View:self.scheduleTableview Info:nil];
@@ -705,18 +665,18 @@
     }
     return _maskView;
 }
--(UIBarButtonItem *)shareItem
-{
-    if (!_shareItem) {
-        UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.frame = CGRectMake(0, 0, 20, 25);
-        
-        [button setImage:[UIImage imageNamed:@"upload_L"] forState:UIControlStateNormal];
-        _shareItem = [[UIBarButtonItem alloc] initWithCustomView:button];
-        button.rac_command = self.viewModel.shareCommand;
-    }
-    return _shareItem;
-}
+//-(UIBarButtonItem *)shareItem
+//{
+//    if (!_shareItem) {
+//        UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
+//        button.frame = CGRectMake(0, 0, 20, 25);
+//        
+//        [button setImage:[UIImage imageNamed:@"upload_L"] forState:UIControlStateNormal];
+//        _shareItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+//        button.rac_command = self.viewModel.shareCommand;
+//    }
+//    return _shareItem;
+//}
 - (UIBarButtonItem *)favoriteItem
 {
     if (!_favoriteItem) {

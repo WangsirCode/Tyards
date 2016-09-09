@@ -23,6 +23,7 @@
 /**
  *  功能:取档(获取系统数据，直接取档)
  */
+
 + (id<NSCoding>)unarchiveSystemDataWithFileName:(NSString *)aFileName;
 /*!
  *  @author 汪宇豪, 16-07-28 14:07:17
@@ -32,7 +33,7 @@
  *  @param filename 文件名称
  */
 + (void)removefile:(NSString*)filename;
-
++ (void)removeUserFile:(NSString *)filename;
 + (unsigned long long )fileSize:(NSString*)fileName;
 + (void)archiveUserData:(id<NSCoding>)aData withFileName:(NSString *)aFileName;
 + (id<NSCoding>)unarchiveUserDataWithFileName:(NSString *)aFileName;

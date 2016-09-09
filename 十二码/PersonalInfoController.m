@@ -11,16 +11,18 @@
 #import "MDABizManager.h"
 #import "SEMSearchViewController.h"
 #import "ColleageSearchController.h"
-@interface PersonalInfoController ()<UITableViewDelegate,UITableViewDataSource,UIPickerViewDelegate,UIPickerViewDataSource,SEMSearchViewControllerDelegate,SearchCollegeDalegate>
-@property (strong,nonatomic)PersonalInfoViewModel* viewModel;
-@property (nonatomic,strong)UIDatePicker* datePickerView;
-@property (nonatomic,strong)UIBarButtonItem* backItem;
-@property (nonatomic,strong)UIImageView* headImageView;
-@property (nonatomic,strong)UITableView* tableview;
-@property (nonatomic,strong)UIImageView* logoImageView;
-@property (nonatomic,strong)UIPickerView* genderPickerView;
-@property (nonatomic,strong)UIBarButtonItem* submitItem;
-@property (nonatomic,strong)UIBarButtonItem* cancelItem;
+#import "PickerView.h"
+#import "GenderPickerView.h"
+@interface PersonalInfoController ()<UITableViewDelegate,UITableViewDataSource,UIPickerViewDelegate,UIPickerViewDataSource,SEMSearchViewControllerDelegate,SearchCollegeDalegate,PickerViewDelegate,GenderPickerViewDelegate>
+@property (strong,nonatomic) PersonalInfoViewModel * viewModel;
+@property (nonatomic,strong) UIBarButtonItem       * backItem;
+@property (nonatomic,strong) UIImageView           * headImageView;
+@property (nonatomic,strong) UITableView           * tableview;
+@property (nonatomic,strong) UIBarButtonItem       * submitItem;
+@property (nonatomic,strong) UIImageView           * logoImageView;
+@property (nonatomic,strong) GenderPickerView      * genderPickerView;
+@property (nonatomic,strong) PickerView            *pickerView;
+@property (nonatomic,strong) UIView                * maskView;
 @end
 
 @implementation PersonalInfoController
@@ -60,8 +62,7 @@
     [self.view addSubview:self.headImageView];
     [self.view addSubview:self.logoImageView];
     [self.view addSubview:self.tableview];
-    [self.view addSubview:self.genderPickerView];
-    [self.view addSubview:self.datePickerView];
+
 }
 
 - (void)makeConstraits
@@ -84,16 +85,7 @@
     .rightEqualToView(self.view)
     .bottomEqualToView(self.view);
     
-    self.genderPickerView.sd_layout
-    .leftEqualToView(self.view)
-    .rightEqualToView(self.view)
-    .heightIs(100 *self.view.scale)
-    .bottomEqualToView(self.view);
-    self.datePickerView.sd_layout
-    .leftEqualToView(self.view)
-    .rightEqualToView(self.view)
-    .heightIs(150 *self.view.scale)
-    .bottomEqualToView(self.view);
+
     self.logoImageView.sd_cornerRadiusFromWidthRatio = @(0.5);
 }
 - (void)bindModel
@@ -109,6 +101,7 @@
     }
     [[self.viewModel.postCommand executionSignals] subscribeNext:^(id x) {
         [XHToast showCenterWithText:@"提交成功"];
+        [self.navigationController popViewControllerAnimated:YES];
     }];
     [RACObserve(self.viewModel, shouldReloadData) subscribeNext:^(id x) {
         if (self.viewModel.shouldReloadData == YES) {
@@ -160,15 +153,13 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row == 2) {
-        self.datePickerView.hidden = YES;
-        self.genderPickerView.hidden = NO;
-        self.navigationItem.leftBarButtonItem = self.cancelItem;
+        [self.view addSubview:self.maskView];
+        [self.view addSubview:self.genderPickerView];
     }
     else if (indexPath.row == 3)
     {
-        self.genderPickerView.hidden = YES;
-        self.datePickerView.hidden = NO;
-        self.navigationItem.leftBarButtonItem = self.cancelItem;
+        [self.view addSubview:self.maskView];
+        [self.view addSubview:self.pickerView];
     }
     else if (indexPath.row == 0)
     {
@@ -222,8 +213,34 @@
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     self.viewModel.model.gender = self.viewModel.gender[self.viewModel.genderArrat[row]];
+//    [self.viewModel getDetail];
+//    [self.tableview reloadData];
+}
+#pragma mark - datePickerViewDeleagte
+- (void)didCilckCancelButton
+{
+    [self.pickerView removeFromSuperview];
+    [self.maskView removeFromSuperview];
+}
+- (void)didCilckDoneButton
+{
+    self.viewModel.model.birthDay = [self.pickerView.datePickerView.date timeIntervalSince1970]*1000;
     [self.viewModel getDetail];
     [self.tableview reloadData];
+    [self.pickerView removeFromSuperview];
+    [self.maskView removeFromSuperview];
+}
+- (void)GenderPickerViewDidClickDoneButton
+{
+    [self.viewModel getDetail];
+    [self.tableview reloadData];
+    [self.genderPickerView removeFromSuperview];
+    [self.maskView removeFromSuperview];
+}
+- (void)GenderPickerViewDidClickCancelButton
+{
+    [self.genderPickerView removeFromSuperview];
+    [self.maskView removeFromSuperview];
 }
 #pragma  mark -Getter
 -(UIBarButtonItem *)backItem
@@ -262,43 +279,24 @@
         _tableview = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableview.delegate = self;
         _tableview.dataSource = self;
-//        UITapGestureRecognizer*  tap = [[UITapGestureRecognizer alloc] initWithActionBlock:^(id  _Nonnull sender) {
-//            self.datePickerView.hidden = YES;
-//            self.genderPickerView.hidden = YES;
-//        }];
-//        [_tableview addGestureRecognizer:tap];
+        _tableview.backgroundColor = [UIColor BackGroundColor];
+        _tableview.separatorColor = [UIColor BackGroundColor];
     }
     return _tableview;
 }
--(UIPickerView *)genderPickerView
+-(GenderPickerView *)genderPickerView
 {
     if (!_genderPickerView) {
-        _genderPickerView = [[UIPickerView alloc] init];
-        _genderPickerView.dataSource = self;
-        _genderPickerView.delegate = self;
-        _genderPickerView.hidden = YES;
-        _genderPickerView.backgroundColor = [UIColor lightGrayColor];
+        _genderPickerView = [[GenderPickerView alloc] init];
+        _genderPickerView.pickerView.dataSource = self;
+        _genderPickerView.pickerView.delegate = self;
+        _genderPickerView.genderDelegate = self;
+        _genderPickerView.backgroundColor = [UIColor whiteColor];
+        _genderPickerView.frame = CGRectMake(0, self.view.height-200, self.view.width, 200);
     }
     return _genderPickerView;
 }
--(UIDatePicker *)datePickerView
-{
-    if (!_datePickerView) {
-        _datePickerView = [[UIDatePicker alloc] init];
-        _datePickerView.backgroundColor = [UIColor lightGrayColor];
-        _datePickerView.datePickerMode = UIDatePickerModeDate;
-        _datePickerView.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh"];
-        _datePickerView.hidden = YES;
-        [[_datePickerView rac_signalForControlEvents:UIControlEventValueChanged] subscribeNext:^(id x) {
-            NSTimeInterval time = [self.datePickerView.date timeIntervalSince1970];
-            self.viewModel.model.birthDay = time * 1000;
-            [self.viewModel getDetail];
-            [self.tableview reloadData];
-        }];
-        
-    }
-    return _datePickerView;
-}
+
 - (UIBarButtonItem *)submitItem
 {
     if (!_submitItem) {
@@ -307,17 +305,29 @@
     }
     return _submitItem;
 }
--(UIBarButtonItem *)cancelItem
+- (PickerView *)pickerView
 {
-    if (!_cancelItem) {
-        _cancelItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(cancel)];
-        
+    if (!_pickerView) {
+        _pickerView = [[PickerView alloc] init];
+        _pickerView.frame = CGRectMake(0, self.view.height-200, self.view.width, 200);
+        _pickerView.userInteractionEnabled = YES;
+        _pickerView.delegate = self;
     }
-    return _cancelItem;
+    return _pickerView;
+}
+- (UIView *)maskView
+{
+    if (!_maskView) {
+        _maskView = [UIView new];
+        _maskView.backgroundColor = [UIColor blackColor];
+        _maskView.alpha = 0.3;
+        _maskView.frame = CGRectMake(0, 0, self.view.width, self.view.height);
+    }
+    return _maskView;
 }
 - (void)cancel
 {
-    self.datePickerView.hidden = YES;
+    self.pickerView.hidden = YES;
     self.genderPickerView.hidden = YES;
     self.navigationItem.leftBarButtonItem = self.backItem;
 }

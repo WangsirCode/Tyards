@@ -22,7 +22,6 @@
     [super viewDidLoad];
     [self setUpView];
     [self bindModel];
-    // Do any additional setup after loading the view.
 }
 #pragma mark- setupView
 
@@ -88,7 +87,6 @@
         [[button rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
             [self.navigationController popViewControllerAnimated:YES];
         }];
-        
     }
     return _backItem;
 }
@@ -99,6 +97,8 @@
         _tableView.delegate = self;
         _tableView.dataSource = self;
         [_tableView registerClass:[MyMessageCell class] forCellReuseIdentifier:@"MyMessageCell"];
+        _tableView.separatorColor = [UIColor BackGroundColor];
+        _tableView.backgroundColor = [UIColor BackGroundColor];
     }
     return _tableView;
 }

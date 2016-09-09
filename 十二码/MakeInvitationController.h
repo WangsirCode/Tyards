@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "MDABizManager.h"
+@protocol MakeInvitationControllerDelegate
+- (void)didMakeInvitation:(InvitationModel*)model;
+@end
 @interface MakeInvitationController : UIViewController
 - (instancetype)initWithDictionary:(NSDictionary*)dictionary;
+@property (nonatomic,strong) id<MakeInvitationControllerDelegate> delegate;
 @end

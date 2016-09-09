@@ -8,6 +8,7 @@
 
 #import "ChangeNickNameController.h"
 #import "MDABizManager.h"
+#import "UserModel.h"
 #import "ChangeNickNameViewModel.h"
 @interface ChangeNickNameController ()<UITextFieldDelegate>
 @property (nonatomic,strong) UIBarButtonItem      *backItem;
@@ -69,6 +70,9 @@
 {
     SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
     [manager changeNickName:[self.viewModel getToken] name:self.viewModel.name success:^(id data) {
+        UserModel* model = (UserModel*)[DataArchive unarchiveUserDataWithFileName:@"userinfo"];
+        model.nickname = self.textFiled.text;
+        [DataArchive archiveUserData:model withFileName:@"userinfo"];
         [XHToast showCenterWithText:@"修改成功"];
     } failure:^(NSError *aError) {
         

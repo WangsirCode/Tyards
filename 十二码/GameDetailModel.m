@@ -52,6 +52,14 @@ MJCodingImplementation
         return 3;
     }
 }
+- (NSString *)getDate
+{
+    NSDate *date = [[NSDate alloc]initWithTimeIntervalSince1970:self.playDate/1000];
+    NSDateFormatter* formater = [[NSDateFormatter alloc] init];
+    formater.dateFormat = @"HH : mm";
+    NSString* ta = [formater stringFromDate:date];
+    return ta;
+}
 @end
 
 

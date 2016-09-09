@@ -17,8 +17,7 @@
         self.genderArrat = @[@"男",@"女"];
         self.gender = @{@"男":@"MALE",@"女":@"FEMALE"};
         [self getDetail];
-        NSUserDefaults* data = [NSUserDefaults standardUserDefaults];
-        NSString* token = (NSString*)[data objectForKey:@"token"];
+        NSString* token = (NSString*)[self getToken];
         [self fetchUserInfo:token];
     }
     return self;
@@ -31,8 +30,7 @@
     else
     {
         SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
-        //测试时先用这个token
-        [manager fetchUserInfo:@"d16c7f4be4a02398c4af50bdc8c1db06" success:^(id data) {
+        [manager fetchUserInfo:token success:^(id data) {
             self.model = data;
             self.shouldReloadData = YES;
             [DataArchive archiveUserData:self.model withFileName:@"UserInfo"];
@@ -86,8 +84,7 @@
 }
 - (RACCommand *)postCommand
 {
-//    NSString* token = [data objectForKey:@"token"];
-    NSString* token = @"d16c7f4be4a02398c4af50bdc8c1db06";
+    NSString* token = [self getToken];
     if (!_postCommand) {
         _postCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
             return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {

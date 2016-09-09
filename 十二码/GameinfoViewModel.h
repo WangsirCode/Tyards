@@ -13,7 +13,7 @@
 @property (nonatomic, strong) NSArray<ScorerListModel *> *scorerModel;
 @property (nonatomic, strong) NSArray<AwardListModel *> *awardModel;
 @property (nonatomic, strong) GameInfoModel *model;
-@property (nonatomic, strong) ScheduleModel *scheduleModel;
+@property (nonatomic, strong) NSArray<TournamentGamesModel *> *scheduleModel;
 @property (nonatomic, strong) NSArray<MatchTeamModel *> *teamModel;
 @property (nonatomic,assign ) NSInteger     status;
 @property (nonatomic,strong ) RACCommand    * shareCommand;

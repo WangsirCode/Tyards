@@ -19,8 +19,8 @@
         [self fetchData:[(NSNumber*)dictionary[@"id"] stringValue]];
         //先用这个测试
 //        [self fetchData:@"9"];
-        self.infoTableviewRowNumber = @[@1,@5];
-        self.infotableviewCellname = @[@"主办方",@"赛制",@"时间",@"地区",@"球队数量"];
+        self.infoTableviewRowNumber = @[@1,@6];
+        self.infotableviewCellname = @[@"主办方",@"赛制",@"时间",@"地区",@"球队数量",@"赞助商"];
         
     }
     return self;
@@ -61,7 +61,13 @@
             [array addObject:@""];
         }
         [array addObject:[@(self.model.teamSize) stringValue]];
-    
+        if (self.model.sponsor) {
+            [array addObject:self.model.sponsor];
+        }
+        else
+        {
+            [array addObject:@""];
+        }
         
         self.infoTableViewCellInfo = array;
         

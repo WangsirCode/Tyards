@@ -147,6 +147,8 @@
 		473BCCD51D5961F1005DBD2F /* PhotoCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 473BCCD41D5961F1005DBD2F /* PhotoCollectionCell.m */; };
 		473BCCD81D596668005DBD2F /* TeamAlbumsResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 473BCCD71D596668005DBD2F /* TeamAlbumsResponseModel.m */; };
 		473BCCDB1D59682A005DBD2F /* AlbumDetailResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 473BCCDA1D59682A005DBD2F /* AlbumDetailResponseModel.m */; };
+		473C99161D8261DF0093F662 /* HistoryInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 473C99151D8261DF0093F662 /* HistoryInfoView.m */; };
+		473C991F1D8289350093F662 /* PickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 473C991E1D8289350093F662 /* PickerView.m */; };
 		47405DD01D521791000A980A /* GameListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47405DCF1D521791000A980A /* GameListView.m */; };
 		47405DD31D521ABB000A980A /* CostomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47405DD21D521ABB000A980A /* CostomView.m */; };
 		4746A63B1D489365009E0645 /* SchoolInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4746A63A1D489365009E0645 /* SchoolInfoView.m */; };
@@ -205,6 +207,8 @@
 		4788AA9D1D71EA6D0057B954 /* PlayHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 4788AA9C1D71EA6D0057B954 /* PlayHistory.m */; };
 		478B5E531D420728007AABC4 /* SEMNetworkingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 478B5E521D420728007AABC4 /* SEMNetworkingManager.m */; };
 		478B5E561D420AC5007AABC4 /* hotTopicsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 478B5E551D420AC5007AABC4 /* hotTopicsModel.m */; };
+		47A086431D82AD9B00ECB636 /* MyLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A086411D82AD9B00ECB636 /* MyLabel.m */; };
+		47A086461D82DB1100ECB636 /* TournamentGamesResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A086451D82DB1100ECB636 /* TournamentGamesResponseModel.m */; };
 		47A364B11D597C78002FC59E /* AlbumDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A364B01D597C78002FC59E /* AlbumDetailController.m */; };
 		47A364B41D597C8B002FC59E /* AlbumDetailViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A364B31D597C8B002FC59E /* AlbumDetailViewModel.m */; };
 		47A364B71D5988AF002FC59E /* PhotoDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A364B61D5988AF002FC59E /* PhotoDetailCell.m */; };
@@ -231,6 +235,7 @@
 		47AF5D2E1D5646A700728933 /* MyConcernViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47AF5D2D1D5646A700728933 /* MyConcernViewModel.m */; };
 		47AF5D311D564AA200728933 /* MeReplyResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47AF5D301D564AA200728933 /* MeReplyResponseModel.m */; };
 		47AF5D341D564DDA00728933 /* MyConcernModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47AF5D331D564DDA00728933 /* MyConcernModel.m */; };
+		47B6621F1D8293B20099BDF3 /* GenderPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47B6621E1D8293B20099BDF3 /* GenderPickerView.m */; };
 		47BB49941D45E0D40052E4D0 /* News.m in Sources */ = {isa = PBXBuildFile; fileRef = 47BB49931D45E0D40052E4D0 /* News.m */; };
 		47BB49971D45E3700052E4D0 /* TopicModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47BB49961D45E3700052E4D0 /* TopicModel.m */; };
 		47BB499D1D45F4450052E4D0 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 47BB499B1D45F4450052E4D0 /* libWeChatSDK.a */; };
@@ -515,6 +520,10 @@
 		473BCCD71D596668005DBD2F /* TeamAlbumsResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamAlbumsResponseModel.m; sourceTree = "<group>"; };
 		473BCCD91D59682A005DBD2F /* AlbumDetailResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumDetailResponseModel.h; sourceTree = "<group>"; };
 		473BCCDA1D59682A005DBD2F /* AlbumDetailResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumDetailResponseModel.m; sourceTree = "<group>"; };
+		473C99141D8261DF0093F662 /* HistoryInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryInfoView.h; sourceTree = "<group>"; };
+		473C99151D8261DF0093F662 /* HistoryInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryInfoView.m; sourceTree = "<group>"; };
+		473C991D1D8289350093F662 /* PickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickerView.h; sourceTree = "<group>"; };
+		473C991E1D8289350093F662 /* PickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickerView.m; sourceTree = "<group>"; };
 		47405DCE1D521791000A980A /* GameListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameListView.h; sourceTree = "<group>"; };
 		47405DCF1D521791000A980A /* GameListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameListView.m; sourceTree = "<group>"; };
 		47405DD11D521ABB000A980A /* CostomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CostomView.h; sourceTree = "<group>"; };
@@ -619,6 +628,10 @@
 		478B5E521D420728007AABC4 /* SEMNetworkingManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SEMNetworkingManager.m; sourceTree = "<group>"; };
 		478B5E541D420AC5007AABC4 /* hotTopicsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hotTopicsModel.h; sourceTree = "<group>"; };
 		478B5E551D420AC5007AABC4 /* hotTopicsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = hotTopicsModel.m; sourceTree = "<group>"; };
+		47A086411D82AD9B00ECB636 /* MyLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyLabel.m; sourceTree = "<group>"; };
+		47A086421D82AD9B00ECB636 /* MyLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLabel.h; sourceTree = "<group>"; };
+		47A086441D82DB1100ECB636 /* TournamentGamesResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TournamentGamesResponseModel.h; sourceTree = "<group>"; };
+		47A086451D82DB1100ECB636 /* TournamentGamesResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TournamentGamesResponseModel.m; sourceTree = "<group>"; };
 		47A364AF1D597C78002FC59E /* AlbumDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumDetailController.h; sourceTree = "<group>"; };
 		47A364B01D597C78002FC59E /* AlbumDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumDetailController.m; sourceTree = "<group>"; };
 		47A364B21D597C8B002FC59E /* AlbumDetailViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumDetailViewModel.h; sourceTree = "<group>"; };
@@ -670,6 +683,8 @@
 		47AF5D301D564AA200728933 /* MeReplyResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeReplyResponseModel.m; sourceTree = "<group>"; };
 		47AF5D321D564DDA00728933 /* MyConcernModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyConcernModel.h; sourceTree = "<group>"; };
 		47AF5D331D564DDA00728933 /* MyConcernModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyConcernModel.m; sourceTree = "<group>"; };
+		47B6621D1D8293B20099BDF3 /* GenderPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenderPickerView.h; sourceTree = "<group>"; };
+		47B6621E1D8293B20099BDF3 /* GenderPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenderPickerView.m; sourceTree = "<group>"; };
 		47BB49921D45E0D40052E4D0 /* News.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = News.h; sourceTree = "<group>"; };
 		47BB49931D45E0D40052E4D0 /* News.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = News.m; sourceTree = "<group>"; };
 		47BB49951D45E3700052E4D0 /* TopicModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopicModel.h; sourceTree = "<group>"; };
@@ -820,6 +835,8 @@
 				4788AA9C1D71EA6D0057B954 /* PlayHistory.m */,
 				47184FAF1D72BB38008A4591 /* MatchEventResponseModel.h */,
 				47184FB01D72BB38008A4591 /* MatchEventResponseModel.m */,
+				47A086441D82DB1100ECB636 /* TournamentGamesResponseModel.h */,
+				47A086451D82DB1100ECB636 /* TournamentGamesResponseModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -860,6 +877,8 @@
 				470F56D31D71D59700110FCE /* DataView.m */,
 				470F56D51D71DF9400110FCE /* HistoryView.h */,
 				470F56D61D71DF9400110FCE /* HistoryView.m */,
+				473C99141D8261DF0093F662 /* HistoryInfoView.h */,
+				473C99151D8261DF0093F662 /* HistoryInfoView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1093,6 +1112,8 @@
 		4734CD961D41BE3E006536DF /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				47A086411D82AD9B00ECB636 /* MyLabel.m */,
+				47A086421D82AD9B00ECB636 /* MyLabel.h */,
 				4734CD971D41BE3E006536DF /* DataArchive.h */,
 				4734CD981D41BE3E006536DF /* DataArchive.m */,
 				47405DD11D521ABB000A980A /* CostomView.h */,
@@ -1374,6 +1395,10 @@
 				47A626311D748CF700ABE897 /* InvitationView.m */,
 				47C053CE1D75927400AEBF86 /* InvitationViewCell.h */,
 				47C053CF1D75927400AEBF86 /* InvitationViewCell.m */,
+				473C991D1D8289350093F662 /* PickerView.h */,
+				473C991E1D8289350093F662 /* PickerView.m */,
+				47B6621D1D8293B20099BDF3 /* GenderPickerView.h */,
+				47B6621E1D8293B20099BDF3 /* GenderPickerView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1879,6 +1904,7 @@
 				4739B5E41D488E3E007842CC /* NoticeGameviewCell.m in Sources */,
 				47E8BCFC1D5C18A6007621F8 /* GameNewsDetailResponseModel.m in Sources */,
 				4725D2BC1D5B2E6E00A13AEB /* GameInfoDetailViewController.m in Sources */,
+				47A086431D82AD9B00ECB636 /* MyLabel.m in Sources */,
 				47405DD01D521791000A980A /* GameListView.m in Sources */,
 				47C053E51D75A14C00AEBF86 /* MyClosedInvitationResponseModel.m in Sources */,
 				470C5E751D44BFC800DDF90B /* BottomView.m in Sources */,
@@ -1888,6 +1914,7 @@
 				47ADE43E1D73CFAD006C130B /* CoachDetailViewModel.m in Sources */,
 				472A923A1D4705A000F8620F /* SEMLoginViewController.m in Sources */,
 				4788AA9D1D71EA6D0057B954 /* PlayHistory.m in Sources */,
+				47A086461D82DB1100ECB636 /* TournamentGamesResponseModel.m in Sources */,
 				4734CDBF1D41C585006536DF /* SEMNewsVIewModel.m in Sources */,
 				4772FE6A1D565C780008ED37 /* MyMessageCell.m in Sources */,
 				4735FA0F1D560EBE00FDF2ED /* MeUserInfoResponseModel.m in Sources */,
@@ -1901,6 +1928,7 @@
 				47CAC1DD1D7667F0001D3708 /* PlaceViewModel.m in Sources */,
 				4746A6701D49B3D8009E0645 /* MeinfoViewModel.m in Sources */,
 				4734CDA81D41BE7D006536DF /* MDABizManager.m in Sources */,
+				473C991F1D8289350093F662 /* PickerView.m in Sources */,
 				47AF5D2E1D5646A700728933 /* MyConcernViewModel.m in Sources */,
 				472930F41D430168008587A6 /* ReCommendNews.m in Sources */,
 				472930F91D430AD1008587A6 /* HomeCell.m in Sources */,
@@ -1927,6 +1955,7 @@
 				4725D2D11D5B677A00A13AEB /* ScheduleResponseModel.m in Sources */,
 				4734CD3B1D41B512006536DF /* main.m in Sources */,
 				4734CDB01D41C46A006536DF /* SEMMeViewController.m in Sources */,
+				473C99161D8261DF0093F662 /* HistoryInfoView.m in Sources */,
 				477676691D58544D00E10594 /* FeedBackViewModel.m in Sources */,
 				4739B5E71D488E6E007842CC /* HistoryviewCell.m in Sources */,
 				4725D2CB1D5B637B00A13AEB /* RaceInfoDetailController.m in Sources */,
@@ -1991,6 +2020,7 @@
 				4734CDDD1D41C95D006536DF /* UIImage+IconFont.m in Sources */,
 				476252171D519027003788C0 /* ShareView.m in Sources */,
 				47A626321D748CF700ABE897 /* InvitationView.m in Sources */,
+				47B6621F1D8293B20099BDF3 /* GenderPickerView.m in Sources */,
 				47A626291D74878400ABE897 /* InvitationResponseModel.m in Sources */,
 				47BB49B61D460AF00052E4D0 /* NewsViewCell.m in Sources */,
 				477676631D58527100E10594 /* XHToast.m in Sources */,

@@ -11,6 +11,7 @@
 #import "TypeSelectController.h"
 #import "MakeInvitationViewModel.h"
 #import "PlaceSelectController.h"
+
 @interface MakeInvitationController () <UITableViewDelegate,UITableViewDataSource,UITextViewDelegate,UITextFieldDelegate,TypeSelectControllerDelegate,PlaceSelectControllerDelegate>
 @property (nonatomic,strong) UIBarButtonItem      *backItem;
 @property (nonatomic,strong) MBProgressHUD        *hud;
@@ -136,18 +137,30 @@
     .widthIs(self.view.width)
     .heightIs(210*self.view.scale);
 }
+- (void)dismiss
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 - (void)bindModel
 {
     self.title = @"编辑战帖";
+    [RACObserve(self.viewModel, valid) subscribeNext:^(id x) {
+        if (self.viewModel.valid == NO) {
+            [XHToast showCenterWithText:@"请填写标题"];
+        }
+    }];
     [RACObserve(self.viewModel, shouldReloadData) subscribeNext:^(id x) {
         if (self.viewModel.shouldReloadData == YES) {
             [self.hud hide:YES];
         }
     }];
     [[self.viewModel.postCommand executionSignals] subscribeNext:^(id x) {
-        [XHToast showCenterWithText:@"发布成功"];
+
+        [self.navigationController popViewControllerAnimated:YES];
+        [self.delegate didMakeInvitation:self.viewModel.model];
+
     }];
-    [RACObserve(self.timeLabel, text) subscribeNext:^(id x) {
+    [RACObserve(self.titleFiled, text) subscribeNext:^(id x) {
         self.viewModel.model.title = self.titleFiled.text;
     }];
     [RACObserve(self.typeLabel, text) subscribeNext:^(id x) {
@@ -178,7 +191,9 @@
     RAC(self.viewModel.model.stadium,name) = RACObserve(self.placeLabel, text);
     RAC(self.viewModel.model,linkman) = RACObserve(self.cmanFiled, text);
     RAC(self.viewModel.model,contact) = RACObserve(self.cteleFiled, text);
-    RAC(self.viewModel.model,desc) = RACObserve(self.messageView, text);
+//    [RACObserve(self.messageView, text) subscribeNext:^(id x) {
+//        self.viewModel.model.desc = self.messageView.text;
+//    }];
 }
 #pragma mark - tableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -317,6 +332,9 @@
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     if (indexPath.row == 1)
     {
+        [self.titleFiled resignFirstResponder];
+        [self.cteleFiled resignFirstResponder];
+        [self.cmanFiled resignFirstResponder];
         self.datePicker.hidden = NO;
         self.postButton.hidden = YES;
         self.navigationItem.leftBarButtonItem = self.doneItem;
@@ -324,6 +342,9 @@
     }
     else if (indexPath.row == 2)
     {
+        [self.titleFiled resignFirstResponder];
+        [self.cteleFiled resignFirstResponder];
+        [self.cmanFiled resignFirstResponder];
         self.timePicker.hidden = NO;
         self.postButton.hidden = YES;
         self.navigationItem.leftBarButtonItem = self.doneItem;
@@ -379,10 +400,31 @@
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     
     if([text isEqualToString:@"\n"]) {
+        self.viewModel.model.desc = self.messageView.text;
         [textView resignFirstResponder];
         return NO;
     }
     return YES;
+}
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    if (textField.tag == 101) {
+        self.postTableView.sd_resetLayout
+        .topSpaceToView(self.view,-30*self.view.scale)
+        .leftEqualToView(self.view)
+        .rightEqualToView(self.view)
+        .heightIs(self.view.height);
+    }
+}
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    if (textField.tag == 101) {
+        self.postTableView.sd_resetLayout
+        .topEqualToView(self.view)
+        .leftEqualToView(self.view)
+        .rightEqualToView(self.view)
+        .heightIs(self.view.height);
+    }
 }
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
@@ -476,6 +518,7 @@
     if (!_cteleFiled) {
         _cteleFiled = [UITextField new];
         _cteleFiled.delegate = self;
+        _cteleFiled.tag = 101;
     }
     return _cteleFiled;
 }
@@ -567,8 +610,24 @@
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = @"yyyy年MM月dd日";
     self.dateLabel.text = [formatter stringFromDate:self.datePicker.date];
-    self.viewModel.model.playDate = [self.datePicker.date timeIntervalSince1970] * 1000;
+
     formatter.dateFormat = @"HH: mm";
     self.timeLabel.text = [formatter stringFromDate:self.timePicker.date];
+    // 获取代表公历的Calendar对象
+    NSCalendar *gregorian = [[NSCalendar alloc]
+                             initWithCalendarIdentifier:NSGregorianCalendar];
+    // 获取当前日期
+    unsigned unitFlags = NSYearCalendarUnit |
+    NSMonthCalendarUnit |  NSDayCalendarUnit;
+    unsigned unitFlags2 = NSHourCalendarUnit |  NSMinuteCalendarUnit;
+    NSDateComponents* comp = [gregorian components: unitFlags
+                                          fromDate:self.datePicker.date];
+    NSDateComponents* comp2 = [gregorian components: unitFlags2
+                                          fromDate:self.timePicker.date];
+    comp.hour = comp2.hour;
+    comp.minute = comp2.minute;
+    NSDate* date = [gregorian dateFromComponents:comp];
+    self.viewModel.model.playDate = [date timeIntervalSince1970] * 1000;
+    
 }
 @end

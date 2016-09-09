@@ -26,7 +26,7 @@ NSString* const HistoryGameURL = @"/university/reviewMatchesGroup";
 NSString* const GameListURL = @"/university/tournaments";
 NSString* const NewDetailURL = @"/news/detail";
 NSString* const WexinURL = @"/user/wxToken";
-NSString* const qqURL = @" /user/qqToken";
+NSString* const qqURL = @"/user/qqToken";
 NSString* const teamList = @"/university/teams";
 NSString* const TeamInfo = @"/team/detail/";
 NSString* const TeamPlayer = @"/team/players/";
@@ -51,7 +51,7 @@ NSString* const dislikeTeam = @"/user/removeFansTeam/";
 NSString* const likeGame = @"/user/fansTournament/";
 NSString* const disLikegame = @"/user/removeFansTournament/";
 NSString* const GameInfo = @"/tournament/info/";
-NSString* const GameSchedule = @"/tournament/lastestRound/";
+NSString* const GameSchedule = @"/tournament/games/";
 NSString* const GameTeams = @"/tournament/teams/";
 NSString* const GameNews = @"/match/articles/";
 NSString* const GameDetails = @"/match/detail/";
@@ -257,7 +257,7 @@ NSString* const GameMessage = @"/match/newses/";
     return [self GET:qqURL parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        successBlock(responseObject);
+        successBlock(responseObject[@"resp"]);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failureBlock(error);
     }];
@@ -731,10 +731,14 @@ NSString* const GameMessage = @"/match/newses/";
     NSMutableString* URL = [[NSMutableString alloc] init];
     [URL appendString:GameSchedule];
     [URL appendString:tournamentId];
-    return [self GET:URL parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
+    NSDictionary* dic = @{@"group":@YES};
+    return [self GET:URL parameters:dic progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        ScheduleResponseModel* model = [ScheduleResponseModel mj_objectWithKeyValues:responseObject];
+        [Games mj_setupReplacedKeyFromPropertyName:^NSDictionary *{
+            return @{@"desc":@"description"};
+        }];
+        TournamentGamesResponseModel* model = [TournamentGamesResponseModel mj_objectWithKeyValues:responseObject];
         successBlock(model.resp);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failureBlock(error);

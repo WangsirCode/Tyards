@@ -12,4 +12,5 @@
 @property (nonatomic,strong) RACCommand* postCommand;
 @property (nonatomic,strong) NSArray* titleArray;
 @property (nonatomic,strong) InvitationModel* model;
+@property (nonatomic,assign) BOOL valid;
 @end

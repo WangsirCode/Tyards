@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MDABizManager.h"
 #import "NoticeCellView.h"
 /*!
  *  @author 汪宇豪, 16-07-27 14:07:08
@@ -15,7 +16,6 @@
  */
 @class NoticeCellView;
 @interface NoticeGameviewCell : UITableViewCell
-@property (nonatomic,strong) NoticeCellView* view;
-@property (nonatomic,strong) UIButton* button;
-@property (nonatomic,strong) NSString* news;
+@property (nonatomic,strong) NoticeCellView * view;
+@property (nonatomic,strong) Games          * model;
 @end

@@ -34,6 +34,8 @@
     [self addSubview:self.statusLabel];
     [self addSubview:self.locationImageView];
     [self addSubview:self.homeLabel];
+    [self addSubview:self.timeImageView];
+    [self addSubview:self.timeLabel];
 }
 
 - (void)makeConstraits
@@ -62,11 +64,6 @@
         make.centerX.equalTo(self.homeImageview.mas_centerX);
         make.top.equalTo(self.homeImageview.mas_bottom).offset(12*scale);
     }];
-//    self.homeTitleLabel.sd_layout
-//    .topSpaceToView(self.homeImageview,12*self.scale)
-//    .centerXEqualToView(self.homeImageview)
-//    .maxWidthIs(100*self.scale)
-//    .autoHeightRatio(0);
     [self.awayTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.awayImgaeview.mas_centerX);
         make.top.equalTo(self.awayImgaeview.mas_bottom).offset(12*scale);
@@ -87,14 +84,22 @@
         make.centerX.equalTo(self.mas_centerX);
         make.top.equalTo(self.homeTitleLabel.mas_top);
     }];
-    [self.homeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-    }];
     [self.locationImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(@(10*scale));
         make.width.equalTo(@(7*scale));
         make.top.equalTo(self.homeTitleLabel.mas_bottom).offset(10);
         make.left.equalTo(self.mas_left).offset(8*self.scale);
+    }];
+    [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.mas_centerX);
+        make.top.equalTo(self.locationImageView.mas_top);
+        make.bottom.equalTo(self.locationImageView.mas_bottom);
+    }];
+    [self.timeImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.equalTo(@(10*scale));
+        make.width.equalTo(@(10*scale));
+        make.top.equalTo(self.homeTitleLabel.mas_bottom).offset(10);
+        make.right.equalTo(self.timeLabel.mas_left).offset(-8);
     }];
 }
 - (void)bindModel
@@ -251,6 +256,23 @@
         _homeLabel.font = [UIFont systemFontOfSize:11];
     }
     return _homeLabel;
+}
+- (UIImageView *)timeImageView
+{
+    if (!_timeImageView) {
+        _timeImageView = [UIImageView new];
+        _timeImageView.image = [UIImage imageNamed:@"clock"];
+    }
+    return _timeImageView;
+}
+- (UILabel *)timeLabel
+{
+    if (!_timeLabel) {
+        _timeLabel = [UILabel new];
+        _timeLabel.textColor = [UIColor colorWithHexString:@"#999999"];
+        _timeLabel.font = [UIFont systemFontOfSize:11];
+    }
+    return _timeLabel;
 }
 - (void)layoutSubviews
 {

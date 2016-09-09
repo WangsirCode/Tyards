@@ -264,7 +264,6 @@
 }
 - (void)didSelectedShareView:(NSInteger)index
 {
-    NSLog(@"%ld",(long)index);
     WXMediaMessage* mes = [WXMediaMessage message];
     [mes setThumbImage:[UIImage imageNamed:@"zhanwei.jpg"]];
     mes.title = self.viewModel.newdetail.title;

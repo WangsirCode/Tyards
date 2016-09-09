@@ -18,7 +18,8 @@
 #import "MyInvitationViewController.h"
 #import "MakeInvitationController.h"
 #import "DOPDropDownMenu.h"
-@interface InvitationViewController ()<UITableViewDelegate,UITableViewDataSource,DOPDropDownMenuDataSource,DOPDropDownMenuDelegate>
+#import "MakeInvitationController.h"
+@interface InvitationViewController ()<UITableViewDelegate,UITableViewDataSource,DOPDropDownMenuDataSource,DOPDropDownMenuDelegate,MakeInvitationControllerDelegate>
 @property (nonatomic,strong) UIBarButtonItem      *backItem;
 @property (nonatomic,strong) MBProgressHUD        *hud;
 @property (nonatomic,strong) InvitationVIewModel  *viewModel;
@@ -85,7 +86,16 @@
         }
     }];
 }
-
+#pragma mark - MakeInvitationDelegate
+- (void)didMakeInvitation:(InvitationModel *)model
+{
+    NSMutableArray* array = [NSMutableArray arrayWithObject:model];
+    [array addObjectsFromArray:self.viewModel.model];
+    self.viewModel.model = nil;
+    self.viewModel.model = array;
+    [self.invitationTableView reloadData];
+    [XHToast showCenterWithText:@"发布成功"];
+}
 #pragma  mark - tableviewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -174,6 +184,7 @@
             UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
             UIAlertAction* makePost = [UIAlertAction actionWithTitle:@"下战帖" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 MakeInvitationController* controler = [[MakeInvitationController alloc] initWithDictionary:@{}];
+                controler.delegate = self;
                 [self.navigationController pushViewController:controler animated:YES];
             }];
             UIAlertAction* myPost = [UIAlertAction actionWithTitle:@"我的战帖" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {

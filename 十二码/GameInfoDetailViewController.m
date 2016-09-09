@@ -23,6 +23,7 @@
 #import "PlayerDetailViewController.h"
 #import "SEMNewsDetailController.h"
 #import "GameinfoViewModel.h"
+#import "SEMTeamHomeViewController.h"
 @interface GameInfoDetailViewController ()<UITableViewDelegate,UITableViewDataSource,LazyPageScrollViewDelegate,UIScrollViewDelegate,ShareViewDelegate,ListTableHeaderVIewDelegate>
 @property (nonatomic,strong) GameinfoViewModel  * viewModel;
 @property (nonatomic,strong) UIImageView        * logoImageView;
@@ -32,7 +33,7 @@
 @property (nonatomic,strong) UITableView        * listTableview;
 @property (nonatomic,strong) UITableView        * teamTableView;
 @property (nonatomic,strong) MBProgressHUD      * hud;
-@property (nonatomic,strong) UIBarButtonItem    * shareItem;
+//@property (nonatomic,strong) UIBarButtonItem    * shareItem;
 @property (nonatomic,strong) UIBarButtonItem    * favoriteItem;
 @property (nonatomic,strong) UIBarButtonItem    * blankItem;
 @property (nonatomic,strong) ShareView          * shareView;
@@ -83,7 +84,7 @@
 {
     [self.view addSubview:self.logoImageView];
     [self.view addSubview:self.pageView];
-    self.navigationItem.rightBarButtonItems = @[self.shareItem,self.blankItem,self.favoriteItem];
+    self.navigationItem.rightBarButtonItems = @[self.favoriteItem];
     [self.view addSubview:self.maskView];
     [self.view addSubview:self.shareView];
     self.navigationItem.leftBarButtonItem = self.backItem;
@@ -112,7 +113,9 @@
             [self.hud hide:YES];
             self.navigationItem.title = self.viewModel.model.name;
             if (self.viewModel.model.logo.url) {
-                [self.logoImageView sd_setImageWithURL:[[NSURL alloc] initWithString:self.viewModel.model.logo.url]  placeholderImage:[UIImage placeholderImage]];
+                NSString* encodedString = [self.viewModel.model.logo.url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+                NSURL *url = [[NSURL alloc] initWithString:encodedString];
+                [self.logoImageView sd_setImageWithURL:url  placeholderImage:[UIImage placeholderImage]];
             }
             else
             {
@@ -215,7 +218,7 @@
     }
     else if (tableView.tag == 101)
     {
-        return self.viewModel.scheduleModel.latestsrounds.count;
+        return self.viewModel.scheduleModel.count;
     }
     else if (tableView.tag == 102)
     {
@@ -239,7 +242,7 @@
     }
     else if (tableView.tag == 101)
     {
-        return self.viewModel.scheduleModel.latestsrounds[section].games.count;
+        return self.viewModel.scheduleModel[section].games.count;
     }
     else if (tableView.tag == 102)
     {
@@ -276,7 +279,9 @@
                 UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"infoCell"];
                 cell.textLabel.text = self.viewModel.infotableviewCellname[indexPath.row];
                 cell.textLabel.textColor = [UIColor colorWithHexString:@"A1B2BA"];
+                cell.textLabel.font = [UIFont systemFontOfSize:16*self.view.scale];
                 cell.detailTextLabel.text = self.viewModel.infoTableViewCellInfo[indexPath.row];
+                cell.detailTextLabel.font = [UIFont systemFontOfSize:16*self.view.scale];
                 [cell.detailTextLabel mas_makeConstraints:^(MASConstraintMaker *make) {
                     make.left.equalTo(cell.contentView.mas_left).offset(98*self.view.scale);
                     make.centerY.equalTo(cell.contentView.mas_centerY);
@@ -287,47 +292,9 @@
     }
     else if (tableView.tag == 101)
     {
-        NoticeGameviewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"NoticeGameviewCell" forIndexPath:indexPath];
-        Games* model = self.viewModel.scheduleModel.latestsrounds[indexPath.section].games[indexPath.row];
-        cell.view.titleLabel.text = model.tournament.name;
-        cell.view.roundLabel.text = model.round.name;
-        cell.view.status = [model getStatus1];
-        if (cell.view.status == 2) {
-            cell.view.homeScoreLabel.text = @"-";
-            cell.view.awaySocreLabel.text = @"-";
-        }
-        else
-        {
-            cell.view.homeScoreLabel.text = [NSString stringWithFormat: @"%ld", (long)model.homeScore];
-            cell.view.awaySocreLabel.text = [NSString stringWithFormat: @"%ld", (long)model.awayScore];
-        }
-        cell.view.homeTitleLabel.text = model.home.name;
-        cell.view.awayTitleLabel.text = model.away.name;
-        cell.view.homeLabel.text = model.home.name;
-        UIImage *image = [UIImage imageNamed:@"zhanwei.jpg"];
-        NSURL *homeurl;
-        if (model.home.logo.url) {
-            homeurl = [[NSURL alloc] initWithString:model.home.logo.url];
-            [cell.view.homeImageview sd_setImageWithURL:homeurl placeholderImage:image options:SDWebImageRefreshCached];
-        }
-        else
-        {
-            cell.view.homeImageview.image = image;
-        }
-        NSURL *awayurl;
-        if (model.away.logo.url) {
-            awayurl = [[NSURL alloc] initWithString:model.away.logo.url];
-            [cell.view.awayImgaeview sd_setImageWithURL:awayurl placeholderImage:image options:SDWebImageRefreshCached];
-        }
-        else
-        {
-            cell.view.awayImgaeview.image = image;
-        }
-        cell.view.location = 1;
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        if (model.latestNews) {
-            [cell.button setTitle:model.latestNews.detail forState:UIControlStateNormal];
-        }
+        NoticeGameviewCell* cell = [[NoticeGameviewCell alloc] init];
+        Games* model = self.viewModel.scheduleModel[indexPath.section].games[indexPath.row];
+        cell.model = model;
         return cell;
     }
     else if (tableView.tag == 102)
@@ -389,12 +356,13 @@
             {
                 UILabel* label = [UILabel new];
                 label.text = [NSString stringWithFormat:@"%ld.",(indexPath.row + 1)];
+                label.font = [UIFont systemFontOfSize:16*self.view.scale];
                 [cell.contentView addSubview:label];
                 label.sd_layout
                 .leftSpaceToView(cell.contentView,17*self.view.scale)
                 .centerYEqualToView(cell.contentView)
                 .heightIs(cell.contentView.height)
-                .widthIs(20);
+                .widthIs(30);
             }
             cell.textLabel.text = model.player.name;
             cell.textLabel.textColor = [UIColor MyColor];
@@ -439,22 +407,30 @@
             cell.imageView.sd_layout
             .centerYEqualToView(cell.contentView)
             .leftSpaceToView(cell.contentView,10*self.view.scale)
-            .heightIs(25*self.view.scale)
+            .heightIs(40*self.view.scale)
             .widthEqualToHeight();
             cell.textLabel.text = model.name;
-            cell.textLabel.font = [UIFont systemFontOfSize:14];
+            cell.textLabel.font = [UIFont systemFontOfSize:18*self.view.scale];
             cell.textLabel.sd_layout
-            .leftSpaceToView(cell.imageView,8)
-            .centerYEqualToView(cell.contentView)
-            .heightIs(cell.contentView.height)
-            .widthIs(140*self.view.scale);
+            .leftSpaceToView(cell.imageView,13*self.view.scale)
+            .topSpaceToView(cell.contentView,5)
+            .heightIs(20*self.view.scale)
+            .widthIs(300*self.view.scale);
+            UIImageView* iamgeView = [UIImageView new];
+            iamgeView.image = [UIImage imageNamed:@"赛事icon=灰"];
+            [cell.contentView addSubview:iamgeView];
+            iamgeView.sd_layout
+            .topSpaceToView(cell.textLabel,12*self.view.scale)
+            .leftEqualToView(cell.textLabel)
+            .heightIs(14*self.view.scale)
+            .widthIs(10*self.view.scale);
             cell.detailTextLabel.text = model.owner;
-            cell.detailTextLabel.textColor = [UIColor MyColor];
-            cell.detailTextLabel.font = [UIFont systemFontOfSize:16];
+            cell.detailTextLabel.textColor = [UIColor colorWithHexString:@"#999999"];
+            cell.detailTextLabel.font = [UIFont systemFontOfSize:14*self.view.scale];
             cell.detailTextLabel.sd_layout
-            .leftSpaceToView(cell.contentView,185*self.view.scale)
-            .centerYEqualToView(cell.contentView)
-            .heightIs(cell.contentView.height)
+            .leftSpaceToView(iamgeView,5)
+            .centerYEqualToView(iamgeView)
+            .heightIs(14*self.view.scale)
             .widthIs(150);
             return cell;
         }
@@ -474,8 +450,8 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (tableView.tag == 101) {
-        if (self.viewModel.scheduleModel.latestsrounds[indexPath.row].games[indexPath.section].latestNews.detail) {
-            return 181*self.view.scale;
+        if (self.viewModel.scheduleModel[indexPath.section].games[indexPath.row].latestNews.detail) {
+            return 196*self.view.scale;
         }
         return 156 * self.view.scale;
     }
@@ -498,6 +474,9 @@
     }
     else if (tableView.tag == 102)
     {
+        if (self.viewModel.listTableIndex == 2) {
+            return 65*self.view.scale;
+        }
         return 48*self.view.scale;
     }
     return 0;
@@ -518,6 +497,9 @@
     }
     else if(tableView.tag == 102)
     {
+        if (self.viewModel.listTableIndex == 2) {
+            return 0;
+        }
         return 48*self.view.scale;
     }
     return 0;
@@ -529,7 +511,7 @@
         UIView* view = [UIView new];
         view.backgroundColor = [UIColor BackGroundColor];
         UILabel* label = [UILabel new];
-        label.text = self.viewModel.scheduleModel.latestsrounds[section].name;
+        label.text = self.viewModel.scheduleModel[section].date;
         label.backgroundColor =[UIColor BackGroundColor];
         label.textAlignment = NSTextAlignmentCenter;
         [view addSubview:label];
@@ -539,7 +521,7 @@
         .rightEqualToView(view)
         .centerYEqualToView(view)
         .leftEqualToView(view)
-        .heightIs(30*self.view.scale);
+        .heightRatioToView(view,1);
         return view;
     }
     else if (tableView.tag == 100)
@@ -583,6 +565,7 @@
                 UILabel* label = [UILabel new];
                 label.textColor = [UIColor colorWithHexString:@"#A1B2BA"];
                 label.text = array[i];
+                label.font = [UIFont systemFontOfSize:15*self.view.scale];
                 label.textAlignment = NSTextAlignmentCenter;
                 [view addSubview:label];
                 label.sd_layout
@@ -618,32 +601,6 @@
             view.layer.borderWidth = 1;
             return view;
         }
-        else
-        {
-            UIView* view = [UIView new];
-            view.backgroundColor = [UIColor whiteColor];
-            view.layer.borderWidth = 1;
-            view.layer.borderColor = [UIColor BackGroundColor].CGColor;
-            UILabel* label = [UILabel new];
-            label.textColor = [UIColor colorWithHexString:@"#A1B2BA"];
-            label.text = @"奖项名称";
-            UILabel* label2 = [UILabel new];
-            label2.text = @"球队/球员/教练";
-            label2.textColor = [UIColor colorWithHexString:@"#A1B2BA"];
-            [view sd_addSubviews:@[label2,label]];
-            label.sd_layout
-            .leftSpaceToView(view,12)
-            .centerYEqualToView(view)
-            .heightIs(48*self.view.scale)
-            .widthIs(100);
-            label2.sd_layout
-            .leftSpaceToView(view,185*self.view.scale)
-            .centerYEqualToView(view)
-            .heightIs(48*self.view.scale)
-            .widthIs(150);
-            return view;
-        }
-        
     }
     return nil;
     
@@ -652,7 +609,14 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (tableView.tag == 101) {
-        RaceInfoDetailController* controller = [[RaceInfoDetailController alloc] initWithDictionay:@{@"id":@(self.viewModel.scheduleModel.latestsrounds[indexPath.section].games[indexPath.row].id)}];
+        RaceInfoDetailController* controller = [[RaceInfoDetailController alloc] initWithDictionay:@{@"id":@(self.viewModel.scheduleModel[indexPath.section].games[indexPath.row].id)}];
+        [self.navigationController pushViewController:controller animated:YES];
+    }
+    else if (tableView.tag == 103)
+    {
+        SEMTeamHomeViewController* controller = [HRTRouter objectForURL:@"TeamHome" withUserInfo:@{@"ide":@(self.viewModel.teamModel[indexPath.row].id)}];
+        controller.hidesBottomBarWhenPushed = YES;
+        controller.navigationController.navigationBar.alpha = 0;
         [self.navigationController pushViewController:controller animated:YES];
     }
 }
@@ -688,7 +652,7 @@
         _pageView = [[LazyPageScrollView alloc] init];
         _pageView.frame =self.view.frame;
         _pageView.delegate = self;
-        [_pageView initTab:YES Gap:self.view.width / 4 TabHeight:27 VerticalDistance:10 BkColor:[UIColor whiteColor]];
+        [_pageView initTab:YES Gap:self.view.width / 4 TabHeight:27*self.view.scale VerticalDistance:10 BkColor:[UIColor whiteColor]];
         [_pageView addTab:@"简介" View:self.infoTableView Info:nil];
         [_pageView addTab:@"赛程" View:self.gameTableView Info:nil];
         [_pageView addTab:@"榜单" View:self.listTableview Info:nil];
@@ -742,6 +706,7 @@
         [_gameTableView registerClass:[NoticeGameviewCell class] forCellReuseIdentifier:@"NoticeGameviewCell"];
         _gameTableView.bounces = NO;
         _gameTableView.backgroundColor = [UIColor BackGroundColor];
+        _gameTableView.separatorColor = [UIColor BackGroundColor];
     }
     return _gameTableView;
 }
@@ -823,18 +788,18 @@
     }
     return _maskView;
 }
--(UIBarButtonItem *)shareItem
-{
-    if (!_shareItem) {
-        UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.frame = CGRectMake(0, 0, 20, 25);
-        
-        [button setImage:[UIImage imageNamed:@"upload_L"] forState:UIControlStateNormal];
-        _shareItem = [[UIBarButtonItem alloc] initWithCustomView:button];
-        button.rac_command = self.viewModel.shareCommand;
-    }
-    return _shareItem;
-}
+//-(UIBarButtonItem *)shareItem
+//{
+//    if (!_shareItem) {
+//        UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
+//        button.frame = CGRectMake(0, 0, 20, 25);
+//        
+//        [button setImage:[UIImage imageNamed:@"upload_L"] forState:UIControlStateNormal];
+//        _shareItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+//        button.rac_command = self.viewModel.shareCommand;
+//    }
+//    return _shareItem;
+//}
 - (UIBarButtonItem *)favoriteItem
 {
     if (!_favoriteItem) {

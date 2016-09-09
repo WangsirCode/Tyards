@@ -38,7 +38,7 @@
 @property (nonatomic,strong) UITableView        * messageTableView;
 @property (nonatomic,strong) UIView             * bottomView;
 @property (nonatomic,strong) MBProgressHUD      * hud;
-@property (nonatomic,strong) UIBarButtonItem    * shareItem;
+//@property (nonatomic,strong) UIBarButtonItem    * shareItem;
 @property (nonatomic,strong) UIBarButtonItem    * blankItem;
 @property (nonatomic,strong) ShareView          * shareView;
 @property (nonatomic,strong) UIView             * maskView;
@@ -86,7 +86,7 @@
 {
     [self.view addSubview:self.backImageView];
     [self.view addSubview:self.pageView];
-    self.navigationItem.rightBarButtonItems = @[self.shareItem,self.blankItem];
+//    self.navigationItem.rightBarButtonItems = @[self.shareItem,self.blankItem];
     [self.view addSubview:self.maskView];
     [self.view addSubview:self.shareView];
     self.navigationItem.leftBarButtonItem = self.backItem;
@@ -174,7 +174,7 @@
     self.headerView.awayTitleLabel.textColor = [UIColor whiteColor];
     self.headerView.homeTitleLabel.text = model.home.name;
     self.headerView.awayTitleLabel.text = model.away.name;
-    self.headerView.homeLabel.text = model.home.name;
+    self.headerView.homeLabel.text = model.stadium.name;
     UIImage *image = [UIImage imageNamed:@"zhanwei.jpg"];
     NSURL *homeurl;
     if (model.home.logo.url) {
@@ -195,6 +195,7 @@
         self.headerView.awayImgaeview.image = image;
     }
     self.headerView.location = 1;
+    self.headerView.timeLabel.text = [model getDate];
 }
 - (void)setUpDataView
 {
@@ -258,7 +259,7 @@
     .topSpaceToView(secLabel,12)
     .leftSpaceToView(self.dataView,12)
     .rightSpaceToView(self.dataView,12)
-    .heightIs(48*(self.viewModel.dataModel.history.count+1)*self.view.scale);
+    .heightIs(120*(self.viewModel.dataModel.history.count)*self.view.scale);
     
     [self.dataView setupAutoContentSizeWithBottomView:histoty bottomMargin:20];
     
@@ -352,7 +353,6 @@
     .leftEqualToView(self.view)
     .rightEqualToView(self.view)
     .heightIs(58*self.view.scale);
-    self.bottomView.hidden = YES;
 }
 - (void)hideMaskView
 {
@@ -461,14 +461,6 @@
         cell.bottomview.viewLabel.text = [@(news.viewed) stringValue];
         return cell;
     }
-    else if (tableView.tag == 101)
-    {
-        return nil;
-    }
-    else if (tableView.tag == 102)
-    {
-        return nil;
-    }
     else if (tableView.tag == 103)
     {
         CommentCell* cell = (CommentCell*)[tableView dequeueReusableCellWithIdentifier:@"CommentCell" forIndexPath:indexPath];
@@ -551,10 +543,10 @@
         _pageView = [[LazyPageScrollView alloc] init];
         _pageView.frame =self.view.frame;
         _pageView.delegate = self;
-        [_pageView initTab:YES Gap:self.view.width / 4 TabHeight:27 VerticalDistance:10 BkColor:[UIColor whiteColor]];
-        [_pageView addTab:@"新闻" View:self.newsTableView Info:nil];
+        [_pageView initTab:YES Gap:self.view.width / 4 TabHeight:27*self.view.scale VerticalDistance:10 BkColor:[UIColor whiteColor]];
         [_pageView addTab:@"赛况" View:self.statusView Info:nil];
         [_pageView addTab:@"数据" View:self.dataView Info:nil];
+        [_pageView addTab:@"新闻" View:self.newsTableView Info:nil];
         [_pageView addTab:@"互动" View:self.messageTableView Info:nil];
         [_pageView setTitleStyle:[UIFont systemFontOfSize:15] SelFont:[UIFont systemFontOfSize:20] Color:[UIColor blackColor] SelColor:[UIColor colorWithHexString:@"#1EA11F"]];
         [_pageView enableBreakLine:YES Width:1 TopMargin:0 BottomMargin:0 Color:[UIColor groupTableViewBackgroundColor]];
@@ -671,18 +663,18 @@
     }
     return _maskView;
 }
--(UIBarButtonItem *)shareItem
-{
-    if (!_shareItem) {
-        UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.frame = CGRectMake(0, 0, 20, 25);
-        
-        [button setImage:[UIImage imageNamed:@"upload_L"] forState:UIControlStateNormal];
-        _shareItem = [[UIBarButtonItem alloc] initWithCustomView:button];
-        button.rac_command = self.viewModel.shareCommand;
-    }
-    return _shareItem;
-}
+//-(UIBarButtonItem *)shareItem
+//{
+//    if (!_shareItem) {
+//        UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
+//        button.frame = CGRectMake(0, 0, 20, 25);
+//        
+//        [button setImage:[UIImage imageNamed:@"upload_L"] forState:UIControlStateNormal];
+//        _shareItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+//        button.rac_command = self.viewModel.shareCommand;
+//    }
+//    return _shareItem;
+//}
 - (UIBarButtonItem *)blankItem
 {
     if (!_blankItem) {
@@ -690,20 +682,6 @@
         _blankItem.width = 20;
     }
     return _blankItem;
-}
--(UIBarButtonItem *)backItem
-{
-    if (!_backItem) {
-        UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
-        [button setImage:[UIImage imageNamed:@"返回icon"] forState:UIControlStateNormal];
-        button.frame = CGRectMake(0, 0, 20, 15);
-        _backItem = [[UIBarButtonItem alloc] initWithCustomView:button];
-        [[button rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
-            [self.navigationController popViewControllerAnimated:YES];
-        }];
-        
-    }
-    return _backItem;
 }
 - (UIImageView *)backImageView
 {
@@ -716,14 +694,14 @@
 #pragma mark -LazyPageScrollViewDelegate
 -(void)LazyPageScrollViewPageChange:(LazyPageScrollView *)pageScrollView Index:(NSInteger)index PreIndex:(NSInteger)preIndex TitleEffectView:(UIView *)viewTitleEffect SelControl:(UIButton *)selBtn
 {
-    if (index == 1) {
+    if (index == 0) {
         self.bottomView.hidden = NO;
     }
-    else if (index == 2)
+    else if (index == 1)
     {
         self.bottomView.hidden = YES;
     }
-    else if (index == 0)
+    else if (index == 2)
     {
         self.bottomView.hidden = YES;
         [self.newsTableView reloadData];

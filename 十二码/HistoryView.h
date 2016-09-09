@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "MDABizManager.h"
+#import "HistoryInfoView.h"
 @class PlayHistory;
 @interface HistoryView : UIView
 @property (nonatomic, strong) NSArray<PlayHistory *> *history;

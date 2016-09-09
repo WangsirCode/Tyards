@@ -21,6 +21,8 @@
 @property (nonatomic,strong) UILabel* homeTitleLabel;
 @property (nonatomic,strong) UILabel* awayTitleLabel;
 @property (nonatomic,strong) UIImageView* locationImageView;
+@property (nonatomic,strong) UIImageView* timeImageView;
+@property (nonatomic,strong) UILabel *timeLabel;
 @property (nonatomic,assign)NSInteger status;
 @property (nonatomic,assign)NSInteger location;
 @end

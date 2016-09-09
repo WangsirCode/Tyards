@@ -66,7 +66,7 @@
 @property (nonatomic, copy) NSString *status;
 
 - (NSInteger)getStatus1;
-
+- (NSString*)getDate;
 @end
 
 @interface Group : NSObject<NSCoding>

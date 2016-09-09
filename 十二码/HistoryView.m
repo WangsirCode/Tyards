@@ -20,19 +20,7 @@
 }
 - (void)makeContraits
 {
-    NSArray<NSString*>* titleArray = @[@"日期",@"赛事",@"比分"];
-    for (int i = 0; i < 3; i ++) {
-        UILabel* label = [UILabel new];
-        label.text = titleArray[i];
-        label.textColor = [UIColor colorWithHexString:@"#999999"];
-        label.textAlignment = NSTextAlignmentCenter;
-        [self addSubview:label];
-        label.sd_layout
-        .topEqualToView(self)
-        .leftSpaceToView(self,115*i*self.scale)
-        .heightIs(48*self.scale)
-        .widthIs(115*self.scale);
-    }
+    
 }
 - (void)bindModel
 {
@@ -42,18 +30,14 @@
         
             for (int i = 0; i < count; i++) {
                 PlayHistory* model = self.history[i];
-                NSArray<NSString*>* contents = @[[model getDate],model.tournament.name,[model getScore]];
-                for (int j = 0; j<3; j++) {
-                    UILabel* label = [UILabel new];
-                    label.textAlignment = NSTextAlignmentCenter;
-                    label.text = contents[j];
-                    [self addSubview:label];
-                    label.sd_layout
-                    .topSpaceToView(self,48*(i+1)*self.scale)
-                    .leftSpaceToView(self,115*j*self.scale)
-                    .heightIs(48*self.scale)
-                    .widthIs(115.3*self.scale);
-                }
+                HistoryInfoView* view = [[HistoryInfoView alloc] init];
+                view.model = model;
+                [self addSubview:view];
+                view.sd_layout
+                .topSpaceToView(self,i*120*self.scale)
+                .leftEqualToView(self)
+                .rightEqualToView(self)
+                .heightIs(120*self.scale);
             }
         }
     }];

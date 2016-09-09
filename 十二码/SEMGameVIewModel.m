@@ -88,7 +88,6 @@ NSString* const GameListCache = @"GameListCache";
                 [manager fetchHistoryGame:self.code offset:0 success:^(id data) {
                     self.historyGameDatasource = data;
                     [DataArchive archiveData:self.historyGameDatasource withFileName:HistoryGameCache];
-                    [DataArchive unarchiveDataWithFileName:HistoryGameCache];
                     [subscriber sendNext:@1];
                     [subscriber sendCompleted];
                     
@@ -157,6 +156,7 @@ NSString* const GameListCache = @"GameListCache";
                 [manager fetchHistoryGame:self.code offset:self.historyGameDatasource.count success:^(id data) {
                     NSMutableArray* array = [NSMutableArray arrayWithArray:self.historyGameDatasource];
                     [array appendObjects:data];
+                    self.historyGameDatasource = nil;
                     self.historyGameDatasource = array;
                     [DataArchive archiveData:self.historyGameDatasource withFileName:HistoryGameCache];
                     [subscriber sendNext:@1];

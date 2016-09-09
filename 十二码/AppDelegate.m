@@ -101,6 +101,7 @@ NSString* const USER_INFO = @"userinfo";
 - (void)onResp:(BaseResp *)resp {
     // 向微信请求授权后,得到响应结果
     if ([resp isKindOfClass:[SendAuthResp class]]) {
+        [DataArchive removeUserFile:@"UserInfo"];
         SendAuthResp *temp = (SendAuthResp *)resp;
         AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
         

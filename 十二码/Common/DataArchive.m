@@ -47,7 +47,6 @@
     if (![fileManager fileExistsAtPath:filePath1]) {
         [fileManager createDirectoryAtPath:filePath1 withIntermediateDirectories:YES attributes:nil error:nil];
     }
-    NSLog(@"%@",filePath1);
     NSString *filePath = [filePath1 stringByAppendingPathComponent:aFileName];
     NSData *archiveData = [NSKeyedArchiver archivedDataWithRootObject:aData];
     [archiveData writeToFile:filePath atomically:NO];
@@ -108,7 +107,6 @@
     if (![fileManager fileExistsAtPath:filePath1]) {
         [fileManager createFileAtPath:filePath1 contents:nil attributes:nil];
     }
-    NSLog(@"%@",filePath1);
     NSString* filePath = [documentPath stringByAppendingPathComponent:filename];
     BOOL blHave=[[NSFileManager defaultManager] fileExistsAtPath:filePath];
     if (!blHave) {
@@ -126,7 +124,31 @@
     }
 }
 
-
++ (void)removeUserFile:(NSString *)filename
+{
+    NSArray *documentArray = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentPath = [documentArray safeObjectAtIndex:0];
+    NSString *filePath1 = [documentPath stringByAppendingPathComponent:@"user"];
+    NSFileManager* fileManager=[NSFileManager defaultManager];
+    if (![fileManager fileExistsAtPath:filePath1]) {
+        [fileManager createFileAtPath:filePath1 contents:nil attributes:nil];
+    }
+    NSString* filePath = [filePath1 stringByAppendingPathComponent:filename];
+    BOOL blHave=[[NSFileManager defaultManager] fileExistsAtPath:filePath];
+    if (!blHave) {
+        NSLog(@"no  have");
+        return ;
+    }else {
+        NSLog(@" have");
+        BOOL blDele= [fileManager removeItemAtPath:filePath error:nil];
+        if (blDele) {
+            NSLog(@"dele success");
+        }else {
+            NSLog(@"dele fail");
+        }
+        
+    }
+}
 /*!
  *  @author 汪宇豪, 16-08-08 11:08:31
  *

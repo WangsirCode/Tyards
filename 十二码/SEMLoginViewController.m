@@ -267,11 +267,19 @@
 -(void)getUserInfoResponse:(APIResponse *)response
 {
     if (response && response.retCode == URLREQUEST_SUCCEED) {
-        
+        [DataArchive removeUserFile:@"UserInfo"];
         NSDictionary *userInfo = [response jsonResponse];
-        
-        // 后续操作...
-        
+        UserModel* data = [[UserModel alloc] init];
+        data.headimgurl = userInfo[@"figureurl_qq_1"];
+        data.nickname = userInfo[@"nickname"];
+        data.token = (NSString*)[DataArchive unarchiveUserDataWithFileName:@"token"];
+        [DataArchive archiveUserData:data withFileName:@"userinfo"];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSData* data1 = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:data.headimgurl]];
+            UIImage* imamge = [[UIImage alloc] initWithData:data1];
+            [DataArchive archiveUserData:imamge withFileName:@"headimage"];
+            [self dismiss];
+        });
         
     } else {
         NSLog(@"QQ auth fail ,getUserInfoResponse:%d", response.detailRetCode);
@@ -282,9 +290,17 @@
 
     if (_tencentOAuth.accessToken && 0 != [_tencentOAuth.accessToken length])
     {
-        // &nbsp;记录登录用户的OpenID、Token以及过期时间
-        [_tencentOAuth getUserInfo];
-        [self dismiss];
+        NSString* token = _tencentOAuth.accessToken;
+        NSString* openID = _tencentOAuth.openId;
+        SEMNetworkingManager* magager = [SEMNetworkingManager sharedInstance];
+        [magager fetchQQToken:token openid:openID success:^(id data) {
+            NSString* token = data;
+            [DataArchive archiveUserData:token withFileName:@"token"];
+            [_tencentOAuth getUserInfo];
+        } failure:^(NSError *aError) {
+            NSLog(@"%@",aError);
+        }];
+
     }
     else
     {

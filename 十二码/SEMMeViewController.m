@@ -40,8 +40,10 @@
         self.topView.name = self.viewModel.info.nickname;
         NSURL* url = [[NSURL alloc] initWithString:self.viewModel.info.headimgurl];
         [self.topView.userHeadView sd_setImageWithURL:url];
+//        self.topView.userHeadView.image = (UIImage*)[DataArchive unarchiveUserDataWithFileName:@"headimage"];
         NSString* token = (NSString*)[DataArchive unarchiveUserDataWithFileName:@"token"];
         [self.viewModel fetchUserInfo:token];
+        self.topView.infoView.hidden = NO;
         self.viewModel.isLogined = YES;
     }
     else
