@@ -66,7 +66,6 @@
     [RACObserve(self.viewModel, status) subscribeNext:^(id x) {
         if (self.viewModel.status == 2) {
             [self.myInvitationTableView reloadData];
-            [self.myClosedInvitationTableView reloadData];
             [self.hud hide:YES];
         }
     }];
@@ -79,17 +78,18 @@
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (tableView.tag == 101) {
+    if (tableView.tag == 100) {
         return self.viewModel.myInvitaions.count;
     }
-    else
+    else if(tableView.tag == 101)
     {
         return self.viewModel.myClosedInvitations.count;
     }
+    return 0;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (tableView.tag == 101) {
+    if (tableView.tag == 100) {
         InvitationViewCell* cell = (InvitationViewCell*)[tableView dequeueReusableCellWithIdentifier:@"MyInvitation"];
         if(!cell)
         {
@@ -100,7 +100,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
-    else
+    else if(tableView.tag == 101)
     {
         InvitationViewCell* cell = (InvitationViewCell*)[tableView dequeueReusableCellWithIdentifier:@"MyClosedInvitation"];
         if (!cell) {
@@ -111,6 +111,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
+    return nil;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 212*self.view.scale;
@@ -176,7 +177,7 @@
         _myInvitationTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _myInvitationTableView.delegate = self;
         _myInvitationTableView.dataSource =self;
-        _myInvitationTableView.tag = 101;
+        _myInvitationTableView.tag = 100;
         [_myInvitationTableView registerClass:[InvitationViewCell class] forCellReuseIdentifier:@"MyInvitation"];
         _myInvitationTableView.separatorColor = [UIColor BackGroundColor];
         _myInvitationTableView.backgroundColor = [UIColor BackGroundColor];
@@ -189,10 +190,11 @@
         _myClosedInvitationTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _myClosedInvitationTableView.delegate = self;
         _myClosedInvitationTableView.dataSource =self;
-        _myClosedInvitationTableView.tag = 102;
+        _myClosedInvitationTableView.tag = 101;
         _myInvitationTableView.separatorColor = [UIColor BackGroundColor];
         [_myClosedInvitationTableView registerClass:[InvitationViewCell class] forCellReuseIdentifier:@"MyClosedInvitation"];
         _myClosedInvitationTableView.backgroundColor = [UIColor BackGroundColor];
+        _myInvitationTableView.separatorColor = [UIColor BackGroundColor];
     }
     return _myClosedInvitationTableView;
 }

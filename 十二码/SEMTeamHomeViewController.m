@@ -22,11 +22,15 @@
 #import "PlayerDetailViewController.h"
 #import "SEMNewsDetailController.h"
 #import "CoachDetailViewController.h"
+#import "CenterAlertIView.h"
 #define LISTTABLEVIEWTAG 101
 #define SCHEDULETABLEVIETAG 102
 #define NEWSTABLEVIEWTAG 103
 #define MESSAGETABLEVIEWTAG 104
-@interface SEMTeamHomeViewController ()<UITableViewDelegate,UITableViewDataSource,LazyPageScrollViewDelegate,UIScrollViewDelegate,ShareViewDelegate>
+#define RECORDINDEX 1
+#define LISTINDEX 2
+#define GAMESINDEX 3
+@interface SEMTeamHomeViewController ()<UITableViewDelegate,UITableViewDataSource,LazyPageScrollViewDelegate,UIScrollViewDelegate,ShareViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource,CenterAlertIViewDelegate>
 @property (nonatomic,strong) SEMTeamHomeModel   * viewModel;
 @property (nonatomic,strong) UIImageView        * logoImageView;
 @property (nonatomic,strong) LazyPageScrollView * pageView;
@@ -45,6 +49,9 @@
 @property (nonatomic,strong) CostomView         * photoview;
 @property (nonatomic,strong) UIScrollView       * scrollView;
 @property (nonatomic,strong) UIButton           * likeButton;
+@property (nonatomic,strong) CenterAlertIView   * alartView;
+@property (nonatomic,strong) UIButton           * listHeaderButton;
+@property (nonatomic,strong) UIButton           * scheduleHeaderButton;
 @end
 
 @implementation SEMTeamHomeViewController
@@ -144,6 +151,21 @@
             self.infoView.model = self.viewModel.InfoModel;
         }
     }];
+    [RACObserve(self.viewModel, shouldUpdateRecord) subscribeNext:^(id x) {
+        if (self.viewModel.shouldUpdateRecord == YES) {
+            self.infoView.model = self.viewModel.InfoModel;
+        }
+    }];
+    [RACObserve(self.viewModel, shouldUpdateList) subscribeNext:^(id x) {
+        if (self.viewModel.shouldUpdateList == YES) {
+            [self.listTableview reloadData];
+        }
+    }];
+    [RACObserve(self.viewModel, shouldUpdateSchedule) subscribeNext:^(id x) {
+        if (self.viewModel.shouldUpdateSchedule == YES) {
+            [self.scheduleTableview reloadData];
+        }
+    }];
     [[self.viewModel.shareCommand executionSignals] subscribeNext:^(id x) {
         NSLog(@"收到了分享信号");
         CALayer* imageLayer = self.shareView.layer;
@@ -181,6 +203,14 @@
             }
         }
     }];
+        UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] initWithActionBlock:^(id  _Nonnull sender) {
+            [self.view addSubview:self.alartView];
+            self.viewModel.pickerIndex = RECORDINDEX;
+        }];
+    self.infoView.userInteractionEnabled = YES;
+    self.infoView.allButton.userInteractionEnabled = YES;
+    self.infoView.allButton.imageView.userInteractionEnabled = YES;
+    [self.infoView.allButton addGestureRecognizer:tap];
 }
 - (void)hideMaskView
 {
@@ -207,39 +237,47 @@
 {
     self.viewModel = [[SEMTeamHomeModel alloc] initWithDictionary: routerParameters];
 }
-
-#pragma mark- shareviewdelegate
-- (void)didSelectedShareView:(NSInteger)index
+#pragma mark -pickerviewDatasource
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
-//    NSLog(@"%ld",(long)index);
-//    WXMediaMessage* mes = [WXMediaMessage message];
-//    [mes setThumbImage:[UIImage imageNamed:@"zhanwei.jpg"]];
-//    mes.title = self.viewModel.newdetail.title;
-//    mes.description = @"我在十二码发送了一片文章";
-//    WXWebpageObject* web = [WXWebpageObject object];
-//    web.webpageUrl = @"www.baidu.com";
-//    mes.mediaObject = web;
-//    SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
-//    req.bText = NO;
-//    req.scene = WXSceneTimeline;
-    switch (index) {
-        case 0:
-            break;
+    return 1;
+}
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return self.viewModel.pickerViewDataSource.count;
+}
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    return self.viewModel.pickerViewDataSource[row];
+}
+- (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component
+{
+    return 60*self.view.scale;
+}
+- (void)didClickDoneButton:(CenterAlertIView *)view index:(NSInteger)selectedIndex
+{
+    [self.alartView removeFromSuperview];
+    NSLog(@"%@",self.viewModel.pickerViewDataSource[selectedIndex]);
+    NSLog(@"%ld",(long)self.viewModel.pickerIndex);
+    NSString* date = self.viewModel.pickerViewDataSource[selectedIndex];
+    switch (self.viewModel.pickerIndex) {
         case 1:
-//            [WXApi sendReq:req];
+            [self.infoView.allButton setTitle:self.viewModel.pickerViewDataSource[selectedIndex] forState:UIControlStateNormal];
+            [self.viewModel loadSRecord:date];
             break;
         case 2:
-            
+            [self.listHeaderButton setTitle:self.viewModel.pickerViewDataSource[selectedIndex] forState:UIControlStateNormal];
+            [self.viewModel loadList:date];
             break;
         case 3:
-            
-            break;
-        case 4:
-            [self hideMaskView];
+            [self.scheduleHeaderButton setTitle:self.viewModel.pickerViewDataSource[selectedIndex] forState:UIControlStateNormal];
+            [self.viewModel loadSchedule:date];
             break;
         default:
             break;
     }
+    
+    self.alartView = nil;
 }
 #pragma mark- tableiviewDelegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -600,6 +638,29 @@
         _listTableview.dataSource = self;
         _listTableview.tag = LISTTABLEVIEWTAG;
         _listTableview.bounces = NO;
+        self.listHeaderButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.listHeaderButton.layer.borderWidth = 1;
+        self.listHeaderButton.layer.borderColor = [UIColor BackGroundColor].CGColor;
+        [self.listHeaderButton setImage:[UIImage imageNamed:@"calender_L"] forState:UIControlStateNormal];
+        [self.listHeaderButton setTitle:@"全部" forState:UIControlStateNormal];
+        [self.listHeaderButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        self.listHeaderButton.frame = CGRectMake(0, 0, self.view.width, 40*self.view.scale);
+        self.listHeaderButton.imageView.sd_layout
+        .rightSpaceToView(self.listHeaderButton,12*self.view.scale)
+        .centerYEqualToView(self.listHeaderButton)
+        .heightIs(17.3*self.view.scale)
+        .widthIs(19.4*self.view.scale);
+        
+        [self.listHeaderButton.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.center.equalTo(self.listHeaderButton);
+            make.height.equalTo(@(44*self.view.scale));
+        }];
+        UITapGestureRecognizer* tap1 = [[UITapGestureRecognizer alloc] initWithActionBlock:^(id  _Nonnull sender) {
+            [self.view addSubview:self.alartView];
+            self.viewModel.pickerIndex = LISTINDEX;
+        }];
+        [self.listHeaderButton addGestureRecognizer:tap1];
+        _listTableview.tableHeaderView = self.listHeaderButton;
     }
     return _listTableview;
 }
@@ -612,12 +673,32 @@
         _scheduleTableview.tag = SCHEDULETABLEVIETAG;
         _scheduleTableview.bounces = NO;
         [_scheduleTableview registerClass:[NoticeGameviewCell class] forCellReuseIdentifier:@"NoticeGameviewCell"];
-        UIView* backView = [UIView new];
-        backView.backgroundColor = [UIColor BackGroundColor];
-        backView.frame = CGRectMake(0, 0, self.view.width, 8);
-        _scheduleTableview.tableHeaderView = backView;
         _scheduleTableview.backgroundColor = [UIColor BackGroundColor];
         _scheduleTableview.separatorColor = [UIColor BackGroundColor];
+        self.scheduleHeaderButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.scheduleHeaderButton.layer.borderWidth = 1;
+        self.scheduleHeaderButton.layer.borderColor = [UIColor BackGroundColor].CGColor;
+        [self.scheduleHeaderButton setImage:[UIImage imageNamed:@"calender_L"] forState:UIControlStateNormal];
+        [self.scheduleHeaderButton setTitle:@"全部" forState:UIControlStateNormal];
+        [self.scheduleHeaderButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        self.scheduleHeaderButton.frame = CGRectMake(0, 0, self.view.width, 40*self.view.scale);
+        self.scheduleHeaderButton.imageView.sd_layout
+        .rightSpaceToView(self.scheduleHeaderButton,12*self.view.scale)
+        .centerYEqualToView(self.scheduleHeaderButton)
+        .heightIs(17.3*self.view.scale)
+        .widthIs(19.4*self.view.scale);
+        
+        [self.scheduleHeaderButton.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.center.equalTo(self.scheduleHeaderButton);
+            make.height.equalTo(@(44*self.view.scale));
+        }];
+        UITapGestureRecognizer* tap2 = [[UITapGestureRecognizer alloc] initWithActionBlock:^(id  _Nonnull sender) {
+            [self.view addSubview:self.alartView];
+            self.viewModel.pickerIndex = GAMESINDEX;
+        }];
+        [self.scheduleHeaderButton addGestureRecognizer:tap2];
+        self.scheduleHeaderButton.backgroundColor = [UIColor whiteColor];
+        _scheduleTableview.tableHeaderView = self.scheduleHeaderButton;
     }
     return _scheduleTableview;
 }
@@ -729,6 +810,17 @@
         
     }
     return _backItem;
+}
+- (CenterAlertIView *)alartView
+{
+    if (!_alartView) {
+        _alartView = [[CenterAlertIView alloc] init];
+        _alartView.pickerView.delegate = self;
+        _alartView.pickerView.dataSource = self;
+        _alartView.frame = self.view.frame;
+        _alartView.delegate = self;
+    }
+    return _alartView;
 }
 #pragma mark -LazyPageScrollViewDelegate
 -(void)LazyPageScrollViewPageChange:(LazyPageScrollView *)pageScrollView Index:(NSInteger)index PreIndex:(NSInteger)preIndex TitleEffectView:(UIView *)viewTitleEffect SelControl:(UIButton *)selBtn

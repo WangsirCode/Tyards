@@ -12,11 +12,9 @@
 {
     self = [super initWithDictionary:dictionary];
     if (self) {
-         self.model = dictionary[@"model"];
         self.cellText = @[@"所在院校",@"所属学院",@"性别",@"生日"];
         self.genderArrat = @[@"男",@"女"];
         self.gender = @{@"男":@"MALE",@"女":@"FEMALE"};
-        [self getDetail];
         NSString* token = (NSString*)[self getToken];
         [self fetchUserInfo:token];
     }
@@ -24,21 +22,21 @@
 }
 - (void)fetchUserInfo:(NSString*)token
 {
-    if ([DataArchive unarchiveUserDataWithFileName:@"UserInfo"]) {
-        self.model = (UserInfoModel*)[DataArchive unarchiveUserDataWithFileName:@"UserInfo"];
-    }
-    else
-    {
+//    if ([DataArchive unarchiveUserDataWithFileName:@"UserInfo"]) {
+//        self.model = (UserInfoModel*)[DataArchive unarchiveUserDataWithFileName:@"UserInfo"];
+//    }
+//    else
+//    {
         SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
         [manager fetchUserInfo:token success:^(id data) {
             self.model = data;
+            [self getDetail];
             self.shouldReloadData = YES;
-            [DataArchive archiveUserData:self.model withFileName:@"UserInfo"];
         } failure:^(NSError *aError)
         {
             
         }];
-    }
+//    }
     
 }
 - (void)getDetail
@@ -84,11 +82,11 @@
 }
 - (RACCommand *)postCommand
 {
-    NSString* token = [self getToken];
     if (!_postCommand) {
         _postCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
             return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
                 SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
+                NSString* token = [self getToken];
                 [manager postUserInfo:self.model.university.id collegeId:self.model.college.id gender:self.model.gender birthday:self.model.birthDay token:token success:^(id data) {
                     [subscriber sendNext:@1];
                     [subscriber sendCompleted];
@@ -100,5 +98,24 @@
         }];
     }
     return _postCommand;
+}
+- (void)postImage:(UIImage *)image
+{
+    NSData *_data = UIImageJPEGRepresentation(image, 0.5f);
+    NSString *_encodedImageStr = [_data base64EncodedString];
+    NSMutableString* string = [NSMutableString stringWithString:@"data:image/png;base64,"];
+    [string appendString:_encodedImageStr];
+    SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
+    [manager postImage:string token:[self getToken] success:^(id data) {
+        NSInteger idne = [(NSNumber*)data integerValue];
+        [manager updateMyAvatar:idne token:[self getToken] success:^(id data) {
+            NSLog(@"更新成功");
+        } failure:^(NSError *aError) {
+            
+        }];
+    } failure:^(NSError *aError) {
+        
+    }];
+    NSLog(@"上传图片");
 }
 @end

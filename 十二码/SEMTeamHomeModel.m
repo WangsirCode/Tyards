@@ -15,7 +15,15 @@
     if (self)
     {
         self.loadingStatus = 0;
+        self.teamId = [(NSNumber*)dictionary[@"ide"] stringValue];
         [self fetchData:[(NSNumber*)dictionary[@"ide"] stringValue]];
+        
+        NSMutableArray* array = [NSMutableArray new];
+        [array addObject:@"全部"];
+        for ( NSInteger i = 2016; i > 2000; i --) {
+            [array addObject:[@(i) stringValue]];
+        }
+        self.pickerViewDataSource = [NSArray arrayWithArray:array];
     }
     return self;
 }
@@ -28,7 +36,7 @@
     } failure:^(NSError *aError) {
         
     }];
-    [manager fetchTeamPlayers:string success:^(id data) {
+    [manager fetchTeamPlayers:string from:0 to:0 success:^(id data) {
         self.players = data;
         self.loadingStatus += 1;
     } failure:^(NSError *aError) {
@@ -40,13 +48,13 @@
     } failure:^(NSError *aError) {
         
     }];
-    [manager fetchTeamGames:string success:^(id data) {
+    [manager fetchTeamGames:string from:0 to:0 success:^(id data) {
         self.games = data;
         self.loadingStatus += 1;
     } failure:^(NSError *aError) {
         
     }];
-    [manager fetchTeamDetailInfo:string token:[self getToken] success:^(id data) {
+    [manager fetchTeamDetailInfo:string token:[self getToken] from:0 to:0 success:^(id data) {
         self.InfoModel = data;
         self.fan = self.InfoModel.fan;
         self.loadingStatus += 1;
@@ -101,5 +109,88 @@
         }];
     }
     return _shareCommand;
+}
+- (void)loadSRecord:(NSString*)formDate
+{
+    SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
+    if ([formDate isEqualToString:@"全部"]) {
+        [manager fetchTeamDetailInfo:self.teamId token:[self getToken] from:0 to:0 success:^(id data) {
+            self.InfoModel = data;
+            self.shouldUpdateRecord = YES;
+        } failure:^(NSError *aError) {
+            
+        }];
+    }
+    else
+    {
+        long long from = [self getDate:formDate];
+        long long to = [self getDate:[@([formDate integerValue] + 1) stringValue]];
+        [manager fetchTeamDetailInfo:self.teamId token:[self getToken] from:from to:to success:^(id data) {
+            self.InfoModel = data;
+            self.shouldUpdateRecord = YES;
+        } failure:^(NSError *aError) {
+            
+        }];
+    }
+    
+}
+- (void)loadList:(NSString*)fromDate
+{
+    SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
+    if ([fromDate isEqualToString:@"全部"]) {
+        [manager fetchTeamPlayers:self.teamId from:0 to:0  success:^(id data) {
+            self.players = data;
+            self.shouldUpdateList = YES;
+        } failure:^(NSError *aError) {
+            
+        }];
+    }
+    else
+    {
+        long long from = [self getDate:fromDate];
+        long long to = [self getDate:[@([fromDate integerValue] + 1) stringValue]];
+        [manager fetchTeamPlayers:self.teamId from:from to:to success:^(id data) {
+            self.players = data;
+            self.shouldUpdateList = YES;
+        } failure:^(NSError *aError) {
+            
+        }];
+    }
+}
+- (void)loadSchedule:(NSString*)fromDate
+{
+    SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
+    if ([fromDate isEqualToString:@"全部"]) {
+        [manager fetchTeamGames:self.teamId from:0 to:0 success:^(id data) {
+            self.games = data;
+            self.shouldUpdateSchedule = YES;
+        } failure:^(NSError *aError) {
+            
+        }];
+    }
+    else
+    {
+        long long from = [self getDate:fromDate];
+        long long to = [self getDate:[@([fromDate integerValue] + 1) stringValue]];
+        [manager fetchTeamGames:self.teamId from:from to:to success:^(id data) {
+            self.games = data;
+            self.shouldUpdateSchedule = YES;
+        } failure:^(NSError *aError) {
+            
+        }];
+    }
+}
+- (long long)getDate:(NSString*)date
+{
+    NSCalendar *gregorian = [[NSCalendar alloc]
+                             initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents* comp = [[NSDateComponents alloc] init];
+    comp.year = [date integerValue];
+    comp.month = 1;
+    comp.day = 1;
+    comp.minute = 0;
+    comp.hour = 0;
+    NSDate* date1 = [gregorian dateFromComponents:comp];
+    return [date1 timeIntervalSince1970] * 1000;
 }
 @end

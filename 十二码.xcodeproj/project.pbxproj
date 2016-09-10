@@ -207,6 +207,9 @@
 		4788AA9D1D71EA6D0057B954 /* PlayHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 4788AA9C1D71EA6D0057B954 /* PlayHistory.m */; };
 		478B5E531D420728007AABC4 /* SEMNetworkingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 478B5E521D420728007AABC4 /* SEMNetworkingManager.m */; };
 		478B5E561D420AC5007AABC4 /* hotTopicsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 478B5E551D420AC5007AABC4 /* hotTopicsModel.m */; };
+		47A008351D83A9AA0090F1A5 /* CenterAlertIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A008341D83A9AA0090F1A5 /* CenterAlertIView.m */; };
+		47A008381D83F0270090F1A5 /* CenterDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A008371D83F0270090F1A5 /* CenterDatePickerView.m */; };
+		47A0083B1D84491C0090F1A5 /* ImageResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A0083A1D84491C0090F1A5 /* ImageResponseModel.m */; };
 		47A086431D82AD9B00ECB636 /* MyLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A086411D82AD9B00ECB636 /* MyLabel.m */; };
 		47A086461D82DB1100ECB636 /* TournamentGamesResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A086451D82DB1100ECB636 /* TournamentGamesResponseModel.m */; };
 		47A364B11D597C78002FC59E /* AlbumDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A364B01D597C78002FC59E /* AlbumDetailController.m */; };
@@ -628,6 +631,12 @@
 		478B5E521D420728007AABC4 /* SEMNetworkingManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SEMNetworkingManager.m; sourceTree = "<group>"; };
 		478B5E541D420AC5007AABC4 /* hotTopicsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hotTopicsModel.h; sourceTree = "<group>"; };
 		478B5E551D420AC5007AABC4 /* hotTopicsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = hotTopicsModel.m; sourceTree = "<group>"; };
+		47A008331D83A9AA0090F1A5 /* CenterAlertIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CenterAlertIView.h; sourceTree = "<group>"; };
+		47A008341D83A9AA0090F1A5 /* CenterAlertIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CenterAlertIView.m; sourceTree = "<group>"; };
+		47A008361D83F0270090F1A5 /* CenterDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CenterDatePickerView.h; sourceTree = "<group>"; };
+		47A008371D83F0270090F1A5 /* CenterDatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CenterDatePickerView.m; sourceTree = "<group>"; };
+		47A008391D84491C0090F1A5 /* ImageResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageResponseModel.h; sourceTree = "<group>"; };
+		47A0083A1D84491C0090F1A5 /* ImageResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageResponseModel.m; sourceTree = "<group>"; };
 		47A086411D82AD9B00ECB636 /* MyLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyLabel.m; sourceTree = "<group>"; };
 		47A086421D82AD9B00ECB636 /* MyLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLabel.h; sourceTree = "<group>"; };
 		47A086441D82DB1100ECB636 /* TournamentGamesResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TournamentGamesResponseModel.h; sourceTree = "<group>"; };
@@ -1399,6 +1408,8 @@
 				473C991E1D8289350093F662 /* PickerView.m */,
 				47B6621D1D8293B20099BDF3 /* GenderPickerView.h */,
 				47B6621E1D8293B20099BDF3 /* GenderPickerView.m */,
+				47A008361D83F0270090F1A5 /* CenterDatePickerView.h */,
+				47A008371D83F0270090F1A5 /* CenterDatePickerView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1457,6 +1468,8 @@
 				47C053E41D75A14C00AEBF86 /* MyClosedInvitationResponseModel.m */,
 				47CAC1DE1D766837001D3708 /* PlacceResponseModel.h */,
 				47CAC1DF1D766837001D3708 /* PlacceResponseModel.m */,
+				47A008391D84491C0090F1A5 /* ImageResponseModel.h */,
+				47A0083A1D84491C0090F1A5 /* ImageResponseModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1550,6 +1563,8 @@
 				47A364D71D5ABC7F002FC59E /* PlayerInfoView.m */,
 				47ABD96C1D607E8300CD18CF /* InfoViewCell.h */,
 				47ABD96D1D607E8300CD18CF /* InfoViewCell.m */,
+				47A008331D83A9AA0090F1A5 /* CenterAlertIView.h */,
+				47A008341D83A9AA0090F1A5 /* CenterAlertIView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1919,6 +1934,7 @@
 				4772FE6A1D565C780008ED37 /* MyMessageCell.m in Sources */,
 				4735FA0F1D560EBE00FDF2ED /* MeUserInfoResponseModel.m in Sources */,
 				476823751D44EA7E00B224E6 /* SearchModel.m in Sources */,
+				47A008351D83A9AA0090F1A5 /* CenterAlertIView.m in Sources */,
 				4734CD991D41BE3E006536DF /* DataArchive.m in Sources */,
 				47CAC1D71D76630E001D3708 /* TypeSelectController.m in Sources */,
 				473BCCD51D5961F1005DBD2F /* PhotoCollectionCell.m in Sources */,
@@ -1967,6 +1983,7 @@
 				470C5EF61D44D7E700DDF90B /* SEMSearchViewController.m in Sources */,
 				475307501D46F964003ECEBF /* MeinfoVIew.m in Sources */,
 				4776425C1D5434F100548C9F /* SEMTeamHomeModel.m in Sources */,
+				47A0083B1D84491C0090F1A5 /* ImageResponseModel.m in Sources */,
 				477642521D541F8300548C9F /* TeamLisstResponseModel.m in Sources */,
 				47C322151D6BF6FE00317A4C /* AwardListResponseModel.m in Sources */,
 				4734CDE11D41CBEA006536DF /* SEMTabViewController.m in Sources */,
@@ -1999,6 +2016,7 @@
 				4734CD921D41BCB9006536DF /* SEMMeViewModel.m in Sources */,
 				470D2EE91D7AC8B1001047BD /* ChangeNickNameController.m in Sources */,
 				477676661D5853CD00E10594 /* FeedBackController.m in Sources */,
+				47A008381D83F0270090F1A5 /* CenterDatePickerView.m in Sources */,
 				470F56D71D71DF9400110FCE /* HistoryView.m in Sources */,
 				470BEE141D58295C003167ED /* SetUpViewModel.m in Sources */,
 				4772FE641D5657B40008ED37 /* MyMessageViewModel.m in Sources */,

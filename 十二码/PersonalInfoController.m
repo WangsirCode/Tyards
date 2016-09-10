@@ -13,7 +13,7 @@
 #import "ColleageSearchController.h"
 #import "PickerView.h"
 #import "GenderPickerView.h"
-@interface PersonalInfoController ()<UITableViewDelegate,UITableViewDataSource,UIPickerViewDelegate,UIPickerViewDataSource,SEMSearchViewControllerDelegate,SearchCollegeDalegate,PickerViewDelegate,GenderPickerViewDelegate>
+@interface PersonalInfoController ()<UITableViewDelegate,UITableViewDataSource,UIPickerViewDelegate,UIPickerViewDataSource,SEMSearchViewControllerDelegate,SearchCollegeDalegate,PickerViewDelegate,GenderPickerViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIActionSheetDelegate>
 @property (strong,nonatomic) PersonalInfoViewModel * viewModel;
 @property (nonatomic,strong) UIBarButtonItem       * backItem;
 @property (nonatomic,strong) UIImageView           * headImageView;
@@ -62,7 +62,6 @@
     [self.view addSubview:self.headImageView];
     [self.view addSubview:self.logoImageView];
     [self.view addSubview:self.tableview];
-
 }
 
 - (void)makeConstraits
@@ -91,14 +90,6 @@
 - (void)bindModel
 {
     self.navigationItem.title = @"个人资料";
-    if (self.viewModel.model.avatar) {
-        NSURL* url = [[NSURL alloc] initWithString:self.viewModel.model.avatar];
-        [self.logoImageView sd_setImageWithURL:url placeholderImage:[UIImage placeholderImage]];
-    }
-    else
-    {
-        self.logoImageView.image = [UIImage placeholderImage];
-    }
     [[self.viewModel.postCommand executionSignals] subscribeNext:^(id x) {
         [XHToast showCenterWithText:@"提交成功"];
         [self.navigationController popViewControllerAnimated:YES];
@@ -106,9 +97,87 @@
     [RACObserve(self.viewModel, shouldReloadData) subscribeNext:^(id x) {
         if (self.viewModel.shouldReloadData == YES) {
             [self.tableview reloadData];
+            if (self.viewModel.model.avatar) {
+                NSURL* url = [[NSURL alloc] initWithString:self.viewModel.model.avatar];
+                [self.logoImageView sd_setImageWithURL:url placeholderImage:[UIImage placeholderImage]];
+            }
+            else
+            {
+                self.logoImageView.image = [UIImage placeholderImage];
+            }
+            UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] initWithActionBlock:^(id  _Nonnull sender) {
+                UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"选择头像" message:nil preferredStyle:(UIAlertControllerStyleActionSheet)];
+                UIAlertAction* canel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+                UIAlertAction* photo = [UIAlertAction actionWithTitle:@"从相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    [self selectPhoto];
+                }];
+                UIAlertAction* takephoto = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    [self takePhoto];
+                }];
+                [alert addAction:canel];
+                [alert addAction:photo];
+                [alert addAction:takephoto];
+                [self presentViewController:alert animated:YES completion:nil];
+            }];
+            [self.logoImageView addGestureRecognizer:tap];
         }
     }];
 }
+#pragma mark - photo
+- (void)selectPhoto
+{
+    NSLog(@"从相册选择");
+    UIImagePickerController *picker = [[UIImagePickerController alloc]init];
+    //设置图片源(相簿)
+    picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+    //设置代理
+    picker.delegate = self;
+    //设置可以编辑
+    picker.allowsEditing = YES;
+    //打开拾取器界面
+    self.navigationController.navigationBar.translucent = NO;
+    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setShadowImage:nil];
+    [self presentViewController:picker animated:YES completion:nil];
+}
+- (void)takePhoto
+{
+    NSLog(@"拍照");
+    NSLog(@"从相册选择");
+    UIImagePickerController *picker = [[UIImagePickerController alloc]init];
+    //设置图片源(相簿)
+    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    //设置代理
+    picker.delegate = self;
+    //设置可以编辑
+    picker.allowsEditing = YES;
+    //打开拾取器界面
+    self.navigationController.navigationBar.translucent = NO;
+    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setShadowImage:nil];
+    [self presentViewController:picker animated:YES completion:nil];
+    
+}
+#pragma mark UIImagePickerControllerDelegate methods
+//完成选择图片
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo
+{
+    //加载图片
+    self.logoImageView.image = image;
+    //选择框消失
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
+    self.navigationController.navigationBar.translucent = YES;
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    [DataArchive archiveUserData:image withFileName:@"headimage"];
+    [self.viewModel postImage:image];
+}
+//取消选择图片
+-(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
 #pragma mark -SearchDelegate
 - (void)didSelectedItem:(NSString *)name diplayname:(NSString *)dispalyname uni:(Universities *)uni
 {
@@ -263,6 +332,7 @@
         _headImageView = [[UIImageView alloc] init];
         _headImageView.image = [UIImage imageNamed:@"头像背景"];
         _headImageView.contentMode = UIViewContentModeScaleToFill;
+        _headImageView.userInteractionEnabled = YES;
     }
     return _headImageView;
 }
@@ -270,6 +340,7 @@
 {
     if (!_logoImageView) {
         _logoImageView = [UIImageView new];
+        _logoImageView.userInteractionEnabled = YES;
     }
     return _logoImageView;
 }

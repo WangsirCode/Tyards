@@ -11,8 +11,8 @@
 #import "TypeSelectController.h"
 #import "MakeInvitationViewModel.h"
 #import "PlaceSelectController.h"
-
-@interface MakeInvitationController () <UITableViewDelegate,UITableViewDataSource,UITextViewDelegate,UITextFieldDelegate,TypeSelectControllerDelegate,PlaceSelectControllerDelegate>
+#import "CenterDatePickerView.h"
+@interface MakeInvitationController () <UITableViewDelegate,UITableViewDataSource,UITextViewDelegate,UITextFieldDelegate,TypeSelectControllerDelegate,PlaceSelectControllerDelegate,CenterDatePickerViewDelegate>
 @property (nonatomic,strong) UIBarButtonItem      *backItem;
 @property (nonatomic,strong) MBProgressHUD        *hud;
 @property (nonatomic,strong) MakeInvitationViewModel         *viewModel;
@@ -23,14 +23,12 @@
 @property (nonatomic,strong) UITextField          *titleFiled;
 @property (nonatomic,strong) UITextField          *cmanFiled;
 @property (nonatomic,strong) UITextField          *cteleFiled;
-@property (nonatomic,strong) UIDatePicker         *datePicker;
-@property (nonatomic,strong) UIDatePicker         *timePicker;
 @property (nonatomic,strong) UILabel              *dateLabel;
 @property (nonatomic,strong) UILabel              *timeLabel;
 @property (nonatomic,strong) UILabel              *placeLabel;
 @property (nonatomic,strong) UILabel              *typeLabel;
-@property (nonatomic,strong) UIBarButtonItem      *doneItem;
-@property (nonatomic,strong) UIBarButtonItem      *cancelItem;
+@property (nonatomic,strong) CenterDatePickerView *datePickerView;
+@property (nonatomic,strong) CenterDatePickerView *timePickerView;
 @end
 @implementation MakeInvitationController
 - (instancetype)initWithDictionary:(NSDictionary*)dictionary
@@ -106,8 +104,8 @@
     self.navigationItem.leftBarButtonItem = self.backItem;
     
     [self.view addSubview:self.postTableView];
-    [self.view addSubview:self.datePicker];
-    [self.view addSubview:self.timePicker];
+//    [self.view addSubview:self.datePicker];
+//    [self.view addSubview:self.timePicker];
 
     [self.view addSubview:self.postButton];
 }
@@ -125,17 +123,17 @@
     .bottomEqualToView(self.view)
     .heightIs(48*self.view.scale);
     
-    self.datePicker.sd_layout
-    .bottomSpaceToView(self.view,0)
-    .heightIs(210*self.view.scale)
-    .widthIs(self.view.width)
-    .centerXEqualToView(self.view);
-    
-    self.timePicker.sd_layout
-    .centerXEqualToView(self.view)
-    .bottomSpaceToView(self.view,0)
-    .widthIs(self.view.width)
-    .heightIs(210*self.view.scale);
+//    self.datePicker.sd_layout
+//    .bottomSpaceToView(self.view,0)
+//    .heightIs(210*self.view.scale)
+//    .widthIs(self.view.width)
+//    .centerXEqualToView(self.view);
+//    
+//    self.timePicker.sd_layout
+//    .centerXEqualToView(self.view)
+//    .bottomSpaceToView(self.view,0)
+//    .widthIs(self.view.width)
+//    .heightIs(210*self.view.scale);
 }
 - (void)dismiss
 {
@@ -335,20 +333,22 @@
         [self.titleFiled resignFirstResponder];
         [self.cteleFiled resignFirstResponder];
         [self.cmanFiled resignFirstResponder];
-        self.datePicker.hidden = NO;
-        self.postButton.hidden = YES;
-        self.navigationItem.leftBarButtonItem = self.doneItem;
-        self.navigationItem.rightBarButtonItem = self.cancelItem;
+//        self.datePicker.hidden = NO;
+//        self.postButton.hidden = YES;
+//        self.navigationItem.leftBarButtonItem = self.doneItem;
+//        self.navigationItem.rightBarButtonItem = self.cancelItem;
+        [self.view addSubview:self.datePickerView];
     }
     else if (indexPath.row == 2)
     {
         [self.titleFiled resignFirstResponder];
         [self.cteleFiled resignFirstResponder];
         [self.cmanFiled resignFirstResponder];
-        self.timePicker.hidden = NO;
-        self.postButton.hidden = YES;
-        self.navigationItem.leftBarButtonItem = self.doneItem;
-        self.navigationItem.rightBarButtonItem = self.cancelItem;
+//        self.timePicker.hidden = NO;
+//        self.postButton.hidden = YES;
+//        self.navigationItem.leftBarButtonItem = self.doneItem;
+//        self.navigationItem.rightBarButtonItem = self.cancelItem;
+        [self.view addSubview:self.timePickerView];
     }
     else if (indexPath.row == 4)
     {
@@ -434,6 +434,18 @@
 - (void)didSelectedItem:(NSString *)type
 {
     self.typeLabel.text = type;
+}
+#pragma mark - centerpickerViewdelegate
+- (void)didClickDoneButton:(CenterDatePickerView *)view
+{
+    if (view.tag == 100) {
+        [self.datePickerView removeFromSuperview];
+    }
+    else if(view.tag == 101)
+    {
+        [self.timePickerView removeFromSuperview];
+    }
+    [self doneItemAction];
 }
 #pragma mark- getter
 
@@ -522,34 +534,34 @@
     }
     return _cteleFiled;
 }
-- (UIDatePicker *)datePicker
-{
-    if (!_datePicker) {
-        _datePicker = [UIDatePicker new];
-        _datePicker.date = [[NSDate alloc] init];
-        _datePicker.center = self.view.center;
-        _datePicker.datePickerMode = UIDatePickerModeDate;
-        NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh"];
-        _datePicker.locale = locale;
-        _datePicker.backgroundColor = [UIColor BackGroundColor];
-        _datePicker.hidden = YES;
-    }
-    return _datePicker;
-}
-- (UIDatePicker *)timePicker
-{
-    if (!_timePicker) {
-        _timePicker = [UIDatePicker new];
-        _timePicker.date = [[NSDate alloc] init];
-        _timePicker.center = self.view.center;
-        _timePicker.datePickerMode = UIDatePickerModeTime;
-        NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh"];
-        _timePicker.locale = locale;
-        _timePicker.backgroundColor = [UIColor BackGroundColor];
-        _timePicker.hidden = YES;
-    }
-    return _timePicker;
-}
+//- (UIDatePicker *)datePicker
+//{
+//    if (!_datePicker) {
+//        _datePicker = [UIDatePicker new];
+//        _datePicker.date = [[NSDate alloc] init];
+//        _datePicker.center = self.view.center;
+//        _datePicker.datePickerMode = UIDatePickerModeDate;
+//        NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh"];
+//        _datePicker.locale = locale;
+//        _datePicker.backgroundColor = [UIColor BackGroundColor];
+//        _datePicker.hidden = YES;
+//    }
+//    return _datePicker;
+//}
+//- (UIDatePicker *)timePicker
+//{
+//    if (!_timePicker) {
+//        _timePicker = [UIDatePicker new];
+//        _timePicker.date = [[NSDate alloc] init];
+//        _timePicker.center = self.view.center;
+//        _timePicker.datePickerMode = UIDatePickerModeTime;
+//        NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh"];
+//        _timePicker.locale = locale;
+//        _timePicker.backgroundColor = [UIColor BackGroundColor];
+//        _timePicker.hidden = YES;
+//    }
+//    return _timePicker;
+//}
 - (UILabel *)dateLabel
 {
     if (!_dateLabel) {
@@ -578,41 +590,67 @@
     }
     return _typeLabel;
 }
-- (UIBarButtonItem *)cancelItem
+//- (UIBarButtonItem *)cancelItem
+//{
+//    if (!_cancelItem) {
+//        _cancelItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(cancelItemAction)];
+//    }
+//    return _cancelItem;
+//}
+//- (void)cancelItemAction
+//{
+//    self.datePicker.hidden = YES;
+//    self.timePicker.hidden = YES;
+//    self.postButton.hidden = NO;
+//    self.navigationItem.rightBarButtonItem = nil;
+//    self.navigationItem.leftBarButtonItem = self.backItem;
+//}
+//- (UIBarButtonItem *)doneItem
+//{
+//    if (!_doneItem) {
+//        _doneItem = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(doneItemAction)];
+//    }
+//    return _doneItem;
+//}
+- (CenterDatePickerView *)datePickerView
 {
-    if (!_cancelItem) {
-        _cancelItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(cancelItemAction)];
+    if (!_datePickerView) {
+        _datePickerView = [[CenterDatePickerView alloc] init];
+        _datePickerView.pickerView.datePickerMode = UIDatePickerModeDate;
+        NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh"];
+        _datePickerView.delegate = self;
+        _datePickerView.tag = 100;
+        _datePickerView.pickerView.locale = locale;
+        _datePickerView.frame = [UIScreen mainScreen].bounds;
     }
-    return _cancelItem;
+    return _datePickerView;
 }
-- (void)cancelItemAction
+- (CenterDatePickerView *)timePickerView
 {
-    self.datePicker.hidden = YES;
-    self.timePicker.hidden = YES;
-    self.postButton.hidden = NO;
-    self.navigationItem.rightBarButtonItem = nil;
-    self.navigationItem.leftBarButtonItem = self.backItem;
-}
-- (UIBarButtonItem *)doneItem
-{
-    if (!_doneItem) {
-        _doneItem = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(doneItemAction)];
+    if (!_timePickerView) {
+        _timePickerView = [[CenterDatePickerView alloc] init];
+        _timePickerView.pickerView.datePickerMode = UIDatePickerModeTime;
+        _timePickerView.delegate = self;
+        _timePickerView.tag = 101;
+        NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh"];
+        _timePickerView.pickerView.locale = locale;
+        _timePickerView.frame = [UIScreen mainScreen].bounds;
     }
-    return _doneItem;
+    return _timePickerView;
 }
 - (void)doneItemAction
 {
-    self.datePicker.hidden = YES;
-    self.timePicker.hidden = YES;
-    self.postButton.hidden = NO;
-    self.navigationItem.rightBarButtonItem = nil;
-    self.navigationItem.leftBarButtonItem = self.backItem;
+//    self.datePicker.hidden = YES;
+//    self.timePicker.hidden = YES;
+//    self.postButton.hidden = NO;
+//    self.navigationItem.rightBarButtonItem = nil;
+//    self.navigationItem.leftBarButtonItem = self.backItem;
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = @"yyyy年MM月dd日";
-    self.dateLabel.text = [formatter stringFromDate:self.datePicker.date];
+    self.dateLabel.text = [formatter stringFromDate:self.datePickerView.pickerView.date];
 
     formatter.dateFormat = @"HH: mm";
-    self.timeLabel.text = [formatter stringFromDate:self.timePicker.date];
+    self.timeLabel.text = [formatter stringFromDate:self.timePickerView.pickerView.date];
     // 获取代表公历的Calendar对象
     NSCalendar *gregorian = [[NSCalendar alloc]
                              initWithCalendarIdentifier:NSGregorianCalendar];
@@ -621,9 +659,9 @@
     NSMonthCalendarUnit |  NSDayCalendarUnit;
     unsigned unitFlags2 = NSHourCalendarUnit |  NSMinuteCalendarUnit;
     NSDateComponents* comp = [gregorian components: unitFlags
-                                          fromDate:self.datePicker.date];
+                                          fromDate:self.datePickerView.pickerView.date];
     NSDateComponents* comp2 = [gregorian components: unitFlags2
-                                          fromDate:self.timePicker.date];
+                                          fromDate:self.timePickerView.pickerView.date];
     comp.hour = comp2.hour;
     comp.minute = comp2.minute;
     NSDate* date = [gregorian dateFromComponents:comp];

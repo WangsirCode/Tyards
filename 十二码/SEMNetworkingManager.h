@@ -5,7 +5,7 @@
 //  Created by 汪宇豪 on 16/7/22.
 //  Copyright © 2016年 汪宇豪. All rights reserved.
 //
-
+#import "ImageResponseModel.h"
 #import <AFNetworking/AFNetworking.h>
 #import "hotTopicsModel.h"
 #import "DataArchive.h"
@@ -257,6 +257,8 @@
  *  @return NSURLSessionTask
  */
 - (NSURLSessionTask*)fetchTeamPlayers:(NSString*)ide
+                                 from:(long long)from
+                                   to:(long long)to
                            success:(void (^)(id data))successBlock
                            failure:(void (^)(NSError *aError))failureBlock;
 
@@ -289,6 +291,8 @@
  *  @return NSURLSessionTask
  */
 - (NSURLSessionTask*)fetchTeamGames:(NSString*)ide
+                               from:(long long)from
+                                 to:(long long)to
                                success:(void (^)(id data))successBlock
                                failure:(void (^)(NSError *aError))failureBlock;
 
@@ -306,6 +310,8 @@
  */
 - (NSURLSessionTask*)fetchTeamDetailInfo:(NSString*)ide
                                    token:(NSString*)token
+                                    from:(long long)from
+                                      to:(long long)to
                             success:(void (^)(id data))successBlock
                             failure:(void (^)(NSError *aError))failureBlock;
 
@@ -950,5 +956,38 @@
                             success:(void (^)(id data))successBlock
                             failure:(void (^)(NSError *aError))failureBlock;
 
+
+/*!
+ *  @author 汪宇豪, 16-09-10 21:09:25
+ *
+ *  @brief 上传图片
+ *
+ *  @param base64
+ *  @param successBlock 成功
+ *  @param failureBlock 失败
+ *
+ *  @return NSURLSessionTask
+ */
+- (NSURLSessionTask*)postImage:(NSString*)base64
+                         token:(NSString*)token
+                            success:(void (^)(id data))successBlock
+                            failure:(void (^)(NSError *aError))failureBlock;
+
+
+/*!
+ *  @author 汪宇豪, 16-09-10 21:09:28
+ *
+ *  @brief 更新头像
+ *
+ *  @param pictureId    id
+ *  @param successBlock 成功
+ *  @param failureBlock 失败
+ *
+ *  @return NSURLSessionTask
+ */
+- (NSURLSessionTask*)updateMyAvatar:(NSInteger)pictureId
+                              token:(NSString*)token
+                       success:(void (^)(id data))successBlock
+                       failure:(void (^)(NSError *aError))failureBlock;
 @end
 

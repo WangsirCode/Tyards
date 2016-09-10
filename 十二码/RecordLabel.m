@@ -63,17 +63,17 @@
             switch (self.mark) {
                 case 1:
                     text = [NSMutableString stringWithFormat:@"胜   %ld",(long)self.model.wins];
-                    percentage = [NSMutableString stringWithFormat:@"%ld",self.model.wins / total * 100];
+                    percentage = [NSMutableString stringWithFormat:@"%ld",(NSInteger)((((CGFloat)self.model.wins / (CGFloat)total)) * 100)];
                     [percentage appendString:@"%"];
                     break;
                 case 2:
                     text = [NSMutableString stringWithFormat:@"平   %ld",(long)self.model.draws];
-                    percentage = [NSMutableString stringWithFormat:@"%ld",self.model.draws / total * 100];
+                    percentage = [NSMutableString stringWithFormat:@"%ld",(NSInteger)((((CGFloat)self.model.draws / (CGFloat)total)) * 100)];
                     [percentage appendString:@"%"];
                     break;
                 case 3:
                     text = [NSMutableString stringWithFormat:@"负   %ld",(long)self.model.loses];
-                    percentage = [NSMutableString stringWithFormat:@"%ld",self.model.loses / total * 100];
+                    percentage = [NSMutableString stringWithFormat:@"%ld",(NSInteger)((((CGFloat)self.model.loses / (CGFloat)total)) * 100)];
                     [percentage appendString:@"%"];
                     break;
                 default:
@@ -106,13 +106,13 @@
         _markView = [[UIImageView alloc] init];
         switch (self.mark) {
             case 1:
-                _markView.backgroundColor = [UIColor colorWithHexString:@"76D186"];
+                _markView.backgroundColor = [UIColor colorWithHexString:@"79D0B6"];
                 break;
             case 2:
                 _markView.backgroundColor = [UIColor colorWithHexString:@"DAF1B4"];
                 break;
             case 3:
-                _markView.backgroundColor = [UIColor colorWithRed:156/255.0 green:222/255.0 blue:154/255.0 alpha:1];
+                _markView.backgroundColor = [UIColor colorWithHexString:@"#ABE1AC"];
                 break;
             default:
                 break;

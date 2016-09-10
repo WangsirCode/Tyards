@@ -301,13 +301,21 @@ NSString* const GameMessage = @"/match/newses/";
 }
 
 //球队队员信息
-- (NSURLSessionTask *)fetchTeamPlayers:(NSString *)ide success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
+- (NSURLSessionTask *)fetchTeamPlayers:(NSString *)ide from:(long long)from to:(long long)to success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
 {
     [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
     NSMutableString* URL = [[NSMutableString alloc] init];
     [URL appendString:TeamPlayer];
     [URL appendString:ide];
-    return [self GET:URL parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
+    NSDictionary* para;
+    if (from == 0) {
+        para = nil;
+    }
+    else
+    {
+        para = @{@"from":@(from),@"to":@(to)};
+    }
+    return [self GET:URL parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         TeamPlayerResponseModel* model = [TeamPlayerResponseModel mj_objectWithKeyValues:responseObject];
@@ -341,16 +349,20 @@ NSString* const GameMessage = @"/match/newses/";
         failureBlock(error);
     }];
 }
-- (NSURLSessionTask *)fetchTeamGames:(NSString *)ide success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
+- (NSURLSessionTask *)fetchTeamGames:(NSString *)ide from:(long long)from to:(long long)to success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
 {
     [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
     NSMutableString* URL = [[NSMutableString alloc] init];
     [URL appendString:TeamGames];
-    //测试以这个未测试
-//    [URL appendString:@"75"];
-    
     [URL appendString:ide];
-    NSDictionary* para = @{@"group":@YES};
+    NSDictionary* para;
+    if (from == 0) {
+        para = @{@"group":@YES};
+    }
+    else
+    {
+        para = @{@"group":@YES,@"from":@(from),@"to":@(to)};
+    }
     return [self GET:URL parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -505,14 +517,21 @@ NSString* const GameMessage = @"/match/newses/";
 
 //获取球队详情
 
-- (NSURLSessionTask *)fetchTeamDetailInfo:(NSString *)ide token:(NSString*)token success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
+- (NSURLSessionTask *)fetchTeamDetailInfo:(NSString *)ide token:(NSString*)token from:(long long)from to:(long long)to success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
 {
     [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
     NSMutableString* URL = [[NSMutableString alloc] init];
     [URL appendString:TeamDetailInfo
      ];
     [URL appendString:ide];
-    NSDictionary* dic = @{@"token":token};
+    NSDictionary* dic;
+    if (from == 0) {
+        dic = @{@"token":token};
+    }
+    else
+    {
+        dic = @{@"token":token,@"from":@(from),@"to":@(to)};
+    }
     return [self GET:URL parameters:dic progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -1085,6 +1104,37 @@ NSString* const GameMessage = @"/match/newses/";
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NewsDetailResponseModel* model = [NewsDetailResponseModel mj_objectWithKeyValues:responseObject];
         successBlock(model.resp);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }];
+}
+//上传头像
+- (NSURLSessionTask *)postImage:(NSString *)base64 token:(NSString*)token success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
+{
+    [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
+//    self.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSMutableString* string = [NSMutableString stringWithString: @"/media/uploadImage"];
+    NSDictionary* para = @{@"str":base64,@"token":token};
+    return [self POST:string parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        ImageResponseModel* model = [ImageResponseModel mj_objectWithKeyValues:responseObject];
+        successBlock(@(model.resp.id));
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }];
+}
+//更新我的头像
+- (NSURLSessionTask *)updateMyAvatar:(NSInteger)pictureId token:(NSString*)token success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
+{
+    [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
+    self.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSMutableString* string = [NSMutableString stringWithString: @"/user/updateMyAvatar"];
+    NSDictionary* para = @{@"id":@(pictureId),@"token":token};
+    return [self POST:string parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        successBlock(responseObject);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failureBlock(error);
     }];

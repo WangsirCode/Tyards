@@ -35,12 +35,12 @@
     }
     else
     {
-        end1 = 2 * PI * (self.model.loses / totle);
+        end1 = 2 * PI * (self.model.wins / totle);
         end2 = 2 * PI * (self.model.draws / totle) + end1;
     }
     
     CGContextMoveToPoint(context, center.x, center.y);//移动画笔到指定坐标点
-    UIColor* aColor = [UIColor colorWithHexString:@"#76D1B6"];
+    UIColor* aColor = [UIColor colorWithHexString:@"#79D0B6"];
     CGContextSetFillColorWithColor(context, aColor.CGColor);//填充颜色
     CGContextAddArc(context, center.x, center.y, 80*self.scale, 0 - PI / 2, end1 - PI / 2, 0); //添加一个圆
     CGContextDrawPath(context, kCGPathFill);
@@ -52,7 +52,8 @@
     CGContextDrawPath(context, kCGPathFill);
 //
     CGContextMoveToPoint(context, center.x, center.y);//移动画笔到指定坐标点
-    UIColor* cColor = [UIColor colorWithRed:156/255.0 green:222/255.0 blue:154/255.0 alpha:1];
+    //UIColor* cColor = [UIColor colorWithRed:156/255.0 green:222/255.0 blue:154/255.0 alpha:1];
+    UIColor* cColor = [UIColor colorWithHexString:@"#ABE1AC"];
     CGContextSetFillColorWithColor(context, cColor.CGColor);//填充颜色
     CGContextAddArc(context, center.x, center.y, 80*self.scale, end2 - PI / 2, 2 *PI- PI / 2, 0); //添加一个圆
     CGContextDrawPath(context, kCGPathFill);

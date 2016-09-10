@@ -270,7 +270,7 @@
         [DataArchive removeUserFile:@"UserInfo"];
         NSDictionary *userInfo = [response jsonResponse];
         UserModel* data = [[UserModel alloc] init];
-        data.headimgurl = userInfo[@"figureurl_qq_1"];
+        data.headimgurl = userInfo[@"figureurl_qq_2"];
         data.nickname = userInfo[@"nickname"];
         data.token = (NSString*)[DataArchive unarchiveUserDataWithFileName:@"token"];
         [DataArchive archiveUserData:data withFileName:@"userinfo"];

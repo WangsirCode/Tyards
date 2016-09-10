@@ -17,4 +17,5 @@
 @property (nonatomic,strong)NSDictionary* gender;
 @property (nonatomic,strong) RACCommand* postCommand;
 - (void)getDetail;
+- (void)postImage:(UIImage*)image;
 @end

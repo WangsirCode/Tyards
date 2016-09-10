@@ -38,13 +38,23 @@
     self.viewModel.info = (UserModel*)[DataArchive unarchiveUserDataWithFileName:@"userinfo"];
     if (self.viewModel.info) {
         self.topView.name = self.viewModel.info.nickname;
-        NSURL* url = [[NSURL alloc] initWithString:self.viewModel.info.headimgurl];
-        [self.topView.userHeadView sd_setImageWithURL:url];
-//        self.topView.userHeadView.image = (UIImage*)[DataArchive unarchiveUserDataWithFileName:@"headimage"];
-        NSString* token = (NSString*)[DataArchive unarchiveUserDataWithFileName:@"token"];
-        [self.viewModel fetchUserInfo:token];
+       // NSURL* url = [[NSURL alloc] initWithString:self.viewModel.info.headimgurl];
+//        [self.topView.userHeadView sd_setImageWithURL:url placeholderImage:[UIImage placeholderImage]];
+        self.topView.userHeadView.image = (UIImage*)[DataArchive unarchiveUserDataWithFileName:@"headimage"];
         self.topView.infoView.hidden = NO;
         self.viewModel.isLogined = YES;
+        UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] initWithActionBlock:^(id  _Nonnull sender) {
+            [self.mm_drawerController closeDrawerAnimated: YES completion:^(BOOL finished) {
+                
+            }];
+            
+            UINavigationController* nav = (UINavigationController*)(((SEMTabViewController*)self.mm_drawerController.centerViewController).selectedViewController);
+            
+            PersonalInfoController* controller = [HRTRouter objectForURL:@"myInfo" withUserInfo:@{}];
+            controller.hidesBottomBarWhenPushed = YES;
+            [nav pushViewController:controller animated:YES];
+        }];
+        [self.topView.userHeadView addGestureRecognizer:tap];
     }
     else
     {
@@ -165,7 +175,7 @@
             
             UINavigationController* nav = (UINavigationController*)(((SEMTabViewController*)self.mm_drawerController.centerViewController).selectedViewController);
             
-            PersonalInfoController* controller = [HRTRouter objectForURL:@"myInfo" withUserInfo:@{@"model":self.viewModel.model}];
+            PersonalInfoController* controller = [HRTRouter objectForURL:@"myInfo" withUserInfo:@{}];
             controller.hidesBottomBarWhenPushed = YES;
             [nav pushViewController:controller animated:YES];
         }
