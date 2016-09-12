@@ -37,6 +37,9 @@
 - (NSString *)getToken
 {
     NSString* token = (NSString*)[DataArchive unarchiveUserDataWithFileName:@"token"];
+    if (token == nil) {
+        return @"";
+    }
     return token;
 }
 @end

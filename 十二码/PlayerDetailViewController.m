@@ -120,7 +120,8 @@
             self.navigationItem.title = self.viewModel.model.player.name;
             NSString* urlstring = self.viewModel.model.player.avatar.url;
             if (urlstring) {
-                NSURL* url = [[NSURL alloc] initWithString:urlstring];
+                NSString* encodedString = [urlstring stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+                NSURL *url = [[NSURL alloc] initWithString:encodedString];
                 [self.logoImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"zhanwei.jpg"]];
             }
             else

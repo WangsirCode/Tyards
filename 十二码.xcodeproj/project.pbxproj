@@ -1704,7 +1704,7 @@
 				TargetAttributes = {
 					4734CD351D41B511006536DF = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = 47EGCVD2MR;
+						DevelopmentTeam = UHREVQ5FVS;
 					};
 					4734CD4E1D41B512006536DF = {
 						CreatedOnToolsVersion = 7.3;
@@ -2197,8 +2197,8 @@
 			baseConfigurationReference = DBF612850A2096C988540F2E /* Pods-十二码.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: cheng geng (FX53G2GVEK)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: cheng geng (FX53G2GVEK)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2257,9 +2257,9 @@
 					"\"UIKit\"",
 					"-fobjc-arc",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.yqyl.YiDimension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yqyl.YiDimen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "58acdd3b-e014-4b4f-8f42-59de8919c1a4";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -2268,8 +2268,8 @@
 			baseConfigurationReference = EBAD3E5CA26ABE9BF6BF078F /* Pods-十二码.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: cheng geng (FX53G2GVEK)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: cheng geng (FX53G2GVEK)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2328,9 +2328,9 @@
 					"\"UIKit\"",
 					"-fobjc-arc",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.yqyl.YiDimension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yqyl.YiDimen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "58acdd3b-e014-4b4f-8f42-59de8919c1a4";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
