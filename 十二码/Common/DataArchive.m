@@ -8,6 +8,8 @@
 
 #import "DataArchive.h"
 #import "NSArray+Safe.h"
+#import "MDABizManager.h"
+
 @implementation DataArchive
 
 /**
@@ -116,6 +118,7 @@
         NSLog(@" have");
         BOOL blDele= [fileManager removeItemAtPath:filePath error:nil];
         if (blDele) {
+            [XHToast showCenterWithText:@"已清除"];
             NSLog(@"dele success");
         }else {
             NSLog(@"dele fail");

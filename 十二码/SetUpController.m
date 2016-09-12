@@ -13,6 +13,9 @@
 #import "ShareView.h"
 #import "SEMLoginViewController.h"
 #import "AboutViewController.h"
+#import "UMSocialWechatHandler.h"
+#import "UMSocial.h"
+
 @interface SetUpController ()<UITableViewDelegate,UITableViewDataSource,ShareViewDelegate>
 @property (strong,nonatomic)SetUpViewModel* viewModel;
 @property (nonatomic,strong)UITableView* tableView;
@@ -64,14 +67,49 @@
     NSLog(@"%ld",(long)index);
     switch (index) {
         case 0:
+        {
+            [UMSocialData defaultData].extConfig.wechatSessionData.url = @"www.baidu.com";
+            UMSocialUrlResource *urlResource = [[UMSocialUrlResource alloc] initWithSnsResourceType:UMSocialUrlResourceTypeImage url:@"www.baidu.com"];
+            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:@"十二码" image:nil location:nil urlResource:urlResource presentedController:self completion:^(UMSocialResponseEntity *response){
+                if (response.responseCode == UMSResponseCodeSuccess) {
+                    NSLog(@"分享成功！");
+                }
+            }];
+        }
+
             break;
         case 1:
+        {
+            [UMSocialData defaultData].extConfig.wechatSessionData.url = @"www.baidu.com";
+            UMSocialUrlResource *urlResource = [[UMSocialUrlResource alloc] initWithSnsResourceType:UMSocialUrlResourceTypeImage url:@"www.baidu.com"];
+            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatTimeline] content:@"十二码" image:nil location:nil urlResource:urlResource presentedController:self completion:^(UMSocialResponseEntity *response){
+                if (response.responseCode == UMSResponseCodeSuccess) {
+                    NSLog(@"分享成功！");
+                }
+            }];
+        }
             break;
         case 2:
-            
+        {
+            [UMSocialData defaultData].extConfig.wechatSessionData.url = @"www.baidu.com";
+            UMSocialUrlResource *urlResource = [[UMSocialUrlResource alloc] initWithSnsResourceType:UMSocialUrlResourceTypeImage url:@"www.baidu.com"];
+            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQQ] content:@"十二码" image:nil location:nil urlResource:urlResource presentedController:self completion:^(UMSocialResponseEntity *response){
+                if (response.responseCode == UMSResponseCodeSuccess) {
+                    NSLog(@"分享成功！");
+                }
+            }];
+        }
             break;
         case 3:
-            
+        {
+            [UMSocialData defaultData].extConfig.wechatSessionData.url = @"www.baidu.com";
+            UMSocialUrlResource *urlResource = [[UMSocialUrlResource alloc] initWithSnsResourceType:UMSocialUrlResourceTypeImage url:@"www.baidu.com"];
+            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQzone] content:@"十二码" image:nil location:nil urlResource:urlResource presentedController:self completion:^(UMSocialResponseEntity *response){
+                if (response.responseCode == UMSResponseCodeSuccess) {
+                    NSLog(@"分享成功！");
+                }
+            }];
+        }
             break;
         case 4:
             [self hideMaskView];
@@ -130,7 +168,7 @@
         cell.detailTextLabel.textColor = [UIColor colorWithHexString:@"#CACACA"];
     }
     if ([text isEqualToString:@"清除缓存"]) {
-        detailText = self.viewModel.fileSize;
+        detailText = @"";
         cell.detailTextLabel.text = detailText;
         cell.detailTextLabel.textColor = [UIColor colorWithHexString:@"#CACACA"];
     }
