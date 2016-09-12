@@ -34,6 +34,10 @@
     [self addSubview:self.homeScoreLabel];
     [self addSubview:self.awaySocreLabel];
     [self addSubview:self.centerLabel];
+    [self addSubview:self.locationImageView];
+    [self addSubview:self.timeLabel];
+    [self addSubview:self.timeImageView];
+    [self addSubview:self.homeLabel];
 }
 
 - (void)makeConstraits
@@ -70,6 +74,28 @@
         make.centerX.equalTo(self.mas_centerX);
         make.centerY.equalTo(self.homeScoreLabel.mas_centerY);
     }];
+    [self.locationImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.equalTo(@(10*scale));
+        make.width.equalTo(@(7*scale));
+        make.top.equalTo(self.homeTitleLabel.mas_bottom).offset(10);
+        make.left.equalTo(self.mas_left).offset(8*self.scale);
+    }];
+    [self.homeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.locationImageView.mas_right).offset(10*self.scale);
+        make.top.equalTo(self.locationImageView.mas_top);
+        make.bottom.equalTo(self.locationImageView.mas_bottom);
+    }];
+    [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.mas_centerX);
+        make.top.equalTo(self.locationImageView.mas_top);
+        make.bottom.equalTo(self.locationImageView.mas_bottom);
+    }];
+    [self.timeImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.equalTo(@(10*scale));
+        make.width.equalTo(@(10*scale));
+        make.top.equalTo(self.homeTitleLabel.mas_bottom).offset(10);
+        make.right.equalTo(self.timeLabel.mas_left).offset(-8);
+    }];
 
 }
 - (void)bindModel
@@ -94,6 +120,8 @@
             {
                 self.awayImgaeview.image = [UIImage placeholderImage];
             }
+            self.homeLabel.text = self.model.tournament.name;
+            self.timeLabel.text = [self.model getDate];
         }
     }];
 }
@@ -198,40 +226,40 @@
 //    }
 //    return _statusLabel;
 //}
-//- (UIImageView *)locationImageView
-//{
-//    if (!_locationImageView) {
-//        _locationImageView = [[UIImageView alloc] init];
-//        _locationImageView.image = [UIImage imageNamed:@"location_L"];
-//    }
-//    return _locationImageView;
-//}
-//- (UILabel *)homeLabel
-//{
-//    if (!_homeLabel) {
-//        _homeLabel = [[UILabel alloc] init];
-//        _homeLabel.textColor = [UIColor colorWithHexString:@"#999999"];
-//        _homeLabel.font = [UIFont systemFontOfSize:11];
-//    }
-//    return _homeLabel;
-//}
-//- (UIImageView *)timeImageView
-//{
-//    if (!_timeImageView) {
-//        _timeImageView = [UIImageView new];
-//        _timeImageView.image = [UIImage imageNamed:@"clock"];
-//    }
-//    return _timeImageView;
-//}
-//- (UILabel *)timeLabel
-//{
-//    if (!_timeLabel) {
-//        _timeLabel = [UILabel new];
-//        _timeLabel.textColor = [UIColor colorWithHexString:@"#999999"];
-//        _timeLabel.font = [UIFont systemFontOfSize:11];
-//    }
-//    return _timeLabel;
-//}
+- (UIImageView *)locationImageView
+{
+    if (!_locationImageView) {
+        _locationImageView = [[UIImageView alloc] init];
+        _locationImageView.image = [UIImage imageNamed:@"赛事icon=灰"];
+    }
+    return _locationImageView;
+}
+- (UILabel *)homeLabel
+{
+    if (!_homeLabel) {
+        _homeLabel = [[UILabel alloc] init];
+        _homeLabel.textColor = [UIColor colorWithHexString:@"#999999"];
+        _homeLabel.font = [UIFont systemFontOfSize:11];
+    }
+    return _homeLabel;
+}
+- (UIImageView *)timeImageView
+{
+    if (!_timeImageView) {
+        _timeImageView = [UIImageView new];
+        _timeImageView.image = [UIImage imageNamed:@"clock"];
+    }
+    return _timeImageView;
+}
+- (UILabel *)timeLabel
+{
+    if (!_timeLabel) {
+        _timeLabel = [UILabel new];
+        _timeLabel.textColor = [UIColor colorWithHexString:@"#999999"];
+        _timeLabel.font = [UIFont systemFontOfSize:11];
+    }
+    return _timeLabel;
+}
 - (void)layoutSubviews
 {
     [super layoutSubviews];

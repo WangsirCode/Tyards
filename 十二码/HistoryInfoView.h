@@ -18,7 +18,7 @@
 //@property (nonatomic,strong) UILabel* roundLabel;
 @property (nonatomic,strong) UIImageView* homeImageview;
 @property (nonatomic,strong) UIImageView* awayImgaeview;
-//@property (nonatomic,strong) UILabel* homeLabel;
+@property (nonatomic,strong) UILabel* homeLabel;
 //@property (nonatomic,strong) UILabel* statusLabel;
 @property (nonatomic,strong) UILabel* homeScoreLabel;
 @property (nonatomic,strong) UILabel* awaySocreLabel;
@@ -26,9 +26,9 @@
 @property (nonatomic,strong) UILabel* homeTitleLabel;
 @property (nonatomic,strong) UILabel* awayTitleLabel;
 @property (nonatomic,strong) PlayHistory* model;
-//@property (nonatomic,strong) UIImageView* locationImageView;
-//@property (nonatomic,strong) UIImageView* timeImageView;
-//@property (nonatomic,strong) UILabel *timeLabel;
+@property (nonatomic,strong) UIImageView* locationImageView;
+@property (nonatomic,strong) UIImageView* timeImageView;
+@property (nonatomic,strong) UILabel *timeLabel;
 //@property (nonatomic,assign)NSInteger status;
 //@property (nonatomic,assign)NSInteger location;
 
