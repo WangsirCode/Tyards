@@ -18,14 +18,14 @@
 
 @implementation PlayerModel
 + (NSDictionary *)objectClassInArray{
-    return @{@"articles" : [Articles class], @"newses" : [Newses class]};
+    return @{@"articles" : [Articles class], @"newses" : [NewsDetailModel class]};
 }
 
 @end
 
 @implementation CoachModel
 + (NSDictionary *)objectClassInArray{
-    return @{@"articles" : [Articles class], @"newses" : [Newses class]};
+    return @{@"articles" : [Articles class], @"newses" : [NewsDetailModel class]};
 }
 
 @end

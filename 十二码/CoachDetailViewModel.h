@@ -10,7 +10,7 @@
 #import "MDABizManager.h"
 @interface CoachDetailViewModel : SEMViewModel
 @property (nonatomic, strong) CoachModel     *model;
-@property (nonatomic,strong ) NSArray<Comments       *> * comments;
+@property (nonatomic, strong) NSArray<NewsDetailModel *> *newsModel;
 @property (nonatomic,strong ) RACCommand      * shareCommand;
 @property (nonatomic,strong ) RACCommand      * likeCommand;
 @property (nonatomic, strong) CoachDataModel *palyerData;

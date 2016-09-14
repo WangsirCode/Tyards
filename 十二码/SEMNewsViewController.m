@@ -237,6 +237,8 @@
                 [self endRefresh];
             }];
         }];
+        _newstableview.backgroundColor = [UIColor BackGroundColor];
+        _newstableview.separatorColor = [UIColor BackGroundColor];
     }
     return _newstableview;
 }
@@ -270,6 +272,7 @@
         }];
         _topictableview.separatorInset = UIEdgeInsetsMake(8, 8, 8, 8);
         _topictableview.separatorColor = [UIColor colorWithHexString:@"#F2F2F2"];
+        _topictableview.backgroundColor = [UIColor BackGroundColor];
     }
     return _topictableview;
 }
@@ -296,6 +299,8 @@
                 [self endRefresh];
             }];
         }];
+        _attensionTableview.backgroundColor = [UIColor BackGroundColor];
+        _attensionTableview.separatorColor = [UIColor BackGroundColor];
     }
     return _attensionTableview;
 }

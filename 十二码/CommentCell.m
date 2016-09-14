@@ -26,17 +26,16 @@
 - (void)setup
 {
     UIImageView *view0 = [UIImageView new];
-    view0.backgroundColor = [UIColor redColor];
     _view0 = view0;
     
     UILabel *view1 = [UILabel new];
     view1.textColor = [UIColor blackColor];
-    view1.font = [UIFont systemFontOfSize:16];
+    view1.font = [UIFont systemFontOfSize:16*self.scale];
     _view1 = view1;
     
     UILabel *view2 = [UILabel new];
     view2.textColor = [UIColor grayColor];
-    view2.font = [UIFont systemFontOfSize:16];
+    view2.font = [UIFont systemFontOfSize:16*self.scale];
     view2.numberOfLines = 0;
     _view2 = view2;
     

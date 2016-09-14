@@ -25,13 +25,7 @@
     //暂时用这个id测试
     [manager fetchCoachInfo:coachId success:^(id data) {
         self.model = data;
-        NSMutableArray* array = [[NSMutableArray alloc] init];
-        [self.model.newses enumerateObjectsUsingBlock:^(Newses * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            if (obj.comments.count > 0) {
-                [array appendObjects:obj.comments];
-            }
-        }];
-        self.comments = [NSArray arrayWithArray:array];
+        self.newsModel = self.model.newses;
         self.status += 1;
     } failure:^(NSError *aError) {
     }];

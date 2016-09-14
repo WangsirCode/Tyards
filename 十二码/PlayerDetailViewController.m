@@ -262,8 +262,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (tableView.tag == MESSAGETABLEVIEWTAG) {
-        CommentCell* cell = (CommentCell*)[tableView dequeueReusableCellWithIdentifier:@"CommentCell" forIndexPath:indexPath];
-        cell.model = self.viewModel.comments[indexPath.row];
+        NewsCommentCell* cell = [[NewsCommentCell alloc] init];
+        cell.model = self.viewModel.messageModel[indexPath.row];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
@@ -326,7 +326,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (tableView.tag == MESSAGETABLEVIEWTAG) {
-        CGFloat height = [tableView cellHeightForIndexPath:indexPath model:self.viewModel.comments[indexPath.row] keyPath:@"model" cellClass:[CommentCell class]  contentViewWidth:[UIScreen mainScreen].bounds.size.width];
+        CGFloat height = [tableView cellHeightForIndexPath:indexPath model:self.viewModel.messageModel[indexPath.row] keyPath:@"model" cellClass:[NewsCommentCell class]  contentViewWidth:[UIScreen mainScreen].bounds.size.width];
         return height;
     }
     else if(tableView.tag == NEWSTABLEVIEWTAG)

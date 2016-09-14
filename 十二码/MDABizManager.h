@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "NewsCommentCell.h"
 #import "AFNetworking.h"
 #import "Masonry.h"
 #import "MJExtension.h"

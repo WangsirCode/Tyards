@@ -463,11 +463,10 @@
     }
     else if (tableView.tag == 103)
     {
-        CommentCell* cell = (CommentCell*)[tableView dequeueReusableCellWithIdentifier:@"CommentCell" forIndexPath:indexPath];
+        NewsCommentCell* cell = [[NewsCommentCell alloc] init];
         cell.model = self.viewModel.messageModel[indexPath.row];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
-
     }
     return nil;
 }
@@ -480,7 +479,7 @@
     }
     else if (tableView.tag == 103)
     {
-        CGFloat height = [tableView cellHeightForIndexPath:indexPath model:self.viewModel.messageModel[indexPath.row] keyPath:@"model" cellClass:[CommentCell class]  contentViewWidth:[UIScreen mainScreen].bounds.size.width];
+        CGFloat height = [tableView cellHeightForIndexPath:indexPath model:self.viewModel.messageModel[indexPath.row] keyPath:@"model" cellClass:[NewsCommentCell class]  contentViewWidth:[UIScreen mainScreen].bounds.size.width];
         return height;
     }
     return 0;

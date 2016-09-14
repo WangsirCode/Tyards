@@ -43,7 +43,7 @@
         
     }];
     [manager fetchTeamComments:string success:^(id data) {
-        self.comments = data;
+        self.newsModel = data;
         self.loadingStatus += 1;
     } failure:^(NSError *aError) {
         

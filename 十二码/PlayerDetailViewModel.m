@@ -25,11 +25,7 @@
     //暂时用这个id测试
     [manager fetchPlayerInfo:playerId success:^(id data) {
         self.model = data;
-        NSMutableArray* array = [[NSMutableArray alloc] init];
-        [self.model.newses enumerateObjectsUsingBlock:^(Newses * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            [array appendObjects:obj.comments];
-        }];
-        self.comments = [NSArray arrayWithArray:array];
+        self.messageModel = self.model.newses;
         self.status += 1;
     } failure:^(NSError *aError) {
     }];

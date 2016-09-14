@@ -337,14 +337,7 @@ NSString* const GameMessage = @"/match/newses/";
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         TeamCommentsResponseModel* result = [TeamCommentsResponseModel mj_objectWithKeyValues:responseObject];
-        NSArray<NewsDetailModel*>* model = result.resp;
-        NSMutableArray<Comments*>* array =[[NSMutableArray alloc] init];
-        [model enumerateObjectsUsingBlock:^(NewsDetailModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            [array appendObjects:obj.comments];
-        }];
-        
-        NSArray* result1 = [[NSArray alloc] initWithArray:array];
-        successBlock(result1);
+        successBlock(result.resp);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failureBlock(error);
     }];
@@ -822,13 +815,7 @@ NSString* const GameMessage = @"/match/newses/";
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         GameMessageResponseModel* result = [GameMessageResponseModel mj_objectWithKeyValues:responseObject];
-        NSArray<NewsDetailModel*>* model = result.resp;
-        NSMutableArray<Comments*>* array =[[NSMutableArray alloc] init];
-        [model enumerateObjectsUsingBlock:^(NewsDetailModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            [array appendObjects:obj.comments];
-        }];
-        NSArray* result1 = [[NSArray alloc] initWithArray:array];
-        successBlock(result1);
+        successBlock(result.resp);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failureBlock(error);
     }];
