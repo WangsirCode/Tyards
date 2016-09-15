@@ -1096,12 +1096,12 @@ NSString* const GameMessage = @"/match/newses/";
     }];
 }
 //上传头像
-- (NSURLSessionTask *)postImage:(NSString *)base64 token:(NSString*)token success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
+- (NSURLSessionTask *)postImage:(NSString *)base64 success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
 {
     [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
 //    self.responseSerializer = [AFHTTPResponseSerializer serializer];
     NSMutableString* string = [NSMutableString stringWithString: @"/media/uploadImage"];
-    NSDictionary* para = @{@"str":base64,@"token":token};
+    NSDictionary* para = @{@"str":base64};
     return [self POST:string parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -1119,6 +1119,112 @@ NSString* const GameMessage = @"/match/newses/";
     NSMutableString* string = [NSMutableString stringWithString: @"/user/updateMyAvatar"];
     NSDictionary* para = @{@"id":@(pictureId),@"token":token};
     return [self POST:string parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        successBlock(responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }];
+}
+//提交评论
+- (NSURLSessionTask *)postComment:(NSInteger)iden content:(NSString *)content targetCommentId:(NSInteger)targetCommentId remind:(NSInteger)remind token:(NSString *)token success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
+{
+    [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
+    self.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSMutableString* string = [NSMutableString stringWithString: @"/news/comment"];
+    NSDictionary* para;
+    if (remind == 0) {
+        para = @{@"id":@(iden),@"content":content,@"token":token};
+    }
+    else
+    {
+        para = @{@"id":@(iden),@"content":content,@"targetCommentId":@(targetCommentId),@"remind":@(remind),@"token":token};
+    }
+    return [self POST:string parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        successBlock(responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }];
+}
+//获取球员互动信息
+- (NSURLSessionTask *)fetchPlayerNews:(NSString *)playerId success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
+{
+    [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
+    self.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSMutableString* URL = [[NSMutableString alloc] init];
+    [URL appendString:@"/player/news/"];
+    [URL appendString:playerId];
+    return [self GET:URL parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        PlayerNewsResponseModel* model = [PlayerNewsResponseModel mj_objectWithKeyValues:responseObject];
+        successBlock(model.resp);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }];
+}
+- (NSURLSessionTask *)postTeamNews:(NSString *)teamId content:(NSString *)content images:(NSString*)images token:(NSString *)token success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
+{
+    [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
+    self.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSMutableString* URL = [[NSMutableString alloc] init];
+    [URL appendString:@"/team/addNews/"];
+    [URL appendString:teamId];
+    NSDictionary* para = @{@"token":token,@"content":content,@"images":images};
+    return [self POST:URL parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        successBlock(responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }];
+}
+//添加比赛互动
+- (NSURLSessionTask *)postMatchNews:(NSString *)matchId content:(NSString *)content images:(NSString *)images token:(NSString *)token success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
+{
+    [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
+    self.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSMutableString* URL = [[NSMutableString alloc] init];
+    [URL appendString:@"/match/postNews/"];
+    [URL appendString:matchId];
+    NSDictionary* para = @{@"token":token,@"content":content,@"images":images};
+    return [self POST:URL parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        successBlock(responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }];
+}
+//添加教练新闻
+- (NSURLSessionTask *)postCoachNews:(NSString *)coachId content:(NSString *)content images:(NSString *)images token:(NSString *)token success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
+{
+    [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
+    self.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSMutableString* URL = [[NSMutableString alloc] init];
+    [URL appendString:@"/coach/addNews/"];
+    [URL appendString:coachId];
+    NSDictionary* para = @{@"token":token,@"content":content,@"images":images};
+    return [self POST:URL parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        successBlock(responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }];
+}
+//添加球员新闻
+- (NSURLSessionTask *)postPlayerNews:(NSString *)playerId content:(NSString *)content images:(NSString *)images token:(NSString *)token success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
+{
+    [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
+    self.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSMutableString* URL = [[NSMutableString alloc] init];
+    [URL appendString:@"/player/addNews/"];
+    [URL appendString:playerId];
+    NSDictionary* para = @{@"token":token,@"content":content,@"images":images};
+    return [self POST:URL parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         successBlock(responseObject);

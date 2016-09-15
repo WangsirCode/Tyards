@@ -27,7 +27,14 @@
 #import "RaceInfoViewModel.h"
 #import "PlayHistory.h"
 #import "HistoryView.h"
-@interface RaceInfoDetailController ()<UITableViewDelegate,UITableViewDataSource,LazyPageScrollViewDelegate,UIScrollViewDelegate,ShareViewDelegate>
+#import "CommentBottomView.h"
+#import "CenterAlertIView.h"
+#import "MLImagePickerViewController.h"
+#import "MLPhotoBrowserViewController.h"
+#import "MLImagePickerMenuTableViewCell.h"
+#import "PictureShowView.h"
+#import "SEMLoginViewController.h"
+@interface RaceInfoDetailController ()<UITableViewDelegate,UITableViewDataSource,LazyPageScrollViewDelegate,UIScrollViewDelegate,ShareViewDelegate,UITextFieldDelegate,NewsCommentCellDelegate>
 @property (nonatomic,strong) RaceInfoViewModel  * viewModel;
 @property (nonatomic,strong) NoticeCellView        * headerView;
 @property (nonatomic,strong) UIImageView* backImageView;
@@ -38,11 +45,12 @@
 @property (nonatomic,strong) UITableView        * messageTableView;
 @property (nonatomic,strong) UIView             * bottomView;
 @property (nonatomic,strong) MBProgressHUD      * hud;
-//@property (nonatomic,strong) UIBarButtonItem    * shareItem;
 @property (nonatomic,strong) UIBarButtonItem    * blankItem;
 @property (nonatomic,strong) ShareView          * shareView;
 @property (nonatomic,strong) UIView             * maskView;
 @property (nonatomic,strong) UIBarButtonItem    * backItem;
+@property (nonatomic,strong) CommentBottomView  * commmentBottomView;
+@property (nonatomic,strong) PictureShowView    * pictureShowView;
 @end
 
 @implementation RaceInfoDetailController
@@ -127,6 +135,26 @@
             [self.messageTableView reloadData];
         }
     }];
+    [RACObserve(self.viewModel, shouldReloadCommentTable) subscribeNext:^(id x) {
+        if (self.viewModel.shouldReloadCommentTable == YES) {
+            [self.messageTableView reloadData];
+            [self.pictureShowView removeFromSuperview];
+            self.viewModel.images = nil;
+            [self.commmentBottomView reSetView];
+            [self.commmentBottomView removeFromSuperview];
+            [self.view addSubview:self.commmentBottomView];
+            self.commmentBottomView.sd_resetLayout
+            .leftEqualToView(self.view)
+            .rightEqualToView(self.view)
+            .bottomEqualToView(self.view)
+            .heightIs(50*self.view.scale);
+            self.commmentBottomView.textField.placeholder = @"说点什么吧";
+            self.commmentBottomView.textField.text = nil;
+            self.viewModel.postType = 1;
+            [XHToast showCenterWithText:@"发表成功" duration:1];
+            self.commmentBottomView.sendButton.enabled = NO;
+        }
+    }];
     [[self.viewModel.shareCommand executionSignals] subscribeNext:^(id x) {
         NSLog(@"收到了分享信号");
         CALayer* imageLayer = self.shareView.layer;
@@ -150,6 +178,16 @@
         if (self.pageView.frame.origin.y < -44) {
             [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
             [self.navigationController.navigationBar setShadowImage:nil];
+        }
+    }];
+    [[self.commmentBottomView.textField rac_textSignal] subscribeNext:^(NSString* x) {
+        if (x.length > 0) {
+            self.commmentBottomView.sendButton.enabled = YES;
+            self.viewModel.content = x;
+        }
+        else
+        {
+            self.commmentBottomView.sendButton.enabled = NO;
         }
     }];
 }
@@ -394,6 +432,96 @@
             break;
     }
 }
+#pragma mark - bottomCommentViewset
+- (void)setTapGesture
+{
+    [[_commmentBottomView.imageButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        [self addPhoto];
+    }];
+    [[_commmentBottomView.sendButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        [self.commmentBottomView.textField resignFirstResponder];
+        if ([self.viewModel didLogined]) {
+            [self.viewModel addNews];
+        }
+        else
+        {
+            SEMLoginViewController* login = [HRTRouter objectForURL:@"login" withUserInfo:@{}];
+            [self presentViewController:login animated:YES completion:nil];
+        }
+    }];
+}
+- (void)addPhoto
+{
+    MLImagePickerViewController *pickerVC = [MLImagePickerViewController pickerViewController];
+    // Limit Count
+    [pickerVC.navigationController.navigationBar setBackgroundColor:[UIColor MyColor]];
+    pickerVC.maxCount = 9 - self.viewModel.images.count;
+    pickerVC.assetsFilter = MLImagePickerAssetsFilterAllPhotos;
+    // Recoder
+    WeakSelf
+    [pickerVC displayForVC:self
+          completionHandle:^(BOOL success,
+                             NSArray<NSURL *> *assetUrls,
+                             NSArray<UIImage *> *thumbImages,
+                             NSArray<UIImage *> *originalImages,
+                             NSError *error) {
+              if (success) {
+                  if (thumbImages.count > 0) {
+                      if (self.viewModel.images) {
+                          NSMutableArray *array = [NSMutableArray arrayWithArray:self.viewModel.images];
+                          [array appendObjects:thumbImages];
+                          self.viewModel.images = nil;
+                          self.viewModel.images = array;
+                      }
+                      else
+                      {
+                          self.viewModel.images = thumbImages;
+                      }
+                      self.commmentBottomView.sendButton.enabled = YES;
+                      
+                      self.pictureShowView = [[PictureShowView alloc] initWithImages:self.viewModel.images];
+                      [self.view addSubview:self.pictureShowView];
+                      self.pictureShowView.sd_layout
+                      .leftEqualToView(self.view)
+                      .rightEqualToView(self.view)
+                      .bottomEqualToView(self.view);
+                      self.commmentBottomView.sd_resetLayout
+                      .bottomSpaceToView(self.view,self.view.scale*60*(self.viewModel.images.count / 5 + 1) + 10 * self.view.scale)
+                      .leftEqualToView(self.view)
+                      .rightEqualToView(self.view)
+                      .heightIs(50*self.view.scale);
+                      if (self.viewModel.images.count < 9) {
+                          UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] initWithActionBlock:^(id  _Nonnull sender) {
+                              [self addPhoto];
+                          }];
+                          [self.pictureShowView.addImageView addGestureRecognizer:tap];
+                      }
+                  }
+              }
+          }];
+    
+}
+#pragma mark - PostComment
+- (void)didClickComment:(NSInteger)newsId targetName:(NSString *)targetName
+{
+    self.viewModel.newsId = newsId;
+    self.viewModel.postType = 2;
+    self.commmentBottomView.textField.placeholder = [NSString stringWithFormat:@"回复%@",targetName];
+    self.commmentBottomView.imageButton.sd_resetLayout
+    .widthIs(0);
+    [self.commmentBottomView.textField becomeFirstResponder];
+}
+- (void)didReplyComment:(NSInteger)newsId targetId:(NSInteger)targetId remindId:(NSInteger)remindID name:(NSString *)name
+{
+    self.viewModel.newsId = newsId;
+    self.viewModel.postType = 3;
+    self.commmentBottomView.textField.placeholder = [NSString stringWithFormat:@"回复%@",name];
+    self.commmentBottomView.imageButton.sd_resetLayout
+    .widthIs(0);
+    [self.commmentBottomView.textField becomeFirstResponder];
+    self.viewModel.remindId = remindID;
+    self.viewModel.targetCommentId = targetId;
+}
 #pragma mark- tableiviewDelegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -465,6 +593,7 @@
     {
         NewsCommentCell* cell = [[NewsCommentCell alloc] init];
         cell.model = self.viewModel.messageModel[indexPath.row];
+        cell.delegate = self;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
@@ -584,6 +713,7 @@
         _newsTableView.tableHeaderView = backView;
         _newsTableView.backgroundColor = [UIColor BackGroundColor];
         _newsTableView.separatorColor = [UIColor BackGroundColor];
+        _newsTableView.bounces = NO;
     }
     return _newsTableView;
 }
@@ -619,6 +749,7 @@
         _messageTableView.tableHeaderView = backView;
         _messageTableView.backgroundColor = [UIColor BackGroundColor];
         _messageTableView.separatorColor = [UIColor BackGroundColor];
+        _messageTableView.bounces = NO;
     }
     return _messageTableView;
 }
@@ -690,24 +821,53 @@
     }
     return _backImageView;
 }
+- (CommentBottomView *)commmentBottomView
+{
+    if (!_commmentBottomView) {
+        _commmentBottomView = [CommentBottomView new];
+        _commmentBottomView.textField.delegate = self;
+        //        _bottomView.userInteractionEnabled = YES;
+        _commmentBottomView.backgroundColor = [UIColor BackGroundColor];
+        [self setTapGesture];
+    }
+    return _commmentBottomView;
+}
 #pragma mark -LazyPageScrollViewDelegate
 -(void)LazyPageScrollViewPageChange:(LazyPageScrollView *)pageScrollView Index:(NSInteger)index PreIndex:(NSInteger)preIndex TitleEffectView:(UIView *)viewTitleEffect SelControl:(UIButton *)selBtn
 {
     if (index == 0) {
+        [self.commmentBottomView removeFromSuperview];
+        [self.pictureShowView removeFromSuperview];
         self.bottomView.hidden = NO;
     }
     else if (index == 1)
     {
+        [self.commmentBottomView removeFromSuperview];
+        [self.pictureShowView removeFromSuperview];
         self.bottomView.hidden = YES;
     }
     else if (index == 2)
     {
+        [self.commmentBottomView removeFromSuperview];
+        [self.pictureShowView removeFromSuperview];
         self.bottomView.hidden = YES;
         [self.newsTableView reloadData];
     }
     else if (index == 3)
     {
-        self.bottomView.hidden = YES;
+        [self.view addSubview:self.commmentBottomView];
+        self.commmentBottomView.sd_layout
+        .leftEqualToView(self.view)
+        .rightEqualToView(self.view)
+        .bottomEqualToView(self.view)
+        .heightIs(50*self.view.scale);
+        if (self.viewModel.images.count > 0) {
+            [self.view addSubview:self.pictureShowView];
+            self.pictureShowView.sd_layout
+            .leftEqualToView(self.view)
+            .rightEqualToView(self.view)
+            .bottomEqualToView(self.view);
+        }
         [self.messageTableView reloadData];
     }
 }

@@ -106,7 +106,7 @@
     NSMutableString* string = [NSMutableString stringWithString:@"data:image/png;base64,"];
     [string appendString:_encodedImageStr];
     SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
-    [manager postImage:string token:[self getToken] success:^(id data) {
+    [manager postImage:string success:^(id data) {
         NSInteger idne = [(NSNumber*)data integerValue];
         [manager updateMyAvatar:idne token:[self getToken] success:^(id data) {
             NSLog(@"更新成功");

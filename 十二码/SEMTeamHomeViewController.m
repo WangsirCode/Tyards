@@ -22,7 +22,13 @@
 #import "PlayerDetailViewController.h"
 #import "SEMNewsDetailController.h"
 #import "CoachDetailViewController.h"
+#import "CommentBottomView.h"
 #import "CenterAlertIView.h"
+#import "MLImagePickerViewController.h"
+#import "MLPhotoBrowserViewController.h"
+#import "MLImagePickerMenuTableViewCell.h"
+#import "PictureShowView.h"
+#import "SEMLoginViewController.h"
 #define LISTTABLEVIEWTAG 101
 #define SCHEDULETABLEVIETAG 102
 #define NEWSTABLEVIEWTAG 103
@@ -30,7 +36,7 @@
 #define RECORDINDEX 1
 #define LISTINDEX 2
 #define GAMESINDEX 3
-@interface SEMTeamHomeViewController ()<UITableViewDelegate,UITableViewDataSource,LazyPageScrollViewDelegate,UIScrollViewDelegate,ShareViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource,CenterAlertIViewDelegate>
+@interface SEMTeamHomeViewController ()<UITableViewDelegate,UITableViewDataSource,LazyPageScrollViewDelegate,UIScrollViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource,CenterAlertIViewDelegate,NewsCommentCellDelegate,UITextFieldDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIActionSheetDelegate>
 @property (nonatomic,strong) SEMTeamHomeModel   * viewModel;
 @property (nonatomic,strong) UIImageView        * logoImageView;
 @property (nonatomic,strong) LazyPageScrollView * pageView;
@@ -52,6 +58,8 @@
 @property (nonatomic,strong) CenterAlertIView   * alartView;
 @property (nonatomic,strong) UIButton           * listHeaderButton;
 @property (nonatomic,strong) UIButton           * scheduleHeaderButton;
+@property (nonatomic,strong) CommentBottomView  * bottomView;
+@property (nonatomic,strong) PictureShowView    * pictureShowView;
 @end
 
 @implementation SEMTeamHomeViewController
@@ -106,11 +114,6 @@
         make.left.equalTo(self.view.mas_left);
         make.right.equalTo(self.view.mas_right);
     }];
-//    [self.infoView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.width.equalTo(self.view.mas_width);
-//        make.top.equalTo(self.scrollView.mas_top);
-//        make.left.equalTo(self.scrollView.mas_left);
-//    }];
     self.infoView.sd_layout
     .widthIs(self.view.width)
     .topEqualToView(self.scrollView)
@@ -166,6 +169,26 @@
             [self.scheduleTableview reloadData];
         }
     }];
+    [RACObserve(self.viewModel, shouldReloadCommentTable) subscribeNext:^(id x) {
+        if (self.viewModel.shouldReloadCommentTable == YES) {
+            [self.messageTableview reloadData];
+            [self.pictureShowView removeFromSuperview];
+            self.viewModel.images = nil;
+            [self.bottomView reSetView];
+            [self.bottomView removeFromSuperview];
+            [self.view addSubview:self.bottomView];
+            self.bottomView.sd_resetLayout
+            .leftEqualToView(self.view)
+            .rightEqualToView(self.view)
+            .bottomEqualToView(self.view)
+            .heightIs(50*self.view.scale);
+            self.bottomView.textField.placeholder = @"说点什么吧";
+            self.bottomView.textField.text = nil;
+            [XHToast showCenterWithText:@"发表成功" duration:1];
+            self.viewModel.postType = 1;
+            self.bottomView.sendButton.enabled = NO;
+        }
+    }];
     [[self.viewModel.shareCommand executionSignals] subscribeNext:^(id x) {
         NSLog(@"收到了分享信号");
         CALayer* imageLayer = self.shareView.layer;
@@ -189,6 +212,16 @@
         if (self.pageView.frame.origin.y < -44) {
             [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
             [self.navigationController.navigationBar setShadowImage:nil];
+        }
+    }];
+    [[self.bottomView.textField rac_textSignal] subscribeNext:^(NSString* x) {
+        if (x.length > 0) {
+            self.bottomView.sendButton.enabled = YES;
+            self.viewModel.content = x;
+        }
+        else
+        {
+            self.bottomView.sendButton.enabled = NO;
         }
     }];
     [RACObserve(self.viewModel,fan) subscribeNext:^(id x) {
@@ -236,6 +269,75 @@
 - (void)setRouterParameters:(NSDictionary *)routerParameters
 {
     self.viewModel = [[SEMTeamHomeModel alloc] initWithDictionary: routerParameters];
+}
+#pragma mark - bottomCommentViewset
+- (void)setTapGesture
+{
+    [[_bottomView.imageButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        [self addPhoto];
+    }];
+    [[_bottomView.sendButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        [self.bottomView.textField resignFirstResponder];
+        if ([self.viewModel didLogined]) {
+            [self.viewModel addNews];
+        }
+        else
+        {
+            SEMLoginViewController* login = [HRTRouter objectForURL:@"login" withUserInfo:@{}];
+            [self presentViewController:login animated:YES completion:nil];
+        }
+    }];
+}
+- (void)addPhoto
+{
+    MLImagePickerViewController *pickerVC = [MLImagePickerViewController pickerViewController];
+    // Limit Count
+    [pickerVC.navigationController.navigationBar setBackgroundColor:[UIColor MyColor]];
+    pickerVC.maxCount = 9 - self.viewModel.images.count;
+    pickerVC.assetsFilter = MLImagePickerAssetsFilterAllPhotos;
+    // Recoder
+    WeakSelf
+    [pickerVC displayForVC:self
+          completionHandle:^(BOOL success,
+                             NSArray<NSURL *> *assetUrls,
+                             NSArray<UIImage *> *thumbImages,
+                             NSArray<UIImage *> *originalImages,
+                             NSError *error) {
+              if (success) {
+                  if (thumbImages.count > 0) {
+                      if (self.viewModel.images) {
+                          NSMutableArray *array = [NSMutableArray arrayWithArray:self.viewModel.images];
+                          [array appendObjects:thumbImages];
+                          self.viewModel.images = nil;
+                          self.viewModel.images = array;
+                      }
+                      else
+                      {
+                          self.viewModel.images = thumbImages;
+                      }
+                      self.bottomView.sendButton.enabled = YES;
+                      
+                      self.pictureShowView = [[PictureShowView alloc] initWithImages:self.viewModel.images];
+                      [self.view addSubview:self.pictureShowView];
+                      self.pictureShowView.sd_layout
+                      .leftEqualToView(self.view)
+                      .rightEqualToView(self.view)
+                      .bottomEqualToView(self.view);
+                      self.bottomView.sd_resetLayout
+                      .bottomSpaceToView(self.view,self.view.scale*60*(self.viewModel.images.count / 5 + 1) + 10 * self.view.scale)
+                      .leftEqualToView(self.view)
+                      .rightEqualToView(self.view)
+                      .heightIs(50*self.view.scale);
+                      if (self.viewModel.images.count < 9) {
+                          UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] initWithActionBlock:^(id  _Nonnull sender) {
+                              [self addPhoto];
+                          }];
+                          [self.pictureShowView.addImageView addGestureRecognizer:tap];
+                      }
+                  }
+              }
+          }];
+    
 }
 #pragma mark -pickerviewDatasource
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
@@ -343,6 +445,7 @@
     if (tableView.tag == MESSAGETABLEVIEWTAG) {
         NewsCommentCell* cell = [[NewsCommentCell alloc] init];
         cell.model = self.viewModel.newsModel[indexPath.row];
+        cell.delegate = self;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
@@ -532,6 +635,27 @@
         [self.navigationController pushViewController:controller animated:YES];
     }
 }
+#pragma mark - PostComment
+- (void)didClickComment:(NSInteger)newsId targetName:(NSString *)targetName
+{
+    self.viewModel.newsId = newsId;
+    self.viewModel.postType = 2;
+    self.bottomView.textField.placeholder = [NSString stringWithFormat:@"回复%@",targetName];
+    self.bottomView.imageButton.sd_resetLayout
+    .widthIs(0);
+    [self.bottomView.textField becomeFirstResponder];
+}
+- (void)didReplyComment:(NSInteger)newsId targetId:(NSInteger)targetId remindId:(NSInteger)remindID name:(NSString *)name
+{
+    self.viewModel.newsId = newsId;
+    self.viewModel.postType = 3;
+    self.bottomView.textField.placeholder = [NSString stringWithFormat:@"回复%@",name];
+    self.bottomView.imageButton.sd_resetLayout
+    .widthIs(0);
+    [self.bottomView.textField becomeFirstResponder];
+    self.viewModel.remindId = remindID;
+    self.viewModel.targetCommentId = targetId;
+}
 #pragma  mark- scrollviewdelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
@@ -720,18 +844,18 @@
     }
     return _hud;
 }
-- (ShareView *)shareView
-{
-    if (!_shareView) {
-        _shareView = [[ShareView alloc] initWithFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height, self.view.width, 200*self.view.scale)];
-        _shareView.layer.anchorPoint = CGPointMake(0, 0);
-        _shareView.frame = CGRectMake(0, self.view.height, self.view.width, 200*self.view.scale);
-        _shareView.delegate = self;
-        _shareView.layer.anchorPoint = CGPointMake(0, 0);
-        NSLog(@"%@",_shareView.description);
-    }
-    return _shareView;
-}
+//- (ShareView *)shareView
+//{
+//    if (!_shareView) {
+//        _shareView = [[ShareView alloc] initWithFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height, self.view.width, 200*self.view.scale)];
+//        _shareView.layer.anchorPoint = CGPointMake(0, 0);
+//        _shareView.frame = CGRectMake(0, self.view.height, self.view.width, 200*self.view.scale);
+//        _shareView.delegate = self;
+//        _shareView.layer.anchorPoint = CGPointMake(0, 0);
+//        NSLog(@"%@",_shareView.description);
+//    }
+//    return _shareView;
+//}
 - (UIView *)maskView
 {
     if (!_maskView) {
@@ -822,22 +946,52 @@
     }
     return _alartView;
 }
+- (CommentBottomView *)bottomView
+{
+    if (!_bottomView) {
+        _bottomView = [[CommentBottomView alloc] init];
+        _bottomView.textField.delegate = self;
+//        _bottomView.userInteractionEnabled = YES;
+        _bottomView.backgroundColor = [UIColor BackGroundColor];
+        [self setTapGesture];
+    }
+    return _bottomView;
+}
 #pragma mark -LazyPageScrollViewDelegate
 -(void)LazyPageScrollViewPageChange:(LazyPageScrollView *)pageScrollView Index:(NSInteger)index PreIndex:(NSInteger)preIndex TitleEffectView:(UIView *)viewTitleEffect SelControl:(UIButton *)selBtn
 {
     if (index == 3) {
         [self.newsTableview reloadData];
+        [self.bottomView removeFromSuperview];
+        [self.pictureShowView removeFromSuperview];
     }
     else if (index == 1)
     {
+        [self.bottomView removeFromSuperview];
+        [self.pictureShowView removeFromSuperview];
         [self.listTableview reloadData];
     }
     else if (index == 4)
     {
         [self.messageTableview reloadData];
+        [self.view addSubview:self.bottomView];
+        self.bottomView.sd_layout
+        .leftEqualToView(self.view)
+        .rightEqualToView(self.view)
+        .bottomEqualToView(self.view)
+        .heightIs(50*self.view.scale);
+        if (self.viewModel.images.count > 0) {
+            [self.view addSubview:self.pictureShowView];
+            self.pictureShowView.sd_layout
+            .leftEqualToView(self.view)
+            .rightEqualToView(self.view)
+            .bottomEqualToView(self.view);
+        }
     }
     else if (index == 2)
     {
+        [self.bottomView removeFromSuperview];
+        [self.pictureShowView removeFromSuperview];
         [self.scheduleTableview reloadData];
     }
 }

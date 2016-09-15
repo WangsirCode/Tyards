@@ -27,7 +27,7 @@
 
 @property (nonatomic, strong) PlayerDetail *player;
 
-@property (nonatomic, strong) NSArray<NewsDetailModel *> *newses;
+@property (nonatomic, strong) NSArray<NewsDetailModel *> *newes;
 
 @property (nonatomic, strong) NSArray<Articles *> *articles;
 

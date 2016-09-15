@@ -18,7 +18,7 @@
 
 @implementation PlayerModel
 + (NSDictionary *)objectClassInArray{
-    return @{@"articles" : [Articles class], @"newses" : [NewsDetailModel class]};
+    return @{@"articles" : [Articles class], @"newes" : [NewsDetailModel class]};
 }
 
 @end

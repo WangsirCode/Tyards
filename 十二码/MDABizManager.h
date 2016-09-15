@@ -74,6 +74,7 @@
 #import "MyClosedInvitationResponseModel.h"
 #import "MyInvitationResponseModel.h"
 #import "PlacceResponseModel.h"
+#import "PlayerNewsResponseModel.h"
 @interface MDABizManager : NSObject
 @property (nonatomic,assign)BOOL userLogined;
 /**

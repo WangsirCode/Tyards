@@ -79,14 +79,7 @@
     .heightIs(self.view.height);
 }
 - (void)KeyboardWillhide:(NSNotification *)notification
-{
-    NSDictionary *info = [notification userInfo];
-    
-    //获取高度
-    NSValue *value = [info objectForKey:@"UIKeyboardBoundsUserInfoKey"];//关键的一句，网上关于获取键盘高度的解决办法，多到这句就over了。系统宏定义的UIKeyboardBoundsUserInfoKey等测试都不能获取正确的值。不知道为什么。。。
-    
-    CGSize keyboardSize = [value CGRectValue].size;
-    
+{  
     // 获取键盘弹出的时间
     NSValue *animationDurationValue = [[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey];
     NSTimeInterval animationDuration;

@@ -7,7 +7,7 @@
 //
 
 #import "NewsCommentView.h"
-
+#import "MDABizManager.h"
 @implementation NewsCommentView
 
 - (instancetype)init
@@ -56,13 +56,18 @@
                 else
                 {
                     label.sd_layout
-                    .topSpaceToView(labels[self.count - 1],0)
+                    .topSpaceToView(labels[self.count - 1],5)
                     .leftSpaceToView(self,3)
                     .rightEqualToView(self)
                     .autoHeightRatio(0);
                 }
                 self.count += 1;
                 [labels addObject:label];
+                UITapGestureRecognizer* tap =[[UITapGestureRecognizer alloc] initWithActionBlock:^(id  _Nonnull sender) {
+                    [self.delegate didClickButton:obj.comment.id remindId:obj.comment.creator.id name:obj.comment.creator.nickname];
+                }];
+                [label addGestureRecognizer:tap];
+                label.userInteractionEnabled = YES;
                 if (obj.comment.replies.count > 0) {
                     for (int i = 0; i < obj.comment.replies.count; i ++) {
                         UILabel* label = [UILabel new];
@@ -92,6 +97,12 @@
                             [self setupAutoHeightWithBottomView:labels[self.count - 1] bottomMargin:10];
                             self.count = 0;
                         }
+                
+                        UITapGestureRecognizer* tap =[[UITapGestureRecognizer alloc] initWithActionBlock:^(id  _Nonnull sender) {
+                            [self.delegate didClickButton:obj.comment.replies[i].targetComment.id remindId:obj.comment.replies[i].creator.id name:obj.comment.replies[i].creator.nickname];
+                        }];
+                        [label addGestureRecognizer:tap];
+                        label.userInteractionEnabled = YES;
                     }
                     
                 }

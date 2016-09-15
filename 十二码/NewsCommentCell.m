@@ -87,6 +87,12 @@
     .heightIs(15*self.scale)
     .rightEqualToView(_view2)
     .widthIs(20*self.scale);
+    
+    UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] initWithActionBlock:^(id  _Nonnull sender) {
+        [self doComment];
+    }];
+    [commentImageView addGestureRecognizer:tap];
+    commentImageView.userInteractionEnabled = YES;
     _view0.sd_cornerRadiusFromWidthRatio = @(0.5);
     
     [_view1 setSingleLineAutoResizeWithMaxWidth:200];
@@ -94,6 +100,8 @@
     [self.contentView addSubview:self.imageContainer];
 
     [self.contentView addSubview:self.commentView];
+    
+    self.commentView.delegate = self;
 }
 
 - (void)setModel:(NewsDetailModel*)model
@@ -133,7 +141,6 @@
             .topSpaceToView(self.imageContainer,5)
             .leftEqualToView(self.imageContainer)
             .rightEqualToView(self.imageContainer);
-            
         }
         else
         {
@@ -158,6 +165,14 @@
     }
     
     
+}
+- (void)didClickButton:(NSInteger)commentId remindId:(NSInteger)remindId name:(NSString *)name
+{
+    [self.delegate didReplyComment:self.model.id targetId:commentId remindId:remindId name:name];
+}
+- (void)doComment
+{
+    [self.delegate didClickComment:self.model.id targetName:self.model.creator.nickname];
 }
 - (ImageContainerView *)imageContainer{
     if (!_imageContainer) {

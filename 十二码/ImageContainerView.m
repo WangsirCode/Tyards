@@ -55,6 +55,7 @@
         .widthEqualToHeight();
         if (idx == self.model.count - 1 || idx == 8) {
             [self setupAutoHeightWithBottomView:imageView bottomMargin:10];
+            *stop = YES;
         }
     }];
 }

@@ -8,6 +8,7 @@
 
 #import "SEMViewModel.h"
 #import "MDABizManager.h"
+#import "UserModel.h"
 @interface SEMViewModel ()
 @property (nonatomic, strong) NSDictionary* userInfo;
 @end
@@ -21,7 +22,6 @@
         _userInfo = [NSDictionary dictionaryWithDictionary: dictionary];
         [self setup];
     }
-    
     return self;
 }
 
@@ -40,6 +40,18 @@
     if (token == nil) {
         return @"";
     }
+    return @"e564fd09a2c17687850cba5fad59d025";
     return token;
+}
+- (BOOL)didLogined
+{
+   UserModel* model  = (UserModel*)[DataArchive unarchiveUserDataWithFileName:@"userinfo"];
+    if (model) {
+        return YES;
+    }
+    else
+    {
+        return NO;
+    }
 }
 @end

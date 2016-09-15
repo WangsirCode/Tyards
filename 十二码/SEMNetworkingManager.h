@@ -969,7 +969,6 @@
  *  @return NSURLSessionTask
  */
 - (NSURLSessionTask*)postImage:(NSString*)base64
-                         token:(NSString*)token
                             success:(void (^)(id data))successBlock
                             failure:(void (^)(NSError *aError))failureBlock;
 
@@ -989,5 +988,132 @@
                               token:(NSString*)token
                        success:(void (^)(id data))successBlock
                        failure:(void (^)(NSError *aError))failureBlock;
+
+
+
+/*!
+ *  @author 汪宇豪, 16-09-14 09:09:53
+ *
+ *  @brief 提交评论
+ *
+ *  @param iden            新闻id
+ *  @param content         内容
+ *  @param targetCommentId 回复的评论的id
+ *  @param remind          回复的人的id
+ *  @param token           toekn
+ *  @param successBlock    成功
+ *  @param failureBlock    失败
+ *
+ *  @return NSURLSessionTask
+ */
+- (NSURLSessionTask*)postComment:(NSInteger)iden
+                         content:(NSString*)content
+                 targetCommentId:(NSInteger)targetCommentId
+                          remind:(NSInteger)remind
+                              token:(NSString*)token
+                            success:(void (^)(id data))successBlock
+                            failure:(void (^)(NSError *aError))failureBlock;
+
+/*!
+ *  @author 汪宇豪, 16-09-14 20:09:11
+ *
+ *  @brief 获取球员的互动信息
+ *
+ *  @param playerId     球员id
+ *  @param successBlock 成功
+ *  @param failureBlock 失败
+ *
+ *  @return NSURLSessionTask
+ */
+- (NSURLSessionTask*)fetchPlayerNews:(NSString*)playerId
+                            success:(void (^)(id data))successBlock
+                            failure:(void (^)(NSError *aError))failureBlock;
+
+
+/*!
+ *  @author 汪宇豪, 16-09-15 08:09:08
+ *
+ *  @brief 添加球队说说
+ *
+ *  @param teamId       球队id
+ *  @param content      内容
+ *  @param token        token
+ *  @param successBlock 成功
+ *  @param failureBlock 失败
+ *
+ *  @return NSURLSessionTask
+ */
+- (NSURLSessionTask*)postTeamNews:(NSString*)teamId
+                         content:(NSString*)content
+                           images:(NSString*)images
+                           token:(NSString*)token
+                         success:(void (^)(id data))successBlock
+                         failure:(void (^)(NSError *aError))failureBlock;
+
+
+/*!
+ *  @author 汪宇豪, 16-09-15 22:09:55
+ *
+ *  @brief 添加赛事互动
+ *
+ *  @param teamId       赛事id
+ *  @param content      说说内容
+ *  @param images       图片
+ *  @param token        token
+ *  @param successBlock 成功
+ *  @param failureBlock 失败
+ *
+ *  @return NSURLSessionTask
+ */
+- (NSURLSessionTask*)postMatchNews:(NSString*)matchId
+                          content:(NSString*)content
+                           images:(NSString*)images
+                            token:(NSString*)token
+                          success:(void (^)(id data))successBlock
+                          failure:(void (^)(NSError *aError))failureBlock;
+
+/*!
+ *  @author 汪宇豪, 16-09-15 22:09:21
+ *
+ *  @brief 添加教练新闻
+ *
+ *  @param coachId      教练id
+ *  @param content      内容
+ *  @param images       图片
+ *  @param token        token
+ *  @param successBlock 成功
+ *  @param failureBlock 失败
+ *
+ *  @return NSURLSessionTask
+ */
+- (NSURLSessionTask*)postCoachNews:(NSString*)coachId
+                           content:(NSString*)content
+                            images:(NSString*)images
+                             token:(NSString*)token
+                           success:(void (^)(id data))successBlock
+                           failure:(void (^)(NSError *aError))failureBlock;
+
+
+/*!
+ *  @author 汪宇豪, 16-09-15 22:09:30
+ *
+ *  @brief 添加球员新闻
+ *
+ *  @param playerId     球员id
+ *  @param content      内容
+ *  @param images       图片
+ *  @param token        token
+ *  @param successBlock 成功
+ *  @param failureBlock 失败
+ *
+ *  @return NSURLSessionTask
+ */
+- (NSURLSessionTask*)postPlayerNews:(NSString*)playerId
+                           content:(NSString*)content
+                            images:(NSString*)images
+                             token:(NSString*)token
+                           success:(void (^)(id data))successBlock
+                           failure:(void (^)(NSError *aError))failureBlock;
+
 @end
 

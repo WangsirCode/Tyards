@@ -7,10 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MDABizManager.h"
+#import "NewsDetailResponseModel.h"
+@protocol NewsCommentViewDelegate
+- (void)didClickButton:(NSInteger)commentId remindId:(NSInteger)remindId name:(NSString*)name;
+@end
 @class Comments;
 @interface NewsCommentView : UIView
 @property (nonatomic, strong) NSArray<Comments *> *model;
 @property (nonatomic, strong) NSString* targetName;
 @property (nonatomic, assign) NSInteger count;
+@property (nonatomic,strong) id<NewsCommentViewDelegate> delegate;
 @end

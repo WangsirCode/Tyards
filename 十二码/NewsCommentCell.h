@@ -10,10 +10,15 @@
 #import "MDABizManager.h"
 #import "ImageContainerView.h"
 #import "NewsCommentView.h"
+@protocol NewsCommentCellDelegate
+- (void)didClickComment:(NSInteger)newsId targetName:(NSString*)targetName;
+- (void)didReplyComment:(NSInteger)newsId targetId:(NSInteger)targetId remindId:(NSInteger)remindID name:(NSString*)name;
+@end
 @class NewsDetailModel,ImageContainerView,NewsCommentView;
-@interface NewsCommentCell : UITableViewCell
+@interface NewsCommentCell : UITableViewCell<NewsCommentViewDelegate>
 @property (nonatomic, strong) NewsDetailModel    *model;
 @property (nonatomic,strong ) ImageContainerView * imageContainer;
 @property (nonatomic,strong ) UILabel            * timeLabel;
 @property (nonatomic,strong ) NewsCommentView    * commentView;
+@property (nonatomic,strong) id<NewsCommentCellDelegate> delegate;
 @end
