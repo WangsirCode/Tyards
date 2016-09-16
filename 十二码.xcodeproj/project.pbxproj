@@ -176,6 +176,7 @@
 		476088101D55874400F36597 /* 约战-进球.png in Resources */ = {isa = PBXBuildFile; fileRef = 4760880A1D55874400F36597 /* 约战-进球.png */; };
 		476088131D5588D900F36597 /* SEMTeamPhotoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 476088121D5588D900F36597 /* SEMTeamPhotoController.m */; };
 		4760881B1D55897200F36597 /* TeamPhotoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4760881A1D55897200F36597 /* TeamPhotoViewModel.m */; };
+		47621DD61D8B729100A7B92A /* TagLabels.m in Sources */ = {isa = PBXBuildFile; fileRef = 47621DD51D8B729100A7B92A /* TagLabels.m */; };
 		476252171D519027003788C0 /* ShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 476252161D519027003788C0 /* ShareView.m */; };
 		4762521D1D5196A0003788C0 /* UIView+Scale.m in Sources */ = {isa = PBXBuildFile; fileRef = 4762521C1D5196A0003788C0 /* UIView+Scale.m */; };
 		476823721D44E43E00B224E6 /* SEMSearchViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 476823711D44E43E00B224E6 /* SEMSearchViewModel.m */; };
@@ -280,6 +281,7 @@
 		47CAC1DA1D766738001D3708 /* PlaceSelectController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47CAC1D91D766738001D3708 /* PlaceSelectController.m */; };
 		47CAC1DD1D7667F0001D3708 /* PlaceViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47CAC1DC1D7667F0001D3708 /* PlaceViewModel.m */; };
 		47CAC1E01D766837001D3708 /* PlacceResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47CAC1DF1D766837001D3708 /* PlacceResponseModel.m */; };
+		47D0BD0B1D8B016A00EDD065 /* TokenResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47D0BD0A1D8B016A00EDD065 /* TokenResponseModel.m */; };
 		47DA9E131D8983420090ABC5 /* CommentBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47DA9E121D8983420090ABC5 /* CommentBottomView.m */; };
 		47DA9E171D8988ED0090ABC5 /* imagebutoon.png in Resources */ = {isa = PBXBuildFile; fileRef = 47DA9E161D8988ED0090ABC5 /* imagebutoon.png */; };
 		47DA9E731D8992E90090ABC5 /* DACircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47DA9E1C1D8992E90090ABC5 /* DACircularProgressView.m */; };
@@ -605,6 +607,8 @@
 		476088121D5588D900F36597 /* SEMTeamPhotoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SEMTeamPhotoController.m; sourceTree = "<group>"; };
 		476088191D55897200F36597 /* TeamPhotoViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamPhotoViewModel.h; sourceTree = "<group>"; };
 		4760881A1D55897200F36597 /* TeamPhotoViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamPhotoViewModel.m; sourceTree = "<group>"; };
+		47621DD41D8B729100A7B92A /* TagLabels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagLabels.h; sourceTree = "<group>"; };
+		47621DD51D8B729100A7B92A /* TagLabels.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagLabels.m; sourceTree = "<group>"; };
 		476252151D519027003788C0 /* ShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareView.h; sourceTree = "<group>"; };
 		476252161D519027003788C0 /* ShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareView.m; sourceTree = "<group>"; };
 		4762521B1D5196A0003788C0 /* UIView+Scale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Scale.h"; sourceTree = "<group>"; };
@@ -795,6 +799,8 @@
 		47CAC1DC1D7667F0001D3708 /* PlaceViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceViewModel.m; sourceTree = "<group>"; };
 		47CAC1DE1D766837001D3708 /* PlacceResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlacceResponseModel.h; sourceTree = "<group>"; };
 		47CAC1DF1D766837001D3708 /* PlacceResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlacceResponseModel.m; sourceTree = "<group>"; };
+		47D0BD091D8B016A00EDD065 /* TokenResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TokenResponseModel.h; sourceTree = "<group>"; };
+		47D0BD0A1D8B016A00EDD065 /* TokenResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TokenResponseModel.m; sourceTree = "<group>"; };
 		47DA9E111D8983420090ABC5 /* CommentBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentBottomView.h; sourceTree = "<group>"; };
 		47DA9E121D8983420090ABC5 /* CommentBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentBottomView.m; sourceTree = "<group>"; };
 		47DA9E161D8988ED0090ABC5 /* imagebutoon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = imagebutoon.png; sourceTree = "<group>"; };
@@ -1146,6 +1152,8 @@
 				4746A6691D49AB17009E0645 /* UserModel.m */,
 				4746A66B1D49B0A6009E0645 /* LoginCommand.h */,
 				4746A66C1D49B0A6009E0645 /* LoginCommand.m */,
+				47D0BD091D8B016A00EDD065 /* TokenResponseModel.h */,
+				47D0BD0A1D8B016A00EDD065 /* TokenResponseModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1183,6 +1191,8 @@
 				476B99621D4F75B100D52B31 /* CommentView.m */,
 				476252151D519027003788C0 /* ShareView.h */,
 				476252161D519027003788C0 /* ShareView.m */,
+				47621DD41D8B729100A7B92A /* TagLabels.h */,
+				47621DD51D8B729100A7B92A /* TagLabels.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -2184,6 +2194,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				47D0BD0B1D8B016A00EDD065 /* TokenResponseModel.m in Sources */,
 				4725D2B91D5B2CB100A13AEB /* GameInfoResponseModel.m in Sources */,
 				47C3220F1D6BF50800317A4C /* ScoreListResponseModel.m in Sources */,
 				4735FA001D55FB3700FDF2ED /* PersonalInfoViewModel.m in Sources */,
@@ -2302,6 +2313,7 @@
 				4735FA0C1D55FCDA00FDF2ED /* MeColleageSearchViewModel.m in Sources */,
 				477676751D58CB2C00E10594 /* TeamCommentsResponseModel.m in Sources */,
 				47C053D61D759B0B00AEBF86 /* MyInvitationViewModel.m in Sources */,
+				47621DD61D8B729100A7B92A /* TagLabels.m in Sources */,
 				4772FE6D1D565DEB0008ED37 /* UIColor+MyColor.m in Sources */,
 				47C053D91D759C5800AEBF86 /* MakeInvitationViewModel.m in Sources */,
 				47DA9E841D8992E90090ABC5 /* MLNavigationViewController.m in Sources */,

@@ -14,6 +14,7 @@
 #import "TeamPlayerResponseModel.h"
 #import "MeUserInfoResponseModel.h"
 #import "TeamCommentsResponseModel.h"
+#import "TokenResponseModel.h"
 NSString* const hotTopics = @"/university/hotTopics";
 NSString* const hotTopicsCache = @"hotTopicsCache";
 NSString* const ReconmendNewsURL = @"/university/editorViews";
@@ -244,7 +245,8 @@ NSString* const GameMessage = @"/match/newses/";
     return [self GET:WexinURL parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        successBlock(responseObject[@"resp"]);
+        TokenResponseModel* model = [TokenResponseModel mj_objectWithKeyValues:responseObject];
+        successBlock(model.resp);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failureBlock(error);
     }];
@@ -1134,7 +1136,39 @@ NSString* const GameMessage = @"/match/newses/";
     NSMutableString* string = [NSMutableString stringWithString: @"/news/comment"];
     NSDictionary* para;
     if (remind == 0) {
-        para = @{@"id":@(iden),@"content":content,@"token":token};
+        if (targetCommentId == 0) {
+            para = @{@"id":@(iden),@"content":content,@"token":token};
+        }
+        else{
+            para = @{@"id":@(iden),@"content":content,@"token":token,@"targetCommentId":@(targetCommentId)};
+        }
+    }
+    else
+    {
+        para = @{@"id":@(iden),@"content":content,@"targetCommentId":@(targetCommentId),@"remind":@(remind),@"token":token};
+    }
+    return [self POST:string parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        successBlock(responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }];
+}
+//提交热点评论
+- (NSURLSessionTask *)commentHottopic:(NSInteger)iden content:(NSString *)content targetCommentId:(NSInteger)targetCommentId remind:(NSInteger)remind token:(NSString *)token success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
+{
+    [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
+    self.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSMutableString* string = [NSMutableString stringWithString: @"/news/commentHottopic"];
+    NSDictionary* para;
+    if (remind == 0) {
+        if (targetCommentId == 0) {
+            para = @{@"id":@(iden),@"content":content,@"token":token};
+        }
+        else{
+            para = @{@"id":@(iden),@"content":content,@"token":token,@"targetCommentId":@(targetCommentId)};
+        }
     }
     else
     {

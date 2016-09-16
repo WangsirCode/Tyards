@@ -82,6 +82,11 @@
                 .leftSpaceToView(self,10*scale)
                 .autoHeightRatio(0);
             }
+            UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] initWithActionBlock:^(id  _Nonnull sender) {
+                [self.delegate didClickButton:obj.targetComment.id remindId:obj.creator.id name:obj.creator.nickname];
+            }];
+            [label addGestureRecognizer:tap];
+            label.userInteractionEnabled = YES;
         }];
         [ self setupAutoHeightWithBottomView:self.labels.lastObject bottomMargin:10*scale ];
     }

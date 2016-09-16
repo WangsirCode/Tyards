@@ -40,7 +40,6 @@
     if (token == nil) {
         return @"";
     }
-    return @"e564fd09a2c17687850cba5fad59d025";
     return token;
 }
 - (BOOL)didLogined

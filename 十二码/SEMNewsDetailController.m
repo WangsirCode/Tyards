@@ -17,9 +17,15 @@
 #import "ShareView.h"
 #import "UMSocialWechatHandler.h"
 #import "UMSocial.h"
-
+#import "MLImagePickerViewController.h"
+#import "MLPhotoBrowserViewController.h"
+#import "MLImagePickerMenuTableViewCell.h"
+#import "PictureShowView.h"
+#import "CommentBottomView.h"
+#import "SEMLoginViewController.h"
+#import "TagLabels.h"
 #define kTimeLineTableViewCellId @"SDTimeLineCell"
-@interface SEMNewsDetailController ()<UITableViewDelegate,UITableViewDataSource,UIWebViewDelegate,ShareViewDelegate,UMSocialUIDelegate>
+@interface SEMNewsDetailController ()<UITableViewDelegate,UITableViewDataSource,UIWebViewDelegate,ShareViewDelegate,UMSocialUIDelegate,CommentCellDelegate>
 @property (nonatomic,strong)NewsDetailViewModel* viewModel;
 @property (nonatomic,strong)UIWebView* webView;
 @property (nonatomic,strong)UILabel* titleLabel;
@@ -34,6 +40,8 @@
 @property (nonatomic,strong)UIBarButtonItem* blankItem;
 @property (nonatomic,strong)ShareView* shareView;
 @property (nonatomic,strong)UIView* maskView;
+@property (nonatomic,strong)CommentBottomView  * bottomView;
+
 @end
 @implementation SEMNewsDetailController
 #pragma mark- lifeCycle
@@ -75,6 +83,7 @@
     [self.view addSubview:self.scrollview];
     [self.view addSubview:self.maskView];
     [self.view addSubview:self.shareView];
+    [self.view addSubview:self.bottomView];
 }
 - (void)makeConstraits
 {
@@ -97,6 +106,11 @@
     .rightEqualToView(self.titleLabel)
     .autoHeightRatio(0);
     
+    self.bottomView.sd_layout
+    .leftEqualToView(self.view)
+    .rightEqualToView(self.view)
+    .bottomEqualToView(self.view)
+    .heightIs(50*self.view.scale);
 
     [_scrollview setupAutoContentSizeWithBottomView:self.tableview bottomMargin:10];
     
@@ -118,11 +132,24 @@
                 [text appendString:self.viewModel.newdetail.detail];
             }
             [self.webView loadHTMLString:text baseURL:nil];
-            self.webView.scrollView.scrollEnabled = YES;
+//            self.webView.scrollView.scrollEnabled = YES;
             self.infoLabbel.text = [self.viewModel.newdetail getInfo];
             self.titleLabel.text = self.viewModel.newdetail.title;
             self.navigationItem.title = self.titleLabel.text;
             self.tableview.tableHeaderView = self.headerView;
+//            if (self.viewModel.newdetail.comments.count > 0) {
+//                [_scrollview setupAutoContentSizeWithBottomView:self.tableview bottomMargin:10];
+//            }
+//            else
+//            {
+//                [self.scrollview addSubview:self.headerView];
+//                [self.tableview removeFromSuperview];
+//                self.headerView.sd_layout
+//                .topSpaceToView(self.webView,10)
+//                .leftEqualToView(self.scrollview)
+//                .rightEqualToView(self.scrollview);
+//                [_scrollview setupAutoContentSizeWithBottomView:self.headerView bottomMargin:10];
+//            }
             [self.tableview reloadData];
         }
     }];
@@ -135,6 +162,27 @@
             .leftEqualToView(self.view)
             .rightEqualToView(self.view)
             .heightIs(self.tableviewHeight);
+        }
+    }];
+    [RACObserve(self.viewModel, shouldReloadCommentTable) subscribeNext:^(id x) {
+        if (self.viewModel.shouldReloadCommentTable == YES) {
+            self.viewModel.isTableView = YES;
+            [self.tableview reloadData];
+            self.bottomView.textField.placeholder = @"说点什么吧";
+            self.bottomView.textField.text = nil;
+            [XHToast showCenterWithText:@"发表成功" duration:1];
+            self.viewModel.postType = 1;
+            self.bottomView.sendButton.enabled = NO;
+        }
+    }];
+    [[self.bottomView.textField rac_textSignal] subscribeNext:^(NSString* x) {
+        if (x.length > 0) {
+            self.bottomView.sendButton.enabled = YES;
+            self.viewModel.content = x;
+        }
+        else
+        {
+            self.bottomView.sendButton.enabled = NO;
         }
     }];
     [[self.viewModel.shareCommand executionSignals] subscribeNext:^(id x) {
@@ -180,6 +228,21 @@
     // 为imageLayer添加动画
     [imageLayer addAnimation:anim forKey:nil];
 }
+#pragma mark - bottomCommentViewset
+- (void)setTapGesture
+{
+    [[_bottomView.sendButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        [self.bottomView.textField resignFirstResponder];
+        if ([self.viewModel didLogined]) {
+            [self.viewModel addNews];
+        }
+        else
+        {
+            SEMLoginViewController* login = [HRTRouter objectForURL:@"login" withUserInfo:@{}];
+            [self presentViewController:login animated:YES completion:nil];
+        }
+    }];
+}
 #pragma mark- tableviewDelegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -188,29 +251,53 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (self.viewModel.newdetail) {
+    if (self.viewModel.newdetail.comments.count > 0) {
         return self.viewModel.newdetail.comments.count;
+    }
+    else
+    {
+        if (self.viewModel.isLoaded == YES) {
+            self.viewModel.isTableView = NO;
+            return 1;
+        }
     }
     return 0;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CommentCell* cell = (CommentCell*)[tableView dequeueReusableCellWithIdentifier:@"CommentCell" forIndexPath:indexPath];
-    cell.model = self.viewModel.newdetail.comments[indexPath.row];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    return cell;
+    if (self.viewModel.isTableView == YES) {
+        CommentCell* cell = [[CommentCell alloc] init];
+        cell.model = self.viewModel.newdetail.comments[indexPath.row];
+        cell.delegate = self;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
+    }
+    else
+    {
+        UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cell"];
+        return cell;
+    }
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGFloat height = [self.tableview cellHeightForIndexPath:indexPath model:self.viewModel.newdetail.comments[indexPath.row] keyPath:@"model" cellClass:[CommentCell class]  contentViewWidth:[UIScreen mainScreen].bounds.size.width];
-    if (self.viewModel.heightSet == NO) {
-        self.tableviewHeight += height;
-    }
+    if (self.viewModel.isTableView == YES) {
+        CGFloat height = [self.tableview cellHeightForIndexPath:indexPath model:self.viewModel.newdetail.comments[indexPath.row] keyPath:@"model" cellClass:[CommentCell class]  contentViewWidth:[UIScreen mainScreen].bounds.size.width];
+        if (self.viewModel.heightSet == NO) {
+            self.tableviewHeight += height;
+        }
+        
+        if (indexPath.row == (self.viewModel.newdetail.comments.count - 1)) {
+            self.viewModel.getHeight = YES;
+        }
+        return height;
 
-    if (indexPath.row == (self.viewModel.newdetail.comments.count - 1)) {
-        self.viewModel.getHeight = YES;
     }
-    return height;
+    else
+    {
+        self.viewModel.getHeight = YES;
+        self.tableviewHeight = 10;
+        return 10;
+    }
 }
 #pragma mark -webviewdelegate
 - (void)webViewDidStartLoad:(UIWebView *)webView
@@ -221,7 +308,7 @@
 {
     
     //为什么无法获取到真实高度？
-//    CGFloat webViewHeight= [[self.webView stringByEvaluatingJavaScriptFromString: @"document.body.scrollHeight"] intValue];
+    CGFloat webViewHeight= [[self.webView stringByEvaluatingJavaScriptFromString: @"document.body.scrollHeight"] intValue];
     
     //如果文字较少，则不用进行scrollViewDidScroll中的设置
     if (self.viewModel.newdetail.text.length < 500) {
@@ -240,26 +327,26 @@
         .topSpaceToView(self.infoLabbel,10)
         .leftEqualToView(self.view)
         .rightEqualToView(self.view)
-        .heightIs(500);
+        .heightIs(webViewHeight);
     }
     [self.hud hide:YES];
 }
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    if (self.viewModel.webViewLoaded == NO && scrollView.contentSize.height != 200) {
-
-        //获取真实的高度
-        CGFloat a = scrollView.contentSize.height;
-        self.webView.sd_resetLayout
-        .topSpaceToView(self.infoLabbel,10)
-        .leftEqualToView(self.view)
-        .rightEqualToView(self.view)
-        .heightIs(a);
-        NSLog(@"%f",a);
-        self.viewModel.webViewLoaded = YES;
-        self.webView.scrollView.scrollEnabled = NO;
-        self.scrollview.scrollEnabled =YES;
-    }
+//    if (self.viewModel.webViewLoaded == NO && scrollView.contentSize.height != 200) {
+//
+//        //获取真实的高度
+//        CGFloat a = scrollView.contentSize.height;
+//        self.webView.sd_resetLayout
+//        .topSpaceToView(self.infoLabbel,10)
+//        .leftEqualToView(self.view)
+//        .rightEqualToView(self.view)
+//        .heightIs(a);
+//        NSLog(@"%f",a);
+//        self.viewModel.webViewLoaded = YES;
+//        self.webView.scrollView.scrollEnabled = NO;
+////        self.scrollview.scrollEnabled =YES;
+//    }
     
 }
 - (void)didSelectedShareView:(NSInteger)index
@@ -333,6 +420,26 @@
 {
     self.viewModel = [[NewsDetailViewModel alloc] initWithDictionary: routerParameters];
 }
+#pragma mark - PostComment
+- (void)didClickComment:(NSInteger)newsId targetName:(NSString *)targetName
+{
+    self.viewModel.targetCommentId = newsId;
+    self.viewModel.postType = 2;
+    self.bottomView.textField.placeholder = [NSString stringWithFormat:@"回复%@",targetName];
+    self.bottomView.imageButton.sd_resetLayout
+    .widthIs(0);
+    [self.bottomView.textField becomeFirstResponder];
+}
+- (void)didReplyComment:(NSInteger)newsId targetId:(NSInteger)targetId remindId:(NSInteger)remindID name:(NSString *)name
+{
+    self.viewModel.postType = 3;
+    self.bottomView.textField.placeholder = [NSString stringWithFormat:@"回复%@",name];
+    self.bottomView.imageButton.sd_resetLayout
+    .widthIs(0);
+    [self.bottomView.textField becomeFirstResponder];
+    self.viewModel.remindId = remindID;
+    self.viewModel.targetCommentId = targetId;
+}
 #pragma mark-getter
 - (UILabel*)titleLabel
 {
@@ -357,6 +464,7 @@
         _webView = [[UIWebView alloc] init];
         _webView.delegate = self;
         _webView.scrollView.delegate = self;
+        _webView.scrollView.scrollEnabled = NO;
         _webView.backgroundColor = [UIColor lightGrayColor];
     }
     return _webView;
@@ -376,64 +484,48 @@
 {
     if (!_headerView) {
         _headerView = [UIView new];
-        UILabel* uplabel = [UILabel new];
-        uplabel.text = @"相关";
-        uplabel.textAlignment = NSTextAlignmentLeft;
-        [_headerView addSubview:uplabel];
-        uplabel.sd_layout
-        .topSpaceToView(_headerView,10)
-        .leftSpaceToView(_headerView,10)
-        .rightSpaceToView(_headerView,10)
-        .autoHeightRatio(0);
-        
-        
-        UIView* tagview = [UIView new];
-        [_headerView addSubview:tagview];
-        NSMutableArray *temp = [NSMutableArray new];
         NSInteger count = self.viewModel.newdetail.tags.count;
         if (count > 0) {
-            NSArray<Tag*>* strings = self.viewModel.newdetail.tags;
-            for (int i = 0; i < count; i++) {
-                UILabel* label = [UILabel new];
-                label.layer.borderWidth = 1;
-                label.textColor = [UIColor colorWithHexString:@"#1EA11f"];
-                label.text = strings[i].text;
-                label.font = [UIFont systemFontOfSize:16];
-                label.layer.borderColor = [UIColor colorWithHexString:@"#C8C8C8"].CGColor;
-                label.textAlignment = NSTextAlignmentCenter;
-                [tagview addSubview:label];
-                label.sd_layout.autoHeightRatio(0);
-                [temp addObject:label];
-            }
-            
-            // 此步设置之后_autoMarginViewsContainer的高度可以根据子view自适应
-            [tagview setupAutoMarginFlowItems:[temp copy] withPerRowItemsCount:3 itemWidth:80 verticalMargin:10 verticalEdgeInset:4 horizontalEdgeInset:10];
-            
-            tagview.sd_layout
-            .leftSpaceToView(_headerView, 10)
-            .rightSpaceToView(_headerView, 10)
-            .topSpaceToView(uplabel, 20);
-        }
-        UILabel* commentLabel = [UILabel new];
-        commentLabel.text = @"精彩评论";
-        commentLabel.textColor = [UIColor colorWithHexString:@"#1EA11F"];
-        [_headerView addSubview:commentLabel];
-        if (count > 0) {
-            commentLabel.sd_layout
-            .topSpaceToView(tagview,22)
+            UILabel* uplabel = [UILabel new];
+            uplabel.text = @"相关";
+            uplabel.textAlignment = NSTextAlignmentLeft;
+            [_headerView addSubview:uplabel];
+            uplabel.sd_layout
+            .topSpaceToView(_headerView,10)
             .leftSpaceToView(_headerView,10)
             .rightSpaceToView(_headerView,10)
-            .heightIs(20);
+            .autoHeightRatio(0);
+            TagLabels* tagView = [[TagLabels alloc] init];
+            tagView.model = self.viewModel.newdetail.tags;
+            [_headerView addSubview:tagView];
+            tagView.sd_layout
+            .leftSpaceToView(_headerView,10)
+            .rightSpaceToView(_headerView,10)
+            .topSpaceToView(uplabel,20*self.view.scale);
+            UILabel* commentLabel = [UILabel new];
+            commentLabel.text = @"精彩评论";
+            commentLabel.textColor = [UIColor colorWithHexString:@"#1EA11F"];
+            [_headerView addSubview:commentLabel];
+            commentLabel.sd_layout
+            .topSpaceToView(tagView,22*self.view.scale)
+            .leftSpaceToView(_headerView,10)
+            .rightSpaceToView(_headerView,10)
+            .heightIs(20*self.view.scale);
+            [_headerView setupAutoHeightWithBottomView:commentLabel bottomMargin:0];
         }
         else
         {
+            UILabel* commentLabel = [UILabel new];
+            commentLabel.text = @"精彩评论";
+            commentLabel.textColor = [UIColor colorWithHexString:@"#1EA11F"];
+            [_headerView addSubview:commentLabel];
             commentLabel.sd_layout
-            .topSpaceToView(uplabel,22)
+            .topSpaceToView(_headerView,22*self.view.scale)
             .leftSpaceToView(_headerView,10)
             .rightSpaceToView(_headerView,10)
-            .heightIs(20);
+            .heightIs(20*self.view.scale);
+            [_headerView setupAutoHeightWithBottomView:commentLabel bottomMargin:0];
         }
-        [_headerView setupAutoHeightWithBottomView:commentLabel bottomMargin:0];
         [_headerView layoutSubviews];
         self.tableviewHeight += _headerView.frame.size.height;
         
@@ -483,11 +575,26 @@
     if (!_scrollview) {
         _scrollview = [[UIScrollView alloc] init];
         
-        //避免刚开始滑动时就滑动
-        _scrollview.scrollEnabled = NO;
+//        //避免刚开始滑动时就滑动
+//        _scrollview.scrollEnabled = NO;
     }
     return _scrollview;
 }
+- (CommentBottomView *)bottomView
+{
+    if (!_bottomView) {
+        _bottomView = [[CommentBottomView alloc] init];
+        _bottomView.backgroundColor = [UIColor BackGroundColor];
+        [self setTapGesture];
+        _bottomView.imageButton.sd_resetLayout
+        .widthIs(0)
+        .leftEqualToView(_bottomView)
+        .topEqualToView(_bottomView)
+        .bottomEqualToView(_bottomView);
+    }
+    return _bottomView;
+}
+
 - (ShareView *)shareView
 {
     if (!_shareView) {

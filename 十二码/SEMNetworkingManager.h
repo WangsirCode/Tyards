@@ -1015,6 +1015,29 @@
                             failure:(void (^)(NSError *aError))failureBlock;
 
 /*!
+ *  @author 汪宇豪, 16-09-15 23:09:29
+ *
+ *  @brief 评论热点
+ *
+ *  @param iden            热点id
+ *  @param content         内容
+ *  @param targetCommentId 回复的评论的id
+ *  @param remind          回复的人的id
+ *  @param token           token
+ *  @param successBlock    成功
+ *  @param failureBlock    失败
+ *
+ *  @return NSURLSessionTask
+ */
+- (NSURLSessionTask*)commentHottopic:(NSInteger)iden
+                         content:(NSString*)content
+                 targetCommentId:(NSInteger)targetCommentId
+                          remind:(NSInteger)remind
+                           token:(NSString*)token
+                         success:(void (^)(id data))successBlock
+                         failure:(void (^)(NSError *aError))failureBlock;
+
+/*!
  *  @author 汪宇豪, 16-09-14 20:09:11
  *
  *  @brief 获取球员的互动信息

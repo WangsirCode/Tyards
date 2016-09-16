@@ -63,6 +63,14 @@
 @end
 
 @implementation SEMTeamHomeViewController
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary
+{
+    self = [super init];
+    if (self) {
+        self.viewModel = [[SEMTeamHomeModel alloc] initWithDictionary:dictionary];
+    }
+    return self;
+}
 #pragma mark- lifeCycle
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
