@@ -14,6 +14,7 @@
 #import <TencentOpenAPI/TencentOAuth.h>
 #import "UserModel.h"
 #import "LoginCommand.h"
+#import "TokenResponseModel.h"
 #import "MeinfoViewModel.h"
 @interface SEMLoginViewController ()<TencentSessionDelegate>
 
@@ -29,6 +30,7 @@
 @property (nonatomic,strong) TencentOAuth* tencentOAuth;
 @property (nonatomic,strong)MeinfoViewModel* viewModel;
 @property (nonatomic,strong)LoginCommand* login;
+@property (nonatomic,strong) NSString* url;
 @end
 
 @implementation SEMLoginViewController
@@ -270,7 +272,13 @@
         [DataArchive removeUserFile:@"UserInfo"];
         NSDictionary *userInfo = [response jsonResponse];
         UserModel* data = [[UserModel alloc] init];
-        data.headimgurl = userInfo[@"figureurl_qq_2"];
+        if (self.url) {
+            data.headimgurl = self.url;
+        }
+        else
+        {
+            data.headimgurl = userInfo[@"figureurl_qq_2"];
+        }
         data.nickname = userInfo[@"nickname"];
         data.token = (NSString*)[DataArchive unarchiveUserDataWithFileName:@"token"];
         [DataArchive archiveUserData:data withFileName:@"userinfo"];
@@ -294,7 +302,9 @@
         NSString* openID = _tencentOAuth.openId;
         SEMNetworkingManager* magager = [SEMNetworkingManager sharedInstance];
         [magager fetchQQToken:token openid:openID success:^(id data) {
-            NSString* token = data;
+            TokenModel* model = data;
+            NSString* token = model.token;
+            self.url = model.user.avatar;
             [DataArchive archiveUserData:token withFileName:@"token"];
             [_tencentOAuth getUserInfo];
         } failure:^(NSError *aError) {

@@ -7,9 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MeUserInfoResponseModel.h"
 @interface TokenModel : NSObject
 @property (nonatomic,strong) NSString* token;
-@property (nonatomic,strong) NSString* user;
+@property (nonatomic,strong) UserInfoModel* user;
 @end
 @interface TokenResponseModel : NSObject
 @property (nonatomic,assign) NSInteger code;

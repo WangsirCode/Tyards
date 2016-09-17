@@ -153,6 +153,7 @@
             self.viewModel.postType = 1;
             [XHToast showCenterWithText:@"发表成功" duration:1];
             self.commmentBottomView.sendButton.enabled = NO;
+            self.viewModel.content = nil;
         }
     }];
     [[self.viewModel.shareCommand executionSignals] subscribeNext:^(id x) {

@@ -158,6 +158,7 @@
             [XHToast showCenterWithText:@"发表成功" duration:1];
             self.viewModel.postType = 1;
             self.bottomView.sendButton.enabled = NO;
+            self.viewModel.content = nil;
         }
     }];
     [[self.bottomView.textField rac_textSignal] subscribeNext:^(NSString* x) {

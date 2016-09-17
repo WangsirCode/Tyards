@@ -112,7 +112,7 @@
     .bottomEqualToView(self.view)
     .heightIs(50*self.view.scale);
 
-    [_scrollview setupAutoContentSizeWithBottomView:self.tableview bottomMargin:10];
+    [_scrollview setupAutoContentSizeWithBottomView:self.tableview bottomMargin:50*self.view.scale];
     
 }
 - (void)bindModel
@@ -132,7 +132,7 @@
                 [text appendString:self.viewModel.newdetail.detail];
             }
             [self.webView loadHTMLString:text baseURL:nil];
-//            self.webView.scrollView.scrollEnabled = YES;
+            self.webView.scrollView.scrollEnabled = YES;
             self.infoLabbel.text = [self.viewModel.newdetail getInfo];
             self.titleLabel.text = self.viewModel.newdetail.title;
             self.navigationItem.title = self.titleLabel.text;
@@ -155,24 +155,32 @@
     }];
     [RACObserve(self.viewModel, getHeight) subscribeNext:^(id x) {
         if (self.viewModel.getHeight == YES && self.viewModel.heightSet == NO) {
-            //为什么会重复执行numberOfRowsInSection:?
+//        if(self.viewModel.getHeight == YES)
+//        {
+//            为什么会重复执行numberOfRowsInSection:?
             self.viewModel.heightSet = YES;
             self.tableview.sd_resetLayout
             .topSpaceToView(self.webView,10)
             .leftEqualToView(self.view)
             .rightEqualToView(self.view)
             .heightIs(self.tableviewHeight);
+//            self.viewModel.getHeight = NO;
+//            self.viewModel.heightSet = NO;
         }
     }];
     [RACObserve(self.viewModel, shouldReloadCommentTable) subscribeNext:^(id x) {
         if (self.viewModel.shouldReloadCommentTable == YES) {
             self.viewModel.isTableView = YES;
+            self.viewModel.getHeight = NO;
+            self.viewModel.heightSet = NO;
+            self.tableviewHeight = 0;
             [self.tableview reloadData];
             self.bottomView.textField.placeholder = @"说点什么吧";
             self.bottomView.textField.text = nil;
             [XHToast showCenterWithText:@"发表成功" duration:1];
             self.viewModel.postType = 1;
             self.bottomView.sendButton.enabled = NO;
+            self.viewModel.content = nil;
         }
     }];
     [[self.bottomView.textField rac_textSignal] subscribeNext:^(NSString* x) {
@@ -251,7 +259,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (self.viewModel.newdetail.comments.count > 0) {
+    if (self.viewModel.newdetail.comments > 0) {
         return self.viewModel.newdetail.comments.count;
     }
     else
@@ -281,16 +289,21 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (self.viewModel.isTableView == YES) {
-        CGFloat height = [self.tableview cellHeightForIndexPath:indexPath model:self.viewModel.newdetail.comments[indexPath.row] keyPath:@"model" cellClass:[CommentCell class]  contentViewWidth:[UIScreen mainScreen].bounds.size.width];
-        if (self.viewModel.heightSet == NO) {
-            self.tableviewHeight += height;
+        if (self.viewModel.newdetail.comments[indexPath.row]) {
+            CGFloat height = [self.tableview cellHeightForIndexPath:indexPath model:self.viewModel.newdetail.comments[indexPath.row] keyPath:@"model" cellClass:[CommentCell class]  contentViewWidth:[UIScreen mainScreen].bounds.size.width];
+                    if (self.viewModel.heightSet == NO) {
+                            self.tableviewHeight += height;
+                    }
+            
+            if (indexPath.row == (self.viewModel.newdetail.comments.count - 1)) {
+                self.viewModel.getHeight = YES;
+            }
+            return height;
         }
-        
-        if (indexPath.row == (self.viewModel.newdetail.comments.count - 1)) {
-            self.viewModel.getHeight = YES;
+        else
+        {
+            return 0;
         }
-        return height;
-
     }
     else
     {
@@ -310,43 +323,43 @@
     //为什么无法获取到真实高度？
     CGFloat webViewHeight= [[self.webView stringByEvaluatingJavaScriptFromString: @"document.body.scrollHeight"] intValue];
     
-    //如果文字较少，则不用进行scrollViewDidScroll中的设置
-    if (self.viewModel.newdetail.text.length < 500) {
-        self.webView.sd_layout
-        .topSpaceToView(self.infoLabbel,10)
-        .leftEqualToView(self.view)
-        .rightEqualToView(self.view)
-        .heightIs(200);
-        self.webView.scrollView.scrollEnabled = NO;
-        self.scrollview.scrollEnabled = YES;
-    }
-    
-    else
-    {
+//    //如果文字较少，则不用进行scrollViewDidScroll中的设置
+//    if (self.viewModel.newdetail.text.length < 500) {
+//        self.webView.sd_layout
+//        .topSpaceToView(self.infoLabbel,10)
+//        .leftEqualToView(self.view)
+//        .rightEqualToView(self.view)
+//        .heightIs(200);
+//        self.webView.scrollView.scrollEnabled = NO;
+//        self.scrollview.scrollEnabled = YES;
+//    }
+//    
+//    else
+//    {
         self.webView.sd_layout
         .topSpaceToView(self.infoLabbel,10)
         .leftEqualToView(self.view)
         .rightEqualToView(self.view)
         .heightIs(webViewHeight);
-    }
+//    }
     [self.hud hide:YES];
 }
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-//    if (self.viewModel.webViewLoaded == NO && scrollView.contentSize.height != 200) {
-//
-//        //获取真实的高度
-//        CGFloat a = scrollView.contentSize.height;
-//        self.webView.sd_resetLayout
-//        .topSpaceToView(self.infoLabbel,10)
-//        .leftEqualToView(self.view)
-//        .rightEqualToView(self.view)
-//        .heightIs(a);
-//        NSLog(@"%f",a);
-//        self.viewModel.webViewLoaded = YES;
-//        self.webView.scrollView.scrollEnabled = NO;
-////        self.scrollview.scrollEnabled =YES;
-//    }
+    if (self.viewModel.webViewLoaded == NO && scrollView.contentSize.height != 200) {
+
+        //获取真实的高度
+        CGFloat a = scrollView.contentSize.height;
+        self.webView.sd_resetLayout
+        .topSpaceToView(self.infoLabbel,10)
+        .leftEqualToView(self.view)
+        .rightEqualToView(self.view)
+        .heightIs(a);
+        NSLog(@"%f",a);
+        self.viewModel.webViewLoaded = YES;
+        self.webView.scrollView.scrollEnabled = NO;
+        self.scrollview.scrollEnabled =YES;
+    }
     
 }
 - (void)didSelectedShareView:(NSInteger)index
@@ -575,8 +588,8 @@
     if (!_scrollview) {
         _scrollview = [[UIScrollView alloc] init];
         
-//        //避免刚开始滑动时就滑动
-//        _scrollview.scrollEnabled = NO;
+        //避免刚开始滑动时就滑动
+        _scrollview.scrollEnabled = NO;
     }
     return _scrollview;
 }
