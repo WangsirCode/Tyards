@@ -14,7 +14,7 @@
 @implementation NewsDetailModel
 
 + (NSDictionary *)objectClassInArray{
-    return @{@"comments" : [Comments class],@"tags" : [Tag class]};
+    return @{@"comments" : [Comments class],@"tags" : [Tag class],@"medias": [Medias1 class]};
 }
 - (NSString*)getDate
 {
@@ -31,6 +31,14 @@
     [info appendString:@" / "];
     [info appendString:[self getDate]];
     return info;
+}
+- (NSString *)getDateInfo
+{
+    NSDate *date = [[NSDate alloc]initWithTimeIntervalSince1970:self.dateCreated/1000];
+    NSDateFormatter* formater = [[NSDateFormatter alloc] init];
+    formater.dateFormat = @"MM月dd日  hh : mm ";
+    NSString* ta = [formater stringFromDate:date];
+    return ta;
 }
 @end
 
@@ -64,7 +72,10 @@
     return ta;
 }
 @end
+@implementation Medias1
 
+
+@end
 
 @implementation Remind
 

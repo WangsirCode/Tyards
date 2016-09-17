@@ -164,6 +164,7 @@
 		4746A66D1D49B0A6009E0645 /* LoginCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 4746A66C1D49B0A6009E0645 /* LoginCommand.m */; };
 		4746A6701D49B3D8009E0645 /* MeinfoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4746A66F1D49B3D8009E0645 /* MeinfoViewModel.m */; };
 		4746A6771D49DFC4009E0645 /* TagView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4746A6761D49DFC4009E0645 /* TagView.m */; };
+		4750689C1D86F96E00D588D8 /* NewsCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4750689B1D86F96E00D588D8 /* NewsCommentCell.m */; };
 		4753074D1D46F74A003ECEBF /* MeTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4753074C1D46F74A003ECEBF /* MeTopView.m */; };
 		475307501D46F964003ECEBF /* MeinfoVIew.m in Sources */ = {isa = PBXBuildFile; fileRef = 4753074F1D46F964003ECEBF /* MeinfoVIew.m */; };
 		476088041D55818600F36597 /* TeamInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 476088031D55818600F36597 /* TeamInfoView.m */; };
@@ -175,6 +176,7 @@
 		476088101D55874400F36597 /* 约战-进球.png in Resources */ = {isa = PBXBuildFile; fileRef = 4760880A1D55874400F36597 /* 约战-进球.png */; };
 		476088131D5588D900F36597 /* SEMTeamPhotoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 476088121D5588D900F36597 /* SEMTeamPhotoController.m */; };
 		4760881B1D55897200F36597 /* TeamPhotoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4760881A1D55897200F36597 /* TeamPhotoViewModel.m */; };
+		47621DD61D8B729100A7B92A /* TagLabels.m in Sources */ = {isa = PBXBuildFile; fileRef = 47621DD51D8B729100A7B92A /* TagLabels.m */; };
 		476252171D519027003788C0 /* ShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 476252161D519027003788C0 /* ShareView.m */; };
 		4762521D1D5196A0003788C0 /* UIView+Scale.m in Sources */ = {isa = PBXBuildFile; fileRef = 4762521C1D5196A0003788C0 /* UIView+Scale.m */; };
 		476823721D44E43E00B224E6 /* SEMSearchViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 476823711D44E43E00B224E6 /* SEMSearchViewModel.m */; };
@@ -207,6 +209,7 @@
 		4788AA9D1D71EA6D0057B954 /* PlayHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 4788AA9C1D71EA6D0057B954 /* PlayHistory.m */; };
 		478B5E531D420728007AABC4 /* SEMNetworkingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 478B5E521D420728007AABC4 /* SEMNetworkingManager.m */; };
 		478B5E561D420AC5007AABC4 /* hotTopicsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 478B5E551D420AC5007AABC4 /* hotTopicsModel.m */; };
+		479A7B871D897F1500916B40 /* PlayerNewsResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 479A7B861D897F1500916B40 /* PlayerNewsResponseModel.m */; };
 		47A008351D83A9AA0090F1A5 /* CenterAlertIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A008341D83A9AA0090F1A5 /* CenterAlertIView.m */; };
 		47A008381D83F0270090F1A5 /* CenterDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A008371D83F0270090F1A5 /* CenterDatePickerView.m */; };
 		47A0083B1D84491C0090F1A5 /* ImageResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A0083A1D84491C0090F1A5 /* ImageResponseModel.m */; };
@@ -229,6 +232,8 @@
 		47A6262C1D748A1500ABE897 /* InvitationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A6262B1D748A1500ABE897 /* InvitationViewController.m */; };
 		47A6262F1D748A8C00ABE897 /* InvitationVIewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A6262E1D748A8C00ABE897 /* InvitationVIewModel.m */; };
 		47A626321D748CF700ABE897 /* InvitationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A626311D748CF700ABE897 /* InvitationView.m */; };
+		47A6EF081D879BF0004C0BB4 /* ImageContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A6EF071D879BF0004C0BB4 /* ImageContainerView.m */; };
+		47A6EF0B1D87A5C3004C0BB4 /* NewsCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A6EF0A1D87A5C3004C0BB4 /* NewsCommentView.m */; };
 		47ABD96B1D60799600CD18CF /* PlayerDataResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47ABD96A1D60799600CD18CF /* PlayerDataResponseModel.m */; };
 		47ABD96E1D607E8300CD18CF /* InfoViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 47ABD96D1D607E8300CD18CF /* InfoViewCell.m */; };
 		47ABD9701D60AA4E00CD18CF /* Copa del Rey.png in Resources */ = {isa = PBXBuildFile; fileRef = 47ABD96F1D60AA4E00CD18CF /* Copa del Rey.png */; };
@@ -276,6 +281,38 @@
 		47CAC1DA1D766738001D3708 /* PlaceSelectController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47CAC1D91D766738001D3708 /* PlaceSelectController.m */; };
 		47CAC1DD1D7667F0001D3708 /* PlaceViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47CAC1DC1D7667F0001D3708 /* PlaceViewModel.m */; };
 		47CAC1E01D766837001D3708 /* PlacceResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47CAC1DF1D766837001D3708 /* PlacceResponseModel.m */; };
+		47D0BD0B1D8B016A00EDD065 /* TokenResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47D0BD0A1D8B016A00EDD065 /* TokenResponseModel.m */; };
+		47DA9E131D8983420090ABC5 /* CommentBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47DA9E121D8983420090ABC5 /* CommentBottomView.m */; };
+		47DA9E171D8988ED0090ABC5 /* imagebutoon.png in Resources */ = {isa = PBXBuildFile; fileRef = 47DA9E161D8988ED0090ABC5 /* imagebutoon.png */; };
+		47DA9E731D8992E90090ABC5 /* DACircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47DA9E1C1D8992E90090ABC5 /* DACircularProgressView.m */; };
+		47DA9E741D8992E90090ABC5 /* DALabeledCircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47DA9E1E1D8992E90090ABC5 /* DALabeledCircularProgressView.m */; };
+		47DA9E831D8992E90090ABC5 /* MLImagePickerHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 47DA9E401D8992E90090ABC5 /* MLImagePickerHUD.m */; };
+		47DA9E841D8992E90090ABC5 /* MLNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47DA9E421D8992E90090ABC5 /* MLNavigationViewController.m */; };
+		47DA9E851D8992E90090ABC5 /* MLPhotoAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 47DA9E441D8992E90090ABC5 /* MLPhotoAsset.m */; };
+		47DA9E861D8992E90090ABC5 /* MLPhotoKitData.m in Sources */ = {isa = PBXBuildFile; fileRef = 47DA9E461D8992E90090ABC5 /* MLPhotoKitData.m */; };
+		47DA9E871D8992E90090ABC5 /* MLPhotoPickerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 47DA9E491D8992E90090ABC5 /* MLPhotoPickerManager.m */; };
+		47DA9E881D8992E90090ABC5 /* MLPhotoRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 47DA9E4B1D8992E90090ABC5 /* MLPhotoRect.m */; };
+		47DA9E891D8992E90090ABC5 /* MLPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 47DA9E4F1D8992E90090ABC5 /* MLPhoto.m */; };
+		47DA9E8A1D8992E90090ABC5 /* MLPhotoBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47DA9E521D8992E90090ABC5 /* MLPhotoBrowserViewController.m */; };
+		47DA9E8B1D8992E90090ABC5 /* MLPhotoBrowserCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 47DA9E551D8992E90090ABC5 /* MLPhotoBrowserCollectionCell.m */; };
+		47DA9E8C1D8992E90090ABC5 /* MLPhotoBrowserCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47DA9E561D8992E90090ABC5 /* MLPhotoBrowserCollectionCell.xib */; };
+		47DA9E8D1D8992E90090ABC5 /* MLPhotoPickerBrowserPhotoImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47DA9E581D8992E90090ABC5 /* MLPhotoPickerBrowserPhotoImageView.m */; };
+		47DA9E8E1D8992E90090ABC5 /* MLPhotoPickerBrowserPhotoScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47DA9E5A1D8992E90090ABC5 /* MLPhotoPickerBrowserPhotoScrollView.m */; };
+		47DA9E8F1D8992E90090ABC5 /* MLPhotoPickerBrowserPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47DA9E5C1D8992E90090ABC5 /* MLPhotoPickerBrowserPhotoView.m */; };
+		47DA9E901D8992E90090ABC5 /* MLPhotoPickerAssetsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 47DA9E601D8992E90090ABC5 /* MLPhotoPickerAssetsManager.m */; };
+		47DA9E911D8992E90090ABC5 /* MLPhotoPickerData.m in Sources */ = {isa = PBXBuildFile; fileRef = 47DA9E621D8992E90090ABC5 /* MLPhotoPickerData.m */; };
+		47DA9E921D8992E90090ABC5 /* MLImagePickerCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 47DA9E651D8992E90090ABC5 /* MLImagePickerCollectionViewCell.m */; };
+		47DA9E931D8992E90090ABC5 /* MLImagePickerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47DA9E661D8992E90090ABC5 /* MLImagePickerCollectionViewCell.xib */; };
+		47DA9E941D8992E90090ABC5 /* MLImagePickerMenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 47DA9E681D8992E90090ABC5 /* MLImagePickerMenuTableViewCell.m */; };
+		47DA9E951D8992E90090ABC5 /* MLImagePickerMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47DA9E691D8992E90090ABC5 /* MLImagePickerMenuTableViewCell.xib */; };
+		47DA9E961D8992E90090ABC5 /* MLPhotoPickerCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47DA9E6B1D8992E90090ABC5 /* MLPhotoPickerCollectionView.m */; };
+		47DA9E971D8992E90090ABC5 /* UIButton+Animation.m in Sources */ = {isa = PBXBuildFile; fileRef = 47DA9E6D1D8992E90090ABC5 /* UIButton+Animation.m */; };
+		47DA9E981D8992E90090ABC5 /* MLImagePickerViewController+MenuTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 47DA9E701D8992E90090ABC5 /* MLImagePickerViewController+MenuTableViewDataSource.m */; };
+		47DA9E991D8992E90090ABC5 /* MLImagePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47DA9E721D8992E90090ABC5 /* MLImagePickerViewController.m */; };
+		47DA9E9B1D89953D0090ABC5 /* MLImagePickerController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 47DA9E9A1D89953D0090ABC5 /* MLImagePickerController.bundle */; };
+		47DA9E9E1D8997830090ABC5 /* PictureShowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47DA9E9D1D8997830090ABC5 /* PictureShowView.m */; };
+		47DA9EA01D8999960090ABC5 /* ➕图片.png in Resources */ = {isa = PBXBuildFile; fileRef = 47DA9E9F1D8999960090ABC5 /* ➕图片.png */; };
+		47DA9EA21D899BD90090ABC5 /* imgae.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 47DA9EA11D899BD90090ABC5 /* imgae.jpg */; };
 		47E8BCF91D5C1315007621F8 /* TeamResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47E8BCF81D5C1315007621F8 /* TeamResponseModel.m */; };
 		47E8BCFC1D5C18A6007621F8 /* GameNewsDetailResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47E8BCFB1D5C18A6007621F8 /* GameNewsDetailResponseModel.m */; };
 		47E8BCFF1D5C1A4A007621F8 /* GameMessageResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47E8BCFE1D5C1A4A007621F8 /* GameMessageResponseModel.m */; };
@@ -552,6 +589,8 @@
 		4746A66F1D49B3D8009E0645 /* MeinfoViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeinfoViewModel.m; sourceTree = "<group>"; };
 		4746A6751D49DFC4009E0645 /* TagView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagView.h; sourceTree = "<group>"; };
 		4746A6761D49DFC4009E0645 /* TagView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagView.m; sourceTree = "<group>"; };
+		4750689A1D86F96E00D588D8 /* NewsCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsCommentCell.h; sourceTree = "<group>"; };
+		4750689B1D86F96E00D588D8 /* NewsCommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsCommentCell.m; sourceTree = "<group>"; };
 		4753074B1D46F74A003ECEBF /* MeTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeTopView.h; sourceTree = "<group>"; };
 		4753074C1D46F74A003ECEBF /* MeTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeTopView.m; sourceTree = "<group>"; };
 		4753074E1D46F964003ECEBF /* MeinfoVIew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeinfoVIew.h; sourceTree = "<group>"; };
@@ -568,6 +607,8 @@
 		476088121D5588D900F36597 /* SEMTeamPhotoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SEMTeamPhotoController.m; sourceTree = "<group>"; };
 		476088191D55897200F36597 /* TeamPhotoViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamPhotoViewModel.h; sourceTree = "<group>"; };
 		4760881A1D55897200F36597 /* TeamPhotoViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamPhotoViewModel.m; sourceTree = "<group>"; };
+		47621DD41D8B729100A7B92A /* TagLabels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagLabels.h; sourceTree = "<group>"; };
+		47621DD51D8B729100A7B92A /* TagLabels.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagLabels.m; sourceTree = "<group>"; };
 		476252151D519027003788C0 /* ShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareView.h; sourceTree = "<group>"; };
 		476252161D519027003788C0 /* ShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareView.m; sourceTree = "<group>"; };
 		4762521B1D5196A0003788C0 /* UIView+Scale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Scale.h"; sourceTree = "<group>"; };
@@ -631,6 +672,8 @@
 		478B5E521D420728007AABC4 /* SEMNetworkingManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SEMNetworkingManager.m; sourceTree = "<group>"; };
 		478B5E541D420AC5007AABC4 /* hotTopicsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hotTopicsModel.h; sourceTree = "<group>"; };
 		478B5E551D420AC5007AABC4 /* hotTopicsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = hotTopicsModel.m; sourceTree = "<group>"; };
+		479A7B851D897F1400916B40 /* PlayerNewsResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerNewsResponseModel.h; sourceTree = "<group>"; };
+		479A7B861D897F1500916B40 /* PlayerNewsResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerNewsResponseModel.m; sourceTree = "<group>"; };
 		47A008331D83A9AA0090F1A5 /* CenterAlertIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CenterAlertIView.h; sourceTree = "<group>"; };
 		47A008341D83A9AA0090F1A5 /* CenterAlertIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CenterAlertIView.m; sourceTree = "<group>"; };
 		47A008361D83F0270090F1A5 /* CenterDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CenterDatePickerView.h; sourceTree = "<group>"; };
@@ -675,6 +718,10 @@
 		47A6262E1D748A8C00ABE897 /* InvitationVIewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvitationVIewModel.m; sourceTree = "<group>"; };
 		47A626301D748CF700ABE897 /* InvitationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvitationView.h; sourceTree = "<group>"; };
 		47A626311D748CF700ABE897 /* InvitationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvitationView.m; sourceTree = "<group>"; };
+		47A6EF061D879BF0004C0BB4 /* ImageContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageContainerView.h; sourceTree = "<group>"; };
+		47A6EF071D879BF0004C0BB4 /* ImageContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageContainerView.m; sourceTree = "<group>"; };
+		47A6EF091D87A5C3004C0BB4 /* NewsCommentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsCommentView.h; sourceTree = "<group>"; };
+		47A6EF0A1D87A5C3004C0BB4 /* NewsCommentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsCommentView.m; sourceTree = "<group>"; };
 		47ABD9691D60799600CD18CF /* PlayerDataResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerDataResponseModel.h; sourceTree = "<group>"; };
 		47ABD96A1D60799600CD18CF /* PlayerDataResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerDataResponseModel.m; sourceTree = "<group>"; };
 		47ABD96C1D607E8300CD18CF /* InfoViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoViewCell.h; sourceTree = "<group>"; };
@@ -752,6 +799,64 @@
 		47CAC1DC1D7667F0001D3708 /* PlaceViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceViewModel.m; sourceTree = "<group>"; };
 		47CAC1DE1D766837001D3708 /* PlacceResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlacceResponseModel.h; sourceTree = "<group>"; };
 		47CAC1DF1D766837001D3708 /* PlacceResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlacceResponseModel.m; sourceTree = "<group>"; };
+		47D0BD091D8B016A00EDD065 /* TokenResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TokenResponseModel.h; sourceTree = "<group>"; };
+		47D0BD0A1D8B016A00EDD065 /* TokenResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TokenResponseModel.m; sourceTree = "<group>"; };
+		47DA9E111D8983420090ABC5 /* CommentBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentBottomView.h; sourceTree = "<group>"; };
+		47DA9E121D8983420090ABC5 /* CommentBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentBottomView.m; sourceTree = "<group>"; };
+		47DA9E161D8988ED0090ABC5 /* imagebutoon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = imagebutoon.png; sourceTree = "<group>"; };
+		47DA9E1B1D8992E90090ABC5 /* DACircularProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DACircularProgressView.h; sourceTree = "<group>"; };
+		47DA9E1C1D8992E90090ABC5 /* DACircularProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DACircularProgressView.m; sourceTree = "<group>"; };
+		47DA9E1D1D8992E90090ABC5 /* DALabeledCircularProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DALabeledCircularProgressView.h; sourceTree = "<group>"; };
+		47DA9E1E1D8992E90090ABC5 /* DALabeledCircularProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DALabeledCircularProgressView.m; sourceTree = "<group>"; };
+		47DA9E3F1D8992E90090ABC5 /* MLImagePickerHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLImagePickerHUD.h; sourceTree = "<group>"; };
+		47DA9E401D8992E90090ABC5 /* MLImagePickerHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLImagePickerHUD.m; sourceTree = "<group>"; };
+		47DA9E411D8992E90090ABC5 /* MLNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLNavigationViewController.h; sourceTree = "<group>"; };
+		47DA9E421D8992E90090ABC5 /* MLNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLNavigationViewController.m; sourceTree = "<group>"; };
+		47DA9E431D8992E90090ABC5 /* MLPhotoAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLPhotoAsset.h; sourceTree = "<group>"; };
+		47DA9E441D8992E90090ABC5 /* MLPhotoAsset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLPhotoAsset.m; sourceTree = "<group>"; };
+		47DA9E451D8992E90090ABC5 /* MLPhotoKitData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLPhotoKitData.h; sourceTree = "<group>"; };
+		47DA9E461D8992E90090ABC5 /* MLPhotoKitData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLPhotoKitData.m; sourceTree = "<group>"; };
+		47DA9E471D8992E90090ABC5 /* MLPhotoPickerHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLPhotoPickerHeader.h; sourceTree = "<group>"; };
+		47DA9E481D8992E90090ABC5 /* MLPhotoPickerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLPhotoPickerManager.h; sourceTree = "<group>"; };
+		47DA9E491D8992E90090ABC5 /* MLPhotoPickerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLPhotoPickerManager.m; sourceTree = "<group>"; };
+		47DA9E4A1D8992E90090ABC5 /* MLPhotoRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLPhotoRect.h; sourceTree = "<group>"; };
+		47DA9E4B1D8992E90090ABC5 /* MLPhotoRect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLPhotoRect.m; sourceTree = "<group>"; };
+		47DA9E4E1D8992E90090ABC5 /* MLPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLPhoto.h; sourceTree = "<group>"; };
+		47DA9E4F1D8992E90090ABC5 /* MLPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLPhoto.m; sourceTree = "<group>"; };
+		47DA9E511D8992E90090ABC5 /* MLPhotoBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLPhotoBrowserViewController.h; sourceTree = "<group>"; };
+		47DA9E521D8992E90090ABC5 /* MLPhotoBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLPhotoBrowserViewController.m; sourceTree = "<group>"; };
+		47DA9E541D8992E90090ABC5 /* MLPhotoBrowserCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLPhotoBrowserCollectionCell.h; sourceTree = "<group>"; };
+		47DA9E551D8992E90090ABC5 /* MLPhotoBrowserCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLPhotoBrowserCollectionCell.m; sourceTree = "<group>"; };
+		47DA9E561D8992E90090ABC5 /* MLPhotoBrowserCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MLPhotoBrowserCollectionCell.xib; sourceTree = "<group>"; };
+		47DA9E571D8992E90090ABC5 /* MLPhotoPickerBrowserPhotoImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLPhotoPickerBrowserPhotoImageView.h; sourceTree = "<group>"; };
+		47DA9E581D8992E90090ABC5 /* MLPhotoPickerBrowserPhotoImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLPhotoPickerBrowserPhotoImageView.m; sourceTree = "<group>"; };
+		47DA9E591D8992E90090ABC5 /* MLPhotoPickerBrowserPhotoScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLPhotoPickerBrowserPhotoScrollView.h; sourceTree = "<group>"; };
+		47DA9E5A1D8992E90090ABC5 /* MLPhotoPickerBrowserPhotoScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLPhotoPickerBrowserPhotoScrollView.m; sourceTree = "<group>"; };
+		47DA9E5B1D8992E90090ABC5 /* MLPhotoPickerBrowserPhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLPhotoPickerBrowserPhotoView.h; sourceTree = "<group>"; };
+		47DA9E5C1D8992E90090ABC5 /* MLPhotoPickerBrowserPhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLPhotoPickerBrowserPhotoView.m; sourceTree = "<group>"; };
+		47DA9E5F1D8992E90090ABC5 /* MLPhotoPickerAssetsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLPhotoPickerAssetsManager.h; sourceTree = "<group>"; };
+		47DA9E601D8992E90090ABC5 /* MLPhotoPickerAssetsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLPhotoPickerAssetsManager.m; sourceTree = "<group>"; };
+		47DA9E611D8992E90090ABC5 /* MLPhotoPickerData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLPhotoPickerData.h; sourceTree = "<group>"; };
+		47DA9E621D8992E90090ABC5 /* MLPhotoPickerData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLPhotoPickerData.m; sourceTree = "<group>"; };
+		47DA9E641D8992E90090ABC5 /* MLImagePickerCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLImagePickerCollectionViewCell.h; sourceTree = "<group>"; };
+		47DA9E651D8992E90090ABC5 /* MLImagePickerCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLImagePickerCollectionViewCell.m; sourceTree = "<group>"; };
+		47DA9E661D8992E90090ABC5 /* MLImagePickerCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MLImagePickerCollectionViewCell.xib; sourceTree = "<group>"; };
+		47DA9E671D8992E90090ABC5 /* MLImagePickerMenuTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLImagePickerMenuTableViewCell.h; sourceTree = "<group>"; };
+		47DA9E681D8992E90090ABC5 /* MLImagePickerMenuTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLImagePickerMenuTableViewCell.m; sourceTree = "<group>"; };
+		47DA9E691D8992E90090ABC5 /* MLImagePickerMenuTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MLImagePickerMenuTableViewCell.xib; sourceTree = "<group>"; };
+		47DA9E6A1D8992E90090ABC5 /* MLPhotoPickerCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLPhotoPickerCollectionView.h; sourceTree = "<group>"; };
+		47DA9E6B1D8992E90090ABC5 /* MLPhotoPickerCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLPhotoPickerCollectionView.m; sourceTree = "<group>"; };
+		47DA9E6C1D8992E90090ABC5 /* UIButton+Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Animation.h"; sourceTree = "<group>"; };
+		47DA9E6D1D8992E90090ABC5 /* UIButton+Animation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Animation.m"; sourceTree = "<group>"; };
+		47DA9E6F1D8992E90090ABC5 /* MLImagePickerViewController+MenuTableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MLImagePickerViewController+MenuTableViewDataSource.h"; sourceTree = "<group>"; };
+		47DA9E701D8992E90090ABC5 /* MLImagePickerViewController+MenuTableViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MLImagePickerViewController+MenuTableViewDataSource.m"; sourceTree = "<group>"; };
+		47DA9E711D8992E90090ABC5 /* MLImagePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLImagePickerViewController.h; sourceTree = "<group>"; };
+		47DA9E721D8992E90090ABC5 /* MLImagePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLImagePickerViewController.m; sourceTree = "<group>"; };
+		47DA9E9A1D89953D0090ABC5 /* MLImagePickerController.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MLImagePickerController.bundle; sourceTree = "<group>"; };
+		47DA9E9C1D8997830090ABC5 /* PictureShowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PictureShowView.h; sourceTree = "<group>"; };
+		47DA9E9D1D8997830090ABC5 /* PictureShowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PictureShowView.m; sourceTree = "<group>"; };
+		47DA9E9F1D8999960090ABC5 /* ➕图片.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "➕图片.png"; sourceTree = "<group>"; };
+		47DA9EA11D899BD90090ABC5 /* imgae.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = imgae.jpg; sourceTree = "<group>"; };
 		47E8BCF71D5C1315007621F8 /* TeamResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamResponseModel.h; sourceTree = "<group>"; };
 		47E8BCF81D5C1315007621F8 /* TeamResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamResponseModel.m; sourceTree = "<group>"; };
 		47E8BCFA1D5C18A6007621F8 /* GameNewsDetailResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameNewsDetailResponseModel.h; sourceTree = "<group>"; };
@@ -888,6 +993,8 @@
 				470F56D61D71DF9400110FCE /* HistoryView.m */,
 				473C99141D8261DF0093F662 /* HistoryInfoView.h */,
 				473C99151D8261DF0093F662 /* HistoryInfoView.m */,
+				47DA9E9C1D8997830090ABC5 /* PictureShowView.h */,
+				47DA9E9D1D8997830090ABC5 /* PictureShowView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -956,6 +1063,7 @@
 		4734CD391D41B511006536DF /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				47DA9E9A1D89953D0090ABC5 /* MLImagePickerController.bundle */,
 				47BB49A01D45F45B0052E4D0 /* weixin */,
 				4734CDE21D41CD27006536DF /* picture */,
 				4734CD451D41B512006536DF /* Assets.xcassets */,
@@ -1044,6 +1152,8 @@
 				4746A6691D49AB17009E0645 /* UserModel.m */,
 				4746A66B1D49B0A6009E0645 /* LoginCommand.h */,
 				4746A66C1D49B0A6009E0645 /* LoginCommand.m */,
+				47D0BD091D8B016A00EDD065 /* TokenResponseModel.h */,
+				47D0BD0A1D8B016A00EDD065 /* TokenResponseModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1081,6 +1191,8 @@
 				476B99621D4F75B100D52B31 /* CommentView.m */,
 				476252151D519027003788C0 /* ShareView.h */,
 				476252161D519027003788C0 /* ShareView.m */,
+				47621DD41D8B729100A7B92A /* TagLabels.h */,
+				47621DD51D8B729100A7B92A /* TagLabels.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1163,6 +1275,7 @@
 		4734CDA91D41BFAA006536DF /* Expand */ = {
 			isa = PBXGroup;
 			children = (
+				47DA9E181D8992C60090ABC5 /* Photo */,
 				4746A6741D49B92F009E0645 /* XHToast */,
 				4734CDAA1D41BFBB006536DF /* Catagory */,
 				4734CD961D41BE3E006536DF /* Common */,
@@ -1218,8 +1331,11 @@
 		4734CDE21D41CD27006536DF /* picture */ = {
 			isa = PBXGroup;
 			children = (
+				47DA9EA11D899BD90090ABC5 /* imgae.jpg */,
+				47DA9E161D8988ED0090ABC5 /* imagebutoon.png */,
 				47184FBE1D73C303008A4591 /* icon_followed(1).png */,
 				47ABD96F1D60AA4E00CD18CF /* Copa del Rey.png */,
+				47DA9E9F1D8999960090ABC5 /* ➕图片.png */,
 				470D2EE31D7A4AF3001047BD /* visible.png */,
 				4735FA101D5616F000FDF2ED /* Group 19.png */,
 				470D2EED1D7BC7C2001047BD /* volume.png */,
@@ -1515,6 +1631,8 @@
 				47A364CB1D5AB870002FC59E /* PlayerInforesponseModel.m */,
 				47ABD9691D60799600CD18CF /* PlayerDataResponseModel.h */,
 				47ABD96A1D60799600CD18CF /* PlayerDataResponseModel.m */,
+				479A7B851D897F1400916B40 /* PlayerNewsResponseModel.h */,
+				479A7B861D897F1500916B40 /* PlayerNewsResponseModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1565,6 +1683,14 @@
 				47ABD96D1D607E8300CD18CF /* InfoViewCell.m */,
 				47A008331D83A9AA0090F1A5 /* CenterAlertIView.h */,
 				47A008341D83A9AA0090F1A5 /* CenterAlertIView.m */,
+				4750689A1D86F96E00D588D8 /* NewsCommentCell.h */,
+				4750689B1D86F96E00D588D8 /* NewsCommentCell.m */,
+				47A6EF061D879BF0004C0BB4 /* ImageContainerView.h */,
+				47A6EF071D879BF0004C0BB4 /* ImageContainerView.m */,
+				47A6EF091D87A5C3004C0BB4 /* NewsCommentView.h */,
+				47A6EF0A1D87A5C3004C0BB4 /* NewsCommentView.m */,
+				47DA9E111D8983420090ABC5 /* CommentBottomView.h */,
+				47DA9E121D8983420090ABC5 /* CommentBottomView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1604,6 +1730,157 @@
 				47BB499C1D45F4450052E4D0 /* WXApiObject.h */,
 			);
 			name = weixin;
+			sourceTree = "<group>";
+		};
+		47DA9E181D8992C60090ABC5 /* Photo */ = {
+			isa = PBXGroup;
+			children = (
+				47DA9E191D8992E90090ABC5 /* ThreePart */,
+				47DA9E3D1D8992E90090ABC5 /* Classes */,
+			);
+			name = Photo;
+			sourceTree = "<group>";
+		};
+		47DA9E191D8992E90090ABC5 /* ThreePart */ = {
+			isa = PBXGroup;
+			children = (
+				47DA9E1A1D8992E90090ABC5 /* DACircularProgress */,
+			);
+			path = ThreePart;
+			sourceTree = "<group>";
+		};
+		47DA9E1A1D8992E90090ABC5 /* DACircularProgress */ = {
+			isa = PBXGroup;
+			children = (
+				47DA9E1B1D8992E90090ABC5 /* DACircularProgressView.h */,
+				47DA9E1C1D8992E90090ABC5 /* DACircularProgressView.m */,
+				47DA9E1D1D8992E90090ABC5 /* DALabeledCircularProgressView.h */,
+				47DA9E1E1D8992E90090ABC5 /* DALabeledCircularProgressView.m */,
+			);
+			path = DACircularProgress;
+			sourceTree = "<group>";
+		};
+		47DA9E3D1D8992E90090ABC5 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				47DA9E3E1D8992E90090ABC5 /* Base */,
+				47DA9E4C1D8992E90090ABC5 /* MLPhotoBrowser */,
+				47DA9E5D1D8992E90090ABC5 /* MLPhotoPicker */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		47DA9E3E1D8992E90090ABC5 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				47DA9E3F1D8992E90090ABC5 /* MLImagePickerHUD.h */,
+				47DA9E401D8992E90090ABC5 /* MLImagePickerHUD.m */,
+				47DA9E411D8992E90090ABC5 /* MLNavigationViewController.h */,
+				47DA9E421D8992E90090ABC5 /* MLNavigationViewController.m */,
+				47DA9E431D8992E90090ABC5 /* MLPhotoAsset.h */,
+				47DA9E441D8992E90090ABC5 /* MLPhotoAsset.m */,
+				47DA9E451D8992E90090ABC5 /* MLPhotoKitData.h */,
+				47DA9E461D8992E90090ABC5 /* MLPhotoKitData.m */,
+				47DA9E471D8992E90090ABC5 /* MLPhotoPickerHeader.h */,
+				47DA9E481D8992E90090ABC5 /* MLPhotoPickerManager.h */,
+				47DA9E491D8992E90090ABC5 /* MLPhotoPickerManager.m */,
+				47DA9E4A1D8992E90090ABC5 /* MLPhotoRect.h */,
+				47DA9E4B1D8992E90090ABC5 /* MLPhotoRect.m */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		47DA9E4C1D8992E90090ABC5 /* MLPhotoBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				47DA9E4D1D8992E90090ABC5 /* Models */,
+				47DA9E501D8992E90090ABC5 /* ViewController */,
+				47DA9E531D8992E90090ABC5 /* Views */,
+			);
+			path = MLPhotoBrowser;
+			sourceTree = "<group>";
+		};
+		47DA9E4D1D8992E90090ABC5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				47DA9E4E1D8992E90090ABC5 /* MLPhoto.h */,
+				47DA9E4F1D8992E90090ABC5 /* MLPhoto.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		47DA9E501D8992E90090ABC5 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				47DA9E511D8992E90090ABC5 /* MLPhotoBrowserViewController.h */,
+				47DA9E521D8992E90090ABC5 /* MLPhotoBrowserViewController.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		47DA9E531D8992E90090ABC5 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				47DA9E541D8992E90090ABC5 /* MLPhotoBrowserCollectionCell.h */,
+				47DA9E551D8992E90090ABC5 /* MLPhotoBrowserCollectionCell.m */,
+				47DA9E561D8992E90090ABC5 /* MLPhotoBrowserCollectionCell.xib */,
+				47DA9E571D8992E90090ABC5 /* MLPhotoPickerBrowserPhotoImageView.h */,
+				47DA9E581D8992E90090ABC5 /* MLPhotoPickerBrowserPhotoImageView.m */,
+				47DA9E591D8992E90090ABC5 /* MLPhotoPickerBrowserPhotoScrollView.h */,
+				47DA9E5A1D8992E90090ABC5 /* MLPhotoPickerBrowserPhotoScrollView.m */,
+				47DA9E5B1D8992E90090ABC5 /* MLPhotoPickerBrowserPhotoView.h */,
+				47DA9E5C1D8992E90090ABC5 /* MLPhotoPickerBrowserPhotoView.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		47DA9E5D1D8992E90090ABC5 /* MLPhotoPicker */ = {
+			isa = PBXGroup;
+			children = (
+				47DA9E5E1D8992E90090ABC5 /* Model */,
+				47DA9E631D8992E90090ABC5 /* UIView */,
+				47DA9E6E1D8992E90090ABC5 /* UIViewController */,
+			);
+			path = MLPhotoPicker;
+			sourceTree = "<group>";
+		};
+		47DA9E5E1D8992E90090ABC5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				47DA9E5F1D8992E90090ABC5 /* MLPhotoPickerAssetsManager.h */,
+				47DA9E601D8992E90090ABC5 /* MLPhotoPickerAssetsManager.m */,
+				47DA9E611D8992E90090ABC5 /* MLPhotoPickerData.h */,
+				47DA9E621D8992E90090ABC5 /* MLPhotoPickerData.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		47DA9E631D8992E90090ABC5 /* UIView */ = {
+			isa = PBXGroup;
+			children = (
+				47DA9E641D8992E90090ABC5 /* MLImagePickerCollectionViewCell.h */,
+				47DA9E651D8992E90090ABC5 /* MLImagePickerCollectionViewCell.m */,
+				47DA9E661D8992E90090ABC5 /* MLImagePickerCollectionViewCell.xib */,
+				47DA9E671D8992E90090ABC5 /* MLImagePickerMenuTableViewCell.h */,
+				47DA9E681D8992E90090ABC5 /* MLImagePickerMenuTableViewCell.m */,
+				47DA9E691D8992E90090ABC5 /* MLImagePickerMenuTableViewCell.xib */,
+				47DA9E6A1D8992E90090ABC5 /* MLPhotoPickerCollectionView.h */,
+				47DA9E6B1D8992E90090ABC5 /* MLPhotoPickerCollectionView.m */,
+				47DA9E6C1D8992E90090ABC5 /* UIButton+Animation.h */,
+				47DA9E6D1D8992E90090ABC5 /* UIButton+Animation.m */,
+			);
+			path = UIView;
+			sourceTree = "<group>";
+		};
+		47DA9E6E1D8992E90090ABC5 /* UIViewController */ = {
+			isa = PBXGroup;
+			children = (
+				47DA9E6F1D8992E90090ABC5 /* MLImagePickerViewController+MenuTableViewDataSource.h */,
+				47DA9E701D8992E90090ABC5 /* MLImagePickerViewController+MenuTableViewDataSource.m */,
+				47DA9E711D8992E90090ABC5 /* MLImagePickerViewController.h */,
+				47DA9E721D8992E90090ABC5 /* MLImagePickerViewController.m */,
+			);
+			path = UIViewController;
 			sourceTree = "<group>";
 		};
 		59F3A195794D197DEDF165E0 /* Frameworks */ = {
@@ -1790,8 +2067,10 @@
 				4734CE491D41CD5E006536DF /* 搜索-×.png in Resources */,
 				4734CE371D41CD55006536DF /* star_L副本.png in Resources */,
 				4734CE3D1D41CD55006536DF /* 头像 copy.png in Resources */,
+				47DA9EA21D899BD90090ABC5 /* imgae.jpg in Resources */,
 				4734CDFE1D41CD42006536DF /* 微信QQ分割线.png in Resources */,
 				47C053CC1D7520D900AEBF86 /* icon_small_soccer.png in Resources */,
+				47DA9E931D8992E90090ABC5 /* MLImagePickerCollectionViewCell.xib in Resources */,
 				47184FB31D72BCEA008A4591 /* 约战-黄.png in Resources */,
 				47C053C81D7520D900AEBF86 /* icon_more.png in Resources */,
 				4734CE011D41CD42006536DF /* 足球logo.png in Resources */,
@@ -1800,6 +2079,7 @@
 				47ABD9701D60AA4E00CD18CF /* Copa del Rey.png in Resources */,
 				47184FBD1D73C2FD008A4591 /* icon_follow(1).png in Resources */,
 				4735FA151D561E2100FDF2ED /* 头像背景.png in Resources */,
+				47DA9E8C1D8992E90090ABC5 /* MLPhotoBrowserCollectionCell.xib in Resources */,
 				4734CE171D41CD4B006536DF /* 深色背景.png in Resources */,
 				4734CE341D41CD55006536DF /* Rectangle 301.png in Resources */,
 				470D2EEE1D7BC7C2001047BD /* volume.png in Resources */,
@@ -1813,7 +2093,9 @@
 				47C053C21D7520D900AEBF86 /* Combined Shape 02.png in Resources */,
 				4734CDEF1D41CD39006536DF /* 资讯icon-绿.png in Resources */,
 				4734CE4E1D41CD6D006536DF /* 2.png in Resources */,
+				47DA9E9B1D89953D0090ABC5 /* MLImagePickerController.bundle in Resources */,
 				4734CE151D41CD4B006536DF /* 我的关注icon.png in Resources */,
+				47DA9EA01D8999960090ABC5 /* ➕图片.png in Resources */,
 				470D2EE41D7A4AF3001047BD /* visible.png in Resources */,
 				4734CE131D41CD4B006536DF /* 好友推荐icon.png in Resources */,
 				4734CDFF1D41CD42006536DF /* 微信QQ矩形框.png in Resources */,
@@ -1834,7 +2116,9 @@
 				4734CE3E1D41CD55006536DF /* 标题背景.png in Resources */,
 				4734CE4C1D41CD5E006536DF /* 信息发送icon.png in Resources */,
 				4734CE001D41CD42006536DF /* 背景.png in Resources */,
+				47DA9E951D8992E90090ABC5 /* MLImagePickerMenuTableViewCell.xib in Resources */,
 				47C053CA1D7520D900AEBF86 /* icon_pen_edit.png in Resources */,
+				47DA9E171D8988ED0090ABC5 /* imagebutoon.png in Resources */,
 				47C053C31D7520D900AEBF86 /* icon_arrow_down.png in Resources */,
 				47C053C61D7520D900AEBF86 /* icon_clock.png in Resources */,
 				4734CDFC1D41CD42006536DF /* QQicon.png in Resources */,
@@ -1910,13 +2194,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				47D0BD0B1D8B016A00EDD065 /* TokenResponseModel.m in Sources */,
 				4725D2B91D5B2CB100A13AEB /* GameInfoResponseModel.m in Sources */,
 				47C3220F1D6BF50800317A4C /* ScoreListResponseModel.m in Sources */,
 				4735FA001D55FB3700FDF2ED /* PersonalInfoViewModel.m in Sources */,
+				47DA9E941D8992E90090ABC5 /* MLImagePickerMenuTableViewCell.m in Sources */,
 				477642621D5440AA00548C9F /* TeamHomeModelResponse.m in Sources */,
+				47DA9E731D8992E90090ABC5 /* DACircularProgressView.m in Sources */,
 				47E8BCF91D5C1315007621F8 /* TeamResponseModel.m in Sources */,
+				47DA9E911D8992E90090ABC5 /* MLPhotoPickerData.m in Sources */,
 				4734CDDC1D41C95D006536DF /* UIFont+IconFont.m in Sources */,
 				4739B5E41D488E3E007842CC /* NoticeGameviewCell.m in Sources */,
+				47A6EF0B1D87A5C3004C0BB4 /* NewsCommentView.m in Sources */,
 				47E8BCFC1D5C18A6007621F8 /* GameNewsDetailResponseModel.m in Sources */,
 				4725D2BC1D5B2E6E00A13AEB /* GameInfoDetailViewController.m in Sources */,
 				47A086431D82AD9B00ECB636 /* MyLabel.m in Sources */,
@@ -1927,7 +2216,10 @@
 				47A364C91D5AB78C002FC59E /* PlayerDetailViewController.m in Sources */,
 				4772FE611D56579B0008ED37 /* MyMessageController.m in Sources */,
 				47ADE43E1D73CFAD006C130B /* CoachDetailViewModel.m in Sources */,
+				47DA9E8A1D8992E90090ABC5 /* MLPhotoBrowserViewController.m in Sources */,
+				47DA9E9E1D8997830090ABC5 /* PictureShowView.m in Sources */,
 				472A923A1D4705A000F8620F /* SEMLoginViewController.m in Sources */,
+				47DA9E921D8992E90090ABC5 /* MLImagePickerCollectionViewCell.m in Sources */,
 				4788AA9D1D71EA6D0057B954 /* PlayHistory.m in Sources */,
 				47A086461D82DB1100ECB636 /* TournamentGamesResponseModel.m in Sources */,
 				4734CDBF1D41C585006536DF /* SEMNewsVIewModel.m in Sources */,
@@ -1935,12 +2227,14 @@
 				4735FA0F1D560EBE00FDF2ED /* MeUserInfoResponseModel.m in Sources */,
 				476823751D44EA7E00B224E6 /* SearchModel.m in Sources */,
 				47A008351D83A9AA0090F1A5 /* CenterAlertIView.m in Sources */,
+				479A7B871D897F1500916B40 /* PlayerNewsResponseModel.m in Sources */,
 				4734CD991D41BE3E006536DF /* DataArchive.m in Sources */,
 				47CAC1D71D76630E001D3708 /* TypeSelectController.m in Sources */,
 				473BCCD51D5961F1005DBD2F /* PhotoCollectionCell.m in Sources */,
 				470F56D41D71D59700110FCE /* DataView.m in Sources */,
 				4734CD951D41BCE3006536DF /* SEMTeamViewModel.m in Sources */,
 				476823721D44E43E00B224E6 /* SEMSearchViewModel.m in Sources */,
+				47DA9E861D8992E90090ABC5 /* MLPhotoKitData.m in Sources */,
 				47CAC1DD1D7667F0001D3708 /* PlaceViewModel.m in Sources */,
 				4746A6701D49B3D8009E0645 /* MeinfoViewModel.m in Sources */,
 				4734CDA81D41BE7D006536DF /* MDABizManager.m in Sources */,
@@ -1948,6 +2242,7 @@
 				47AF5D2E1D5646A700728933 /* MyConcernViewModel.m in Sources */,
 				472930F41D430168008587A6 /* ReCommendNews.m in Sources */,
 				472930F91D430AD1008587A6 /* HomeCell.m in Sources */,
+				47DA9E971D8992E90090ABC5 /* UIButton+Animation.m in Sources */,
 				473BCCD81D596668005DBD2F /* TeamAlbumsResponseModel.m in Sources */,
 				4734CD3E1D41B512006536DF /* AppDelegate.m in Sources */,
 				47CAC1E01D766837001D3708 /* PlacceResponseModel.m in Sources */,
@@ -1957,6 +2252,7 @@
 				47C053E21D759FEF00AEBF86 /* MyInvitationResponseModel.m in Sources */,
 				47A364C61D5A1935002FC59E /* PictureShowController.m in Sources */,
 				4746A66A1D49AB17009E0645 /* UserModel.m in Sources */,
+				47DA9E131D8983420090ABC5 /* CommentBottomView.m in Sources */,
 				47CAC1DA1D766738001D3708 /* PlaceSelectController.m in Sources */,
 				477676721D58614A00E10594 /* AboutViewController.m in Sources */,
 				47A364B11D597C78002FC59E /* AlbumDetailController.m in Sources */,
@@ -1966,13 +2262,17 @@
 				4735F9F71D55FA8F00FDF2ED /* PersonalInfoController.m in Sources */,
 				473BCCDB1D59682A005DBD2F /* AlbumDetailResponseModel.m in Sources */,
 				47ABD96E1D607E8300CD18CF /* InfoViewCell.m in Sources */,
+				47DA9E831D8992E90090ABC5 /* MLImagePickerHUD.m in Sources */,
 				47A364CF1D5AB9D5002FC59E /* PlayerDetailViewModel.m in Sources */,
 				476B99601D4F757B00D52B31 /* CommentCell.m in Sources */,
+				47DA9E8B1D8992E90090ABC5 /* MLPhotoBrowserCollectionCell.m in Sources */,
+				47DA9E8F1D8992E90090ABC5 /* MLPhotoPickerBrowserPhotoView.m in Sources */,
 				4725D2D11D5B677A00A13AEB /* ScheduleResponseModel.m in Sources */,
 				4734CD3B1D41B512006536DF /* main.m in Sources */,
 				4734CDB01D41C46A006536DF /* SEMMeViewController.m in Sources */,
 				473C99161D8261DF0093F662 /* HistoryInfoView.m in Sources */,
 				477676691D58544D00E10594 /* FeedBackViewModel.m in Sources */,
+				47DA9E901D8992E90090ABC5 /* MLPhotoPickerAssetsManager.m in Sources */,
 				4739B5E71D488E6E007842CC /* HistoryviewCell.m in Sources */,
 				4725D2CB1D5B637B00A13AEB /* RaceInfoDetailController.m in Sources */,
 				4746A66D1D49B0A6009E0645 /* LoginCommand.m in Sources */,
@@ -1980,6 +2280,8 @@
 				476B99631D4F75B100D52B31 /* CommentView.m in Sources */,
 				476CBDAF1D4352070075FA7E /* HomeHeadView.m in Sources */,
 				4734CDA51D41BE54006536DF /* HRTTabBarButton.m in Sources */,
+				4750689C1D86F96E00D588D8 /* NewsCommentCell.m in Sources */,
+				47DA9E851D8992E90090ABC5 /* MLPhotoAsset.m in Sources */,
 				470C5EF61D44D7E700DDF90B /* SEMSearchViewController.m in Sources */,
 				475307501D46F964003ECEBF /* MeinfoVIew.m in Sources */,
 				4776425C1D5434F100548C9F /* SEMTeamHomeModel.m in Sources */,
@@ -1996,12 +2298,14 @@
 				47A6262C1D748A1500ABE897 /* InvitationViewController.m in Sources */,
 				4746A6411D489A90009E0645 /* NewsDetailViewModel.m in Sources */,
 				4734CD801D41B9D1006536DF /* SEMHomeVIewController.m in Sources */,
+				47DA9E991D8992E90090ABC5 /* MLImagePickerViewController.m in Sources */,
 				4746A6441D489B18009E0645 /* SEMNewsDetailController.m in Sources */,
 				47BB49971D45E3700052E4D0 /* TopicModel.m in Sources */,
 				4734CDDE1D41C95D006536DF /* UIView+Hirat.m in Sources */,
 				4725D2C81D5B611A00A13AEB /* GameinfoViewModel.m in Sources */,
 				47A364D81D5ABC7F002FC59E /* PlayerInfoView.m in Sources */,
 				47A364BA1D59AFA9002FC59E /* TeamDetailInfoView.m in Sources */,
+				47DA9E741D8992E90090ABC5 /* DALabeledCircularProgressView.m in Sources */,
 				4753074D1D46F74A003ECEBF /* MeTopView.m in Sources */,
 				47C053D01D75927400AEBF86 /* InvitationViewCell.m in Sources */,
 				47E8BD021D5C1DF0007621F8 /* GameDetailResponseModel.m in Sources */,
@@ -2009,8 +2313,10 @@
 				4735FA0C1D55FCDA00FDF2ED /* MeColleageSearchViewModel.m in Sources */,
 				477676751D58CB2C00E10594 /* TeamCommentsResponseModel.m in Sources */,
 				47C053D61D759B0B00AEBF86 /* MyInvitationViewModel.m in Sources */,
+				47621DD61D8B729100A7B92A /* TagLabels.m in Sources */,
 				4772FE6D1D565DEB0008ED37 /* UIColor+MyColor.m in Sources */,
 				47C053D91D759C5800AEBF86 /* MakeInvitationViewModel.m in Sources */,
+				47DA9E841D8992E90090ABC5 /* MLNavigationViewController.m in Sources */,
 				4734CD831D41BA54006536DF /* SEMViewModel.m in Sources */,
 				4708D2E61D4A67BD0094FAF9 /* NoticeCellView.m in Sources */,
 				4734CD921D41BCB9006536DF /* SEMMeViewModel.m in Sources */,
@@ -2023,6 +2329,7 @@
 				47405DD31D521ABB000A980A /* CostomView.m in Sources */,
 				4734CDB61D41C4BF006536DF /* SEMNewsViewController.m in Sources */,
 				4746A64A1D48A2A3009E0645 /* NewsDetailResponseModel.m in Sources */,
+				47DA9E8D1D8992E90090ABC5 /* MLPhotoPickerBrowserPhotoImageView.m in Sources */,
 				47AF5D311D564AA200728933 /* MeReplyResponseModel.m in Sources */,
 				4739B5D51D483B52007842CC /* MeLoginVIewModel.m in Sources */,
 				47A364CC1D5AB870002FC59E /* PlayerInforesponseModel.m in Sources */,
@@ -2036,11 +2343,15 @@
 				478B5E531D420728007AABC4 /* SEMNetworkingManager.m in Sources */,
 				47C053DC1D759C8F00AEBF86 /* MakeInvitationController.m in Sources */,
 				4734CDDD1D41C95D006536DF /* UIImage+IconFont.m in Sources */,
+				47A6EF081D879BF0004C0BB4 /* ImageContainerView.m in Sources */,
+				47DA9E981D8992E90090ABC5 /* MLImagePickerViewController+MenuTableViewDataSource.m in Sources */,
 				476252171D519027003788C0 /* ShareView.m in Sources */,
 				47A626321D748CF700ABE897 /* InvitationView.m in Sources */,
 				47B6621F1D8293B20099BDF3 /* GenderPickerView.m in Sources */,
 				47A626291D74878400ABE897 /* InvitationResponseModel.m in Sources */,
+				47DA9E881D8992E90090ABC5 /* MLPhotoRect.m in Sources */,
 				47BB49B61D460AF00052E4D0 /* NewsViewCell.m in Sources */,
+				47DA9E891D8992E90090ABC5 /* MLPhoto.m in Sources */,
 				477676631D58527100E10594 /* XHToast.m in Sources */,
 				4739B5DE1D4862F1007842CC /* GameDetailModel.m in Sources */,
 				4746A6771D49DFC4009E0645 /* TagView.m in Sources */,
@@ -2055,10 +2366,12 @@
 				47A6262F1D748A8C00ABE897 /* InvitationVIewModel.m in Sources */,
 				4734CDAD1D41BFF2006536DF /* NSArray+Safe.m in Sources */,
 				4734CDB91D41C4CD006536DF /* SEMGameViewController.m in Sources */,
+				47DA9E871D8992E90090ABC5 /* MLPhotoPickerManager.m in Sources */,
 				4776766F1D58610600E10594 /* AboutVIewModel.m in Sources */,
 				4734CDBC1D41C4D9006536DF /* SEMTeamViewController.m in Sources */,
 				4776426E1D548CAD00548C9F /* TeamPlayerResponseModel.m in Sources */,
 				4734CDA31D41BE54006536DF /* HRTRouter.m in Sources */,
+				47DA9E961D8992E90090ABC5 /* MLPhotoPickerCollectionView.m in Sources */,
 				47A364BD1D59C310002FC59E /* OvalView.m in Sources */,
 				47AF5D2B1D56468F00728933 /* MyConcernController.m in Sources */,
 				47A364C01D59D88F002FC59E /* RecordLabel.m in Sources */,
@@ -2070,6 +2383,7 @@
 				47A364B71D5988AF002FC59E /* PhotoDetailCell.m in Sources */,
 				4734CDA41D41BE54006536DF /* UIViewController+HRTRouter.m in Sources */,
 				4704AD811D6004620057D502 /* BasicInfoCell.m in Sources */,
+				47DA9E8E1D8992E90090ABC5 /* MLPhotoPickerBrowserPhotoScrollView.m in Sources */,
 				477642681D546F0800548C9F /* UIImage+placeholder.m in Sources */,
 				47A364C31D5A0735002FC59E /* TeamInfoResponseModel.m in Sources */,
 				4772FE671D5659E40008ED37 /* MyMessageModel.m in Sources */,

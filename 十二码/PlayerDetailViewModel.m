@@ -16,6 +16,8 @@
     {
         self.status = 0;
         [self fetchData:[(NSNumber*)dictionary[@"id"] stringValue]];
+        self.playerId = [(NSNumber*)dictionary[@"id"] stringValue];
+        self.postType = 1;
     }
     return self;
 }
@@ -25,11 +27,6 @@
     //暂时用这个id测试
     [manager fetchPlayerInfo:playerId success:^(id data) {
         self.model = data;
-        NSMutableArray* array = [[NSMutableArray alloc] init];
-        [self.model.newses enumerateObjectsUsingBlock:^(Newses * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            [array appendObjects:obj.comments];
-        }];
-        self.comments = [NSArray arrayWithArray:array];
         self.status += 1;
     } failure:^(NSError *aError) {
     }];
@@ -37,6 +34,12 @@
         self.palyerData = data;
         self.status += 1;
         self.fan = self.palyerData.fan;
+    } failure:^(NSError *aError) {
+        
+    }];
+    [manager fetchPlayerNews:playerId success:^(id data) {
+        self.messageModel = data;
+        self.status +=1;
     } failure:^(NSError *aError) {
         
     }];
@@ -87,5 +90,97 @@
         }];
     }
     return _shareCommand;
+}
+- (void)addNews
+{
+    //添加球队新闻
+    if (self.postType == 1) {
+        NSInteger count = self.images.count;
+        if (self.content == nil) {
+            self.content = @"发表图片说说";
+        }
+        if(count > 0)
+        {
+            self.num = 0;
+            NSMutableArray<NSNumber*>* array = [NSMutableArray new];
+            [self.images enumerateObjectsUsingBlock:^(UIImage * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                NSData *_data = UIImageJPEGRepresentation(obj, 0.5f);
+                NSString *_encodedImageStr = [_data base64EncodedString];
+                NSMutableString* string = [NSMutableString stringWithString:@"data:image/png;base64,"];
+                [string appendString:_encodedImageStr];
+                SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
+                [manager postImage:string success:^(id data) {
+                    NSInteger idne = [(NSNumber*)data integerValue];
+                    [array appendObject:@(idne)];
+                    self.num ++;
+                    if (self.num == count) {
+                        NSMutableString* string = [NSMutableString new];
+                        [array enumerateObjectsUsingBlock:^(NSNumber * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                            [string appendString:[obj stringValue]];
+                            if (idx != count - 1) {
+                                [string appendString:@","];
+                            }
+                        }];
+                        [manager postPlayerNews:self.playerId content:self.content images:string token:[self getToken] success:^(id data) {
+                            [manager fetchPlayerNews:self.playerId success:^(id data) {
+                                self.messageModel = data;
+                                self.shouldReloadCommentTable = YES;
+                            } failure:^(NSError *aError) {
+                                
+                            }];
+                        } failure:^(NSError *aError) {
+                            
+                        }];
+                    }
+                } failure:^(NSError *aError) {
+                    
+                }];
+            }];
+        }
+        else
+        {
+            SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
+            [manager postPlayerNews:self.playerId content:self.content images:@"" token:[self getToken] success:^(id data) {
+                [manager fetchPlayerNews:self.playerId success:^(id data) {
+                    self.messageModel = data;
+                    self.shouldReloadCommentTable = YES;
+                } failure:^(NSError *aError) {
+                    
+                }];
+            } failure:^(NSError *aError) {
+                
+            }];
+        }
+        
+    }
+    //回复楼主
+    else if (self.postType == 2)
+    {
+        SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
+        [manager postComment:self.newsId content:self.content targetCommentId:0 remind:0 token:[self getToken] success:^(id data) {
+            [manager fetchPlayerNews:self.playerId success:^(id data) {
+                self.messageModel = data;
+                self.shouldReloadCommentTable = YES;
+            } failure:^(NSError *aError) {
+                
+            }];
+        } failure:^(NSError *aError) {
+            
+        }];
+    }
+    else if (self.postType == 3)
+    {
+        SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
+        [manager postComment:self.newsId content:self.content targetCommentId:self.targetCommentId remind:self.remindId token:[self getToken] success:^(id data) {
+            [manager fetchPlayerNews:self.playerId success:^(id data) {
+                self.messageModel = data;
+                self.shouldReloadCommentTable = YES;
+            } failure:^(NSError *aError) {
+                
+            }];
+        } failure:^(NSError *aError) {
+            
+        }];
+    }
 }
 @end

@@ -14,8 +14,7 @@
 #import "SEMNetworkingManager.h"
 #import <TencentOpenAPI/TencentOAuth.h>
 #import "UserModel.h"
-
-
+#import "TokenResponseModel.h"
 #import "UMSocialQQHandler.h"
 #import "UMSocial.h"
 #import "UMSocialWechatHandler.h"
@@ -127,7 +126,9 @@ NSString* const USER_INFO = @"userinfo";
                 [[NSUserDefaults standardUserDefaults] synchronize]; // 命令直接同步到文件里，来避免数据的丢失
                 SEMNetworkingManager* magager = [SEMNetworkingManager sharedInstance];
                 [magager fetchWexinToken:accessToken openid:openID success:^(id data) {
-                    NSString* token = data;
+                    TokenModel* model = data;
+                    NSString* token = model.token;
+                    self.url = model.user;
                     [DataArchive archiveUserData:token withFileName:@"token"];
                     [self wechatLoginByRequestForUserInfo];
                 } failure:^(NSError *aError) {
@@ -160,7 +161,13 @@ NSString* const USER_INFO = @"userinfo";
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         WeChatUserModel* model = [WeChatUserModel mj_objectWithKeyValues:responseObject];
         UserModel* data = [[UserModel alloc] init];
-        data.headimgurl = model.headimgurl;
+        if (self.url) {
+            data.headimgurl = self.url;
+        }
+        else
+        {
+            data.headimgurl = model.headimgurl;
+        }
         data.nickname = model.nickname;
         data.token = (NSString*)[DataArchive unarchiveUserDataWithFileName:@"token"];
         [DataArchive archiveUserData:data withFileName:@"userinfo"];

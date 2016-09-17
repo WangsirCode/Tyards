@@ -24,5 +24,6 @@ target ‘十二码’ do
     pod 'MBProgressHUD'
     pod 'DOPDropDownMenu-Enhanced', '~> 1.0.0'
 	pod 'UMengSocial', '~> 4.4'
+    pod 'IQKeyboardManager'
 
 end

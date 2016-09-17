@@ -14,14 +14,19 @@
     self = [super initWithDictionary:dictionary];
     if (self) {
         self.identifier = [dictionary[@"ides"] integerValue];
+        self.detailId = [@(self.identifier) stringValue];
+        self.isTableView = YES;
         NSString* string = dictionary[@"hot"];
         if (string) {
             [self fetchHotData];
+            self.isHotTopic = YES;
         }
         else
         {
             [self fetchdata];
+            self.isHotTopic = NO;
         }
+        self.postType = 1;
 
     }
     return self;
@@ -73,5 +78,101 @@
         }];
     }
     return _shareCommand;
+}
+- (void)addNews
+{
+    //添加新的评论
+    if (self.postType == 1) {
+        if (self.isHotTopic) {
+            SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
+            [manager commentHottopic:self.identifier content:self.content targetCommentId:0 remind:0 token:[self getToken] success:^(id data) {
+                [manager fetchNewsDetail:self.identifier success:^(id data) {
+                    self.newdetail = data;
+                    self.shouldReloadCommentTable = YES;
+                } failure:^(NSError *aError) {
+                    
+                }];
+            } failure:^(NSError *aError) {
+                
+            }];
+        }
+        else
+        {
+            SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
+            [manager postComment:self.identifier content:self.content targetCommentId:0 remind:0 token:[self getToken] success:^(id data) {
+                [manager fetchNewsDetail:self.identifier success:^(id data) {
+                    self.newdetail = data;
+                    self.shouldReloadCommentTable = YES;
+                } failure:^(NSError *aError) {
+                    
+                }];
+
+            } failure:^(NSError *aError) {
+                
+            }];
+        }
+        
+    }
+    //回复楼主
+    else if (self.postType == 2)
+    {
+        if (self.isHotTopic) {
+            SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
+            [manager commentHottopic:self.identifier content:self.content targetCommentId:self.targetCommentId remind:0 token:[self getToken] success:^(id data) {
+                [manager fetchNewsDetail:self.identifier success:^(id data) {
+                    self.newdetail = data;
+                    self.shouldReloadCommentTable = YES;
+                } failure:^(NSError *aError) {
+                    
+                }];
+            } failure:^(NSError *aError) {
+                
+            }];
+        }
+        else{
+            SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
+            [manager postComment:self.identifier content:self.content targetCommentId:self.targetCommentId remind:0 token:[self getToken] success:^(id data) {
+                [manager fetchNewsDetail:self.identifier success:^(id data) {
+                    self.newdetail = data;
+                    self.shouldReloadCommentTable = YES;
+                } failure:^(NSError *aError) {
+                    
+                }];
+            } failure:^(NSError *aError) {
+                
+            }];
+        }
+        
+    }
+    //回复某条评论
+    else if (self.postType == 3)
+    {
+        if (self.isHotTopic) {
+            SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
+            [manager commentHottopic:self.identifier content:self.content targetCommentId:self.targetCommentId remind:self.remindId token:[self getToken] success:^(id data) {
+                [manager fetchNewsDetail:self.identifier success:^(id data) {
+                    self.newdetail = data;
+                    self.shouldReloadCommentTable = YES;
+                } failure:^(NSError *aError) {
+                    
+                }];
+            } failure:^(NSError *aError) {
+                
+            }];
+        }
+        else{
+            SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
+            [manager postComment:self.identifier content:self.content targetCommentId:self.targetCommentId remind:self.remindId token:[self getToken] success:^(id data) {
+                [manager fetchNewsDetail:self.identifier success:^(id data) {
+                    self.newdetail = data;
+                    self.shouldReloadCommentTable = YES;
+                } failure:^(NSError *aError) {
+                    
+                }];
+            } failure:^(NSError *aError) {
+                
+            }];
+        }
+    }
 }
 @end

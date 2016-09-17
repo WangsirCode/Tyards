@@ -24,6 +24,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>IQKeyboardManager.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>JLRoutes.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -122,6 +127,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>478B608843DA864B680B8AFFDF825B26</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>4DA9F1BD2EB20B44D77A3C29448D177D</key>
 		<dict>
 			<key>primary</key>
@@ -137,7 +147,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>592277E4CAE75807B8767658343ECA6D</key>
+		<key>55DBDD8B7D446F1D618F303A9FB53209</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>582F675E3BD91145031B0138BB58029A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -147,7 +162,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8C1C54F8E8465A9BA00CFB353BB615F5</key>
+		<key>776CDCFBFE667354CF9A7E6F6490E557</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7CAA5537A1938E78EDCAC2D596B01CD7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7FCD35813B9040CF631619300427E6B7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -157,7 +182,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9D7D1B98D266AABA1A3F5F7395FD7B50</key>
+		<key>92AAF620E4893AA5D08FF83EDFC7B7E4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -167,37 +192,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A52FA0038E063C4B6AEA39BC07811DF1</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>A79B9858BBC9E4F4F582C63A3BAF16F8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>BA1AE7FCBADA9B7C39B81FDE2C8D95FA</key>
+		<key>E14A207EC51AB281D4B06D73A61550CE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C2EF74CE8EA4DA373B3459A82B1E0C09</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>C707E6FAF43282905FB4AF3A17AC6764</key>
+		<key>F35401B5A32845ECB81B25CE1753475B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>FE2F1D7B9D9FCEA148517E4657B243F4</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>FF595E3B17BC30BFE59ADEB2931CCEBE</key>
 		<dict>
 			<key>primary</key>
 			<true/>

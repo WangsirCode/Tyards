@@ -23,20 +23,27 @@
     }
     return self;
 }
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        [self setup];
+    }
+    return self;
+}
 - (void)setup
 {
     UIImageView *view0 = [UIImageView new];
-    view0.backgroundColor = [UIColor redColor];
     _view0 = view0;
     
     UILabel *view1 = [UILabel new];
     view1.textColor = [UIColor blackColor];
-    view1.font = [UIFont systemFontOfSize:16];
+    view1.font = [UIFont systemFontOfSize:16*self.scale];
     _view1 = view1;
     
     UILabel *view2 = [UILabel new];
     view2.textColor = [UIColor grayColor];
-    view2.font = [UIFont systemFontOfSize:16];
+    view2.font = [UIFont systemFontOfSize:16*self.scale];
     view2.numberOfLines = 0;
     _view2 = view2;
     
@@ -69,6 +76,19 @@
     .rightEqualToView(self.contentView)
     .autoHeightRatio(0);
     
+    UIImageView* commentImageView = [UIImageView new];
+    commentImageView.image = [UIImage imageNamed:@"icon_msg"];
+    [self.contentView addSubview:commentImageView];
+    commentImageView.sd_layout
+    .topSpaceToView(self.contentView,20*self.scale)
+    .heightIs(15*self.scale)
+    .rightEqualToView(_view2)
+    .widthIs(20*self.scale);
+    UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] initWithActionBlock:^(id  _Nonnull sender) {
+        [self doComment];
+    }];
+    [commentImageView addGestureRecognizer:tap];
+    commentImageView.userInteractionEnabled = YES;
     _view0.sd_cornerRadiusFromWidthRatio = @(0.5);
     
     [_view1 setSingleLineAutoResizeWithMaxWidth:200];
@@ -92,6 +112,7 @@
     if (self.model.comment.replies.count > 0) {
         _commentView = [[CommentView alloc] initWithReplies:self.model.comment.replies];
         [self.contentView addSubview:self.commentView];
+        self.commentView.delegate = self;
         _commentView.sd_layout
         .topSpaceToView(_view2,10)
         .leftEqualToView(_view2)
@@ -103,5 +124,12 @@
         [self setupAutoHeightWithBottomView:_view2 bottomMargin:10];
     }
 }
-
+- (void)didClickButton:(NSInteger)commentId remindId:(NSInteger)remindId name:(NSString *)name
+{
+    [self.delegate didReplyComment:self.model.comment.id targetId:commentId remindId:remindId name:name];
+}
+- (void)doComment
+{
+    [self.delegate didClickComment:self.model.comment.id targetName:self.model.comment.creator.nickname];
+}
 @end

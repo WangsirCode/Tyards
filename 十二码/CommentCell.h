@@ -9,8 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "CommentView.h"
 #import "NewsDetailResponseModel.h"
-@interface CommentCell : UITableViewCell
+@protocol CommentCellDelegate
+- (void)didClickComment:(NSInteger)newsId targetName:(NSString*)targetName;
+- (void)didReplyComment:(NSInteger)newsId targetId:(NSInteger)targetId remindId:(NSInteger)remindID name:(NSString*)name;
+@end
+@interface CommentCell : UITableViewCell<CommentViewDelegate>
 @property (nonatomic,strong)Comments* model;
 @property (nonatomic,strong)CommentView* commentView;
 @property (nonatomic,strong) UILabel* timeLabel;
+@property (nonatomic,strong) id<CommentCellDelegate> delegate;
 @end

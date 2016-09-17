@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "ReCommendNews.h"
 @class NewsDetailModel,Creator,Comments,Comment,Creator,Tag;
-@class Remind,Creator,Targetcomment,Reply,BackNews;
+@class Remind,Creator,Targetcomment,Reply,BackNews,Medias1;
 @interface NewsDetailResponseModel : NSObject
 
 @property (nonatomic, strong) NewsDetailModel *resp;
@@ -31,7 +31,7 @@
 
 @property (nonatomic, strong) NSArray<Tag *> *tags;
 
-@property (nonatomic, strong) NSArray *medias;
+@property (nonatomic, strong) NSArray<Medias1*> *medias;
 
 @property (nonatomic, copy) NSString *type;
 
@@ -45,8 +45,17 @@
 
 @property (nonatomic, strong) NSArray *viewers;
 - (NSString*)getInfo;
+- (NSString*)getDateInfo;
 @end
+@interface Medias1 : NSObject
 
+@property (nonatomic,strong) NSString* url;
+
+@property (nonatomic,strong) NSString* type;
+
+@property (nonatomic,assign) NSInteger id;
+
+@end
 
 @interface Comments : NSObject
 

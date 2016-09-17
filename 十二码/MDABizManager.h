@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "NewsCommentCell.h"
 #import "AFNetworking.h"
 #import "Masonry.h"
 #import "MJExtension.h"
@@ -73,6 +74,7 @@
 #import "MyClosedInvitationResponseModel.h"
 #import "MyInvitationResponseModel.h"
 #import "PlacceResponseModel.h"
+#import "PlayerNewsResponseModel.h"
 @interface MDABizManager : NSObject
 @property (nonatomic,assign)BOOL userLogined;
 /**

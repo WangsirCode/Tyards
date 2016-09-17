@@ -331,7 +331,6 @@
                 break;
         }
     }
-
     SEMTeamHomeViewController* controller = [HRTRouter objectForURL:@"TeamHome" withUserInfo:@{@"ide":@(iden)}];
     controller.hidesBottomBarWhenPushed = YES;
     controller.navigationController.navigationBar.alpha = 0;

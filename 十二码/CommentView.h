@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "NewsDetailResponseModel.h"
+@protocol CommentViewDelegate
+- (void)didClickButton:(NSInteger)commentId remindId:(NSInteger)remindId name:(NSString*)name;
+@end
 /*!
  *  @author 汪宇豪, 16-08-01 20:08:46
  *
@@ -16,5 +19,7 @@
 @interface CommentView : UIView
 @property (nonatomic,strong)NSArray<Reply*>* replys;
 @property (nonatomic,strong)NSMutableArray<UILabel*>* labels;
+@property (nonatomic,strong)id<CommentViewDelegate> delegate;
 - (instancetype)initWithReplies:(NSArray*)replies;
+
 @end
