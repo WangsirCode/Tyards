@@ -27,17 +27,19 @@
 
 - (void)makeconstraits
 {
-    [self.infoLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.mas_right);
-        make.centerY.equalTo(self.mas_centerY);
-        make.height.equalTo(self.mas_height);
-    }];
     [self.infoImage mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.mas_top);
         make.bottom.equalTo(self.mas_baseline);
         make.left.equalTo(self.mas_left);
-        make.right.equalTo(self.infoLabel.mas_left).offset(-5);
+        make.width.equalTo(@(15*self.scale));
     }];
+    [self.infoLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.mas_centerY);
+        make.height.equalTo(self.mas_height);
+        make.left.equalTo(self.infoImage.mas_right).offset(5*self.scale);
+    }];
+
+
 }
 
 - (UILabel*)infoLabel

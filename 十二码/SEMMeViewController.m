@@ -60,7 +60,7 @@
     {
         self.topView.name = @"请登录";
         self.topView.headImage = [UIImage imageNamed:@"Group 2"];
-        self.topView.infoView.hidden = YES;
+        self.topView.infoView.hidden = NO;
         self.viewModel.isLogined = NO;
     }
 }
