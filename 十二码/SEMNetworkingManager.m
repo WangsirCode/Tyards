@@ -63,7 +63,7 @@ NSString* const GameMessage = @"/match/newses/";
     static id _sharedInstance = nil;
     static dispatch_once_t oncePredicate;
     dispatch_once(&oncePredicate, ^{
-        NSURL* url = [NSURL URLWithString: @"http://dev.12yards.cn"];
+        NSURL* url = [NSURL URLWithString: @"http://www.12yards.cn"];
         _sharedInstance = [[self alloc] initWithBaseURL: url];
     });
     return _sharedInstance;

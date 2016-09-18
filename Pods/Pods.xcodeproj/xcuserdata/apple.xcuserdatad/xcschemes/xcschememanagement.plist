@@ -8,101 +8,146 @@
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>1</integer>
 		</dict>
 		<key>BHBPopView.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>2</integer>
 		</dict>
 		<key>DOPDropDownMenu-Enhanced.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>3</integer>
 		</dict>
 		<key>FDFullscreenPopGesture.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
+		<key>IQKeyboardManager.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>21</integer>
 		</dict>
 		<key>JLRoutes.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>5</integer>
 		</dict>
 		<key>LazyPageScrollView.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>6</integer>
 		</dict>
 		<key>MBProgressHUD.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>8</integer>
 		</dict>
 		<key>MGJRouter.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>9</integer>
 		</dict>
 		<key>MJExtension.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>10</integer>
 		</dict>
 		<key>MJRefresh.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>11</integer>
 		</dict>
 		<key>MMDrawerController.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>12</integer>
 		</dict>
 		<key>Masonry.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>7</integer>
 		</dict>
 		<key>Pods-十二码.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>13</integer>
 		</dict>
 		<key>ReactiveCocoa.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>14</integer>
 		</dict>
 		<key>ReactiveViewModel.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>15</integer>
 		</dict>
 		<key>SDAutoLayout.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>16</integer>
 		</dict>
 		<key>SDCycleScrollView.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>17</integer>
 		</dict>
 		<key>SDWebImage.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>18</integer>
 		</dict>
 		<key>UITableView+FDTemplateLayoutCell.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>19</integer>
 		</dict>
 		<key>YYCategories.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>20</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
@@ -122,6 +167,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>478B608843DA864B680B8AFFDF825B26</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>4DA9F1BD2EB20B44D77A3C29448D177D</key>
 		<dict>
 			<key>primary</key>
@@ -137,6 +187,16 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>55DBDD8B7D446F1D618F303A9FB53209</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>582F675E3BD91145031B0138BB58029A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>592277E4CAE75807B8767658343ECA6D</key>
 		<dict>
 			<key>primary</key>
@@ -147,12 +207,32 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>776CDCFBFE667354CF9A7E6F6490E557</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7CAA5537A1938E78EDCAC2D596B01CD7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7FCD35813B9040CF631619300427E6B7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>8C1C54F8E8465A9BA00CFB353BB615F5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>928353533005A4198EBDA5B700D37B64</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>92AAF620E4893AA5D08FF83EDFC7B7E4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -188,6 +268,16 @@
 			<true/>
 		</dict>
 		<key>C707E6FAF43282905FB4AF3A17AC6764</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E14A207EC51AB281D4B06D73A61550CE</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F35401B5A32845ECB81B25CE1753475B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
