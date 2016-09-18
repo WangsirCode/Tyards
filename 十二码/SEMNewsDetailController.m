@@ -154,19 +154,19 @@
         }
     }];
     [RACObserve(self.viewModel, getHeight) subscribeNext:^(id x) {
-        if (self.viewModel.getHeight == YES && self.viewModel.heightSet == NO) {
-//        if(self.viewModel.getHeight == YES)
-//        {
-//            为什么会重复执行numberOfRowsInSection:?
-            self.viewModel.heightSet = YES;
-            self.tableview.sd_resetLayout
-            .topSpaceToView(self.webView,10)
-            .leftEqualToView(self.view)
-            .rightEqualToView(self.view)
-            .heightIs(self.tableviewHeight);
-//            self.viewModel.getHeight = NO;
-//            self.viewModel.heightSet = NO;
-        }
+//        if (self.viewModel.getHeight == YES && self.viewModel.heightSet == NO) {
+////        if(self.viewModel.getHeight == YES)
+////        {
+////            为什么会重复执行numberOfRowsInSection:?
+//            self.viewModel.heightSet = YES;
+//            self.tableview.sd_resetLayout
+//            .topSpaceToView(self.webView,10)
+//            .leftEqualToView(self.view)
+//            .rightEqualToView(self.view)
+//            .heightIs(self.tableviewHeight);
+////            self.viewModel.getHeight = NO;
+////            self.viewModel.heightSet = NO;
+//        }
     }];
     [RACObserve(self.viewModel, shouldReloadCommentTable) subscribeNext:^(id x) {
         if (self.viewModel.shouldReloadCommentTable == YES) {
@@ -291,13 +291,13 @@
     if (self.viewModel.isTableView == YES) {
         if (self.viewModel.newdetail.comments[indexPath.row]) {
             CGFloat height = [self.tableview cellHeightForIndexPath:indexPath model:self.viewModel.newdetail.comments[indexPath.row] keyPath:@"model" cellClass:[CommentCell class]  contentViewWidth:[UIScreen mainScreen].bounds.size.width];
-                    if (self.viewModel.heightSet == NO) {
-                            self.tableviewHeight += height;
-                    }
-            
-            if (indexPath.row == (self.viewModel.newdetail.comments.count - 1)) {
-                self.viewModel.getHeight = YES;
-            }
+//                    if (self.viewModel.heightSet == NO) {
+//                            self.tableviewHeight += height;
+//                    }
+//            
+//            if (indexPath.row == (self.viewModel.newdetail.comments.count - 1)) {
+//                self.viewModel.getHeight = YES;
+//            }
             return height;
         }
         else
@@ -341,6 +341,11 @@
         .leftEqualToView(self.view)
         .rightEqualToView(self.view)
         .heightIs(webViewHeight);
+        self.tableview.sd_resetLayout
+        .leftEqualToView(self.view)
+        .rightEqualToView(self.view)
+        .topSpaceToView(self.webView,10)
+        .maxHeightIs(3000*self.view.scale);
 //    }
     [self.hud hide:YES];
 }
@@ -359,8 +364,12 @@
         self.viewModel.webViewLoaded = YES;
         self.webView.scrollView.scrollEnabled = NO;
         self.scrollview.scrollEnabled =YES;
+        self.tableview.sd_resetLayout
+        .leftEqualToView(self.view)
+        .rightEqualToView(self.view)
+        .topSpaceToView(self.webView,10)
+        .maxHeightIs(3000*self.view.scale);
     }
-    
 }
 - (void)didSelectedShareView:(NSInteger)index
 {
