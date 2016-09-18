@@ -194,6 +194,7 @@
             self.bottomView.textField.text = nil;
             [XHToast showCenterWithText:@"发表成功" duration:1];
             self.viewModel.postType = 1;
+            self.viewModel.content = nil;
             self.bottomView.sendButton.enabled = NO;
         }
     }];

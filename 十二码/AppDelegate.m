@@ -128,7 +128,7 @@ NSString* const USER_INFO = @"userinfo";
                 [magager fetchWexinToken:accessToken openid:openID success:^(id data) {
                     TokenModel* model = data;
                     NSString* token = model.token;
-                    self.url = model.user;
+                    self.url = model.user.avatar;
                     [DataArchive archiveUserData:token withFileName:@"token"];
                     [self wechatLoginByRequestForUserInfo];
                 } failure:^(NSError *aError) {
@@ -172,7 +172,7 @@ NSString* const USER_INFO = @"userinfo";
         data.token = (NSString*)[DataArchive unarchiveUserDataWithFileName:@"token"];
         [DataArchive archiveUserData:data withFileName:@"userinfo"];
         dispatch_async(dispatch_get_main_queue(), ^{
-            NSData* data1 = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:model.headimgurl]];
+            NSData* data1 = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:data.headimgurl]];
             UIImage* imamge = [[UIImage alloc] initWithData:data1];
             [DataArchive archiveUserData:imamge withFileName:@"headimage"];
         });

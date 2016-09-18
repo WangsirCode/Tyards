@@ -26,8 +26,8 @@ NSString* const NoticeGameURL = @"/university/previewMatchesGroup";
 NSString* const HistoryGameURL = @"/university/reviewMatchesGroup";
 NSString* const GameListURL = @"/university/tournaments";
 NSString* const NewDetailURL = @"/news/detail";
-NSString* const WexinURL = @"/user/wxToken";
-NSString* const qqURL = @"/user/qqToken";
+NSString* const WexinURL = @"/user/wxTokenWithInfo";
+NSString* const qqURL = @"/user/qqTokenWithInfo";
 NSString* const teamList = @"/university/teams";
 NSString* const TeamInfo = @"/team/detail/";
 NSString* const TeamPlayer = @"/team/players/";
@@ -258,8 +258,10 @@ NSString* const GameMessage = @"/match/newses/";
     NSDictionary *para = @{@"access_token":token,@"openid":openid};
     return [self GET:qqURL parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
         
+        
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        successBlock(responseObject[@"resp"]);
+        TokenResponseModel* model = [TokenResponseModel mj_objectWithKeyValues:responseObject];
+        successBlock(model.resp);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failureBlock(error);
     }];

@@ -86,7 +86,7 @@
         if (self.isHotTopic) {
             SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
             [manager commentHottopic:self.identifier content:self.content targetCommentId:0 remind:0 token:[self getToken] success:^(id data) {
-                [manager fetchNewsDetail:self.identifier success:^(id data) {
+                [manager fetchHotDetail:[@(self.identifier) stringValue] success:^(id data) {
                     self.newdetail = data;
                     self.shouldReloadCommentTable = YES;
                 } failure:^(NSError *aError) {
@@ -119,7 +119,7 @@
         if (self.isHotTopic) {
             SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
             [manager commentHottopic:self.identifier content:self.content targetCommentId:self.targetCommentId remind:0 token:[self getToken] success:^(id data) {
-                [manager fetchNewsDetail:self.identifier success:^(id data) {
+                [manager fetchHotDetail:[@(self.identifier) stringValue] success:^(id data) {
                     self.newdetail = data;
                     self.shouldReloadCommentTable = YES;
                 } failure:^(NSError *aError) {
@@ -150,7 +150,7 @@
         if (self.isHotTopic) {
             SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
             [manager commentHottopic:self.identifier content:self.content targetCommentId:self.targetCommentId remind:self.remindId token:[self getToken] success:^(id data) {
-                [manager fetchNewsDetail:self.identifier success:^(id data) {
+                [manager fetchHotDetail:[@(self.identifier) stringValue] success:^(id data) {
                     self.newdetail = data;
                     self.shouldReloadCommentTable = YES;
                 } failure:^(NSError *aError) {
