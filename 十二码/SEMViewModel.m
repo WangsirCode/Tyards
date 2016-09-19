@@ -34,6 +34,11 @@
     NSUserDefaults *database = [NSUserDefaults standardUserDefaults];
     return [database objectForKey:@"name"];
 }
+- (NSString*)getSchoolName
+{
+    NSUserDefaults *database = [NSUserDefaults standardUserDefaults];
+    return [database objectForKey:@"displayname"];
+}
 - (NSString *)getToken
 {
     NSString* token = (NSString*)[DataArchive unarchiveUserDataWithFileName:@"token"];

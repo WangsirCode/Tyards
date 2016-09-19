@@ -176,7 +176,7 @@
     NSUserDefaults* data = [NSUserDefaults standardUserDefaults];
     CGFloat scale = [data floatForKey:@"scale"];
     if (tableView.tag == 101) {
-        return scale * 258;
+        return scale * 270;
     }
     else
     {

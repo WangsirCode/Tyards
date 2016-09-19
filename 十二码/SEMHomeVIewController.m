@@ -26,6 +26,7 @@
 #import "UserModel.h"
 #import "UIViewController+MMDrawerController.h"
 #import "MDABizManager.h"
+#import "SEMTabViewController.h"
 #import "SEMNewsDetailController.h"
 @interface SEMHomeVIewController ()<UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,SEMSearchViewControllerDelegate>
 @property (nonatomic,strong) SEMHomeVIewModel * viewModel;
@@ -177,7 +178,11 @@
     self.viewModel.title = dispalyname;
     NSUserDefaults *database = [NSUserDefaults standardUserDefaults];
     [database setObject:name forKey:@"name"];
+    [database setObject:dispalyname forKey:@"displayname"];
+    
     [self.tableView.mj_header beginRefreshing];
+    SEMTabViewController* nav = ((SEMTabViewController*)self.mm_drawerController.centerViewController);
+    nav.viewControllers = [NSArray arrayWithObjects:[HRTRouter objectForURL: @"Home?navigation=navigation"],[HRTRouter objectForURL: @"News?navigation=navigation"],[HRTRouter objectForURL: @"Team?navigation=navigation"],[HRTRouter objectForURL: @"Game?navigation=navigation"], nil];
 }
 #pragma mark -tableviewDatasource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

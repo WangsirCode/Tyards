@@ -1052,6 +1052,20 @@
                             success:(void (^)(id data))successBlock
                             failure:(void (^)(NSError *aError))failureBlock;
 
+/*!
+ *  @author 汪宇豪, 16-09-19 07:09:41
+ *
+ *  @brief 获取赛事章程
+ *
+ *  @param tournamentId tournamentId
+ *  @param successBlock 成功
+ *  @param failureBlock 失败
+ *
+ *  @return NSURLSessionTask
+ */
+- (NSURLSessionTask*)fetchPolicy:(NSString*)tournamentId
+                             success:(void (^)(id data))successBlock
+                             failure:(void (^)(NSError *aError))failureBlock;
 
 /*!
  *  @author 汪宇豪, 16-09-15 08:09:08

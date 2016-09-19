@@ -18,4 +18,5 @@
 - (NSString*)getSchoolCode;
 - (NSString*)getToken;
 - (BOOL)didLogined;
+- (NSString*)getSchoolName;
 @end

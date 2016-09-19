@@ -115,7 +115,7 @@
     else
     {
         uni = self.viewModel.datasource[indexPath.section].universities[indexPath.row];
-        cell.textLabel.text = uni.displayName;
+        cell.textLabel.text = uni.name;
     }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.detailTextLabel.text = uni.city;
@@ -162,13 +162,13 @@
     if (self.viewModel.isSearching == YES) {
         uni = self.viewModel.universities[indexPath.row];
         name = self.viewModel.universities[indexPath.row].code;
-        dispalyname = self.viewModel.universities[indexPath.row].displayName;
+        dispalyname = self.viewModel.universities[indexPath.row].name;
     }
     else
     {
         uni = self.viewModel.datasource[indexPath.section].universities[indexPath.row];
         name = self.viewModel.datasource[indexPath.section].universities[indexPath.row].code;
-        dispalyname = self.viewModel.datasource[indexPath.section].universities[indexPath.row].displayName;
+        dispalyname = self.viewModel.datasource[indexPath.section].universities[indexPath.row].name;
     }
     [self.navigationController popViewControllerAnimated:YES];
     

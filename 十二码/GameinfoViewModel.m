@@ -105,6 +105,12 @@
     } failure:^(NSError *aError) {
         
     }];
+    [manager fetchPolicy:tournamentId success:^(id data) {
+        self.policyModel = data;
+        self.status += 1;
+    } failure:^(NSError *aError) {
+        
+    }];
 }
 -(RACCommand *)likeCommand
 {

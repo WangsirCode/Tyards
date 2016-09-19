@@ -39,6 +39,7 @@
         make.top.equalTo(self.titleImageView.mas_bottom).offset(10 * self.scale);
         make.left.equalTo(self.contentView.mas_left).offset(12 * self.scale);
         make.right.equalTo(self.contentView.mas_right).offset(-12 * self.scale);
+        make.height.equalTo(@(40*self.scale));
     }];
     [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.titleLabel.mas_bottom).offset(10 * self.scale);
@@ -78,7 +79,8 @@
 {
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc] init];
-        _titleLabel.font =[UIFont systemFontOfSize:18];
+        _titleLabel.font =[UIFont systemFontOfSize:16*self.scale];
+        _titleLabel.numberOfLines = 2;
     }
     return _titleLabel;
 }

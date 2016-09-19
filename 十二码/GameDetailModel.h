@@ -67,6 +67,7 @@
 
 - (NSInteger)getStatus1;
 - (NSString*)getDate;
+- (NSString*)getDate2;
 @end
 
 @interface Group : NSObject<NSCoding>

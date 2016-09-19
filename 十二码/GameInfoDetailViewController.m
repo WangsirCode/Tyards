@@ -24,6 +24,7 @@
 #import "SEMNewsDetailController.h"
 #import "GameinfoViewModel.h"
 #import "SEMTeamHomeViewController.h"
+#import "PolicyShowController.h"
 @interface GameInfoDetailViewController ()<UITableViewDelegate,UITableViewDataSource,LazyPageScrollViewDelegate,UIScrollViewDelegate,ShareViewDelegate,ListTableHeaderVIewDelegate>
 @property (nonatomic,strong) GameinfoViewModel  * viewModel;
 @property (nonatomic,strong) UIImageView        * logoImageView;
@@ -109,7 +110,7 @@
 {
     //当加载完毕之后隐藏hud
     [RACObserve(self.viewModel, status) subscribeNext:^(id x) {
-        if (self.viewModel.status == 6) {
+        if (self.viewModel.status == 7) {
             [self.hud hide:YES];
             self.navigationItem.title = self.viewModel.model.name;
             if (self.viewModel.model.logo.url) {
@@ -533,12 +534,19 @@
         }
         else
         {
-            label.text = @"赛事章程";
+            label.text = @"点我查看赛事章程";
         }
         label.textAlignment = NSTextAlignmentLeft;
         [view addSubview:label];
         label.font = [UIFont systemFontOfSize:14];
         label.textColor = [UIColor MyColor];
+        UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] initWithActionBlock:^(id  _Nonnull sender) {
+            PolicyShowController* controller = [[PolicyShowController alloc] initWithDictionary:@{@"text":self.viewModel.policyModel.text}];
+            controller.navigationItem.title = self.navigationItem.title;
+            [self.navigationController pushViewController:controller animated:YES];
+        }];
+        [label addGestureRecognizer:tap];
+        label.userInteractionEnabled = YES;
         label.sd_layout
         .rightEqualToView(view)
         .centerYEqualToView(view)
@@ -693,6 +701,7 @@
         backView.backgroundColor = [UIColor BackGroundColor];
         backView.frame = CGRectMake(0, 0, self.view.width, 8);
         _infoTableView.tableHeaderView = backView;
+        _infoTableView.bounces = NO;
     }
     return _infoTableView;
 }
@@ -707,6 +716,7 @@
         _gameTableView.bounces = NO;
         _gameTableView.backgroundColor = [UIColor BackGroundColor];
         _gameTableView.separatorColor = [UIColor BackGroundColor];
+        _gameTableView.bounces = NO;
     }
     return _gameTableView;
 }
@@ -741,6 +751,7 @@
         _teamTableView.tableHeaderView = backView;
         _teamTableView.backgroundColor = [UIColor BackGroundColor];
         _teamTableView.separatorColor = [UIColor BackGroundColor];
+        _teamTableView.bounces =NO;
     }
     return _teamTableView;
 }
