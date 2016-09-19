@@ -148,7 +148,7 @@
         cell.status = [model getStatus];
         cell.titleLabel.text = model.name;
         cell.timeLabel.text = [model getDate];
-        cell.location = [model getLocation];
+        cell.location = model.university.name;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 

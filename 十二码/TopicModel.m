@@ -34,7 +34,7 @@ MJCodingImplementation
 
 - (NSString*)getInfo
 {
-    NSMutableString* info = [NSMutableString stringWithString:self.creator.nickname];
+    NSMutableString* info = [NSMutableString stringWithString:self.author];
     [info appendString:@" / "];
     [info appendString:[self getDate]];
     return info;

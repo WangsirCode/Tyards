@@ -34,6 +34,7 @@
 #import "MLImagePickerMenuTableViewCell.h"
 #import "PictureShowView.h"
 #import "SEMLoginViewController.h"
+#import "SEMTeamHomeViewController.h"
 @interface RaceInfoDetailController ()<UITableViewDelegate,UITableViewDataSource,LazyPageScrollViewDelegate,UIScrollViewDelegate,ShareViewDelegate,UITextFieldDelegate,NewsCommentCellDelegate>
 @property (nonatomic,strong) RaceInfoViewModel  * viewModel;
 @property (nonatomic,strong) NoticeCellView        * headerView;
@@ -224,6 +225,13 @@
     {
         self.headerView.homeImageview.image = image;
     }
+    self.headerView.userInteractionEnabled = YES;
+    self.headerView.homeImageview.userInteractionEnabled = YES;
+    UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] initWithActionBlock:^(id  _Nonnull sender) {
+        SEMTeamHomeViewController* controller = [[SEMTeamHomeViewController alloc] initWithDictionary:@{@"ide":@(model.home.id)}];
+        [self.navigationController pushViewController:controller animated:YES];
+    }];
+    [self.headerView.homeImageview addGestureRecognizer:tap];
     NSURL *awayurl;
     if (model.away.logo.url) {
         awayurl = [[NSURL alloc] initWithString:model.away.logo.url];
@@ -233,8 +241,14 @@
     {
         self.headerView.awayImgaeview.image = image;
     }
+    self.headerView.awayImgaeview.userInteractionEnabled = YES;
+    UITapGestureRecognizer* tap1 = [[UITapGestureRecognizer alloc] initWithActionBlock:^(id  _Nonnull sender) {
+        SEMTeamHomeViewController* controller = [[SEMTeamHomeViewController alloc] initWithDictionary:@{@"ide":@(model.away.id)}];
+        [self.navigationController pushViewController:controller animated:YES];
+    }];
+    [self.headerView.awayImgaeview addGestureRecognizer:tap1];
     self.headerView.location = 1;
-    self.headerView.timeLabel.text = [model getDate];
+    self.headerView.timeLabel.text = [model getDate2];
 }
 - (void)setUpDataView
 {
@@ -255,7 +269,7 @@
     .heightIs(44*self.view.scale);
     
     DataView* homeData = [[DataView alloc] init];
-    homeData.titleLabel.text = @"主队";
+    homeData.titleLabel.text = self.viewModel.dataModel.homeData.team.name;
     homeData.numLabel.text = [@([self.viewModel.dataModel.homeData getNum]) stringValue];
     homeData.winLabel.text = [NSString stringWithFormat:@"%ld",self.viewModel.dataModel.homeData.wins];
     homeData.loseLabel.text = [NSString stringWithFormat:@"%ld",self.viewModel.dataModel.homeData.loses];
@@ -267,7 +281,7 @@
     .heightIs(144*self.view.scale);
     
     DataView* awayData = [[DataView alloc] init];
-    awayData.titleLabel.text = @"客队";
+    awayData.titleLabel.text = self.viewModel.dataModel.awayData.team.name;
     awayData.numLabel.text = [@([self.viewModel.dataModel.awayData getNum]) stringValue];
     awayData.winLabel.text = [NSString stringWithFormat:@"%ld",self.viewModel.dataModel.awayData.wins];
     awayData.loseLabel.text = [NSString stringWithFormat:@"%ld",self.viewModel.dataModel.awayData.loses];
@@ -535,7 +549,7 @@
     }
     else if (tableView.tag == 102)
     {
-        return 0;
+        return 1;
         
     }
     else if(tableView.tag == 103)
@@ -547,15 +561,11 @@
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (tableView.tag == 100)
+    if (tableView.tag == 102)
     {
         return self.viewModel.newsModel.count;
     }
     else if (tableView.tag == 101)
-    {
-        return 0;
-    }
-    else if (tableView.tag == 102)
     {
         return 0;
     }
@@ -568,7 +578,7 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (tableView.tag == 100) {
+    if (tableView.tag == 102) {
         News* news = self.viewModel.newsModel[indexPath.row];
         HomeCell* cell = (HomeCell*)[tableView dequeueReusableCellWithIdentifier:@"HomeCell" forIndexPath:indexPath];
         
@@ -603,7 +613,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(tableView.tag == 100)
+    if(tableView.tag == 102)
     {
         return 100*self.view.scale;
     }
@@ -633,7 +643,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (tableView.tag == 100) {
+    if (tableView.tag == 102) {
         NSInteger ide = self.viewModel.newsModel[indexPath.row].id;
         SEMNewsDetailController* controller = [[SEMNewsDetailController alloc] initWithDictionary:@{@"ides":@(ide)}];
         controller.hidesBottomBarWhenPushed = YES;
@@ -706,7 +716,7 @@
         _newsTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _newsTableView.delegate = self;
         _newsTableView.dataSource = self;
-        _newsTableView.tag = 100;
+        _newsTableView.tag = 102;
         [_newsTableView registerClass:[HomeCell class] forCellReuseIdentifier:@"HomeCell"];
         UIView* backView = [UIView new];
         backView.backgroundColor = [UIColor BackGroundColor];
@@ -819,6 +829,7 @@
     if (!_backImageView) {
         _backImageView = [[UIImageView alloc] init];
         _backImageView.image = [UIImage imageNamed:@"深色背景"];
+        _backImageView.userInteractionEnabled = YES;
     }
     return _backImageView;
 }

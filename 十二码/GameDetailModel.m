@@ -60,6 +60,14 @@ MJCodingImplementation
     NSString* ta = [formater stringFromDate:date];
     return ta;
 }
+- (NSString *)getDate2
+{
+    NSDate *date = [[NSDate alloc]initWithTimeIntervalSince1970:self.playDate/1000];
+    NSDateFormatter* formater = [[NSDateFormatter alloc] init];
+    formater.dateFormat = @"yyyy-MM-dd HH : mm";
+    NSString* ta = [formater stringFromDate:date];
+    return ta;
+}
 @end
 
 

@@ -15,11 +15,27 @@ NSString* const imagescash = @"imagecache";
 {
     self = [super initWithDictionary:dictionary];
     if (self) {
-        self.title = @"华中科技大学";
-        self.code = @"hust";
+        NSString* code = [self getSchoolCode];
+        NSString* name = [self getSchoolName];
+        if (code) {
+            self.code = code;
+        }
+        else
+        {
+            self.code = @"hust";
+            NSUserDefaults *database = [NSUserDefaults standardUserDefaults];
+            [database setObject:self.code forKey:@"name"];
+        }
+        if (name) {
+            self.title = name;
+        }
+        else
+        {
+            self.title = @"华中科技大学";
+        }
         self.index = 0;
-        NSUserDefaults *database = [NSUserDefaults standardUserDefaults];
-        [database setObject:self.code forKey:@"name"];
+
+
         [self fetchData];
     }
     return self;

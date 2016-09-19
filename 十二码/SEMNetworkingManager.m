@@ -15,6 +15,7 @@
 #import "MeUserInfoResponseModel.h"
 #import "TeamCommentsResponseModel.h"
 #import "TokenResponseModel.h"
+#import "TournamentPolicyResponseModel.h"
 NSString* const hotTopics = @"/university/hotTopics";
 NSString* const hotTopicsCache = @"hotTopicsCache";
 NSString* const ReconmendNewsURL = @"/university/editorViews";
@@ -735,6 +736,22 @@ NSString* const GameMessage = @"/match/newses/";
             return @{@"desc":@"description"};
         }];
         GameInfoResponseModel* model = [GameInfoResponseModel mj_objectWithKeyValues:responseObject];
+        successBlock(model.resp);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }];
+}
+//获取赛事章程
+- (NSURLSessionTask *)fetchPolicy:(NSString *)tournamentId success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
+{
+    [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
+    NSMutableString* URL = [[NSMutableString alloc] init];
+    [URL appendString:@"/tournament/policy/"];
+    [URL appendString:tournamentId];
+    return [self GET:URL parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        TournamentPolicyResponseModel* model = [TournamentPolicyResponseModel mj_objectWithKeyValues:responseObject];
         successBlock(model.resp);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failureBlock(error);

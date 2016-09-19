@@ -13,9 +13,9 @@
 
 
 
-@class Topic,Creator1,Thumbnail1;
+@class Topic1,Creator1,Thumbnail1;
 @interface TopicModel : NSObject<NSCoding>
-@property (nonatomic, strong) NSArray<Topic *> *resp;
+@property (nonatomic, strong) NSArray<Topic1 *> *resp;
 
 @property (nonatomic, assign) NSInteger code;
 
@@ -41,6 +41,9 @@
 @property (nonatomic, assign) NSInteger likeCount;
 
 @property (nonatomic, assign) NSInteger commentCount;
+
+@property (nonatomic,strong) NSString* author;
+
 - (NSString*)getInfo;
 
 @end

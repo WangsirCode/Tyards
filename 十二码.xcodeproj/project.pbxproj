@@ -13,6 +13,8 @@
 		470BEE141D58295C003167ED /* SetUpViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 470BEE131D58295C003167ED /* SetUpViewModel.m */; };
 		470C5E751D44BFC800DDF90B /* BottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 470C5E741D44BFC800DDF90B /* BottomView.m */; };
 		470C5EF61D44D7E700DDF90B /* SEMSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 470C5EF51D44D7E700DDF90B /* SEMSearchViewController.m */; };
+		470C6A911D8F6103009BB8C7 /* TournamentPolicyResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 470C6A901D8F6103009BB8C7 /* TournamentPolicyResponseModel.m */; };
+		470C6A941D8F62DA009BB8C7 /* PolicyShowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 470C6A931D8F62DA009BB8C7 /* PolicyShowController.m */; };
 		470D2EE41D7A4AF3001047BD /* visible.png in Resources */ = {isa = PBXBuildFile; fileRef = 470D2EE31D7A4AF3001047BD /* visible.png */; };
 		470D2EE61D7ABFBA001047BD /* Group 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 470D2EE51D7ABFBA001047BD /* Group 2.png */; };
 		470D2EE91D7AC8B1001047BD /* ChangeNickNameController.m in Sources */ = {isa = PBXBuildFile; fileRef = 470D2EE81D7AC8B1001047BD /* ChangeNickNameController.m */; };
@@ -363,6 +365,10 @@
 		470C5E741D44BFC800DDF90B /* BottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BottomView.m; sourceTree = "<group>"; };
 		470C5EF41D44D7E700DDF90B /* SEMSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEMSearchViewController.h; sourceTree = "<group>"; };
 		470C5EF51D44D7E700DDF90B /* SEMSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SEMSearchViewController.m; sourceTree = "<group>"; };
+		470C6A8F1D8F6103009BB8C7 /* TournamentPolicyResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TournamentPolicyResponseModel.h; sourceTree = "<group>"; };
+		470C6A901D8F6103009BB8C7 /* TournamentPolicyResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TournamentPolicyResponseModel.m; sourceTree = "<group>"; };
+		470C6A921D8F62DA009BB8C7 /* PolicyShowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PolicyShowController.h; sourceTree = "<group>"; };
+		470C6A931D8F62DA009BB8C7 /* PolicyShowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PolicyShowController.m; sourceTree = "<group>"; };
 		470D2EE31D7A4AF3001047BD /* visible.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = visible.png; sourceTree = "<group>"; };
 		470D2EE51D7ABFBA001047BD /* Group 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Group 2.png"; sourceTree = "<group>"; };
 		470D2EE71D7AC8B1001047BD /* ChangeNickNameController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeNickNameController.h; sourceTree = "<group>"; };
@@ -951,6 +957,8 @@
 				47184FB01D72BB38008A4591 /* MatchEventResponseModel.m */,
 				47A086441D82DB1100ECB636 /* TournamentGamesResponseModel.h */,
 				47A086451D82DB1100ECB636 /* TournamentGamesResponseModel.m */,
+				470C6A8F1D8F6103009BB8C7 /* TournamentPolicyResponseModel.h */,
+				470C6A901D8F6103009BB8C7 /* TournamentPolicyResponseModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1008,6 +1016,8 @@
 				4725D2BB1D5B2E6E00A13AEB /* GameInfoDetailViewController.m */,
 				4725D2C91D5B637B00A13AEB /* RaceInfoDetailController.h */,
 				4725D2CA1D5B637B00A13AEB /* RaceInfoDetailController.m */,
+				470C6A921D8F62DA009BB8C7 /* PolicyShowController.h */,
+				470C6A931D8F62DA009BB8C7 /* PolicyShowController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -2209,9 +2219,11 @@
 				47E8BCFC1D5C18A6007621F8 /* GameNewsDetailResponseModel.m in Sources */,
 				4725D2BC1D5B2E6E00A13AEB /* GameInfoDetailViewController.m in Sources */,
 				47A086431D82AD9B00ECB636 /* MyLabel.m in Sources */,
+				470C6A911D8F6103009BB8C7 /* TournamentPolicyResponseModel.m in Sources */,
 				47405DD01D521791000A980A /* GameListView.m in Sources */,
 				47C053E51D75A14C00AEBF86 /* MyClosedInvitationResponseModel.m in Sources */,
 				470C5E751D44BFC800DDF90B /* BottomView.m in Sources */,
+				470C6A941D8F62DA009BB8C7 /* PolicyShowController.m in Sources */,
 				47BB49941D45E0D40052E4D0 /* News.m in Sources */,
 				47A364C91D5AB78C002FC59E /* PlayerDetailViewController.m in Sources */,
 				4772FE611D56579B0008ED37 /* MyMessageController.m in Sources */,

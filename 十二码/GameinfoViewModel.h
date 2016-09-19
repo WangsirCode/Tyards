@@ -8,6 +8,7 @@
 
 #import "SEMViewModel.h"
 #import "MDABizManager.h"
+#import "TournamentPolicyResponseModel.h"
 @interface GameinfoViewModel : SEMViewModel
 @property (nonatomic, strong) NSArray<ScoreListModel *> *scoreModel;
 @property (nonatomic, strong) NSArray<ScorerListModel *> *scorerModel;
@@ -15,6 +16,7 @@
 @property (nonatomic, strong) GameInfoModel *model;
 @property (nonatomic, strong) NSArray<TournamentGamesModel *> *scheduleModel;
 @property (nonatomic, strong) NSArray<MatchTeamModel *> *teamModel;
+@property (nonatomic, strong) PolicyModel *policyModel;
 @property (nonatomic,assign ) NSInteger     status;
 @property (nonatomic,strong ) RACCommand    * shareCommand;
 @property (nonatomic,strong ) RACCommand    * likeCommand;
