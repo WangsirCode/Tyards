@@ -25,7 +25,8 @@
 #import "GameinfoViewModel.h"
 #import "SEMTeamHomeViewController.h"
 #import "PolicyShowController.h"
-@interface GameInfoDetailViewController ()<UITableViewDelegate,UITableViewDataSource,LazyPageScrollViewDelegate,UIScrollViewDelegate,ShareViewDelegate,ListTableHeaderVIewDelegate>
+#import "PlayerDetailViewController.h"
+@interface GameInfoDetailViewController ()<UITableViewDelegate,UITableViewDataSource,LazyPageScrollViewDelegate,UIScrollViewDelegate,ShareViewDelegate,ListTableHeaderVIewDelegate,UIGestureRecognizerDelegate>
 @property (nonatomic,strong) GameinfoViewModel  * viewModel;
 @property (nonatomic,strong) UIImageView        * logoImageView;
 @property (nonatomic,strong) LazyPageScrollView * pageView;
@@ -208,6 +209,13 @@
             break;
     }
 }
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    if ([NSStringFromClass([touch.view class]) isEqualToString:@"UIView"]) {
+        return NO;
+    }
+    return  YES;
+}
 #pragma mark- tableiviewDelegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -305,14 +313,22 @@
             UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"scroreCell"];
             cell.textLabel.text = [NSString stringWithFormat:@"%ld.",(long)(indexPath.row + 1)];
             cell.textLabel.textColor = [UIColor blackColor];
-            cell.detailTextLabel.textColor = [UIColor MyColor];
-            cell.detailTextLabel.text = model.team.name;
-            cell.detailTextLabel.textAlignment = NSTextAlignmentLeft;
-            cell.detailTextLabel.sd_layout
+            UILabel* detailLabel = [UILabel new];
+            detailLabel.textColor = [UIColor MyColor];
+            detailLabel.text = model.team.name;
+            detailLabel.textAlignment = NSTextAlignmentLeft;
+            [cell.contentView addSubview:detailLabel];
+            detailLabel.sd_layout
             .centerYEqualToView(cell.contentView)
             .leftSpaceToView(cell.textLabel,24*self.view.scale)
             .heightIs(cell.contentView.height)
             .maxWidthIs(140*self.view.scale);
+            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithActionBlock:^(id  _Nonnull sender) {
+                SEMTeamHomeViewController* controller = [[SEMTeamHomeViewController alloc] initWithDictionary:@{@"ide":@(model.team.id)}];
+                [self.navigationController pushViewController:controller animated:YES];
+            }];
+            [detailLabel addGestureRecognizer:tap];
+            tap.delegate = self;
             NSArray<NSNumber*>* array = @[@([model getNum]),@(model.wins),@(model.draws),@(model.loses),@(model.points)];
             for (int i = 0; i < 5; i++) {
                 UILabel* label = [UILabel new];
@@ -326,6 +342,7 @@
                 .widthIs(35*self.view.scale)
                 .heightIs(cell.contentView.height);
             }
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }
         else if (self.viewModel.listTableIndex == 1)
@@ -372,9 +389,15 @@
             .leftSpaceToView(cell.contentView,70*self.view.scale)
             .heightIs(cell.contentView.height)
             .widthIs(85*self.view.scale);
+            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithActionBlock:^(id  _Nonnull sender) {
+                PlayerDetailViewController* controller = [[PlayerDetailViewController alloc] initWithDictionary:@{@"id":@(model.player.id)}];
+                [self.navigationController pushViewController:controller animated:YES];
+            }];
+            [cell.textLabel addGestureRecognizer:tap];
             cell.detailTextLabel.textColor = [UIColor MyColor];
             cell.detailTextLabel.text = model.team.name;
             cell.detailTextLabel.textAlignment = NSTextAlignmentLeft;
+            
             cell.detailTextLabel.sd_layout
             .leftSpaceToView(cell.contentView,165*self.view.scale)
             .centerYEqualToView(cell.contentView)
@@ -627,6 +650,10 @@
         controller.navigationController.navigationBar.alpha = 0;
         [self.navigationController pushViewController:controller animated:YES];
     }
+    else
+    {
+        [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    }
 }
 #pragma  mark- scrollviewdelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -735,6 +762,7 @@
         _listTableview.tableHeaderView = view;
         _listTableview.separatorInset = UIEdgeInsetsZero;
         _listTableview.bounces = NO;
+        _listTableview.allowsSelection = NO;
     }
     return _listTableview;
 }
