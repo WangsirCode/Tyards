@@ -897,6 +897,7 @@
  *  @return NSURLSessionTask
  */
 - (NSURLSessionTask*)postInvitation:(NSString*)title
+                                ide:(NSString*)ide
                                date:(long long)date
                             stadium:(NSInteger)stadium
                                type:(NSString*)type
@@ -1066,6 +1067,22 @@
 - (NSURLSessionTask*)fetchPolicy:(NSString*)tournamentId
                              success:(void (^)(id data))successBlock
                              failure:(void (^)(NSError *aError))failureBlock;
+
+/*!
+ *  @author 汪宇豪, 16-09-20 11:09:31
+ *
+ *  @brief 关闭约战贴
+ *
+ *  @param match_invitation_id 约战贴id
+ *  @param successBlock        成功
+ *  @param failureBlock        失败
+ *
+ *  @return NSURLSessionTask
+ */
+- (NSURLSessionTask*)closeInvitation:(NSString*)match_invitation_id
+                               token:(NSString*)token
+                         success:(void (^)(id data))successBlock
+                         failure:(void (^)(NSError *aError))failureBlock;
 
 /*!
  *  @author 汪宇豪, 16-09-15 08:09:08

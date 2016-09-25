@@ -12,6 +12,7 @@
 #import "MakeInvitationViewModel.h"
 #import "PlaceSelectController.h"
 #import "CenterDatePickerView.h"
+#import "IQKeyboardManager.h"
 @interface MakeInvitationController () <UITableViewDelegate,UITableViewDataSource,UITextViewDelegate,UITextFieldDelegate,TypeSelectControllerDelegate,PlaceSelectControllerDelegate,CenterDatePickerViewDelegate>
 @property (nonatomic,strong) UIBarButtonItem      *backItem;
 @property (nonatomic,strong) MBProgressHUD        *hud;
@@ -27,6 +28,7 @@
 @property (nonatomic,strong) UILabel              *timeLabel;
 @property (nonatomic,strong) UILabel              *placeLabel;
 @property (nonatomic,strong) UILabel              *typeLabel;
+@property (nonatomic,strong) UIBarButtonItem      *closeItem;
 @property (nonatomic,strong) CenterDatePickerView *datePickerView;
 @property (nonatomic,strong) CenterDatePickerView *timePickerView;
 @end
@@ -36,6 +38,17 @@
     self = [super init];
     if (self) {
         self.viewModel = [[MakeInvitationViewModel alloc] initWithDictionary:dictionary];
+        if (dictionary[@"model"]) {
+            self.viewModel.model = dictionary[@"model"];
+            self.viewModel.mine = YES;
+            self.titleFiled.text = self.viewModel.model.title;
+            self.placeLabel.text = self.viewModel.model.stadium.name;
+            self.cteleFiled.text = self.viewModel.model.contact;
+            self.cmanFiled.text = self.viewModel.model.linkman;
+            self.dateLabel.text = [self.viewModel.model getDate1];
+            self.timeLabel.text = [self.viewModel.model getTime];
+            self.typeLabel.text = [self.viewModel.model getType];
+        }
     }
     return self;
 }
@@ -47,7 +60,11 @@
     
     // Do any additional setup after loading the view.
 }
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
 
+}
 #pragma viewsetup
 - (void)setupView
 {
@@ -95,7 +112,9 @@
 - (void)addSubviews
 {
     self.navigationItem.leftBarButtonItem = self.backItem;
-    
+    if (self.viewModel.mine) {
+        self.navigationItem.rightBarButtonItem = self.closeItem;
+    }
     [self.view addSubview:self.postTableView];
 //    [self.view addSubview:self.datePicker];
 //    [self.view addSubview:self.timePicker];
@@ -149,7 +168,6 @@
 
         [self.navigationController popViewControllerAnimated:YES];
         [self.delegate didMakeInvitation:self.viewModel.model];
-
     }];
     [RACObserve(self.titleFiled, text) subscribeNext:^(id x) {
         self.viewModel.model.title = self.titleFiled.text;
@@ -179,9 +197,17 @@
             self.viewModel.model.type = @"ELEVEN";
         }
     }];
-    RAC(self.viewModel.model.stadium,name) = RACObserve(self.placeLabel, text);
-    RAC(self.viewModel.model,linkman) = RACObserve(self.cmanFiled, text);
-    RAC(self.viewModel.model,contact) = RACObserve(self.cteleFiled, text);
+     [RACObserve(self.placeLabel, text) subscribeNext:^(id x) {
+         self.viewModel.model.stadium.name = self.placeLabel.text;
+     }];
+    [RACObserve(self.cmanFiled, text) subscribeNext:^(id x) {
+        self.viewModel.model.linkman = self.cmanFiled.text;
+    }];
+    [RACObserve(self.cteleFiled, text) subscribeNext:^(id x) {
+        self.viewModel.model.contact = self.cteleFiled.text;
+    }];
+//    RAC(self.viewModel.model,linkman) = RACObserve(self.cmanFiled, text);
+//    RAC(self.viewModel.model,contact) = RACObserve(self.cteleFiled, text);
 //    [RACObserve(self.messageView, text) subscribeNext:^(id x) {
 //        self.viewModel.model.desc = self.messageView.text;
 //    }];
@@ -495,7 +521,13 @@
     if (!_messageView) {
         _messageView = [[UITextView alloc] init];
         _messageView.delegate = self;
-        _messageView.text = @"备注信息让各大球队提高对你的兴趣吧";
+        if (self.viewModel.model.desc) {
+            _messageView.text = self.viewModel.model.desc;
+        }
+        else
+        {
+            _messageView.text = @"备注信息让各大球队提高对你的兴趣吧";
+        }
         _messageView.textColor = [UIColor colorWithHexString:@"#CACACA"];
         _messageView.font = [UIFont systemFontOfSize:14];
     }
@@ -583,6 +615,14 @@
     }
     return _typeLabel;
 }
+- (UIBarButtonItem *)closeItem
+{
+    if (!_closeItem) {
+        _closeItem = [[UIBarButtonItem alloc] initWithTitle:@"关闭" style:UIBarButtonItemStylePlain target:self.viewModel action:@selector(closeInviTation)];
+    }
+    return _closeItem;
+}
+
 //- (UIBarButtonItem *)cancelItem
 //{
 //    if (!_cancelItem) {

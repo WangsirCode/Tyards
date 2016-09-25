@@ -18,7 +18,9 @@
 #import "UMSocialQQHandler.h"
 #import "UMSocial.h"
 #import "UMSocialWechatHandler.h"
+#import "IQKeyboardManager.h"
 #import "UMSocialSinaSSOHandler.h"
+#import "MakeInvitationController.h"
 #define kYMAppKey @"57cfb44b67e58e4b32000157"
 #define kQQAppID @"101273513"
 #define kQQAppKey @"6001745f699da343ecd89cf2c51f9c76"
@@ -55,11 +57,9 @@ NSString* const USER_INFO = @"userinfo";
     [UMSocialQQHandler setQQWithAppId:kQQAppID appKey:kQQAppKey url:@"http://www.umeng.com/social"];
     [UMSocialQQHandler setSupportWebView:YES];
     [UMSocialWechatHandler setWXAppId:WXPatient_App_ID appSecret:WXPatient_App_Secret url:@"http://www.umeng.com/social"];
-    
-    // Override point for customization after application launch.
+    [[IQKeyboardManager sharedManager].disabledDistanceHandlingClasses addObject:[MakeInvitationController class]];
     return YES;
 }
-
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.

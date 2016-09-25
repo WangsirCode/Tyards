@@ -209,13 +209,18 @@
             break;
     }
 }
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
-{
-    if ([NSStringFromClass([touch.view class]) isEqualToString:@"UIView"]) {
-        return NO;
-    }
-    return  YES;
-}
+//
+//- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+//{
+//    if ([touch.view isDescendantOfView:autocompleteTableView]) {
+//        
+//        // Don't let selections of auto-complete entries fire the
+//        // gesture recognizer
+//        return NO;
+//    }
+//    
+//    return YES;
+//}
 #pragma mark- tableiviewDelegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -762,7 +767,6 @@
         _listTableview.tableHeaderView = view;
         _listTableview.separatorInset = UIEdgeInsetsZero;
         _listTableview.bounces = NO;
-        _listTableview.allowsSelection = NO;
     }
     return _listTableview;
 }

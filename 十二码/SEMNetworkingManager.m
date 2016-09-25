@@ -646,6 +646,22 @@ NSString* const GameMessage = @"/match/newses/";
         failureBlock(error);
     }];
 }
+//关闭约战贴
+- (NSURLSessionTask *)closeInvitation:(NSString *)match_invitation_id token:(NSString *)token success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
+{
+    [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
+    NSMutableString* URL = [[NSMutableString alloc] init];
+    [URL appendString:@"/match/closeInvitation/"
+     ];
+    [URL appendString:match_invitation_id];
+    NSDictionary* para = @{@"token":token};
+    return [self POST:URL parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }];
+}
 //取消关注球员
 - (NSURLSessionTask *)postdisLikePlayer:(NSString *)playerId token:(NSString *)token success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
 {
@@ -1054,12 +1070,19 @@ NSString* const GameMessage = @"/match/newses/";
     }];
 }
 //上传约战
-- (NSURLSessionTask *)postInvitation:(NSString *)title date:(long long)date stadium:(NSInteger)stadium type:(NSString *)type contact:(NSString *)contact linkman:(NSString *)linkman description:(NSString *)description token:(NSString *)token success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
+- (NSURLSessionTask *)postInvitation:(NSString *)title ide:(NSString*)ide date:(long long)date stadium:(NSInteger)stadium type:(NSString *)type contact:(NSString *)contact linkman:(NSString *)linkman description:(NSString *)description token:(NSString *)token success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
 {
     [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
     NSMutableString* URL = [[NSMutableString alloc] init];
     [URL appendString:@"/match/updateInvitation"];
-    NSDictionary* para = @{@"title":title,@"date":@(date),@"stadium":@(stadium),@"type":type,@"contact":contact,@"linkman":linkman,@"description":description,@"token":token};
+    NSDictionary* para;
+    if (ide) {
+        para = @{@"id":ide,@"title":title,@"date":@(date),@"stadium":@(stadium),@"type":type,@"contact":contact,@"linkman":linkman,@"description":description,@"token":token};
+    }
+    else
+    {
+        para = @{@"title":title,@"date":@(date),@"stadium":@(stadium),@"type":type,@"contact":contact,@"linkman":linkman,@"description":description,@"token":token};
+    }
     return [self POST:URL parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {

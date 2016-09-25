@@ -38,7 +38,13 @@
 
 @property (nonatomic, assign) BOOL complete;
 
+- (NSString*)getDate1;
+
+- (NSString*)getTime;
+
 - (NSString*)getDate;
+
+- (NSString*)getType;
 @end
 
 

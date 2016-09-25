@@ -1,4 +1,4 @@
-platform :ios, ‘7.0’
+platform :ios, ‘8.0’
 
 target ‘十二码’ do
     pod 'ReactiveCocoa', '~> 2.5'
@@ -25,5 +25,4 @@ target ‘十二码’ do
     pod 'DOPDropDownMenu-Enhanced', '~> 1.0.0'
 	pod 'UMengSocial', '~> 4.4'
     pod 'IQKeyboardManager'
-
 end

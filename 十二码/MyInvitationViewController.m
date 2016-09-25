@@ -10,8 +10,9 @@
 #import "MyInvitationViewModel.h"
 #import "MDABizManager.h"
 #import "LazyPageScrollView.h"
+#import "MakeInvitationController.h"
 #import "InvitationViewCell.h"
-@interface MyInvitationViewController ()<LazyPageScrollViewDelegate,UITableViewDelegate,UITableViewDataSource>
+@interface MyInvitationViewController ()<LazyPageScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,MakeInvitationControllerDelegate>
 @property (nonatomic,strong) UIBarButtonItem      *backItem;
 @property (nonatomic,strong) MBProgressHUD        *hud;
 @property (nonatomic,strong) MyInvitationViewModel         *viewModel;
@@ -116,6 +117,35 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 212*self.view.scale;
 }
+#pragma mark - tableviewDelegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (tableView.tag == 100) {
+        InvitationModel* model = self.viewModel.myInvitaions[indexPath.row];
+        MakeInvitationController* controller = [[MakeInvitationController alloc] initWithDictionary:@{@"model":model}];
+        [self.navigationController pushViewController:controller animated:YES];
+        self.viewModel.index = indexPath.row;
+        controller.delegate = self;
+    }
+}
+- (void)didMakeInvitation:(InvitationModel *)model
+{
+    NSMutableArray* array = [NSMutableArray arrayWithArray:self.viewModel.myInvitaions];
+    if (model) {
+        [array replaceObjectAtIndex:self.viewModel.index withObject:model];
+        self.viewModel.myClosedInvitations = array;
+    }
+    else
+    {
+        InvitationModel* model = array[self.viewModel.index];
+        [array removeObjectAtIndex:self.viewModel.index];
+        NSMutableArray* close = [NSMutableArray arrayWithArray:self.viewModel.myClosedInvitations];
+        [close insertObject:model atIndex:0];
+        [self.myClosedInvitationTableView reloadData];
+    }
+    [self.myInvitationTableView reloadData];
+    
+}
 #pragma mark- getter
 
 -(UIBarButtonItem *)backItem
@@ -191,10 +221,9 @@
         _myClosedInvitationTableView.delegate = self;
         _myClosedInvitationTableView.dataSource =self;
         _myClosedInvitationTableView.tag = 101;
-        _myInvitationTableView.separatorColor = [UIColor BackGroundColor];
         [_myClosedInvitationTableView registerClass:[InvitationViewCell class] forCellReuseIdentifier:@"MyClosedInvitation"];
         _myClosedInvitationTableView.backgroundColor = [UIColor BackGroundColor];
-        _myInvitationTableView.separatorColor = [UIColor BackGroundColor];
+        _myClosedInvitationTableView.separatorColor = [UIColor BackGroundColor];
     }
     return _myClosedInvitationTableView;
 }

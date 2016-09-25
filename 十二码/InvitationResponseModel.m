@@ -24,6 +24,27 @@
     NSString* ta = [formater stringFromDate:date];
     return ta;
 }
+- (NSString *)getDate1
+{
+    NSDate *date = [[NSDate alloc]initWithTimeIntervalSince1970:self.playDate/1000];
+    NSDateFormatter* formater = [[NSDateFormatter alloc] init];
+    formater.dateFormat = @"yyyy年MM月dd日";
+    NSString* ta = [formater stringFromDate:date];
+    return ta;
+}
+- (NSString *)getTime
+{
+    NSDate *date = [[NSDate alloc]initWithTimeIntervalSince1970:self.playDate/1000];
+    NSDateFormatter* formater = [[NSDateFormatter alloc] init];
+    formater.dateFormat = @"HH:mm";
+    NSString* ta = [formater stringFromDate:date];
+    return ta;
+}
+- (NSString *)getType
+{
+    NSDictionary *dic = @{@"FIVE":@"5人场",@"SIX":@"6人场",@"SEVEN":@"7人场",@"EIGHT":@"8人场",@"NINE":@"9人场",@"ELEVEN":@"11人场"};
+    return dic[self.type];
+}
 @end
 
 

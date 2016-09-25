@@ -45,12 +45,24 @@
                         self.model.desc = @"";
                     }
                     self.valid = YES;
-                    [manager postInvitation:self.model.title date:self.model.playDate stadium:self.model.stadium.id type:self.model.type contact:self.model.contact linkman:self.model.linkman description:self.model.desc token:[self getToken] success:^(id data) {
-                        [subscriber sendNext:@1];
-                        [subscriber sendCompleted];
-                    } failure:^(NSError *aError) {
-                        
-                    }];
+                    if (self.mine) {
+                        [manager postInvitation:self.model.title ide:[@(self.model.id) stringValue] date:self.model.playDate stadium:self.model.stadium.id type:self.model.type contact:self.model.contact linkman:self.model.linkman description:self.model.desc token:[self getToken] success:^(id data) {
+                            [subscriber sendNext:@1];
+                            [subscriber sendCompleted];
+                        } failure:^(NSError *aError) {
+                            
+                        }];
+                    }
+                    else
+                    {
+                        [manager postInvitation:self.model.title ide:nil date:self.model.playDate stadium:self.model.stadium.id type:self.model.type contact:self.model.contact linkman:self.model.linkman description:self.model.desc token:[self getToken] success:^(id data) {
+                            [subscriber sendNext:@1];
+                            [subscriber sendCompleted];
+                        } failure:^(NSError *aError) {
+                            
+                        }];
+                    }
+
                 }
 
                 return nil;
@@ -58,5 +70,11 @@
         }];
     }
     return _postCommand;
+}
+- (void)closeInviTation
+{
+    SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
+    [manager closeInvitation:[@(self.model.id) stringValue] token:[self getToken] success:nil failure:nil];
+    self.model = nil;
 }
 @end

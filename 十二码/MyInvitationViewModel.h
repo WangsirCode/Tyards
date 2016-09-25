@@ -12,4 +12,5 @@
 @property (nonatomic, strong) NSArray<InvitationModel *> *myInvitaions;
 @property (nonatomic, strong) NSArray<InvitationModel *> *myClosedInvitations;
 @property (nonatomic,assign) NSInteger status;
+@property (nonatomic,assign) NSInteger index;
 @end

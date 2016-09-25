@@ -13,4 +13,6 @@
 @property (nonatomic,strong) NSArray* titleArray;
 @property (nonatomic,strong) InvitationModel* model;
 @property (nonatomic,assign) BOOL valid;
+@property (nonatomic,assign) BOOL mine;
+- (void)closeInviTation;
 @end
