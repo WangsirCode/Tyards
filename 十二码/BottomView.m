@@ -54,8 +54,8 @@
         make.width.equalTo(@(25*self.scale));
     }];
     [self.viewImage mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.mas_top).offset(4);
-        make.bottom.equalTo(self.mas_bottom).offset(-4);
+        make.top.equalTo(self.mas_top).offset(5);
+        make.bottom.equalTo(self.mas_bottom).offset(-6);
         make.right.equalTo(self.viewLabel.mas_left).offset(-5*self.scale);
         make.width.equalTo(@(15*self.scale));
     }];

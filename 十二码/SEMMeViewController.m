@@ -22,11 +22,19 @@
 #import "InvitationViewController.h"
 #import "FeedBackController.h"
 #import "ChangeNickNameController.h"
-@interface SEMMeViewController ()<UITableViewDelegate,UITableViewDataSource>
+#import "ShareView.h"
+#import "UMSocialWechatHandler.h"
+#import "UMSocial.h"
+
+@interface SEMMeViewController ()<UITableViewDelegate,UITableViewDataSource,ShareViewDelegate>
 @property (strong,nonatomic)SEMMeViewModel* viewModel;
 @property (nonatomic,strong)MeTopView* topView;
 @property (nonatomic,strong)UITableView* tableview;
 @property (nonatomic,strong)LoginCommand* login;
+@property (nonatomic,strong)ShareView* shareView;
+@property (nonatomic,strong)UIView* maskView;
+
+
 @end
 
 @implementation SEMMeViewController
@@ -88,6 +96,8 @@
 {
     [self.view addSubview:self.topView];
     [self.view addSubview:self.tableview];
+//    [self.view addSubview:self.maskView];
+    [self.maskView addSubview:self.shareView];
 }
 
 - (void)makeConstraits
@@ -247,7 +257,104 @@
         controller.hidesBottomBarWhenPushed = YES;
         [nav pushViewController:controller animated:YES];
         
+    }else if (indexPath.row==5){
+        [[UIApplication sharedApplication].keyWindow addSubview:self.maskView];
+
+        
+        CALayer* imageLayer = self.shareView.layer;
+//        self.maskView.hidden = NO;
+        CGPoint fromPoint = imageLayer.position;
+        CGPoint toPoint = CGPointMake(0, self.view.height - 200*self.view.scale);
+        // 创建不断改变CALayer的position属性的属性动画
+        CABasicAnimation* anim = [CABasicAnimation
+                                  animationWithKeyPath:@"position"];
+        // 设置动画开始的属性值
+        anim.fromValue = [NSValue valueWithCGPoint:fromPoint];
+        // 设置动画结束的属性值
+        anim.toValue = [NSValue valueWithCGPoint:toPoint];
+        anim.duration = 0.3;
+        imageLayer.position = toPoint;
+        anim.removedOnCompletion = YES;
+        // 为imageLayer添加动画
+        [imageLayer addAnimation:anim forKey:nil];
     }
+}
+#pragma mark-ShareViewDelegate
+- (void)didSelectedShareView:(NSInteger)index
+{
+    NSLog(@"%ld",(long)index);
+    switch (index) {
+        case 0:
+        {
+            [UMSocialData defaultData].extConfig.wechatSessionData.url = @"www.baidu.com";
+            UMSocialUrlResource *urlResource = [[UMSocialUrlResource alloc] initWithSnsResourceType:UMSocialUrlResourceTypeImage url:@"www.baidu.com"];
+            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:@"十二码" image:nil location:nil urlResource:urlResource presentedController:self completion:^(UMSocialResponseEntity *response){
+                if (response.responseCode == UMSResponseCodeSuccess) {
+                    NSLog(@"分享成功！");
+                }
+            }];
+        }
+            
+            break;
+        case 1:
+        {
+            [UMSocialData defaultData].extConfig.wechatSessionData.url = @"www.baidu.com";
+            UMSocialUrlResource *urlResource = [[UMSocialUrlResource alloc] initWithSnsResourceType:UMSocialUrlResourceTypeImage url:@"www.baidu.com"];
+            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatTimeline] content:@"十二码" image:nil location:nil urlResource:urlResource presentedController:self completion:^(UMSocialResponseEntity *response){
+                if (response.responseCode == UMSResponseCodeSuccess) {
+                    NSLog(@"分享成功！");
+                }
+            }];
+        }
+            break;
+        case 2:
+        {
+            [UMSocialData defaultData].extConfig.wechatSessionData.url = @"www.baidu.com";
+            UMSocialUrlResource *urlResource = [[UMSocialUrlResource alloc] initWithSnsResourceType:UMSocialUrlResourceTypeImage url:@"www.baidu.com"];
+            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQQ] content:@"十二码" image:nil location:nil urlResource:urlResource presentedController:self completion:^(UMSocialResponseEntity *response){
+                if (response.responseCode == UMSResponseCodeSuccess) {
+                    NSLog(@"分享成功！");
+                }
+            }];
+        }
+            break;
+        case 3:
+        {
+            [UMSocialData defaultData].extConfig.wechatSessionData.url = @"www.baidu.com";
+            UMSocialUrlResource *urlResource = [[UMSocialUrlResource alloc] initWithSnsResourceType:UMSocialUrlResourceTypeImage url:@"www.baidu.com"];
+            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQzone] content:@"十二码" image:nil location:nil urlResource:urlResource presentedController:self completion:^(UMSocialResponseEntity *response){
+                if (response.responseCode == UMSResponseCodeSuccess) {
+                    NSLog(@"分享成功！");
+                }
+            }];
+        }
+            break;
+        case 4:
+            [self hideMaskView];
+            break;
+        default:
+            break;
+    }
+}
+- (void)hideMaskView
+{
+//    _maskView.hidden = YES;
+    [_maskView removeFromSuperview];
+    CALayer* imageLayer = self.shareView.layer;
+    CGPoint fromPoint = imageLayer.position;
+    CGPoint toPoint = CGPointMake(0, self.view.height);
+    // 创建不断改变CALayer的position属性的属性动画
+    CABasicAnimation* anim = [CABasicAnimation
+                              animationWithKeyPath:@"position"];
+    // 设置动画开始的属性值
+    anim.fromValue = [NSValue valueWithCGPoint:fromPoint];
+    // 设置动画结束的属性值
+    anim.toValue = [NSValue valueWithCGPoint:toPoint];
+    anim.duration = 0.3;
+    imageLayer.position = toPoint;
+    anim.removedOnCompletion = YES;
+    // 为imageLayer添加动画
+    [imageLayer addAnimation:anim forKey:nil];
 }
 #pragma mark -Getter
 - (MeTopView*)topView
@@ -277,5 +384,31 @@
         _tableview.dataSource = self;
     }
     return _tableview;
+}
+- (ShareView *)shareView
+{
+    if (!_shareView) {
+        _shareView = [[ShareView alloc] initWithFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height, [UIScreen mainScreen].bounds.size.width, 200*self.view.scale)];
+        _shareView.layer.anchorPoint = CGPointMake(0, 0);
+        _shareView.frame = CGRectMake(0, self.view.height, self.view.width, 200*self.view.scale);
+        _shareView.delegate = self;
+        _shareView.layer.anchorPoint = CGPointMake(0, 0);
+        NSLog(@"%@",_shareView.description);
+    }
+    return _shareView;
+}
+- (UIView *)maskView
+{
+    if (!_maskView) {
+        _maskView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
+        _maskView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.5];
+//        _maskView.alpha = 0.5;
+//        _maskView.hidden = YES;
+        
+        //添加点击之后的手势
+        UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideMaskView)];
+        [_maskView addGestureRecognizer:tap];
+    }
+    return _maskView;
 }
 @end
