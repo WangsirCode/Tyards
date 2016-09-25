@@ -50,7 +50,7 @@
 - (void)makeConstraits
 {
     CGFloat height;
-    height = self.view.scale * 48 * 5 + 24;
+    height = self.view.scale * 48 * 4 + 24;
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.and.left.and.right.equalTo(self.view);
         make.height.equalTo(@(height));
@@ -118,6 +118,7 @@
             break;
     }
 }
+
 #pragma mark -viewModelSet
 
 - (void)setRouterParameters:(NSDictionary *)routerParameters
@@ -131,10 +132,10 @@
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == 2) {
-        return 1;
+    if (section == 1) {
+        return 2;
     }
-    return 2;
+    return 1;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -168,23 +169,23 @@
         cell.detailTextLabel.textColor = [UIColor colorWithHexString:@"#CACACA"];
     }
     if ([text isEqualToString:@"清除缓存"]) {
-        detailText = self.viewModel.fileSize;
-        cell.detailTextLabel.text = detailText;
+      //  detailText = self.viewModel.fileSize;
+     //   cell.detailTextLabel.text = detailText;
         cell.detailTextLabel.textColor = [UIColor colorWithHexString:@"#CACACA"];
     }
 
     cell.textLabel.text = text;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    if([text isEqualToString:@"推荐好友"])
-    {
-        UIImageView* image = [[UIImageView alloc] init];
-        image.image = [UIImage imageNamed:@"upload_L"];
-        [cell.contentView addSubview:image];
-        [image mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.equalTo(cell.contentView.mas_centerY);
-            make.right.equalTo(cell.contentView.mas_right).offset(10);
-        }];
-    }
+//    if([text isEqualToString:@"推荐好友"])
+//    {
+//        UIImageView* image = [[UIImageView alloc] init];
+//        image.image = [UIImage imageNamed:@"upload_L"];
+//        [cell.contentView addSubview:image];
+//        [image mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.centerY.equalTo(cell.contentView.mas_centerY);
+//            make.right.equalTo(cell.contentView.mas_right).offset(10);
+//        }];
+//    }
     return cell;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -254,6 +255,9 @@
     if ([text isEqualToString:@"登录"]) {
         SEMLoginViewController* login = [HRTRouter objectForURL:@"login" withUserInfo:@{}];
         [self presentViewController:login animated:YES completion:nil];
+    }
+    if ([text isEqualToString:@"检查更新"]) {
+        [XHToast showCenterWithText:@"已是最新版本"];
     }
 }
 - (void)hideMaskView

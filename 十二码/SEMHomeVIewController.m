@@ -253,8 +253,15 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSInteger ide = self.viewModel.datasource[indexPath.row].id;
+    
+    News* news = self.viewModel.datasource[indexPath.row];
+
+    
     SEMNewsDetailController* controller = [[SEMNewsDetailController alloc] initWithDictionary:@{@"ides":@(ide)}];
     controller.hidesBottomBarWhenPushed = YES;
+    controller.shareTitle=news.title;
+    controller.shareImgUrl =news.thumbnail.url;
+    controller.shareId=ide;
     [self.navigationController pushViewController:controller animated:YES];
 }
 #pragma mark -Getter

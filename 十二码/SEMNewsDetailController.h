@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface SEMNewsDetailController : UIViewController
+@property (nonatomic,strong) NSString *shareTitle;
+@property (nonatomic,strong) NSString *shareImgUrl;
+@property (nonatomic) NSInteger shareId;
 - (instancetype)initWithDictionary:(NSDictionary*)dictionary;
 @end
