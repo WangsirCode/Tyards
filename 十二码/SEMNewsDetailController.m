@@ -383,12 +383,19 @@
     SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
     req.bText = NO;
     req.scene = WXSceneTimeline;
+    
+    
+    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:self.shareImgUrl]];
+    UIImage *image = [UIImage imageWithData:data];
+    if (!image) {
+        image = [UIImage imageNamed:@"zhanwei.jpg"];
+    }
     switch (index) {
         case 0:
         {
-            [UMSocialData defaultData].extConfig.wechatSessionData.url = @"www.baidu.com";
-            UMSocialUrlResource *urlResource = [[UMSocialUrlResource alloc] initWithSnsResourceType:UMSocialUrlResourceTypeImage url:@"www.baidu.com"];
-            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:@"十二码" image:nil location:nil urlResource:urlResource presentedController:self completion:^(UMSocialResponseEntity *response){
+            [UMSocialData defaultData].extConfig.wechatSessionData.url = self.viewModel.newdetail.text;
+            UMSocialUrlResource *urlResource = [[UMSocialUrlResource alloc] initWithSnsResourceType:UMSocialUrlResourceTypeDefault url:[NSString stringWithFormat:@"http://www.12yards.cn/news/index/%ld",(long)self.shareId]];
+            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:self.shareTitle image:image location:nil urlResource:urlResource presentedController:self completion:^(UMSocialResponseEntity *response){
                 if (response.responseCode == UMSResponseCodeSuccess) {
                     NSLog(@"分享成功！");
                 }
@@ -398,9 +405,9 @@
         case 1:
 //            [WXApi sendReq:req];
         {
-            [UMSocialData defaultData].extConfig.wechatSessionData.url = @"www.baidu.com";
-            UMSocialUrlResource *urlResource = [[UMSocialUrlResource alloc] initWithSnsResourceType:UMSocialUrlResourceTypeImage url:@"www.baidu.com"];
-            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatTimeline] content:@"十二码" image:nil location:nil urlResource:urlResource presentedController:self completion:^(UMSocialResponseEntity *response){
+            [UMSocialData defaultData].extConfig.wechatTimelineData.url =self.viewModel.newdetail.text;
+            UMSocialUrlResource *urlResource = [[UMSocialUrlResource alloc] initWithSnsResourceType:UMSocialUrlResourceTypeDefault url:[NSString stringWithFormat:@"http://www.12yards.cn/news/index/%ld",(long)self.shareId]];
+            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatTimeline] content:self.shareTitle image:image location:nil urlResource:urlResource presentedController:self completion:^(UMSocialResponseEntity *response){
                 if (response.responseCode == UMSResponseCodeSuccess) {
                     NSLog(@"分享成功！");
                 }
@@ -409,9 +416,9 @@
             break;
         case 2:
         {
-            [UMSocialData defaultData].extConfig.wechatSessionData.url = @"www.baidu.com";
-            UMSocialUrlResource *urlResource = [[UMSocialUrlResource alloc] initWithSnsResourceType:UMSocialUrlResourceTypeImage url:@"www.baidu.com"];
-            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQQ] content:@"十二码" image:nil location:nil urlResource:urlResource presentedController:self completion:^(UMSocialResponseEntity *response){
+            [UMSocialData defaultData].extConfig.qqData.url = self.viewModel.newdetail.text;
+            UMSocialUrlResource *urlResource = [[UMSocialUrlResource alloc] initWithSnsResourceType:UMSocialUrlResourceTypeDefault url:[NSString stringWithFormat:@"http://www.12yards.cn/news/index/%ld",(long)self.shareId]];
+            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQQ] content:self.shareTitle image:image location:nil urlResource:urlResource presentedController:self completion:^(UMSocialResponseEntity *response){
                 if (response.responseCode == UMSResponseCodeSuccess) {
                     NSLog(@"分享成功！");
                 }
@@ -420,9 +427,9 @@
             break;
         case 3:
         {
-            [UMSocialData defaultData].extConfig.wechatSessionData.url = @"www.baidu.com";
-            UMSocialUrlResource *urlResource = [[UMSocialUrlResource alloc] initWithSnsResourceType:UMSocialUrlResourceTypeImage url:@"www.baidu.com"];
-            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQzone] content:@"十二码" image:nil location:nil urlResource:urlResource presentedController:self completion:^(UMSocialResponseEntity *response){
+            [UMSocialData defaultData].extConfig.qzoneData.url = self.viewModel.newdetail.text;
+            UMSocialUrlResource *urlResource = [[UMSocialUrlResource alloc] initWithSnsResourceType:UMSocialUrlResourceTypeDefault url:[NSString stringWithFormat:@"http://www.12yards.cn/news/index/%ld",(long)self.shareId]];
+            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQzone] content:self.shareTitle image:image location:nil urlResource:urlResource presentedController:self completion:^(UMSocialResponseEntity *response){
                 if (response.responseCode == UMSResponseCodeSuccess) {
                     NSLog(@"分享成功！");
                 }
