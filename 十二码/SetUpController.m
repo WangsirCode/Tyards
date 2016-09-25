@@ -169,8 +169,8 @@
         cell.detailTextLabel.textColor = [UIColor colorWithHexString:@"#CACACA"];
     }
     if ([text isEqualToString:@"清除缓存"]) {
-      //  detailText = self.viewModel.fileSize;
-     //   cell.detailTextLabel.text = detailText;
+        detailText = self.viewModel.fileSize;
+        cell.detailTextLabel.text = detailText;
         cell.detailTextLabel.textColor = [UIColor colorWithHexString:@"#CACACA"];
     }
 
