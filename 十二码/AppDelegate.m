@@ -19,6 +19,8 @@
 #import "UMSocial.h"
 #import "UMSocialWechatHandler.h"
 #import "UMSocialSinaSSOHandler.h"
+#import "BBLaunchAdMonitor.h"
+
 #define kYMAppKey @"57cfb44b67e58e4b32000157"
 #define kQQAppID @"101273513"
 #define kQQAppKey @"6001745f699da343ecd89cf2c51f9c76"
@@ -32,12 +34,15 @@ NSString* const WX_REFRESH_TOKEN = @"refresh_token";
 NSString* const USER_INFO = @"userinfo";
 @interface AppDelegate ()<WXApiDelegate>
 @property (nonatomic,retain) id<WechatDelegate> delegate;
+@property (nonatomic,strong) NSDictionary *startDic;
+
 @end
 
 @implementation AppDelegate
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
     [WXApi registerApp:@"wx9bdb6c74a8821ee3"];
     CGFloat scale = [UIScreen mainScreen].bounds.size.width / 375;
     NSUserDefaults* database = [NSUserDefaults standardUserDefaults];
@@ -56,10 +61,32 @@ NSString* const USER_INFO = @"userinfo";
     [UMSocialQQHandler setSupportWebView:YES];
     [UMSocialWechatHandler setWXAppId:WXPatient_App_ID appSecret:WXPatient_App_Secret url:@"http://www.umeng.com/social"];
     
+
+    
+    
     // Override point for customization after application launch.
+    SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
+    [manager startUp:^(id data) {
+        self.startDic=data;
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAdDetail:) name:BBLaunchAdDetailDisplayNotification object:nil];
+        [BBLaunchAdMonitor showAdAtPath:self.startDic[@"url"]
+                                 onView:self.window.rootViewController.view
+                           timeInterval:3.
+                       detailParameters:@{}];
+        
+        
+       
+    } failure:^(NSError *aError) {
+        
+    }];
+    
     return YES;
 }
 
+- (void)showAdDetail:(NSNotification *)noti
+{
+    NSLog(@"detail parameters:%@", noti.object);
+}
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
