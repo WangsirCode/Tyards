@@ -11,6 +11,7 @@
 #import "PlayerDetailViewController.h"
 #import "GameInfoDetailViewController.h"
 #import "CoachDetailViewController.h"
+#import "RaceInfoDetailController.h"
 @implementation TagLabels
 
 - (instancetype) init
@@ -66,6 +67,14 @@
                     {
                         UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] initWithActionBlock:^(id  _Nonnull sender) {
                             GameInfoDetailViewController* controler = [[GameInfoDetailViewController alloc] initWithDictionay:@{@"id":@(obj.rid)}];
+                            [self.viewController.navigationController pushViewController:controler animated:YES];
+                        }];
+                        [label addGestureRecognizer:tap];
+                    }
+                    else if ([obj.type isEqualToString:@"Game"])
+                    {
+                        UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] initWithActionBlock:^(id  _Nonnull sender) {
+                            RaceInfoDetailController* controler = [[RaceInfoDetailController alloc] initWithDictionay:@{@"id":@(obj.rid)}];
                             [self.viewController.navigationController pushViewController:controler animated:YES];
                         }];
                         [label addGestureRecognizer:tap];

@@ -11,9 +11,15 @@
 @implementation TeamInfoResponseModel
 
 @end
+
+@implementation Captain
+
+@end
+
 @implementation TeamInfoModel
 
 @end
+
 @implementation Info
 
 @end

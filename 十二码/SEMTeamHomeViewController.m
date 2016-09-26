@@ -402,6 +402,10 @@
     }
     else if (tableView.tag == LISTTABLEVIEWTAG)
     {
+        if(kArrayIsEmpty(self.viewModel.players.coaches))
+        {
+            return 1;
+        }
         return 2;
     }
     else if(tableView.tag == SCHEDULETABLEVIETAG)
@@ -425,6 +429,13 @@
     }
     else if (tableView.tag == LISTTABLEVIEWTAG)
     {
+        if(kArrayIsEmpty(self.viewModel.players.coaches))
+        {
+            if (self.viewModel.players.captain) {
+                return self.viewModel.players.players.count + 1;
+            }
+            return self.viewModel.players.players.count;
+        }
         switch (section) {
             case 0:
                 return self.viewModel.players.coaches.count;
@@ -481,6 +492,28 @@
     }
     else if (tableView.tag == LISTTABLEVIEWTAG)
     {
+        if(kArrayIsEmpty(self.viewModel.players.coaches))
+        {
+            UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"TeamPlayerCell"];
+            cell.textLabel.textColor = [UIColor colorWithHexString:@"#1EA11F"];
+            if (self.viewModel.players.captain) {
+                
+                if (indexPath.row == 0) {
+                    cell.textLabel.text = self.viewModel.players.captain.player.name;
+                    cell.detailTextLabel.text = @"队长";
+                }
+                else
+                {
+                    cell.textLabel.text = self.viewModel.players.players[indexPath.row - 1].player.name;
+                }
+            }
+            else
+            {
+                cell.textLabel.text = self.viewModel.players.players[indexPath.row].player.name;
+            }
+            return cell;
+            
+        }
         UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"TeamPlayerCell"];
         cell.textLabel.textColor = [UIColor colorWithHexString:@"#1EA11F"];
         if (indexPath.section == 0) {
@@ -586,6 +619,10 @@
     {
         UILabel* label = [UILabel new];
         label.backgroundColor = [UIColor BackGroundColor];
+        if (kArrayIsEmpty(self.viewModel.players.coaches)) {
+            label.text = @"   队员";
+            return label;
+        }
         if (section == 0) {
             label.text = @"   主教练";
         }
@@ -606,6 +643,26 @@
         if (indexPath.section == 0 && self.viewModel.model.info.coach)
         {
             CoachDetailViewController *controller= [[CoachDetailViewController alloc] initWithDictionary:@{@"id":@(self.viewModel.model.info.coach.id),@"coach":@"YES"}];
+            [self.navigationController pushViewController:controller animated:YES];
+        }
+        else if (indexPath.section == 0 && kArrayIsEmpty(self.viewModel.players.coaches))
+        {
+            NSInteger inde;
+            if (self.viewModel.players.captain) {
+                if (indexPath.row == 0 &&self.viewModel.players.captain) {
+                    inde = self.viewModel.players.captain.player.id;
+                }
+                else if(indexPath.row != 0 && self.viewModel.players.captain)
+                {
+                    inde = self.viewModel.players.players[indexPath.row - 1].player.id;
+                }
+            }
+            else
+            {
+                inde = self.viewModel.players.players[indexPath.row].player.id;
+            }
+            
+            PlayerDetailViewController *controller= [[PlayerDetailViewController alloc] initWithDictionary:@{@"id":@(inde)}];
             [self.navigationController pushViewController:controller animated:YES];
         }
         else if(indexPath.section == 1)

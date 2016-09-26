@@ -33,18 +33,20 @@
 {
     if (!_postCommand) {
         _postCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+            if (kStringIsEmpty(self.model.title) || (kStringIsEmpty(self.model.contact))) {
+                self.valid = NO;
+                return [RACSignal empty];
+            }
+            else
+            {
+                self.valid = YES;
+            }
             return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
                  SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
-                if ([self.model.title isEqualToString:@""]) {
-                    self.valid = NO;
-                }
-                else
-                {
                     if([self.model.desc isEqualToString:@"备注信息让各大球队提高对你的兴趣吧"])
                     {
                         self.model.desc = @"";
                     }
-                    self.valid = YES;
                     if (self.mine) {
                         [manager postInvitation:self.model.title ide:[@(self.model.id) stringValue] date:self.model.playDate stadium:self.model.stadium.id type:self.model.type contact:self.model.contact linkman:self.model.linkman description:self.model.desc token:[self getToken] success:^(id data) {
                             [subscriber sendNext:@1];
@@ -62,9 +64,6 @@
                             
                         }];
                     }
-
-                }
-
                 return nil;
             }];
         }];

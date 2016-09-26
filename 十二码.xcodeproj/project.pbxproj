@@ -156,6 +156,7 @@
 		473C991F1D8289350093F662 /* PickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 473C991E1D8289350093F662 /* PickerView.m */; };
 		47405DD01D521791000A980A /* GameListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47405DCF1D521791000A980A /* GameListView.m */; };
 		47405DD31D521ABB000A980A /* CostomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47405DD21D521ABB000A980A /* CostomView.m */; };
+		4740F0161D9936E800AD0083 /* ScoreCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4740F0151D9936E800AD0083 /* ScoreCell.m */; };
 		4746A63B1D489365009E0645 /* SchoolInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4746A63A1D489365009E0645 /* SchoolInfoView.m */; };
 		4746A6411D489A90009E0645 /* NewsDetailViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4746A6401D489A90009E0645 /* NewsDetailViewModel.m */; };
 		4746A6441D489B18009E0645 /* SEMNewsDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4746A6431D489B18009E0645 /* SEMNewsDetailController.m */; };
@@ -581,6 +582,8 @@
 		47405DCF1D521791000A980A /* GameListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameListView.m; sourceTree = "<group>"; };
 		47405DD11D521ABB000A980A /* CostomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CostomView.h; sourceTree = "<group>"; };
 		47405DD21D521ABB000A980A /* CostomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CostomView.m; sourceTree = "<group>"; };
+		4740F0141D9936E800AD0083 /* ScoreCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreCell.h; sourceTree = "<group>"; };
+		4740F0151D9936E800AD0083 /* ScoreCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoreCell.m; sourceTree = "<group>"; };
 		4746A6391D489365009E0645 /* SchoolInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SchoolInfoView.h; sourceTree = "<group>"; };
 		4746A63A1D489365009E0645 /* SchoolInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SchoolInfoView.m; sourceTree = "<group>"; };
 		4746A63F1D489A90009E0645 /* NewsDetailViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsDetailViewModel.h; sourceTree = "<group>"; };
@@ -1009,6 +1012,8 @@
 				473C99151D8261DF0093F662 /* HistoryInfoView.m */,
 				47DA9E9C1D8997830090ABC5 /* PictureShowView.h */,
 				47DA9E9D1D8997830090ABC5 /* PictureShowView.m */,
+				4740F0141D9936E800AD0083 /* ScoreCell.h */,
+				4740F0151D9936E800AD0083 /* ScoreCell.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -2001,7 +2006,7 @@
 				TargetAttributes = {
 					4734CD351D41B511006536DF = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = X5DK3836PD;
+						DevelopmentTeam = UHREVQ5FVS;
 					};
 					4734CD4E1D41B512006536DF = {
 						CreatedOnToolsVersion = 7.3;
@@ -2400,6 +2405,7 @@
 				47AF5D2B1D56468F00728933 /* MyConcernController.m in Sources */,
 				47A364C01D59D88F002FC59E /* RecordLabel.m in Sources */,
 				470F56D11D71D2D400110FCE /* RaceDataResponseModel.m in Sources */,
+				4740F0161D9936E800AD0083 /* ScoreCell.m in Sources */,
 				4725D2CE1D5B63CD00A13AEB /* RaceInfoViewModel.m in Sources */,
 				4746A63B1D489365009E0645 /* SchoolInfoView.m in Sources */,
 				47E8BCFF1D5C1A4A007621F8 /* GameMessageResponseModel.m in Sources */,
@@ -2535,8 +2541,8 @@
 			baseConfigurationReference = DBF612850A2096C988540F2E /* Pods-十二码.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Shanghai Luolai Home Textile Co., Ltd.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shanghai Luolai Home Textile Co., Ltd.";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2595,9 +2601,9 @@
 					"\"UIKit\"",
 					"-fobjc-arc",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.luolai.pad;
+				PRODUCT_BUNDLE_IDENTIFIER = com.luolai;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "51d02e98-83a5-46fb-a6ab-c717762f105d";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -2606,8 +2612,8 @@
 			baseConfigurationReference = EBAD3E5CA26ABE9BF6BF078F /* Pods-十二码.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Shanghai Luolai Home Textile Co., Ltd.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shanghai Luolai Home Textile Co., Ltd.";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2666,9 +2672,9 @@
 					"\"UIKit\"",
 					"-fobjc-arc",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.luolai.pad;
+				PRODUCT_BUNDLE_IDENTIFIER = com.luolai;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "51d02e98-83a5-46fb-a6ab-c717762f105d";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

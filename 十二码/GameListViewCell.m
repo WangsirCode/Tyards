@@ -48,6 +48,15 @@
     .leftSpaceToView(self.logoImageView,12*self.scale)
     .autoHeightRatio(0);
     [self.timeLabel setSingleLineAutoResizeWithMaxWidth:250];
+    
+    self.locationView = [[CostomView alloc] initWithInfo:self.location image:[UIImage imageNamed:@"location_L"] FontSize:12];
+    self.locationView.label.textColor = [UIColor colorWithHexString:@"999999"];
+    [self.contentView addSubview:self.locationView];
+    self.locationView.sd_layout
+    .topSpaceToView(self.timeLabel,12*self.scale)
+    .leftSpaceToView(self.logoImageView,12*self.scale)
+    .heightIs(15*self.scale)
+    .widthIs(100);
 }
 - (void)bindModel
 {
@@ -78,15 +87,7 @@
     }];
     [RACObserve(self, location) subscribeNext:^(id x) {
         if (self.location) {
-            self.locationView = [[CostomView alloc] initWithInfo:self.location image:[UIImage imageNamed:@"location_L"] FontSize:12];
-            self.locationView.label.textColor = [UIColor colorWithHexString:@"999999"];
-            [self.contentView addSubview:self.locationView];
-            self.locationView.sd_layout
-            .topSpaceToView(self.timeLabel,12*self.scale)
-            .leftSpaceToView(self.logoImageView,12*self.scale)
-            .heightIs(15*self.scale)
-            .widthIs(100);
-
+            self.locationView.label.text = self.location;
         }
     }];
 }
@@ -126,14 +127,5 @@
         _statusLabel.layer.borderWidth = 1;
     }
     return _statusLabel;
-}
-- (UILabel *)locationLabel
-{
-    if (!_locationLabel) {
-        _locationLabel = [UILabel new];
-        _locationLabel.textColor = [UIColor colorWithHexString:@"#999999"];
-        _locationLabel.font = [UIFont systemFontOfSize:12*self.scale];
-    }
-    return _locationLabel;
 }
 @end

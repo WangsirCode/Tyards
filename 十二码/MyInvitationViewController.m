@@ -139,15 +139,15 @@
     {
         InvitationModel* model = array[self.viewModel.index];
         [array removeObjectAtIndex:self.viewModel.index];
+        self.viewModel.myInvitaions = [array copy];
         NSMutableArray* close = [NSMutableArray arrayWithArray:self.viewModel.myClosedInvitations];
         [close insertObject:model atIndex:0];
+        self.viewModel.myClosedInvitations = [close copy];
         [self.myClosedInvitationTableView reloadData];
     }
     [self.myInvitationTableView reloadData];
-    
 }
 #pragma mark- getter
-
 -(UIBarButtonItem *)backItem
 {
     if (!_backItem) {

@@ -106,12 +106,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "&#x5341;&#x4e8c;&#x7801;/SEMNetworkingManager.m"
-            timestampString = "496038676.830527"
+            timestampString = "496588034.839343"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "656"
-            endingLineNumber = "656"
-            landmarkName = "-closeInvitation:token:success:failure:"
+            startingLineNumber = "1078"
+            endingLineNumber = "1078"
+            landmarkName = "-postInvitation:ide:date:stadium:type:contact:linkman:description:token:success:failure:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -121,13 +121,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "&#x5341;&#x4e8c;&#x7801;/SEMNetworkingManager.m"
-            timestampString = "496039113.706007"
+            filePath = "&#x5341;&#x4e8c;&#x7801;/GameInfoDetailViewController.m"
+            timestampString = "496586094.216815"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1080"
-            endingLineNumber = "1080"
-            landmarkName = "-postInvitation:ide:date:stadium:type:contact:linkman:description:token:success:failure:"
+            startingLineNumber = "195"
+            endingLineNumber = "195"
+            landmarkName = "-didClickButton"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

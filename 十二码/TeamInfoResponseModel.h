@@ -13,6 +13,7 @@
 @class Cover;
 @class Honours;
 @class Team,Logo,Logo;
+@class Avatar;
 @interface TeamInfoResponseModel : NSObject
 
 @property (nonatomic, strong) TeamInfoModel *resp;
@@ -20,6 +21,22 @@
 @property (nonatomic, assign) NSInteger code;
 
 @end
+@interface Captain : NSObject
+
+
+@property (nonatomic, copy) NSString *cover;
+
+@property (nonatomic, assign) NSInteger id;
+
+@property (nonatomic, copy) NSString *name;
+
+@property (nonatomic, copy) NSString *position;
+
+@property (nonatomic, strong) Avatar *avatar;
+
+
+@end
+
 @interface Record : NSObject
 @property (nonatomic, assign) NSInteger draws;
 
@@ -33,7 +50,7 @@
 
 @property (nonatomic, assign) BOOL active;
 
-@property (nonatomic, copy) NSString *captain;
+@property (nonatomic, strong) Captain *captain;
 
 @property (nonatomic, strong) Logo *logo;
 
@@ -59,6 +76,8 @@
 @property (nonatomic, strong) Record *data;
 
 @end
+
+
 
 
 

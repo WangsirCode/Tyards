@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -22,7 +22,7 @@
                     <constraints>
                         <constraint firstAttribute="width" id="upr-9n-2xs"/>
                     </constraints>
-                    <mutableString key="text">Disclaimers 
+                    <string key="text">Disclaimers 
 All software and applications are third party products and provided as is. Apple make no representations or warranties, expressly or impliedly. By way of example but not of limitation, Apple make no representations or warranties of merchantability or fitness for a particular purpose, or that the use of the software and applications will not infringe any intellectual property rights. Apple shall not be liable for any damages of any kind arising out of or relating to the use or inability to use the software and applications and services thereof. Amendment and availability of these software and applications are subject to change without any prior notice.
 
 免责声明 
@@ -36,7 +36,7 @@ All software and applications are third party products and provided as is. Apple
 十二码有权但无义务，改善或更正本网站任何部分之任何疏漏、错误。               
 
 十二码
-武汉绿茵者联盟科技有限责任公司</mutableString>
+武汉绿茵者联盟科技有限责任公司</string>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     <variation key="default">

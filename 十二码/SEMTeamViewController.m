@@ -107,7 +107,14 @@
         }];
     }
     
-    
+}
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
+    [searchBar resignFirstResponder];
+}
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    [searchBar resignFirstResponder];
 }
 #pragma mark- tableviewdelegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -343,12 +350,7 @@
         _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width / 2, 30)];
         _searchBar.delegate = self;
         _searchBar.placeholder = @"搜索球队";
-//        _searchBar.translucent = YES;
-        [_searchBar setTintColor:[UIColor whiteColor]];
-//        //        _searchBar.barTintColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:1];
-//        _searchBar.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
-//        [UISearchBar appearance].barTintColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
-//        //        [UISearchBar appearance].backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
+        [_searchBar setTintColor:[UIColor colorWithHexString:@"#1EA11F"]];
     }
     return _searchBar;
 }

@@ -19,7 +19,7 @@
 @property (nonatomic,strong) UILabel     * timeLabel;
 @property (nonatomic,strong) CostomView  * locationView;
 @property (nonatomic,strong) UILabel     * statusLabel;
-@property (nonatomic,strong) UILabel* locationLabel;
+//@property (nonatomic,strong) UILabel* locationLabel;
 @property (nonatomic,assign) NSInteger   status;
 @property (nonatomic,strong) NSString* location;
 @end

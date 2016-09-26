@@ -24,4 +24,6 @@
 @property (nonatomic,strong) NSString* code;
 @property (nonatomic,assign) BOOL fisrtGotoHistoryTable;
 @property (nonatomic,assign) BOOL fisrtGotoGameListtable;
+@property (nonatomic,assign) NSInteger historyGameCount;
+@property (nonatomic,assign) NSInteger niticeGameCount;
 @end

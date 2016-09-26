@@ -26,7 +26,8 @@
 #import "SEMTeamHomeViewController.h"
 #import "PolicyShowController.h"
 #import "PlayerDetailViewController.h"
-@interface GameInfoDetailViewController ()<UITableViewDelegate,UITableViewDataSource,LazyPageScrollViewDelegate,UIScrollViewDelegate,ShareViewDelegate,ListTableHeaderVIewDelegate,UIGestureRecognizerDelegate>
+#import "ScoreCell.h"
+@interface GameInfoDetailViewController ()<UITableViewDelegate,UITableViewDataSource,LazyPageScrollViewDelegate,UIScrollViewDelegate,ShareViewDelegate,ListTableHeaderVIewDelegate,UIGestureRecognizerDelegate,ScoreCellDelegate>
 @property (nonatomic,strong) GameinfoViewModel  * viewModel;
 @property (nonatomic,strong) UIImageView        * logoImageView;
 @property (nonatomic,strong) LazyPageScrollView * pageView;
@@ -188,6 +189,11 @@
     // 为imageLayer添加动画
     [imageLayer addAnimation:anim forKey:nil];
 }
+#pragma mark - cellDelegate
+- (void)didClickButton
+{
+    NSLog(@"");
+}
 #pragma mark- shareviewdelegate
 - (void)didSelectedShareView:(NSInteger)index
 {
@@ -315,25 +321,21 @@
     {
         if (self.viewModel.listTableIndex == 0) {
             Grids* model = self.viewModel.scoreModel[indexPath.section].grids[indexPath.row];
-            UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"scroreCell"];
+            ScoreCell* cell = (ScoreCell*)[[ScoreCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"ScoreCell"];
             cell.textLabel.text = [NSString stringWithFormat:@"%ld.",(long)(indexPath.row + 1)];
             cell.textLabel.textColor = [UIColor blackColor];
-            UILabel* detailLabel = [UILabel new];
-            detailLabel.textColor = [UIColor MyColor];
-            detailLabel.text = model.team.name;
-            detailLabel.textAlignment = NSTextAlignmentLeft;
-            [cell.contentView addSubview:detailLabel];
-            detailLabel.sd_layout
+            cell.label.text = model.team.name;
+            cell.delegate = self;
+            cell.label.sd_layout
             .centerYEqualToView(cell.contentView)
             .leftSpaceToView(cell.textLabel,24*self.view.scale)
             .heightIs(cell.contentView.height)
             .maxWidthIs(140*self.view.scale);
-            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithActionBlock:^(id  _Nonnull sender) {
-                SEMTeamHomeViewController* controller = [[SEMTeamHomeViewController alloc] initWithDictionary:@{@"ide":@(model.team.id)}];
-                [self.navigationController pushViewController:controller animated:YES];
-            }];
-            [detailLabel addGestureRecognizer:tap];
-            tap.delegate = self;
+//            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithActionBlock:^(id  _Nonnull sender) {
+//                SEMTeamHomeViewController* controller = [[SEMTeamHomeViewController alloc] initWithDictionary:@{@"ide":@(model.team.id)}];
+//                [self.navigationController pushViewController:controller animated:YES];
+//            }];
+//            [cell.label addGestureRecognizer:tap];
             NSArray<NSNumber*>* array = @[@([model getNum]),@(model.wins),@(model.draws),@(model.loses),@(model.points)];
             for (int i = 0; i < 5; i++) {
                 UILabel* label = [UILabel new];
@@ -763,6 +765,7 @@
         view.backgroundColor = [UIColor BackGroundColor];
         view.frame = CGRectMake(0, 0, self.view.width, self.view.scale * 68);
         [view addSubview:self.listTableHeaderView];
+        [_listTableview registerClass:[ScoreCell class] forCellReuseIdentifier:@"ScoreCell"];
         self.listTableHeaderView.backgroundColor = [UIColor whiteColor];
         _listTableview.tableHeaderView = view;
         _listTableview.separatorInset = UIEdgeInsetsZero;

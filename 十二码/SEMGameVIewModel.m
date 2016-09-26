@@ -23,6 +23,8 @@ NSString* const GameListCache = @"GameListCache";
         self.code = [database objectForKey:@"name"];
         self.fisrtGotoGameListtable = YES;
         self.fisrtGotoHistoryTable = YES;
+        self.niticeGameCount = 0;
+        self.historyGameCount = 0;
         [self fecthData];
     }
     return self;
@@ -32,18 +34,26 @@ NSString* const GameListCache = @"GameListCache";
     NSArray *noticeGames = (NSArray*) [DataArchive unarchiveDataWithFileName:NoticeGameCache];
     if (noticeGames.count > 0) {
         self.noticeGameDatasource = noticeGames;
+        [self.noticeGameDatasource enumerateObjectsUsingBlock:^(GameDetailModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            self.niticeGameCount += obj.games.count;
+        }];
     }
     else
     {
         self.noticeGameDatasource = [[NSArray alloc] init];
+        self.noticeGameDatasource = 0;
     }
     NSArray* historyGames = (NSArray*)[DataArchive unarchiveDataWithFileName:HistoryGameCache];
     if (historyGames.count > 0) {
         self.historyGameDatasource = historyGames;
+        [self.historyGameDatasource enumerateObjectsUsingBlock:^(GameDetailModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            self.historyGameCount += obj.games.count;
+        }];
     }
     else
     {
         self.historyGameDatasource = [[NSArray alloc] init];
+        self.historyGameCount = 0;
     }
     NSArray* gamelists = (NSArray*)[DataArchive unarchiveDataWithFileName:GameListCache];
     if (gamelists.count > 0) {
@@ -65,7 +75,11 @@ NSString* const GameListCache = @"GameListCache";
                 SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
                 [manager fetchNoticeGame:self.code offset:0 success:^(id data) {
                     self.noticeGameDatasource = data;
+                    self.niticeGameCount = 0;
                     [DataArchive archiveData:self.noticeGameDatasource withFileName:NoticeGameCache];
+                    [self.noticeGameDatasource enumerateObjectsUsingBlock:^(GameDetailModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                        self.niticeGameCount += obj.games.count;
+                    }];
                     [subscriber sendNext:@1];
                     [subscriber sendCompleted];
                     
@@ -87,6 +101,10 @@ NSString* const GameListCache = @"GameListCache";
                 SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
                 [manager fetchHistoryGame:self.code offset:0 success:^(id data) {
                     self.historyGameDatasource = data;
+                    self.historyGameCount = 0;
+                    [self.historyGameDatasource enumerateObjectsUsingBlock:^(GameDetailModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                        self.historyGameCount += obj.games.count;
+                    }];
                     [DataArchive archiveData:self.historyGameDatasource withFileName:HistoryGameCache];
                     [subscriber sendNext:@1];
                     [subscriber sendCompleted];
@@ -130,11 +148,15 @@ NSString* const GameListCache = @"GameListCache";
         _loadMoreNoticeGameCommad = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
             return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
                 SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
-                [manager fetchNoticeGame:self.code offset:self.noticeGameDatasource.count success:^(id data) {
+                [manager fetchNoticeGame:self.code offset:self.niticeGameCount success:^(id data) {
                     NSMutableArray* array = [NSMutableArray arrayWithArray:self.noticeGameDatasource];
                     [array arrayByAddingObjectsFromArray:(NSArray*)data];
                     self.noticeGameDatasource = nil;
                     self.noticeGameDatasource = array;
+                    self.niticeGameCount = 0;
+                    [self.noticeGameDatasource enumerateObjectsUsingBlock:^(GameDetailModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                        self.niticeGameCount += obj.games.count;
+                    }];
                     [DataArchive archiveData:self.noticeGameDatasource withFileName:NoticeGameCache];
                     [subscriber sendNext:@1];
                     [subscriber sendCompleted];
@@ -153,11 +175,15 @@ NSString* const GameListCache = @"GameListCache";
         _loadMoreHistoryGameCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
             return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
                 SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
-                [manager fetchHistoryGame:self.code offset:self.historyGameDatasource.count success:^(id data) {
+                [manager fetchHistoryGame:self.code offset:self.historyGameCount success:^(id data) {
                     NSMutableArray* array = [NSMutableArray arrayWithArray:self.historyGameDatasource];
                     [array appendObjects:data];
                     self.historyGameDatasource = nil;
                     self.historyGameDatasource = array;
+                    self.historyGameCount = 0;
+                    [self.historyGameDatasource enumerateObjectsUsingBlock:^(GameDetailModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                        self.historyGameCount += obj.games.count;
+                    }];
                     [DataArchive archiveData:self.historyGameDatasource withFileName:HistoryGameCache];
                     [subscriber sendNext:@1];
                     [subscriber sendCompleted];

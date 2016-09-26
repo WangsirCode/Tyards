@@ -52,6 +52,11 @@
     }
     return self;
 }
++ (void)load
+{
+    [super load];
+    [[IQKeyboardManager sharedManager] setEnable:NO];
+}
 #pragma mark -lifeCycle
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -156,7 +161,7 @@
     self.title = @"编辑战帖";
     [RACObserve(self.viewModel, valid) subscribeNext:^(id x) {
         if (self.viewModel.valid == NO) {
-            [XHToast showCenterWithText:@"请填写标题"];
+            [XHToast showCenterWithText:@"请完整填写相关信息"];
         }
     }];
     [RACObserve(self.viewModel, shouldReloadData) subscribeNext:^(id x) {
@@ -165,9 +170,11 @@
         }
     }];
     [[self.viewModel.postCommand executionSignals] subscribeNext:^(id x) {
-
-        [self.navigationController popViewControllerAnimated:YES];
-        [self.delegate didMakeInvitation:self.viewModel.model];
+        if(self.viewModel.valid == YES)
+        {
+            [self.navigationController popViewControllerAnimated:YES];
+            [self.delegate didMakeInvitation:self.viewModel.model];
+        }
     }];
     [RACObserve(self.titleFiled, text) subscribeNext:^(id x) {
         self.viewModel.model.title = self.titleFiled.text;
@@ -208,9 +215,9 @@
     }];
 //    RAC(self.viewModel.model,linkman) = RACObserve(self.cmanFiled, text);
 //    RAC(self.viewModel.model,contact) = RACObserve(self.cteleFiled, text);
-//    [RACObserve(self.messageView, text) subscribeNext:^(id x) {
-//        self.viewModel.model.desc = self.messageView.text;
-//    }];
+    [RACObserve(self.messageView, text) subscribeNext:^(id x) {
+        self.viewModel.model.desc = self.messageView.text;
+    }];
 }
 #pragma mark - tableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -400,6 +407,7 @@
     {
         textView.textColor = [UIColor colorWithHexString:@"000000"];
     }
+    self.viewModel.model.desc = textView.text;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView
@@ -618,11 +626,16 @@
 - (UIBarButtonItem *)closeItem
 {
     if (!_closeItem) {
-        _closeItem = [[UIBarButtonItem alloc] initWithTitle:@"关闭" style:UIBarButtonItemStylePlain target:self.viewModel action:@selector(closeInviTation)];
+        _closeItem = [[UIBarButtonItem alloc] initWithTitle:@"关闭" style:UIBarButtonItemStylePlain target:self action:@selector(closeInvitation)];
     }
     return _closeItem;
 }
-
+- (void)closeInvitation
+{
+    [self.viewModel closeInviTation];
+    [self.navigationController popViewControllerAnimated:YES];
+    [self.delegate didMakeInvitation:nil];
+}
 //- (UIBarButtonItem *)cancelItem
 //{
 //    if (!_cancelItem) {

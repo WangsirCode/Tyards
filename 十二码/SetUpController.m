@@ -244,8 +244,18 @@
         [imageLayer addAnimation:anim forKey:nil];
     }
     if ([text isEqualToString:@"切换账号"]) {
-        SEMLoginViewController* login = [HRTRouter objectForURL:@"login" withUserInfo:@{}];
-        [self presentViewController:login animated:YES completion:nil];
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"退出登录" message:@"切换账号之前需要退出当前登录" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+        UIAlertAction* done = [UIAlertAction actionWithTitle:@"确认退出" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [DataArchive removeUserFile:@"token"];
+            [DataArchive removeUserFile:@"userinfo"];
+            [DataArchive removeUserFile:@"headimage"];
+            SEMLoginViewController* login = [HRTRouter objectForURL:@"login" withUserInfo:@{}];
+            [self presentViewController:login animated:YES completion:nil];
+        }];
+        [alert addAction:cancel];
+        [alert addAction:done];
+        [self presentViewController:alert animated:YES completion:nil];
     }
     if ([text isEqualToString:@"关于"]) {
         AboutViewController* controller = [HRTRouter objectForURL:@"about" withUserInfo:@{}];
@@ -289,6 +299,9 @@
         _backItem = [[UIBarButtonItem alloc] initWithCustomView:button];
         [[button rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
             [self.navigationController popViewControllerAnimated:YES];
+            [self.mm_drawerController toggleDrawerSide:MMDrawerSideLeft animated:NO completion:^(BOOL finished) {
+                
+            }];
         }];
         
     }

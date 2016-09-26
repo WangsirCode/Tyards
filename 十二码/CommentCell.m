@@ -81,9 +81,9 @@
     [self.contentView addSubview:commentImageView];
     commentImageView.sd_layout
     .topSpaceToView(self.contentView,20*self.scale)
-    .heightIs(15*self.scale)
+    .heightIs(20*self.scale)
     .rightEqualToView(_view2)
-    .widthIs(20*self.scale);
+    .widthIs(25*self.scale);
     UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] initWithActionBlock:^(id  _Nonnull sender) {
         [self doComment];
     }];

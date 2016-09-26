@@ -40,6 +40,7 @@
     .widthIs(70*self.scale);
     
     NSArray* array = @[@"icon_C",@"icon_location",@"icon_clock",@"icon_msg"];
+    self.messageLabel.numberOfLines = 2;
     NSArray<UILabel*>* labels = @[self.nameLabel,self.placeLabel,self.dateLabel,self.messageLabel];
     for (int i = 0; i< 4; i++) {
         UIImageView* view = [UIImageView new];

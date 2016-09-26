@@ -519,8 +519,7 @@ NSString* const GameMessage = @"/match/newses/";
 {
     [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
     NSMutableString* URL = [[NSMutableString alloc] init];
-    [URL appendString:TeamDetailInfo
-     ];
+    [URL appendString:TeamDetailInfo];
     [URL appendString:ide];
     NSDictionary* dic;
     if (from == 0) {
@@ -659,7 +658,6 @@ NSString* const GameMessage = @"/match/newses/";
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
 
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        failureBlock(error);
     }];
 }
 //取消关注球员

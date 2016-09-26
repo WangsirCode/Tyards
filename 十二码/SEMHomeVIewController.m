@@ -189,7 +189,6 @@
 {
     return 1;
 }
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.viewModel.datasource.count;
@@ -215,6 +214,20 @@
         cell.newsImage.image = [UIImage imageNamed:@"zhanwei.jpg"];
     }
     cell.bottomview.viewLabel.text = [@(news.viewed) stringValue];
+    if ([news.type isEqualToString:@"TOPIC"]) {
+        UILabel *label = [UILabel new];
+        label.textColor = [UIColor whiteColor];
+        label.font = [UIFont systemFontOfSize:13*self.view.scale];
+        label.text = @"话题";
+        label.backgroundColor = [UIColor orangeColor];
+        [cell.contentView addSubview:label];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.sd_layout
+        .rightEqualToView(cell.titleLabel)
+        .bottomEqualToView(cell.titleLabel)
+        .widthIs(30*self.view.scale)
+        .heightIs(14*self.view.scale);
+    }
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

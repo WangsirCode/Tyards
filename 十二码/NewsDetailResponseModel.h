@@ -44,6 +44,8 @@
 @property (nonatomic, strong) NSArray *loves;
 
 @property (nonatomic, strong) NSArray *viewers;
+
+@property (nonatomic,strong) NSString* author;
 - (NSString*)getInfo;
 - (NSString*)getDateInfo;
 @end

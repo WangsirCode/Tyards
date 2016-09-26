@@ -138,13 +138,20 @@
             }
             
             //设置教练和队长信息
-            NSMutableString* player = [NSMutableString stringWithString:@"主教练:"];
-            if (self.model.info.coach.name) {
-                [player appendString:self.model.info.coach.name];
+            NSMutableString* player = [NSMutableString new];
+            if(!kStringIsEmpty(self.model.info.coach.name))
+            {
+                [player appendString:@"主教练:"];
+                if (self.model.info.coach.name) {
+                    [player appendString:self.model.info.coach.name];
+                    [player appendString:@"    "];
+                }
             }
-            [player appendString:@"    队长:"];
-            if (self.model.info.captain) {
-                [player appendString:self.model.info.captain];
+            if (!kStringIsEmpty(self.model.info.captain.name)) {
+                [player appendString:@"队长:"];
+                if (self.model.info.captain) {
+                    [player appendString:self.model.info.captain.name];
+                }
             }
             self.playerLabel.text = player;
             

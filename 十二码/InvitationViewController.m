@@ -117,7 +117,7 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 212*self.view.scale;
+    return 220*self.view.scale;
 }
 #pragma mark -DOPDropDownMenuDataSource
 - (NSInteger)numberOfColumnsInMenu:(DOPDropDownMenu *)menu
@@ -149,6 +149,9 @@
         _backItem        = [[UIBarButtonItem alloc] initWithCustomView:button];
         [[button rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
             [self.navigationController popViewControllerAnimated:YES];
+            [self.mm_drawerController toggleDrawerSide:MMDrawerSideLeft animated:NO completion:^(BOOL finished) {
+                
+            }];
         }];
         
     }

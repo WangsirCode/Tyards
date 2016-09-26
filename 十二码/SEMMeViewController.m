@@ -46,8 +46,6 @@
     self.viewModel.info = (UserModel*)[DataArchive unarchiveUserDataWithFileName:@"userinfo"];
     if (self.viewModel.info) {
         self.topView.name = self.viewModel.info.nickname;
-       // NSURL* url = [[NSURL alloc] initWithString:self.viewModel.info.headimgurl];
-//        [self.topView.userHeadView sd_setImageWithURL:url placeholderImage:[UIImage placeholderImage]];
         self.topView.userHeadView.image = (UIImage*)[DataArchive unarchiveUserDataWithFileName:@"headimage"];
         self.topView.infoView.hidden = NO;
         self.viewModel.isLogined = YES;
@@ -68,7 +66,7 @@
     {
         self.topView.name = @"请登录";
         self.topView.headImage = [UIImage imageNamed:@"Group 2"];
-        self.topView.infoView.hidden = NO;
+        self.topView.infoView.hidden = YES;
         self.viewModel.isLogined = NO;
     }
 }

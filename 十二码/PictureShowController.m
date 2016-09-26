@@ -56,7 +56,7 @@
     self.navigationItem.leftBarButtonItem = self.backItem;
     [self.view addSubview:self.srcollView];
     [self.imageArray enumerateObjectsUsingBlock:^(UIImageView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        obj.frame = CGRectMake(0, 0, self.view.width, 300*self.view.scale);
+        obj.frame = CGRectMake(0, 150*self.view.scale, self.view.width, 300*self.view.scale);
         UIAlertController* alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
         UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
         UIAlertAction *archiveAction = [UIAlertAction actionWithTitle:@"保存到手机" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -74,7 +74,8 @@
         }];
         [obj addGestureRecognizer:longgesture];
         UIScrollView* view = [[UIScrollView alloc] init];
-        view.frame = CGRectMake(idx*(self.view.width), 150*self.view.scale, self.view.width, 300*self.view.scale);
+//        view.frame = CGRectMake(idx*(self.view.width), 150*self.view.scale, self.view.width, 300*self.view.scale);
+        view.frame = CGRectMake(idx*(self.view.width), 0, self.view.width, self.view.height);
         [view addSubview:obj];
         view.minimumZoomScale = 0.2;
         view.maximumZoomScale = 2;

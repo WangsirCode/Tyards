@@ -86,6 +86,9 @@
         _backItem = [[UIBarButtonItem alloc] initWithCustomView:button];
         [[button rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
             [self.navigationController popViewControllerAnimated:YES];
+            [self.mm_drawerController toggleDrawerSide:MMDrawerSideLeft animated:NO completion:^(BOOL finished) {
+                
+            }];
         }];
     }
     return _backItem;
