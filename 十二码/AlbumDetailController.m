@@ -10,12 +10,14 @@
 #import "MDABizManager.h"
 #import "AlbumDetailViewModel.h"
 #import "PhotoDetailCell.h"
+#import "HZPhotoBrowser.h"
 #import "PictureShowController.h"
-@interface AlbumDetailController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
+@interface AlbumDetailController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,HZPhotoBrowserDelegate>
 @property (nonatomic,strong) AlbumDetailViewModel *viewModel;
 @property (nonatomic,strong) UICollectionView     *collectionView;
 @property (nonatomic,strong) UIBarButtonItem      *backItem;
 @property (nonatomic,strong) MBProgressHUD        *hud;
+@property (nonatomic,strong) HZPhotoBrowser       *browser;
 @end
 @implementation AlbumDetailController
 - (instancetype)initWithDictionary:(NSDictionary*)dictionary
@@ -94,16 +96,26 @@
 #pragma mark-collectionviewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-
-    NSMutableArray* array = [NSMutableArray new];
-    [self.viewModel.model.medias enumerateObjectsUsingBlock:^(Medias * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [array addObject:obj.media.url];
-    }];
-    PictureShowController* controller = [[PictureShowController alloc] initWithImages:array index:indexPath.row];
-    [self.navigationController pushViewController:controller animated:YES];
+//    NSMutableArray* array = [NSMutableArray new];
+//    [self.viewModel.model.medias enumerateObjectsUsingBlock:^(Medias * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//        [array addObject:obj.media.url];
+//    }];
+    self.browser.currentImageIndex = (int)indexPath.row;
+    // 展示图片浏览器
+    [self.browser show];
+//    PictureShowController* controller = [[PictureShowController alloc] initWithImages:array index:indexPath.row];
+//    [self.navigationController pushViewController:controller animated:YES];
 }
-
+- (UIImage *)photoBrowser:(HZPhotoBrowser *)browser placeholderImageForIndex:(NSInteger)index
+{
+    PhotoDetailCell* cell = (PhotoDetailCell*)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
+    return cell.imageView.image;
+}
+- (NSURL *)photoBrowser:(HZPhotoBrowser *)browser highQualityImageURLForIndex:(NSInteger)index
+{
+    NSURL* url = [[NSURL alloc] initWithString:self.viewModel.model.medias[index].media.url];
+    return url;
+}
 #pragma mark- getter
 - (UICollectionView *)collectionView
 {
@@ -139,5 +151,15 @@
         _hud = [MBProgressHUD showHUDAddedTo:self.collectionView animated:YES];
     }
     return _hud;
+}
+- (HZPhotoBrowser *)browser
+{
+    if (!_browser) {
+        _browser = [[HZPhotoBrowser alloc] init];
+        _browser.sourceImagesContainerView = self.collectionView;
+        _browser.imageCount = self.viewModel.medias.count;
+        _browser.delegate = self;
+    }
+    return _browser;
 }
 @end

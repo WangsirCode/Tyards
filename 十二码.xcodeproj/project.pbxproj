@@ -217,6 +217,12 @@
 		478B5E531D420728007AABC4 /* SEMNetworkingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 478B5E521D420728007AABC4 /* SEMNetworkingManager.m */; };
 		478B5E561D420AC5007AABC4 /* hotTopicsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 478B5E551D420AC5007AABC4 /* hotTopicsModel.m */; };
 		479A7B871D897F1500916B40 /* PlayerNewsResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 479A7B861D897F1500916B40 /* PlayerNewsResponseModel.m */; };
+		479A89181D9A829A009CC3C8 /* HZImagesGroupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 479A88EA1D9A8299009CC3C8 /* HZImagesGroupView.m */; };
+		479A89191D9A829A009CC3C8 /* HZIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 479A88ED1D9A8299009CC3C8 /* HZIndicatorView.m */; };
+		479A891A1D9A829A009CC3C8 /* HZPhotoBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 479A88EF1D9A8299009CC3C8 /* HZPhotoBrowser.m */; };
+		479A891B1D9A829A009CC3C8 /* HZPhotoBrowserView.m in Sources */ = {isa = PBXBuildFile; fileRef = 479A88F21D9A8299009CC3C8 /* HZPhotoBrowserView.m */; };
+		479A891C1D9A829A009CC3C8 /* whiteplaceholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 479A88F31D9A8299009CC3C8 /* whiteplaceholder.png */; };
+		479A891D1D9A829A009CC3C8 /* HZPhotoItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 479A88F51D9A8299009CC3C8 /* HZPhotoItemModel.m */; };
 		47A008351D83A9AA0090F1A5 /* CenterAlertIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A008341D83A9AA0090F1A5 /* CenterAlertIView.m */; };
 		47A008381D83F0270090F1A5 /* CenterDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A008371D83F0270090F1A5 /* CenterDatePickerView.m */; };
 		47A0083B1D84491C0090F1A5 /* ImageResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A0083A1D84491C0090F1A5 /* ImageResponseModel.m */; };
@@ -693,6 +699,18 @@
 		478B5E551D420AC5007AABC4 /* hotTopicsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = hotTopicsModel.m; sourceTree = "<group>"; };
 		479A7B851D897F1400916B40 /* PlayerNewsResponseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerNewsResponseModel.h; sourceTree = "<group>"; };
 		479A7B861D897F1500916B40 /* PlayerNewsResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerNewsResponseModel.m; sourceTree = "<group>"; };
+		479A88E91D9A8299009CC3C8 /* HZImagesGroupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HZImagesGroupView.h; sourceTree = "<group>"; };
+		479A88EA1D9A8299009CC3C8 /* HZImagesGroupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HZImagesGroupView.m; sourceTree = "<group>"; };
+		479A88EC1D9A8299009CC3C8 /* HZIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HZIndicatorView.h; sourceTree = "<group>"; };
+		479A88ED1D9A8299009CC3C8 /* HZIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HZIndicatorView.m; sourceTree = "<group>"; };
+		479A88EE1D9A8299009CC3C8 /* HZPhotoBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HZPhotoBrowser.h; sourceTree = "<group>"; };
+		479A88EF1D9A8299009CC3C8 /* HZPhotoBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HZPhotoBrowser.m; sourceTree = "<group>"; };
+		479A88F01D9A8299009CC3C8 /* HZPhotoBrowserConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HZPhotoBrowserConfig.h; sourceTree = "<group>"; };
+		479A88F11D9A8299009CC3C8 /* HZPhotoBrowserView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HZPhotoBrowserView.h; sourceTree = "<group>"; };
+		479A88F21D9A8299009CC3C8 /* HZPhotoBrowserView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HZPhotoBrowserView.m; sourceTree = "<group>"; };
+		479A88F31D9A8299009CC3C8 /* whiteplaceholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteplaceholder.png; sourceTree = "<group>"; };
+		479A88F41D9A8299009CC3C8 /* HZPhotoItemModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HZPhotoItemModel.h; sourceTree = "<group>"; };
+		479A88F51D9A8299009CC3C8 /* HZPhotoItemModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HZPhotoItemModel.m; sourceTree = "<group>"; };
 		47A008331D83A9AA0090F1A5 /* CenterAlertIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CenterAlertIView.h; sourceTree = "<group>"; };
 		47A008341D83A9AA0090F1A5 /* CenterAlertIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CenterAlertIView.m; sourceTree = "<group>"; };
 		47A008361D83F0270090F1A5 /* CenterDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CenterDatePickerView.h; sourceTree = "<group>"; };
@@ -1301,6 +1319,7 @@
 		4734CDA91D41BFAA006536DF /* Expand */ = {
 			isa = PBXGroup;
 			children = (
+				479A88E81D9A8299009CC3C8 /* photoBroser */,
 				47DA9E181D8992C60090ABC5 /* Photo */,
 				4746A6741D49B92F009E0645 /* XHToast */,
 				4734CDAA1D41BFBB006536DF /* Catagory */,
@@ -1751,6 +1770,33 @@
 			name = Team;
 			sourceTree = "<group>";
 		};
+		479A88E81D9A8299009CC3C8 /* photoBroser */ = {
+			isa = PBXGroup;
+			children = (
+				479A88E91D9A8299009CC3C8 /* HZImagesGroupView.h */,
+				479A88EA1D9A8299009CC3C8 /* HZImagesGroupView.m */,
+				479A88EB1D9A8299009CC3C8 /* HZPhotoBrowser */,
+				479A88F41D9A8299009CC3C8 /* HZPhotoItemModel.h */,
+				479A88F51D9A8299009CC3C8 /* HZPhotoItemModel.m */,
+			);
+			path = photoBroser;
+			sourceTree = "<group>";
+		};
+		479A88EB1D9A8299009CC3C8 /* HZPhotoBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				479A88EC1D9A8299009CC3C8 /* HZIndicatorView.h */,
+				479A88ED1D9A8299009CC3C8 /* HZIndicatorView.m */,
+				479A88EE1D9A8299009CC3C8 /* HZPhotoBrowser.h */,
+				479A88EF1D9A8299009CC3C8 /* HZPhotoBrowser.m */,
+				479A88F01D9A8299009CC3C8 /* HZPhotoBrowserConfig.h */,
+				479A88F11D9A8299009CC3C8 /* HZPhotoBrowserView.h */,
+				479A88F21D9A8299009CC3C8 /* HZPhotoBrowserView.m */,
+				479A88F31D9A8299009CC3C8 /* whiteplaceholder.png */,
+			);
+			path = HZPhotoBrowser;
+			sourceTree = "<group>";
+		};
 		47BB49A01D45F45B0052E4D0 /* weixin */ = {
 			isa = PBXGroup;
 			children = (
@@ -2131,6 +2177,7 @@
 				4734CE131D41CD4B006536DF /* 好友推荐icon.png in Resources */,
 				4734CDFF1D41CD42006536DF /* 微信QQ矩形框.png in Resources */,
 				4734CE321D41CD55006536DF /* qq_s.png in Resources */,
+				479A891C1D9A829A009CC3C8 /* whiteplaceholder.png in Resources */,
 				476088101D55874400F36597 /* 约战-进球.png in Resources */,
 				47184FB71D72C81D008A4591 /* 约战-乌龙.png in Resources */,
 				4734CE101D41CD4B006536DF /* 个人信息-向右箭头icon.png in Resources */,
@@ -2235,6 +2282,7 @@
 				47DA9E911D8992E90090ABC5 /* MLPhotoPickerData.m in Sources */,
 				4734CDDC1D41C95D006536DF /* UIFont+IconFont.m in Sources */,
 				4739B5E41D488E3E007842CC /* NoticeGameviewCell.m in Sources */,
+				479A891A1D9A829A009CC3C8 /* HZPhotoBrowser.m in Sources */,
 				47A6EF0B1D87A5C3004C0BB4 /* NewsCommentView.m in Sources */,
 				47E8BCFC1D5C18A6007621F8 /* GameNewsDetailResponseModel.m in Sources */,
 				4725D2BC1D5B2E6E00A13AEB /* GameInfoDetailViewController.m in Sources */,
@@ -2262,6 +2310,7 @@
 				479A7B871D897F1500916B40 /* PlayerNewsResponseModel.m in Sources */,
 				4734CD991D41BE3E006536DF /* DataArchive.m in Sources */,
 				47CAC1D71D76630E001D3708 /* TypeSelectController.m in Sources */,
+				479A891D1D9A829A009CC3C8 /* HZPhotoItemModel.m in Sources */,
 				473BCCD51D5961F1005DBD2F /* PhotoCollectionCell.m in Sources */,
 				470F56D41D71D59700110FCE /* DataView.m in Sources */,
 				4734CD951D41BCE3006536DF /* SEMTeamViewModel.m in Sources */,
@@ -2366,6 +2415,7 @@
 				47DA9E8D1D8992E90090ABC5 /* MLPhotoPickerBrowserPhotoImageView.m in Sources */,
 				47AF5D311D564AA200728933 /* MeReplyResponseModel.m in Sources */,
 				4739B5D51D483B52007842CC /* MeLoginVIewModel.m in Sources */,
+				479A891B1D9A829A009CC3C8 /* HZPhotoBrowserView.m in Sources */,
 				47A364CC1D5AB870002FC59E /* PlayerInforesponseModel.m in Sources */,
 				47A364D51D5ABA93002FC59E /* TemplateController.m in Sources */,
 				4739B5E11D4867DF007842CC /* GameListResponseModel.m in Sources */,
@@ -2374,6 +2424,7 @@
 				478B5E561D420AC5007AABC4 /* hotTopicsModel.m in Sources */,
 				4762521D1D5196A0003788C0 /* UIView+Scale.m in Sources */,
 				4739B5DB1D483FE4007842CC /* TopicCell.m in Sources */,
+				479A89181D9A829A009CC3C8 /* HZImagesGroupView.m in Sources */,
 				478B5E531D420728007AABC4 /* SEMNetworkingManager.m in Sources */,
 				47C053DC1D759C8F00AEBF86 /* MakeInvitationController.m in Sources */,
 				4734CDDD1D41C95D006536DF /* UIImage+IconFont.m in Sources */,
@@ -2396,6 +2447,7 @@
 				4739B5EA1D488E84007842CC /* GameListViewCell.m in Sources */,
 				47184FB11D72BB38008A4591 /* MatchEventResponseModel.m in Sources */,
 				477642651D546ADE00548C9F /* MessageTableviewCell.m in Sources */,
+				479A89191D9A829A009CC3C8 /* HZIndicatorView.m in Sources */,
 				47C322121D6BF64E00317A4C /* ScorerListResponseModel.m in Sources */,
 				47A6262F1D748A8C00ABE897 /* InvitationVIewModel.m in Sources */,
 				4734CDAD1D41BFF2006536DF /* NSArray+Safe.m in Sources */,

@@ -8,6 +8,7 @@
 
 #import "ImageContainerView.h"
 #import "PictureShowController.h"
+#import "HZPhotoBrowser.h"
 @implementation ImageContainerView
 
 - (instancetype)init
@@ -42,8 +43,14 @@
         imageView.clipsToBounds = YES;
         [imageView sd_setImageWithURL:[[NSURL alloc] initWithString:obj] placeholderImage:[UIImage placeholderImage]];
         UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] initWithActionBlock:^(id  _Nonnull sender) {
-            PictureShowController* controller = [[PictureShowController alloc] initWithImages:self.model index:idx];
-            [self.viewController.navigationController pushViewController:controller animated:YES];
+            HZPhotoBrowser *browserVc = [[HZPhotoBrowser alloc] init];
+            browserVc.sourceImagesContainerView = self;
+            browserVc.imageCount = self.model.count;
+            browserVc.currentImageIndex = (int)idx;
+            // 代理
+            browserVc.delegate = self;
+            // 展示图片浏览器
+            [browserVc show];
         }];
         [imageView addGestureRecognizer:tap];
         [self addSubview:imageView];
@@ -58,5 +65,14 @@
             *stop = YES;
         }
     }];
+}
+- (UIImage *)photoBrowser:(HZPhotoBrowser *)browser placeholderImageForIndex:(NSInteger)index
+{
+    return ((UIImageView*)self.subviews[index]).image;
+}
+- (NSURL *)photoBrowser:(HZPhotoBrowser *)browser highQualityImageURLForIndex:(NSInteger)index
+{
+    NSURL *url = [[NSURL alloc] initWithString:self.model[index]];
+    return url;
 }
 @end

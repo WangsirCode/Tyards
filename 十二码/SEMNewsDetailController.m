@@ -124,7 +124,7 @@
             NSUserDefaults* data = [NSUserDefaults standardUserDefaults];
             CGFloat scale = [data floatForKey:@"scale"];
             
-            NSMutableString * text = [NSMutableString stringWithFormat:@"<head><style>img{width:%fpx !important;}</style></head>",scale * 375];
+            NSMutableString * text = [NSMutableString stringWithFormat:@"<head><style>img{max-width:%dpx !important;}</style></head>",(int)(scale * 375)];
             if (self.viewModel.newdetail.text) {
                 [text appendString:self.viewModel.newdetail.text]; ;
             }

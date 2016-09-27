@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HZPhotoBrowser.h"
 #import "MDABizManager.h"
 /*!
  *  @author 汪宇豪, 16-09-13 10:09:15
  *
  *  @brief 用于展示评论中图片的view
  */
-@interface ImageContainerView : UIView
+@interface ImageContainerView : UIView<HZPhotoBrowserDelegate>
 @property (nonatomic,strong) NSArray<NSString*> *model;
 @end
