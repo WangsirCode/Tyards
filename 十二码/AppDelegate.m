@@ -57,7 +57,7 @@ NSString* const USER_INFO = @"userinfo";
     [UMSocialQQHandler setQQWithAppId:kQQAppID appKey:kQQAppKey url:@"http://www.umeng.com/social"];
     [UMSocialQQHandler setSupportWebView:YES];
     [UMSocialWechatHandler setWXAppId:WXPatient_App_ID appSecret:WXPatient_App_Secret url:@"http://www.umeng.com/social"];
-    [[IQKeyboardManager sharedManager].disabledDistanceHandlingClasses addObject:[MakeInvitationController class]];
+//    [[IQKeyboardManager sharedManager].disabledDistanceHandlingClasses addObject:[MakeInvitationController class]];
     return YES;
 }
 - (void)applicationWillResignActive:(UIApplication *)application {

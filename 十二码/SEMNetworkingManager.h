@@ -1169,5 +1169,35 @@
                            success:(void (^)(id data))successBlock
                            failure:(void (^)(NSError *aError))failureBlock;
 
+/*!
+ *  @author 汪宇豪, 16-09-27 11:09:15
+ *
+ *  @brief 获取未读的约战
+ *
+ *  @param token        token
+ *  @param successBlock 成功
+ *  @param failureBlock 失败
+ *
+ *  @return NSURLSessionTask
+ */
+- (NSURLSessionTask*)fetchUnreadInvitation:(NSString*)token
+                             success:(void (^)(id data))successBlock
+                             failure:(void (^)(NSError *aError))failureBlock;
+/*!
+ *  @author 汪宇豪, 16-09-27 11:09:45
+ *
+ *  @brief 获得未读的评论
+ *
+ *  @param token        token
+ *  @param successBlock 成功
+ *  @param failureBlock 失败
+ *
+ *  @return NSURLSessionTask
+ */
+- (NSURLSessionTask*)fetchUnReadReply:(NSString*)token
+                                   success:(void (^)(id data))successBlock
+                                   failure:(void (^)(NSError *aError))failureBlock;
+
+
 @end
 

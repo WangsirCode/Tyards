@@ -64,7 +64,7 @@ NSString* const GameMessage = @"/match/newses/";
     static id _sharedInstance = nil;
     static dispatch_once_t oncePredicate;
     dispatch_once(&oncePredicate, ^{
-        NSURL* url = [NSURL URLWithString: @"http://www.12yards.cn"];
+        NSURL* url = [NSURL URLWithString: @"http://dev.12yards.cn"];
         _sharedInstance = [[self alloc] initWithBaseURL: url];
     });
     return _sharedInstance;
@@ -1302,6 +1302,40 @@ NSString* const GameMessage = @"/match/newses/";
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         successBlock(responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }];
+}
+//获取未读约战
+- (NSURLSessionTask *)fetchUnreadInvitation:(NSString *)token success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
+{
+    [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
+    self.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSMutableString* URL = [[NSMutableString alloc] init];
+    [URL appendString:@"/user/unReadMatchInvitationCount"];
+    NSDictionary* para = @{@"token":token};
+    return [self GET:URL parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        CountModel* model = [CountModel mj_objectWithKeyValues:responseObject];
+        successBlock(model);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }];
+}
+//获取未读评论
+- (NSURLSessionTask *)fetchUnReadReply:(NSString *)token success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
+{
+    [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
+    self.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSMutableString* URL = [[NSMutableString alloc] init];
+    [URL appendString:@"/user/unReadReplyCount"];
+    NSDictionary* para = @{@"token":token};
+    return [self GET:URL parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        CountModel* model = [CountModel mj_objectWithKeyValues:responseObject];
+        successBlock(model);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failureBlock(error);
     }];

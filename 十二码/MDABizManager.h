@@ -114,6 +114,7 @@ blue:((float)(rgbValue & 0xFF)) / 255.0 alpha:1.0]
 #import "UITableViewCell+Scale.h"
 #import "UIImage+placeholder.h"
 #import "MMDrawerController.h"
+#import "CountModel.h"
 #import "UIViewController+MMDrawerController.h"
 #import "UINavigationController+FDFullscreenPopGesture.h"
 #import "SearchModel.h"

@@ -170,6 +170,7 @@
 		4746A66D1D49B0A6009E0645 /* LoginCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 4746A66C1D49B0A6009E0645 /* LoginCommand.m */; };
 		4746A6701D49B3D8009E0645 /* MeinfoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4746A66F1D49B3D8009E0645 /* MeinfoViewModel.m */; };
 		4746A6771D49DFC4009E0645 /* TagView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4746A6761D49DFC4009E0645 /* TagView.m */; };
+		474A1AFB1D9A1D5E0082E3CD /* CountModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 474A1AFA1D9A1D5E0082E3CD /* CountModel.m */; };
 		4750689C1D86F96E00D588D8 /* NewsCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4750689B1D86F96E00D588D8 /* NewsCommentCell.m */; };
 		4753074D1D46F74A003ECEBF /* MeTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4753074C1D46F74A003ECEBF /* MeTopView.m */; };
 		475307501D46F964003ECEBF /* MeinfoVIew.m in Sources */ = {isa = PBXBuildFile; fileRef = 4753074F1D46F964003ECEBF /* MeinfoVIew.m */; };
@@ -605,6 +606,8 @@
 		4746A66F1D49B3D8009E0645 /* MeinfoViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeinfoViewModel.m; sourceTree = "<group>"; };
 		4746A6751D49DFC4009E0645 /* TagView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagView.h; sourceTree = "<group>"; };
 		4746A6761D49DFC4009E0645 /* TagView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagView.m; sourceTree = "<group>"; };
+		474A1AF91D9A1D5E0082E3CD /* CountModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountModel.h; sourceTree = "<group>"; };
+		474A1AFA1D9A1D5E0082E3CD /* CountModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountModel.m; sourceTree = "<group>"; };
 		4750689A1D86F96E00D588D8 /* NewsCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsCommentCell.h; sourceTree = "<group>"; };
 		4750689B1D86F96E00D588D8 /* NewsCommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsCommentCell.m; sourceTree = "<group>"; };
 		4753074B1D46F74A003ECEBF /* MeTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeTopView.h; sourceTree = "<group>"; };
@@ -1175,6 +1178,8 @@
 				4746A66C1D49B0A6009E0645 /* LoginCommand.m */,
 				47D0BD091D8B016A00EDD065 /* TokenResponseModel.h */,
 				47D0BD0A1D8B016A00EDD065 /* TokenResponseModel.m */,
+				474A1AF91D9A1D5E0082E3CD /* CountModel.h */,
+				474A1AFA1D9A1D5E0082E3CD /* CountModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -2419,6 +2424,7 @@
 				4772FE671D5659E40008ED37 /* MyMessageModel.m in Sources */,
 				476088041D55818600F36597 /* TeamInfoView.m in Sources */,
 				47AF5D341D564DDA00728933 /* MyConcernModel.m in Sources */,
+				474A1AFB1D9A1D5E0082E3CD /* CountModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

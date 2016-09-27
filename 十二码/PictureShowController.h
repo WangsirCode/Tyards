@@ -6,11 +6,12 @@
 //  Copyright © 2016年 汪宇豪. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "MDABizManager.h"
+#import <UIKit/UIKit.h>
 @interface PictureShowController : UIViewController
-@property (nonatomic, strong) NSArray<Medias *> *model;
-@property (nonatomic,assign) NSUInteger index;
-@property (nonatomic,strong)NSArray<NSString*>* ImageURLs;
-- (instancetype)initWithImages:(NSArray<NSString*>*)imagesURL index:(NSInteger)index;
+@property(nonatomic, strong) NSArray<Medias *> *model;
+@property(nonatomic, assign) NSUInteger index;
+@property(nonatomic, strong) NSArray<NSString *> *ImageURLs;
+- (instancetype)initWithImages:(NSArray<NSString *> *)imagesURL
+                         index:(NSInteger)index;
 @end

@@ -12,7 +12,6 @@
 #import "MakeInvitationViewModel.h"
 #import "PlaceSelectController.h"
 #import "CenterDatePickerView.h"
-#import "IQKeyboardManager.h"
 @interface MakeInvitationController () <UITableViewDelegate,UITableViewDataSource,UITextViewDelegate,UITextFieldDelegate,TypeSelectControllerDelegate,PlaceSelectControllerDelegate,CenterDatePickerViewDelegate>
 @property (nonatomic,strong) UIBarButtonItem      *backItem;
 @property (nonatomic,strong) MBProgressHUD        *hud;
@@ -52,11 +51,7 @@
     }
     return self;
 }
-+ (void)load
-{
-    [super load];
-    [[IQKeyboardManager sharedManager] setEnable:NO];
-}
+
 #pragma mark -lifeCycle
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -80,39 +75,39 @@
 }
 -(void)KeyboardWillShow:(NSNotification *)notification
 {
-    NSDictionary *info = [notification userInfo];
-    
-    //获取高度
-    NSValue *value = [info objectForKey:@"UIKeyboardBoundsUserInfoKey"];//关键的一句，网上关于获取键盘高度的解决办法，多到这句就over了。系统宏定义的UIKeyboardBoundsUserInfoKey等测试都不能获取正确的值。不知道为什么。。。
-    
-    CGSize keyboardSize = [value CGRectValue].size;
-    float keyboardHeight = keyboardSize.height;
-    
-    // 获取键盘弹出的时间
-    NSValue *animationDurationValue = [[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey];
-    NSTimeInterval animationDuration;
-    [animationDurationValue getValue:&animationDuration];
-    
-    //自定义的frame大小的改变的语句
-    self.postTableView.sd_resetLayout
-    .topSpaceToView(self.view,-keyboardHeight + 48)
-    .leftEqualToView(self.view)
-    .rightEqualToView(self.view)
-    .heightIs(self.view.height);
+//    NSDictionary *info = [notification userInfo];
+//    
+//    //获取高度
+//    NSValue *value = [info objectForKey:@"UIKeyboardBoundsUserInfoKey"];//关键的一句，网上关于获取键盘高度的解决办法，多到这句就over了。系统宏定义的UIKeyboardBoundsUserInfoKey等测试都不能获取正确的值。不知道为什么。。。
+//    
+//    CGSize keyboardSize = [value CGRectValue].size;
+//    float keyboardHeight = keyboardSize.height;
+//    
+//    // 获取键盘弹出的时间
+//    NSValue *animationDurationValue = [[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey];
+//    NSTimeInterval animationDuration;
+//    [animationDurationValue getValue:&animationDuration];
+//    
+//    //自定义的frame大小的改变的语句
+//    self.postTableView.sd_resetLayout
+//    .topSpaceToView(self.view,-keyboardHeight + 48)
+//    .leftEqualToView(self.view)
+//    .rightEqualToView(self.view)
+//    .heightIs(self.view.height);
 }
 - (void)KeyboardWillhide:(NSNotification *)notification
 {  
-    // 获取键盘弹出的时间
-    NSValue *animationDurationValue = [[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey];
-    NSTimeInterval animationDuration;
-    [animationDurationValue getValue:&animationDuration];
-    
-    //自定义的frame大小的改变的语句
-    self.postTableView.sd_resetLayout
-    .topEqualToView(self.view)
-    .leftEqualToView(self.view)
-    .rightEqualToView(self.view)
-    .heightIs(self.view.height);
+//    // 获取键盘弹出的时间
+//    NSValue *animationDurationValue = [[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey];
+//    NSTimeInterval animationDuration;
+//    [animationDurationValue getValue:&animationDuration];
+//    
+//    //自定义的frame大小的改变的语句
+//    self.postTableView.sd_resetLayout
+//    .topEqualToView(self.view)
+//    .leftEqualToView(self.view)
+//    .rightEqualToView(self.view)
+//    .heightIs(self.view.height);
 }
 - (void)addSubviews
 {
@@ -436,21 +431,21 @@
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
     if (textField.tag == 101) {
-        self.postTableView.sd_resetLayout
-        .topSpaceToView(self.view,-30*self.view.scale)
-        .leftEqualToView(self.view)
-        .rightEqualToView(self.view)
-        .heightIs(self.view.height);
+//        self.postTableView.sd_resetLayout
+//        .topSpaceToView(self.view,-30*self.view.scale)
+//        .leftEqualToView(self.view)
+//        .rightEqualToView(self.view)
+//        .heightIs(self.view.height);
     }
 }
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     if (textField.tag == 101) {
-        self.postTableView.sd_resetLayout
-        .topEqualToView(self.view)
-        .leftEqualToView(self.view)
-        .rightEqualToView(self.view)
-        .heightIs(self.view.height);
+//        self.postTableView.sd_resetLayout
+//        .topEqualToView(self.view)
+//        .leftEqualToView(self.view)
+//        .rightEqualToView(self.view)
+//        .heightIs(self.view.height);
     }
 }
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {

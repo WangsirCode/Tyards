@@ -238,9 +238,15 @@
     }
     else
     {
-        ColleageSearchController* searchControlle = [HRTRouter objectForURL:@"MEInfoColleageSearch" withUserInfo:@{@"code":@(self.viewModel.model.university.id)}];
-        searchControlle.delegate = self;
-        [self.navigationController pushViewController:searchControlle animated:true];
+        if (self.viewModel.model.university.id == 0) {
+            [XHToast showCenterWithText:@"请选择学校"];
+        }
+        else
+        {
+            ColleageSearchController* searchControlle = [HRTRouter objectForURL:@"MEInfoColleageSearch" withUserInfo:@{@"code":@(self.viewModel.model.university.id)}];
+            searchControlle.delegate = self;
+            [self.navigationController pushViewController:searchControlle animated:true];
+        }
     }
 }
 #pragma mark -viewModelSet
