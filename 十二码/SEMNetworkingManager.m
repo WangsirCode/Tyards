@@ -58,6 +58,7 @@ NSString* const GameTeams = @"/tournament/teams/";
 NSString* const GameNews = @"/match/articles/";
 NSString* const GameDetails = @"/match/detail/";
 NSString* const GameMessage = @"/match/newses/";
+NSString* const StatUp=@"/welcome/startup/";
 @implementation SEMNetworkingManager
 + (instancetype)sharedInstance
 {
@@ -69,7 +70,19 @@ NSString* const GameMessage = @"/match/newses/";
     });
     return _sharedInstance;
 }
-
+- (NSURLSessionTask*)startUp:(void (^)(id data))successBlock
+                     failure:(void (^)(NSError *aError))failureBlock{
+    [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
+    return [self GET:StatUp parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *dic =responseObject[@"resp"];
+        successBlock(dic);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }
+            ];
+}
 - (NSURLSessionTask*)fetchHotTopics:(NSString*)code
                             success:(void (^)(id data))successBlock
                        failure:(void (^)(NSError *aError))failureBlock

@@ -12,6 +12,7 @@
 		1821FCA41D964019009BB5AC /* StateVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1821FCA21D964019009BB5AC /* StateVC.xib */; };
 		1821FCA81D964039009BB5AC /* ServiceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1821FCA61D964039009BB5AC /* ServiceVC.m */; };
 		1821FCA91D964039009BB5AC /* ServiceVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1821FCA71D964039009BB5AC /* ServiceVC.xib */; };
+		18282D071D996676000956EC /* BBLaunchAdMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 18282D051D996676000956EC /* BBLaunchAdMonitor.m */; };
 		4704AD811D6004620057D502 /* BasicInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4704AD801D6004620057D502 /* BasicInfoCell.m */; };
 		4708D2E61D4A67BD0094FAF9 /* NoticeCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4708D2E51D4A67BD0094FAF9 /* NoticeCellView.m */; };
 		470BEE111D582909003167ED /* SetUpController.m in Sources */ = {isa = PBXBuildFile; fileRef = 470BEE101D582909003167ED /* SetUpController.m */; };
@@ -370,6 +371,8 @@
 		1821FCA51D964039009BB5AC /* ServiceVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceVC.h; sourceTree = "<group>"; };
 		1821FCA61D964039009BB5AC /* ServiceVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceVC.m; sourceTree = "<group>"; };
 		1821FCA71D964039009BB5AC /* ServiceVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServiceVC.xib; sourceTree = "<group>"; };
+		18282D051D996676000956EC /* BBLaunchAdMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBLaunchAdMonitor.m; sourceTree = "<group>"; };
+		18282D061D996676000956EC /* BBLaunchAdMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBLaunchAdMonitor.h; sourceTree = "<group>"; };
 		4704AD7F1D6004620057D502 /* BasicInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicInfoCell.h; sourceTree = "<group>"; };
 		4704AD801D6004620057D502 /* BasicInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicInfoCell.m; sourceTree = "<group>"; };
 		4708D2E41D4A67BD0094FAF9 /* NoticeCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoticeCellView.h; sourceTree = "<group>"; };
@@ -1079,6 +1082,8 @@
 		4734CD381D41B511006536DF /* 十二码 */ = {
 			isa = PBXGroup;
 			children = (
+				18282D051D996676000956EC /* BBLaunchAdMonitor.m */,
+				18282D061D996676000956EC /* BBLaunchAdMonitor.h */,
 				47A364D31D5ABA93002FC59E /* TemplateController.h */,
 				47A364D41D5ABA93002FC59E /* TemplateController.m */,
 				4734CD3C1D41B512006536DF /* AppDelegate.h */,
@@ -2315,6 +2320,7 @@
 				470F56D41D71D59700110FCE /* DataView.m in Sources */,
 				4734CD951D41BCE3006536DF /* SEMTeamViewModel.m in Sources */,
 				476823721D44E43E00B224E6 /* SEMSearchViewModel.m in Sources */,
+				18282D071D996676000956EC /* BBLaunchAdMonitor.m in Sources */,
 				47DA9E861D8992E90090ABC5 /* MLPhotoKitData.m in Sources */,
 				47CAC1DD1D7667F0001D3708 /* PlaceViewModel.m in Sources */,
 				4746A6701D49B3D8009E0645 /* MeinfoViewModel.m in Sources */,

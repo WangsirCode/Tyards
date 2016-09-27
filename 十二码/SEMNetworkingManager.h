@@ -21,7 +21,18 @@
  *  @return 单例
  */
 + (instancetype)sharedInstance;
-
+/*!
+ *  @author 汪宇豪, 16-07-24 20:07:05
+ *
+ *  @brief 启动页
+ *
+ *  @param successBlock 成功
+ *  @param failureBlock 失败
+ *
+ *  @return NSURLSessionTask
+ */
+- (NSURLSessionTask*)startUp:(void (^)(id data))successBlock
+                             failure:(void (^)(NSError *aError))failureBlock;
 /*!
  *  @author 汪宇豪, 16-07-22 16:07:43
  *
@@ -65,7 +76,6 @@
  */
 - (NSURLSessionTask*)fetchSchoolList:(void (^)(id data))successBlock
                                 failure:(void (^)(NSError *aError))failureBlock;
-
 
 /*!
  *  @author 汪宇豪, 16-07-24 20:07:37
