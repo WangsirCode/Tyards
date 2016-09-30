@@ -107,7 +107,7 @@
     [self.tableview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.topView.mas_bottom);
         make.left.and.right.equalTo(self.view);
-        make.height.equalTo(@(48*7*self.view.scale));
+        make.height.equalTo(@(55*7*self.view.scale));
     }];
 }
 
@@ -160,7 +160,7 @@
     }];
     cell.textLabel.text = self.viewModel.items[indexPath.row];
     [cell.textLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(cell.contentView.mas_left).offset(35);
+        make.left.equalTo(cell.contentView.mas_left).offset(45*self.view.scale);
         make.centerY.equalTo(cell.contentView.mas_centerY);
     }];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -169,7 +169,7 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
         {
-            return 48*self.view.scale;
+            return 55*self.view.scale;
         }
 #pragma  mark-TableDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -380,6 +380,7 @@
         _tableview.separatorInset = UIEdgeInsetsMake(0, 35, 0, 0);
         _tableview.delegate = self;
         _tableview.dataSource = self;
+        _tableview.separatorColor = [UIColor whiteColor];
     }
     return _tableview;
 }

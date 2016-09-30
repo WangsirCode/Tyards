@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "MDABizManager.h"
 #import "TeamHomeModelResponse.h"
-@class ConcernModel,User;
+@class ConcernModel,User,Avatar,Player;
 @interface MyConcernModel : NSObject
 
 

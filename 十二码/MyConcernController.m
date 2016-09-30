@@ -73,6 +73,7 @@
     UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"concernCell"];
     NSString* string;
     ConcernModel* model = self.viewModel.model[indexPath.row];
+    UIImageView* imageView = [UIImageView new];
     if (model.player) {
         string = model.player.name;
     }
@@ -89,10 +90,11 @@
         string = model.coach.name;
     }
     cell.textLabel.text = string;
+    cell.textLabel.font = [UIFont systemFontOfSize:14*self.view.scale];
     MyLabel* label = [[MyLabel alloc] init];
     label.textInsets = UIEdgeInsetsMake(5, 5, 5, 5);
     label.text = @"取消关注";
-    label.font = [UIFont systemFontOfSize:16*self.view.scale];
+    label.font = [UIFont systemFontOfSize:12*self.view.scale];
     label.textColor = [UIColor colorWithHexString:@"#1EA11f"];
     label.layer.borderWidth = 1;
     label.textAlignment = NSTextAlignmentCenter;
@@ -101,14 +103,20 @@
     label.sd_layout
     .centerYEqualToView(cell.contentView)
     .rightSpaceToView(cell.contentView,10)
-    .heightIs(30*self.view.scale)
-    .widthIs(80*self.view.scale);
+    .heightIs(25*self.view.scale)
+    .widthIs(70*self.view.scale);
+    label.layer.cornerRadius = 5;
+    label.layer.masksToBounds = YES;
     UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] initWithActionBlock:^(id  _Nonnull sender) {
         [self deFan:indexPath.row];
     }];
     [label addGestureRecognizer:tap];
     label.userInteractionEnabled = YES;
     return cell;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 50*self.view.scale;
 }
 #pragma mark  - TableviewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

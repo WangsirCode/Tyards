@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "BottomView.h"
+#import "MDABizManager.h"
 @interface HomeCell : UITableViewCell
 @property (nonatomic,strong) UILabel     * titleLabel;
 @property (nonatomic,strong) UIImageView * newsImage;
@@ -15,4 +16,5 @@
 @property (nonatomic,strong) UILabel     * commentLabel;
 @property (nonatomic,strong) UIImageView * conmmentView;
 @property (nonatomic,strong) BottomView* bottomview;
+@property (nonatomic,strong) News *model;
 @end

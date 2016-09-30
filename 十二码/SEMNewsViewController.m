@@ -119,22 +119,7 @@
     if (tableView.tag == 100) {
         NewsViewCell* cell = (NewsViewCell*)[tableView dequeueReusableCellWithIdentifier:@"newscell" forIndexPath:indexPath];
         News* news = self.viewModel.newsDataSource[indexPath.row];
-        
-        cell.titleLabel.text = news.title;
-        cell.bottomview.commentLabel.text = [@(news.commentCount) stringValue];;
-        cell.bottomview.inifoLabel.text = [news getInfo];
-        if (news.thumbnail.url)
-        {
-            NSURL* url = [[NSURL alloc] initWithString:news.thumbnail.url];
-            [cell.newsImage sd_setImageWithURL:url
-                              placeholderImage:[UIImage imageNamed:@"zhanwei.jpg"]
-                                       options:SDWebImageRefreshCached];
-        }
-        else
-        {
-            cell.newsImage.image = [UIImage imageNamed:@"zhanwei.jpg"];
-        }
-        cell.bottomview.viewLabel.text = [@(news.viewed) stringValue];
+        cell.model = news;
         return cell;
     }
     else if(tableView.tag == 101)
@@ -152,22 +137,7 @@
     {
         NewsViewCell* cell = (NewsViewCell*)[tableView dequeueReusableCellWithIdentifier:@"attensioncell" forIndexPath:indexPath];
         News* news = self.viewModel.attensionDatasource[indexPath.row];
-        
-        cell.titleLabel.text = news.title;
-        cell.bottomview.commentLabel.text = [@(news.commentCount) stringValue];;
-        cell.bottomview.inifoLabel.text = [news getInfo];
-        if (news.thumbnail.url)
-        {
-            NSURL* url = [[NSURL alloc] initWithString:news.thumbnail.url];
-            [cell.newsImage sd_setImageWithURL:url
-                              placeholderImage:[UIImage imageNamed:@"zhanwei.jpg"]
-                                       options:SDWebImageRefreshCached];
-        }
-        else
-        {
-            cell.newsImage.image = [UIImage imageNamed:@"zhanwei.jpg"];
-        }
-        cell.bottomview.viewLabel.text = [@(news.viewed) stringValue];
+        cell.model = news;
         return cell;
     }
 }
@@ -180,7 +150,7 @@
     }
     else
     {
-        return scale * 100;
+        return scale * 120;
 
     }
 }
@@ -239,6 +209,10 @@
         }];
         _newstableview.backgroundColor = [UIColor BackGroundColor];
         _newstableview.separatorColor = [UIColor BackGroundColor];
+        UIView* backView = [UIView new];
+        backView.backgroundColor = [UIColor BackGroundColor];
+        backView.frame = CGRectMake(0, 0, self.view.width, 8);
+        _newstableview.tableHeaderView = backView;
     }
     return _newstableview;
 }
@@ -273,6 +247,10 @@
         _topictableview.separatorInset = UIEdgeInsetsMake(8, 8, 8, 8);
         _topictableview.separatorColor = [UIColor colorWithHexString:@"#F2F2F2"];
         _topictableview.backgroundColor = [UIColor BackGroundColor];
+        UIView* backView = [UIView new];
+        backView.backgroundColor = [UIColor BackGroundColor];
+        backView.frame = CGRectMake(0, 0, self.view.width, 8);
+        _topictableview.tableHeaderView = backView;
     }
     return _topictableview;
 }
@@ -301,6 +279,10 @@
         }];
         _attensionTableview.backgroundColor = [UIColor BackGroundColor];
         _attensionTableview.separatorColor = [UIColor BackGroundColor];
+        UIView* backView = [UIView new];
+        backView.backgroundColor = [UIColor BackGroundColor];
+        backView.frame = CGRectMake(0, 0, self.view.width, 8);
+        _attensionTableview.tableHeaderView = backView;
     }
     return _attensionTableview;
 }
@@ -310,17 +292,13 @@
         _pageView = [[LazyPageScrollView alloc] init];
         _pageView.frame =self.view.frame;
         _pageView.delegate = self;
-        [_pageView initTab:YES Gap:self.view.width / 3 TabHeight:27 VerticalDistance:10 BkColor:[UIColor whiteColor]];
+        [_pageView initTab:YES Gap:self.view.width / 3 TabHeight:45*self.view.scale VerticalDistance:0 BkColor:[UIColor whiteColor]];
         UIView *view=[[UIView alloc] init];
         view.backgroundColor=[UIColor orangeColor];
         [_pageView addTab:@"新闻" View:self.newstableview Info:nil];
-        view=[[UIView alloc] init];
-        view.backgroundColor=[UIColor greenColor];
         [_pageView addTab:@"话题" View:self.topictableview Info:nil];
-        view=[[UIView alloc] init];
-        view.backgroundColor=[UIColor lightGrayColor];
         [_pageView addTab:@"关注" View:self.attensionTableview Info:nil];
-        [_pageView setTitleStyle:[UIFont systemFontOfSize:15] SelFont:[UIFont systemFontOfSize:20] Color:[UIColor blackColor] SelColor:[UIColor colorWithHexString:@"#1EA11F"]];
+        [_pageView setTitleStyle:[UIFont systemFontOfSize:15*self.view.scale] SelFont:[UIFont systemFontOfSize:18*self.view.scale] Color:[UIColor colorWithHexString:@"#666666"] SelColor:[UIColor colorWithHexString:@"#1EA11F"]];
         [_pageView enableBreakLine:YES Width:1 TopMargin:0 BottomMargin:0 Color:[UIColor groupTableViewBackgroundColor]];
         [_pageView generate:^(UIButton *firstTitleControl, UIView *viewTitleEffect) {
             CGRect frame= firstTitleControl.frame;

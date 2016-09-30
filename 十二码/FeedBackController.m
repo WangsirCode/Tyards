@@ -125,7 +125,7 @@
         _textField.text = @"您的反馈将帮助我们更快成长";
         _textField.textColor = [UIColor colorWithHexString:@"#CACACA"];
         _textField.tintColor = [UIColor MyColor];
-        _textField.layer.borderWidth = 1;
+        _textField.layer.borderWidth = 0.5;
         _textField.delegate = self;
         _textField.font = [UIFont systemFontOfSize:16];
         _textField.layer.borderColor = [UIColor colorWithHexString:@"#CACACA"].CGColor;

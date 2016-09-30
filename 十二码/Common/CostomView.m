@@ -29,8 +29,8 @@
     [self.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.mas_centerY);
         make.left.equalTo(self.mas_left);
-        make.height.equalTo(self.mas_height).dividedBy(1.3);
-        make.width.equalTo(self.mas_height).dividedBy(1.3);
+        make.height.equalTo(self.mas_height).dividedBy(1.2);
+        make.width.equalTo(self.mas_height).dividedBy(1);
     }];
     [self.label mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.imageView.mas_right).offset(8);

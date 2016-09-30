@@ -177,10 +177,10 @@
                     view.layer.borderColor = [UIColor BackGroundColor].CGColor;
                     [self addSubview:view];
                     view.sd_layout
-                    .topSpaceToView(self.honorLabel,60*i*self.scale)
+                    .topSpaceToView(self.honorLabel,70*i*self.scale)
                     .leftEqualToView(self)
                     .rightEqualToView(self)
-                    .heightIs(60*self.scale);
+                    .heightIs(70*self.scale);
                     UIImageView* iamgeView = [UIImageView new];
                     if (model.logo.url) {
                         [iamgeView sd_setImageWithURL:[[NSURL alloc] initWithString:model.logo.url ] placeholderImage:[UIImage placeholderImage]];
@@ -190,22 +190,22 @@
                     {
                         iamgeView.image = [UIImage placeholderImage];
                     }
-                    iamgeView.sd_cornerRadiusFromWidthRatio = @0.5;
+//                    iamgeView.sd_cornerRadiusFromWidthRatio = @0.5;
                     [view addSubview:iamgeView];
                     iamgeView.sd_layout
                     .centerYEqualToView(view)
-                    .heightIs(40*self.scale)
+                    .heightIs(50*self.scale)
                     .leftSpaceToView(view,10*self.scale)
                      .widthEqualToHeight();
                     UILabel* label = [UILabel new];
                     label.text = model.name;
                     [view addSubview:label];
                     label.sd_layout
-                    .topSpaceToView(view,8*self.scale)
+                    .topEqualToView(iamgeView)
                     .leftSpaceToView(iamgeView,20*self.scale)
                     .heightIs(25*self.scale)
                     .widthIs(300);
-                    label.font = [UIFont systemFontOfSize:18*self.scale];
+                    label.font = [UIFont systemFontOfSize:14*self.scale];
                     UIImageView* plateImage = [UIImageView new];
                     plateImage.image = [UIImage imageNamed:@"赛事icon=灰"];
                     [view addSubview:plateImage];
@@ -249,7 +249,7 @@
     if (!_infoLabel) {
         _infoLabel = [UILabel new];
         _infoLabel.text = @"   基本资料";
-        _infoLabel.font = [UIFont systemFontOfSize:16];
+        _infoLabel.font = [UIFont systemFontOfSize:14*self.scale];
         _infoLabel.textColor = [UIColor MyColor];
         _infoLabel.layer.borderColor = [UIColor BackGroundColor].CGColor;
         _infoLabel.layer.borderWidth = 1;
@@ -261,7 +261,7 @@
     if (!_recordLabel) {
         _recordLabel = [UILabel new];
         _recordLabel.text = @"   球队战绩";
-        _recordLabel.font = [UIFont systemFontOfSize:16];
+        _recordLabel.font = [UIFont systemFontOfSize:14*self.scale];
         _recordLabel.textColor = [UIColor MyColor];
     }
     return _recordLabel;
@@ -271,7 +271,7 @@
     if (!_honorLabel) {
         _honorLabel = [UILabel new];
         _honorLabel.text = @"   球队荣誉";
-        _honorLabel.font = [UIFont systemFontOfSize:16];
+        _honorLabel.font = [UIFont systemFontOfSize:14*self.scale];
         _honorLabel.textColor = [UIColor MyColor];
         _honorLabel.layer.borderColor = [UIColor BackGroundColor].CGColor;
         _honorLabel.layer.borderWidth = 1;
@@ -323,6 +323,7 @@
         _allButton.layer.borderColor = [UIColor BackGroundColor].CGColor;
         [_allButton setImage:[UIImage imageNamed:@"calender_L"] forState:UIControlStateNormal];
         [_allButton setTitle:@"全部" forState:UIControlStateNormal];
+        _allButton.titleLabel.font = [UIFont systemFontOfSize:14*self.scale];
         [_allButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     }
     return _allButton;

@@ -117,6 +117,8 @@
         uni = self.viewModel.datasource[indexPath.section].universities[indexPath.row];
         cell.textLabel.text = uni.name;
     }
+    cell.detailTextLabel.font = [UIFont systemFontOfSize:14*self.view.scale];
+    cell.textLabel.font = [UIFont systemFontOfSize:14*self.view.scale];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.detailTextLabel.text = uni.city;
         return cell;
@@ -129,11 +131,12 @@
         UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 100, 20)];
         [view addSubview:titleLabel];
         [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.and.bottom.and.right.equalTo(view);
-            make.left.equalTo(view).offset(10);
+            make.centerY.equalTo(view.mas_centerY);
+            make.height.equalTo(view.mas_height);
+            make.left.equalTo(view).offset(15*self.view.scale);
         }];
         titleLabel.text = self.viewModel.datasource[section].name;
-        titleLabel.font = [UIFont systemFontOfSize:20];
+        titleLabel.font = [UIFont systemFontOfSize:16*self.view.scale];
         
         [titleLabel setTextColor:[UIColor colorWithHexString:@"#1EA11F"]];
         view.backgroundColor = [UIColor lightTextColor];
@@ -150,7 +153,7 @@
     if (self.viewModel.isSearching == YES) {
         return 0;
     }
-    return 40;
+    return 50*self.view.scale;
 }
 #pragma mark - UITableViewDelagate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -174,6 +177,10 @@
     
     [self.delegate didSelectedItem:name diplayname:dispalyname uni:uni] ;
     
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 50 * self.view.scale;
 }
 #pragma mark- UISearBardelagate
 - (void) searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
@@ -230,6 +237,7 @@
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
+        _tableView.separatorColor = [UIColor colorWithHexString:@"#EAEAEA"];
     }
     return _tableView;
 }

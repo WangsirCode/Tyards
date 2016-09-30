@@ -69,11 +69,11 @@
         make.top.equalTo(self.awayImgaeview.mas_bottom).offset(12*scale);
     }];
     [self.homeScoreLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.mas_top).offset(65*scale);
+        make.centerY.equalTo(self.mas_top).offset(80*scale);
         make.left.equalTo(self.homeImageview.mas_right).offset(42*scale);
     }];
     [self.awaySocreLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.mas_top).offset(65*scale);
+        make.centerY.equalTo(self.mas_top).offset(80*scale);
         make.right.equalTo(self.awayImgaeview.mas_left).offset(-42*scale);
     }];
     [self.centerLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -83,6 +83,8 @@
     [self.statusLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.mas_centerX);
         make.top.equalTo(self.homeTitleLabel.mas_top);
+        make.width.equalTo(@(40*self.scale));
+        make.height.equalTo(@(15*self.scale));
     }];
     [self.locationImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(@(10*scale));
@@ -98,7 +100,7 @@
     [self.timeImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(@(10*scale));
         make.width.equalTo(@(10*scale));
-        make.top.equalTo(self.homeTitleLabel.mas_bottom).offset(10);
+        make.top.equalTo(self.locationImageView.mas_top);
         make.right.equalTo(self.timeLabel.mas_left).offset(-8);
     }];
 }
@@ -110,19 +112,19 @@
             case 1:
                 self.statusLabel.layer.borderColor = [UIColor colorWithHexString:@"#1EA11F"].CGColor;
                 self.statusLabel.textColor = [UIColor colorWithHexString:@"#1EA11F"];
-                self.statusLabel.text = @" 进行中  ";
+                self.statusLabel.text = @"进行中";
                 break;
                 //带开赛
             case 2:
                 self.statusLabel.layer.borderColor = [UIColor colorWithHexString:@"#FD1818"].CGColor;
                 self.statusLabel.textColor = [UIColor colorWithHexString:@"#FD1818"];
-                self.statusLabel.text = @" 待开赛  ";
+                self.statusLabel.text = @"待开赛";
                 break;
                 //已结束
             case 3:
                 self.statusLabel.layer.borderColor = [UIColor colorWithHexString:@"#FBC81A"].CGColor;
                 self.statusLabel.textColor = [UIColor colorWithHexString:@"#FBC81A"];
-                self.statusLabel.text = @" 已结束  ";
+                self.statusLabel.text = @"已结束";
                 break;
             default:
                 break;
@@ -143,9 +145,8 @@
 {
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc] init];
-        _titleLabel.font = [UIFont systemFontOfSize:18];
+        _titleLabel.font = [UIFont systemFontOfSize:14*self.scale];
         _titleLabel.textAlignment = NSTextAlignmentCenter;
-        
     }
     return _titleLabel;
 }
@@ -230,13 +231,14 @@
     }
     return _centerLabel;
 }
--(UILabel *)statusLabel
+-(MyLabel *)statusLabel
 {
     if (!_statusLabel) {
-        _statusLabel = [[UILabel alloc] init];
-        _statusLabel.font = [UIFont systemFontOfSize:11];
+        _statusLabel = [[MyLabel alloc] init];
+        _statusLabel.font = [UIFont systemFontOfSize:9*self.scale];
         _statusLabel.textAlignment = NSTextAlignmentCenter;
         _statusLabel.layer.borderWidth = 1;
+        _statusLabel.textInsets = UIEdgeInsetsMake(1, 1, 1, 1);
     }
     return _statusLabel;
 }

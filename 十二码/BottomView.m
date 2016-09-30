@@ -67,18 +67,12 @@
     }];
 }
 
-- (void)updateConstraintsIfNeeded
-{
-    [super updateConstraintsIfNeeded];
-    NSLog(@"%f",self.frame.size.width);
-    NSLog(@"%f",self.frame.size.height);
-}
 #pragma mark -getter
 - (UILabel*)inifoLabel
 {
     if (!_inifoLabel) {
         _inifoLabel = [[UILabel alloc] init];
-        _inifoLabel.font = [UIFont systemFontOfSize:14];
+        _inifoLabel.font = [UIFont systemFontOfSize:12];
         [_inifoLabel setTextColor:[UIColor colorWithHexString:@"#C9C9C9"]];
     }
     return _inifoLabel;
@@ -87,7 +81,7 @@
 {
     if (!_viewLabel) {
         _viewLabel = [UILabel new];
-        _viewLabel.font = [UIFont systemFontOfSize:14];
+        _viewLabel.font = [UIFont systemFontOfSize:12];
         [_viewLabel setTextColor:[UIColor colorWithHexString:@"#C9C9C9"]];
     }
     return _viewLabel;
@@ -96,7 +90,7 @@
 {
     if (!_commentLabel) {
         _commentLabel = [[UILabel alloc] init];
-        _commentLabel.font = [UIFont systemFontOfSize:14];
+        _commentLabel.font = [UIFont systemFontOfSize:12];
         [_commentLabel setTextColor:[UIColor colorWithHexString:@"#C9C9C9"]];
         
     }

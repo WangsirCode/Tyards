@@ -197,61 +197,14 @@
 {
     News* news = self.viewModel.datasource[indexPath.row];
     HomeCell* cell = (HomeCell*)[self.tableView dequeueReusableCellWithIdentifier:@"HomeCell" forIndexPath:indexPath];
-    
-    cell.titleLabel.text = news.title;
-
-    cell.bottomview.commentLabel.text = [@(news.commentCount) stringValue];;
-    cell.bottomview.inifoLabel.text = [news getInfo];
-    if (news.thumbnail.url)
-    {
-        NSURL* url = [[NSURL alloc] initWithString:news.thumbnail.url];
-        [cell.newsImage sd_setImageWithURL:url
-                          placeholderImage:[UIImage imageNamed:@"zhanwei.jpg"]
-                                   options:SDWebImageRefreshCached];
-    }
-    else
-    {
-        cell.newsImage.image = [UIImage imageNamed:@"zhanwei.jpg"];
-    }
-    cell.bottomview.viewLabel.text = [@(news.viewed) stringValue];
-    if ([news.type isEqualToString:@"TOPIC"]) {
-        UILabel *label = [UILabel new];
-        label.textColor = [UIColor whiteColor];
-        label.font = [UIFont systemFontOfSize:13*self.view.scale];
-        label.text = @"话题";
-        label.backgroundColor = [UIColor orangeColor];
-        [cell.contentView addSubview:label];
-        label.textAlignment = NSTextAlignmentCenter;
-        label.sd_layout
-        .rightEqualToView(cell.titleLabel)
-        .bottomEqualToView(cell.titleLabel)
-        .widthIs(30*self.view.scale)
-        .heightIs(14*self.view.scale);
-    }
+    cell.model = news;
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    News *news = self.viewModel.datasource[indexPath.row];
-//    return [tableView fd_heightForCellWithIdentifier: NSStringFromClass([HomeCell class]) cacheByIndexPath: indexPath configuration:^(HomeCell* cell) {
-//        cell.titleLabel.text = news.title;
-//        cell.inifoLabel.text = [news getInfo];
-//        cell.commentLabel.text = [@(news.commentCount) stringValue];;
-//        if (news.thumbnail.url)
-//        {
-//            NSURL* url = [[NSURL alloc] initWithString:news.thumbnail.url];
-//            [cell.newsImage sd_setImageWithURL:url
-//                              placeholderImage:[UIImage imageNamed:@"zhanwei.jpg"]
-//                                       options:SDWebImageRefreshCached];
-//        }
-//        else
-//        {
-//            cell.newsImage.image = [UIImage imageNamed:@"zhanwei.jpg"];
-//        }
-//    }];
     NSUserDefaults* data = [NSUserDefaults standardUserDefaults];
     CGFloat scale = [data floatForKey:@"scale"];
-    return 100*scale;
+    return 120*scale;
     
 }
 #pragma mark -Scollviewdelegate

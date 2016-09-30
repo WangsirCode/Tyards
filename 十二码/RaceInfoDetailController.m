@@ -111,7 +111,7 @@
     }];
     [self.backImageView addSubview:self.headerView];
     [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.backImageView).offset(44*self.view.scale);
+        make.top.equalTo(self.backImageView).offset(60*self.view.scale);
         make.left.and.right.equalTo(self.backImageView);
         make.bottom.equalTo(self.backImageView.mas_bottom);
     }];
@@ -205,9 +205,10 @@
     }
     else
     {
-        self.headerView.homeScoreLabel.text = [NSString stringWithFormat: @"%ld", (long)model.homeScore];
-        self.headerView.awaySocreLabel.text = [NSString stringWithFormat: @"%ld", (long)model.awayScore];
+        self.headerView.homeScoreLabel.text = [NSString stringWithFormat: @"%ld(%ld)", (long)model.homeScore,(long)model.penaltyHome];
+        self.headerView.awaySocreLabel.text = [NSString stringWithFormat: @"(%ld)%ld", (long)model.penaltyAway,(long)model.awayScore];
     }
+    self.headerView.centerLabel.textColor = [UIColor whiteColor];
     self.headerView.homeScoreLabel.textColor = [UIColor whiteColor];
     self.headerView.awaySocreLabel.textColor = [UIColor whiteColor];
     self.headerView.homeTitleLabel.textColor = [UIColor whiteColor];
@@ -249,6 +250,15 @@
     [self.headerView.awayImgaeview addGestureRecognizer:tap1];
     self.headerView.location = 1;
     self.headerView.timeLabel.text = [model getDate2];
+    self.headerView.roundLabel.textColor = [UIColor colorWithHexString:@"#6B7CA0"];
+    self.headerView.timeLabel.textColor = [UIColor colorWithHexString:@"#6B7CA0"];
+    self.headerView.homeLabel.textColor =[UIColor colorWithHexString:@"#6B7CA0"];
+    [self.headerView.locationImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.height.equalTo(@(10*self.view.scale));
+        make.width.equalTo(@(7*self.view.scale));
+        make.top.equalTo(self.headerView.homeTitleLabel.mas_bottom).offset(15*self.view.scale);
+        make.left.equalTo(self.headerView.mas_left).offset(8*self.view.scale);
+    }];
 }
 - (void)setUpDataView
 {
@@ -332,7 +342,8 @@
         UIView* line = [UIView new];
         line.backgroundColor = [UIColor colorWithHexString:@"CACACA"];
         UILabel* label = [UILabel new];
-        label.textColor = [UIColor colorWithHexString:@"#CACACA"];
+        label.textColor = [UIColor colorWithHexString:@"#666666"];
+        label.font = [UIFont systemFontOfSize:14*self.view.scale];
         UIImageView* imageView = [UIImageView new];
         [self.statusView sd_addSubviews:@[line,label,imageView]];
         imageView.sd_layout
@@ -387,6 +398,7 @@
         imageView.image = [UIImage imageNamed:imageName[i]];
         UILabel* label = [UILabel new];
         label.text = names[i];
+        label.font = [UIFont systemFontOfSize:13*self.view.scale];
         label.textColor = [UIColor colorWithHexString:@"#999999"];
         [_bottomView sd_addSubviews:@[imageView,label]];
         imageView.sd_layout
@@ -581,23 +593,7 @@
     if (tableView.tag == 102) {
         News* news = self.viewModel.newsModel[indexPath.row];
         HomeCell* cell = (HomeCell*)[tableView dequeueReusableCellWithIdentifier:@"HomeCell" forIndexPath:indexPath];
-        
-        cell.titleLabel.text = news.title;
-        
-        cell.bottomview.commentLabel.text = [@(news.commentCount) stringValue];;
-        cell.bottomview.inifoLabel.text = [news getInfo];
-        if (news.thumbnail.url)
-        {
-            NSURL* url = [[NSURL alloc] initWithString:news.thumbnail.url];
-            [cell.newsImage sd_setImageWithURL:url
-                              placeholderImage:[UIImage imageNamed:@"zhanwei.jpg"]
-                                       options:SDWebImageRefreshCached];
-        }
-        else
-        {
-            cell.newsImage.image = [UIImage imageNamed:@"zhanwei.jpg"];
-        }
-        cell.bottomview.viewLabel.text = [@(news.viewed) stringValue];
+        cell.model = news;
         return cell;
     }
     else if (tableView.tag == 103)
@@ -615,7 +611,7 @@
 {
     if(tableView.tag == 102)
     {
-        return 100*self.view.scale;
+        return 120*self.view.scale;
     }
     else if (tableView.tag == 103)
     {
@@ -682,12 +678,12 @@
         _pageView = [[LazyPageScrollView alloc] init];
         _pageView.frame =self.view.frame;
         _pageView.delegate = self;
-        [_pageView initTab:YES Gap:self.view.width / 4 TabHeight:27*self.view.scale VerticalDistance:10 BkColor:[UIColor whiteColor]];
+        [_pageView initTab:YES Gap:self.view.width / 4 TabHeight:40*self.view.scale VerticalDistance:0 BkColor:[UIColor whiteColor]];
         [_pageView addTab:@"赛况" View:self.statusView Info:nil];
         [_pageView addTab:@"数据" View:self.dataView Info:nil];
         [_pageView addTab:@"新闻" View:self.newsTableView Info:nil];
         [_pageView addTab:@"互动" View:self.messageTableView Info:nil];
-        [_pageView setTitleStyle:[UIFont systemFontOfSize:15] SelFont:[UIFont systemFontOfSize:20] Color:[UIColor blackColor] SelColor:[UIColor colorWithHexString:@"#1EA11F"]];
+        [_pageView setTitleStyle:[UIFont systemFontOfSize:15*self.view.scale] SelFont:[UIFont systemFontOfSize:18*self.view.scale] Color:[UIColor colorWithHexString:@"#666666"] SelColor:[UIColor colorWithHexString:@"#1EA11F"]];
         [_pageView enableBreakLine:YES Width:1 TopMargin:0 BottomMargin:0 Color:[UIColor groupTableViewBackgroundColor]];
         [_pageView generate:^(UIButton *firstTitleControl, UIView *viewTitleEffect) {
             CGRect frame= firstTitleControl.frame;

@@ -381,21 +381,7 @@
     {
         Articles* news = self.viewModel.model.articles[indexPath.row];
         TeamNewsCell* cell = (TeamNewsCell*)[tableView dequeueReusableCellWithIdentifier:@"TeamNewsCell"];
-        cell.titleLabel.text = news.title;
-        
-        cell.bottomview.commentLabel.text = [@(news.commentCount) stringValue];;
-        cell.bottomview.inifoLabel.text = [news getInfo];
-        if (news.thumbnail.url)
-        {
-            NSURL* url = [[NSURL alloc] initWithString:news.thumbnail.url];
-            [cell.newsImage sd_setImageWithURL:url
-                              placeholderImage:[UIImage imageNamed:@"zhanwei.jpg"]
-                                       options:SDWebImageRefreshCached];
-        }
-        else
-        {
-            cell.newsImage.image = [UIImage imageNamed:@"zhanwei.jpg"];
-        }
+        cell.model = news;
         return cell;
     }
     else
@@ -441,7 +427,7 @@
     }
     else if(tableView.tag == NEWSTABLEVIEWTAG)
     {
-        return 100 * self.view.scale;
+        return 120 * self.view.scale;
     }
     else
     {
@@ -556,13 +542,13 @@
         _pageView = [[LazyPageScrollView alloc] init];
         _pageView.frame =self.view.frame;
         _pageView.delegate = self;
-        [_pageView initTab:YES Gap:self.view.width / 5 TabHeight:27*self.view.scale VerticalDistance:10 BkColor:[UIColor whiteColor]];
+        [_pageView initTab:YES Gap:self.view.width / 5 TabHeight:40*self.view.scale VerticalDistance:0 BkColor:[UIColor whiteColor]];
         [_pageView addTab:@"资料" View:self.infoTableView Info:nil];
         [_pageView addTab:@"新闻" View:self.newsTableview Info:nil];
         [_pageView addTab:@"留言" View:self.messageTableview Info:nil];
 
 
-        [_pageView setTitleStyle:[UIFont systemFontOfSize:15] SelFont:[UIFont systemFontOfSize:20] Color:[UIColor blackColor] SelColor:[UIColor colorWithHexString:@"#1EA11F"]];
+        [_pageView setTitleStyle:[UIFont systemFontOfSize:15*self.view.scale] SelFont:[UIFont systemFontOfSize:18*self.view.scale] Color:[UIColor colorWithHexString:@"#666666"] SelColor:[UIColor colorWithHexString:@"#1EA11F"]];
         [_pageView enableBreakLine:YES Width:1 TopMargin:0 BottomMargin:0 Color:[UIColor groupTableViewBackgroundColor]];
         [_pageView generate:^(UIButton *firstTitleControl, UIView *viewTitleEffect) {
             CGRect frame= firstTitleControl.frame;

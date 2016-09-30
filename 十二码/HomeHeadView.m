@@ -9,6 +9,7 @@
 #import "HomeHeadView.h"
 #import "YYCategories.h"
 #import "Masonry.h"
+#import "MDABizManager.h"
 @implementation HomeHeadView
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -46,6 +47,14 @@
         make.left.equalTo(self.mas_left).offset(10*scale);
         make.right.and.bottom.equalTo(self);
     }];
+    UIView* view = [UIView new];
+    view.backgroundColor = [UIColor BackGroundColor];
+    [self addSubview:view];
+    [view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.titleLabel.mas_bottom).offset(-1);
+        make.left.and.right.equalTo(self);
+        make.height.equalTo(@(0.5));
+    }];
 }
 
 #pragma mark -Getter
@@ -55,7 +64,7 @@
         _titleLabel = [[UILabel alloc] init];
         _titleLabel.text = @"热门推荐";
         _titleLabel.textColor = [UIColor colorWithHexString:@"#1EA11F"];
-        _titleLabel.font = [UIFont systemFontOfSize:20];
+        _titleLabel.font = [UIFont systemFontOfSize:15*self.scale];
     }
     return _titleLabel;
 }

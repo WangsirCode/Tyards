@@ -299,9 +299,9 @@
                 UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"infoCell"];
                 cell.textLabel.text = self.viewModel.infotableviewCellname[indexPath.row];
                 cell.textLabel.textColor = [UIColor colorWithHexString:@"A1B2BA"];
-                cell.textLabel.font = [UIFont systemFontOfSize:16*self.view.scale];
+                cell.textLabel.font = [UIFont systemFontOfSize:14*self.view.scale];
                 cell.detailTextLabel.text = self.viewModel.infoTableViewCellInfo[indexPath.row];
-                cell.detailTextLabel.font = [UIFont systemFontOfSize:16*self.view.scale];
+                cell.detailTextLabel.font = [UIFont systemFontOfSize:14*self.view.scale];
                 [cell.detailTextLabel mas_makeConstraints:^(MASConstraintMaker *make) {
                     make.left.equalTo(cell.contentView.mas_left).offset(98*self.view.scale);
                     make.centerY.equalTo(cell.contentView.mas_centerY);
@@ -324,8 +324,10 @@
             ScoreCell* cell = (ScoreCell*)[[ScoreCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"ScoreCell"];
             cell.textLabel.text = [NSString stringWithFormat:@"%ld.",(long)(indexPath.row + 1)];
             cell.textLabel.textColor = [UIColor blackColor];
+            cell.textLabel.font = [UIFont systemFontOfSize:13*self.view.scale];
             cell.label.text = model.team.name;
             cell.delegate = self;
+            cell.label.font = [UIFont systemFontOfSize:13*self.view.scale];
             cell.label.sd_layout
             .centerYEqualToView(cell.contentView)
             .leftSpaceToView(cell.textLabel,24*self.view.scale)
@@ -341,6 +343,7 @@
                 UILabel* label = [UILabel new];
                 label.textColor = [UIColor blackColor];
                 label.text = [array[i] stringValue];
+                label.font = [UIFont systemFontOfSize:13*self.view.scale];
                 label.textAlignment = NSTextAlignmentCenter;
                 [cell.contentView addSubview:label];
                 label.sd_layout
@@ -381,7 +384,7 @@
             {
                 UILabel* label = [UILabel new];
                 label.text = [NSString stringWithFormat:@"%ld.",(indexPath.row + 1)];
-                label.font = [UIFont systemFontOfSize:16*self.view.scale];
+                label.font = [UIFont systemFontOfSize:13*self.view.scale];
                 [cell.contentView addSubview:label];
                 label.sd_layout
                 .leftSpaceToView(cell.contentView,17*self.view.scale)
@@ -391,6 +394,7 @@
             }
             cell.textLabel.text = model.player.name;
             cell.textLabel.textColor = [UIColor MyColor];
+            cell.textLabel.font = [UIFont systemFontOfSize:13*self.view.scale];
             cell.textLabel.sd_layout
             .centerYEqualToView(cell.contentView)
             .leftSpaceToView(cell.contentView,70*self.view.scale)
@@ -404,7 +408,7 @@
             cell.detailTextLabel.textColor = [UIColor MyColor];
             cell.detailTextLabel.text = model.team.name;
             cell.detailTextLabel.textAlignment = NSTextAlignmentLeft;
-            
+            cell.detailTextLabel.font = [UIFont systemFontOfSize:13*self.view.scale];
             cell.detailTextLabel.sd_layout
             .leftSpaceToView(cell.contentView,165*self.view.scale)
             .centerYEqualToView(cell.contentView)
@@ -415,6 +419,7 @@
             [cell.contentView addSubview:num];
             num.textAlignment = NSTextAlignmentCenter;
             num.text = [NSString stringWithFormat:@"%ld",model.score];
+            num.font = [UIFont systemFontOfSize:13*self.view.scale];
             num.sd_layout
             .centerYEqualToView(cell.contentView)
             .leftSpaceToView(cell.contentView,310*self.view.scale)
@@ -434,17 +439,16 @@
             {
                 cell.imageView.image = [UIImage placeholderImage];
             }
-            cell.imageView.sd_cornerRadiusFromWidthRatio = @0.5;
             cell.imageView.sd_layout
             .centerYEqualToView(cell.contentView)
             .leftSpaceToView(cell.contentView,10*self.view.scale)
-            .heightIs(40*self.view.scale)
+            .heightIs(50*self.view.scale)
             .widthEqualToHeight();
             cell.textLabel.text = model.name;
-            cell.textLabel.font = [UIFont systemFontOfSize:18*self.view.scale];
+            cell.textLabel.font = [UIFont systemFontOfSize:15*self.view.scale];
             cell.textLabel.sd_layout
             .leftSpaceToView(cell.imageView,13*self.view.scale)
-            .topSpaceToView(cell.contentView,5)
+            .topSpaceToView(cell.contentView,14*self.view.scale)
             .heightIs(20*self.view.scale)
             .widthIs(300*self.view.scale);
             UIImageView* iamgeView = [UIImageView new];
@@ -457,7 +461,7 @@
             .widthIs(10*self.view.scale);
             cell.detailTextLabel.text = model.owner;
             cell.detailTextLabel.textColor = [UIColor colorWithHexString:@"#999999"];
-            cell.detailTextLabel.font = [UIFont systemFontOfSize:14*self.view.scale];
+            cell.detailTextLabel.font = [UIFont systemFontOfSize:13*self.view.scale];
             cell.detailTextLabel.sd_layout
             .leftSpaceToView(iamgeView,5)
             .centerYEqualToView(iamgeView)
@@ -472,6 +476,7 @@
         UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"teamCell"];
         cell.textLabel.text = self.viewModel.teamModel[indexPath.row].name;
         cell.textLabel.textColor = [UIColor MyColor];
+        cell.textLabel.font = [UIFont systemFontOfSize:14*self.view.scale];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
@@ -506,7 +511,7 @@
     else if (tableView.tag == 102)
     {
         if (self.viewModel.listTableIndex == 2) {
-            return 65*self.view.scale;
+            return 75*self.view.scale;
         }
         return 48*self.view.scale;
     }
@@ -520,7 +525,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if (tableView.tag == 101) {
-        return 30*self.view.scale;
+        return 60*self.view.scale;
     }
     else if (tableView.tag == 100)
     {
@@ -546,7 +551,7 @@
         label.backgroundColor =[UIColor BackGroundColor];
         label.textAlignment = NSTextAlignmentCenter;
         [view addSubview:label];
-        label.font = [UIFont systemFontOfSize:14];
+        label.font = [UIFont systemFontOfSize:14*self.view.scale];
         label.textColor = [UIColor lightGrayColor];
         label.sd_layout
         .rightEqualToView(view)
@@ -592,6 +597,7 @@
             label.textColor = [UIColor colorWithHexString:@"#A1B2BA"];
             label.textAlignment = NSTextAlignmentLeft;
             label.text = self.viewModel.scoreModel[section].name;
+            label.font = [UIFont systemFontOfSize:13*self.view.scale];
             [view addSubview:label];
             label.sd_layout
             .centerYEqualToView(view)
@@ -603,7 +609,7 @@
                 UILabel* label = [UILabel new];
                 label.textColor = [UIColor colorWithHexString:@"#A1B2BA"];
                 label.text = array[i];
-                label.font = [UIFont systemFontOfSize:15*self.view.scale];
+                label.font = [UIFont systemFontOfSize:13*self.view.scale];
                 label.textAlignment = NSTextAlignmentCenter;
                 [view addSubview:label];
                 label.sd_layout
@@ -613,6 +619,22 @@
                 .heightIs(48*self.view.scale);
             }
             view.backgroundColor = [UIColor whiteColor];
+            UIView* line = [UIView new];
+            line.backgroundColor = [UIColor colorWithHexString:@"#EAEAEA"];
+            [view addSubview:line];
+            line.sd_layout
+            .leftEqualToView(view)
+            .rightEqualToView(view)
+            .heightIs(0.5)
+            .bottomEqualToView(view);
+            UIView* line1 = [UIView new];
+            line1.backgroundColor = [UIColor colorWithHexString:@"#EAEAEA"];
+            [view addSubview:line1];
+            line1.sd_layout
+            .leftEqualToView(view)
+            .rightEqualToView(view)
+            .heightIs(0.5)
+            .topEqualToView(view);
             return view;
         }
         else if (self.viewModel.listTableIndex == 1)
@@ -624,6 +646,7 @@
             for (int i = 0; i < 4 ; i ++) {
                 UILabel *label = [UILabel new];
                 label.text = stringArray[i];
+                label.font = [UIFont systemFontOfSize:13*self.view.scale];
                 label.textColor = [UIColor colorWithHexString:@"#A1B2BA"];
                 if (i == 3) {
                     label.textAlignment = NSTextAlignmentCenter;
@@ -637,6 +660,22 @@
             }
             view.layer.borderColor = [UIColor BackGroundColor].CGColor;
             view.layer.borderWidth = 1;
+            UIView* line = [UIView new];
+            line.backgroundColor = [UIColor colorWithHexString:@"#EAEAEA"];
+            [view addSubview:line];
+            line.sd_layout
+            .leftEqualToView(view)
+            .rightEqualToView(view)
+            .heightIs(0.5)
+            .bottomEqualToView(view);
+            UIView* line1 = [UIView new];
+            line1.backgroundColor = [UIColor colorWithHexString:@"#EAEAEA"];
+            [view addSubview:line1];
+            line1.sd_layout
+            .leftEqualToView(view)
+            .rightEqualToView(view)
+            .heightIs(0.5)
+            .topEqualToView(view);
             return view;
         }
     }
@@ -694,12 +733,12 @@
         _pageView = [[LazyPageScrollView alloc] init];
         _pageView.frame =self.view.frame;
         _pageView.delegate = self;
-        [_pageView initTab:YES Gap:self.view.width / 4 TabHeight:27*self.view.scale VerticalDistance:10 BkColor:[UIColor whiteColor]];
+        [_pageView initTab:YES Gap:self.view.width / 4 TabHeight:40*self.view.scale VerticalDistance:0 BkColor:[UIColor whiteColor]];
         [_pageView addTab:@"简介" View:self.infoTableView Info:nil];
         [_pageView addTab:@"赛程" View:self.gameTableView Info:nil];
         [_pageView addTab:@"榜单" View:self.listTableview Info:nil];
         [_pageView addTab:@"球队" View:self.teamTableView Info:nil];
-        [_pageView setTitleStyle:[UIFont systemFontOfSize:15] SelFont:[UIFont systemFontOfSize:20] Color:[UIColor blackColor] SelColor:[UIColor colorWithHexString:@"#1EA11F"]];
+        [_pageView setTitleStyle:[UIFont systemFontOfSize:15*self.view.scale] SelFont:[UIFont systemFontOfSize:18*self.view.scale] Color:[UIColor colorWithHexString:@"#666666"] SelColor:[UIColor colorWithHexString:@"#1EA11F"]];
         [_pageView enableBreakLine:YES Width:1 TopMargin:0 BottomMargin:0 Color:[UIColor groupTableViewBackgroundColor]];
         [_pageView generate:^(UIButton *firstTitleControl, UIView *viewTitleEffect) {
             CGRect frame= firstTitleControl.frame;
@@ -770,6 +809,7 @@
         _listTableview.tableHeaderView = view;
         _listTableview.separatorInset = UIEdgeInsetsZero;
         _listTableview.bounces = NO;
+        _listTableview.separatorColor = [UIColor colorWithHexString:@"#EAEAEA"];
     }
     return _listTableview;
 }

@@ -212,7 +212,7 @@
             default:
                 break;
         }
-        
+        cell.textLabel.font = [UIFont systemFontOfSize:14*self.view.scale];
         cell.textLabel.text = uni.name;
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -227,7 +227,7 @@
         [view addSubview:titleLabel];
         [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.and.bottom.and.right.equalTo(view);
-            make.left.equalTo(view).offset(10);
+            make.left.equalTo(view).offset(14*self.view.scale);
         }];
         switch (section) {
             case 0:
@@ -243,7 +243,7 @@
                 break;
         }
         
-        titleLabel.font = [UIFont systemFontOfSize:20];
+        titleLabel.font = [UIFont systemFontOfSize:14*self.view.scale];
         
         [titleLabel setTextColor:[UIColor colorWithHexString:@"#1EA11F"]];
         view.backgroundColor = [UIColor whiteColor];
@@ -257,7 +257,7 @@
         [view addSubview:titleLabel];
         [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.and.bottom.and.right.equalTo(view);
-            make.left.equalTo(view).offset(10);
+            make.left.equalTo(view).offset(14*self.view.scale);
         }];
         switch (section) {
             case 0:
@@ -273,7 +273,7 @@
                 break;
         }
         
-        titleLabel.font = [UIFont systemFontOfSize:20];
+        titleLabel.font = [UIFont systemFontOfSize:14*self.view.scale];
         
         [titleLabel setTextColor:[UIColor colorWithHexString:@"#1EA11F"]];
         view.backgroundColor = [UIColor whiteColor];
@@ -360,6 +360,7 @@
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
+        _tableView.separatorColor = [UIColor colorWithHexString:@"#EAEAEA"];
     }
     return _tableView;
 }

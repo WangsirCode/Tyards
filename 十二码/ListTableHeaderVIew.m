@@ -49,7 +49,7 @@
         [_scoreButton setTitleColor:[UIColor colorWithHexString:@"#A1B2BA"] forState:UIControlStateNormal];
         _scoreButton.layer.borderWidth = 1;
         _scoreButton.layer.borderColor = [UIColor colorWithHexString:@"#A1B2BA"].CGColor;
-        _scoreButton.titleLabel.font = [UIFont systemFontOfSize:14];
+        _scoreButton.titleLabel.font = [UIFont systemFontOfSize:12*self.scale];
         [_scoreButton setTitleColor:[UIColor MyColor] forState:UIControlStateSelected];
         [[_scoreButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
             _scoreButton.layer.borderColor = [UIColor MyColor].CGColor;
@@ -69,7 +69,7 @@
         [_scorerButton setTitleColor:[UIColor MyColor] forState:UIControlStateSelected];
         _scorerButton.layer.borderWidth = 1;
         _scorerButton.layer.borderColor = [UIColor colorWithHexString:@"#A1B2BA"].CGColor;
-        _scorerButton.titleLabel.font = [UIFont systemFontOfSize:14];
+        _scorerButton.titleLabel.font = [UIFont systemFontOfSize:12*self.scale];
         [[_scorerButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
             _scorerButton.layer.borderColor = [UIColor MyColor].CGColor;
             _scorerButton.selected = YES;
@@ -88,7 +88,7 @@
         [_awardButton setTitleColor:[UIColor MyColor] forState:UIControlStateSelected];
         _awardButton.layer.borderWidth = 1;
         _awardButton.layer.borderColor = [UIColor colorWithHexString:@"#A1B2BA"].CGColor;
-        _awardButton.titleLabel.font = [UIFont systemFontOfSize:14];
+        _awardButton.titleLabel.font = [UIFont systemFontOfSize:12*self.scale];
         [[_awardButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
             _awardButton.layer.borderColor = [UIColor MyColor].CGColor;
             [self.delegate didClickButtonAtIndex:2];

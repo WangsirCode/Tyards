@@ -101,8 +101,14 @@
         uni = self.viewModel.dataSource[indexPath.row];
         cell.textLabel.text = uni.name;
     }
+    cell.detailTextLabel.font = [UIFont systemFontOfSize:14*self.view.scale];
+    cell.textLabel.font = [UIFont systemFontOfSize:14*self.view.scale];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 50 * self.view.scale;
 }
 #pragma mark - UITableViewDelagate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -175,6 +181,7 @@
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
+        _tableView.separatorColor = [UIColor colorWithHexString:@"#EAEAEA"];
     }
     return _tableView;
 }

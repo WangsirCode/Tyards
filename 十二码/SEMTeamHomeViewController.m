@@ -117,7 +117,7 @@
         make.height.equalTo(@(227 *self.view.scale));
     }];
     [self.pageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.logoImageView.mas_bottom);
+        make.top.equalTo(self.logoImageView.mas_bottom).offset(5*self.view.scale);
         make.bottom.equalTo(self.view.mas_bottom);
         make.left.equalTo(self.view.mas_left);
         make.right.equalTo(self.view.mas_right);
@@ -147,12 +147,14 @@
             UIImage* image = [UIImage imageNamed:@"camera_L"];
             self.photoview = [[CostomView alloc] initWithInfo:@"相册" image:image FontSize:14];
             self.photoview.label.textColor = [UIColor whiteColor];
+            self.photoview.alpha = 0.5;
+            
             [self.view addSubview:self.photoview];
             [self.photoview mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.right.equalTo(self.logoImageView.mas_right);
-                make.bottom.equalTo(self.logoImageView.mas_bottom);
-                make.height.equalTo(@14);
-                make.width.equalTo(@60);
+                make.bottom.equalTo(self.logoImageView.mas_bottom).offset(-8*self.view.scale);
+                make.height.equalTo(@(14*self.view.scale));
+                make.width.equalTo(@(60*self.view.scale));
             }];
             UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] initWithActionBlock:^(id  _Nonnull sender) {
                 SEMTeamPhotoController* controller = [HRTRouter objectForURL:@"photo" withUserInfo:@{@"id":@(self.viewModel.model.info.id)}];
@@ -473,21 +475,7 @@
     {
         Articles* news = self.viewModel.model.articles[indexPath.row];
         TeamNewsCell* cell = (TeamNewsCell*)[tableView dequeueReusableCellWithIdentifier:@"TeamNewsCell"];
-        cell.titleLabel.text = news.title;
-        
-        cell.bottomview.commentLabel.text = [@(news.commentCount) stringValue];;
-        cell.bottomview.inifoLabel.text = [news getInfo];
-        if (news.thumbnail.url)
-        {
-            NSURL* url = [[NSURL alloc] initWithString:news.thumbnail.url];
-            [cell.newsImage sd_setImageWithURL:url
-                              placeholderImage:[UIImage imageNamed:@"zhanwei.jpg"]
-                                       options:SDWebImageRefreshCached];
-        }
-        else
-        {
-            cell.newsImage.image = [UIImage imageNamed:@"zhanwei.jpg"];
-        }
+        cell.model = news;
         return cell;
     }
     else if (tableView.tag == LISTTABLEVIEWTAG)
@@ -496,11 +484,13 @@
         {
             UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"TeamPlayerCell"];
             cell.textLabel.textColor = [UIColor colorWithHexString:@"#1EA11F"];
+            cell.textLabel.font = [UIFont systemFontOfSize:14*self.view.scale];
             if (self.viewModel.players.captain) {
                 
                 if (indexPath.row == 0) {
                     cell.textLabel.text = self.viewModel.players.captain.player.name;
                     cell.detailTextLabel.text = @"队长";
+                    cell.detailTextLabel.font = [UIFont systemFontOfSize:14*self.view.scale];
                 }
                 else
                 {
@@ -516,6 +506,7 @@
         }
         UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"TeamPlayerCell"];
         cell.textLabel.textColor = [UIColor colorWithHexString:@"#1EA11F"];
+        cell.textLabel.font = [UIFont systemFontOfSize:14*self.view.scale];
         if (indexPath.section == 0) {
             cell.textLabel.text = self.viewModel.players.coaches[indexPath.row].coach.name;
         }
@@ -526,6 +517,7 @@
                 if (indexPath.row == 0) {
                     cell.textLabel.text = self.viewModel.players.captain.player.name;
                     cell.detailTextLabel.text = @"队长";
+                    cell.detailTextLabel.font = [UIFont systemFontOfSize:14*self.view.scale];
                 }
                 else
                 {
@@ -559,7 +551,7 @@
     }
     else if(tableView.tag == NEWSTABLEVIEWTAG)
     {
-        return 100 * self.view.scale;
+        return 120 * self.view.scale;
     }
     else if (tableView.tag == LISTTABLEVIEWTAG)
     {
@@ -586,7 +578,7 @@
     }
     else if (tableView.tag == SCHEDULETABLEVIETAG)
     {
-        return 30*self.view.scale;
+        return 60*self.view.scale;
     }
     return 0;
 }
@@ -604,9 +596,10 @@
     NSRange range = NSMakeRange(0, string.length);
     [AttributedStr addAttribute:NSForegroundColorAttributeName
      
-                          value:[UIColor colorWithHexString:@"#1EA11F"]
+                          value:[UIColor colorWithHexString:@"#999999"]
      
                           range:range];
+    [AttributedStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14*self.view.scale] range:range];
     label.attributedText = AttributedStr;
     label.textAlignment = NSTextAlignmentCenter;
     view.backgroundColor = [UIColor BackGroundColor];
@@ -618,6 +611,7 @@
     else if (tableView.tag == LISTTABLEVIEWTAG)
     {
         UILabel* label = [UILabel new];
+        label.font = [UIFont systemFontOfSize:14*self.view.scale];
         label.backgroundColor = [UIColor BackGroundColor];
         if (kArrayIsEmpty(self.viewModel.players.coaches)) {
             label.text = @"   队员";
@@ -630,6 +624,7 @@
         {
             label.text = @"   队员";
         }
+        
         return label;
     }
     return nil;
@@ -754,14 +749,14 @@
         _pageView = [[LazyPageScrollView alloc] init];
         _pageView.frame =self.view.frame;
         _pageView.delegate = self;
-        [_pageView initTab:YES Gap:self.view.width / 5 TabHeight:27*self.view.scale VerticalDistance:10 BkColor:[UIColor whiteColor]];
+        [_pageView initTab:YES Gap:self.view.width / 5 TabHeight:40*self.view.scale VerticalDistance:0 BkColor:[UIColor whiteColor]];
         [_pageView addTab:@"资料" View:self.scrollView Info:nil];
         [_pageView addTab:@"名单" View:self.listTableview Info:nil];
         [_pageView addTab:@"赛程" View:self.scheduleTableview Info:nil];
         [_pageView addTab:@"新闻" View:self.newsTableview Info:nil];
         [_pageView addTab:@"留言" View:self.messageTableview Info:nil];
-        [_pageView setTitleStyle:[UIFont systemFontOfSize:15] SelFont:[UIFont systemFontOfSize:20] Color:[UIColor blackColor] SelColor:[UIColor colorWithHexString:@"#1EA11F"]];
-        [_pageView enableBreakLine:YES Width:1 TopMargin:0 BottomMargin:0 Color:[UIColor groupTableViewBackgroundColor]];
+        [_pageView setTitleStyle:[UIFont systemFontOfSize:15*self.view.scale] SelFont:[UIFont systemFontOfSize:18*self.view.scale] Color:[UIColor colorWithHexString:@"#666666"] SelColor:[UIColor colorWithHexString:@"#1EA11F"]];
+        [_pageView enableBreakLine:YES Width:1 TopMargin:0 BottomMargin:0 Color:[UIColor whiteColor]];
         [_pageView generate:^(UIButton *firstTitleControl, UIView *viewTitleEffect) {
             CGRect frame= firstTitleControl.frame;
             frame.size.height-=5;
@@ -833,6 +828,7 @@
         self.listHeaderButton.layer.borderColor = [UIColor BackGroundColor].CGColor;
         [self.listHeaderButton setImage:[UIImage imageNamed:@"calender_L"] forState:UIControlStateNormal];
         [self.listHeaderButton setTitle:@"全部" forState:UIControlStateNormal];
+        self.listHeaderButton.titleLabel.font = [UIFont systemFontOfSize:14*self.view.scale];
         [self.listHeaderButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         self.listHeaderButton.frame = CGRectMake(0, 0, self.view.width, 40*self.view.scale);
         self.listHeaderButton.imageView.sd_layout
@@ -851,6 +847,7 @@
         }];
         [self.listHeaderButton addGestureRecognizer:tap1];
         _listTableview.tableHeaderView = self.listHeaderButton;
+        _listTableview.separatorColor = [UIColor colorWithHexString:@"#EAEAEA"];
     }
     return _listTableview;
 }
@@ -870,6 +867,7 @@
         self.scheduleHeaderButton.layer.borderColor = [UIColor BackGroundColor].CGColor;
         [self.scheduleHeaderButton setImage:[UIImage imageNamed:@"calender_L"] forState:UIControlStateNormal];
         [self.scheduleHeaderButton setTitle:@"全部" forState:UIControlStateNormal];
+        self.scheduleHeaderButton.titleLabel.font = [UIFont systemFontOfSize:14*self.view.scale];
         [self.scheduleHeaderButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         self.scheduleHeaderButton.frame = CGRectMake(0, 0, self.view.width, 40*self.view.scale);
         self.scheduleHeaderButton.imageView.sd_layout

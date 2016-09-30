@@ -50,7 +50,7 @@
     }];
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.and.right.equalTo(self);
-        make.top.equalTo(self.userHeadView.mas_bottom).offset(25*scale);
+        make.top.equalTo(self.userHeadView.mas_bottom).offset(18*scale);
     }];
     [self.infoView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.mas_centerX);

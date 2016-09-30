@@ -29,9 +29,9 @@
 {
     [self.infoImage mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.mas_top);
-        make.bottom.equalTo(self.mas_baseline);
+        make.height.equalTo(@(13*self.scale));
         make.left.equalTo(self.mas_left);
-        make.width.equalTo(@(15*self.scale));
+        make.width.equalTo(@(13*self.scale));
     }];
     [self.infoLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.mas_centerY);
@@ -46,7 +46,7 @@
 {
     if (!_infoLabel) {
         _infoLabel = [[UILabel alloc] init];
-        _infoLabel.font = [UIFont systemFontOfSize:13];
+        _infoLabel.font = [UIFont systemFontOfSize:11*self.scale];
         [_infoLabel setTextColor:[UIColor colorWithHexString:@"#506185"]];
         _infoLabel.backgroundColor = [UIColor clearColor];
         _infoLabel.text = @"修改昵称";

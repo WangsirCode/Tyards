@@ -39,9 +39,8 @@
     self.statusLabel.sd_layout
     .topSpaceToView(self.contentView,24*self.scale)
     .leftSpaceToView(self.titleLabel,8 *self.scale)
-    .autoHeightRatio(0);
-    
-    [self.statusLabel setSingleLineAutoResizeWithMaxWidth:100];
+    .widthIs(40*self.scale)
+    .heightIs(18*self.scale);
     
     self.timeLabel.sd_layout
     .topSpaceToView(self.titleLabel,12*self.scale)
@@ -57,6 +56,12 @@
     .leftSpaceToView(self.logoImageView,12*self.scale)
     .heightIs(15*self.scale)
     .widthIs(100);
+    [self.locationView.imageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.locationView.mas_centerY);
+        make.left.equalTo(self.locationView.mas_left);
+        make.height.equalTo(self.locationView.mas_height).dividedBy(1);
+        make.width.equalTo(self.locationView.mas_height).dividedBy(1.5);
+    }];
 }
 - (void)bindModel
 {
@@ -66,19 +71,19 @@
             case 1:
                 self.statusLabel.layer.borderColor = [UIColor colorWithHexString:@"#1EA11F"].CGColor;
                 self.statusLabel.textColor = [UIColor colorWithHexString:@"#1EA11F"];
-                self.statusLabel.text = @" 进行中  ";
+                self.statusLabel.text = @"进行中";
                 break;
                 //带开赛
             case 2:
                 self.statusLabel.layer.borderColor = [UIColor colorWithHexString:@"#FD1818"].CGColor;
                 self.statusLabel.textColor = [UIColor colorWithHexString:@"#FD1818"];
-                self.statusLabel.text = @" 待开赛  ";
+                self.statusLabel.text = @"待开赛";
                 break;
                 //已结束
             case 3:
                 self.statusLabel.layer.borderColor = [UIColor colorWithHexString:@"#FBC81A"].CGColor;
                 self.statusLabel.textColor = [UIColor colorWithHexString:@"#FBC81A"];
-                self.statusLabel.text = @" 已结束  ";
+                self.statusLabel.text = @"已结束";
                 break;
                 
             default:
@@ -119,12 +124,14 @@
     return _timeLabel;
 }
 
-- (UILabel *)statusLabel
+- (MyLabel *)statusLabel
 {
     if (!_statusLabel) {
-        _statusLabel = [[UILabel alloc] init];
-        _statusLabel.font = [UIFont systemFontOfSize:12 *self.scale];
+        _statusLabel = [[MyLabel alloc] init];
+        _statusLabel.textInsets = UIEdgeInsetsMake(2, 2, 2, 2);
+        _statusLabel.font = [UIFont systemFontOfSize:9 *self.scale];
         _statusLabel.layer.borderWidth = 1;
+        _statusLabel.textAlignment = NSTextAlignmentCenter;
     }
     return _statusLabel;
 }

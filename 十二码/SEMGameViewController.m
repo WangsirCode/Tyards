@@ -169,7 +169,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (tableView.tag == GAMELISTTABLEVIEW) {
-        return 100 * self.view.scale;
+        return 120 * self.view.scale;
     }
     else
     {
@@ -204,9 +204,10 @@
     NSRange range = NSMakeRange(0, string.length);
     [AttributedStr addAttribute:NSForegroundColorAttributeName
      
-                          value:[UIColor colorWithHexString:@"#1EA11F"]
+                          value:[UIColor colorWithHexString:@"#999999"]
      
                           range:range]  ;
+    [AttributedStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14*self.view.scale] range:range];
     label.attributedText = AttributedStr;
     label.textAlignment = NSTextAlignmentCenter;
     [label mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -219,7 +220,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if (tableView.tag != GAMELISTTABLEVIEW) {
-        return 30*self.view.scale;
+        return 60*self.view.scale;
     }
     return 0;
 }
@@ -363,13 +364,11 @@
     if (!_pageView) {
         _pageView = [[LazyPageScrollView alloc] init];
         _pageView.delegate = self;
-        [_pageView initTab:YES Gap:self.view.width / 3 TabHeight:27*self.view.scale VerticalDistance:10 BkColor:[UIColor whiteColor]];
-        UIView *view=[[UIView alloc] init];
-        view.backgroundColor=[UIColor orangeColor];
+        [_pageView initTab:YES Gap:self.view.width / 3 TabHeight:45*self.view.scale VerticalDistance:0 BkColor:[UIColor whiteColor]];
         [_pageView addTab:@"比赛预告" View:self.noticegameTableview Info:nil];
         [_pageView addTab:@"历史战报" View:self.historygameTableview Info:nil];
         [_pageView addTab:@"赛事一览" View:self.gamelistTableview Info:nil];
-        [_pageView setTitleStyle:[UIFont systemFontOfSize:15] SelFont:[UIFont systemFontOfSize:20] Color:[UIColor blackColor] SelColor:[UIColor colorWithHexString:@"#1EA11F"]];
+        [_pageView setTitleStyle:[UIFont systemFontOfSize:15*self.view.scale] SelFont:[UIFont systemFontOfSize:18*self.view.scale] Color:[UIColor colorWithHexString:@"#666666"] SelColor:[UIColor colorWithHexString:@"#1EA11F"]];
         [_pageView enableBreakLine:YES Width:1 TopMargin:0 BottomMargin:0 Color:[UIColor groupTableViewBackgroundColor]];
         [_pageView generate:^(UIButton *firstTitleControl, UIView *viewTitleEffect) {
             CGRect frame= firstTitleControl.frame;

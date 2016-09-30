@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "MDABizManager.h"
-@class PlayerModel,PlayerDetail,Newses,Articles,Cover,CoachModel;
+@class PlayerModel,PlayerDetail,Newses,Articles,Cover,CoachModel,Avatar;
 @interface PlayerInforesponseModel : NSObject
 
 @property (nonatomic, strong) PlayerModel *resp;

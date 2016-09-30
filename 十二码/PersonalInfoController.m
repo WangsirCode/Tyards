@@ -199,11 +199,11 @@
     UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"infocell"];
     cell.textLabel.text = self.viewModel.cellText[indexPath.row];
     cell.textLabel.textColor = [UIColor colorWithHexString:@"#999999"];
-    cell.textLabel.font = [UIFont systemFontOfSize:18* self.view.scale];
+    cell.textLabel.font = [UIFont systemFontOfSize:15* self.view.scale];
     cell.detailTextLabel.text = self.viewModel.cellDetail[indexPath.row];
     cell.detailTextLabel.textColor = [UIColor colorWithHexString:@"#000000"];
     cell.detailTextLabel.alpha = 0.87;
-    cell.detailTextLabel.font = [UIFont systemFontOfSize:18 * self.view.scale];
+    cell.detailTextLabel.font = [UIFont systemFontOfSize:15 * self.view.scale];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     [cell.detailTextLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -359,8 +359,8 @@
         _tableview = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableview.delegate = self;
         _tableview.dataSource = self;
-        _tableview.backgroundColor = [UIColor BackGroundColor];
-        _tableview.separatorColor = [UIColor BackGroundColor];
+        _tableview.backgroundColor = [UIColor whiteColor];
+        _tableview.separatorColor = [UIColor whiteColor];
     }
     return _tableview;
 }

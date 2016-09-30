@@ -63,11 +63,11 @@
         make.top.equalTo(self.awayImgaeview.mas_bottom).offset(12*scale);
     }];
     [self.homeScoreLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.mas_top).offset(65*scale);
+        make.centerY.equalTo(self.mas_top).offset(40*scale);
         make.left.equalTo(self.homeImageview.mas_right).offset(42*scale);
     }];
     [self.awaySocreLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.mas_top).offset(65*scale);
+        make.centerY.equalTo(self.mas_top).offset(40*scale);
         make.right.equalTo(self.awayImgaeview.mas_left).offset(-42*scale);
     }];
     [self.centerLabel mas_makeConstraints:^(MASConstraintMaker *make) {

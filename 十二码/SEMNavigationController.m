@@ -18,7 +18,7 @@
 @implementation SEMNavigationController
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.navigationBar setBarTintColor:[UIColor colorWithRed:62/255.0 green:182/255.0 blue:103/255.0 alpha:0]];
+    [self.navigationBar setBarTintColor:[UIColor colorWithHexString:@"#279F2A"]];
     self.navigationBar.translucent = NO;
     self.fd_fullscreenPopGestureRecognizer.enabled = YES;
     self.delegate = self;
