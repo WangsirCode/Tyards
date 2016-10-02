@@ -34,8 +34,6 @@ NSString* const imagescash = @"imagecache";
             self.title = @"华中科技大学";
         }
         self.index = 0;
-
-
         [self fetchData];
     }
     return self;
@@ -77,7 +75,6 @@ NSString* const imagescash = @"imagecache";
                     if (self.index == 2) {
                         [subscriber sendCompleted];
                     }
-                    
                     [DataArchive archiveData:self.datasource withFileName:newscash];
                 } failure:^(NSError *aError) {
                     NSLog(@"%@",aError);
@@ -112,12 +109,10 @@ NSString* const imagescash = @"imagecache";
                 [manager fetchReCommendNews:self.code
                                      offset:self.datasource.count success:^(id data) {
                     NSMutableArray* array = [NSMutableArray arrayWithArray:self.datasource];
-                    [array arrayByAddingObjectsFromArray:(NSArray*)data];
-                    self.datasource = nil;
+                    [array appendObjects:data];
                     self.datasource = array;
                     [subscriber sendNext:@1];
                     [subscriber sendCompleted];
-                    NSLog(@"%lu",(unsigned long)self.datasource.count);
                     [DataArchive archiveData:self.datasource withFileName:newscash];
                 } failure:^(NSError *aError) {
                     NSLog(@"%@",aError);
@@ -129,6 +124,7 @@ NSString* const imagescash = @"imagecache";
     }
     return _loadMoreCommand;
 }
+
 - (RACCommand*)searchCommand
 {
     if (!_searchCommand){

@@ -200,6 +200,12 @@
             self.bottomView.sendButton.enabled = NO;
         }
     }];
+    [RACObserve(self.viewModel, sholdReloadCommentTable2) subscribeNext:^(id x) {
+        if (self.viewModel.sholdReloadCommentTable2 == YES) {
+            [self.messageTableview reloadData];
+            [self.messageTableview.mj_footer endRefreshing];
+        }
+    }];
     [[self.viewModel.shareCommand executionSignals] subscribeNext:^(id x) {
         NSLog(@"收到了分享信号");
         CALayer* imageLayer = self.shareView.layer;
@@ -471,6 +477,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
+    
     else if (tableView.tag == NEWSTABLEVIEWTAG)
     {
         Articles* news = self.viewModel.model.articles[indexPath.row];
@@ -478,6 +485,7 @@
         cell.model = news;
         return cell;
     }
+    
     else if (tableView.tag == LISTTABLEVIEWTAG)
     {
         if(kArrayIsEmpty(self.viewModel.players.coaches))
@@ -497,19 +505,22 @@
                     cell.textLabel.text = self.viewModel.players.players[indexPath.row - 1].player.name;
                 }
             }
+            
             else
             {
                 cell.textLabel.text = self.viewModel.players.players[indexPath.row].player.name;
             }
-            return cell;
             
+            return cell;
         }
         UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"TeamPlayerCell"];
         cell.textLabel.textColor = [UIColor colorWithHexString:@"#1EA11F"];
         cell.textLabel.font = [UIFont systemFontOfSize:14*self.view.scale];
+        
         if (indexPath.section == 0) {
             cell.textLabel.text = self.viewModel.players.coaches[indexPath.row].coach.name;
         }
+        
         else
         {
             if (self.viewModel.players.captain) {
@@ -528,10 +539,11 @@
             {
                 cell.textLabel.text = self.viewModel.players.players[indexPath.row].player.name;
             }
-            
         }
         return cell;
     }
+    
+
     else if (tableView.tag == SCHEDULETABLEVIETAG)
     {
         NoticeGameviewCell* cell = [[NoticeGameviewCell alloc] init];
@@ -794,6 +806,10 @@
         _messageTableview.tableHeaderView = backView;
         _messageTableview.backgroundColor = [UIColor BackGroundColor];
         _messageTableview.separatorColor = [UIColor BackGroundColor];
+        _messageTableview.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+            [self.viewModel loadMoreComment];
+            [_messageTableview.mj_footer endRefreshing];
+        }];
     }
     return _messageTableview;
 }
@@ -887,6 +903,10 @@
         [self.scheduleHeaderButton addGestureRecognizer:tap2];
         self.scheduleHeaderButton.backgroundColor = [UIColor whiteColor];
         _scheduleTableview.tableHeaderView = self.scheduleHeaderButton;
+        _scheduleTableview.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+            [self.viewModel loadMoreSchdule];
+            [_scheduleTableview.mj_footer endRefreshing];
+        }];
     }
     return _scheduleTableview;
 }

@@ -43,6 +43,8 @@
                 [string appendString:@" : "];
                 [string appendString:content];
                 NSMutableAttributedString* attri = [[NSMutableAttributedString alloc] initWithString:string];
+                [attri addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12*self.scale] range:NSMakeRange(0, attri.length)];
+                [attri addAttribute:NSForegroundColorAttributeName value:[UIColor grayColor] range:NSMakeRange(0, attri.length)];
                 [attri addAttribute:NSForegroundColorAttributeName value:[UIColor MyColor] range:NSMakeRange(0, firstName.length)];
                 [attri addAttribute:NSForegroundColorAttributeName value:[UIColor MyColor] range:NSMakeRange(firstName.length+4, secName.length)];
                 label.attributedText = attri;
@@ -82,6 +84,8 @@
                         [string appendString:@" : "];
                         [string appendString:content];
                         NSMutableAttributedString* attri = [[NSMutableAttributedString alloc] initWithString:string];
+                        [attri addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12*self.scale] range:NSMakeRange(0, attri.length)];
+                        [attri addAttribute:NSForegroundColorAttributeName value:[UIColor grayColor] range:NSMakeRange(0, attri.length)];
                         [attri addAttribute:NSForegroundColorAttributeName value:[UIColor MyColor] range:NSMakeRange(0, firstName.length)];
                         [attri addAttribute:NSForegroundColorAttributeName value:[UIColor MyColor] range:NSMakeRange(firstName.length+4, secName.length)];
                         label.attributedText = attri;

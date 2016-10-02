@@ -21,7 +21,17 @@
     }
     return self;
 }
-
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
+        [self addSubviews];
+        [self makeConstraits];
+        [self bindModel];
+    }
+    return self;
+}
 
 #pragma mark - viewsetup
 - (void)addSubviews
@@ -69,6 +79,7 @@
             
             self.bottomview.commentLabel.text = [@(self.model.commentCount) stringValue];;
             self.bottomview.inifoLabel.text = [self.model getInfo];
+            
             if (self.model.thumbnail.url)
             {
                 NSURL* url = [[NSURL alloc] initWithString:self.model.thumbnail.url];
@@ -76,6 +87,7 @@
                                   placeholderImage:[UIImage imageNamed:@"zhanwei.jpg"]
                                            options:SDWebImageRefreshCached];
             }
+            
             else
             {
                 self.newsImage.image = [UIImage imageNamed:@"zhanwei.jpg"];

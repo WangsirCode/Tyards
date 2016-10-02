@@ -109,6 +109,7 @@ NSString* const TopicsCache = @"TopicsCache";
                     [manager fetchMyFans:token offset:count success:^(id data) {
                         NSMutableArray<News*> *array = [NSMutableArray arrayWithArray:self.attensionDatasource];
                         [array appendObjects:data];
+                        self.attensionDatasource = nil;
                         self.attensionDatasource = array;
                         [DataArchive archiveData:self.attensionDatasource withFileName:@"attension"];
                         [subscriber sendNext:@1];
@@ -124,15 +125,16 @@ NSString* const TopicsCache = @"TopicsCache";
     }
     return _loadMoreFansCommand;
 }
-- (RACCommand*)loadMoreNewsCommand
+- (RACCommand*)loadMoreNewsCommad
 {
     if (!_loadMoreNewsCommad) {
         _loadMoreNewsCommad = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
             return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
                 SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
                 [manager fetchNews:self.code offset:self.newsDataSource.count success:^(id data) {
-                    NSMutableArray<News*> *array = [NSMutableArray arrayWithArray:self.newsDataSource];
+                    NSMutableArray *array = [NSMutableArray arrayWithArray:self.newsDataSource];
                     [array appendObjects:data];
+                    self.newsDataSource = nil;
                     self.newsDataSource = array;
                     [DataArchive archiveData:self.newsDataSource withFileName:NewsCache];
                     [subscriber sendNext:@1];
@@ -179,6 +181,7 @@ NSString* const TopicsCache = @"TopicsCache";
                 [manager fetchTopics:self.code offset:self.topicDataSource.count success:^(id data) {
                     NSMutableArray *array = [NSMutableArray arrayWithArray:self.topicDataSource];
                     [array appendObjects:data];
+                    self.topicDataSource = nil;
                     self.topicDataSource = array;
                     [DataArchive archiveData:self.topicDataSource withFileName:TopicsCache];
                     [subscriber sendNext:@1];

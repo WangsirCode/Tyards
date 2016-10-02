@@ -285,6 +285,7 @@
  *  @return NSURLSessionTask
  */
 - (NSURLSessionTask*)fetchTeamComments:(NSString*)ide
+                                offset:(NSInteger)offset
                               success:(void (^)(id data))successBlock
                               failure:(void (^)(NSError *aError))failureBlock;
 
@@ -303,6 +304,7 @@
 - (NSURLSessionTask*)fetchTeamGames:(NSString*)ide
                                from:(long long)from
                                  to:(long long)to
+                             offset:(NSInteger)offset
                                success:(void (^)(id data))successBlock
                                failure:(void (^)(NSError *aError))failureBlock;
 
@@ -691,6 +693,7 @@
  *  @return NSURLSessionTask
  */
 - (NSURLSessionTask*)fetchGameSchedule:(NSString*)tournamentId
+                                offset:(NSInteger)offset
                            success:(void (^)(id data))successBlock
                            failure:(void (^)(NSError *aError))failureBlock;
 

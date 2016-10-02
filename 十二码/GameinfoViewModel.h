@@ -20,10 +20,13 @@
 @property (nonatomic,assign ) NSInteger     status;
 @property (nonatomic,strong ) RACCommand    * shareCommand;
 @property (nonatomic,strong ) RACCommand    * likeCommand;
+@property (nonatomic,assign) BOOL shouldReloadScheduleTable;
 @property (nonatomic,strong) NSArray* infoTableviewRowNumber;
 @property (nonatomic,strong) NSArray* infoTableViewCellInfo;
 @property (nonatomic,strong) NSArray* infotableviewCellname;
 @property (nonatomic,assign) NSInteger listTableIndex;
 @property (nonatomic,assign) BOOL fan;
 @property (nonatomic,assign) BOOL didFaned;
+@property (nonatomic,strong) NSString* teamId;
+- (void)loadMoreSchedule;
 @end

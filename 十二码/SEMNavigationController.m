@@ -21,14 +21,5 @@
     [self.navigationBar setBarTintColor:[UIColor colorWithHexString:@"#279F2A"]];
     self.navigationBar.translucent = NO;
     self.fd_fullscreenPopGestureRecognizer.enabled = YES;
-    self.delegate = self;
 }
-- (void)selfPopView{
-    
-    [self popViewControllerAnimated: YES];
-}
-
-
-
-
 @end

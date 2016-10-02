@@ -176,6 +176,7 @@
 
     cell.textLabel.text = text;
     cell.textLabel.font = [UIFont systemFontOfSize:14*self.view.scale];
+    cell.detailTextLabel.font = [UIFont systemFontOfSize:14*self.view.scale];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 //    if([text isEqualToString:@"推荐好友"])
 //    {

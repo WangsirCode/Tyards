@@ -30,6 +30,7 @@
 @property (nonatomic,assign) BOOL   shouldUpdateList;
 @property (nonatomic,assign) BOOL   shouldUpdateSchedule;
 @property (nonatomic,assign) BOOL   shouldReloadCommentTable;
+@property (nonatomic,assign) BOOL   sholdReloadCommentTable2;
 @property (nonatomic,strong) NSString * teamId;
 @property (nonatomic,assign) NSInteger newsId;
 @property (nonatomic,assign) NSInteger targetCommentId;
@@ -37,8 +38,13 @@
 @property (nonatomic,strong) NSString* content;
 @property (nonatomic,assign) NSInteger postType;
 @property (nonatomic,assign) NSInteger num;
+@property (nonatomic,assign) long from;
+@property (nonatomic,assign) long to;
 - (void)loadSchedule:(NSString*)fromDate;
 - (void)loadList:(NSString*)fromDate;
 - (void)loadSRecord:(NSString*)formDate;
 - (void)addNews;
+- (void)loadMoreSchdule;
+- (void)loadMoreNews;
+- (void)loadMoreComment;
 @end

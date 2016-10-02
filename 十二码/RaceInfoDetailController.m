@@ -205,8 +205,15 @@
     }
     else
     {
-        self.headerView.homeScoreLabel.text = [NSString stringWithFormat: @"%ld(%ld)", (long)model.homeScore,(long)model.penaltyHome];
-        self.headerView.awaySocreLabel.text = [NSString stringWithFormat: @"(%ld)%ld", (long)model.penaltyAway,(long)model.awayScore];
+        if (model.penaltyAway == 0 && model.penaltyHome == 0) {
+            self.headerView.homeScoreLabel.text = [NSString stringWithFormat: @"%ld", (long)model.homeScore];
+            self.headerView.awaySocreLabel.text = [NSString stringWithFormat: @"%ld", (long)model.awayScore];
+        }
+        else
+        {
+            self.headerView.homeScoreLabel.text = [NSString stringWithFormat: @"%ld(%ld)", (long)model.homeScore,(long)model.penaltyHome];
+            self.headerView.awaySocreLabel.text = [NSString stringWithFormat: @"(%ld)%ld", (long)model.penaltyAway,(long)model.awayScore];
+        }
     }
     self.headerView.centerLabel.textColor = [UIColor whiteColor];
     self.headerView.homeScoreLabel.textColor = [UIColor whiteColor];
@@ -742,6 +749,7 @@
     }
     return _dataView;
 }
+
 - (UITableView*)messageTableView
 {
     if (!_messageTableView) {
@@ -878,6 +886,20 @@
         }
         [self.messageTableView reloadData];
     }
+}
+-(UIBarButtonItem *)backItem
+{
+    if (!_backItem) {
+        UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
+        [button setImage:[UIImage imageNamed:@"返回icon"] forState:UIControlStateNormal];
+        button.frame = CGRectMake(0, 0, 20, 15);
+        _backItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+        [[button rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }];
+        
+    }
+    return _backItem;
 }
 
 @end

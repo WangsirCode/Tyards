@@ -83,7 +83,7 @@
                 label.userInteractionEnabled = YES;
                 label.font = [UIFont systemFontOfSize:18*self.scale];
                 width = obj.text.length * 20 + 10;
-                if ((count=count+obj.text.length) > 15) {
+                if ((count=count+obj.text.length) > 12) {
                     count = obj.text.length;
                     row = 0;
                     column ++;

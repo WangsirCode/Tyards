@@ -27,4 +27,5 @@
 @property (nonatomic,assign) NSInteger num;
 @property (nonatomic,assign) BOOL   shouldReloadCommentTable;
 - (void)addNews;
+- (void)loadMoreComment;
 @end

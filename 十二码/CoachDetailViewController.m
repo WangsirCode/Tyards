@@ -453,6 +453,7 @@
     if (tableView.tag == INFOTABLEVIEWTAG)
     {
         UIView* view = [UIView new];
+        view.backgroundColor = [UIColor whiteColor];
         UILabel* label = [UILabel new];
         if (section == 0) {
             label.text = @"个人简介";

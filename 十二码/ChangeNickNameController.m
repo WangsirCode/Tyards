@@ -31,8 +31,6 @@
     [super viewDidLoad];
     [self setupView];
     [self bindModel];
-    
-    // Do any additional setup after loading the view.
 }
 
 #pragma viewsetup

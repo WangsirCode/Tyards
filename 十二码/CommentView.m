@@ -40,7 +40,6 @@
             [string appendString:@":  "];
             [string appendString:reply.content];
             UILabel* label = [[UILabel alloc] init];
-            label.font = [UIFont systemFontOfSize:14];
             label.textAlignment = NSTextAlignmentLeft;
             label.numberOfLines = 0;
             [self addSubview:label];
@@ -52,6 +51,7 @@
             NSRange fisrtarange = [string rangeOfString:filstName];
             NSRange range = NSMakeRange(filstName.length, string.length - filstName.length);
             NSRange secrange;
+            [AttributedStr addAttribute:NSForegroundColorAttributeName value:[UIColor grayColor] range:NSMakeRange(0, AttributedStr.length)];
             if (secName) {
                 secrange = [string rangeOfString:secName options:nil range:range];
                 [AttributedStr addAttribute:NSForegroundColorAttributeName
@@ -65,6 +65,7 @@
                                   value:[UIColor colorWithHexString:@"#1EA11F"]
              
                                   range:fisrtarange];
+            [AttributedStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12*self.scale] range:NSMakeRange(0, AttributedStr.length)];
             label.attributedText = AttributedStr;
             
             //设置约束

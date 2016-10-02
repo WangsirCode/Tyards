@@ -156,6 +156,12 @@
             [self.navigationController.navigationBar setShadowImage:nil];
         }
     }];
+    [RACObserve(self.viewModel, shouldReloadScheduleTable) subscribeNext:^(id x) {
+        if (self.viewModel.shouldReloadScheduleTable == YES) {
+            [self.gameTableView reloadData];
+            [self.gameTableView.mj_footer endRefreshing];
+        }
+    }];
     [RACObserve(self.viewModel,fan) subscribeNext:^(id x) {
         self.likeButton.selected = self.viewModel.fan;
         if (self.viewModel.didFaned) {
@@ -563,6 +569,7 @@
     else if (tableView.tag == 100)
     {
         UIView* view = [UIView new];
+        view.backgroundColor = [UIColor whiteColor];
         UILabel* label = [UILabel new];
         if (section == 0) {
             label.text = @"基本资料";
@@ -593,6 +600,7 @@
     {
         if (self.viewModel.listTableIndex == 0) {
             UIView* view = [UIView new];
+            view.backgroundColor = [UIColor whiteColor];
             UILabel* label = [UILabel new];
             label.textColor = [UIColor colorWithHexString:@"#A1B2BA"];
             label.textAlignment = NSTextAlignmentLeft;
@@ -790,6 +798,10 @@
         _gameTableView.backgroundColor = [UIColor BackGroundColor];
         _gameTableView.separatorColor = [UIColor BackGroundColor];
         _gameTableView.bounces = NO;
+        _gameTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+            [self.viewModel loadMoreSchedule];
+        }];
+        
     }
     return _gameTableView;
 }
@@ -916,7 +928,6 @@
         [[button rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
             [self.navigationController popViewControllerAnimated:YES];
         }];
-        
     }
     return _backItem;
 }
