@@ -323,15 +323,12 @@
     if (!_backItem) {
         UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
         [button setImage:[UIImage imageNamed:@"返回icon"] forState:UIControlStateNormal];
-        button.frame = CGRectMake(0, 0, 25, 20);
+        button.frame = CGRectMake(0, 0, 20, 15);
         _backItem = [[UIBarButtonItem alloc] initWithCustomView:button];
         [[button rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
             [self.navigationController popViewControllerAnimated:YES];
-            [self.mm_drawerController toggleDrawerSide:MMDrawerSideLeft animated:NO completion:^(BOOL finished) {
-                
-            }];
         }];
-    
+        
     }
     return _backItem;
 }

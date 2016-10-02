@@ -49,24 +49,24 @@ NSString* const USER_INFO = @"userinfo";
     NSUserDefaults* database = [NSUserDefaults standardUserDefaults];
     [database setFloat:scale forKey:@"scale"];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     [UINavigationBar appearance].titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
     [UINavigationBar appearance].tintColor = [UIColor whiteColor];
     self.window.rootViewController = [HRTRouter objectForURL: @"initial"];
+    
     //友盟
     [UMSocialData setAppKey:kYMAppKey];
     [UMSocialConfig hiddenNotInstallPlatforms:@[UMShareToWechatSession, UMShareToWechatTimeline,UMShareToQQ,UMShareToQzone]];
     [UMSocialQQHandler setQQWithAppId:kQQAppID appKey:kQQAppKey url:@"http://www.umeng.com/social"];
     [UMSocialQQHandler setSupportWebView:YES];
     [UMSocialWechatHandler setWXAppId:WXPatient_App_ID appSecret:WXPatient_App_Secret url:@"http://www.umeng.com/social"];
-    [[IQKeyboardManager sharedManager].disabledDistanceHandlingClasses addObject:[MakeInvitationController class]];
+    
     // Override point for customization after application launch.
     SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
     [manager startUp:^(id data) {
         self.startDic=data;
-//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAdDetail:) name:BBLaunchAdDetailDisplayNotification object:nil];
+
         [BBLaunchAdMonitor showAdAtPath:self.startDic[@"url"]
                                  onView:self.window.rootViewController.view
                            timeInterval:3.

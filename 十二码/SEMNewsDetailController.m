@@ -28,6 +28,7 @@
 @interface SEMNewsDetailController ()<UITableViewDelegate,UITableViewDataSource,UIWebViewDelegate,ShareViewDelegate,UMSocialUIDelegate,CommentCellDelegate>
 @property (nonatomic,strong)NewsDetailViewModel* viewModel;
 @property (nonatomic,strong)UIWebView* webView;
+@property (nonatomic,strong)UIBarButtonItem* backItem;
 @property (nonatomic,strong)UILabel* titleLabel;
 @property (nonatomic,strong)UILabel* infoLabbel;
 @property (nonatomic,strong)UITableView* tableview;
@@ -81,6 +82,7 @@
 - (void)addsubviews
 {
     self.navigationItem.rightBarButtonItems = @[self.shareItem];
+    self.navigationItem.leftBarButtonItem = self.backItem;
     [self.view addSubview:self.scrollview];
     [self.view addSubview:self.maskView];
     [self.view addSubview:self.shareView];
@@ -114,7 +116,6 @@
     .heightIs(50*self.view.scale);
 
     [_scrollview setupAutoContentSizeWithBottomView:self.tableview bottomMargin:50*self.view.scale];
-    
 }
 - (void)bindModel
 {
@@ -629,7 +630,20 @@
     }
     return _bottomView;
 }
-
+-(UIBarButtonItem *)backItem
+{
+    if (!_backItem) {
+        UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
+        [button setImage:[UIImage imageNamed:@"返回icon"] forState:UIControlStateNormal];
+        button.frame = CGRectMake(0, 0, 20, 15);
+        _backItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+        [[button rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }];
+        
+    }
+    return _backItem;
+}
 - (ShareView *)shareView
 {
     if (!_shareView) {

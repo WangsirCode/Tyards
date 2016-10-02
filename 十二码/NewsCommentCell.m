@@ -45,8 +45,8 @@
     _view1 = view1;
     
     UILabel *view2 = [UILabel new];
-    view2.textColor = [UIColor grayColor];
-    view2.font = [UIFont systemFontOfSize:16*self.scale];
+    view2.textColor = [UIColor blackColor];
+    view2.font = [UIFont systemFontOfSize:14*self.scale];
     view2.numberOfLines = 0;
     _view2 = view2;
     

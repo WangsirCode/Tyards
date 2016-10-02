@@ -117,7 +117,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (tableView.tag == 100) {
-        NewsViewCell* cell = (NewsViewCell*)[tableView dequeueReusableCellWithIdentifier:@"newscell" forIndexPath:indexPath];
+        NewsViewCell* cell = [[NewsViewCell alloc] init];
         News* news = self.viewModel.newsDataSource[indexPath.row];
         cell.model = news;
         return cell;
@@ -135,7 +135,7 @@
     }
     else
     {
-        NewsViewCell* cell = (NewsViewCell*)[tableView dequeueReusableCellWithIdentifier:@"attensioncell" forIndexPath:indexPath];
+        NewsViewCell* cell = [[NewsViewCell alloc] init];
         News* news = self.viewModel.attensionDatasource[indexPath.row];
         cell.model = news;
         return cell;
@@ -186,23 +186,19 @@
         _newstableview = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _newstableview.delegate = self;
         _newstableview.dataSource = self;
-        _newstableview.tag = 1;
+        _newstableview.tag = 100;
         [_newstableview registerClass:[NewsViewCell class] forCellReuseIdentifier:@"newscell"];
         _newstableview.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
             
             
             [[self.viewModel.loadNewNewsCommand execute: nil] subscribeNext:^(id x) {
-                NSLog(@"%@",x);
                 [self.newstableview reloadData];
-                NSLog(@"已经更新完了");
                 [self endRefresh];
             }];
         }];
         _newstableview.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
             
             [[self.viewModel.loadMoreNewsCommad execute: nil] subscribeNext:^(id x) {
-                NSLog(@"已经加载了更多了");
-                NSLog(@"%@",x);
                 [_newstableview reloadData];
                 [self endRefresh];
             }];
@@ -222,15 +218,13 @@
         _topictableview = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _topictableview.delegate = self;
         _topictableview.dataSource = self;
-        _topictableview.tag = 2;
+        _topictableview.tag = 101;
         [_topictableview registerClass:[TopicCell class] forCellReuseIdentifier:@"topiccell"];
         _topictableview.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
             
             
             [[self.viewModel.loadNewTopicsCommand execute: nil] subscribeNext:^(id x) {
-                NSLog(@"%@",x);
                 [self.topictableview reloadData];
-                NSLog(@"已经更新完了");
                 [self endRefresh];
             }];
         }];
@@ -238,8 +232,6 @@
         _topictableview.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
             
             [[self.viewModel.loadMoreTopicsCommand execute: nil] subscribeNext:^(id x) {
-                NSLog(@"已经加载了更多了");
-                NSLog(@"%@",x);
                 [_topictableview reloadData];
                 [self endRefresh];
             }];
@@ -261,7 +253,7 @@
         _attensionTableview = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _attensionTableview.delegate = self;
         _attensionTableview.dataSource = self;
-        _attensionTableview.tag = 3;
+        _attensionTableview.tag = 102;
         [_attensionTableview registerClass:[NewsViewCell class] forCellReuseIdentifier:@"attensioncell"];
         _attensionTableview.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
             

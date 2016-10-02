@@ -61,6 +61,8 @@
 @property (nonatomic, assign) NSInteger likeCount;
 
 @property (nonatomic, assign) NSInteger commentCount;
+
+@property (nonatomic,strong) NSString* author;
 - (NSString*)getInfo;
 @end
 

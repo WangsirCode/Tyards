@@ -16,6 +16,7 @@
     {
         self.status = 0;
         self.listTableIndex = 0;
+        self.teamId = [(NSNumber*)dictionary[@"id"] stringValue];
         [self fetchData:[(NSNumber*)dictionary[@"id"] stringValue]];
         //先用这个测试
 //        [self fetchData:@"9"];
@@ -75,7 +76,7 @@
     } failure:^(NSError *aError) {
 
     }];
-    [manager fetchGameSchedule:tournamentId success:^(id data) {
+    [manager fetchGameSchedule:tournamentId offset:0 success:^(id data) {
         self.scheduleModel = data;
         self.status += 1;
     } failure:^(NSError *aError) {
@@ -159,5 +160,25 @@
         }];
     }
     return _shareCommand;
+}
+- (void)loadMoreSchedule
+{
+    SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
+    [manager fetchGameSchedule:self.teamId offset:[self getOffset] success:^(id data) {
+        NSMutableArray* array = [NSMutableArray arrayWithArray:self.scheduleModel];
+        [array appendObjects:(NSArray*)data];
+        self.scheduleModel = array;
+        self.shouldReloadScheduleTable = YES;
+    } failure:^(NSError *aError) {
+        
+    }];
+}
+- (NSInteger)getOffset
+{
+    __block NSInteger offset= 0;
+    [self.scheduleModel enumerateObjectsUsingBlock:^(TournamentGamesModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        offset += obj.games.count;
+    }];
+    return offset;
 }
 @end

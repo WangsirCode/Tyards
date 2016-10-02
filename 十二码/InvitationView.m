@@ -54,8 +54,9 @@
         labels[i].sd_layout
         .topSpaceToView(self.titleLable,(16+i*24)*self.scale)
         .leftSpaceToView(view,10)
-        .rightEqualToView(self)
-        .autoHeightRatio(0);
+        .rightSpaceToView(self,10)
+        .autoHeightRatio(0)
+        .maxHeightIs(35*self.scale);
     }
     self.breakLine.sd_layout
     .leftEqualToView(self)
@@ -74,7 +75,7 @@
     .topSpaceToView(self.breakLine,15*self.scale)
     .heightIs(20*self.scale)
     .widthIs(20*self.scale)
-    .leftSpaceToView(self,120*self.scale);
+    .leftSpaceToView(self,110*self.scale);
 }
 - (void)bindModel
 {

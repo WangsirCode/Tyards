@@ -34,7 +34,7 @@
 @property (nonatomic,strong) UITableView      * tableView;
 @property (nonatomic,strong) UIBarButtonItem  * searchItem;
 @property (nonatomic,strong) UIBarButtonItem  * userItem;
-@property (nonatomic,strong) UIButton* button;
+@property (nonatomic,strong) UIButton         * button;
 @end
 
 @implementation SEMHomeVIewController
@@ -90,10 +90,7 @@
 
         
         [[self.viewModel.loadNewCommand execute: nil] subscribeNext:^(id x) {
-            NSLog(@"%@",x);
-            
             if ([x  isEqual: @1]) {
-                //更新tableview
                 [self.tableView reloadData];
             }
             else
@@ -145,11 +142,9 @@
     }];
     self.searchItem.rac_command = self.viewModel.searchCommand;
     [self.searchItem.rac_command.executionSignals subscribeNext:^(id x) {
-        NSLog(@"x");//为什么先执行这句？   
         SEMSearchViewController* searchControlle = [HRTRouter objectForURL:@"search" withUserInfo:@{}];
         searchControlle.delegate = self;
         [self.navigationController pushViewController:searchControlle animated:true];
-        
     }];
 }
 
@@ -196,7 +191,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     News* news = self.viewModel.datasource[indexPath.row];
-    HomeCell* cell = (HomeCell*)[self.tableView dequeueReusableCellWithIdentifier:@"HomeCell" forIndexPath:indexPath];
+    HomeCell* cell = [[HomeCell alloc] init];
     cell.model = news;
     return cell;
 }
@@ -219,10 +214,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSInteger ide = self.viewModel.datasource[indexPath.row].id;
-    
     News* news = self.viewModel.datasource[indexPath.row];
-
-    
     SEMNewsDetailController* controller = [[SEMNewsDetailController alloc] initWithDictionary:@{@"ides":@(ide)}];
     controller.hidesBottomBarWhenPushed = YES;
     controller.shareTitle=news.title;
@@ -296,7 +288,6 @@
         _button.frame = CGRectMake(0, 0, 30, 30);
         _button.layer.masksToBounds = YES;
         _button.layer.cornerRadius = 15;
-    
     }
     return _button;
 }

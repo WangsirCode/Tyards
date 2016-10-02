@@ -65,7 +65,7 @@ NSString* const StatUp=@"/welcome/startup/";
     static id _sharedInstance = nil;
     static dispatch_once_t oncePredicate;
     dispatch_once(&oncePredicate, ^{
-        NSURL* url = [NSURL URLWithString: @"http://www.12yards.cn"];
+        NSURL* url = [NSURL URLWithString: @"http://dev.12yards.cn"];
         _sharedInstance = [[self alloc] initWithBaseURL: url];
     });
     return _sharedInstance;
@@ -344,13 +344,13 @@ NSString* const StatUp=@"/welcome/startup/";
 }
 
 //获取评论
-- (NSURLSessionTask *)fetchTeamComments:(NSString *)ide success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
+- (NSURLSessionTask *)fetchTeamComments:(NSString *)ide offset:(NSInteger)offset success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
 {
     [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
     NSMutableString* URL = [[NSMutableString alloc] init];
     [URL appendString:TeamComments];
     [URL appendString:ide];
-    NSDictionary* para = @{@"unflattern":@YES};
+    NSDictionary* para = @{@"unflattern":@YES,@"offset":@(offset)};
     return [self GET:URL parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -360,7 +360,7 @@ NSString* const StatUp=@"/welcome/startup/";
         failureBlock(error);
     }];
 }
-- (NSURLSessionTask *)fetchTeamGames:(NSString *)ide from:(long long)from to:(long long)to success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
+- (NSURLSessionTask *)fetchTeamGames:(NSString *)ide from:(long long)from to:(long long)to offset:(NSInteger)offset success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
 {
     [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
     NSMutableString* URL = [[NSMutableString alloc] init];
@@ -368,11 +368,11 @@ NSString* const StatUp=@"/welcome/startup/";
     [URL appendString:ide];
     NSDictionary* para;
     if (from == 0) {
-        para = @{@"group":@YES};
+        para = @{@"group":@YES,@"offset":@(offset)};
     }
     else
     {
-        para = @{@"group":@YES,@"from":@(from),@"to":@(to)};
+        para = @{@"group":@YES,@"from":@(from),@"to":@(to),@"offset":@(offset)};
     }
     return [self GET:URL parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
         
@@ -785,13 +785,13 @@ NSString* const StatUp=@"/welcome/startup/";
     }];
 }
 //获取赛程
-- (NSURLSessionTask *)fetchGameSchedule:(NSString *)tournamentId success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
+- (NSURLSessionTask *)fetchGameSchedule:(NSString *)tournamentId offset:(NSInteger)offset success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
 {
     [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
     NSMutableString* URL = [[NSMutableString alloc] init];
     [URL appendString:GameSchedule];
     [URL appendString:tournamentId];
-    NSDictionary* dic = @{@"group":@YES};
+    NSDictionary* dic = @{@"group":@YES,@"offset":@(offset)};
     return [self GET:URL parameters:dic progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {

@@ -295,17 +295,13 @@
             
             
             [[self.viewModel.loadNewHistoryGameCommand execute: nil] subscribeNext:^(id x) {
-                NSLog(@"%@",x);
                 [self.historygameTableview reloadData];
-                NSLog(@"已经更新完了");
                 [self endRefresh];
             }];
         }];
         _historygameTableview.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
             
             [[self.viewModel.loadMoreHistoryGameCommand execute: nil] subscribeNext:^(id x) {
-                NSLog(@"已经加载了更多了");
-                NSLog(@"%@",x);
                 [_historygameTableview reloadData];
                 [self endRefresh];
             }];
@@ -334,17 +330,13 @@
             
             
             [[self.viewModel.loadNewGameListCommand execute: nil] subscribeNext:^(id x) {
-                NSLog(@"%@",x);
                 [self.gamelistTableview reloadData];
-                NSLog(@"已经更新完了");
                 [self endRefresh];
             }];
         }];
         _gamelistTableview.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
             
             [[self.viewModel.loadMoreGameListCommand execute: nil] subscribeNext:^(id x) {
-                NSLog(@"已经加载了更多了");
-                NSLog(@"%@",x);
                 [_gamelistTableview reloadData];
                 [self endRefresh];
             }];

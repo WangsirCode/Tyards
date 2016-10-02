@@ -155,7 +155,9 @@
 {
     if (!_logoImageview) {
         _logoImageview = [[UIImageView alloc] init];
-        _logoImageview.image = [UIImage imageNamed:@"足球logo"];
+        _logoImageview.image = [UIImage imageNamed:@"logo"];
+        _logoImageview.layer.cornerRadius = 20*self.view.scale;
+        _logoImageview.layer.masksToBounds = YES;
     }
     return _logoImageview;
 }
@@ -190,10 +192,10 @@
 {
     if (!_infoLabel) {
         _infoLabel = [[UILabel alloc] init];
-        _infoLabel.text = @"曾经的足球梦，在这里实现";
+        _infoLabel.text = @"我们自己的绿茵青春";
         _infoLabel.textAlignment = NSTextAlignmentCenter;
         _infoLabel.textColor = [UIColor whiteColor];
-        _infoLabel.font = [UIFont systemFontOfSize:14];
+        _infoLabel.font = [UIFont systemFontOfSize:14*self.view.scale];
     }
     return _infoLabel;
 }

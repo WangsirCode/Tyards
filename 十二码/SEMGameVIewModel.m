@@ -150,7 +150,7 @@ NSString* const GameListCache = @"GameListCache";
                 SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
                 [manager fetchNoticeGame:self.code offset:self.niticeGameCount success:^(id data) {
                     NSMutableArray* array = [NSMutableArray arrayWithArray:self.noticeGameDatasource];
-                    [array arrayByAddingObjectsFromArray:(NSArray*)data];
+                    [array appendObjects:data];
                     self.noticeGameDatasource = nil;
                     self.noticeGameDatasource = array;
                     self.niticeGameCount = 0;
