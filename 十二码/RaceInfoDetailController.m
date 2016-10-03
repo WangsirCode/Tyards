@@ -192,12 +192,32 @@
             self.commmentBottomView.sendButton.enabled = NO;
         }
     }];
+    [RACObserve(self.viewModel, updateMessagaTable) subscribeNext:^(id x) {
+        if (self.viewModel.updateMessagaTable == YES) {
+            [self.messageTableView.mj_footer endRefreshing];
+            [self.messageTableView reloadData];
+        }
+    }];
+    [RACObserve(self.viewModel, updateNewsTable) subscribeNext:^(id x) {
+        if (self.viewModel.updateNewsTable == YES) {
+            [self.newsTableView.mj_footer endRefreshing];
+            [self.newsTableView reloadData];
+        }
+    }];
 }
 - (void)setUpHeaderView
 {
     Games* model = self.viewModel.gameModel;
     self.headerView.titleLabel.text = @"";
-    self.headerView.roundLabel.text = model.round.name;
+    NSMutableString* info = [NSMutableString new];
+    if (model.group.name) {
+        [info appendString:model.group.name];
+        [info appendString:@"  "];
+    }
+    if (model.round.name) {
+        [info appendString:model.round.name];
+    }
+    self.headerView.roundLabel.text = info;
     self.headerView.status = [model getStatus1];
     if (self.headerView.status == 2) {
         self.headerView.homeScoreLabel.text = @"-";
@@ -728,6 +748,9 @@
         _newsTableView.backgroundColor = [UIColor BackGroundColor];
         _newsTableView.separatorColor = [UIColor BackGroundColor];
         _newsTableView.bounces = NO;
+        _newsTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+            [self.viewModel loadMoreNews];
+        }];
     }
     return _newsTableView;
 }
@@ -765,6 +788,10 @@
         _messageTableView.backgroundColor = [UIColor BackGroundColor];
         _messageTableView.separatorColor = [UIColor BackGroundColor];
         _messageTableView.bounces = NO;
+        _messageTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+            [self.viewModel loadMoreMessages];
+        }];
+
     }
     return _messageTableView;
 }

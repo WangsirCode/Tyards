@@ -24,7 +24,7 @@
 - (void)fetchData:(NSString*)matchId
 {
     SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
-    [manager fetchGameNews:matchId success:^(id data) {
+    [manager fetchGameNews:matchId offset:0 success:^(id data) {
         self.newsModel = data;
         self.status += 1;
     } failure:^(NSError *aError) {
@@ -36,7 +36,7 @@
     } failure:^(NSError *aError) {
         
     }];
-    [manager fetchGameMessage:matchId success:^(id data) {
+    [manager fetchGameMessage:matchId offset:0 success:^(id data) {
         self.messageModel = data;
         self.status += 1;
     } failure:^(NSError *aError) {
@@ -114,7 +114,7 @@
                         }];
 
                         [manager postMatchNews:self.raceId content:self.content images:string token:[self getToken] success:^(id data) {
-                            [manager fetchGameMessage:self.raceId success:^(id data) {
+                            [manager fetchGameMessage:self.raceId offset:0 success:^(id data) {
                                 self.messageModel = data;
                                 self.shouldReloadCommentTable = YES;
                             } failure:^(NSError *aError) {
@@ -133,7 +133,7 @@
         {
             SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
             [manager postMatchNews:self.raceId content:self.content images:@"" token:[self getToken] success:^(id data) {
-                [manager fetchGameMessage:self.raceId success:^(id data) {
+                [manager fetchGameMessage:self.raceId offset:0 success:^(id data) {
                     self.messageModel = data;
                     self.shouldReloadCommentTable = YES;
                 } failure:^(NSError *aError) {
@@ -150,7 +150,7 @@
     {
         SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
         [manager postComment:self.newsId content:self.content targetCommentId:0 remind:0 token:[self getToken] success:^(id data) {
-            [manager fetchGameMessage:self.raceId success:^(id data) {
+            [manager fetchGameMessage:self.raceId offset:0 success:^(id data) {
                 self.messageModel = data;
                 self.shouldReloadCommentTable = YES;
             } failure:^(NSError *aError) {
@@ -164,7 +164,7 @@
     {
         SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
         [manager postComment:self.newsId content:self.content targetCommentId:self.targetCommentId remind:self.remindId token:[self getToken] success:^(id data) {
-            [manager fetchGameMessage:self.raceId success:^(id data) {
+            [manager fetchGameMessage:self.raceId offset:0 success:^(id data) {
                 self.messageModel = data;
                 self.shouldReloadCommentTable = YES;
             } failure:^(NSError *aError) {
@@ -174,5 +174,29 @@
             
         }];
     }
+}
+- (void)loadMoreNews
+{
+    SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
+    [manager fetchGameNews:self.raceId offset:self.newsModel.count success:^(id data) {
+        NSMutableArray *array = [[NSMutableArray alloc] initWithArray:self.newsModel];
+        [array appendObjects:(NSArray*)data];
+        self.newsModel = array;
+        self.updateNewsTable = YES;
+    } failure:^(NSError *aError) {
+        
+    }];
+}
+- (void)loadMoreMessages
+{
+    SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
+    [manager fetchGameMessage:self.raceId offset:self.messageModel.count success:^(id data) {
+        NSMutableArray *array = [[NSMutableArray alloc] initWithArray:self.newsModel];
+        [array appendObjects:(NSArray*)data];
+        self.messageModel = array;
+        self.updateMessagaTable = YES;
+    } failure:^(NSError *aError) {
+        
+    }];
 }
 @end

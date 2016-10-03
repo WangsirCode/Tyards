@@ -253,6 +253,12 @@
             }
         }
     }];
+    [RACObserve(self.viewModel, updateNewsTable) subscribeNext:^(id x) {
+        if (self.viewModel.updateNewsTable == YES) {
+            [self.newsTableview.mj_footer endRefreshing];
+            [self.newsTableview reloadData];
+        }
+    }];
         UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] initWithActionBlock:^(id  _Nonnull sender) {
             [self.view addSubview:self.alartView];
             self.viewModel.pickerIndex = RECORDINDEX;
@@ -828,6 +834,9 @@
         _newsTableview.tableHeaderView = backView;
         _newsTableview.backgroundColor = [UIColor BackGroundColor];
         _newsTableview.separatorColor = [UIColor BackGroundColor];
+        _newsTableview.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+            [self.viewModel loadMoreNews];
+        }];
     }
     return _newsTableview;
 }

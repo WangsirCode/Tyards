@@ -26,5 +26,9 @@
 @property (nonatomic,strong) NSString* content;
 @property (nonatomic,assign) NSInteger postType;
 @property (nonatomic,assign) NSInteger num;
+@property (nonatomic,assign) BOOL updateNewsTable;
+@property (nonatomic,assign) BOOL updateCommentTable;
 - (void)addNews;
+- (void)loadMoreComment;
+- (void)loadMoreNews;
 @end

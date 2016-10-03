@@ -210,6 +210,18 @@
         }
         
     }];
+    [RACObserve(self.viewModel, updateNewsTable) subscribeNext:^(id x) {
+        if (self.viewModel.updateNewsTable == YES) {
+            [self.newsTableview.mj_footer endRefreshing];
+            [self.newsTableview reloadData];
+        }
+    }];
+    [RACObserve(self.viewModel, updateCommentTable) subscribeNext:^(id x) {
+        if (self.viewModel.updateCommentTable == YES) {
+            [self.messageTableview.mj_footer endRefreshing];
+            [self.messageTableview reloadData];
+        }
+    }];
 }
 - (void)hideMaskView
 {
@@ -606,6 +618,9 @@
         _messageTableview.tableHeaderView = backView;
         _messageTableview.backgroundColor = [UIColor BackGroundColor];
         _messageTableview.separatorColor = [UIColor BackGroundColor];
+        _messageTableview.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+            [self.viewModel loadMoreComment];
+        }];
     }
     return _messageTableview;
 }
@@ -624,6 +639,9 @@
         _newsTableview.tableHeaderView = backView;
         _newsTableview.backgroundColor = [UIColor BackGroundColor];
         _newsTableview.separatorColor = [UIColor BackGroundColor];
+        _newsTableview.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+            [self.viewModel loadMoreNews];
+        }];
     }
     return _newsTableview;
 }

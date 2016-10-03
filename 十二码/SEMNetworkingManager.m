@@ -65,7 +65,7 @@ NSString* const StatUp=@"/welcome/startup/";
     static id _sharedInstance = nil;
     static dispatch_once_t oncePredicate;
     dispatch_once(&oncePredicate, ^{
-        NSURL* url = [NSURL URLWithString: @"http://dev.12yards.cn"];
+        NSURL* url = [NSURL URLWithString: @"http://www.12yards.cn"];
         _sharedInstance = [[self alloc] initWithBaseURL: url];
     });
     return _sharedInstance;
@@ -302,13 +302,14 @@ NSString* const StatUp=@"/welcome/startup/";
 }
 
 //球队主页信息
--(NSURLSessionTask *)fetchTeamInfo:(NSString *)ide success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
+-(NSURLSessionTask *)fetchTeamInfo:(NSString *)ide offset:(NSInteger)offset success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
 {
     [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
     NSMutableString* URL = [[NSMutableString alloc] init];
     [URL appendString:TeamInfo];
     [URL appendString:ide];
-    return [self GET:URL parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
+    NSDictionary* para = @{@"offset":@(offset)};
+    return [self GET:URL parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         TeamHomeModelResponse* model = [TeamHomeModelResponse mj_objectWithKeyValues:responseObject];
@@ -553,14 +554,15 @@ NSString* const StatUp=@"/welcome/startup/";
 }
 
 //获取球员信息
--(NSURLSessionTask *)fetchPlayerInfo:(NSString *)playerId success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
+-(NSURLSessionTask *)fetchPlayerInfo:(NSString *)playerId offset:(NSInteger)offset success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
 {
     [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
     NSMutableString* URL = [[NSMutableString alloc] init];
     [URL appendString:PlayerInfo
      ];
     [URL appendString:playerId];
-    return [self GET:URL parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
+    NSDictionary* para = @{@"offset":@(offset)};
+    return [self GET:URL parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         PlayerInforesponseModel* model = [PlayerInforesponseModel mj_objectWithKeyValues:responseObject];
@@ -570,14 +572,15 @@ NSString* const StatUp=@"/welcome/startup/";
     }];
 }
 //获取教练信息
-- (NSURLSessionTask *)fetchCoachInfo:(NSString *)coachId success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
+- (NSURLSessionTask *)fetchCoachInfo:(NSString *)coachId offset:(NSInteger)offset success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
 {
     [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
     NSMutableString* URL = [[NSMutableString alloc] init];
     [URL appendString:@"/coach/info/"
      ];
     [URL appendString:coachId];
-    return [self GET:URL parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
+    NSDictionary* para = @{@"offset":@(offset)};
+    return [self GET:URL parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
@@ -821,13 +824,14 @@ NSString* const StatUp=@"/welcome/startup/";
     }];
 }
 //获取比赛新闻
-- (NSURLSessionTask *)fetchGameNews:(NSString *)matchId success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
+- (NSURLSessionTask *)fetchGameNews:(NSString *)matchId offset:(NSInteger)offset success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
 {
     [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
     NSMutableString* URL = [[NSMutableString alloc] init];
     [URL appendString:GameNews];
     [URL appendString:matchId];
-    return [self GET:URL parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
+    NSDictionary* dic = @{@"offset":@(offset)};
+    return [self GET:URL parameters:dic progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         GameNewsDetailResponseModel* model = [GameNewsDetailResponseModel mj_objectWithKeyValues:responseObject];
@@ -853,13 +857,14 @@ NSString* const StatUp=@"/welcome/startup/";
     }];
 }
 //获取比赛留言
-- (NSURLSessionTask *)fetchGameMessage:(NSString *)matchId success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
+- (NSURLSessionTask *)fetchGameMessage:(NSString *)matchId offset:(NSInteger)offset success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
 {
     [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
     NSMutableString* URL = [[NSMutableString alloc] init];
     [URL appendString:GameMessage];
     [URL appendString:matchId];
-    return [self GET:URL parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
+    NSDictionary* para = @{@"offset":@(offset)};
+    return [self GET:URL parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         GameMessageResponseModel* result = [GameMessageResponseModel mj_objectWithKeyValues:responseObject];
@@ -1236,14 +1241,15 @@ NSString* const StatUp=@"/welcome/startup/";
     }];
 }
 //获取球员互动信息
-- (NSURLSessionTask *)fetchPlayerNews:(NSString *)playerId success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
+- (NSURLSessionTask *)fetchPlayerNews:(NSString *)playerId offset:(NSInteger)offset success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
 {
     [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
     self.responseSerializer = [AFHTTPResponseSerializer serializer];
     NSMutableString* URL = [[NSMutableString alloc] init];
     [URL appendString:@"/player/news/"];
     [URL appendString:playerId];
-    return [self GET:URL parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
+    NSDictionary* para = @{@"offset":@(offset)};
+    return [self GET:URL parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         PlayerNewsResponseModel* model = [PlayerNewsResponseModel mj_objectWithKeyValues:responseObject];

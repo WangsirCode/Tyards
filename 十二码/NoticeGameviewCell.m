@@ -25,7 +25,14 @@
         [RACObserve(self, model) subscribeNext:^(id x) {
             if (self.model) {
                 self.view.titleLabel.text = self.model.tournament.name;
-                self.view.roundLabel.text = self.model.round.name;
+                NSMutableString* info = [NSMutableString new];
+                if (self.model.group.name) {
+                    [info appendString:self.model.group.name];
+                    [info appendString:@"  "];
+                }
+                if (self.model.round.name) {
+                    [info appendString:self.model.round.name];
+                }
                 self.view.status = [self.model getStatus1];
                 if (self.view.status == 2) {
                     self.view.homeScoreLabel.text = @"-";
