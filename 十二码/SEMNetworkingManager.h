@@ -251,6 +251,7 @@
  *  @return NSURLSessionTask
  */
 - (NSURLSessionTask*)fetchTeamInfo:(NSString*)ide
+                            offset:(NSInteger)offset
                            success:(void (^)(id data))successBlock
                            failure:(void (^)(NSError *aError))failureBlock;
 
@@ -476,6 +477,7 @@
  *  @return NSURLSessionTask
  */
 - (NSURLSessionTask*)fetchPlayerInfo:(NSString*)playerId
+                              offset:(NSInteger)offset
                               success:(void (^)(id data))successBlock
                               failure:(void (^)(NSError *aError))failureBlock;
 
@@ -491,6 +493,7 @@
  *  @return NSURLSessionTask
  */
 - (NSURLSessionTask*)fetchCoachInfo:(NSString*)coachId
+                             offset:(NSInteger)offset
                              success:(void (^)(id data))successBlock
                              failure:(void (^)(NSError *aError))failureBlock;
 
@@ -724,6 +727,7 @@
  *  @return NSURLSessionTask
  */
 - (NSURLSessionTask*)fetchGameNews:(NSString*)matchId
+                            offset:(NSInteger)offset
                             success:(void (^)(id data))successBlock
                             failure:(void (^)(NSError *aError))failureBlock;
 
@@ -754,6 +758,7 @@
  *  @return NSURLSessionTask
  */
 - (NSURLSessionTask*)fetchGameMessage:(NSString*)matchId
+                               offset:(NSInteger)offset
                              success:(void (^)(id data))successBlock
                              failure:(void (^)(NSError *aError))failureBlock;
 
@@ -1063,6 +1068,7 @@
  *  @return NSURLSessionTask
  */
 - (NSURLSessionTask*)fetchPlayerNews:(NSString*)playerId
+                              offset:(NSInteger)offset
                             success:(void (^)(id data))successBlock
                             failure:(void (^)(NSError *aError))failureBlock;
 

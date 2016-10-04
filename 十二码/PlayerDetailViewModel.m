@@ -25,7 +25,7 @@
 {
     SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
     //暂时用这个id测试
-    [manager fetchPlayerInfo:playerId success:^(id data) {
+    [manager fetchPlayerInfo:playerId offset:0 success:^(id data) {
         self.model = data;
         self.status += 1;
     } failure:^(NSError *aError) {
@@ -37,7 +37,7 @@
     } failure:^(NSError *aError) {
         
     }];
-    [manager fetchPlayerNews:playerId success:^(id data) {
+    [manager fetchPlayerNews:playerId offset:0 success:^(id data) {
         self.messageModel = data;
         self.status +=1;
     } failure:^(NSError *aError) {
@@ -122,7 +122,7 @@
                             }
                         }];
                         [manager postPlayerNews:self.playerId content:self.content images:string token:[self getToken] success:^(id data) {
-                            [manager fetchPlayerNews:self.playerId success:^(id data) {
+                            [manager fetchPlayerNews:self.playerId offset:0 success:^(id data) {
                                 self.messageModel = data;
                                 self.shouldReloadCommentTable = YES;
                             } failure:^(NSError *aError) {
@@ -141,7 +141,7 @@
         {
             SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
             [manager postPlayerNews:self.playerId content:self.content images:@"" token:[self getToken] success:^(id data) {
-                [manager fetchPlayerNews:self.playerId success:^(id data) {
+                [manager fetchPlayerNews:self.playerId offset:0 success:^(id data) {
                     self.messageModel = data;
                     self.shouldReloadCommentTable = YES;
                 } failure:^(NSError *aError) {
@@ -158,7 +158,7 @@
     {
         SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
         [manager postComment:self.newsId content:self.content targetCommentId:0 remind:0 token:[self getToken] success:^(id data) {
-            [manager fetchPlayerNews:self.playerId success:^(id data) {
+            [manager fetchPlayerNews:self.playerId offset:0 success:^(id data) {
                 self.messageModel = data;
                 self.shouldReloadCommentTable = YES;
             } failure:^(NSError *aError) {
@@ -172,7 +172,7 @@
     {
         SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
         [manager postComment:self.newsId content:self.content targetCommentId:self.targetCommentId remind:self.remindId token:[self getToken] success:^(id data) {
-            [manager fetchPlayerNews:self.playerId success:^(id data) {
+            [manager fetchPlayerNews:self.playerId offset:0 success:^(id data) {
                 self.messageModel = data;
                 self.shouldReloadCommentTable = YES;
             } failure:^(NSError *aError) {
@@ -182,5 +182,28 @@
             
         }];
     }
+}
+- (void)loadMoreNews
+{
+    SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
+    [manager fetchPlayerInfo:self.playerId offset:self.model.articles.count success:^(id data) {
+        NSMutableArray* array = [NSMutableArray arrayWithArray:self.model.articles];
+        [array appendObjects:((CoachModel*)data).articles];
+        self.model = data;
+        self.model.articles = array;
+        self.updateNewsTable = YES;
+    } failure:^(NSError *aError) {
+    }];
+}
+- (void)loadMoreComment
+{
+    SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
+    [manager fetchPlayerInfo:self.playerId offset:self.messageModel.count success:^(id data) {
+        NSMutableArray* array = [NSMutableArray arrayWithArray:self.messageModel];
+        [array appendObjects:(NSArray*)data];
+        self.messageModel = array;
+        self.updateCommentTable = YES;
+    } failure:^(NSError *aError) {
+    }];
 }
 @end

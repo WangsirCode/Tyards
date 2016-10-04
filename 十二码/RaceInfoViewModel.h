@@ -26,5 +26,9 @@
 @property (nonatomic,assign) NSInteger postType;
 @property (nonatomic,assign) NSInteger num;
 @property (nonatomic,assign) BOOL   shouldReloadCommentTable;
+@property (nonatomic,assign) BOOL updateNewsTable;
+@property (nonatomic,assign) BOOL updateMessagaTable;
 - (void)addNews;
+- (void)loadMoreNews;
+- (void)loadMoreMessages;
 @end

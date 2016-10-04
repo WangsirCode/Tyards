@@ -25,7 +25,7 @@
 {
     SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
     //暂时用这个id测试
-    [manager fetchCoachInfo:coachId success:^(id data) {
+    [manager fetchCoachInfo:coachId offset:0 success:^(id data) {
         self.model = data;
         self.newsModel = self.model.newses;
         self.status += 1;
@@ -117,7 +117,7 @@
                             }
                         }];
                         [manager postCoachNews:self.coachId content:self.content images:string token:[self getToken] success:^(id data) {
-                            [manager fetchCoachInfo:self.coachId success:^(id data) {
+                            [manager fetchCoachInfo:self.coachId offset:0 success:^(id data) {
                                 self.model = data;
                                 self.newsModel = self.model.newses;
                                 self.shouldReloadCommentTable = YES;
@@ -136,7 +136,7 @@
         {
             SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
             [manager postCoachNews:self.coachId content:self.content images:@"" token:[self getToken] success:^(id data) {
-                [manager fetchCoachInfo:self.coachId success:^(id data) {
+                [manager fetchCoachInfo:self.coachId offset:0 success:^(id data) {
                     self.model = data;
                     self.newsModel = self.model.newses;
                     self.shouldReloadCommentTable = YES;
@@ -153,7 +153,7 @@
     {
         SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
         [manager postComment:self.newsId content:self.content targetCommentId:0 remind:0 token:[self getToken] success:^(id data) {
-            [manager fetchCoachInfo:self.coachId success:^(id data) {
+            [manager fetchCoachInfo:self.coachId offset:0 success:^(id data) {
                 self.model = data;
                 self.newsModel = self.model.newses;
                 self.shouldReloadCommentTable = YES;
@@ -167,7 +167,7 @@
     {
         SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
         [manager postComment:self.newsId content:self.content targetCommentId:self.targetCommentId remind:self.remindId token:[self getToken] success:^(id data) {
-            [manager fetchCoachInfo:self.coachId success:^(id data) {
+            [manager fetchCoachInfo:self.coachId offset:0 success:^(id data) {
                 self.model = data;
                 self.newsModel = self.model.newses;
                 self.shouldReloadCommentTable = YES;
@@ -178,5 +178,27 @@
         }];
     }
 }
-
+- (void)loadMoreNews
+{
+    SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
+    [manager fetchCoachInfo:self.coachId offset:self.model.articles.count success:^(id data) {
+        NSMutableArray* array = [NSMutableArray arrayWithArray:self.model.articles];
+        [array appendObjects:((CoachModel*)data).articles];
+        self.model = data;
+        self.model.articles = array;
+        self.updateNewsTable = YES;
+    } failure:^(NSError *aError) {
+    }];
+}
+- (void)loadMoreComment
+{
+    SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
+    [manager fetchCoachInfo:self.coachId offset:self.newsModel.count success:^(id data) {
+        NSMutableArray* array = [NSMutableArray arrayWithArray:self.model.newses];
+        [array appendObjects:((CoachModel*)data).newses];
+        self.newsModel = array;
+        self.updateCommentTable = YES;
+    } failure:^(NSError *aError) {
+    }];
+}
 @end

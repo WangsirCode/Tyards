@@ -31,6 +31,7 @@
 @property (nonatomic,assign) BOOL   shouldUpdateSchedule;
 @property (nonatomic,assign) BOOL   shouldReloadCommentTable;
 @property (nonatomic,assign) BOOL   sholdReloadCommentTable2;
+@property (nonatomic,assign) BOOL updateNewsTable;
 @property (nonatomic,strong) NSString * teamId;
 @property (nonatomic,assign) NSInteger newsId;
 @property (nonatomic,assign) NSInteger targetCommentId;

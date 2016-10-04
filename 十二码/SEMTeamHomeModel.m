@@ -31,7 +31,7 @@
 - (void)fetchData:(NSString*)string
 {
     SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
-    [manager fetchTeamInfo:string success:^(id data) {
+    [manager fetchTeamInfo:string offset:0 success:^(id data) {
         self.model = data;
         self.loadingStatus += 1;
     } failure:^(NSError *aError) {
@@ -324,7 +324,15 @@
 - (void)loadMoreNews
 {
    SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
-    
+    [manager fetchTeamInfo:self.teamId offset:self.model.articles.count success:^(id data) {
+        NSMutableArray* array = [NSMutableArray arrayWithArray:self.model.articles];
+        [array appendObjects:((TeamHomeModel*)data).articles];
+        self.model = data;
+        self.model.articles = array;
+        self.updateNewsTable = YES;
+    } failure:^(NSError *aError) {
+        
+    }];
 }
 - (void)loadMoreComment
 {
