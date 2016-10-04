@@ -1129,8 +1129,8 @@ NSString* const StatUp=@"/welcome/startup/";
     [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
     NSMutableString* URL = [[NSMutableString alloc] init];
     [URL appendString:@"/user/info/"];
-    [URL appendString:nickName];
-    NSDictionary* para = @{@"token":token};
+//    [URL appendString:nickName];
+    NSDictionary* para = @{@"token":token,@"nickname":nickName};
     return [self POST:URL parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
