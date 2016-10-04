@@ -191,7 +191,7 @@
 {
     SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
     [manager fetchGameMessage:self.raceId offset:self.messageModel.count success:^(id data) {
-        NSMutableArray *array = [[NSMutableArray alloc] initWithArray:self.newsModel];
+        NSMutableArray *array = [[NSMutableArray alloc] initWithArray:self.messageModel];
         [array appendObjects:(NSArray*)data];
         self.messageModel = array;
         self.updateMessagaTable = YES;
