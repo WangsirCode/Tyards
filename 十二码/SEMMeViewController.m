@@ -26,6 +26,9 @@
 #import "UMSocialWechatHandler.h"
 #import "UMSocial.h"
 
+
+#define kShareTargetUrl @"http://a.app.qq.com/o/simple.jsp?pkgname=com.tyards"
+
 @interface SEMMeViewController ()<UITableViewDelegate,UITableViewDataSource,ShareViewDelegate>
 @property (strong,nonatomic)SEMMeViewModel* viewModel;
 @property (nonatomic,strong)MeTopView* topView;
@@ -280,13 +283,15 @@
 #pragma mark-ShareViewDelegate
 - (void)didSelectedShareView:(NSInteger)index
 {
+    
+    
     NSLog(@"%ld",(long)index);
     switch (index) {
         case 0:
         {
-            [UMSocialData defaultData].extConfig.wechatSessionData.url = @"www.baidu.com";
-            UMSocialUrlResource *urlResource = [[UMSocialUrlResource alloc] initWithSnsResourceType:UMSocialUrlResourceTypeImage url:@"www.baidu.com"];
-            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:@"十二码" image:nil location:nil urlResource:urlResource presentedController:self completion:^(UMSocialResponseEntity *response){
+            [UMSocialData defaultData].extConfig.wechatSessionData.url = kShareTargetUrl;
+            UMSocialUrlResource *urlResource = [[UMSocialUrlResource alloc] initWithSnsResourceType:UMSocialUrlResourceTypeImage url:@""];
+            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:@"推荐一个我天天用的校园足球App给你" image:[UIImage imageNamed:@"logo"] location:nil urlResource:urlResource presentedController:self completion:^(UMSocialResponseEntity *response){
                 if (response.responseCode == UMSResponseCodeSuccess) {
                     NSLog(@"分享成功！");
                 }
@@ -296,9 +301,9 @@
             break;
         case 1:
         {
-            [UMSocialData defaultData].extConfig.wechatSessionData.url = @"www.baidu.com";
-            UMSocialUrlResource *urlResource = [[UMSocialUrlResource alloc] initWithSnsResourceType:UMSocialUrlResourceTypeImage url:@"www.baidu.com"];
-            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatTimeline] content:@"十二码" image:nil location:nil urlResource:urlResource presentedController:self completion:^(UMSocialResponseEntity *response){
+            [UMSocialData defaultData].extConfig.wechatTimelineData.url = kShareTargetUrl;
+            UMSocialUrlResource *urlResource = [[UMSocialUrlResource alloc] initWithSnsResourceType:UMSocialUrlResourceTypeImage url:@""];
+            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatTimeline] content:@"推荐一个我天天用的校园足球App给你" image:[UIImage imageNamed:@"logo"] location:nil urlResource:urlResource presentedController:self completion:^(UMSocialResponseEntity *response){
                 if (response.responseCode == UMSResponseCodeSuccess) {
                     NSLog(@"分享成功！");
                 }
@@ -307,9 +312,9 @@
             break;
         case 2:
         {
-            [UMSocialData defaultData].extConfig.wechatSessionData.url = @"www.baidu.com";
-            UMSocialUrlResource *urlResource = [[UMSocialUrlResource alloc] initWithSnsResourceType:UMSocialUrlResourceTypeImage url:@"www.baidu.com"];
-            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQQ] content:@"十二码" image:nil location:nil urlResource:urlResource presentedController:self completion:^(UMSocialResponseEntity *response){
+            [UMSocialData defaultData].extConfig.qqData.url = kShareTargetUrl;
+            UMSocialUrlResource *urlResource = [[UMSocialUrlResource alloc] initWithSnsResourceType:UMSocialUrlResourceTypeImage url:@""];
+            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQQ] content:@"推荐一个我天天用的校园足球App给你" image:[UIImage imageNamed:@"logo"] location:nil urlResource:urlResource presentedController:self completion:^(UMSocialResponseEntity *response){
                 if (response.responseCode == UMSResponseCodeSuccess) {
                     NSLog(@"分享成功！");
                 }
@@ -318,9 +323,9 @@
             break;
         case 3:
         {
-            [UMSocialData defaultData].extConfig.wechatSessionData.url = @"www.baidu.com";
-            UMSocialUrlResource *urlResource = [[UMSocialUrlResource alloc] initWithSnsResourceType:UMSocialUrlResourceTypeImage url:@"www.baidu.com"];
-            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQzone] content:@"十二码" image:nil location:nil urlResource:urlResource presentedController:self completion:^(UMSocialResponseEntity *response){
+            [UMSocialData defaultData].extConfig.qzoneData.url = kShareTargetUrl;
+            UMSocialUrlResource *urlResource = [[UMSocialUrlResource alloc] initWithSnsResourceType:UMSocialUrlResourceTypeImage url:@""];
+            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQzone] content:@"推荐一个我天天用的校园足球App给你" image:[UIImage imageNamed:@"logo"] location:nil urlResource:urlResource presentedController:self completion:^(UMSocialResponseEntity *response){
                 if (response.responseCode == UMSResponseCodeSuccess) {
                     NSLog(@"分享成功！");
                 }
