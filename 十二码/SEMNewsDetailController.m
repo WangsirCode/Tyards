@@ -25,6 +25,8 @@
 #import "SEMLoginViewController.h"
 #import "TagLabels.h"
 #define kTimeLineTableViewCellId @"SDTimeLineCell"
+
+
 @interface SEMNewsDetailController ()<UITableViewDelegate,UITableViewDataSource,UIWebViewDelegate,ShareViewDelegate,UMSocialUIDelegate,CommentCellDelegate>
 @property (nonatomic,strong)NewsDetailViewModel* viewModel;
 @property (nonatomic,strong)UIWebView* webView;
@@ -397,11 +399,12 @@
     if (!image) {
         image = [UIImage imageNamed:@"zhanwei.jpg"];
     }
+    NSString *urlStr=[NSString stringWithFormat:@"http://www.12yards.cn/news/index/%ld",(long)self.shareId];
     switch (index) {
         case 0:
         {
-            [UMSocialData defaultData].extConfig.wechatSessionData.url = self.viewModel.newdetail.text;
-            UMSocialUrlResource *urlResource = [[UMSocialUrlResource alloc] initWithSnsResourceType:UMSocialUrlResourceTypeDefault url:[NSString stringWithFormat:@"http://www.12yards.cn/news/index/%ld",(long)self.shareId]];
+            [UMSocialData defaultData].extConfig.wechatSessionData.url = urlStr;
+            UMSocialUrlResource *urlResource = [[UMSocialUrlResource alloc] initWithSnsResourceType:UMSocialUrlResourceTypeDefault url:urlStr];
             [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:self.shareTitle image:image location:nil urlResource:urlResource presentedController:self completion:^(UMSocialResponseEntity *response){
                 if (response.responseCode == UMSResponseCodeSuccess) {
                     NSLog(@"分享成功！");
@@ -412,8 +415,8 @@
         case 1:
 //            [WXApi sendReq:req];
         {
-            [UMSocialData defaultData].extConfig.wechatTimelineData.url =self.viewModel.newdetail.text;
-            UMSocialUrlResource *urlResource = [[UMSocialUrlResource alloc] initWithSnsResourceType:UMSocialUrlResourceTypeDefault url:[NSString stringWithFormat:@"http://www.12yards.cn/news/index/%ld",(long)self.shareId]];
+            [UMSocialData defaultData].extConfig.wechatTimelineData.url =urlStr;
+            UMSocialUrlResource *urlResource = [[UMSocialUrlResource alloc] initWithSnsResourceType:UMSocialUrlResourceTypeDefault url:urlStr];
             [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatTimeline] content:self.shareTitle image:image location:nil urlResource:urlResource presentedController:self completion:^(UMSocialResponseEntity *response){
                 if (response.responseCode == UMSResponseCodeSuccess) {
                     NSLog(@"分享成功！");
@@ -423,8 +426,8 @@
             break;
         case 2:
         {
-            [UMSocialData defaultData].extConfig.qqData.url = self.viewModel.newdetail.text;
-            UMSocialUrlResource *urlResource = [[UMSocialUrlResource alloc] initWithSnsResourceType:UMSocialUrlResourceTypeDefault url:[NSString stringWithFormat:@"http://www.12yards.cn/news/index/%ld",(long)self.shareId]];
+            [UMSocialData defaultData].extConfig.qqData.url = urlStr;
+            UMSocialUrlResource *urlResource = [[UMSocialUrlResource alloc] initWithSnsResourceType:UMSocialUrlResourceTypeDefault url:urlStr];
             [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQQ] content:self.shareTitle image:image location:nil urlResource:urlResource presentedController:self completion:^(UMSocialResponseEntity *response){
                 if (response.responseCode == UMSResponseCodeSuccess) {
                     NSLog(@"分享成功！");
@@ -434,8 +437,8 @@
             break;
         case 3:
         {
-            [UMSocialData defaultData].extConfig.qzoneData.url = self.viewModel.newdetail.text;
-            UMSocialUrlResource *urlResource = [[UMSocialUrlResource alloc] initWithSnsResourceType:UMSocialUrlResourceTypeDefault url:[NSString stringWithFormat:@"http://www.12yards.cn/news/index/%ld",(long)self.shareId]];
+            [UMSocialData defaultData].extConfig.qzoneData.url = urlStr;
+            UMSocialUrlResource *urlResource = [[UMSocialUrlResource alloc] initWithSnsResourceType:UMSocialUrlResourceTypeDefault url:urlStr];
             [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQzone] content:self.shareTitle image:image location:nil urlResource:urlResource presentedController:self completion:^(UMSocialResponseEntity *response){
                 if (response.responseCode == UMSResponseCodeSuccess) {
                     NSLog(@"分享成功！");
