@@ -171,7 +171,7 @@
     if (tableView.tag == GAMELISTTABLEVIEW) {
         return 120 * self.view.scale;
     }
-    else
+    else if(tableView.tag == HISTORYTABLEVIEW)
     {
         GameDetailModel* model1 = self.viewModel.historyGameDatasource[indexPath.section];
         Games* model = model1.games[indexPath.row];
@@ -180,6 +180,13 @@
         }
         return 156*self.view.scale;
    
+    }else{
+        GameDetailModel* model1 = self.viewModel.noticeGameDatasource[indexPath.section];
+        Games* model = model1.games[indexPath.row];
+        if (model.latestNews.detail) {
+            return 196 * self.view.scale;
+        }
+        return 156*self.view.scale;
     }
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section

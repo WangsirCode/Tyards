@@ -133,7 +133,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (section == 1) {
-        return 2;
+        return 1;
     }
     return 1;
 }
@@ -158,11 +158,11 @@
             make.center.equalTo(cell.contentView);
         }];
     }
-    if ([text isEqualToString:@"检查更新"]) {
-        detailText = self.viewModel.version;
-        cell.detailTextLabel.text = detailText;
-        cell.detailTextLabel.textColor = [UIColor colorWithHexString:@"#CACACA"];
-    }
+//    if ([text isEqualToString:@"检查更新"]) {
+//        detailText = self.viewModel.version;
+//        cell.detailTextLabel.text = detailText;
+//        cell.detailTextLabel.textColor = [UIColor colorWithHexString:@"#CACACA"];
+//    }
     if ([text isEqualToString:@"意见反馈"]) {
         detailText = @"尽情来吐槽吧";
         cell.detailTextLabel.text = detailText;
@@ -268,9 +268,9 @@
         SEMLoginViewController* login = [HRTRouter objectForURL:@"login" withUserInfo:@{}];
         [self presentViewController:login animated:YES completion:nil];
     }
-    if ([text isEqualToString:@"检查更新"]) {
-        [XHToast showCenterWithText:@"已是最新版本"];
-    }
+//    if ([text isEqualToString:@"检查更新"]) {
+//        [XHToast showCenterWithText:@"已是最新版本"];
+//    }
 }
 - (void)hideMaskView
 {

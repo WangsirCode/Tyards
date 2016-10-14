@@ -15,7 +15,7 @@
     if (self)
     {
         self.isLogined = [dictionary[@"login"] boolValue];
-        self.itemName = @[@[@"清除缓存"],@[@"检查更新",@"关于"],@[@"切换账号"]];
+        self.itemName = @[@[@"清除缓存"],@[@"关于"],@[@"切换账号"]];
         self.version = @"v1.0";
         self.fileSize = [NSString stringWithFormat:@"%lluKB",[DataArchive fileSize:@"cache"]];
     }
