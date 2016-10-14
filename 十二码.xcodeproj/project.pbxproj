@@ -13,6 +13,11 @@
 		1821FCA81D964039009BB5AC /* ServiceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1821FCA61D964039009BB5AC /* ServiceVC.m */; };
 		1821FCA91D964039009BB5AC /* ServiceVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1821FCA71D964039009BB5AC /* ServiceVC.xib */; };
 		18282D071D996676000956EC /* BBLaunchAdMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 18282D051D996676000956EC /* BBLaunchAdMonitor.m */; };
+		18D1B4ED1DAE7AE100C8438B /* SEMRegVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D1B4EB1DAE7AE100C8438B /* SEMRegVC.m */; };
+		18D1B4EE1DAE7AE100C8438B /* SEMRegVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18D1B4EC1DAE7AE100C8438B /* SEMRegVC.xib */; };
+		18D1B4F21DAE7B0400C8438B /* SEMForgetVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D1B4F01DAE7B0400C8438B /* SEMForgetVC.m */; };
+		18D1B4F31DAE7B0400C8438B /* SEMForgetVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18D1B4F11DAE7B0400C8438B /* SEMForgetVC.xib */; };
+		18F87CFD1DA53B70008D4BA5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18F87CFC1DA53B70008D4BA5 /* LaunchScreen.storyboard */; };
 		4704AD811D6004620057D502 /* BasicInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4704AD801D6004620057D502 /* BasicInfoCell.m */; };
 		4708D2E61D4A67BD0094FAF9 /* NoticeCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4708D2E51D4A67BD0094FAF9 /* NoticeCellView.m */; };
 		470BEE111D582909003167ED /* SetUpController.m in Sources */ = {isa = PBXBuildFile; fileRef = 470BEE101D582909003167ED /* SetUpController.m */; };
@@ -373,6 +378,13 @@
 		1821FCA71D964039009BB5AC /* ServiceVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServiceVC.xib; sourceTree = "<group>"; };
 		18282D051D996676000956EC /* BBLaunchAdMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBLaunchAdMonitor.m; sourceTree = "<group>"; };
 		18282D061D996676000956EC /* BBLaunchAdMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBLaunchAdMonitor.h; sourceTree = "<group>"; };
+		18D1B4EA1DAE7AE100C8438B /* SEMRegVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEMRegVC.h; sourceTree = "<group>"; };
+		18D1B4EB1DAE7AE100C8438B /* SEMRegVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SEMRegVC.m; sourceTree = "<group>"; };
+		18D1B4EC1DAE7AE100C8438B /* SEMRegVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SEMRegVC.xib; sourceTree = "<group>"; };
+		18D1B4EF1DAE7B0400C8438B /* SEMForgetVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEMForgetVC.h; sourceTree = "<group>"; };
+		18D1B4F01DAE7B0400C8438B /* SEMForgetVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SEMForgetVC.m; sourceTree = "<group>"; };
+		18D1B4F11DAE7B0400C8438B /* SEMForgetVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SEMForgetVC.xib; sourceTree = "<group>"; };
+		18F87CFC1DA53B70008D4BA5 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4704AD7F1D6004620057D502 /* BasicInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicInfoCell.h; sourceTree = "<group>"; };
 		4704AD801D6004620057D502 /* BasicInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicInfoCell.m; sourceTree = "<group>"; };
 		4708D2E41D4A67BD0094FAF9 /* NoticeCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoticeCellView.h; sourceTree = "<group>"; };
@@ -1114,6 +1126,7 @@
 				47BB49A01D45F45B0052E4D0 /* weixin */,
 				4734CDE21D41CD27006536DF /* picture */,
 				4734CD451D41B512006536DF /* Assets.xcassets */,
+				18F87CFC1DA53B70008D4BA5 /* LaunchScreen.storyboard */,
 				4734CD4A1D41B512006536DF /* Info.plist */,
 				4734CD3A1D41B512006536DF /* main.m */,
 			);
@@ -1518,6 +1531,12 @@
 		4735F9F11D55F9DF00FDF2ED /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				18D1B4EF1DAE7B0400C8438B /* SEMForgetVC.h */,
+				18D1B4F01DAE7B0400C8438B /* SEMForgetVC.m */,
+				18D1B4F11DAE7B0400C8438B /* SEMForgetVC.xib */,
+				18D1B4EA1DAE7AE100C8438B /* SEMRegVC.h */,
+				18D1B4EB1DAE7AE100C8438B /* SEMRegVC.m */,
+				18D1B4EC1DAE7AE100C8438B /* SEMRegVC.xib */,
 				4734CDAE1D41C46A006536DF /* SEMMeViewController.h */,
 				4734CDAF1D41C46A006536DF /* SEMMeViewController.m */,
 				472A92381D4705A000F8620F /* SEMLoginViewController.h */,
@@ -2062,7 +2081,7 @@
 				TargetAttributes = {
 					4734CD351D41B511006536DF = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = X5DK3836PD;
+						DevelopmentTeam = 3CJZ3T532P;
 						ProvisioningStyle = Automatic;
 					};
 					4734CD4E1D41B512006536DF = {
@@ -2109,6 +2128,7 @@
 				4734CE111D41CD4B006536DF /* 个人资料icon.png in Resources */,
 				4734CE461D41CD5E006536DF /* 点-灰.png in Resources */,
 				4734CE2F1D41CD55006536DF /* cursor.png in Resources */,
+				18D1B4F31DAE7B0400C8438B /* SEMForgetVC.xib in Resources */,
 				4734CDD51D41C95D006536DF /* demo.css in Resources */,
 				4734CE181D41CD4B006536DF /* 约战icon.png in Resources */,
 				4734CE301D41CD55006536DF /* cursor02.png in Resources */,
@@ -2135,6 +2155,7 @@
 				4760880D1D55874400F36597 /* 约战-助攻.png in Resources */,
 				4734CDDB1D41C95D006536DF /* iconfont.woff in Resources */,
 				4734CE351D41CD55006536DF /* right-arrow.png in Resources */,
+				18F87CFD1DA53B70008D4BA5 /* LaunchScreen.storyboard in Resources */,
 				4734CDED1D41CD39006536DF /* 球队icon-绿.png in Resources */,
 				4734CE361D41CD55006536DF /* star_L.png in Resources */,
 				477676771D58D1BF00E10594 /* zhanwei.jpg in Resources */,
@@ -2145,6 +2166,7 @@
 				47C053C71D7520D900AEBF86 /* icon_location.png in Resources */,
 				4734CDD71D41C95D006536DF /* iconfont.css in Resources */,
 				4734CDFD1D41CD42006536DF /* 微信icon.png in Resources */,
+				18D1B4EE1DAE7AE100C8438B /* SEMRegVC.xib in Resources */,
 				4734CE481D41CD5E006536DF /* 返回icon.png in Resources */,
 				4734CDEC1D41CD39006536DF /* 球队icon-灰.png in Resources */,
 				4734CE491D41CD5E006536DF /* 搜索-×.png in Resources */,
@@ -2342,6 +2364,7 @@
 				4746A66A1D49AB17009E0645 /* UserModel.m in Sources */,
 				47DA9E131D8983420090ABC5 /* CommentBottomView.m in Sources */,
 				47CAC1DA1D766738001D3708 /* PlaceSelectController.m in Sources */,
+				18D1B4ED1DAE7AE100C8438B /* SEMRegVC.m in Sources */,
 				477676721D58614A00E10594 /* AboutViewController.m in Sources */,
 				47A364B11D597C78002FC59E /* AlbumDetailController.m in Sources */,
 				4783923B1D53242F00C31D37 /* UITableViewCell+Scale.m in Sources */,
@@ -2454,6 +2477,7 @@
 				4739B5EA1D488E84007842CC /* GameListViewCell.m in Sources */,
 				47184FB11D72BB38008A4591 /* MatchEventResponseModel.m in Sources */,
 				477642651D546ADE00548C9F /* MessageTableviewCell.m in Sources */,
+				18D1B4F21DAE7B0400C8438B /* SEMForgetVC.m in Sources */,
 				479A89191D9A829A009CC3C8 /* HZIndicatorView.m in Sources */,
 				47C322121D6BF64E00317A4C /* ScorerListResponseModel.m in Sources */,
 				47A6262F1D748A8C00ABE897 /* InvitationVIewModel.m in Sources */,
@@ -2606,9 +2630,9 @@
 			baseConfigurationReference = DBF612850A2096C988540F2E /* Pods-十二码.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Li Cheng (C2Q8SGG574)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = X5DK3836PD;
+				DEVELOPMENT_TEAM = 3CJZ3T532P;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2667,7 +2691,7 @@
 					"\"UIKit\"",
 					"-fobjc-arc",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.luolai.pad;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ios.sem;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -2678,9 +2702,9 @@
 			baseConfigurationReference = EBAD3E5CA26ABE9BF6BF078F /* Pods-十二码.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Big Green Co., Ltd. (3CJZ3T532P)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = X5DK3836PD;
+				DEVELOPMENT_TEAM = 3CJZ3T532P;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2739,7 +2763,7 @@
 					"\"UIKit\"",
 					"-fobjc-arc",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.luolai.pad;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ios.sem;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

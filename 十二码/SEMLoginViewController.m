@@ -16,7 +16,11 @@
 #import "LoginCommand.h"
 #import "TokenResponseModel.h"
 #import "MeinfoViewModel.h"
-@interface SEMLoginViewController ()<TencentSessionDelegate>
+#import "SEMRegVC.h"
+#import "SEMForgetVC.h"
+
+
+@interface SEMLoginViewController ()<TencentSessionDelegate,WXApiDelegate>
 
 @property (nonatomic,strong)UIImageView* logoImageview;
 @property (nonatomic,strong)UIButton* backButton;
@@ -31,12 +35,27 @@
 @property (nonatomic,strong)MeinfoViewModel* viewModel;
 @property (nonatomic,strong)LoginCommand* login;
 @property (nonatomic,strong) NSString* url;
+
+@property (nonatomic,strong) UIView *accView;
+@property (nonatomic,strong) UIView *passView;
+@property (nonatomic,strong) UIImageView *accImg;
+@property (nonatomic,strong) UIImageView *passImg;
+@property (nonatomic,strong) UITextField *accTF;
+@property (nonatomic,strong) UITextField *passTF;
+@property (nonatomic,strong) UIButton *regBtn;
+@property (nonatomic,strong) UIButton *passBtn;
+@property (nonatomic,strong) UIButton *loginBtn;
 @end
 
 @implementation SEMLoginViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    if ([WXApi isWXAppInstalled]){
+        self.wexinView.hidden=NO;
+    }else{
+        self.wexinView.hidden=YES;
+    }
     [self addSubviews];
     [self makeConstraits];
     [self bindModel];
@@ -57,6 +76,16 @@
 
 - (void)addSubviews
 {
+    [self.view addSubview:self.accView];
+    [self.view addSubview:self.passView];
+    [self.view addSubview:self.regBtn];
+    [self.view addSubview:self.passBtn];
+    [self.view addSubview:self.loginBtn];
+    [self.accView addSubview:self.accTF];
+    [self.accView addSubview:self.accImg];
+    [self.passView addSubview:self.passTF];
+    [self.passView addSubview:self.passImg];
+    
     [self.view addSubview:self.logoImageview];
     [self.view addSubview:self.backButton];
     [self.view addSubview:self.titleLabel];
@@ -73,7 +102,7 @@
         make.centerX.equalTo(self.view.mas_centerX);
         make.width.equalTo(self.view.mas_width).dividedBy(3.14);
         make.height.equalTo(self.logoImageview.mas_width);
-        make.top.equalTo(self.view.mas_top).offset(98*scale);
+        make.top.equalTo(self.view.mas_top).offset(70*scale);
     }];
     [self.backButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view.mas_top).offset(45*scale);
@@ -82,7 +111,7 @@
         make.width.equalTo(self.view.mas_width).dividedBy(20.69);
     }];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.logoImageview.mas_bottom).offset(30*scale);
+        make.top.equalTo(self.logoImageview.mas_bottom).offset(20*scale);
         make.centerX.equalTo(self.view.mas_centerX);
         make.left.equalTo(self.view.mas_left);
     }];
@@ -91,8 +120,69 @@
         make.centerX.equalTo(self.view.mas_centerX);
         make.left.equalTo(self.view.mas_left);
     }];
+    [self.accView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.infoLabel.mas_bottom).offset(15*scale);
+        make.centerX.equalTo(self.view.mas_centerX);
+        make.left.equalTo(self.view.mas_left).offset(30*scale);
+        make.height.offset(40*scale);
+        
+    }];
+    [self.accImg mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.accView.mas_top);
+        make.left.equalTo(self.accView.mas_left);
+        make.bottom.equalTo(self.accView.mas_bottom);
+        make.width.offset(30*scale);
+        
+    }];
+    [self.accTF mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.accView.mas_right);
+        make.top.equalTo(self.accView.mas_top);
+        make.bottom.equalTo(self.accView.mas_bottom);
+        make.left.equalTo(self.accImg.mas_right);
+
+    }];
+    [self.passView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.accView.mas_bottom).offset(15*scale);
+        make.centerX.equalTo(self.view.mas_centerX);
+        make.left.equalTo(self.view.mas_left).offset(30*scale);
+        make.height.offset(40*scale);
+        
+    }];
+    [self.passImg mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.passView.mas_top);
+        make.left.equalTo(self.passView.mas_left);
+        make.bottom.equalTo(self.passView.mas_bottom);
+        make.width.offset(30*scale);
+        
+    }];
+    [self.passTF mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.passView.mas_right);
+        make.top.equalTo(self.passView.mas_top);
+        make.bottom.equalTo(self.passView.mas_bottom);
+        make.left.equalTo(self.passImg.mas_right);
+        
+    }];
+    [self.regBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.passView.mas_bottom).offset(10*scale);
+        make.left.equalTo(self.passView.mas_left);
+        make.height.offset(40*scale);
+        make.width.offset(50*scale);
+    }];
+    [self.passBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.passView.mas_bottom).offset(10*scale);
+        make.right.equalTo(self.passView.mas_right);
+        make.height.offset(40*scale);
+        make.width.offset(100*scale);
+    }];
+    [self.loginBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.passView.mas_bottom).offset(65*scale);
+        make.centerX.equalTo(self.view.mas_centerX);
+        make.left.equalTo(self.view.mas_left).offset(70*scale);
+        make.height.offset(30*scale);
+    }];
+    
     [self.backImage mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.infoLabel.mas_bottom).offset(50*scale);
+        make.top.equalTo(self.infoLabel.mas_bottom).offset(225*scale);
         make.left.and.right.equalTo(self.view);
         make.height.equalTo(self.view.mas_height).dividedBy(7);
     }];
@@ -131,16 +221,18 @@
     }];
     [[self.wexinView.button rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
         NSLog(@"请求微信登录");
-        if ([WXApi isWXAppInstalled]) {
+//        if ([WXApi isWXAppInstalled]) {
             SendAuthReq* req = [[SendAuthReq alloc] init];
             req.scope = @"snsapi_userinfo";
-            [WXApi sendReq:req];
-        }
-        else
-        {
-            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"微信登录" message:@"请先安装好微信客户端" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-            [alert show];
-        }
+//            [WXApi sendReq:req];
+            [WXApi sendAuthReq:req viewController:self delegate:self];
+//            sendAuthReq:(SendAuthReq*)req viewController:(UIViewController*)viewController delegate:(id<WXApiDelegate>)delegate
+//        }
+//        else
+//        {
+//            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"微信登录" message:@"请先安装好微信客户端" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+//            [alert show];
+//        }
     }];
     [[self.qqView.button rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
         NSLog(@"请求qq登录");
@@ -198,6 +290,88 @@
         _infoLabel.font = [UIFont systemFontOfSize:14*self.view.scale];
     }
     return _infoLabel;
+}
+-(UIView *)accView{
+    if (!_accView) {
+        _accView = [[UIView alloc] init];
+        _accView.backgroundColor=[UIColor whiteColor];
+    }
+    return _accView;
+}
+-(UIImageView*)accImg{
+    if (!_accImg) {
+        _accImg = [[UIImageView alloc] init];
+        _accImg.contentMode=UIViewContentModeCenter;
+        [_accImg setImage:[UIImage imageNamed:@"acc_icon"]];
+    }
+    return _accImg;
+}
+-(UIView *)passView{
+    if (!_passView) {
+        _passView = [[UIView alloc] init];
+        _passView.backgroundColor=[UIColor whiteColor];
+    }
+    return _passView;
+}
+-(UIImageView*)passImg{
+    if (!_passImg) {
+        _passImg = [[UIImageView alloc] init];
+        _passImg.contentMode=UIViewContentModeCenter;
+
+        [_passImg setImage:[UIImage imageNamed:@"pass_icon"]];
+    }
+    return _passImg;
+}
+-(UITextField*)accTF{
+    if (!_accTF) {
+        _accTF = [[UITextField alloc] init];
+        _accTF.placeholder = @"请输入邮箱账号";
+        _accTF.backgroundColor=[UIColor whiteColor];
+        _accTF.font = [UIFont systemFontOfSize:15*self.view.scale];
+    }
+    return _accTF;
+}
+-(UITextField*)passTF{
+    if (!_passTF) {
+        _passTF = [[UITextField alloc] init];
+        _passTF.placeholder = @"请输入邮箱密码";
+//        _passTF.textAlignment = NSTextAlignmentCenter;
+        _passTF.backgroundColor=[UIColor whiteColor];
+        _passTF.font = [UIFont systemFontOfSize:15*self.view.scale];
+    }
+    return _passTF;
+}
+- (UIButton*)regBtn
+{
+    if (!_regBtn) {
+        _regBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_regBtn setTitle:@"注册"  forState:UIControlStateNormal];
+        _regBtn.titleLabel.font= [UIFont systemFontOfSize: 15];
+        [_regBtn addTarget:self action:@selector(regAction) forControlEvents:UIControlEventAllEvents];
+    }
+    return _regBtn;
+}
+- (UIButton*)passBtn
+{
+    if (!_passBtn) {
+        _passBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_passBtn setTitle:@"找回密码"  forState:UIControlStateNormal];
+        _passBtn.titleLabel.font= [UIFont systemFontOfSize: 15];
+        [_passBtn addTarget:self action:@selector(forgetAction) forControlEvents:UIControlEventAllEvents];
+    }
+    return _passBtn;
+}
+- (UIButton*)loginBtn
+{
+    if (!_loginBtn) {
+        _loginBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_loginBtn setTitle:@"登录"  forState:UIControlStateNormal];
+        _loginBtn.titleLabel.font= [UIFont systemFontOfSize: 15];
+        _loginBtn.layer.borderColor=[UIColor whiteColor].CGColor;
+        _loginBtn.layer.borderWidth=1;
+        [_loginBtn addTarget:self action:@selector(loginAction) forControlEvents:UIControlEventAllEvents];
+    }
+    return _loginBtn;
 }
 - (UIImageView*)backImage
 {
@@ -318,5 +492,30 @@
     {
         NSLog(@"登录不成功 没有获取accesstoken");
     }
+}
+-(void)regAction{
+    SEMRegVC *vc =[[SEMRegVC alloc] init];
+//    [self.navigationController pushViewController:vc animated:YES];
+    [self presentViewController:vc animated:YES completion:nil];
+
+}
+-(void)forgetAction{
+    SEMForgetVC *vc =[[SEMForgetVC alloc] init];
+//    [self.navigationController pushViewController:vc animated:YES];
+    [self presentViewController:vc animated:YES completion:nil];
+
+}
+-(void)loginAction{
+    SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
+    [manager log:self.accTF.text  password:self.passTF.text success:^(id data) {
+        TokenModel* model = data;
+        NSString* token = model.token;
+        self.url = model.user.avatar;
+        [DataArchive archiveUserData:token withFileName:@"token"];
+        [self dismiss];
+    } failure:^(NSError *aError) {
+        NSLog(@"%@",aError);
+        [XHToast showCenterWithText:@"登录失败"];
+    }];
 }
 @end

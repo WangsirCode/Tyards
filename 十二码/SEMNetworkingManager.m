@@ -59,6 +59,10 @@ NSString* const GameNews = @"/match/articles/";
 NSString* const GameDetails = @"/match/detail/";
 NSString* const GameMessage = @"/match/newses/";
 NSString* const StatUp=@"/welcome/startup/";
+NSString* const Reg=@"/user/register/";
+NSString* const Log=@"/user/token/";
+NSString* const Forget=@"/user/resetPassword/";
+
 @implementation SEMNetworkingManager
 + (instancetype)sharedInstance
 {
@@ -74,6 +78,65 @@ NSString* const StatUp=@"/welcome/startup/";
                      failure:(void (^)(NSError *aError))failureBlock{
     [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
     return [self GET:StatUp parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *dic =responseObject[@"resp"];
+        successBlock(dic);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }
+            ];
+}
+- (NSURLSessionTask*)reg:(NSString*)username
+                nickname:(NSString*)nickname
+                password:(NSString*)password
+                 success:(void (^)(id data))successBlock
+                 failure:(void (^)(NSError *aError))failureBlock
+{
+    [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
+    NSMutableString* URL = [[NSMutableString alloc] init];
+    [URL appendString:Reg];
+    
+    NSDictionary* para = @{@"username":username,@"nickname":nickname,@"password":password};
+    return [self GET:URL parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *dic =responseObject[@"resp"];
+        successBlock(dic);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }
+            ];
+}
+- (NSURLSessionTask*)log:(NSString*)username
+                password:(NSString*)password
+                 success:(void (^)(id data))successBlock
+                 failure:(void (^)(NSError *aError))failureBlock
+{
+    [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
+    NSMutableString* URL = [[NSMutableString alloc] init];
+    [URL appendString:Log];
+    
+    NSDictionary* para = @{@"username":username,@"password":password};
+    return [self GET:URL parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *dic =responseObject[@"resp"];
+        successBlock(dic);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }
+            ];
+}
+- (NSURLSessionTask*)forget:(NSString*)username
+                    success:(void (^)(id data))successBlock
+                    failure:(void (^)(NSError *aError))failureBlock{
+    [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
+    NSMutableString* URL = [[NSMutableString alloc] init];
+    [URL appendString:Forget];
+    
+    NSDictionary* para = @{@"username":username};
+    return [self GET:URL parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary *dic =responseObject[@"resp"];

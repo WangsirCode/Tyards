@@ -33,6 +33,23 @@
  */
 - (NSURLSessionTask*)startUp:(void (^)(id data))successBlock
                              failure:(void (^)(NSError *aError))failureBlock;
+
+//注册
+- (NSURLSessionTask*)reg:(NSString*)username
+                nickname:(NSString*)nickname
+                password:(NSString*)password
+                            success:(void (^)(id data))successBlock
+                            failure:(void (^)(NSError *aError))failureBlock;
+
+//登录
+- (NSURLSessionTask*)log:(NSString*)username
+                password:(NSString*)password
+                 success:(void (^)(id data))successBlock
+                 failure:(void (^)(NSError *aError))failureBlock;
+//找回密码
+- (NSURLSessionTask*)forget:(NSString*)username
+                 success:(void (^)(id data))successBlock
+                 failure:(void (^)(NSError *aError))failureBlock;
 /*!
  *  @author 汪宇豪, 16-07-22 16:07:43
  *

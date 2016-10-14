@@ -71,7 +71,7 @@
         if (self.model) {
             NSMutableAttributedString* attr = [[NSMutableAttributedString alloc] initWithString:self.model.title];
             NSRange range = NSMakeRange(0, self.model.title.length);
-            [attr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14*self.scale] range:range];
+            [attr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:16*self.scale] range:range];
             NSMutableParagraphStyle* style = [[NSMutableParagraphStyle alloc] init];
 
             [attr addAttribute:NSParagraphStyleAttributeName value:style range:range];
