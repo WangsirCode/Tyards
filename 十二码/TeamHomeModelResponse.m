@@ -31,7 +31,7 @@
 {
     NSDate *date = [[NSDate alloc]initWithTimeIntervalSince1970:self.dateCreated/1000];
     NSDateFormatter* formater = [[NSDateFormatter alloc] init];
-    formater.dateFormat = @"yyyy.MM.dd";
+    formater.dateFormat = @"MM.dd";
     NSString* ta = [formater stringFromDate:date];
     return ta;
 }
