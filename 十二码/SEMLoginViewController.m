@@ -334,9 +334,9 @@
 -(UITextField*)passTF{
     if (!_passTF) {
         _passTF = [[UITextField alloc] init];
-        _passTF.placeholder = @"请输入邮箱密码";
-//        _passTF.textAlignment = NSTextAlignmentCenter;
+        _passTF.placeholder = @"请输入密码";
         _passTF.backgroundColor=[UIColor whiteColor];
+        _passTF.secureTextEntry=YES;
         _passTF.font = [UIFont systemFontOfSize:15*self.view.scale];
     }
     return _passTF;
@@ -506,16 +506,43 @@
 
 }
 -(void)loginAction{
-    SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
-    [manager log:self.accTF.text  password:self.passTF.text success:^(id data) {
-        TokenModel* model = data;
-        NSString* token = model.token;
-        self.url = model.user.avatar;
-        [DataArchive archiveUserData:token withFileName:@"token"];
-        [self dismiss];
-    } failure:^(NSError *aError) {
-        NSLog(@"%@",aError);
-        [XHToast showCenterWithText:@"登录失败"];
-    }];
+    if (![self isValidateEmail:self.accTF.text]) {
+        [XHToast showCenterWithText:@"请输入有效的邮箱账号"];
+
+    }else if (self.passTF.text.length==0){
+        [XHToast showCenterWithText:@"请输入邮箱密码"];
+
+    }else{
+        SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
+        [manager log:self.accTF.text  password:self.passTF.text success:^(id data) {
+            if (data) {
+                TokenModel* model = data;
+                NSString* token = model.token;
+                self.url = model.user.avatar;
+                [DataArchive archiveUserData:token withFileName:@"token"];
+                
+                UserModel* data = [[UserModel alloc] init];
+                data.nickname = model.user.nickname;
+                data.token = (NSString*)[DataArchive unarchiveUserDataWithFileName:@"token"];
+                [DataArchive archiveUserData:data withFileName:@"userinfo"];
+                [self dismiss];
+
+            }else{
+                [XHToast showCenterWithText:@"登录失败"];
+
+            }
+        } failure:^(NSError *aError) {
+            NSLog(@"%@",aError);
+            [XHToast showCenterWithText:@"登录失败"];
+        }]; 
+    }
+    
+}
+//判断是否是有效的邮箱
+-(BOOL)isValidateEmail:(NSString *)email
+{
+    NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    return [emailTest evaluateWithObject:email];
 }
 @end
