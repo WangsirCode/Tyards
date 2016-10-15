@@ -28,6 +28,7 @@
 #import "MDABizManager.h"
 #import "SEMTabViewController.h"
 #import "SEMNewsDetailController.h"
+#import "UIView+redPoint.h"
 @interface SEMHomeVIewController ()<UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,SEMSearchViewControllerDelegate>
 @property (nonatomic,strong) SEMHomeVIewModel * viewModel;
 @property (nonatomic,strong) HomeHeadView     * headView;
@@ -35,6 +36,8 @@
 @property (nonatomic,strong) UIBarButtonItem  * searchItem;
 @property (nonatomic,strong) UIBarButtonItem  * userItem;
 @property (nonatomic,strong) UIButton         * button;
+@property (nonatomic,strong) UIView           * userView;
+@property (nonatomic,strong) UIView           * red;
 @end
 
 @implementation SEMHomeVIewController
@@ -52,6 +55,13 @@
     else
     {
         [self.button setImage:[UIImage imageNamed:@"Group 2"] forState:UIControlStateNormal];
+    }
+    if ([self.viewModel haveUnredMessge]) {
+        self.red.hidden = NO;
+    }
+    else
+    {
+        self.red.hidden = YES;
     }
 }
 - (void)viewDidLoad {
@@ -86,6 +96,8 @@
     [self.view addSubview:self.tableView];
     self.navigationItem.rightBarButtonItem = self.searchItem;
     self.navigationItem.leftBarButtonItem = self.userItem;
+    [self.button showRedAtOffSetX:10 AndOffSetY:10 OrValue:@"1"];
+    
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
 
         
@@ -271,7 +283,8 @@
 - (UIBarButtonItem*)userItem
 {
     if (!_userItem) {
-        _userItem = [[UIBarButtonItem alloc] initWithCustomView:self.button];
+        _userItem = [[UIBarButtonItem alloc] initWithCustomView:self.userView];
+        
         [[self.button rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
             [self.navigationController.mm_drawerController toggleDrawerSide:MMDrawerSideLeft animated:YES completion:^(BOOL finished) {
                 
@@ -290,5 +303,26 @@
         _button.layer.cornerRadius = 15;
     }
     return _button;
+}
+- (UIView *)userView
+{
+    if (!_userView) {
+        _userView = [UIView new];
+        [_userView addSubview:self.button];
+        _userView.frame = CGRectMake(0, 0, 30, 30);
+        [_userView addSubview:self.red];
+    }
+    return _userView;
+}
+- (UIView *)red
+{
+    if (!_red) {
+        _red = [UIView new];
+        _red.backgroundColor = [UIColor redColor];
+        _red.frame = CGRectMake(25, 0, 9, 9);
+        _red.layer.cornerRadius = _red.width / 2;
+        _red.clipsToBounds = YES;
+    }
+    return _red;
 }
 @end

@@ -22,7 +22,7 @@
 - (void)fetchData
 {
     SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
-    [manager fetchInvitations:^(id data) {
+    [manager fetchInvitations:[self getToken] success: ^(id data) {
         self.model = data;
         self.anothorModel = data;
         self.shouldReloadData = YES;

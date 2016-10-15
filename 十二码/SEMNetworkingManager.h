@@ -865,7 +865,8 @@
  *
  *  @return NSURLSessionTask
  */
-- (NSURLSessionTask*)fetchInvitations:(void (^)(id data))successBlock
+- (NSURLSessionTask*)fetchInvitations:(NSString*)token
+                              success:(void (^)(id data))successBlock
                              failure:(void (^)(NSError *aError))failureBlock;
 
 /*!
