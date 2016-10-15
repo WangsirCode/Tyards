@@ -8,6 +8,7 @@
 
 #import "CommentView.h"
 #import "MDABizManager.h"
+
 @implementation CommentView
 - (instancetype)initWithReplies:(NSArray *)replies
 {
@@ -38,7 +39,46 @@
                 secName = reply.remind.nickname;
             }
             [string appendString:@":  "];
-            [string appendString:reply.content];
+            [string appendString:reply.content];            
+            
+//            NSMutableAttributedString *text = [NSMutableAttributedString new];
+//            NSArray *array = [reply.content componentsSeparatedByString:@"$"];
+//            for (NSString *string in array) {
+//                if (string.length>0) {
+//                    if ([string hasPrefix:@"["]&&[string hasSuffix:@"]"]) {
+//                        NSString *temp = [string stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"["]];
+//                        NSString *gifString = [temp stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"]"]];
+//                        NSLog(@"%@",gifString);
+//                        // 添加表情
+//                        gifString = [gifString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//
+//                        NSTextAttachment *attch = [[NSTextAttachment alloc] init];
+//                        // 表情图片
+//                        attch.image = [UIImage imageNamed:[NSString stringWithFormat:@"emoji_%@",[gifString substringToIndex:3]]];
+//                        // 设置图片大小
+//                        attch.bounds = CGRectMake(0, 0, 20, 20);
+//                        
+////                        // 创建带有图片的富文本
+////                        NSAttributedString *string = [NSAttributedString attributedStringWithAttachment:attch];
+////                        [attri appendAttributedString:string];
+//                        
+//                        // 用label的attributedText属性来使用富文本
+////                        self.textLabel.attributedText = attri;
+//
+//                        [text insertAttributedString:[NSAttributedString attributedStringWithAttachment:attch] atIndex:0];
+//                    }
+//                    else{
+//
+//                        [text appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@",string] attributes:nil]];                    }
+//                }
+//            }
+////            [string appendString:text];
+//            
+//            
+            
+            
+            
+            
             UILabel* label = [[UILabel alloc] init];
             label.textAlignment = NSTextAlignmentLeft;
             label.numberOfLines = 0;
@@ -98,4 +138,5 @@
     
 
 }
+
 @end

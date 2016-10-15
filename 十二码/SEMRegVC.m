@@ -26,24 +26,38 @@
 }
 
 - (IBAction)regAction:(id)sender {
-    SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
-    [manager reg:self.accTF.text nickname:self.nicknameTF.text password:self.passTF.text success:^(id data) {
-        [self dismissViewControllerAnimated:YES completion:nil];
+    if (![self isValidateEmail:self.accTF.text]) {
+        [XHToast showCenterWithText:@"请输入有效的邮箱账号"];
+        
+    }else if (self.passTF.text.length==0){
+        [XHToast showCenterWithText:@"请输入邮箱密码"];
+        
+    }else if(self.nicknameTF.text.length==0){
+        [XHToast showCenterWithText:@"请输入昵称"];
 
-    } failure:^(NSError *aError) {
-        NSLog(@"%@",aError);
-    }];
-//    [manager reg:<#(NSString *)#> nickname:<#(NSString *)#> password:<#(NSString *)#> success:<#^(id data)successBlock#> failure:<#^(NSError *aError)failureBlock#> success:^(id data) {
-//        self.datasource = data;
-//        [subscriber sendNext:@1];
-//        self.index += 1;
-//        if (self.index == 2) {
-//            [subscriber sendCompleted];
-//        }
-//        [DataArchive archiveData:self.datasource withFileName:newscash];
-//    } failure:^(NSError *aError) {
-//        NSLog(@"%@",aError);
-//    }];
+    }else{
+        SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
+        [manager reg:self.accTF.text nickname:self.nicknameTF.text password:self.passTF.text success:^(NSInteger data)
+         {
+            if (!data) {
+                [XHToast showCenterWithText:@"注册成功"];
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }else{
+                [XHToast showCenterWithText:@"注册失败"];
+            }
+
+            
+        } failure:^(NSError *aError) {
+            NSLog(@"%@",aError);
+        }];
+    }
+}
+//判断是否是有效的邮箱
+-(BOOL)isValidateEmail:(NSString *)email
+{
+    NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    return [emailTest evaluateWithObject:email];
 }
 - (IBAction)dissAction:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];

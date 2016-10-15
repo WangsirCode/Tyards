@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SEMRegVC">
@@ -46,7 +47,7 @@
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入邮箱账号" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Jhv-W4-9KL">
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="20" id="gTn-jn-bXX"/>
+                        <constraint firstAttribute="height" constant="30" id="gTn-jn-bXX"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
@@ -54,7 +55,7 @@
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入昵称" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="e0U-8q-VzJ">
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="20" id="olb-fJ-gxU"/>
+                        <constraint firstAttribute="height" constant="30" id="olb-fJ-gxU"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
@@ -62,7 +63,7 @@
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入密码" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qvH-by-2Rv">
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="20" id="O6O-4J-PkK"/>
+                        <constraint firstAttribute="height" constant="30" id="O6O-4J-PkK"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
@@ -101,7 +102,7 @@
                 <constraint firstItem="YGx-Mq-b4p" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="8Tn-MA-QdO"/>
                 <constraint firstAttribute="trailing" secondItem="Jhv-W4-9KL" secondAttribute="trailing" constant="20" id="9GN-nl-KlN"/>
                 <constraint firstItem="4fc-Wo-g3W" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="Aew-2P-UTC"/>
-                <constraint firstItem="76F-Io-vVu" firstAttribute="top" secondItem="0Bx-I5-hXl" secondAttribute="bottom" constant="20" id="BQD-qy-hCs"/>
+                <constraint firstItem="76F-Io-vVu" firstAttribute="top" secondItem="0Bx-I5-hXl" secondAttribute="bottom" constant="30" id="BQD-qy-hCs"/>
                 <constraint firstAttribute="trailing" secondItem="YGx-Mq-b4p" secondAttribute="trailing" id="C8Q-y1-dyo"/>
                 <constraint firstItem="76F-Io-vVu" firstAttribute="leading" secondItem="0Bx-I5-hXl" secondAttribute="leading" id="Flf-pU-HMH"/>
                 <constraint firstItem="e0U-8q-VzJ" firstAttribute="leading" secondItem="Jhv-W4-9KL" secondAttribute="leading" id="GAb-0O-kES"/>
@@ -119,9 +120,9 @@
                 <constraint firstItem="e0U-8q-VzJ" firstAttribute="top" secondItem="Jhv-W4-9KL" secondAttribute="bottom" constant="20" id="j6Q-gb-Bgd"/>
                 <constraint firstItem="qvH-by-2Rv" firstAttribute="trailing" secondItem="e0U-8q-VzJ" secondAttribute="trailing" id="lun-Ah-fbX"/>
                 <constraint firstItem="qvH-by-2Rv" firstAttribute="leading" secondItem="e0U-8q-VzJ" secondAttribute="leading" id="mA7-e2-7x0"/>
-                <constraint firstItem="Nbq-z6-aGD" firstAttribute="top" secondItem="76F-Io-vVu" secondAttribute="bottom" constant="70" id="mkT-bd-lL9"/>
+                <constraint firstItem="Nbq-z6-aGD" firstAttribute="top" secondItem="76F-Io-vVu" secondAttribute="bottom" constant="100" id="mkT-bd-lL9"/>
                 <constraint firstItem="4fc-Wo-g3W" firstAttribute="top" secondItem="Ruq-fn-XT9" secondAttribute="bottom" constant="50" id="qQ2-eD-2nK"/>
-                <constraint firstItem="0Bx-I5-hXl" firstAttribute="top" secondItem="4fc-Wo-g3W" secondAttribute="bottom" constant="20" id="rW3-5q-sYl"/>
+                <constraint firstItem="0Bx-I5-hXl" firstAttribute="top" secondItem="4fc-Wo-g3W" secondAttribute="bottom" constant="30" id="rW3-5q-sYl"/>
                 <constraint firstItem="YGx-Mq-b4p" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="xgv-CB-DbL"/>
             </constraints>
             <point key="canvasLocation" x="-28" y="30"/>

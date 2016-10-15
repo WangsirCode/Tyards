@@ -90,19 +90,19 @@ NSString* const Forget=@"/user/resetPassword/";
 - (NSURLSessionTask*)reg:(NSString*)username
                 nickname:(NSString*)nickname
                 password:(NSString*)password
-                 success:(void (^)(id data))successBlock
+                 success:(void (^)(NSInteger data))successBlock
                  failure:(void (^)(NSError *aError))failureBlock
 {
     [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
-    NSMutableString* URL = [[NSMutableString alloc] init];
-    [URL appendString:Reg];
+//    NSMutableString* URL = [[NSMutableString alloc] init];
+//    [URL appendString:Reg];
     
     NSDictionary* para = @{@"username":username,@"nickname":nickname,@"password":password};
-    return [self GET:URL parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
+    return [self GET:Reg parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSDictionary *dic =responseObject[@"resp"];
-        successBlock(dic);
+        TokenResponseModel* model = [TokenResponseModel mj_objectWithKeyValues:responseObject];
+        successBlock(model.code);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failureBlock(error);
     }
@@ -114,33 +114,29 @@ NSString* const Forget=@"/user/resetPassword/";
                  failure:(void (^)(NSError *aError))failureBlock
 {
     [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
-    NSMutableString* URL = [[NSMutableString alloc] init];
-    [URL appendString:Log];
     
     NSDictionary* para = @{@"username":username,@"password":password};
-    return [self GET:URL parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
+    return [self GET:Log parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSDictionary *dic =responseObject[@"resp"];
-        successBlock(dic);
+        TokenResponseModel* model = [TokenResponseModel mj_objectWithKeyValues:responseObject];
+        successBlock(model.resp);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failureBlock(error);
     }
             ];
 }
 - (NSURLSessionTask*)forget:(NSString*)username
-                    success:(void (^)(id data))successBlock
+                    success:(void (^)(NSInteger data))successBlock
                     failure:(void (^)(NSError *aError))failureBlock{
     [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
-    NSMutableString* URL = [[NSMutableString alloc] init];
-    [URL appendString:Forget];
     
     NSDictionary* para = @{@"username":username};
-    return [self GET:URL parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
+    return [self GET:Forget parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSDictionary *dic =responseObject[@"resp"];
-        successBlock(dic);
+        TokenResponseModel* model = [TokenResponseModel mj_objectWithKeyValues:responseObject];
+        successBlock(model.code);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failureBlock(error);
     }
