@@ -67,7 +67,7 @@
 - (void)savaName
 {
     SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
-    [manager changeNickName:[self.viewModel getToken] name:self.textFiled.text success:^(id data) {
+    [manager changeNickName:[self.viewModel getToken] name:self.viewModel.name success:^(id data) {
         UserModel* model = (UserModel*)[DataArchive unarchiveUserDataWithFileName:@"userinfo"];
         model.nickname = self.textFiled.text;
         [DataArchive archiveUserData:model withFileName:@"userinfo"];
