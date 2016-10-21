@@ -413,7 +413,7 @@
         }
         if (i == self.viewModel.eventModel.events.count) {
             line.hidden = YES;
-            [self.statusView setupAutoContentSizeWithRightView:imageView rightMargin:10];
+            [self.statusView setupAutoContentSizeWithBottomView:imageView bottomMargin:100*self.view.scale];
         }
     }
     self.bottomView = [UIView new];
