@@ -1065,13 +1065,14 @@ NSString* const Forget=@"/user/resetPassword/";
     }];
 }
 //获取约战列表
-- (NSURLSessionTask *)fetchInvitations:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
+- (NSURLSessionTask *)fetchInvitations:(NSString *)token success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock
 {
     [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
     NSMutableString* URL = [[NSMutableString alloc] init];
     [URL appendString:@"/match/invitations"
      ];
-    return [self GET:URL parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
+    NSDictionary* dic = @{@"token":token};
+    return [self GET:URL parameters:dic progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
@@ -1396,7 +1397,7 @@ NSString* const Forget=@"/user/resetPassword/";
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         CountModel* model = [CountModel mj_objectWithKeyValues:responseObject];
-        successBlock(model);
+        successBlock(@(model.resp));
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failureBlock(error);
     }];
@@ -1413,7 +1414,7 @@ NSString* const Forget=@"/user/resetPassword/";
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         CountModel* model = [CountModel mj_objectWithKeyValues:responseObject];
-        successBlock(model);
+        successBlock(@(model.resp));
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failureBlock(error);
     }];

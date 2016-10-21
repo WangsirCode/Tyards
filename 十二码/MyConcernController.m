@@ -9,6 +9,10 @@
 #import "MyConcernController.h"
 #import "MyConcernViewModel.h"
 #import "MDABizManager.h"
+#import "PlayerDetailViewController.h"
+#import "CoachDetailViewController.h"
+#import "GameInfoDetailViewController.h"
+#import "SEMTeamHomeViewController.h"
 @interface MyConcernController ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong,nonatomic) MyConcernViewModel * viewModel;
 @property (nonatomic,strong) UITableView        * tableView;
@@ -122,6 +126,26 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    ConcernModel* model = self.viewModel.model[indexPath.row];
+    if (model.player) {
+        PlayerDetailViewController* controller = [[PlayerDetailViewController alloc] initWithDictionary:@{@"id":@(model.player.id)}];
+        [self.navigationController pushViewController:controller animated:YES];
+    }
+    else if (model.team)
+    {
+        SEMTeamHomeViewController* controller = [[SEMTeamHomeViewController alloc] initWithDictionary :@{@"ide":@(model.team.id)}];
+        [self.navigationController pushViewController:controller animated:YES];
+    }
+    else if (model.tournament)
+    {
+        GameInfoDetailViewController* controller = [[GameInfoDetailViewController alloc] initWithDictionay :@{@"id":@(model.tournament.id)}];
+        [self.navigationController pushViewController:controller animated:YES];
+    }
+    else if (model.coach)
+    {
+        CoachDetailViewController* controller = [[CoachDetailViewController alloc] initWithDictionary:@{@"id":@(model.coach.id)}];
+        [self.navigationController pushViewController:controller animated:YES];
+    }
     
 }
 #pragma mark - deFan

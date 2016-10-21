@@ -13,10 +13,14 @@
 @property (nonatomic, strong, readonly) NSDictionary* userInfo;
 @property (nonatomic,assign)BOOL shouldReloadData;
 - (instancetype)initWithDictionary:(NSDictionary*)dictionary;
-
 - (void)setup;
 - (NSString*)getSchoolCode;
 - (NSString*)getToken;
 - (BOOL)didLogined;
 - (NSString*)getSchoolName;
+- (NSString*)getReply;
+- (NSString*)getInvitation;
+- (BOOL)haveUnredMessge;
+- (void)fetchReply;
+- (void)fetchInvitation;
 @end

@@ -25,7 +25,7 @@
 #import "ShareView.h"
 #import "UMSocialWechatHandler.h"
 #import "UMSocial.h"
-
+#import  "MyLabel.h"
 
 #define kShareTargetUrl @"http://a.app.qq.com/o/simple.jsp?pkgname=com.tyards"
 
@@ -46,6 +46,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self.viewModel fetchInvitation];
+    [self.viewModel fetchReply];
     self.viewModel.info = (UserModel*)[DataArchive unarchiveUserDataWithFileName:@"userinfo"];
     if (self.viewModel.info) {
         self.topView.name = self.viewModel.info.nickname;
@@ -168,6 +170,42 @@
     }];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    if (indexPath.row == 2 && [self.viewModel getReply]) {
+        MyLabel* label = [[MyLabel alloc] init];
+//        label.textInsets = UIEdgeInsetsMake(5, 5, 5, 5);
+        [cell.contentView addSubview:label];
+        label.sd_layout
+        .centerYEqualToView(cell.contentView)
+        .leftSpaceToView(cell.textLabel,10*self.view.scale)
+        .heightIs(15*self.view.scale)
+        .widthEqualToHeight();
+        label.layer.cornerRadius = label.width / 2;
+        label.layer.masksToBounds = YES;
+        label.backgroundColor = [UIColor redColor];
+        label.textColor = [UIColor whiteColor];
+        label.font = [UIFont systemFontOfSize:10*self.view.scale];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.text = [self.viewModel getReply];
+        
+    }
+    if (indexPath.row == 3 && [self.viewModel getInvitation]) {
+        MyLabel* label = [[MyLabel alloc] init];
+        //        label.textInsets = UIEdgeInsetsMake(5, 5, 5, 5);
+        [cell.contentView addSubview:label];
+        label.sd_layout
+        .centerYEqualToView(cell.contentView)
+        .leftSpaceToView(cell.textLabel,10*self.view.scale)
+        .heightIs(15*self.view.scale)
+        .widthEqualToHeight();
+        label.sd_cornerRadiusFromWidthRatio = @0.5;
+        label.layer.masksToBounds = YES;
+        label.backgroundColor = [UIColor redColor];
+        label.textColor = [UIColor whiteColor];
+        label.font = [UIFont systemFontOfSize:10*self.view.scale];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.text = [self.viewModel getInvitation];
+
+    }
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
