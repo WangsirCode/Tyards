@@ -137,7 +137,16 @@
             }
             [self.webView loadHTMLString:text baseURL:nil];
             self.webView.scrollView.scrollEnabled = YES;
-            self.infoLabbel.text = [self.viewModel.newdetail getInfo];
+            
+            NSMutableAttributedString *attributed = [[NSMutableAttributedString alloc] init];
+            [attributed appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@",self.viewModel.newdetail.author] attributes:nil]];
+            [attributed addAttribute:NSForegroundColorAttributeName
+             
+                                  value:[UIColor colorWithHexString:@"#1EA11F"]
+             
+                                  range:NSMakeRange(0, self.viewModel.newdetail.author.length)];
+            [attributed appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"   %@",[self.viewModel.newdetail getDateInfo]] attributes:nil]];
+            self.infoLabbel.attributedText = attributed;
             self.titleLabel.text = self.viewModel.newdetail.title;
             self.navigationItem.title = self.titleLabel.text;
             self.tableview.tableHeaderView = self.headerView;

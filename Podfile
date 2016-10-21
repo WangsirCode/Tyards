@@ -25,4 +25,6 @@ target ‘十二码’ do
     pod 'DOPDropDownMenu-Enhanced', '~> 1.0.0'
 	pod 'UMengSocial', '~> 4.4'
     pod 'IQKeyboardManager'
+    pod 'UMengAnalytics', '~> 3.6.6'
+
 end

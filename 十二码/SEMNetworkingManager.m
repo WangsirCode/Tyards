@@ -80,8 +80,9 @@ NSString* const Forget=@"/user/resetPassword/";
     return [self GET:StatUp parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSDictionary *dic =responseObject[@"resp"];
-        successBlock(dic);
+        StartUpModel *model =[StartUpModel mj_objectWithKeyValues:responseObject];
+//        NSDictionary *dic =startModel[]
+        successBlock(model.startUpDic);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failureBlock(error);
     }

@@ -56,6 +56,7 @@ PODS:
     - TencentOpenApiSDK/Basic (= 2.9.5)
   - TencentOpenApiSDK/Basic (2.9.5)
   - UITableView+FDTemplateLayoutCell (1.4)
+  - UMengAnalytics (3.6.6)
   - UMengSocial (4.4)
   - YYCategories (1.0.3):
     - YYCategories/no-arc (= 1.0.3)
@@ -82,6 +83,7 @@ DEPENDENCIES:
   - SDWebImage
   - TencentOpenApiSDK
   - UITableView+FDTemplateLayoutCell
+  - UMengAnalytics (~> 3.6.6)
   - UMengSocial (~> 4.4)
   - YYCategories
 
@@ -115,9 +117,10 @@ SPEC CHECKSUMS:
   SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
   TencentOpenApiSDK: a0d7716edd6eb438d65828168e8e5137301b436d
   UITableView+FDTemplateLayoutCell: 234e1582bcc4e18461af91155123bb96538ed030
+  UMengAnalytics: 4bf831415146b9c57cb10be65fbd43462ef8cf65
   UMengSocial: aba7296602310385114d82c255539a7bef3b7ab0
   YYCategories: 0fd4d9eb0994d8d0e355beb4081c8f7202a82b7b
 
-PODFILE CHECKSUM: 8a8f4528142eb73e64499bbfe02a6442d7a6253c
+PODFILE CHECKSUM: eec638122db53e0b8d1850e88bd315f48c84899a
 
 COCOAPODS: 1.0.1
