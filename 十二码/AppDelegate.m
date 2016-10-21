@@ -87,6 +87,7 @@ NSString* const USER_INFO = @"userinfo";
         
     }];
     [self checkVersion];
+
     return YES;
 }
 
