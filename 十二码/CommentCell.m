@@ -45,7 +45,7 @@
     
     UILabel *view2 = [UILabel new];
     view2.textColor = [UIColor blackColor];
-    view2.font = [UIFont systemFontOfSize:15*self.scale];
+//    view2.font = [UIFont systemFontOfSize:15*self.scale];
     view2.numberOfLines = 0;
     _view2 = view2;
     
@@ -128,13 +128,6 @@
                             // 设置图片大小
                             attch.bounds = CGRectMake(0, 0, 15, 15);
     
-    //                        // 创建带有图片的富文本
-    //                        NSAttributedString *string = [NSAttributedString attributedStringWithAttachment:attch];
-    //                        [attri appendAttributedString:string];
-    
-                            // 用label的attributedText属性来使用富文本
-    //                        self.textLabel.attributedText = attri;
-
                             [text appendAttributedString:[NSAttributedString attributedStringWithAttachment:attch]];
                             [text appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@",[string substringFromIndex:5]] attributes:nil]];
                         }
@@ -144,13 +137,13 @@
                     }
                 }
 
-    CGRect labelSize = [text boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, 25) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
+    [text addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Helvetica" size:15*self.scale] range:NSMakeRange(0, text.length)];
+    CGRect labelSize = [text boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, 100) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading context:nil];
    
     _view2.attributedText = text;
     int num =labelSize.size.width/(ScreenWidth-70-20);
     num=num+1;
     _view2.sd_layout.heightIs(num*17);
-    
     
     
     

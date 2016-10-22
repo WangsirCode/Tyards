@@ -531,7 +531,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if (tableView.tag == 101) {
-        return 60*self.view.scale;
+        return 35*self.view.scale;
     }
     else if (tableView.tag == 100)
     {

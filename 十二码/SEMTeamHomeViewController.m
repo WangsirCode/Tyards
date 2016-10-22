@@ -596,7 +596,7 @@
     }
     else if (tableView.tag == SCHEDULETABLEVIETAG)
     {
-        return 60*self.view.scale;
+        return 35*self.view.scale;
     }
     return 0;
 }
