@@ -243,7 +243,7 @@
 {
     if(!_headView)
     {
-        _headView = [[HomeHeadView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height / 2)];
+        _headView = [[HomeHeadView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height / 2.29)];
         _headView.scrollView.delegate = self;
         _headView.backgroundColor = [UIColor whiteColor];
         if (self.viewModel.topics) {

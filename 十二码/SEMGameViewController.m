@@ -227,7 +227,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if (tableView.tag != GAMELISTTABLEVIEW) {
-        return 60*self.view.scale;
+        return 35*self.view.scale;
     }
     return 0;
 }
