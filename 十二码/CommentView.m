@@ -8,6 +8,7 @@
 
 #import "CommentView.h"
 #import "MDABizManager.h"
+#define ScreenWidth [UIScreen mainScreen].bounds.size.width
 
 @implementation CommentView
 - (instancetype)initWithReplies:(NSArray *)replies
@@ -30,53 +31,48 @@
             Reply* reply = self.replys[idx];
             NSString* filstName;
             NSString* secName;
-            NSMutableString* string = [[NSMutableString alloc] init];
-            [string appendString:reply.creator.nickname];
+            NSMutableAttributedString* string = [[NSMutableAttributedString alloc] init];
+            [string appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@",reply.creator.nickname] attributes:nil]];
             filstName = reply.creator.nickname;
             if (reply.remind) {
-                [string appendString:@"回复"];
-                [string appendString:reply.remind.nickname];
+                [string appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"回复"] attributes:nil]];
+                
+//                [string appendString:@"回复"];
+//                [string appendString:reply.remind.nickname];
+                
+                [string appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@",reply.remind.nickname] attributes:nil]];
                 secName = reply.remind.nickname;
             }
-            [string appendString:@":  "];
-            [string appendString:reply.content];            
+            [string appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@":  "] attributes:nil]];
+//            [string appendString:@":  "];
+//            [string appendString:reply.content];
             
-//            NSMutableAttributedString *text = [NSMutableAttributedString new];
-//            NSArray *array = [reply.content componentsSeparatedByString:@"$"];
-//            for (NSString *string in array) {
-//                if (string.length>0) {
-//                    if ([string hasPrefix:@"["]&&[string hasSuffix:@"]"]) {
-//                        NSString *temp = [string stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"["]];
-//                        NSString *gifString = [temp stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"]"]];
-//                        NSLog(@"%@",gifString);
-//                        // 添加表情
-//                        gifString = [gifString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-//
-//                        NSTextAttachment *attch = [[NSTextAttachment alloc] init];
-//                        // 表情图片
-//                        attch.image = [UIImage imageNamed:[NSString stringWithFormat:@"emoji_%@",[gifString substringToIndex:3]]];
-//                        // 设置图片大小
-//                        attch.bounds = CGRectMake(0, 0, 20, 20);
-//                        
-////                        // 创建带有图片的富文本
-////                        NSAttributedString *string = [NSAttributedString attributedStringWithAttachment:attch];
-////                        [attri appendAttributedString:string];
-//                        
-//                        // 用label的attributedText属性来使用富文本
-////                        self.textLabel.attributedText = attri;
-//
-//                        [text insertAttributedString:[NSAttributedString attributedStringWithAttachment:attch] atIndex:0];
-//                    }
-//                    else{
-//
-//                        [text appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@",string] attributes:nil]];                    }
-//                }
-//            }
-////            [string appendString:text];
-//            
-//            
-            
-            
+            NSMutableAttributedString *text = [NSMutableAttributedString new];
+            NSArray *array = [reply.content componentsSeparatedByString:@"$"];
+            for (NSString *string in array) {
+                if (string.length>0) {
+                    if ([string hasPrefix:@"["]&&string.length>4) {
+                        NSString *temp = [[string substringToIndex:5] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"["]];
+                        NSString *gifString = [temp stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"]"]];
+                        NSLog(@"%@",gifString);
+                        // 添加表情
+                        gifString = [gifString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+
+                        NSTextAttachment *attch = [[NSTextAttachment alloc] init];
+                        // 表情图片
+                        attch.image = [UIImage imageNamed:[NSString stringWithFormat:@"emoji_%@",[gifString substringToIndex:3]]];
+                        // 设置图片大小
+                        attch.bounds = CGRectMake(0, 0, 15, 15);
+                        
+                        [text appendAttributedString:[NSAttributedString attributedStringWithAttachment:attch]];
+                        [text appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@",[string substringFromIndex:5]] attributes:nil]];
+                    }
+                    else{
+
+                        [text appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@",string] attributes:nil]];                    }
+                }
+            }
+            [string appendAttributedString:text];
             
             
             UILabel* label = [[UILabel alloc] init];
@@ -84,44 +80,57 @@
             label.numberOfLines = 0;
             [self addSubview:label];
             [self.labels appendObject:label];
-            [label setSingleLineAutoResizeWithMaxWidth:280*scale];
-            
-            //设置富文本
-            NSMutableAttributedString *AttributedStr = [[NSMutableAttributedString alloc]initWithString:string];
-            NSRange fisrtarange = [string rangeOfString:filstName];
-            NSRange range = NSMakeRange(filstName.length, string.length - filstName.length);
-            NSRange secrange;
-            [AttributedStr addAttribute:NSForegroundColorAttributeName value:[UIColor grayColor] range:NSMakeRange(0, AttributedStr.length)];
+//            [label setSingleLineAutoResizeWithMaxWidth:280*scale];
+        //设置富文本
+//            NSMutableAttributedString *AttributedStr = [[NSMutableAttributedString alloc]initWithAttributedString:string];
+//            NSRange fisrtarange = [string rangeOfString:filstName];
+//            NSRange range = NSMakeRange(filstName.length, string.length - filstName.length);
+//            NSRange secrange;
+            [string addAttribute:NSForegroundColorAttributeName value:[UIColor grayColor] range:NSMakeRange(0, string.length)];
             if (secName) {
-                secrange = [string rangeOfString:secName options:nil range:range];
-                [AttributedStr addAttribute:NSForegroundColorAttributeName
-                 
+//                secrange = [string rangeOfString:secName options:nil range:range];
+                [string addAttribute:NSForegroundColorAttributeName
+//
                                       value:[UIColor colorWithHexString:@"#1EA11F"]
                  
-                                      range:secrange];
+                                      range:NSMakeRange(filstName.length+2, secName.length)];
             }
-            [AttributedStr addAttribute:NSForegroundColorAttributeName
+            [string addAttribute:NSForegroundColorAttributeName
              
                                   value:[UIColor colorWithHexString:@"#1EA11F"]
              
-                                  range:fisrtarange];
-            [AttributedStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12*self.scale] range:NSMakeRange(0, AttributedStr.length)];
-            label.attributedText = AttributedStr;
+                                  range:NSMakeRange(0, filstName.length)];
+            [string addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Helvetica" size:13*self.scale] range:NSMakeRange(0, string.length)];
             
+            
+
+            CGRect labelSize = [string boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, 100) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading context:nil];
+            
+            label.attributedText = string;
+            int num =labelSize.size.width/(ScreenWidth-70-20);
+            num=num+1;
+            label.sd_layout.heightIs(num*16);
+
             //设置约束
             if (idx == 0) {
                 label.sd_layout
                 .topSpaceToView(self,10*scale)
-                .leftSpaceToView(self,10*scale)
-                .autoHeightRatio(0);
+                .rightSpaceToView(self, 10)
+
+                .leftSpaceToView(self,10*scale);
+//                .autoHeightRatio(0);
+                
+
             }
             else
             {
                 UILabel* upLabel = self.labels[idx - 1];
                 label.sd_layout
                 .topSpaceToView(upLabel,8*scale)
-                .leftSpaceToView(self,10*scale)
-                .autoHeightRatio(0);
+                .rightSpaceToView(self, 10)
+
+                .leftSpaceToView(self,10*scale);
+//                .autoHeightRatio(0);
             }
             UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] initWithActionBlock:^(id  _Nonnull sender) {
                 [self.delegate didClickButton:obj.targetComment.id remindId:obj.creator.id name:obj.creator.nickname];

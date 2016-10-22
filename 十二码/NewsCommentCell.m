@@ -7,6 +7,7 @@
 //
 
 #import "NewsCommentCell.h"
+#define ScreenWidth [UIScreen mainScreen].bounds.size.width
 
 @implementation NewsCommentCell
 {
@@ -117,7 +118,47 @@
         _view0.image = [UIImage imageNamed:@"zhanwei.jpg"];
     }
     _view1.text = self.model.creator.nickname;
-    _view2.text = self.model.text;
+    
+    
+    NSMutableAttributedString *text = [NSMutableAttributedString new];
+    NSArray *array = [self.model.text componentsSeparatedByString:@"$"];
+    for (NSString *string in array) {
+        if (string.length>0) {
+            if (string.length>4&&[string hasPrefix:@"["]) {
+                NSString *temp = [[string substringToIndex:5] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"["]];
+                NSString *gifString = [temp stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"]"]];
+                NSLog(@"%@",gifString);
+                // 添加表情
+                gifString = [gifString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+                
+                NSTextAttachment *attch = [[NSTextAttachment alloc] init];
+                // 表情图片
+                attch.image = [UIImage imageNamed:[NSString stringWithFormat:@"emoji_%@",[gifString substringToIndex:3]]];
+                // 设置图片大小
+                attch.bounds = CGRectMake(0, 0, 15, 15);
+                
+                [text appendAttributedString:[NSAttributedString attributedStringWithAttachment:attch]];
+                [text appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@",[string substringFromIndex:5]] attributes:nil]];
+            }
+            else{
+                
+                [text appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@",string] attributes:nil]];                    }
+        }
+    }
+    
+    CGRect labelSize = [text boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, 25) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
+    
+    _view2.attributedText = text;
+    int num =labelSize.size.width/(ScreenWidth-70-20);
+    num=num+1;
+    _view2.sd_layout.heightIs(num*17);
+    
+    
+
+    
+    
+    
+//    _view2.text = self.model.text;
     _timeLabel.text = [self.model getDateInfo];
     if (self.model.medias.count > 0) {
         NSMutableArray* array = [NSMutableArray new];

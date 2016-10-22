@@ -50,7 +50,7 @@
 - (void)makeConstraits
 {
     CGFloat height;
-    height = self.view.scale * 48 * 4 + 24;
+    height = self.view.scale * 48 * 3 + 24;
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.and.left.and.right.equalTo(self.view);
         make.height.equalTo(@(height));
@@ -175,7 +175,7 @@
     }
 
     cell.textLabel.text = text;
-    cell.textLabel.font = [UIFont systemFontOfSize:14*self.view.scale];
+    cell.textLabel.font = [UIFont systemFontOfSize:16*self.view.scale];
     cell.detailTextLabel.font = [UIFont systemFontOfSize:14*self.view.scale];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 //    if([text isEqualToString:@"推荐好友"])
