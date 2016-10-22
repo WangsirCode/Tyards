@@ -8,6 +8,8 @@
 
 #import "CommentCell.h"
 #import "MDABizManager.h"
+#define ScreenWidth [UIScreen mainScreen].bounds.size.width
+
 @implementation CommentCell
 {
     UIImageView *_view0;
@@ -67,8 +69,8 @@
     _view2.sd_layout
     .topSpaceToView(_view1, 10)
     .rightSpaceToView(self.contentView, 10)
-    .leftEqualToView(_view1)
-    .autoHeightRatio(0);
+    .leftEqualToView(_view1);
+//    .autoHeightRatio(0);
     
     _timeLabel.sd_layout
     .leftSpaceToView(_view1,13)
@@ -107,7 +109,54 @@
         _view0.image = [UIImage imageNamed:@"zhanwei.jpg"];
     }
     _view1.text = self.model.comment.creator.nickname;
-    _view2.text = self.model.comment.content;
+    
+    
+                NSMutableAttributedString *text = [NSMutableAttributedString new];
+                NSArray *array = [self.model.comment.content componentsSeparatedByString:@"$"];
+                for (NSString *string in array) {
+                    if (string.length>0) {
+                        if (string.length>4&&[string hasPrefix:@"["]) {
+                            NSString *temp = [[string substringToIndex:5] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"["]];
+                            NSString *gifString = [temp stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"]"]];
+                            NSLog(@"%@",gifString);
+                            // 添加表情
+                            gifString = [gifString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
+                            NSTextAttachment *attch = [[NSTextAttachment alloc] init];
+                            // 表情图片
+                            attch.image = [UIImage imageNamed:[NSString stringWithFormat:@"emoji_%@",[gifString substringToIndex:3]]];
+                            // 设置图片大小
+                            attch.bounds = CGRectMake(0, 0, 15, 15);
+    
+    //                        // 创建带有图片的富文本
+    //                        NSAttributedString *string = [NSAttributedString attributedStringWithAttachment:attch];
+    //                        [attri appendAttributedString:string];
+    
+                            // 用label的attributedText属性来使用富文本
+    //                        self.textLabel.attributedText = attri;
+
+                            [text appendAttributedString:[NSAttributedString attributedStringWithAttachment:attch]];
+                            [text appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@",[string substringFromIndex:5]] attributes:nil]];
+                        }
+                        else{
+    
+                            [text appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@",string] attributes:nil]];                    }
+                    }
+                }
+
+    CGRect labelSize = [text boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, 25) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
+   
+    _view2.attributedText = text;
+    int num =labelSize.size.width/(ScreenWidth-70-20);
+    num=num+1;
+    _view2.sd_layout.heightIs(num*17);
+    
+    
+    
+    
+    
+    
+//    _view2.text = self.model.comment.content;
     _timeLabel.text = [self.model getDate];
     if (self.model.comment.replies.count > 0) {
         _commentView = [[CommentView alloc] initWithReplies:self.model.comment.replies];
