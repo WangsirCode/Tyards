@@ -218,8 +218,12 @@
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index
 {
     NSInteger ide = self.viewModel.topics[index].id;
+    Topic *news=self.viewModel.topics[index];
     SEMNewsDetailController* controller = [[SEMNewsDetailController alloc] initWithDictionary:@{@"ides":@(ide),@"hot":@"YES"}];
     controller.hidesBottomBarWhenPushed = YES;
+    controller.shareTitle=news.title;
+    controller.shareImgUrl =news.media.url;
+    controller.shareId=ide;
     [self.navigationController pushViewController:controller animated:YES];
 }
 #pragma mark- tableviewDelegate

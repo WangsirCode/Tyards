@@ -51,7 +51,7 @@
     [self.viewLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.mas_centerY);
         make.right.equalTo(self.conmmentView.mas_left).offset(-5*self.scale);
-        make.width.equalTo(@(25*self.scale));
+        make.width.equalTo(@(32*self.scale));
     }];
     [self.viewImage mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.mas_top).offset(5);

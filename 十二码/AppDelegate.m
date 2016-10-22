@@ -22,9 +22,15 @@
 #import "UMSocialSinaSSOHandler.h"
 #import "MakeInvitationController.h"
 #import "BBLaunchAdMonitor.h"
+#import "MobClick.h"
+
+
 #define kYMAppKey @"57cfb44b67e58e4b32000157"
 #define kQQAppID @"101273513"
 #define kQQAppKey @"6001745f699da343ecd89cf2c51f9c76"
+#define kAppVersion_URL @"http://itunes.apple.com/lookup?id=1158504942"
+#define kAppDownloadURL @"https://itunes.apple.com/cn/app/id1158504942"
+
 
 NSString* const WXPatient_App_ID = @"wx9bdb6c74a8821ee3";
 NSString* const WXPatient_App_Secret = @"bda4135fa9aa74b8d4e123713d24b6fb";
@@ -57,6 +63,9 @@ NSString* const USER_INFO = @"userinfo";
     
     //友盟
     [UMSocialData setAppKey:kYMAppKey];
+    
+    [MobClick startWithAppkey:kYMAppKey reportPolicy:BATCH channelId:@"App Store"];
+
     [UMSocialConfig hiddenNotInstallPlatforms:@[UMShareToWechatSession, UMShareToWechatTimeline,UMShareToQQ,UMShareToQzone]];
     [UMSocialQQHandler setQQWithAppId:kQQAppID appKey:kQQAppKey url:@"http://www.umeng.com/social"];
     [UMSocialQQHandler setSupportWebView:YES];
@@ -64,20 +73,21 @@ NSString* const USER_INFO = @"userinfo";
     
     // Override point for customization after application launch.
     SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
-//    [manager startUp:^(id data) {
-//        self.startDic=data;
-//
-//        [BBLaunchAdMonitor showAdAtPath:self.startDic[@"url"]
-//                                 onView:self.window.rootViewController.view
-//                           timeInterval:3.
-//                       detailParameters:@{}];
-//        
-//        
-//       //
-//    } failure:^(NSError *aError) {
-//        
-//    }];
-//    
+    [manager startUp:^(id data) {
+        self.startDic=data;
+
+        [BBLaunchAdMonitor showAdAtPath:self.startDic[@"url"]
+                                 onView:self.window.rootViewController.view
+                           timeInterval:3.
+                       detailParameters:@{}];
+        
+        
+       //
+    } failure:^(NSError *aError) {
+        
+    }];
+    [self checkVersion];
+
     return YES;
 }
 
@@ -214,5 +224,30 @@ NSString* const USER_INFO = @"userinfo";
         NSLog(@"获取用户信息时出错 = %@", error);
     }];
 }
+- (void)checkVersion {
+    NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
+    NSString *currentVersion = [[infoDic objectForKey:@"CFBundleShortVersionString"] stringByReplacingOccurrencesOfString:@"." withString:@""];
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] init];
+    __weak typeof(self)weakSelf = self;
+    [manager POST:kAppVersion_URL parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSString *lastVersion = [[responseObject[@"results"] firstObject][@"version"] stringByReplacingOccurrencesOfString:@"." withString:@""];
+        if ([currentVersion intValue] / 1.0 / (currentVersion.length * 10) < [lastVersion intValue] / 1.0 / (lastVersion.length * 10)) {
+            [weakSelf versionUpdatePrompt];
+        }
+    } failure:nil];
+}
 
+- (void)versionUpdatePrompt {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"版本更新" message:@"检测到有新的版本可以更新" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"前往更新", nil];
+    [alert show];
+}
+
+
+#pragma mark -- UIAlertViewDelegate
+-(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1) {
+        NSURL *url = [NSURL URLWithString:kAppDownloadURL];
+        [[UIApplication sharedApplication] openURL:url];
+    }
+}
 @end

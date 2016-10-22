@@ -16,3 +16,6 @@
 @property (nonatomic,assign) NSInteger code;
 @property (nonatomic,strong) TokenModel* resp;
 @end
+@interface StartUpModel : NSObject
+@property (nonatomic,strong) NSDictionary* startUpDic;
+@end
