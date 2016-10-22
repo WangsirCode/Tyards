@@ -86,7 +86,7 @@
         make.bottom.equalTo(self.locationImageView.mas_bottom);
     }];
     [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.mas_centerX);
+        make.left.equalTo(self.centerLabel.mas_right).offset(10);
         make.top.equalTo(self.locationImageView.mas_top);
         make.bottom.equalTo(self.locationImageView.mas_bottom);
     }];
