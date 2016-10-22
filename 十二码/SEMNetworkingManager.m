@@ -1189,9 +1189,9 @@ NSString* const Forget=@"/user/resetPassword/";
 {
     [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
     NSMutableString* URL = [[NSMutableString alloc] init];
-    [URL appendString:@"/user/info/"];
+    [URL appendString:@"/user/updateName"];
 //    [URL appendString:nickName];
-    NSDictionary* para = @{@"token":token,@"nickname":nickName};
+    NSDictionary* para = @{@"token":token,@"name":nickName};
     return [self POST:URL parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
