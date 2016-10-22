@@ -154,6 +154,7 @@ NSString* const USER_INFO = @"userinfo";
                     TokenModel* model = data;
                     NSString* token = model.token;
                     self.url = model.user.avatar;
+                    self.nickName = model.user.nickname;
                     [DataArchive archiveUserData:token withFileName:@"token"];
                     [self wechatLoginByRequestForUserInfo];
                 } failure:^(NSError *aError) {
@@ -193,7 +194,13 @@ NSString* const USER_INFO = @"userinfo";
         {
             data.headimgurl = model.headimgurl;
         }
-        data.nickname = model.nickname;
+        if (self.nickName) {
+            data.nickname = self.nickName;
+        }
+        else
+        {
+            data.nickname = model.nickname;
+        }
         data.token = (NSString*)[DataArchive unarchiveUserDataWithFileName:@"token"];
         [DataArchive archiveUserData:data withFileName:@"userinfo"];
         dispatch_async(dispatch_get_main_queue(), ^{

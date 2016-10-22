@@ -35,7 +35,7 @@
 @property (nonatomic,strong)MeinfoViewModel* viewModel;
 @property (nonatomic,strong)LoginCommand* login;
 @property (nonatomic,strong) NSString* url;
-
+@property (nonatomic,strong) NSString* nickname;
 @property (nonatomic,strong) UIView *accView;
 @property (nonatomic,strong) UIView *passView;
 @property (nonatomic,strong) UIImageView *accImg;
@@ -455,7 +455,13 @@
         {
             data.headimgurl = userInfo[@"figureurl_qq_2"];
         }
-        data.nickname = userInfo[@"nickname"];
+        if (self.nickname) {
+            data.nickname = self.nickname;
+        }
+        else
+        {
+            data.nickname = userInfo[@"nickname"];
+        }
         data.token = (NSString*)[DataArchive unarchiveUserDataWithFileName:@"token"];
         [DataArchive archiveUserData:data withFileName:@"userinfo"];
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -481,6 +487,7 @@
             TokenModel* model = data;
             NSString* token = model.token;
             self.url = model.user.avatar;
+            self.nickname = model.user.nickname;
             [DataArchive archiveUserData:token withFileName:@"token"];
             [_tencentOAuth getUserInfo];
         } failure:^(NSError *aError) {
