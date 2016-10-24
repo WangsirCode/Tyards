@@ -16,8 +16,3 @@
 
 
 @end
-@implementation StartUpModel
-
-
-
-@end

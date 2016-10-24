@@ -113,6 +113,7 @@
     
                 NSMutableAttributedString *text = [NSMutableAttributedString new];
                 NSArray *array = [self.model.comment.content componentsSeparatedByString:@"$"];
+    
                 for (NSString *string in array) {
                     if (string.length>0) {
                         if (string.length>4&&[string hasPrefix:@"["]) {
@@ -132,18 +133,23 @@
                             [text appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@",[string substringFromIndex:5]] attributes:nil]];
                         }
                         else{
-    
-                            [text appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@",string] attributes:nil]];                    }
+                            
+                            [text appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@",string] attributes:nil]];
+                        }
                     }
                 }
 
     [text addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Helvetica" size:15*self.scale] range:NSMakeRange(0, text.length)];
-    CGRect labelSize = [text boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, 100) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading context:nil];
+    CGRect labelSize = [text boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, 25) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading context:nil];
    
     _view2.attributedText = text;
-    int num =labelSize.size.width/(ScreenWidth-70-20);
-    num=num+1;
-    _view2.sd_layout.heightIs(num*17);
+    NSInteger num =labelSize.size.width/(ScreenWidth-70-20);
+    NSArray *arr= [self.model.comment.content componentsSeparatedByString:@"\n"];
+    num=num+arr.count;
+    if (arr.count!=1) {
+        num=num+1;
+    }
+    _view2.sd_layout.heightIs(num*18);
     
     
     

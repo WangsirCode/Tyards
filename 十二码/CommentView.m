@@ -104,12 +104,16 @@
             
             
 
-            CGRect labelSize = [string boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, 100) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading context:nil];
+            CGRect labelSize = [string boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, 25) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading context:nil];
             
             label.attributedText = string;
-            int num =labelSize.size.width/(ScreenWidth-70-20);
-            num=num+1;
-            label.sd_layout.heightIs(num*16);
+            NSInteger num =labelSize.size.width/(ScreenWidth-70-20);
+            NSArray *arr= [reply.content componentsSeparatedByString:@"\n"];
+            num=num+arr.count;
+            if (arr.count!=1) {
+                num=num+1;
+            }
+            label.sd_layout.heightIs(num*18);
 
             //设置约束
             if (idx == 0) {
@@ -126,7 +130,7 @@
             {
                 UILabel* upLabel = self.labels[idx - 1];
                 label.sd_layout
-                .topSpaceToView(upLabel,8*scale)
+                .topSpaceToView(upLabel,5*scale)
                 .rightSpaceToView(self, 10)
 
                 .leftSpaceToView(self,10*scale);
