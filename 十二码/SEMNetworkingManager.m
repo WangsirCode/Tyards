@@ -16,6 +16,7 @@
 #import "TeamCommentsResponseModel.h"
 #import "TokenResponseModel.h"
 #import "TournamentPolicyResponseModel.h"
+#import "StartUpModel.h"
 NSString* const hotTopics = @"/university/hotTopics";
 NSString* const hotTopicsCache = @"hotTopicsCache";
 NSString* const ReconmendNewsURL = @"/university/editorViews";
@@ -81,8 +82,7 @@ NSString* const Forget=@"/user/resetPassword/";
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         StartUpModel *model =[StartUpModel mj_objectWithKeyValues:responseObject];
-//        NSDictionary *dic =startModel[]
-        successBlock(model.startUpDic);
+        successBlock(model.resp);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failureBlock(error);
     }
@@ -95,9 +95,6 @@ NSString* const Forget=@"/user/resetPassword/";
                  failure:(void (^)(NSError *aError))failureBlock
 {
     [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
-//    NSMutableString* URL = [[NSMutableString alloc] init];
-//    [URL appendString:Reg];
-    
     NSDictionary* para = @{@"username":username,@"nickname":nickname,@"password":password};
     return [self GET:Reg parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
         

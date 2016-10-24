@@ -84,6 +84,7 @@
 		18A1AEA21DB1EEB50063106B /* emoji_769.png in Resources */ = {isa = PBXBuildFile; fileRef = 18A1AE5B1DB1EEB50063106B /* emoji_769.png */; };
 		18A1AEA31DB1EEB50063106B /* emoji_770.png in Resources */ = {isa = PBXBuildFile; fileRef = 18A1AE5C1DB1EEB50063106B /* emoji_770.png */; };
 		18A1AEA41DB1EEB50063106B /* emoji_771.png in Resources */ = {isa = PBXBuildFile; fileRef = 18A1AE5D1DB1EEB50063106B /* emoji_771.png */; };
+		18ADD8B51DBD038900188852 /* StartUpModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ADD8B41DBD038900188852 /* StartUpModel.m */; };
 		18D1B4ED1DAE7AE100C8438B /* SEMRegVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D1B4EB1DAE7AE100C8438B /* SEMRegVC.m */; };
 		18D1B4EE1DAE7AE100C8438B /* SEMRegVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18D1B4EC1DAE7AE100C8438B /* SEMRegVC.xib */; };
 		18D1B4F21DAE7B0400C8438B /* SEMForgetVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D1B4F01DAE7B0400C8438B /* SEMForgetVC.m */; };
@@ -521,6 +522,8 @@
 		18A1AE5B1DB1EEB50063106B /* emoji_769.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_769.png; sourceTree = "<group>"; };
 		18A1AE5C1DB1EEB50063106B /* emoji_770.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_770.png; sourceTree = "<group>"; };
 		18A1AE5D1DB1EEB50063106B /* emoji_771.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_771.png; sourceTree = "<group>"; };
+		18ADD8B31DBD038900188852 /* StartUpModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartUpModel.h; sourceTree = "<group>"; };
+		18ADD8B41DBD038900188852 /* StartUpModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartUpModel.m; sourceTree = "<group>"; };
 		18D1B4EA1DAE7AE100C8438B /* SEMRegVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEMRegVC.h; sourceTree = "<group>"; };
 		18D1B4EB1DAE7AE100C8438B /* SEMRegVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SEMRegVC.m; sourceTree = "<group>"; };
 		18D1B4EC1DAE7AE100C8438B /* SEMRegVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SEMRegVC.xib; sourceTree = "<group>"; };
@@ -1318,6 +1321,8 @@
 		4734CD381D41B511006536DF /* 十二码 */ = {
 			isa = PBXGroup;
 			children = (
+				18ADD8B31DBD038900188852 /* StartUpModel.h */,
+				18ADD8B41DBD038900188852 /* StartUpModel.m */,
 				18282D051D996676000956EC /* BBLaunchAdMonitor.m */,
 				18282D061D996676000956EC /* BBLaunchAdMonitor.h */,
 				47A364D31D5ABA93002FC59E /* TemplateController.h */,
@@ -2721,6 +2726,7 @@
 				1821FCA31D964019009BB5AC /* StateVC.m in Sources */,
 				47E8BD021D5C1DF0007621F8 /* GameDetailResponseModel.m in Sources */,
 				4734CDC21D41C835006536DF /* SEMInitialViewController.m in Sources */,
+				18ADD8B51DBD038900188852 /* StartUpModel.m in Sources */,
 				4735FA0C1D55FCDA00FDF2ED /* MeColleageSearchViewModel.m in Sources */,
 				477676751D58CB2C00E10594 /* TeamCommentsResponseModel.m in Sources */,
 				47C053D61D759B0B00AEBF86 /* MyInvitationViewModel.m in Sources */,

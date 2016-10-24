@@ -351,6 +351,7 @@
         case 2:
         {
             [UMSocialData defaultData].extConfig.qqData.url = kShareTargetUrl;
+            [UMSocialData defaultData].extConfig.qqData.shareImage=[UIImage imageNamed:@"logo"];
             UMSocialUrlResource *urlResource = [[UMSocialUrlResource alloc] initWithSnsResourceType:UMSocialUrlResourceTypeImage url:@""];
             [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQQ] content:@"推荐一个我天天用的校园足球App给你" image:[UIImage imageNamed:@"logo"] location:nil urlResource:urlResource presentedController:self completion:^(UMSocialResponseEntity *response){
                 if (response.responseCode == UMSResponseCodeSuccess) {
@@ -362,6 +363,7 @@
         case 3:
         {
             [UMSocialData defaultData].extConfig.qzoneData.url = kShareTargetUrl;
+            [UMSocialData defaultData].extConfig.qzoneData.shareImage=[UIImage imageNamed:@"logo"];
             UMSocialUrlResource *urlResource = [[UMSocialUrlResource alloc] initWithSnsResourceType:UMSocialUrlResourceTypeImage url:@""];
             [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQzone] content:@"推荐一个我天天用的校园足球App给你" image:[UIImage imageNamed:@"logo"] location:nil urlResource:urlResource presentedController:self completion:^(UMSocialResponseEntity *response){
                 if (response.responseCode == UMSResponseCodeSuccess) {

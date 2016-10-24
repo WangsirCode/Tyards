@@ -23,7 +23,7 @@
 #import "MakeInvitationController.h"
 #import "BBLaunchAdMonitor.h"
 #import "MobClick.h"
-
+#import "StartUpModel.h"
 
 #define kYMAppKey @"57cfb44b67e58e4b32000157"
 #define kQQAppID @"101273513"
@@ -41,7 +41,6 @@ NSString* const WX_REFRESH_TOKEN = @"refresh_token";
 NSString* const USER_INFO = @"userinfo";
 @interface AppDelegate ()<WXApiDelegate>
 @property (nonatomic,retain) id<WechatDelegate> delegate;
-@property (nonatomic,strong) NSDictionary *startDic;
 
 @end
 
@@ -74,9 +73,9 @@ NSString* const USER_INFO = @"userinfo";
     // Override point for customization after application launch.
     SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
     [manager startUp:^(id data) {
-        self.startDic=data;
-
-        [BBLaunchAdMonitor showAdAtPath:self.startDic[@"url"]
+        StartUpModel *model =[StartUpModel new];
+        model.resp=data;
+        [BBLaunchAdMonitor showAdAtPath:model.resp.url
                                  onView:self.window.rootViewController.view
                            timeInterval:3.
                        detailParameters:@{}];

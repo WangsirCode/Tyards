@@ -408,7 +408,13 @@
     if (!image) {
         image = [UIImage imageNamed:@"zhanwei.jpg"];
     }
-    NSString *urlStr=[NSString stringWithFormat:@"http://www.12yards.cn/news/index/%ld",(long)self.shareId];
+    NSString *urlStr;
+    if (self.viewModel.isHotTopic) {
+        urlStr=[NSString stringWithFormat:@"http://www.12yards.cn/news/hottopic/%ld",(long)self.shareId];
+    }
+    else{
+        urlStr=[NSString stringWithFormat:@"http://www.12yards.cn/news/index/%ld",(long)self.shareId];
+    }
     switch (index) {
         case 0:
         {

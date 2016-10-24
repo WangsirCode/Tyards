@@ -149,9 +149,16 @@
     CGRect labelSize = [text boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, 25) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
     
     _view2.attributedText = text;
-    int num =labelSize.size.width/(ScreenWidth-70-20);
-    num=num+1;
-    _view2.sd_layout.heightIs(num*17);
+    
+    
+    NSInteger num =labelSize.size.width/(ScreenWidth-70-20);
+    NSArray *arr= [self.model.text componentsSeparatedByString:@"\n"];
+    num=num+arr.count;
+    if (arr.count!=1) {
+        num=num+1;
+    }
+
+    _view2.sd_layout.heightIs(num*18);
     
     
 
