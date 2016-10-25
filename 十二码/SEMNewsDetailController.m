@@ -44,6 +44,7 @@
 @property (nonatomic,strong)ShareView* shareView;
 @property (nonatomic,strong)UIView* maskView;
 @property (nonatomic,strong)CommentBottomView  * bottomView;
+@property (nonatomic,strong)UIButton *bottomBtn;
 
 @end
 @implementation SEMNewsDetailController
@@ -89,6 +90,7 @@
     [self.view addSubview:self.maskView];
     [self.view addSubview:self.shareView];
     [self.view addSubview:self.bottomView];
+    [self.view addSubview:self.bottomBtn];
 }
 - (void)makeConstraits
 {
@@ -340,8 +342,7 @@
 {
     
     //为什么无法获取到真实高度？
-    CGFloat webViewHeight= [[self.webView stringByEvaluatingJavaScriptFromString: @"document.body.scrollHeight"] intValue];
-    
+    CGFloat webViewHeight= [[self.webView stringByEvaluatingJavaScriptFromString: @"document.body.scrollHeight"] floatValue];
 //    //如果文字较少，则不用进行scrollViewDidScroll中的设置
 //    if (self.viewModel.newdetail.text.length < 500) {
 //        self.webView.sd_layout
@@ -365,10 +366,36 @@
 //        .rightEqualToView(self.view)
 //        .topSpaceToView(self.webView,10);
 //    }
+    
+//    CGFloat a = webView.height;
+//    self.webView.sd_resetLayout
+//    .topSpaceToView(self.infoLabbel,10)
+//    .leftEqualToView(self.view)
+//    .rightEqualToView(self.view)
+//    .heightIs(a);
+//    NSLog(@"%f",a);
+//    self.viewModel.webViewLoaded = YES;
+//    self.webView.scrollView.scrollEnabled = NO;
+//    self.scrollview.scrollEnabled =YES;
+//    self.tableview.sd_resetLayout
+//    .leftEqualToView(self.view)
+//    .rightEqualToView(self.view)
+//    .topSpaceToView(self.webView,10)
+//    .heightIs(self.tableviewHeight);
     [self.hud hide:YES];
 }
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
+    if (self.scrollview==scrollView) {
+        NSInteger num =scrollView.contentOffset.y;
+        CGFloat webViewHeight= [[self.webView stringByEvaluatingJavaScriptFromString: @"document.body.scrollHeight"] intValue];
+        if (num-webViewHeight>0) {
+            self.bottomBtn.hidden=YES;
+        }else{
+            self.bottomBtn.hidden=NO;
+        }
+    }
+ 
     if (self.viewModel.webViewLoaded == NO && scrollView.contentSize.height != 200) {
 
         //获取真实的高度
@@ -628,9 +655,9 @@
 {
     if (!_scrollview) {
         _scrollview = [[UIScrollView alloc] init];
-        
+        _scrollview.delegate=self;
         //避免刚开始滑动时就滑动
-        _scrollview.scrollEnabled = NO;
+        _scrollview.scrollEnabled = YES;
     }
     return _scrollview;
 }
@@ -687,4 +714,23 @@
     }
     return _maskView;
 }
+- (UIButton*)bottomBtn{
+    
+    if (!_bottomBtn) {
+        _bottomBtn=[UIButton buttonWithType:UIButtonTypeCustom];
+        _bottomBtn.frame = CGRectMake(self.view.width-60, self.view.height-110-64, 50, 50);
+        [_bottomBtn addTarget:self action:@selector(bottomAction) forControlEvents:UIControlEventTouchUpInside];
+        [_bottomBtn setImage:[UIImage imageNamed:@"newsdetail_btnBG_icon"] forState:UIControlStateNormal];
+    }
+    return _bottomBtn;
+}
+-(void)bottomAction{
+    //为什么无法获取到真实高度？
+    CGFloat webViewHeight= [[self.webView stringByEvaluatingJavaScriptFromString: @"document.body.scrollHeight"] intValue];
+    [self.scrollview   scrollRectToVisible:CGRectMake(0, webViewHeight-68, self.view.width, self.view.height) animated:YES];
+}
+
+
+
+
 @end
