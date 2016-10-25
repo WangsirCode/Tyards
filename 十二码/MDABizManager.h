@@ -158,6 +158,9 @@ blue:((float)(rgbValue & 0xFF)) / 255.0 alpha:1.0]
 #import "MyInvitationResponseModel.h"
 #import "PlacceResponseModel.h"
 #import "PlayerNewsResponseModel.h"
+
+#define ScreenWidth [UIScreen mainScreen].bounds.size.width
+
 @interface MDABizManager : NSObject
 @property (nonatomic,assign)BOOL userLogined;
 /**
