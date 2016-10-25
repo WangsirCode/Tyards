@@ -48,6 +48,10 @@
 @property (nonatomic, copy) NSString *team;
 
 @end
+@interface CollegeModel : NSObject
+@property (nonatomic,assign) NSInteger code;
+@property (nonatomic,strong)NSArray* resp;
+@end
 @interface College : NSObject<NSCoding>
 @property (nonatomic, assign) NSInteger id;
 @property (nonatomic,strong) NSString* name;

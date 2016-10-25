@@ -36,3 +36,10 @@ MJCodingImplementation
 MJCodingImplementation
 
 @end
+@implementation CollegeModel
+
+
++ (NSDictionary *)objectClassInArray{
+    return @{@"resp" : [College class]};
+}
+@end

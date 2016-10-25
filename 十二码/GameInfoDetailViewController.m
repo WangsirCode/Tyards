@@ -704,10 +704,22 @@
         controller.navigationController.navigationBar.alpha = 0;
         [self.navigationController pushViewController:controller animated:YES];
     }
-    else
+    else if(tableView.tag == 102)
     {
+        if (self.viewModel.listTableIndex == 1) {
+            ScorerListModel* model = self.viewModel.scorerModel[indexPath.row];
+            PlayerDetailViewController* controller = [[PlayerDetailViewController alloc] initWithDictionary:@{@"id":@(model.player.id)}];
+            [self.navigationController pushViewController:controller animated:YES];
+        }
+        else if (self.viewModel.listTableIndex == 0)
+        {
+            Grids* model = self.viewModel.scoreModel[indexPath.section].grids[indexPath.row];
+            SEMTeamHomeViewController* controler = [[SEMTeamHomeViewController alloc] initWithDictionary:@{@"ide":@(model.team.id)}];
+            [self.navigationController pushViewController:controler animated:YES];
+        }
         [tableView deselectRowAtIndexPath:indexPath animated:NO];
     }
+
 }
 #pragma  mark- scrollviewdelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
