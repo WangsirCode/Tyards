@@ -24,6 +24,7 @@
 #import "CommentBottomView.h"
 #import "SEMLoginViewController.h"
 #import "TagLabels.h"
+#import "MeUserInfoResponseModel.h"
 #define kTimeLineTableViewCellId @"SDTimeLineCell"
 
 
@@ -297,6 +298,11 @@
     if (self.viewModel.isTableView == YES) {
         CommentCell* cell = [[CommentCell alloc] init];
         cell.model = self.viewModel.newdetail.comments[indexPath.row];
+        UserInfoModel* model  = (UserInfoModel*)[DataArchive unarchiveUserDataWithFileName:@"userinfo"];
+        if (model.id==cell.model.comment.creator.id) {
+           UILongPressGestureRecognizer * longPressGesture = [[UILongPressGestureRecognizer alloc ]initWithTarget:self action:@selector(cellLongPress:)];
+            [cell addGestureRecognizer:longPressGesture];
+        }
         cell.delegate = self;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
@@ -332,6 +338,23 @@
         self.tableviewHeight = 10;
         return 10;
     }
+}
+-(void)cellLongPress:(UIGestureRecognizer *)recognizer{
+    
+    if (recognizer.state == UIGestureRecognizerStateBegan) {
+        CGPoint location = [recognizer locationInView:self.tableview];
+        NSIndexPath * indexPath = [self.tableview indexPathForRowAtPoint:location];
+        
+        NSInteger commendId=self.viewModel.newdetail.comments[indexPath.row].id;
+        SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
+        [manager deleteNews:self.shareId ifhotTopic:NO targetCommentId:commendId token: [self.viewModel getToken] success:^(id data) {
+            [self.viewModel.newdetail.comments removeObjectAtIndex:indexPath.row];
+            [self.tableview reloadData];
+        } failure:^(NSError *aError) {
+            
+        }];
+    }
+    
 }
 #pragma mark -webviewdelegate
 - (void)webViewDidStartLoad:(UIWebView *)webView
