@@ -175,22 +175,53 @@
             endingLineNumber = "317"
             landmarkName = "-fetchWexinToken:openid:success:failure:"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "&#x5341;&#x4e8c;&#x7801;/SEMMeViewController.m"
-            timestampString = "498795138.641868"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
-            landmarkName = "-viewWillAppear:"
-            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[SEMNetworkingManager fetchWexinToken:openid:success:failure:]"
+                  moduleName = "&#x5341;&#x4e8c;&#x7801;"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/wangyuhao/Tyards/%E5%8D%81%E4%BA%8C%E7%A0%81/SEMNetworkingManager.m"
+                  timestampString = "499097263.821585"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "318"
+                  endingLineNumber = "318"
+                  offsetFromSymbolStart = "408">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__63-[SEMNetworkingManager fetchWexinToken:openid:success:failure:]_block_invoke"
+                  moduleName = "&#x5341;&#x4e8c;&#x7801;"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/wangyuhao/Tyards/%E5%8D%81%E4%BA%8C%E7%A0%81/SEMNetworkingManager.m"
+                  timestampString = "499097263.823019"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "318"
+                  endingLineNumber = "318"
+                  offsetFromSymbolStart = "56">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__63-[SEMNetworkingManager fetchWexinToken:openid:success:failure:]_block_invoke_2"
+                  moduleName = "&#x5341;&#x4e8c;&#x7801;"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/wangyuhao/Tyards/%E5%8D%81%E4%BA%8C%E7%A0%81/SEMNetworkingManager.m"
+                  timestampString = "499097263.824524"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "318"
+                  endingLineNumber = "318"
+                  offsetFromSymbolStart = "24">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -206,6 +237,38 @@
             startingLineNumber = "204"
             endingLineNumber = "204"
             landmarkName = "-wechatLoginByRequestForUserInfo"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "&#x5341;&#x4e8c;&#x7801;/SEMNetworkingManager.m"
+            timestampString = "499097262.489306"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "470"
+            endingLineNumber = "470"
+            landmarkName = "-fetchColleges:success:failure:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "&#x5341;&#x4e8c;&#x7801;/SEMNetworkingManager.m"
+            timestampString = "499097282.143484"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "466"
+            endingLineNumber = "466"
+            landmarkName = "-fetchColleges:success:failure:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

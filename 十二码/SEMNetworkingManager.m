@@ -468,8 +468,8 @@ NSString* const deleteComment=@"/news/deleteMyComment/";
     return [self GET:URL parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSArray<College*>* model = [College mj_objectArrayWithKeyValuesArray:responseObject[@"resp"]];
-        successBlock(model);
+        CollegeModel* model = [CollegeModel mj_objectWithKeyValues:responseObject];
+        successBlock(model.resp);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failureBlock(error);
     }];
