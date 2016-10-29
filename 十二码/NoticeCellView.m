@@ -30,6 +30,7 @@
     [self addSubview:self.awayTitleLabel];
     [self addSubview:self.homeScoreLabel];
     [self addSubview:self.awaySocreLabel];
+    [self addSubview:self.giveUpAwayLabel];
     [self addSubview:self.centerLabel];
     [self addSubview:self.statusLabel];
     [self addSubview:self.locationImageView];
@@ -75,6 +76,11 @@
     [self.awaySocreLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.mas_top).offset(80*scale);
         make.right.equalTo(self.awayImgaeview.mas_left).offset(-42*scale);
+    }];
+    [self.giveUpAwayLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.awaySocreLabel);
+        make.top.equalTo(self.awaySocreLabel.mas_top).offset(33*scale);
+        make.width.equalTo(@(26*scale));
     }];
     [self.centerLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.mas_centerX);
@@ -218,6 +224,21 @@
         _awaySocreLabel.font = [UIFont systemFontOfSize:(NSInteger)(28*scale)];
     }
     return _awaySocreLabel;
+}
+- (UILabel *)giveUpAwayLabel
+{
+
+    if (!_giveUpAwayLabel) {
+        _giveUpAwayLabel = [[UILabel alloc] init];
+        _giveUpAwayLabel.textAlignment = NSTextAlignmentCenter;
+        _giveUpAwayLabel.layer.borderWidth=1;
+        _giveUpAwayLabel.layer.borderColor=[UIColor grayColor].CGColor;
+        _giveUpAwayLabel.text=@"弃权";
+        _giveUpAwayLabel.hidden=YES;
+        _giveUpAwayLabel.textColor=[UIColor grayColor];
+        _giveUpAwayLabel.font = [UIFont systemFontOfSize:9];
+    }
+    return _giveUpAwayLabel;
 }
 - (UILabel *)centerLabel
 {

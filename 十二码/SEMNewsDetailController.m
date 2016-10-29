@@ -25,10 +25,12 @@
 #import "SEMLoginViewController.h"
 #import "TagLabels.h"
 #import "MeUserInfoResponseModel.h"
+
+
 #define kTimeLineTableViewCellId @"SDTimeLineCell"
 
 
-@interface SEMNewsDetailController ()<UITableViewDelegate,UITableViewDataSource,UIWebViewDelegate,ShareViewDelegate,UMSocialUIDelegate,CommentCellDelegate>
+@interface SEMNewsDetailController ()<UITableViewDelegate,UITableViewDataSource,UIWebViewDelegate,ShareViewDelegate,UMSocialUIDelegate,CommentCellDelegate,HZPhotoBrowserDelegate>
 @property (nonatomic,strong)NewsDetailViewModel* viewModel;
 @property (nonatomic,strong)UIWebView* webView;
 @property (nonatomic,strong)UIBarButtonItem* backItem;
@@ -47,6 +49,9 @@
 @property (nonatomic,strong)CommentBottomView  * bottomView;
 @property (nonatomic,strong)UIButton *bottomBtn;
 
+@property (nonatomic,strong) UIGestureRecognizer *recognizer;
+@property (nonatomic,strong) NSMutableArray *mUrlArray;
+@property (nonatomic,assign) CGFloat webViewHeight;
 @end
 @implementation SEMNewsDetailController
 #pragma mark- lifeCycle
@@ -298,8 +303,8 @@
     if (self.viewModel.isTableView == YES) {
         CommentCell* cell = [[CommentCell alloc] init];
         cell.model = self.viewModel.newdetail.comments[indexPath.row];
-        UserInfoModel* model  = (UserInfoModel*)[DataArchive unarchiveUserDataWithFileName:@"userinfo"];
-        if (model.id==cell.model.comment.creator.id) {
+        NSString *userId=(NSString*)[DataArchive unarchiveUserDataWithFileName:@"userId"];
+        if ([userId integerValue]==cell.model.comment.creator.id) {
            UILongPressGestureRecognizer * longPressGesture = [[UILongPressGestureRecognizer alloc ]initWithTarget:self action:@selector(cellLongPress:)];
             [cell addGestureRecognizer:longPressGesture];
         }
@@ -342,19 +347,48 @@
 -(void)cellLongPress:(UIGestureRecognizer *)recognizer{
     
     if (recognizer.state == UIGestureRecognizerStateBegan) {
-        CGPoint location = [recognizer locationInView:self.tableview];
-        NSIndexPath * indexPath = [self.tableview indexPathForRowAtPoint:location];
+        self.recognizer=recognizer;
+        UIView *view =[[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
+        view.backgroundColor=[[UIColor grayColor] colorWithAlphaComponent:0.5];
         
-        NSInteger commendId=self.viewModel.newdetail.comments[indexPath.row].id;
-        SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
-        [manager deleteNews:self.shareId ifhotTopic:NO targetCommentId:commendId token: [self.viewModel getToken] success:^(id data) {
-            [self.viewModel.newdetail.comments removeObjectAtIndex:indexPath.row];
-            [self.tableview reloadData];
-        } failure:^(NSError *aError) {
-            
-        }];
+        UIButton *deleteBtn =[UIButton buttonWithType:UIButtonTypeCustom];
+        deleteBtn.frame = CGRectMake(40, self.view.height/2, ScreenWidth-80, 40);
+        [deleteBtn setTitle:@"删除" forState:UIControlStateNormal];
+        deleteBtn.backgroundColor=[UIColor whiteColor];
+        deleteBtn.titleLabel.font = [UIFont systemFontOfSize: 15.0];
+        [deleteBtn addTarget:self action:@selector(deleteComment:) forControlEvents:UIControlEventTouchUpInside];
+        [deleteBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        [view addSubview:deleteBtn];
+        
+        UIButton *cancelBtn =[UIButton buttonWithType:UIButtonTypeCustom];
+        cancelBtn.frame = CGRectMake(40, self.view.height/2+40, ScreenWidth-80, 40);
+        [cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
+        cancelBtn.backgroundColor=[UIColor whiteColor];
+        cancelBtn.titleLabel.font = [UIFont systemFontOfSize: 15.0];
+        [cancelBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        [cancelBtn addTarget:self action:@selector(cancelComment:) forControlEvents:UIControlEventTouchUpInside];
+        [view addSubview:cancelBtn];
+        
+        [self.view addSubview:view];
     }
+}
+-(void)deleteComment:(UIButton*)sender{
+    CGPoint location = [self.recognizer locationInView:self.tableview];
+    NSIndexPath * indexPath = [self.tableview indexPathForRowAtPoint:location];
     
+    NSInteger commendId=self.viewModel.newdetail.comments[indexPath.row].id;
+    SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
+    [manager deleteNews:self.shareId ifhotTopic:self.viewModel.isHotTopic targetCommentId:commendId token: [self.viewModel getToken] success:^(id data) {
+        [sender.superview removeFromSuperview];
+        [self.viewModel.newdetail.comments removeObjectAtIndex:indexPath.row];
+        [self.tableview reloadData];
+    } failure:^(NSError *aError) {
+        
+    }];
+    
+}
+-(void)cancelComment:(UIButton*)sender{
+    [sender.superview removeFromSuperview];
 }
 #pragma mark -webviewdelegate
 - (void)webViewDidStartLoad:(UIWebView *)webView
@@ -365,7 +399,7 @@
 {
     
     //为什么无法获取到真实高度？
-    CGFloat webViewHeight= [[self.webView stringByEvaluatingJavaScriptFromString: @"document.body.scrollHeight"] floatValue];
+    _webViewHeight= [[self.webView stringByEvaluatingJavaScriptFromString: @"document.body.scrollHeight"] floatValue];
 //    //如果文字较少，则不用进行scrollViewDidScroll中的设置
 //    if (self.viewModel.newdetail.text.length < 500) {
 //        self.webView.sd_layout
@@ -383,7 +417,7 @@
         .topSpaceToView(self.infoLabbel,10)
         .leftEqualToView(self.view)
         .rightEqualToView(self.view)
-        .heightIs(webViewHeight);
+        .heightIs(_webViewHeight);
 //        self.tableview.sd_resetLayout
 //        .leftEqualToView(self.view)
 //        .rightEqualToView(self.view)
@@ -406,13 +440,86 @@
 //    .topSpaceToView(self.webView,10)
 //    .heightIs(self.tableviewHeight);
     [self.hud hide:YES];
+    
+    //这里是js，主要目的实现对url的获取
+    static  NSString * const jsGetImages =
+    @"function getImages(){\
+    var objs = document.getElementsByTagName(\"img\");\
+    var imgScr = '';\
+    for(var i=0;i<objs.length;i++){\
+    imgScr = imgScr + objs[i].src + '+';\
+    };\
+    return imgScr;\
+    };";
+    
+    [webView stringByEvaluatingJavaScriptFromString:jsGetImages];//注入js方法
+    NSString *urlResurlt = [webView stringByEvaluatingJavaScriptFromString:@"getImages()"];
+    _mUrlArray = [NSMutableArray arrayWithArray:[urlResurlt componentsSeparatedByString:@"+"]];
+    [_mUrlArray removeObjectAtIndex:0];
+    if (_mUrlArray.count >= 2) {
+        [_mUrlArray removeLastObject];
+    }
+    //urlResurlt 就是获取到得所有图片的url的拼接；mUrlArray就是所有Url的数组
+    
+    //添加图片可点击js
+    [webView stringByEvaluatingJavaScriptFromString:@"function registerImageClickAction(){\
+     var imgs=document.getElementsByTagName('img');\
+     var length=imgs.length;\
+     for(var i=0;i<length;i++){\
+     img=imgs[i];\
+     img.onclick=function(){\
+     window.location.href='image-preview:'+this.src}\
+     }\
+     }"];
+    [webView stringByEvaluatingJavaScriptFromString:@"registerImageClickAction();"];
+    
 }
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
+    //预览图片
+    if ([request.URL.scheme isEqualToString:@"image-preview"]) {
+        NSString* path = [request.URL.absoluteString substringFromIndex:[@"image-preview:" length]];
+        path = [path stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        //path 就是被点击图片的url
+        int index = 0;
+        for (int i=0; i<self.mUrlArray.count; i++) {
+            if ([self.mUrlArray[i] isEqualToString:path]) {
+                index=i;
+            }
+        }
+        HZPhotoBrowser *browserVc = [[HZPhotoBrowser alloc] init];
+        browserVc.sourceImagesContainerView = self.view;
+        browserVc.imageCount = self.mUrlArray.count;
+        browserVc.currentImageIndex = index;
+        // 代理
+        browserVc.delegate = self;
+        // 展示图片浏览器
+        [browserVc show];
+        
+        return NO;
+    }
+    return YES;
+}
+
+#pragma mark--HZPhotoBrowserDelegate
+- (UIImage *)photoBrowser:(HZPhotoBrowser *)browser placeholderImageForIndex:(NSInteger)index
+{
+
+    NSData *data = [[NSData alloc]initWithContentsOfURL:[NSURL URLWithString:self.mUrlArray[index]]];
+    return [UIImage imageWithData:data];
+}
+- (NSURL *)photoBrowser:(HZPhotoBrowser *)browser highQualityImageURLForIndex:(NSInteger)index
+{
+    NSURL *url = [[NSURL alloc] initWithString:self.mUrlArray[index]];
+    return url;
+}
+
+
+
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     if (self.scrollview==scrollView) {
         NSInteger num =scrollView.contentOffset.y;
-        CGFloat webViewHeight= [[self.webView stringByEvaluatingJavaScriptFromString: @"document.body.scrollHeight"] intValue];
-        if (num-webViewHeight>0) {
+        if (num-_webViewHeight+120>0) {
             self.bottomBtn.hidden=YES;
         }else{
             self.bottomBtn.hidden=NO;
@@ -748,9 +855,8 @@
     return _bottomBtn;
 }
 -(void)bottomAction{
-    //为什么无法获取到真实高度？
-    CGFloat webViewHeight= [[self.webView stringByEvaluatingJavaScriptFromString: @"document.body.scrollHeight"] intValue];
-    [self.scrollview   scrollRectToVisible:CGRectMake(0, webViewHeight-68, self.view.width, self.view.height) animated:YES];
+
+    [self.scrollview   scrollRectToVisible:CGRectMake(0, _webViewHeight-120, self.view.width, self.view.height) animated:YES];
 }
 
 

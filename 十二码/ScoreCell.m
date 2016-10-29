@@ -18,7 +18,6 @@
         UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] initWithActionBlock:^(id  _Nonnull sender) {
             [self.delegate didClickButton];
         }];
-        self.label.userInteractionEnabled=YES;
         [self.label addGestureRecognizer:tap];
     }
     return self;

@@ -67,7 +67,7 @@
     .heightRatioToView(_view0, 0.4);
     
     _view2.sd_layout
-    .topSpaceToView(_view1, 10)
+    .topSpaceToView(self.contentView,46)
     .rightSpaceToView(self.contentView, 10)
     .leftEqualToView(_view1);
 //    .autoHeightRatio(0);

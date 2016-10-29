@@ -43,6 +43,11 @@
                     self.view.homeScoreLabel.text = [NSString stringWithFormat: @"%ld", (long)self.model.homeScore];
                     self.view.awaySocreLabel.text = [NSString stringWithFormat: @"%ld", (long)self.model.awayScore];
                 }
+                if (self.model.giveupAway) {
+                    self.view.giveUpAwayLabel.hidden=NO;
+                }else{
+                    self.view.giveUpAwayLabel.hidden=YES;
+                }
                 self.view.homeTitleLabel.text = self.model.home.name;
                 self.view.awayTitleLabel.text = self.model.away.name;
                 self.view.homeLabel.text = self.model.stadium.name;
@@ -138,6 +143,11 @@
                 {
                     self.view.homeScoreLabel.text = [NSString stringWithFormat: @"%ld", (long)self.model.homeScore];
                     self.view.awaySocreLabel.text = [NSString stringWithFormat: @"%ld", (long)self.model.awayScore];
+                }
+                if (self.model.giveupAway) {
+                    self.view.giveUpAwayLabel.hidden=NO;
+                }else{
+                    self.view.giveUpAwayLabel.hidden=YES;
                 }
                 self.view.homeTitleLabel.text = self.model.home.name;
                 self.view.awayTitleLabel.text = self.model.away.name;

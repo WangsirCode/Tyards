@@ -235,6 +235,11 @@
             self.headerView.awaySocreLabel.text = [NSString stringWithFormat: @"(%ld)%ld", (long)model.penaltyAway,(long)model.awayScore];
         }
     }
+    if (model.giveupAway) {
+        self.headerView.giveUpAwayLabel.hidden=NO;
+    }else{
+        self.headerView.giveUpAwayLabel.hidden=YES;
+    }
     self.headerView.centerLabel.textColor = [UIColor whiteColor];
     self.headerView.homeScoreLabel.textColor = [UIColor whiteColor];
     self.headerView.awaySocreLabel.textColor = [UIColor whiteColor];

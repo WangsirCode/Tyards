@@ -73,6 +73,14 @@
 - (void)showPhotoBrowser
 {
 //    UICollectionViewCell* sourceView = [(UICollectionView*)self.sourceImagesContainerView cellForItemAtIndexPath:[NSIndexPath indexPathWithIndex:self.currentImageIndex]];
+    
+    if (self.sourceImagesContainerView.subviews.count<self.currentImageIndex+1) {
+        _hasShowedPhotoBrowser = YES;
+        _scrollView.hidden = NO;
+        _indexLabel.hidden = NO;
+        _saveButton.hidden = NO;
+        return;
+    }
     UIView *sourceView = self.sourceImagesContainerView.subviews[self.currentImageIndex];
     UIView *parentView = [self getParsentView:sourceView];
     CGRect rect = [sourceView.superview convertRect:sourceView.frame toView:parentView];
@@ -85,7 +93,8 @@
     
     UIImageView *tempImageView = [[UIImageView alloc] init];
     tempImageView.frame = rect;
-    tempImageView.image = [self placeholderImageForIndex:self.currentImageIndex];
+//    tempImageView.image = [self placeholderImageForIndex:self.currentImageIndex];
+    [tempImageView setImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[self highQualityImageURLForIndex:self.currentImageIndex]]]];
     [self.view addSubview:tempImageView];
     tempImageView.contentMode = UIViewContentModeScaleAspectFit;
 
@@ -246,6 +255,10 @@
 {
     HZPhotoBrowserView *view = (HZPhotoBrowserView *)recognizer.view;
     UIImageView *currentImageView = view.imageview;
+    if (self.sourceImagesContainerView.subviews.count<(self.currentImageIndex+1)) {
+        [self dismissViewControllerAnimated:NO completion:nil];
+        return;
+    }
     
     UIView *sourceView = self.sourceImagesContainerView.subviews[self.currentImageIndex];
     UIView *parentView = [self getParsentView:sourceView];

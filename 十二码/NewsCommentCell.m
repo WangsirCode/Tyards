@@ -160,11 +160,6 @@
 
     _view2.sd_layout.heightIs(num*18);
     
-    
-
-    
-    
-    
 //    _view2.text = self.model.text;
     _timeLabel.text = [self.model getDateInfo];
     if (self.model.medias.count > 0) {

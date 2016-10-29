@@ -17,6 +17,8 @@
 @property (nonatomic,strong) MyLabel* statusLabel;
 @property (nonatomic,strong) UILabel* homeScoreLabel;
 @property (nonatomic,strong) UILabel* awaySocreLabel;
+@property (nonatomic,strong) UILabel* giveUpAwayLabel;
+
 @property (nonatomic,strong) UILabel* centerLabel;
 @property (nonatomic,strong) UILabel* homeTitleLabel;
 @property (nonatomic,strong) UILabel* awayTitleLabel;

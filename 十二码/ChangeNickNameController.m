@@ -66,6 +66,10 @@
 
 - (void)savaName
 {
+    if ( [[self.textFiled.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] length]==0) {
+        [XHToast showCenterWithText:@"昵称不能为空"];
+        return;
+    }
     SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
     [manager changeNickName:[self.viewModel getToken] name:self.textFiled.text success:^(id data) {
         UserModel* model = (UserModel*)[DataArchive unarchiveUserDataWithFileName:@"userinfo"];
