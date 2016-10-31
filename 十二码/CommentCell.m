@@ -140,16 +140,20 @@
                 }
 
     [text addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Helvetica" size:15*self.scale] range:NSMakeRange(0, text.length)];
-    CGRect labelSize = [text boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, 25) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading context:nil];
-   
     _view2.attributedText = text;
-    NSInteger num =labelSize.size.width/(ScreenWidth-70-20);
     NSArray *arr= [self.model.comment.content componentsSeparatedByString:@"\n"];
-    num=num+arr.count;
-    if (arr.count!=1) {
-        num=num+1;
+    
+    NSDictionary *attribute = @{NSFontAttributeName: [UIFont systemFontOfSize:15]};
+    NSInteger index =0;
+    for (int i=0; i<arr.count; i++) {
+        CGRect rect = [arr[i] boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT)
+                                        options:NSStringDrawingUsesLineFragmentOrigin
+                                     attributes:attribute
+                                        context:nil];
+        index=index+ rect.size.width;
     }
-    _view2.sd_layout.heightIs(num*18);
+    NSInteger oneNum =index/(ScreenWidth-70-20)+arr.count;
+    _view2.sd_layout.heightIs(oneNum*19);
     
     
     

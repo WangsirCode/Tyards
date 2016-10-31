@@ -253,6 +253,7 @@
             [DataArchive removeUserFile:@"userinfo"];
             [DataArchive removeUserFile:@"headimage"];
             [DataArchive removeUserFile:@"UserInfo"];
+            [DataArchive removeUserFile:@"userId"];
             SEMLoginViewController* login = [HRTRouter objectForURL:@"login" withUserInfo:@{}];
             [self presentViewController:login animated:YES completion:nil];
         }];
