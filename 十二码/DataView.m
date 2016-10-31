@@ -81,7 +81,7 @@
 {
     if (!_titleLabel) {
         _titleLabel = [UILabel new];
-        _titleLabel.font = [UIFont systemFontOfSize:16];
+        _titleLabel.font = [UIFont systemFontOfSize:15];
         _titleLabel.textAlignment = NSTextAlignmentCenter;
         _titleLabel.layer.borderWidth = 1;
         _titleLabel.layer.borderColor = [UIColor BackGroundColor].CGColor;
