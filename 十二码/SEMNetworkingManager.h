@@ -1074,6 +1074,13 @@
                          success:(void (^)(id data))successBlock
                          failure:(void (^)(NSError *aError))failureBlock;
 
+//删除评论
+- (NSURLSessionTask*)deleteNews:(NSInteger)iden
+                     ifhotTopic:(BOOL)ifhotTopic
+                     targetCommentId:(NSInteger)targetCommentId
+                               token:(NSString*)token
+                             success:(void (^)(id data))successBlock
+                             failure:(void (^)(NSError *aError))failureBlock;
 /*!
  *  @author 汪宇豪, 16-09-14 20:09:11
  *

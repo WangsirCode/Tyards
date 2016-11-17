@@ -63,6 +63,7 @@ NSString* const StatUp=@"/welcome/startup/";
 NSString* const Reg=@"/user/register/";
 NSString* const Log=@"/user/token/";
 NSString* const Forget=@"/user/resetPassword/";
+NSString* const deleteComment=@"/news/deleteMyComment/";
 
 @implementation SEMNetworkingManager
 + (instancetype)sharedInstance
@@ -1298,6 +1299,31 @@ NSString* const Forget=@"/user/resetPassword/";
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failureBlock(error);
     }];
+}
+- (NSURLSessionTask*)deleteNews:(NSInteger)iden
+                     ifhotTopic:(BOOL)ifhotTopic
+                targetCommentId:(NSInteger)targetCommentId
+                          token:(NSString*)token
+                        success:(void (^)(id data))successBlock
+                        failure:(void (^)(NSError *aError))failureBlock{
+    [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
+    self.responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    NSDictionary* para ;
+    if (ifhotTopic) {
+        para= @{@"id":@(targetCommentId),@"hotTopic":@(iden),@"token":token};
+    }else{
+        para= @{@"id":@(targetCommentId),@"news":@(iden),@"token":token};
+    }
+    return [self POST:deleteComment parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        TokenResponseModel* model = [TokenResponseModel mj_objectWithKeyValues:responseObject];
+        successBlock(model);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }];
+
 }
 //获取球员互动信息
 - (NSURLSessionTask *)fetchPlayerNews:(NSString *)playerId offset:(NSInteger)offset success:(void (^)(id))successBlock failure:(void (^)(NSError *))failureBlock

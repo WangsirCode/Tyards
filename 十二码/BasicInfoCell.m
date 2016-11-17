@@ -44,7 +44,7 @@
 {
     if (!_label) {
         _label = [[UILabel alloc] init];
-        _label.font = [UIFont systemFontOfSize:16];
+        _label.font = [UIFont systemFontOfSize:14];
         _label.textColor = [UIColor colorWithHexString:@"#666666"];
     }
     return _label;

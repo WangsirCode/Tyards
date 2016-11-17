@@ -489,6 +489,7 @@
             self.url = model.user.avatar;
             self.nickname = model.user.nickname;
             [DataArchive archiveUserData:token withFileName:@"token"];
+            [DataArchive archiveUserData:[NSString stringWithFormat:@"%ld",(long)model.user.id] withFileName:@"userId"];
             [_tencentOAuth getUserInfo];
         } failure:^(NSError *aError) {
             NSLog(@"%@",aError);
@@ -532,6 +533,7 @@
                 data.nickname = model.user.nickname;
                 data.token = (NSString*)[DataArchive unarchiveUserDataWithFileName:@"token"];
                 [DataArchive archiveUserData:data withFileName:@"userinfo"];
+                [DataArchive archiveUserData:[NSString stringWithFormat:@"%ld",(long)model.user.id] withFileName:@"userId"];
                 [self dismiss];
 
             }else{

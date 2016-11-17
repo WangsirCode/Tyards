@@ -160,6 +160,7 @@ blue:((float)(rgbValue & 0xFF)) / 255.0 alpha:1.0]
 #import "PlayerNewsResponseModel.h"
 
 #define ScreenWidth [UIScreen mainScreen].bounds.size.width
+#define ScreenHeight [UIScreen mainScreen].bounds.size.height
 
 @interface MDABizManager : NSObject
 @property (nonatomic,assign)BOOL userLogined;

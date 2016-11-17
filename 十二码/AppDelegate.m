@@ -165,6 +165,7 @@ NSString* const USER_INFO = @"userinfo";
                     self.url = model.user.avatar;
                     self.nickName = model.user.nickname;
                     [DataArchive archiveUserData:token withFileName:@"token"];
+                    [DataArchive archiveUserData:[NSString stringWithFormat:@"%ld",(long)model.user.id] withFileName:@"userId"];
                     [self wechatLoginByRequestForUserInfo];
                 } failure:^(NSError *aError) {
                     NSLog(@"%@",aError);

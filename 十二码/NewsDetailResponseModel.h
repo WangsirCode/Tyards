@@ -23,7 +23,7 @@
 
 @property (nonatomic, copy) NSString *detail;
 
-@property (nonatomic, strong) NSArray<Comments *> *comments;
+@property (nonatomic, strong) NSMutableArray<Comments *> *comments;
 
 @property (nonatomic, assign) long long dateCreated;
 
