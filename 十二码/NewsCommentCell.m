@@ -54,7 +54,7 @@
     _timeLabel = [[UILabel alloc] init];
     _timeLabel.textColor = [UIColor colorWithHexString:@"#C8C8C8"];
     _timeLabel.textAlignment = NSTextAlignmentLeft;
-    _timeLabel.font = [UIFont systemFontOfSize:12];
+    _timeLabel.font = [UIFont systemFontOfSize:12*self.scale];
     [self.contentView sd_addSubviews:@[view0, view1, view2,_timeLabel]];
     
     _view0.sd_layout
@@ -66,7 +66,8 @@
     _view1.sd_layout
     .topSpaceToView(self.contentView,20)
     .leftSpaceToView(_view0, 10)
-    .heightRatioToView(_view0, 0.4);
+    .heightRatioToView(_view0, 0.4)
+    .maxWidthIs(200*self.scale);
     
     _view2.sd_layout
     .topSpaceToView(_view1, 10)

@@ -79,7 +79,7 @@
 - (NSURLSessionTask*)fetchReCommendNews:(NSString*)code
                                  offset:(NSInteger)offset
                             success:(void (^)(id data))successBlock
-                            failure:(void (^)(NSError *aError))failureBlock;
+                                failure:(void (^)(NSError *aError))failureBlock;
 
 /*!
  *  @author 汪宇豪, 16-07-24 20:07:05

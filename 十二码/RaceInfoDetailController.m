@@ -495,6 +495,7 @@
     [[_commmentBottomView.sendButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
         [self.commmentBottomView.textField resignFirstResponder];
         if ([self.viewModel didLogined]) {
+            self.commmentBottomView.sendButton.enabled = NO;
             [self.viewModel addNews];
         }
         else
