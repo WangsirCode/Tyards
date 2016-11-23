@@ -14,7 +14,9 @@
 #import "SEMLoginViewController.h"
 #import  "LoginCommand.h"
 #import "UserModel.h"
-#import "PersonalInfoController.h"
+//#import "PersonalInfoController.h"
+#import "MyZoneVC.h"
+#import "MyArticle.h"
 #import "UIViewController+MMDrawerController.h"
 #import "SEMTabViewController.h"
 #import "MyConcernController.h"
@@ -61,7 +63,8 @@
             
             UINavigationController* nav = (UINavigationController*)(((SEMTabViewController*)self.mm_drawerController.centerViewController).selectedViewController);
             
-            PersonalInfoController* controller = [HRTRouter objectForURL:@"myInfo" withUserInfo:@{}];
+//            PersonalInfoController* controller = [HRTRouter objectForURL:@"myInfo" withUserInfo:@{}];
+            MyZoneVC *controller = [HRTRouter objectForURL:@"myInfo" withUserInfo:@{}];
             controller.hidesBottomBarWhenPushed = YES;
             [nav pushViewController:controller animated:YES];
         }];
@@ -210,7 +213,7 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
         {
-            return 55*self.view.scale;
+            return 50*self.view.scale;
         }
 #pragma  mark-TableDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -224,7 +227,8 @@
             
             UINavigationController* nav = (UINavigationController*)(((SEMTabViewController*)self.mm_drawerController.centerViewController).selectedViewController);
             
-            PersonalInfoController* controller = [HRTRouter objectForURL:@"myInfo" withUserInfo:@{}];
+//            PersonalInfoController* controller = [HRTRouter objectForURL:@"myInfo" withUserInfo:@{}];
+            MyZoneVC *controller = [HRTRouter objectForURL:@"myInfo" withUserInfo:@{}];
             controller.hidesBottomBarWhenPushed = YES;
             [nav pushViewController:controller animated:YES];
         }
@@ -233,8 +237,23 @@
             [XHToast showCenterWithText:@"请先登录"];
         }
         
+    }else if (indexPath.row==1){
+        if (self.viewModel.isLogined) {
+            [self.mm_drawerController closeDrawerAnimated: YES completion:^(BOOL finished) {
+                
+            }];
+            
+            UINavigationController* nav = (UINavigationController*)(((SEMTabViewController*)self.mm_drawerController.centerViewController).selectedViewController);
+            MyArticle *controller = [HRTRouter objectForURL:@"myArticle" withUserInfo:@{}];
+            controller.hidesBottomBarWhenPushed = YES;
+            [nav pushViewController:controller animated:YES];
+        }
+        else
+        {
+            [XHToast showCenterWithText:@"请先登录"];
+        }
     }
-    else if (indexPath.row == 1)
+    else if (indexPath.row == 2)
     {
         if (self.viewModel.isLogined) {
             [self.mm_drawerController closeDrawerAnimated: YES completion:^(BOOL finished) {
@@ -251,7 +270,7 @@
         }
         
     }
-    else if (indexPath.row == 2)
+    else if (indexPath.row == 3)
     {
         if (self.viewModel.isLogined) {
             [self.mm_drawerController closeDrawerAnimated: YES completion:^(BOOL finished) {
@@ -268,7 +287,7 @@
         }
 
     }
-    else if (indexPath.row == 6)
+    else if (indexPath.row == 7)
     {
         [self.mm_drawerController closeDrawerAnimated: YES completion:^(BOOL finished) {
         }];
@@ -278,7 +297,7 @@
         controller.hidesBottomBarWhenPushed = YES;
         [nav pushViewController:controller animated:YES];
     }
-    else if (indexPath.row == 3)
+    else if (indexPath.row == 4)
     {
         [self.mm_drawerController closeDrawerAnimated: YES completion:^(BOOL finished) {
         }];
@@ -287,7 +306,7 @@
         controller.hidesBottomBarWhenPushed = YES;
         [nav pushViewController:controller animated:YES];
     }
-    else if (indexPath.row == 4)
+    else if (indexPath.row == 5)
     {
         FeedBackController* controller = [[FeedBackController alloc] init];
         [self.mm_drawerController closeDrawerAnimated: YES completion:^(BOOL finished) {
@@ -296,7 +315,7 @@
         controller.hidesBottomBarWhenPushed = YES;
         [nav pushViewController:controller animated:YES];
         
-    }else if (indexPath.row==5){
+    }else if (indexPath.row==6){
         [[UIApplication sharedApplication].keyWindow addSubview:self.maskView];
 
         

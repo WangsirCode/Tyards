@@ -38,6 +38,14 @@
 @property (nonatomic,strong) UIButton         * button;
 @property (nonatomic,strong) UIView           * userView;
 @property (nonatomic,strong) UIView           * red;
+
+@property (nonatomic,strong) UIScrollView *scrollView;
+@property (nonatomic,strong) UITableView *oneTab;
+@property (nonatomic,strong) UITableView *twoTab;
+@property (nonatomic,strong) UITableView *threeTab;
+@property (nonatomic,strong) UITableView *fourTab;
+@property (nonatomic,strong) UITableView *fiveTab;
+
 @end
 
 @implementation SEMHomeVIewController
@@ -87,20 +95,64 @@
 {
     UIImage* image = [[UIImage imageNamed:@"首页icon-灰"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     UIImage* selectedImage = [[UIImage imageNamed:@"首页icon-绿"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"首页" image:image selectedImage:selectedImage];
+    self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"资讯" image:image selectedImage:selectedImage];
     [self.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor lightGrayColor],NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
     [self.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:37/255.0 green:153/255.0 blue:31/255.0 alpha:1],NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
 }
 - (void)addSubviews
 {
-    [self.view addSubview:self.tableView];
+    UIButton *btn =[[UIButton alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth/6, 40)];
+    [btn setTitle:@"首页" forState:UIControlStateNormal];
+    [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(btnAction) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIButton *oneBtn =[[UIButton alloc] initWithFrame:CGRectMake(ScreenWidth/6, 0, ScreenWidth/6, 40)];
+    [oneBtn setTitle:@"新闻" forState:UIControlStateNormal];
+    [oneBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [oneBtn addTarget:self action:@selector(oneBtnAction) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIButton *twoBtn =[[UIButton alloc] initWithFrame:CGRectMake(2*ScreenWidth/6, 0, ScreenWidth/6, 40)];
+    [twoBtn setTitle:@"专栏" forState:UIControlStateNormal];
+    [twoBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [twoBtn addTarget:self action:@selector(twoBtnAction) forControlEvents:UIControlEventTouchUpInside];
+
+
+    UIButton *threeBtn =[[UIButton alloc] initWithFrame:CGRectMake(3*ScreenWidth/6, 0,ScreenWidth/6, 40)];
+    [threeBtn setTitle:@"学堂" forState:UIControlStateNormal];
+    [threeBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [threeBtn addTarget:self action:@selector(threeBtnAction) forControlEvents:UIControlEventTouchUpInside];
+
+    UIButton *fourBtn =[[UIButton alloc] initWithFrame:CGRectMake(4*ScreenWidth/6, 0, ScreenWidth/6, 40)];
+    [fourBtn setTitle:@"话题" forState:UIControlStateNormal];
+    [fourBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [fourBtn addTarget:self action:@selector(fourBtnAction) forControlEvents:UIControlEventTouchUpInside];
+
+    UIButton *fiveBtn =[[UIButton alloc] initWithFrame:CGRectMake(5*ScreenWidth/6, 0, ScreenWidth/6, 40)];
+    [fiveBtn setTitle:@"关注" forState:UIControlStateNormal];
+    [fiveBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [fiveBtn addTarget:self action:@selector(fiveBtnAction) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:btn];
+    [self.view addSubview:oneBtn];
+    [self.view addSubview:twoBtn];
+    [self.view addSubview:threeBtn];
+    [self.view addSubview:fourBtn];
+    [self.view addSubview:fiveBtn];
+    
+    [self.view addSubview:self.scrollView];
+    
+    [self.scrollView addSubview:self.tableView];
+    [self.scrollView addSubview:self.oneTab];
+    [self.scrollView addSubview:self.twoTab];
+    [self.scrollView addSubview:self.threeTab];
+    [self.scrollView addSubview:self.fourTab];
+    [self.scrollView addSubview:self.fiveTab];
+    
     self.navigationItem.rightBarButtonItem = self.searchItem;
     self.navigationItem.leftBarButtonItem = self.userItem;
     [self.button showRedAtOffSetX:10 AndOffSetY:10 OrValue:@"1"];
     
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-
-        
         [[self.viewModel.loadNewCommand execute: nil] subscribeNext:^(id x) {
             if ([x  isEqual: @1]) {
                 [self.tableView reloadData];
@@ -130,21 +182,217 @@
             NSLog(@"%@",x);
             [self.tableView reloadData];
             [self endRefresh];
-        
         }];
-        
     }];
+    
+    self.oneTab.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [[self.viewModel.loadNewCommand execute: nil] subscribeNext:^(id x) {
+            if ([x  isEqual: @1]) {
+                [self.twoTab reloadData];
+            }
+            //            else
+            //            {
+            //                //设置轮播图
+            //                NSMutableArray* titles = [[NSMutableArray alloc] init];
+            //                NSMutableArray* url = [[NSMutableArray alloc]init];
+            //                [self.viewModel.topics enumerateObjectsUsingBlock:^(Topic * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            //                    [titles addObject:obj.title];
+            //                    [url addObject:obj.media.url];
+            //                }];
+            //            }
+            NSLog(@"已经更新完了");
+            [self endRefresh];
+        }];
+    }];
+    [self.oneTab.mj_header beginRefreshing];
+    self.oneTab.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        
+        [[self.viewModel.loadMoreCommand execute: nil] subscribeNext:^(id x) {
+            NSLog(@"已经加载了更多了");
+            NSLog(@"%@",x);
+            [self.oneTab reloadData];
+            [self endRefresh];
+        }];
+    }];
+    
+    
+    self.twoTab.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [[self.viewModel.loadNewCommand execute: nil] subscribeNext:^(id x) {
+            if ([x  isEqual: @1]) {
+                [self.twoTab reloadData];
+            }
+//            else
+//            {
+//                //设置轮播图
+//                NSMutableArray* titles = [[NSMutableArray alloc] init];
+//                NSMutableArray* url = [[NSMutableArray alloc]init];
+//                [self.viewModel.topics enumerateObjectsUsingBlock:^(Topic * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//                    [titles addObject:obj.title];
+//                    [url addObject:obj.media.url];
+//                }];
+//            }
+            NSLog(@"已经更新完了");
+            [self endRefresh];
+        }];
+    }];
+    [self.twoTab.mj_header beginRefreshing];
+    self.twoTab.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        
+        [[self.viewModel.loadMoreCommand execute: nil] subscribeNext:^(id x) {
+            NSLog(@"已经加载了更多了");
+            NSLog(@"%@",x);
+            [self.twoTab reloadData];
+            [self endRefresh];
+        }];
+    }];
+    
+    
+    self.threeTab.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [[self.viewModel.loadNewCommand execute: nil] subscribeNext:^(id x) {
+            if ([x  isEqual: @1]) {
+                [self.threeTab reloadData];
+            }
+//            else
+//            {
+//                //设置轮播图
+//                NSMutableArray* titles = [[NSMutableArray alloc] init];
+//                NSMutableArray* url = [[NSMutableArray alloc]init];
+//                [self.viewModel.topics enumerateObjectsUsingBlock:^(Topic * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//                    [titles addObject:obj.title];
+//                    [url addObject:obj.media.url];
+//                }];
+//            
+//            }
+            NSLog(@"已经更新完了");
+            [self endRefresh];
+        }];
+    }];
+    [self.threeTab.mj_header beginRefreshing];
+    self.threeTab.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        
+        [[self.viewModel.loadMoreCommand execute: nil] subscribeNext:^(id x) {
+            NSLog(@"已经加载了更多了");
+            NSLog(@"%@",x);
+            [self.threeTab reloadData];
+            [self endRefresh];
+        }];
+    }];
+    
+    self.fourTab.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [[self.viewModel.loadNewCommand execute: nil] subscribeNext:^(id x) {
+            if ([x  isEqual: @1]) {
+                [self.fourTab reloadData];
+            }
+//            else
+//            {
+//                //设置轮播图
+//                NSMutableArray* titles = [[NSMutableArray alloc] init];
+//                NSMutableArray* url = [[NSMutableArray alloc]init];
+//                [self.viewModel.topics enumerateObjectsUsingBlock:^(Topic * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//                    [titles addObject:obj.title];
+//                    [url addObject:obj.media.url];
+//                }];
+//           
+//            }
+            NSLog(@"已经更新完了");
+            [self endRefresh];
+        }];
+    }];
+    [self.fourTab.mj_header beginRefreshing];
+    self.fourTab.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        
+        [[self.viewModel.loadMoreCommand execute: nil] subscribeNext:^(id x) {
+            NSLog(@"已经加载了更多了");
+            NSLog(@"%@",x);
+            [self.fourTab reloadData];
+            [self endRefresh];
+        }];
+    }];
+
+    
+    self.fiveTab.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [[self.viewModel.loadNewCommand execute: nil] subscribeNext:^(id x) {
+            if ([x  isEqual: @1]) {
+                [self.fiveTab reloadData];
+            }
+//            else
+//            {
+//                //设置轮播图
+//                NSMutableArray* titles = [[NSMutableArray alloc] init];
+//                NSMutableArray* url = [[NSMutableArray alloc]init];
+//                [self.viewModel.topics enumerateObjectsUsingBlock:^(Topic * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//                    [titles addObject:obj.title];
+//                    [url addObject:obj.media.url];
+//                }];
+//           
+//            }
+            NSLog(@"已经更新完了");
+            [self endRefresh];
+        }];
+    }];
+    [self.fiveTab.mj_header beginRefreshing];
+    self.fiveTab.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        
+        [[self.viewModel.loadMoreCommand execute: nil] subscribeNext:^(id x) {
+            NSLog(@"已经加载了更多了");
+            NSLog(@"%@",x);
+            [self.fiveTab reloadData];
+            [self endRefresh];
+        }];
+    }];
+    
+    
+    
+    
+    
+}
+-(void)btnAction{
+    [self.scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+}
+-(void)oneBtnAction{
+    [self.scrollView setContentOffset:CGPointMake(ScreenWidth, 0) animated:YES];
+}
+-(void)twoBtnAction{
+    [self.scrollView setContentOffset:CGPointMake(2*ScreenWidth, 0) animated:YES];
+
+}
+-(void)threeBtnAction{
+    [self.scrollView setContentOffset:CGPointMake(3*ScreenWidth, 0) animated:YES];
+
+}
+-(void)fourBtnAction{
+    [self.scrollView setContentOffset:CGPointMake(4*ScreenWidth, 0) animated:YES];
+
+}
+-(void)fiveBtnAction{
+    [self.scrollView setContentOffset:CGPointMake(5*ScreenWidth, 0) animated:YES];
+
 }
 - (void)endRefresh
 {
     [self.tableView.mj_footer endRefreshing];
     [self.tableView.mj_header endRefreshing];
+    
+    [self.oneTab.mj_footer endRefreshing];
+    [self.oneTab.mj_header endRefreshing];
+    
+    [self.twoTab.mj_footer endRefreshing];
+    [self.twoTab.mj_header endRefreshing];
+    
+    [self.threeTab.mj_footer endRefreshing];
+    [self.threeTab.mj_header endRefreshing];
+    
+    [self.fourTab.mj_footer endRefreshing];
+    [self.fourTab.mj_header endRefreshing];
+    
+    [self.fiveTab.mj_footer endRefreshing];
+    [self.fiveTab.mj_header endRefreshing];
 }
 - (void)makeConstraits
 {
-    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.and.top.and.left.bottom.equalTo(self.view);
-    }];
+//    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.right.and.top.and.left.bottom.equalTo(self.view);
+//    }];
 }
 
 - (void)bindModel
@@ -182,12 +430,17 @@
 {
     self.viewModel.code = name;
     [DataArchive archiveData:name withFileName:@"school"];
-    self.viewModel.title = dispalyname;
     NSUserDefaults *database = [NSUserDefaults standardUserDefaults];
     [database setObject:name forKey:@"name"];
     [database setObject:dispalyname forKey:@"displayname"];
     
-    [self.tableView.mj_header beginRefreshing];
+//    [self.tableView.mj_header beginRefreshing];
+//    [self.twoTab.mj_header beginRefreshing];
+//    [self.threeTab.mj_header beginRefreshing];
+//    [self.fourTab.mj_header beginRefreshing];
+//    [self.fiveTab.mj_header beginRefreshing];
+    [DataArchive archiveUserData:[NSString stringWithFormat:@"%ld",(long)uni.id] withFileName:@"universityId"];
+
     SEMTabViewController* nav = ((SEMTabViewController*)self.mm_drawerController.centerViewController);
     nav.viewControllers = [NSArray arrayWithObjects:[HRTRouter objectForURL: @"Home?navigation=navigation"],[HRTRouter objectForURL: @"News?navigation=navigation"],[HRTRouter objectForURL: @"Team?navigation=navigation"],[HRTRouter objectForURL: @"Game?navigation=navigation"], nil];
 }
@@ -243,7 +496,7 @@
 {
     if(!_headView)
     {
-        _headView = [[HomeHeadView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height / 2.29)];
+        _headView = [[HomeHeadView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, self.view.height / 2.29)];
         _headView.scrollView.delegate = self;
         _headView.backgroundColor = [UIColor whiteColor];
         if (self.viewModel.topics) {
@@ -256,24 +509,99 @@
             self.headView.scrollView.titlesGroup = titles;
             self.headView.scrollView.imageURLStringsGroup = url;
         }
-        
     }
     return _headView;
+}
+
+
+
+
+-(UIScrollView*)scrollView{
+    if (!_scrollView) {
+        _scrollView=[[UIScrollView alloc] initWithFrame:CGRectMake(0, 40, ScreenWidth, ScreenHeight)];
+        _scrollView.contentSize=CGSizeMake(5*ScreenWidth, ScreenHeight);
+        _scrollView.pagingEnabled=YES;
+    }
+    return _scrollView;
 }
 - (UITableView*)tableView
 {
     if(!_tableView)
     {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight) style:UITableViewStylePlain];
         _tableView.delegate =self;
         _tableView.dataSource = self;
         [_tableView registerClass:[HomeCell class] forCellReuseIdentifier:@"HomeCell"];
-        
         _tableView.tableHeaderView = self.headView;
         _tableView.backgroundColor = [UIColor BackGroundColor];
         _tableView.separatorColor = [UIColor BackGroundColor];
     }
     return _tableView;
+}
+- (UITableView*)oneTab
+{
+    if(!_oneTab)
+    {
+        _oneTab = [[UITableView alloc] initWithFrame:CGRectMake(ScreenWidth, 0, ScreenWidth, ScreenHeight) style:UITableViewStylePlain];
+        _oneTab.delegate =self;
+        _oneTab.dataSource = self;
+        [_oneTab registerClass:[HomeCell class] forCellReuseIdentifier:@"HomeCell"];
+        _oneTab.backgroundColor = [UIColor BackGroundColor];
+        _oneTab.separatorColor = [UIColor BackGroundColor];
+    }
+    return _oneTab;
+}
+- (UITableView*)twoTab
+{
+    if(!_twoTab)
+    {
+        _twoTab = [[UITableView alloc] initWithFrame:CGRectMake(ScreenWidth, 0, ScreenWidth, ScreenHeight) style:UITableViewStylePlain];
+        _twoTab.delegate =self;
+        _twoTab.dataSource = self;
+        [_twoTab registerClass:[HomeCell class] forCellReuseIdentifier:@"HomeCell"];
+        _twoTab.backgroundColor = [UIColor BackGroundColor];
+        _twoTab.separatorColor = [UIColor BackGroundColor];
+    }
+    return _twoTab;
+}
+- (UITableView*)threeTab
+{
+    if(!_threeTab)
+    {
+        _threeTab = [[UITableView alloc] initWithFrame:CGRectMake(2*ScreenWidth, 0, ScreenWidth, ScreenHeight) style:UITableViewStylePlain];
+        _threeTab.delegate =self;
+        _threeTab.dataSource = self;
+        [_threeTab registerClass:[HomeCell class] forCellReuseIdentifier:@"HomeCell"];
+        _threeTab.backgroundColor = [UIColor BackGroundColor];
+        _threeTab.separatorColor = [UIColor BackGroundColor];
+    }
+    return _threeTab;
+}
+- (UITableView*)fourTab
+{
+    if(!_fourTab)
+    {
+        _fourTab = [[UITableView alloc] initWithFrame:CGRectMake(3*ScreenWidth, 0, ScreenWidth, ScreenHeight) style:UITableViewStylePlain];
+        _fourTab.delegate =self;
+        _fourTab.dataSource = self;
+        [_fourTab registerClass:[HomeCell class] forCellReuseIdentifier:@"HomeCell"];
+        _fourTab.backgroundColor = [UIColor BackGroundColor];
+        _fourTab.separatorColor = [UIColor BackGroundColor];
+    }
+    return _fourTab;
+}
+- (UITableView*)fiveTab
+{
+    if(!_fiveTab)
+    {
+        _fiveTab = [[UITableView alloc] initWithFrame:CGRectMake(4*ScreenWidth, 0, ScreenWidth, ScreenHeight) style:UITableViewStylePlain];
+        _fiveTab.delegate =self;
+        _fiveTab.dataSource = self;
+        [_fiveTab registerClass:[HomeCell class] forCellReuseIdentifier:@"HomeCell"];
+        _fiveTab.backgroundColor = [UIColor BackGroundColor];
+        _fiveTab.separatorColor = [UIColor BackGroundColor];
+    }
+    return _fiveTab;
 }
 - (UIBarButtonItem*)searchItem
 {
@@ -288,10 +616,8 @@
 {
     if (!_userItem) {
         _userItem = [[UIBarButtonItem alloc] initWithCustomView:self.userView];
-        
         [[self.button rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
             [self.navigationController.mm_drawerController toggleDrawerSide:MMDrawerSideLeft animated:YES completion:^(BOOL finished) {
-                
             }];
         }];
     }
@@ -300,7 +626,6 @@
 - (UIButton*)button
 {
     if (!_button) {
-        
         _button = [UIButton buttonWithType:UIButtonTypeCustom];
         _button.frame = CGRectMake(0, 0, 30, 30);
         _button.layer.masksToBounds = YES;

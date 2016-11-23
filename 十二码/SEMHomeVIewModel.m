@@ -17,6 +17,7 @@ NSString* const imagescash = @"imagecache";
     if (self) {
         NSString* code = [self getSchoolCode];
         NSString* name = [self getSchoolName];
+        [DataArchive archiveUserData:@"4" withFileName:@"universityId"];
         if (code) {
             self.code = code;
         }

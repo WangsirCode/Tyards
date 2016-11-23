@@ -17,4 +17,5 @@
 @property (nonatomic,strong) UIImageView * conmmentView;
 @property (nonatomic,strong) BottomView* bottomview;
 @property (nonatomic,strong) News *model;
+-(void)setdata:(NSDictionary*)dic;
 @end

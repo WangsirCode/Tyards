@@ -50,6 +50,66 @@
 - (NSURLSessionTask*)forget:(NSString*)username
                  success:(void (^)(NSInteger data))successBlock
                  failure:(void (^)(NSError *aError))failureBlock;
+//发帖
+- (NSURLSessionTask*)addPost:(NSString*)token
+                       title:(NSString *)title
+                     content:(NSString *)content
+                  university:(NSString *)university
+                    success:(void (^)(NSInteger data))successBlock
+                    failure:(void (^)(NSError *aError))failureBlock;
+
+
+//更新草稿
+- (NSURLSessionTask*)updateDraft:(NSString*)token
+                       title:(NSString *)title
+                     content:(NSString *)content
+                  university:(NSString *)university
+                           draft:(BOOL)draft
+                         draftId:(NSString *)draftId
+                     success:(void (^)(NSInteger data))successBlock
+                     failure:(void (^)(NSError *aError))failureBlock;
+//我的帖子
+- (NSURLSessionTask*)myPosts:(NSString*)token
+                      university:(NSString *)university
+                      offset:(NSInteger)offset
+                         success:(void (^)(id data))successBlock
+                         failure:(void (^)(NSError *aError))failureBlock;
+//获得我的草稿
+- (NSURLSessionTask*)getMyDraft:(NSString*)token
+                  university:(NSString *)university
+                     success:(void (^)(id data))successBlock
+                     failure:(void (^)(NSError *aError))failureBlock;
+//删除草稿
+- (NSURLSessionTask*)deleteDraft:(NSString*)token
+                     draftId:(NSString *)draftId
+                        success:(void (^)(id data))successBlock
+                        failure:(void (^)(NSError *aError))failureBlock;
+//帖子列表
+- (NSURLSessionTask*)posts:(NSString*)university
+                         q:(NSString *)str
+                          offset:(NSInteger)offset
+                         success:(void (^)(id data))successBlock
+                         failure:(void (^)(NSError *aError))failureBlock;
+
+//帖子详情
+- (NSURLSessionTask*)post:(NSString*)postId
+                   success:(void (^)(id data))successBlock
+                   failure:(void (^)(NSError *aError))failureBlock;
+
+////评论帖子
+//- (NSURLSessionTask*)commentPost:(NSString*)postId
+//                         content:(NSString *)content
+//                    token:(NSInteger)token
+//                   success:(void (^)(id data))successBlock
+//                   failure:(void (^)(NSError *aError))failureBlock;
+//用户动态
+- (NSURLSessionTask*)activities:(NSString*)userid
+                          offset:(NSInteger)offset
+                         success:(void (^)(id data))successBlock
+                         failure:(void (^)(NSError *aError))failureBlock;
+
+
+
 /*!
  *  @author 汪宇豪, 16-07-22 16:07:43
  *
