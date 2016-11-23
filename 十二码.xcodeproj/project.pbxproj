@@ -2413,11 +2413,7 @@
 				TargetAttributes = {
 					4734CD351D41B511006536DF = {
 						CreatedOnToolsVersion = 7.3;
-<<<<<<< HEAD
 						DevelopmentTeam = 87AMZQF2AF;
-=======
-						DevelopmentTeam = X5DK3836PD;
->>>>>>> 791592974cc8ae3d590c235848122d76cce9b4a7
 						ProvisioningStyle = Automatic;
 					};
 					4734CD4E1D41B512006536DF = {
@@ -3060,11 +3056,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-<<<<<<< HEAD
 				DEVELOPMENT_TEAM = 87AMZQF2AF;
-=======
-				DEVELOPMENT_TEAM = X5DK3836PD;
->>>>>>> 791592974cc8ae3d590c235848122d76cce9b4a7
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3124,11 +3116,7 @@
 					"\"UIKit\"",
 					"-fobjc-arc",
 				);
-<<<<<<< HEAD
-				PRODUCT_BUNDLE_IDENTIFIER = com.ios.s;
-=======
-				PRODUCT_BUNDLE_IDENTIFIER = com.luolai.pad;
->>>>>>> 791592974cc8ae3d590c235848122d76cce9b4a7
+				PRODUCT_BUNDLE_IDENTIFIER = com.luolai.p;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -3141,11 +3129,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-<<<<<<< HEAD
 				DEVELOPMENT_TEAM = 87AMZQF2AF;
-=======
-				DEVELOPMENT_TEAM = X5DK3836PD;
->>>>>>> 791592974cc8ae3d590c235848122d76cce9b4a7
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3205,11 +3189,7 @@
 					"\"UIKit\"",
 					"-fobjc-arc",
 				);
-<<<<<<< HEAD
-				PRODUCT_BUNDLE_IDENTIFIER = com.ios.s;
-=======
-				PRODUCT_BUNDLE_IDENTIFIER = com.luolai.pad;
->>>>>>> 791592974cc8ae3d590c235848122d76cce9b4a7
+				PRODUCT_BUNDLE_IDENTIFIER = com.luolai.p;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

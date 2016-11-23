@@ -24,7 +24,6 @@
 - (void)fetchData:(NSString*)playerId
 {
     SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
-    //暂时用这个id测试
     [manager fetchPlayerInfo:playerId offset:0 success:^(id data) {
         self.model = data;
         self.status += 1;
@@ -198,7 +197,7 @@
 - (void)loadMoreComment
 {
     SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
-    [manager fetchPlayerInfo:self.playerId offset:self.messageModel.count success:^(id data) {
+    [manager fetchPlayerNews:self.playerId offset:self.messageModel.count success:^(id data) {
         NSMutableArray* array = [NSMutableArray arrayWithArray:self.messageModel];
         [array appendObjects:(NSArray*)data];
         self.messageModel = array;
