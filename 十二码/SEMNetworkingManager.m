@@ -64,7 +64,12 @@ NSString* const Reg=@"/user/register/";
 NSString* const Log=@"/user/token/";
 NSString* const Forget=@"/user/resetPassword/";
 NSString* const deleteComment=@"/news/deleteMyComment/";
-
+NSString* const addPost=@"/forum/addPost/";
+NSString* const updateDraft=@"/forum/updateDraft/";
+NSString* const myPosts=@"/forum/myPosts";
+NSString* const getMyDraft=@"/forum/getMyDraft";
+NSString* const deleteDraft=@"/forum/deleteDraft";
+NSString* const posts=@"/forum/posts";
 @implementation SEMNetworkingManager
 + (instancetype)sharedInstance
 {
@@ -76,6 +81,7 @@ NSString* const deleteComment=@"/news/deleteMyComment/";
     });
     return _sharedInstance;
 }
+
 - (NSURLSessionTask*)startUp:(void (^)(id data))successBlock
                      failure:(void (^)(NSError *aError))failureBlock{
     [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
@@ -136,6 +142,160 @@ NSString* const deleteComment=@"/news/deleteMyComment/";
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         TokenResponseModel* model = [TokenResponseModel mj_objectWithKeyValues:responseObject];
         successBlock(model.code);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }
+            ];
+}
+//发帖
+- (NSURLSessionTask*)addPost:(NSString*)token
+                       title:(NSString *)title
+                     content:(NSString *)content
+                  university:(NSString *)university
+                     success:(void (^)(NSInteger data))successBlock
+                     failure:(void (^)(NSError *aError))failureBlock{
+    [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
+    
+    NSDictionary *para = @{@"token":token,@"title":title,@"content":content,@"university":university};
+    return [self GET:addPost parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        TokenResponseModel* model = [TokenResponseModel mj_objectWithKeyValues:responseObject];
+        successBlock(model.code);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }
+            ];
+}
+
+//更新草稿
+- (NSURLSessionTask*)updateDraft:(NSString*)token
+                           title:(NSString *)title
+                         content:(NSString *)content
+                      university:(NSString *)university
+                           draft:(BOOL)draft
+                         draftId:(NSString *)draftId
+                         success:(void (^)(NSInteger data))successBlock
+                         failure:(void (^)(NSError *aError))failureBlock{
+    [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
+    
+    NSDictionary *para = @{@"token":token,@"title":title,@"content":content,@"university":university,@"draft":[NSNumber numberWithBool:draft],@"id":draftId};
+    return [self GET:updateDraft parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        TokenResponseModel* model = [TokenResponseModel mj_objectWithKeyValues:responseObject];
+        successBlock(model.code);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }
+            ];
+}
+//我的帖子
+- (NSURLSessionTask*)myPosts:(NSString*)token
+                  university:(NSString *)university
+                      offset:(NSInteger)offset
+                     success:(void (^)(id data))successBlock
+                     failure:(void (^)(NSError *aError))failureBlock{
+    [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
+    
+    NSDictionary *para = @{@"token":token,@"university":university,@"offset":@(offset)};
+    return [self GET:myPosts parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
+        successBlock(dict);
+        
+
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }
+            ];
+}
+//获得我的草稿
+- (NSURLSessionTask*)getMyDraft:(NSString*)token
+                     university:(NSString *)university
+                        success:(void (^)(id data))successBlock
+                        failure:(void (^)(NSError *aError))failureBlock{
+    [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
+    
+    NSDictionary *para = @{@"token":token,@"university":university};
+    return [self GET:getMyDraft parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
+        successBlock(dict);
+        
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }
+            ];
+}
+//删除草稿
+- (NSURLSessionTask*)deleteDraft:(NSString*)token
+                         draftId:(NSString *)draftId
+                         success:(void (^)(id data))successBlock
+                         failure:(void (^)(NSError *aError))failureBlock{
+    [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
+    
+    NSDictionary *para = @{@"token":token,@"id":draftId};
+    return [self GET:deleteDraft parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
+        successBlock(dict);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }
+            ];
+}
+//帖子列表
+- (NSURLSessionTask*)posts:(NSString*)university
+                               q:(NSString *)str
+                          offset:(NSInteger)offset
+                         success:(void (^)(id data))successBlock
+                         failure:(void (^)(NSError *aError))failureBlock{
+    [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
+    
+    NSDictionary *para = @{@"university":university,@"q":str,@"offset":@(offset)};
+    return [self GET:posts parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
+        successBlock(dict);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }
+            ];
+}
+//帖子详情
+- (NSURLSessionTask*)post:(NSString*)postId
+                  success:(void (^)(id data))successBlock
+                  failure:(void (^)(NSError *aError))failureBlock{
+    [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
+    NSDictionary *para = @{@"id":postId};
+    return [self GET:@"/forum/post" parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
+        successBlock(dict);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failureBlock(error);
+    }
+            ];
+}
+//用户动态
+- (NSURLSessionTask*)activities:(NSString*)userid
+                          offset:(NSInteger)offset
+                         success:(void (^)(id data))successBlock
+                         failure:(void (^)(NSError *aError))failureBlock{
+    [self.requestSerializer setQueryStringSerializationWithStyle:AFHTTPRequestQueryStringDefaultStyle];
+    NSDictionary *para = @{@"offset":@(offset),@"id":userid};
+    return [self GET:@"/user/activities" parameters:para progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
+        successBlock(dict);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failureBlock(error);
     }
