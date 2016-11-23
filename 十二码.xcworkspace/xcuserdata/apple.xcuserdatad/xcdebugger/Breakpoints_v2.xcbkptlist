@@ -4,9 +4,73 @@
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "&#x5341;&#x4e8c;&#x7801;/SEMSearchViewController.m"
+            timestampString = "500182243.738355"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "178"
+            endingLineNumber = "178"
+            landmarkName = "-tableView:didSelectRowAtIndexPath:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "&#x5341;&#x4e8c;&#x7801;/SEMNetworkingManager.m"
+            timestampString = "500353501.339367"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "449"
+            endingLineNumber = "449"
+            landmarkName = "-fetchNewsDetail:success:failure:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "&#x5341;&#x4e8c;&#x7801;/SEMHomeVIewModel.m"
+            timestampString = "500195946.469931"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
+            landmarkName = "-loadNewCommand"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "&#x5341;&#x4e8c;&#x7801;/SEMNetworkingManager.m"
+            timestampString = "500353501.339367"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "321"
+            endingLineNumber = "321"
+            landmarkName = "-fetchReCommendNews:offset:success:failure:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             scope = "0"
@@ -19,237 +83,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "&#x5341;&#x4e8c;&#x7801;/NewsCommentCell.m"
-            timestampString = "499314865.106148"
+            filePath = "&#x5341;&#x4e8c;&#x7801;/SEMGameVIewModel.m"
+            timestampString = "500263192.203192"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "164"
-            endingLineNumber = "164"
-            landmarkName = "-setModel:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "&#x5341;&#x4e8c;&#x7801;/NewsCommentView.m"
-            timestampString = "498988108.246683"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "100"
-            endingLineNumber = "100"
-            landmarkName = "-bindModel"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "&#x5341;&#x4e8c;&#x7801;/CommentView.m"
-            timestampString = "498974560.489578"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
-            landmarkName = "-setUpView"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "&#x5341;&#x4e8c;&#x7801;/SEMMeViewController.m"
-            timestampString = "498988472.668908"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "218"
-            endingLineNumber = "218"
-            landmarkName = "-tableView:didSelectRowAtIndexPath:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "&#x5341;&#x4e8c;&#x7801;/SEMMeViewController.m"
-            timestampString = "498990910.911512"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "366"
-            endingLineNumber = "366"
-            landmarkName = "-didSelectedShareView:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "&#x5341;&#x4e8c;&#x7801;/SEMNewsDetailController.m"
-            timestampString = "499411262.723439"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "859"
-            endingLineNumber = "859"
-            landmarkName = "-bottomAction"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "&#x5341;&#x4e8c;&#x7801;/SEMNewsDetailController.m"
-            timestampString = "499331689.613806"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
-            landmarkName = "-initWithDictionary:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "&#x5341;&#x4e8c;&#x7801;/ImageContainerView.m"
-            timestampString = "499314369.133407"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "46"
-            endingLineNumber = "46"
-            landmarkName = "-addImages"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "&#x5341;&#x4e8c;&#x7801;/SEMNewsDetailController.m"
-            timestampString = "499411262.723439"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "459"
-            endingLineNumber = "459"
-            landmarkName = "-webViewDidFinishLoad:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "&#x5341;&#x4e8c;&#x7801;/SEMNewsDetailController.m"
-            timestampString = "499411262.723439"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "489"
-            endingLineNumber = "489"
-            landmarkName = "-webView:shouldStartLoadWithRequest:navigationType:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "&#x5341;&#x4e8c;&#x7801;/photoBroser/HZPhotoBrowser/HZPhotoBrowser.m"
-            timestampString = "499330230.07193"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "136"
-            endingLineNumber = "136"
-            landmarkName = "-showPhotoBrowser"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "&#x5341;&#x4e8c;&#x7801;/photoBroser/HZPhotoBrowser/HZPhotoBrowser.m"
-            timestampString = "499330230.07193"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "177"
-            endingLineNumber = "177"
-            landmarkName = "-addToolbars"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "&#x5341;&#x4e8c;&#x7801;/photoBroser/HZPhotoBrowser/HZPhotoBrowser.m"
-            timestampString = "499330230.07193"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "100"
-            endingLineNumber = "100"
-            landmarkName = "-showPhotoBrowser"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "&#x5341;&#x4e8c;&#x7801;/SEMNewsDetailController.m"
-            timestampString = "499411262.723439"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "506"
-            endingLineNumber = "506"
-            landmarkName = "-photoBrowser:placeholderImageForIndex:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "&#x5341;&#x4e8c;&#x7801;/NewsDetailViewModel.m"
-            timestampString = "499405450.927666"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
-            landmarkName = "-fetchdata"
+            startingLineNumber = "103"
+            endingLineNumber = "103"
+            landmarkName = "-loadNewHistoryGameCommand"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -260,12 +100,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "&#x5341;&#x4e8c;&#x7801;/SEMNetworkingManager.m"
-            timestampString = "499406186.927533"
+            timestampString = "500353501.339367"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "306"
-            endingLineNumber = "306"
-            landmarkName = "-fetchNewsDetail:success:failure:"
+            startingLineNumber = "419"
+            endingLineNumber = "419"
+            landmarkName = "-fetchHistoryGame:offset:success:failure:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -275,13 +115,29 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "&#x5341;&#x4e8c;&#x7801;/CommentCell.m"
-            timestampString = "499412524.294303"
+            filePath = "&#x5341;&#x4e8c;&#x7801;/SEMNetworkingManager.m"
+            timestampString = "500289035.559392"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "117"
-            endingLineNumber = "117"
-            landmarkName = "-setModel:"
+            startingLineNumber = "226"
+            endingLineNumber = "226"
+            landmarkName = "-getMyDraft:university:success:failure:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "&#x5341;&#x4e8c;&#x7801;/HomeCell.m"
+            timestampString = "500265424.286574"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "115"
+            endingLineNumber = "115"
+            landmarkName = "-setdata:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -291,13 +147,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "&#x5341;&#x4e8c;&#x7801;/SEMNewsDetailController.m"
-            timestampString = "499413223.941756"
+            filePath = "&#x5341;&#x4e8c;&#x7801;/DraftsCell.m"
+            timestampString = "500268240.046473"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
-            landmarkName = "-initWithDictionary:"
+            startingLineNumber = "18"
+            endingLineNumber = "18"
+            landmarkName = "-setData:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -307,13 +163,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "&#x5341;&#x4e8c;&#x7801;/TeamDetailInfoView.m"
-            timestampString = "499415657.666328"
+            filePath = "&#x5341;&#x4e8c;&#x7801;/WateringVC.m"
+            timestampString = "500284768.867239"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "251"
-            endingLineNumber = "251"
-            landmarkName = "-infoLabel"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
+            landmarkName = "-refreshRequest:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -323,13 +179,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "&#x5341;&#x4e8c;&#x7801;/GameInfoDetailViewController.m"
-            timestampString = "499415662.821154"
+            filePath = "&#x5341;&#x4e8c;&#x7801;/DraftsVC.m"
+            timestampString = "500353507.260555"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "575"
-            endingLineNumber = "575"
-            landmarkName = "-tableView:viewForHeaderInSection:"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
+            landmarkName = "-tableView:didSelectRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -339,14 +195,46 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "&#x5341;&#x4e8c;&#x7801;/TeamDetailInfoView.m"
-            timestampString = "499415839.230886"
+            filePath = "&#x5341;&#x4e8c;&#x7801;/SEMNetworkingManager.m"
+            timestampString = "500374127.048506"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "166"
-            endingLineNumber = "166"
-            landmarkName = "-bindModel"
+            startingLineNumber = "160"
+            endingLineNumber = "160"
+            landmarkName = "-addPost:title:content:university:success:failure:"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[SEMNetworkingManager addPost:title:content:university:success:failure:]"
+                  moduleName = "&#x5341;&#x4e8c;&#x7801;"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/appel/Desktop/Tyards/%E5%8D%81%E4%BA%8C%E7%A0%81/SEMNetworkingManager.m"
+                  timestampString = "500374127.269121"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "160"
+                  endingLineNumber = "160"
+                  offsetFromSymbolStart = "517">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__73-[SEMNetworkingManager addPost:title:content:university:success:failure:]_block_invoke"
+                  moduleName = "&#x5341;&#x4e8c;&#x7801;"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/appel/Desktop/Tyards/%E5%8D%81%E4%BA%8C%E7%A0%81/SEMNetworkingManager.m"
+                  timestampString = "500374127.271083"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "162"
+                  endingLineNumber = "162"
+                  offsetFromSymbolStart = "52">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

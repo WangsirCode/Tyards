@@ -111,6 +111,9 @@
         }
     }];
 }
+-(void)setdata:(NSDictionary*)dic{
+    
+}
 #pragma mark -getter
 - (UILabel*)titleLabel
 {

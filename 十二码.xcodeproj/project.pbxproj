@@ -7,12 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1811E6171DC86ADE00D099E4 /* PushArticleVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1811E6151DC86ADE00D099E4 /* PushArticleVC.m */; };
+		1811E6181DC86ADE00D099E4 /* PushArticleVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1811E6161DC86ADE00D099E4 /* PushArticleVC.xib */; };
+		1811E6211DC8795200D099E4 /* DraftsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1811E61F1DC8795200D099E4 /* DraftsVC.m */; };
+		1811E6221DC8795200D099E4 /* DraftsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1811E6201DC8795200D099E4 /* DraftsVC.xib */; };
+		1811E6261DC8900000D099E4 /* EditDataVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1811E6241DC8900000D099E4 /* EditDataVC.m */; };
+		1811E6271DC8900000D099E4 /* EditDataVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1811E6251DC8900000D099E4 /* EditDataVC.xib */; };
+		1811E62C1DC8929800D099E4 /* UIPlaceHolderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1811E62B1DC8929800D099E4 /* UIPlaceHolderTextView.m */; };
 		1821FC9F1D963224009BB5AC /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1821FC9E1D963224009BB5AC /* AboutViewController.xib */; };
 		1821FCA31D964019009BB5AC /* StateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1821FCA11D964019009BB5AC /* StateVC.m */; };
 		1821FCA41D964019009BB5AC /* StateVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1821FCA21D964019009BB5AC /* StateVC.xib */; };
 		1821FCA81D964039009BB5AC /* ServiceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1821FCA61D964039009BB5AC /* ServiceVC.m */; };
 		1821FCA91D964039009BB5AC /* ServiceVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1821FCA71D964039009BB5AC /* ServiceVC.xib */; };
 		18282D071D996676000956EC /* BBLaunchAdMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 18282D051D996676000956EC /* BBLaunchAdMonitor.m */; };
+		182EBAC51DC9E9D30007BCF2 /* WateringVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 182EBAC31DC9E9D30007BCF2 /* WateringVC.m */; };
+		182EBAC61DC9E9D30007BCF2 /* WateringVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 182EBAC41DC9E9D30007BCF2 /* WateringVC.xib */; };
+		182EBACA1DC9F06C0007BCF2 /* WateringCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 182EBAC81DC9F06C0007BCF2 /* WateringCell.m */; };
+		182EBACB1DC9F06C0007BCF2 /* WateringCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 182EBAC91DC9F06C0007BCF2 /* WateringCell.xib */; };
+		183152631DD1743600A21A8C /* DraftsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 183152611DD1743600A21A8C /* DraftsCell.m */; };
+		183152641DD1743600A21A8C /* DraftsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 183152621DD1743600A21A8C /* DraftsCell.xib */; };
+		187C3A8E1DC74424005C14AE /* MyZone.m in Sources */ = {isa = PBXBuildFile; fileRef = 187C3A8C1DC74424005C14AE /* MyZone.m */; };
+		187C3A8F1DC74424005C14AE /* MyZone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 187C3A8D1DC74424005C14AE /* MyZone.xib */; };
+		187C3A931DC745AF005C14AE /* MyArticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 187C3A911DC745AF005C14AE /* MyArticle.m */; };
+		187C3A941DC745AF005C14AE /* MyArticle.xib in Resources */ = {isa = PBXBuildFile; fileRef = 187C3A921DC745AF005C14AE /* MyArticle.xib */; };
+		187E7A351DCACAC700EE40EE /* WriteVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 187E7A331DCACAC700EE40EE /* WriteVC.m */; };
+		187E7A361DCACAC700EE40EE /* WriteVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 187E7A341DCACAC700EE40EE /* WriteVC.xib */; };
 		18A1AE5E1DB1EEB50063106B /* emoji_701.png in Resources */ = {isa = PBXBuildFile; fileRef = 18A1AE171DB1EEB50063106B /* emoji_701.png */; };
 		18A1AE5F1DB1EEB50063106B /* emoji_702.png in Resources */ = {isa = PBXBuildFile; fileRef = 18A1AE181DB1EEB50063106B /* emoji_702.png */; };
 		18A1AE601DB1EEB50063106B /* emoji_703.png in Resources */ = {isa = PBXBuildFile; fileRef = 18A1AE191DB1EEB50063106B /* emoji_703.png */; };
@@ -442,6 +461,17 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1811E6141DC86ADE00D099E4 /* PushArticleVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushArticleVC.h; sourceTree = "<group>"; };
+		1811E6151DC86ADE00D099E4 /* PushArticleVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushArticleVC.m; sourceTree = "<group>"; };
+		1811E6161DC86ADE00D099E4 /* PushArticleVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PushArticleVC.xib; sourceTree = "<group>"; };
+		1811E61E1DC8795200D099E4 /* DraftsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DraftsVC.h; sourceTree = "<group>"; };
+		1811E61F1DC8795200D099E4 /* DraftsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DraftsVC.m; sourceTree = "<group>"; usesTabs = 0; };
+		1811E6201DC8795200D099E4 /* DraftsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DraftsVC.xib; sourceTree = "<group>"; };
+		1811E6231DC8900000D099E4 /* EditDataVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditDataVC.h; sourceTree = "<group>"; };
+		1811E6241DC8900000D099E4 /* EditDataVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditDataVC.m; sourceTree = "<group>"; };
+		1811E6251DC8900000D099E4 /* EditDataVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditDataVC.xib; sourceTree = "<group>"; };
+		1811E62A1DC8929800D099E4 /* UIPlaceHolderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIPlaceHolderTextView.h; sourceTree = "<group>"; };
+		1811E62B1DC8929800D099E4 /* UIPlaceHolderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPlaceHolderTextView.m; sourceTree = "<group>"; };
 		1821FC9E1D963224009BB5AC /* AboutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutViewController.xib; sourceTree = "<group>"; };
 		1821FCA01D964019009BB5AC /* StateVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StateVC.h; sourceTree = "<group>"; };
 		1821FCA11D964019009BB5AC /* StateVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StateVC.m; sourceTree = "<group>"; };
@@ -451,6 +481,24 @@
 		1821FCA71D964039009BB5AC /* ServiceVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServiceVC.xib; sourceTree = "<group>"; };
 		18282D051D996676000956EC /* BBLaunchAdMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBLaunchAdMonitor.m; sourceTree = "<group>"; };
 		18282D061D996676000956EC /* BBLaunchAdMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBLaunchAdMonitor.h; sourceTree = "<group>"; };
+		182EBAC21DC9E9D30007BCF2 /* WateringVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WateringVC.h; sourceTree = "<group>"; };
+		182EBAC31DC9E9D30007BCF2 /* WateringVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WateringVC.m; sourceTree = "<group>"; };
+		182EBAC41DC9E9D30007BCF2 /* WateringVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WateringVC.xib; sourceTree = "<group>"; };
+		182EBAC71DC9F06C0007BCF2 /* WateringCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WateringCell.h; sourceTree = "<group>"; };
+		182EBAC81DC9F06C0007BCF2 /* WateringCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WateringCell.m; sourceTree = "<group>"; };
+		182EBAC91DC9F06C0007BCF2 /* WateringCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WateringCell.xib; sourceTree = "<group>"; };
+		183152601DD1743600A21A8C /* DraftsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DraftsCell.h; sourceTree = "<group>"; };
+		183152611DD1743600A21A8C /* DraftsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DraftsCell.m; sourceTree = "<group>"; };
+		183152621DD1743600A21A8C /* DraftsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DraftsCell.xib; sourceTree = "<group>"; };
+		187C3A8B1DC74424005C14AE /* MyZone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyZone.h; sourceTree = "<group>"; };
+		187C3A8C1DC74424005C14AE /* MyZone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyZone.m; sourceTree = "<group>"; };
+		187C3A8D1DC74424005C14AE /* MyZone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyZone.xib; sourceTree = "<group>"; };
+		187C3A901DC745AF005C14AE /* MyArticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyArticle.h; sourceTree = "<group>"; };
+		187C3A911DC745AF005C14AE /* MyArticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyArticle.m; sourceTree = "<group>"; };
+		187C3A921DC745AF005C14AE /* MyArticle.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyArticle.xib; sourceTree = "<group>"; };
+		187E7A321DCACAC700EE40EE /* WriteVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WriteVC.h; sourceTree = "<group>"; };
+		187E7A331DCACAC700EE40EE /* WriteVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WriteVC.m; sourceTree = "<group>"; };
+		187E7A341DCACAC700EE40EE /* WriteVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WriteVC.xib; sourceTree = "<group>"; };
 		18A1AE171DB1EEB50063106B /* emoji_701.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_701.png; sourceTree = "<group>"; };
 		18A1AE181DB1EEB50063106B /* emoji_702.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_702.png; sourceTree = "<group>"; };
 		18A1AE191DB1EEB50063106B /* emoji_703.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_703.png; sourceTree = "<group>"; };
@@ -1106,6 +1154,42 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1811E6131DC86ABD00D099E4 /* PushArticleVC */ = {
+			isa = PBXGroup;
+			children = (
+				183152601DD1743600A21A8C /* DraftsCell.h */,
+				183152611DD1743600A21A8C /* DraftsCell.m */,
+				183152621DD1743600A21A8C /* DraftsCell.xib */,
+				1811E6231DC8900000D099E4 /* EditDataVC.h */,
+				1811E6241DC8900000D099E4 /* EditDataVC.m */,
+				1811E6251DC8900000D099E4 /* EditDataVC.xib */,
+				1811E61E1DC8795200D099E4 /* DraftsVC.h */,
+				1811E61F1DC8795200D099E4 /* DraftsVC.m */,
+				1811E6201DC8795200D099E4 /* DraftsVC.xib */,
+				1811E6141DC86ADE00D099E4 /* PushArticleVC.h */,
+				1811E6151DC86ADE00D099E4 /* PushArticleVC.m */,
+				1811E6161DC86ADE00D099E4 /* PushArticleVC.xib */,
+			);
+			name = PushArticleVC;
+			sourceTree = "<group>";
+		};
+		1811E6281DC8925900D099E4 /* ThirdParty */ = {
+			isa = PBXGroup;
+			children = (
+				1811E6291DC8926F00D099E4 /* UIPlaceHolderTextView */,
+			);
+			path = ThirdParty;
+			sourceTree = "<group>";
+		};
+		1811E6291DC8926F00D099E4 /* UIPlaceHolderTextView */ = {
+			isa = PBXGroup;
+			children = (
+				1811E62A1DC8929800D099E4 /* UIPlaceHolderTextView.h */,
+				1811E62B1DC8929800D099E4 /* UIPlaceHolderTextView.m */,
+			);
+			path = UIPlaceHolderTextView;
+			sourceTree = "<group>";
+		};
 		18A1AE161DB1EEB50063106B /* 归档 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1299,6 +1383,7 @@
 			isa = PBXGroup;
 			children = (
 				18A1AE161DB1EEB50063106B /* 归档 */,
+				1811E6281DC8925900D099E4 /* ThirdParty */,
 				4734CD381D41B511006536DF /* 十二码 */,
 				4734CD521D41B512006536DF /* 十二码Tests */,
 				4734CD5D1D41B512006536DF /* 十二码UITests */,
@@ -1329,8 +1414,8 @@
 				47A364D41D5ABA93002FC59E /* TemplateController.m */,
 				4734CD3C1D41B512006536DF /* AppDelegate.h */,
 				4734CD3D1D41B512006536DF /* AppDelegate.m */,
-				4734CDA71D41BE7D006536DF /* MDABizManager.m */,
 				4734CDA61D41BE7D006536DF /* MDABizManager.h */,
+				4734CDA71D41BE7D006536DF /* MDABizManager.m */,
 				478B5E511D420728007AABC4 /* SEMNetworkingManager.h */,
 				478B5E521D420728007AABC4 /* SEMNetworkingManager.m */,
 				4725D2B21D5B2B6E00A13AEB /* Game */,
@@ -1491,6 +1576,15 @@
 		4734CD791D41B98B006536DF /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				187E7A321DCACAC700EE40EE /* WriteVC.h */,
+				187E7A331DCACAC700EE40EE /* WriteVC.m */,
+				187E7A341DCACAC700EE40EE /* WriteVC.xib */,
+				182EBAC71DC9F06C0007BCF2 /* WateringCell.h */,
+				182EBAC81DC9F06C0007BCF2 /* WateringCell.m */,
+				182EBAC91DC9F06C0007BCF2 /* WateringCell.xib */,
+				182EBAC21DC9E9D30007BCF2 /* WateringVC.h */,
+				182EBAC31DC9E9D30007BCF2 /* WateringVC.m */,
+				182EBAC41DC9E9D30007BCF2 /* WateringVC.xib */,
 				4734CDB41D41C4BF006536DF /* SEMNewsViewController.h */,
 				4734CDB51D41C4BF006536DF /* SEMNewsViewController.m */,
 				4746A6421D489B18009E0645 /* SEMNewsDetailController.h */,
@@ -1762,6 +1856,7 @@
 		4735F9F11D55F9DF00FDF2ED /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				1811E6131DC86ABD00D099E4 /* PushArticleVC */,
 				18D1B4EF1DAE7B0400C8438B /* SEMForgetVC.h */,
 				18D1B4F01DAE7B0400C8438B /* SEMForgetVC.m */,
 				18D1B4F11DAE7B0400C8438B /* SEMForgetVC.xib */,
@@ -1772,6 +1867,12 @@
 				4734CDAF1D41C46A006536DF /* SEMMeViewController.m */,
 				472A92381D4705A000F8620F /* SEMLoginViewController.h */,
 				472A92391D4705A000F8620F /* SEMLoginViewController.m */,
+				187C3A901DC745AF005C14AE /* MyArticle.h */,
+				187C3A911DC745AF005C14AE /* MyArticle.m */,
+				187C3A921DC745AF005C14AE /* MyArticle.xib */,
+				187C3A8B1DC74424005C14AE /* MyZone.h */,
+				187C3A8C1DC74424005C14AE /* MyZone.m */,
+				187C3A8D1DC74424005C14AE /* MyZone.xib */,
 				4735F9F51D55FA8F00FDF2ED /* PersonalInfoController.h */,
 				4735F9F61D55FA8F00FDF2ED /* PersonalInfoController.m */,
 				4735F9FB1D55FAF600FDF2ED /* ColleageSearchController.h */,
@@ -2312,7 +2413,7 @@
 				TargetAttributes = {
 					4734CD351D41B511006536DF = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = 3CJZ3T532P;
+						DevelopmentTeam = X5DK3836PD;
 						ProvisioningStyle = Automatic;
 					};
 					4734CD4E1D41B512006536DF = {
@@ -2384,15 +2485,18 @@
 				4734CE381D41CD55006536DF /* up-arrow.png in Resources */,
 				4760880F1D55874400F36597 /* 约战-时间.png in Resources */,
 				4734CE3C1D41CD55006536DF /* wechat_s.png in Resources */,
+				1811E6221DC8795200D099E4 /* DraftsVC.xib in Resources */,
 				470D2EE61D7ABFBA001047BD /* Group 2.png in Resources */,
 				18A1AE941DB1EEB50063106B /* emoji_755.png in Resources */,
 				4734CDF01D41CD39006536DF /* 赛事icon-绿.png in Resources */,
+				187C3A941DC745AF005C14AE /* MyArticle.xib in Resources */,
 				18A1AE5F1DB1EEB50063106B /* emoji_702.png in Resources */,
 				18A1AE8E1DB1EEB50063106B /* emoji_749.png in Resources */,
 				18A1AE5E1DB1EEB50063106B /* emoji_701.png in Resources */,
 				4735FA121D5616F000FDF2ED /* Group 19.png in Resources */,
 				4734CDD61D41C95D006536DF /* demo.html in Resources */,
 				472A923E1D473C6900F8620F /* logo.png in Resources */,
+				187E7A361DCACAC700EE40EE /* WriteVC.xib in Resources */,
 				4734CD461D41B512006536DF /* Assets.xcassets in Resources */,
 				47C053C91D7520D900AEBF86 /* icon_msg.png in Resources */,
 				18A1AE8C1DB1EEB50063106B /* emoji_747.png in Resources */,
@@ -2448,12 +2552,14 @@
 				4734CE471D41CD5E006536DF /* 点-绿.png in Resources */,
 				18A1AE8F1DB1EEB50063106B /* emoji_750.png in Resources */,
 				47ABD9701D60AA4E00CD18CF /* Copa del Rey.png in Resources */,
+				1811E6271DC8900000D099E4 /* EditDataVC.xib in Resources */,
 				47184FBD1D73C2FD008A4591 /* icon_follow(1).png in Resources */,
 				18A1AE771DB1EEB50063106B /* emoji_726.png in Resources */,
 				4735FA151D561E2100FDF2ED /* 头像背景.png in Resources */,
 				18A1AE751DB1EEB50063106B /* emoji_724.png in Resources */,
 				18A1AE661DB1EEB50063106B /* emoji_709.png in Resources */,
 				47DA9E8C1D8992E90090ABC5 /* MLPhotoBrowserCollectionCell.xib in Resources */,
+				182EBAC61DC9E9D30007BCF2 /* WateringVC.xib in Resources */,
 				18A1AE921DB1EEB50063106B /* emoji_753.png in Resources */,
 				18A1AE681DB1EEB50063106B /* emoji_711.png in Resources */,
 				18A1AE671DB1EEB50063106B /* emoji_710.png in Resources */,
@@ -2479,6 +2585,7 @@
 				4734CE311D41CD55006536DF /* location_L.png in Resources */,
 				47C053C21D7520D900AEBF86 /* Combined Shape 02.png in Resources */,
 				18A1AE631DB1EEB50063106B /* emoji_706.png in Resources */,
+				187C3A8F1DC74424005C14AE /* MyZone.xib in Resources */,
 				18A1AE831DB1EEB50063106B /* emoji_738.png in Resources */,
 				4734CDEF1D41CD39006536DF /* 资讯icon-绿.png in Resources */,
 				4734CE4E1D41CD6D006536DF /* 2.png in Resources */,
@@ -2501,7 +2608,9 @@
 				4734CE101D41CD4B006536DF /* 个人信息-向右箭头icon.png in Resources */,
 				4734CE391D41CD55006536DF /* upload_L.png in Resources */,
 				4734CDF11D41CD39006536DF /* 赛事icon=灰.png in Resources */,
+				182EBACB1DC9F06C0007BCF2 /* WateringCell.xib in Resources */,
 				18A1AE901DB1EEB50063106B /* emoji_751.png in Resources */,
+				183152641DD1743600A21A8C /* DraftsCell.xib in Resources */,
 				4734CE161D41CD4B006536DF /* 消息通知icon.png in Resources */,
 				4734CE191D41CD4B006536DF /* 绿白圈圈icon.png in Resources */,
 				4734CE331D41CD55006536DF /* qzone_s.png in Resources */,
@@ -2509,6 +2618,7 @@
 				4734CDF31D41CD39006536DF /* 首页icon-绿.png in Resources */,
 				18A1AE791DB1EEB50063106B /* emoji_728.png in Resources */,
 				18A1AE7E1DB1EEB50063106B /* emoji_733.png in Resources */,
+				1811E6181DC86ADE00D099E4 /* PushArticleVC.xib in Resources */,
 				4734CE4B1D41CD5E006536DF /* 消息icon.png in Resources */,
 				4734CE1B1D41CD4B006536DF /* 黑色透明度.png in Resources */,
 				470F56CE1D71346700110FCE /* scorer3.png in Resources */,
@@ -2618,6 +2728,7 @@
 				4725D2BC1D5B2E6E00A13AEB /* GameInfoDetailViewController.m in Sources */,
 				47A086431D82AD9B00ECB636 /* MyLabel.m in Sources */,
 				470C6A911D8F6103009BB8C7 /* TournamentPolicyResponseModel.m in Sources */,
+				1811E62C1DC8929800D099E4 /* UIPlaceHolderTextView.m in Sources */,
 				47405DD01D521791000A980A /* GameListView.m in Sources */,
 				47C053E51D75A14C00AEBF86 /* MyClosedInvitationResponseModel.m in Sources */,
 				470C5E751D44BFC800DDF90B /* BottomView.m in Sources */,
@@ -2641,6 +2752,7 @@
 				479A7B871D897F1500916B40 /* PlayerNewsResponseModel.m in Sources */,
 				4734CD991D41BE3E006536DF /* DataArchive.m in Sources */,
 				47CAC1D71D76630E001D3708 /* TypeSelectController.m in Sources */,
+				1811E6261DC8900000D099E4 /* EditDataVC.m in Sources */,
 				479A891D1D9A829A009CC3C8 /* HZPhotoItemModel.m in Sources */,
 				473BCCD51D5961F1005DBD2F /* PhotoCollectionCell.m in Sources */,
 				470F56D41D71D59700110FCE /* DataView.m in Sources */,
@@ -2654,6 +2766,7 @@
 				473C991F1D8289350093F662 /* PickerView.m in Sources */,
 				47AF5D2E1D5646A700728933 /* MyConcernViewModel.m in Sources */,
 				472930F41D430168008587A6 /* ReCommendNews.m in Sources */,
+				182EBAC51DC9E9D30007BCF2 /* WateringVC.m in Sources */,
 				472930F91D430AD1008587A6 /* HomeCell.m in Sources */,
 				47DA9E971D8992E90090ABC5 /* UIButton+Animation.m in Sources */,
 				473BCCD81D596668005DBD2F /* TeamAlbumsResponseModel.m in Sources */,
@@ -2674,6 +2787,7 @@
 				4734CD8F1D41BC75006536DF /* SEMGameVIewModel.m in Sources */,
 				470BEE111D582909003167ED /* SetUpController.m in Sources */,
 				4735F9F71D55FA8F00FDF2ED /* PersonalInfoController.m in Sources */,
+				1811E6171DC86ADE00D099E4 /* PushArticleVC.m in Sources */,
 				473BCCDB1D59682A005DBD2F /* AlbumDetailResponseModel.m in Sources */,
 				47ABD96E1D607E8300CD18CF /* InfoViewCell.m in Sources */,
 				47DA9E831D8992E90090ABC5 /* MLImagePickerHUD.m in Sources */,
@@ -2711,12 +2825,14 @@
 				4734CD891D41BB49006536DF /* SEMHomeVIewModel.m in Sources */,
 				472A92471D47B1FA00F8620F /* WeChatUserModel.m in Sources */,
 				47A6262C1D748A1500ABE897 /* InvitationViewController.m in Sources */,
+				183152631DD1743600A21A8C /* DraftsCell.m in Sources */,
 				4746A6411D489A90009E0645 /* NewsDetailViewModel.m in Sources */,
 				4734CD801D41B9D1006536DF /* SEMHomeVIewController.m in Sources */,
 				47DA9E991D8992E90090ABC5 /* MLImagePickerViewController.m in Sources */,
 				4746A6441D489B18009E0645 /* SEMNewsDetailController.m in Sources */,
 				47BB49971D45E3700052E4D0 /* TopicModel.m in Sources */,
 				4734CDDE1D41C95D006536DF /* UIView+Hirat.m in Sources */,
+				187E7A351DCACAC700EE40EE /* WriteVC.m in Sources */,
 				4725D2C81D5B611A00A13AEB /* GameinfoViewModel.m in Sources */,
 				47A364D81D5ABC7F002FC59E /* PlayerInfoView.m in Sources */,
 				47A364BA1D59AFA9002FC59E /* TeamDetailInfoView.m in Sources */,
@@ -2724,6 +2840,7 @@
 				4753074D1D46F74A003ECEBF /* MeTopView.m in Sources */,
 				47C053D01D75927400AEBF86 /* InvitationViewCell.m in Sources */,
 				1821FCA31D964019009BB5AC /* StateVC.m in Sources */,
+				1811E6211DC8795200D099E4 /* DraftsVC.m in Sources */,
 				47E8BD021D5C1DF0007621F8 /* GameDetailResponseModel.m in Sources */,
 				4734CDC21D41C835006536DF /* SEMInitialViewController.m in Sources */,
 				18ADD8B51DBD038900188852 /* StartUpModel.m in Sources */,
@@ -2762,6 +2879,8 @@
 				478B5E531D420728007AABC4 /* SEMNetworkingManager.m in Sources */,
 				47C053DC1D759C8F00AEBF86 /* MakeInvitationController.m in Sources */,
 				4734CDDD1D41C95D006536DF /* UIImage+IconFont.m in Sources */,
+				187C3A8E1DC74424005C14AE /* MyZone.m in Sources */,
+				182EBACA1DC9F06C0007BCF2 /* WateringCell.m in Sources */,
 				47A6EF081D879BF0004C0BB4 /* ImageContainerView.m in Sources */,
 				47DA9E981D8992E90090ABC5 /* MLImagePickerViewController+MenuTableViewDataSource.m in Sources */,
 				476252171D519027003788C0 /* ShareView.m in Sources */,
@@ -2791,6 +2910,7 @@
 				4776766F1D58610600E10594 /* AboutVIewModel.m in Sources */,
 				4734CDBC1D41C4D9006536DF /* SEMTeamViewController.m in Sources */,
 				4776426E1D548CAD00548C9F /* TeamPlayerResponseModel.m in Sources */,
+				187C3A931DC745AF005C14AE /* MyArticle.m in Sources */,
 				4734CDA31D41BE54006536DF /* HRTRouter.m in Sources */,
 				47DA9E961D8992E90090ABC5 /* MLPhotoPickerCollectionView.m in Sources */,
 				47A364BD1D59C310002FC59E /* OvalView.m in Sources */,
@@ -2936,11 +3056,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 3CJZ3T532P;
+				DEVELOPMENT_TEAM = X5DK3836PD;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/YYKit/Vendor",
 				);
 				INFOPLIST_FILE = "十二码/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2995,7 +3116,7 @@
 					"\"UIKit\"",
 					"-fobjc-arc",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ios.sem;
+				PRODUCT_BUNDLE_IDENTIFIER = com.luolai.pad;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -3008,11 +3129,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 3CJZ3T532P;
+				DEVELOPMENT_TEAM = X5DK3836PD;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/YYKit/Vendor",
 				);
 				INFOPLIST_FILE = "十二码/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -3067,7 +3189,7 @@
 					"\"UIKit\"",
 					"-fobjc-arc",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ios.sem;
+				PRODUCT_BUNDLE_IDENTIFIER = com.luolai.pad;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

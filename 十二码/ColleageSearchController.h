@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MeUserInfoResponseModel.h"
+
 @protocol SearchCollegeDalegate <NSObject>
 - (void)didSelectedItem:(College*)uni;
 @end
