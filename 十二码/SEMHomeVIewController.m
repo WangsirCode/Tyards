@@ -394,18 +394,22 @@
 //        make.right.and.top.and.left.bottom.equalTo(self.view);
 //    }];
 }
-
+-(void)rightSearch{
+    SEMSearchViewController* searchControlle = [HRTRouter objectForURL:@"search" withUserInfo:@{}];
+    searchControlle.delegate = self;
+    [self.navigationController pushViewController:searchControlle animated:true];
+}
 - (void)bindModel
 {
     [RACObserve(self.viewModel, title) subscribeNext:^(NSString* x) {
         self.navigationItem.title = x;
     }];
     self.searchItem.rac_command = self.viewModel.searchCommand;
-    [self.searchItem.rac_command.executionSignals subscribeNext:^(id x) {
-        SEMSearchViewController* searchControlle = [HRTRouter objectForURL:@"search" withUserInfo:@{}];
-        searchControlle.delegate = self;
-        [self.navigationController pushViewController:searchControlle animated:true];
-    }];
+//    [self.searchItem.rac_command.executionSignals subscribeNext:^(id x) {
+//        SEMSearchViewController* searchControlle = [HRTRouter objectForURL:@"search" withUserInfo:@{}];
+//        searchControlle.delegate = self;
+//        [self.navigationController pushViewController:searchControlle animated:true];
+//    }];
 }
 
 #pragma mark -viewModelSet
@@ -607,8 +611,13 @@
 {
     if(!_searchItem)
     {
-        _searchItem = [[UIBarButtonItem alloc] initWithTitle:@"切换学校" style:UIBarButtonItemStylePlain target:nil action:nil];
-        [_searchItem setTintColor:[UIColor whiteColor]];
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        btn.frame = CGRectMake(0, 0, 80, 30);
+        btn.titleLabel.font = [UIFont systemFontOfSize:15];
+        [btn setTitle:@"切换学校" forState:UIControlStateNormal];
+        [btn setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
+        [btn addTarget:self action:@selector(rightSearch) forControlEvents:UIControlEventTouchUpInside];
+        _searchItem = [[UIBarButtonItem alloc]initWithCustomView:btn];
     }
     return _searchItem;
 }

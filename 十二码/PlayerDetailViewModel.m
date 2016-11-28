@@ -200,7 +200,7 @@
     SEMNetworkingManager* manager = [SEMNetworkingManager sharedInstance];
     [manager fetchPlayerInfo:self.playerId offset:self.messageModel.count success:^(id data) {
         NSMutableArray* array = [NSMutableArray arrayWithArray:self.messageModel];
-        [array appendObjects:(NSArray*)data];
+        [array appendObjects:((PlayerModel*)data).newes];
         self.messageModel = array;
         self.updateCommentTable = YES;
     } failure:^(NSError *aError) {
