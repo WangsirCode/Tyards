@@ -568,10 +568,10 @@
     }
     NSString *urlStr;
     if (self.viewModel.isHotTopic) {
-        urlStr=[NSString stringWithFormat:@"http://dev.12yards.cn/news/hottopic/%ld",(long)self.shareId];
+        urlStr=[NSString stringWithFormat:@"http://www.12yards.cn/news/hottopic/%ld",(long)self.shareId];
     }
     else{
-        urlStr=[NSString stringWithFormat:@"http://dev.12yards.cn/news/index/%ld",(long)self.shareId];
+        urlStr=[NSString stringWithFormat:@"http://www.12yards.cn/news/index/%ld",(long)self.shareId];
     }
     switch (index) {
         case 0:

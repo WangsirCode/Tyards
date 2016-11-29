@@ -31,7 +31,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "449"
             endingLineNumber = "449"
-            landmarkName = "-fetchNewsDetail:success:failure:"
+            landmarkName = "-fetchGameList:offset:success:failure:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -63,7 +63,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "321"
             endingLineNumber = "321"
-            landmarkName = "-fetchReCommendNews:offset:success:failure:"
+            landmarkName = "-fetchHotTopics:success:failure:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -105,7 +105,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "419"
             endingLineNumber = "419"
-            landmarkName = "-fetchHistoryGame:offset:success:failure:"
+            landmarkName = "-fetchNoticeGame:offset:success:failure:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
