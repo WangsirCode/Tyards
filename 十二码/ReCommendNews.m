@@ -31,6 +31,11 @@ MJCodingImplementation
 - (NSString*)getInfo
 {
     NSMutableString* info = [NSMutableString stringWithString:self.author];
+    if (info.length > 6) {
+        NSString* string = [info substringWithRange:NSMakeRange(0, 6)];
+        info = [NSMutableString stringWithFormat:@"%@...",string];
+        
+    }
     [info appendString:@" / "];
     [info appendString:[self getDate]];
     return info;
